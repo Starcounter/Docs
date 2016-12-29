@@ -1,8 +1,11 @@
 {
-    "plugins": [ "versions" ],
+    "plugins": [ "versions" ], ["theme-api"]
     "pluginsConfig": {
         "versions": {
             "type": "branches"
+        }
+        "theme-api": {
+            "theme": "dark"
         }
     }
 }
