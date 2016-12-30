@@ -3,5 +3,5 @@
 * [Guides](README.md)
     * [Database](database-intro.md)
         * [Creating Database Classes](creating-database-classes.md)
-* [Tutorial](
+* [Tutorial](tutorial-intro.md)
 
