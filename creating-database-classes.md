@@ -1,4 +1,4 @@
-Starcounter does not support SQL92's &lt;code&gt;INSERT&lt;/code&gt; statement. Instead, objects are created directly in the programming code. Marking a class in the code as a database class is done by setting the &lt;code&gt;\[Database\]&lt;/code&gt; attribute. This class becomes a part of the database schema.
+Starcounter does not support SQL92's `INSERT` statement. Instead, objects are created directly in the programming code. Marking a class in the code as a database class is done by setting the &lt;code&gt;\[Database\]&lt;/code&gt; attribute. This class becomes a part of the database schema.
 
 
 
