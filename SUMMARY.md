@@ -1,6 +1,7 @@
 # Summary
 
-* [Guides](README.md)
-* [Database](chapter1.md)
-* [Creating Database Classes](creating-database-classes.md)
+* [Guides](guides-intro.md)
+    * [Database](database-intro.md)
+        * [Creating Database Classes](creating-database-classes.md)
+* [Tutorial](tutorial-intro.md)
 
