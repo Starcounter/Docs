@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
     "plugins": [ "versions" ],
-=======
-    "plugins": [ "versions"],
->>>>>>> f7197ad34ff699ea0cfd240d76cc619b20193730
     "pluginsConfig": {
     "versions": {
         "type": "branches"
