@@ -32,6 +32,25 @@
       color: #f47e0c;
       background: linear-gradient(0deg, white 94%, #f47e0c 6%);
     }
+
+    .company-button-outer:hover {
+      color: #f47e0c;
+      background: linear-gradient(0deg, white 94%, #f47e0c 6%);
+    }
+
+    .company-button-link {
+        background-color: #463f4a;
+        border: none;
+        color: white;
+        padding: 10px 10px;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 10px;
+        display: inline-block;
+        font-size: 14px;
+        font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+        margin-top: 13px;
+    }
   </style>
   <div class="header" height="42" width="100%">
     <img class="starcounter-logo" src="https://starcounter.io/wp-content/uploads/2015/06/logo_io_2x.png" height="42" width="226">
@@ -53,8 +72,8 @@
     <form class="menu-button-form" action="https://starcounter.io/blog/">
       <input class="menu-button-input" type="submit" value="BLOG" />
     </form>
-    <form class="menu-button-form" action="http://starcounter.com/">
-      <input class="menu-button-input" type="submit" value="Company" />
-    </form>
+    <div class="company-button-outer">
+      <a class="company-button-link" href="https://starcounter.com/">COMPANY</a>
+    </div>
   </div>
 </body>
