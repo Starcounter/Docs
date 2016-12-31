@@ -1,19 +1,19 @@
 {
-"plugins": [ "versions" ],
-"pluginsConfig": {
-    "versions": {
-        "gitbookConfigURL": "https://raw.githubusercontent.com/Starcounter/Docs/master/book.json",
-        "options": [
+    "plugins": [ "versions" ],
+    "pluginsConfig": {
+        "versions": {
+            "gitbookConfigURL": "https://raw.githubusercontent.com/Starcounter/Docs/master/book.json",
+            "options": [
                 {
                     "value": "https://github.com/Starcounter/Docs",
-                    "text": "2.2/stable",
-                    "selected": true
+                    "text": "Version 1.3.0"
                 },
                 {
                     "value": "https://github.com/Starcounter/Docs/tree/2.3",
-                    "text": "2.3/develop",
+                    "text": "Version 1.4.0",
+                    "selected": true
                 }
             ]
-        }     
+        }
     }
 }
