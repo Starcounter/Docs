@@ -2,18 +2,7 @@
     "plugins": [ "versions" ],
     "pluginsConfig": {
         "versions": {
-            "gitbookConfigURL": "https://raw.githubusercontent.com/Starcounter/Docs/master/book.json",
-            "options": [
-                {
-                    "value": "https://github.com/Starcounter/Docs",
-                    "text": "Version 1.3.0"
-                },
-                {
-                    "value": "https://github.com/Starcounter/Docs/tree/2.3",
-                    "text": "Version 1.4.0",
-                    "selected": true
-                }
-            ]
+            "type": "branches"
         }
     }
 }
