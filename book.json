@@ -7,7 +7,7 @@
         "options": [
                 {
                     "value": "https://github.com/Starcounter/Docs",
-                    "text": "2.2/stable"
+                    "text": "2.2/stable",
                     "selected": true
                 },
                 {
