@@ -1,3 +1,5 @@
+# The Trade-off Between System Complexity and Scalability
+
 In the context of today’s conventional development platforms, the performance capacity of a single server runs out fast. Scaling operations often means scaling out: adding more machines — more layers of complexity — to a multi-tiered network of various kinds of servers, and performance enhancers like multi-node data redundancy, caches, and data grids. An increasing user base leads to a corresponding expansion of tiers and number of machines.
 
 **This scale-out approach comes with some weighty drawbacks:**
