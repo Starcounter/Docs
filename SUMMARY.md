@@ -11,7 +11,7 @@
 * [Guides](guides/guides-intro.md)
     * [Database](guides/database/database-intro.md)
         * [Creating Database Classes](guides/database/creating-database-classes.md)
-* [Cookbook](cookbook.md)
-* [Glossary](glossary.md)
-* [Sample Apps](sample-apps.md)
+* [Cookbook](cookbook/cookbook.md)
+* [Glossary](glossary/glossary.md)
+* [Sample Apps](sample-apps/sample-apps.md)
 
