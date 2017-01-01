@@ -7,7 +7,7 @@
         * [Starcounter and the Future of Microservices](what-is-starcounter/collapsing-the-stack/the-future-of-microservices.md)
         * [10 Benefits of Collapsing the Stack](what-is-starcounter/collapsing-the-stack/10-benefits-of-collapsing-the-stack.md)
     * [Database and Webserver, Integrated](what-is-starcounter/database-and-webserver-integrated.md)
-* [Tutorial](tutorial/tutorial-intro.md)
+* [Tutorial](tutorial/hello-world-tutorial.md)
 * [Guides](guides/guides-intro.md)
     * [Database](guides/database/database-intro.md)
         * [Creating Database Classes](guides/database/creating-database-classes.md)
