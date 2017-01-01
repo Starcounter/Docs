@@ -8,6 +8,7 @@
         * [10 Benefits of Collapsing the Stack](what-is-starcounter/collapsing-the-stack/10-benefits-of-collapsing-the-stack.md)
     * [Database and Webserver, Integrated](what-is-starcounter/database-and-webserver-integrated.md)
 * [Tutorial](tutorial/hello-world-tutorial.md)
+    * [Create a Database Class](tutorial/create-a-database-class.md)
 * [Guides](guides/guides-intro.md)
     * [Database](guides/database/database-intro.md)
         * [Creating Database Classes](guides/database/creating-database-classes.md)
