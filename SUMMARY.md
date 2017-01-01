@@ -2,7 +2,7 @@
 
 * [Introduction](README.md)
 * [What is Starcounter?](what-is-starcounter/what-is-starcounter.md)
-    * [Collapsing the Stack](what-is-starcounter/collapsing-the-stack.md)
+    * [Collapsing the Stack](what-is-starcounter/collapsing-the-stack/collapsing-the-stack.md)
         * [System Complexity and Scalability Trade-off](what-is-starcounter/collapsing-the-stack/system-complexity-and-scalability.md)
         * [Starcounter and the Future of Microservices](what-is-starcounter/collapsing-the-stack/the-future-of-microservices.md)
         * [10 Benefits of Collapsing the Stack](what-is-starcounter/collapsing-the-stack/10-benefits-of-collapsing-the-stack.md)
