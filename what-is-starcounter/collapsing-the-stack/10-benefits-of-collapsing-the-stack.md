@@ -1,3 +1,5 @@
+# 10 Benefits of Collapsing the Stack
+
 The best way we can illustrate the benefits of the collapsed-stack approach is by sharing some of the results we’ve achieved with our own in-memory database and application platform:
 
 ### 1. Fast, responsive and multi-platform GUI

@@ -1,3 +1,5 @@
+# Starcounter and the Future of Micro-Services
+
 In light of the recent micro-services movement, the inception of a new breed of in-memory technology is a central component.
 
 ![starcounter-microservices](/assets/starcounter_microservices.png)
