@@ -1,3 +1,5 @@
+# Collapsing the Stack
+
 **Time to work smarter, not harder. Find out why making the switch to simplified system architecture is the key to beating slow software and maximizing scalability.**
 
 A software vendor’s primary objectives are to attract new users, adapt to the expectations of existing users, and prevent user outflow — all critical to maintaining the agility, competitiveness, and profitability of a business.

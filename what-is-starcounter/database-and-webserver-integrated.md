@@ -1,3 +1,5 @@
+# Database and Webserver, Integrated
+
 Let's deepen into technical details in order to understand how two layers, application and database, are physically merged into one.
 
 We can say that database and application server are represented by two parallel running processes. In the picture they are presented as ScDATA and ScCODE respectively. Inbound and outbound traffic towards those processes is initially handled by Gateway process.
