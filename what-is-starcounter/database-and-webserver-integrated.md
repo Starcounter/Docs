@@ -1,6 +1,8 @@
 Let's deepen into technical details in order to understand how two layers, application and database, are physically merged into one.
 
-We can say that database and application server are represented by two parallel running processes. In the picture they are presented as ScDATA and ScCODE respectively. Inbound and outbound traffic towards those processes is initially handled by Gateway process.<img alt="" src="http://starcounter.io/wp-content/uploads/2016/06/web-DB-explanation.gif" />
+We can say that database and application server are represented by two parallel running processes. In the picture they are presented as ScDATA and ScCODE respectively. Inbound and outbound traffic towards those processes is initially handled by Gateway process.
+
+![web-DB-explaination](/assets/web-DB-explanation.gif)
 
 Distinction of depicted processes:
 
