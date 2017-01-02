@@ -1,7 +1,6 @@
 <head>
   <link rel="stylesheet" type="text/css" href="../src/text.css">
 </head>
-
 # Create a Database Class
 
 Welcome to the first part of our Hello World tutorial!
