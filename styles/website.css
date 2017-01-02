@@ -1,7 +1,8 @@
 /* CSS for website */
 
 .page-inner p, h1, h2, h3, h4, h5, h6, section, pre {
-    width: 85%;
+    width: 60%;
+    margin: 0 auto;
 }
 
 .page-inner aside {
