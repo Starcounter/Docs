@@ -1,10 +1,10 @@
 /* CSS for website */
 
-.page-inner p, h1, h2, h3, h4, h5, h6, section, pre {
+.markdown-section p, h1, h2, h3, h4, h5, h6, section, pre {
     width: 65%;
 }
 
-.page-inner aside {
+.markdown-section aside {
     width: 205px;
     font-size: 14px;
     line-height: 17px;
@@ -13,11 +13,11 @@
     margin-left: 10px;
 }
 
-.page-inner aside {
+.markdown-section aside {
     margin-bottom: 20px;
 }
 
-.page-inner aside.read-more {
+.markdown-section aside.read-more {
     background-image: url(/wp-content/uploads/2015/05/read-more.svg);
     background-repeat: no-repeat;
     background-position: 0px 5px;
