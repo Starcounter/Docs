@@ -22,19 +22,12 @@ function init() {
     // Add action to toggle sidebar
     toolbar.createButton({
         index: 0,
-        icon: 'fa fa-align-justify',
+        icon: 'fa fa-id-card-o',
         onClick: function(e) {
             e.preventDefault();
             sidebar.toggle();
         }
     });
-
-    toolbar.createButton({
-        index: 1,
-        icon: `fa fa-address-book`,
-        text: "a button",
-        position: "right",
-    })
 }
 
 gitbook.events.on('start', init);
