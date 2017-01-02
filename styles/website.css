@@ -41,8 +41,8 @@ p, h1, h2, h3, h4, h5, h6, pre {
     min-height: 100px;
     width: 65%;
     margin: 0 auto;
-    margin-top: 25px;
-    margin-bottom: 25px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .markdown-section section.see-yourself::before {
@@ -90,6 +90,7 @@ pre::after {
 
 .code-title {
     float: right;
+    margin-right: 35%;
 }
 
 .code-title::before {
