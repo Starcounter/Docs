@@ -74,7 +74,11 @@
         {% endblock %}
     </div>    
     <script>
-        console.log("HERE");
+        var codeTitleElements = document.getElementsByClassName("code-title");
+        for (var i = 0; i < codeTitleElements.length; i++){
+            codeTitleElements[i].nextElementSibling.remove();
+            console.log("HERE");
+        }
     
         var gitbook = gitbook || [];
         gitbook.push(function() {
