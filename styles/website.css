@@ -47,7 +47,7 @@
     margin-bottom: 10px;
 }
 
-pre::before {
+pre::after {
     display: none;
 }
 .code-name + pre {
