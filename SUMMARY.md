@@ -13,6 +13,7 @@
     * [First Interactive UI](tutorial/first-interactive-ui.md)
     * [Computed Properties](tutorial/computed-properties.md)
     * [Expense Tracker](tutorial/expense-tracker.md)
+    * [Cancel and Delete](tutorial/cancel-and-delete.md)
 * [Guides](guides/guides-intro.md)
     * [Database](guides/database/database-intro.md)
         * [Creating Database Classes](guides/database/creating-database-classes.md)
