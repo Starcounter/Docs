@@ -1,9 +1,31 @@
 {% block book_header %}
 <div class="book-header" role="navigation">
-    {% if glossary.path %}
-    <a href="{{ ('/' + glossary.path)|resolveFile }}" class="btn pull-left" aria-label="{{ "GLOSSARY_OPEN"|t }}"><i class="fa fa-sort-alpha-asc"></i></a>
-    {% endif %}
-
-    <!-- Title -->
+  <!-- Title -->
+  <div class="header" height="42" width="100%">
+    <a href="https://starcounter.io/">
+      <img class="starcounter-logo" src="https://starcounter.io/wp-content/uploads/2015/06/logo_io_2x.png" height="42" width="226">
+    </a>
+    <form class="menu-button-form" action="https://starcounter.io/">
+      <input class="menu-button-input" type="submit" value="HOME" />
+    </form>
+    <form class="menu-button-form" action="https://starcounter.io/download/">
+      <input class="menu-button-input" type="submit" value="DOWNLOAD" />
+    </form>
+    <form class="menu-button-form" action="http://localhost:4000/">
+      <input class="menu-button-input" type="submit" value="DOCS" />
+    </form>
+    <form class="menu-button-form" action="https://starcounter.io/community/">
+      <input class="menu-button-input" type="submit" value="COMMUNITY & SUPPORT" />
+    </form>
+    <form class="menu-button-form" action="https://starcounter.io/apps/">
+      <input class="menu-button-input" type="submit" value="APP HUB" />
+    </form>
+    <form class="menu-button-form" action="https://starcounter.io/blog/">
+      <input class="menu-button-input" type="submit" value="BLOG" />
+    </form>
+    <div class="company-button-outer">
+      <a class="company-button-link" href="https://starcounter.com/">COMPANY</a>
+    </div>
+  </div>
 </div>
 {% endblock %}
