@@ -1,6 +1,9 @@
 /* CSS for website */
+p, h1, h2, h3, h4, h5, h6, pre {
+    width: 65%;
+}
 
-.markdown-section > p, h1, h2, h3, h4, h5, h6, pre, li {
+.markdown-section li {
     width: 65%;
 }
 
