@@ -47,6 +47,9 @@
     margin-bottom: 10px;
 }
 
+pre::before {
+    display: none;
+}
 .code-name + pre {
 	margin: 0 0 1em;
 }
