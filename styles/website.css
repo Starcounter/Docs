@@ -115,3 +115,7 @@ kbd {
     border-radius: 3px;
     box-shadow: inset 0 -1px 0 #bbb;
 }
+
+.code-title + p {
+    display: none;
+}
