@@ -39,10 +39,42 @@
     width: 65%;
 }
 
-markdown-section section.see-yourself::before {
+.markdown-section section.see-yourself::before {
     content: "SEE FOR YOURSELF!";
     font-size: 20px;
     display: block;
     color: #83BFCB;
     margin-bottom: 10px;
+}
+
+.code-name + pre {
+	margin: 0 0 1em;
+}
+
+.code-name + pre code {
+	border-radius: 0 3px 3px 3px;
+}
+
+.code-name {
+	height: 26px;
+	position: relative;
+	line-height: 26px;
+	padding: 0 .5em;
+	display: inline-block;
+	border-radius: 3px 0 0 0;
+	background-color: rgba(0,0,0,0.12);
+	font-size: 16px;
+	font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+.code-name::after {
+	content: "";
+	border-color: transparent transparent rgba(0,0,0,0.12) rgba(0,0,0,0.12);
+	border-style: solid;
+	border-width: 13px;
+	height: 0;
+	width: 0;
+	position: absolute;
+	bottom: 0;
+	right: -26px;
 }
