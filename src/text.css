@@ -6,3 +6,8 @@ aside {
     float: right;
     margin-left: 10px;
 }
+
+p {
+    float: left;
+    width: 70%;
+}
