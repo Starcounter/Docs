@@ -14,9 +14,3 @@ aside.read-more {
     background-size: 26px;
     padding: 0 0 0 28px;
 }
-
-p, code, h1, div, section{
-    float: left;
-    width: 70%;
-}
-
