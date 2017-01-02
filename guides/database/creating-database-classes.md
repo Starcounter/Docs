@@ -5,16 +5,16 @@ Public fields (e.g., `Person.FirstName` and `Quote.Person`), public auto-created
 using Starcounter;
 [Database]
 public class Person {
-public string FirstName;
-public string LastName { get; set; }
-public string FullName { get { return FirstName + " " + LastName; } }
+    public string FirstName;
+    public string LastName { get; set; }
+    public string FullName { get { return FirstName + " " + LastName; } }
 }
 
 [Database]
 public class Quote {
-public Person Person;
-private string _Text;
-public string Text { get { return _Text; } set { _Text = value; } }
+    public Person Person;
+    private string _Text;
+    public string Text { get { return _Text; } set { _Text = value; } }
 }
 
 ```
