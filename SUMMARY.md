@@ -17,6 +17,7 @@
     * [Using a Shared Data Model](tutorial/using-a-shared-data-model.md)
     * [Mapper App for Images](tutorial/mapper-app-for-images.md)
     * [UI Blending](tutorial/ui-blending.md)
+    * [The Next Step](tutorial/the-next-step.md)
 * [Guides](guides/guides-intro.md)
     * [Database](guides/database/database-intro.md)
         * [Creating Database Classes](guides/database/creating-database-classes.md)
