@@ -10,6 +10,7 @@
 * [Tutorial](tutorial/hello-world-tutorial.md)
     * [Create a Database Class](tutorial/create-a-database-class.md)
     * [Create a Real Time UI](tutorial/create-a-real-time-ui.md)
+    * [First Interactive UI](tutorial/first-interactive-ui.md)
 * [Guides](guides/guides-intro.md)
     * [Database](guides/database/database-intro.md)
         * [Creating Database Classes](guides/database/creating-database-classes.md)
