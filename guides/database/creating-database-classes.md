@@ -3,6 +3,7 @@ New records are created with the native program code operator <code>new</code>. 
 Public fields (e.g., `Person.FirstName` and `Quote.Person`), public auto-created properties (e.g., `Person.LastName`) and public properties getting and setting private fields (e.g., `Quote.Text`) become database columns. More complex public properties become code properties, which are not stored as columns, but can be accessed in SQL queries (e.g., `Person.FullName`).
 ```cs
 using Starcounter;
+
 [Database]
 public class Person {
     public string FirstName;
@@ -22,15 +23,16 @@ public class Quote {
 Using the `Transient` custom attribute, it is possible to exclude fields and auto-implemented properties of a database class from becoming database columns. A field or auto-implemented property with this attribute applied to it will remain a regular .NET field/property and its value will be stored on the CLR heap and hence garbage collected along with the object it belongs to. Such fields and properties are not available using SQL; instead, Starcounter ignores them as a whole.
 ```cs
 using Starcounter;
+
 [Database]
 public class Person {
-public string FirstName;
-public string LastName { get; set; }
-public string FullName { get { return FirstName + " " + LastName; } }
-[Transient]
-public int ProcessSessionID;
-[Transient]
-public int ProcessSessionNumber { get; set; }
+    public string FirstName;
+    public string LastName { get; set; }
+    public string FullName { get { return FirstName + " " + LastName; } }
+    [Transient]
+    public int ProcessSessionID;
+    [Transient]
+    public int ProcessSessionNumber { get; set; }
 }
 
 ```
