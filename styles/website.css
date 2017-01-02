@@ -1,10 +1,10 @@
 /* CSS for website */
 p, h1, h2, h3, h4, h5, h6, pre {
-    width: 65%;
+    width: 75%;
 }
 
 .markdown-section li {
-    width: 65%;
+    width: 75%;
 }
 
 .markdown-section aside {
