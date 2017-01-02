@@ -1,5 +1,26 @@
 /* CSS for website */
 
-.page-inner p, h1, h2, h3, h4, h5, h6, section {
+.page-inner p, h1, h2, h3, h4, h5, h6, section, pre {
     width: 85%;
+}
+
+.page-inner aside {
+    width: 205px;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000;
+    float: right;
+    margin-left: 10px;
+}
+
+.page-inner aside {
+    margin-bottom: 20px;
+}
+
+.page-inner aside.read-more {
+    background-image: url(/wp-content/uploads/2015/05/read-more.svg);
+    background-repeat: no-repeat;
+    background-position: 0px 5px;
+    background-size: 26px;
+    padding: 0 0 0 28px;
 }
