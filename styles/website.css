@@ -76,11 +76,12 @@
 	width: 0;
 	position: absolute;
 	bottom: 0;
-	right: -26px;
+	right: -25px;
 }
 
 .code-title {
         float: right;
+        margin-right: 35%;
 }
 
 .code-title::before {
@@ -92,9 +93,8 @@
 	width: 0;
 	position: absolute;
 	bottom: 0;
-	left: -26px;
+	left: -25px;
 }
-
 .code-title::after {
         border-color: transparent transparent transparent transparent;
 }
