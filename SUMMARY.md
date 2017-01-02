@@ -9,6 +9,7 @@
     * [Database and Webserver, Integrated](what-is-starcounter/database-and-webserver-integrated.md)
 * [Tutorial](tutorial/hello-world-tutorial.md)
     * [Create a Database Class](tutorial/create-a-database-class.md)
+    * [Create a Real Time UI](tutorial/create-a-real-time-ui.md)
 * [Guides](guides/guides-intro.md)
     * [Database](guides/database/database-intro.md)
         * [Creating Database Classes](guides/database/creating-database-classes.md)
