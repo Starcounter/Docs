@@ -78,3 +78,23 @@
 	bottom: 0;
 	right: -26px;
 }
+
+.code-title {
+        float: right;
+}
+
+.code-title::before {
+	content: "";
+	border-color: transparent rgba(0,0,0,0.12) rgba(0,0,0,0.12) transparent;
+	border-style: solid;
+	border-width: 13px;
+	height: 0;
+	width: 0;
+	position: absolute;
+	bottom: 0;
+	left: -26px;
+}
+
+.code-title::after {
+        border-color: transparent transparent transparent transparent;
+}
