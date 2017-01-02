@@ -13,7 +13,9 @@ First-generation in-memory databases made a significant shift from operating dat
 Whereas today’s storage procedures will often put chunks of code closer to the database to increase performance, with the collapsed stack approach it is no longer necessary to dissipate logic between database and app code since all applications running in a platform operate physically the same data instances that the database owns. Thus, delivery of data from the database to the app is not needed. This translates to millions of fully ACID transactions per second on a modest server.
 
 What’s more, by shrinking the <a href="http://starcounter.io/what-is-starcounter/3-database-web-server-integrated/">database and application tiers into a single layer</a>, additional value can be realized via the elimination of messages relayed between the web and app server, inter-process communication, data redundancy, and similar “middlemen”. In addition, the glue code which was binding the layers goes away, resulting in the pure, beautiful business logic expressed by concise code.
+
 <h3>Who will Benefit Most from Collapsing the Stack?</h3>
+
 Any data or performance-critical business is a strong candidate for collapsing the stack and adopting an in-memory platform. Likewise, any business demanding agility and performance is a good match. Such a platform can be used within any vertical, but likely within industries including banking, finance, retail, internet, telecom and gambling/gaming.
 
 An excellent usage example, documented by the International Data Corporation (IDC), is represented by Swedish retailer Gekås Ullared, who was driven to make the switch to Starcounter’s in-memory application platform at a critical time when their accelerated growth was overwhelming their databases— and their IT budget.
