@@ -1,4 +1,51 @@
 .header {
-    width: 50%;
-    background-color: red;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.starcounter-logo {
+  margin-top: 8px;
+  margin-right: 20px;
+}
+
+.menu-button-form {
+  height: 62.7px;
+}
+
+.menu-button-input {
+  height: 98%;
+  color: black;
+  background-color: white;
+  border: none;
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  line-height: 60px;
+  font-weight: 400;
+  font-size: 14px;
+  bottom:0;
+}
+
+.menu-button-input:hover {
+  color: #f47e0c;
+  background: linear-gradient(0deg, white 94%, #f47e0c 6%);
+}
+
+.company-button-outer:hover {
+  color: #f47e0c;
+  background: linear-gradient(0deg, white 94%, #f47e0c 6%);
+}
+
+.company-button-link {
+    background-color: #463f4a;
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 10px;
+    display: inline-block;
+    font-size: 14px;
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    margin-top: 11px;
 }
