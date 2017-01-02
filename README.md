@@ -15,7 +15,7 @@ This is a GitBook to test the feasibility of using this for the Starcounter docu
 1. In the files tree section of GitBook, if there's already a directory where the page goes, simple add a file and name it the same as the original page, i.e `commit-hooks.md`. Otherwise create a directory where the page should be.
 2. Go to `SUMMARY.md` and add a reference to the page in the correct place like this: `[<my-page-name>](<page-directory>/<page-file>)`
 3. Copy the markdown from WordPress into the newly created markdown file.
-4. Add a headline of the size `<h2>` as seen in the original page
+4. Add a headline of the size `<h1>`
 5. Remove all the `fusion` tags that come from the WordPress theme
 6. Fix paths to images
     * Download the image from the original

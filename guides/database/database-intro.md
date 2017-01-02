@@ -1,3 +1,5 @@
+# Database
+
 In Starcounter, classes are tables and class instances are rows. The database objects live in the database from the beginning. This means that they are not serialized to the database, they are _created_ in the database from the time you use the <code>new</code> operator. SQL queries will immediately see them. There is no concept of moving data to and from the database. This means that accessing a property on a database object (e.g <code>myPerson.FirstName</code>) reads the value from the database rather than from the normal .NET heap. This is possible as the data of the database lives in the RAM.
 Read more in [Creating database classes](/guides/database/creating-database-classes/) and [Data manipulation](/guides/database/data-manipulation/).
 

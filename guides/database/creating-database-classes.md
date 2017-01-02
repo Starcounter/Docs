@@ -1,3 +1,5 @@
+# Creating Database Classes
+
 Starcounter does not support SQL92's INSERT statement. Instead, objects are created directly in the programming code. Marking a class in the code as a database class is done by setting the <code>[Database]</code> attribute. This class becomes a part of the database schema.
 New records are created with the native program code operator <code>new</code>. All instances of a database class are database objects and are stored in the database.
 Public fields (e.g., `Person.FirstName` and `Quote.Person`), public auto-created properties (e.g., `Person.LastName`) and public properties getting and setting private fields (e.g., `Quote.Text`) become database columns. More complex public properties become code properties, which are not stored as columns, but can be accessed in SQL queries (e.g., `Person.FullName`).
