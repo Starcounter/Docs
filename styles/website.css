@@ -1,13 +1,5 @@
 /* CSS for website */
 
-p, h1, h2, h3, h4, h5, h6, pre {
-    width: 100%;
-}
-
-.markdown-section li {
-    width: 100%;
-}
-
 .markdown-section aside {
     width: 205px;
     font-size: 14px;
@@ -122,5 +114,9 @@ kbd {
 }
 
 .code-title + p {
+    display: none;
+}
+
+.code-name + p {
     display: none;
 }
