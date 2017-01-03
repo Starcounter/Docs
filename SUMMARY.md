@@ -75,7 +75,9 @@
         * [Using Web Components](guides/puppet-web-apps/using-web-components.md)
         * [Import HTML composition](guides/puppet-web-apps/import-html-composition.md)
         * [Acceptance testing with Selenium](guides/puppet-web-apps/acceptance-testing-with-selenium.md)
-
+    * [RESTful web apps](guides/restful-web-apps/restful-web-apps.md)
+        * [Responding with JSON](guides/restful-web-apps/responding-with-json.md)
+        * [Accepting JSON in requests](guides/restful-web-apps/accepting-json-in-requests.md)
 * [Cookbook](cookbook/cookbook.md)
 * [Glossary](glossary/glossary.md)
 * [Sample Apps](sample-apps/sample-apps.md)
