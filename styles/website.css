@@ -1,5 +1,9 @@
 /* CSS for website */
 
+.markdown-section pre {
+    width: 100%;
+}
+
 .markdown-section aside {
     width: 205px;
     font-size: 14px;
