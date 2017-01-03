@@ -60,7 +60,7 @@ Here we see clearly what it does. There's a key that marks what we will do (html
 
 And here's the output:
 
-<a href="http://starcounter.io/wp-content/uploads/2016/10/getCurl.png" rel="attachment wp-att-17276"><img src="http://starcounter.io/wp-content/uploads/2016/10/getCurl-1024x148.png" alt="getcurl" width="669" height="97" class="alignnone size-large wp-image-17276" /></a>
+![curl output](/assets/getCurl.png)
 
 If the key and/or the version is invalid, then you would get a 404 back. Otherwise, the response status will be 200.
 

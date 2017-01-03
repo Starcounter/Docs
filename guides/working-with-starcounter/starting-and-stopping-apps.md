@@ -88,7 +88,7 @@ In Visual Studio, press <kbd>F5</kbd> to start the application. The Starcounter 
 
 In fact, Visual Studio plugin supports most of the ```star.exe``` command line arguments. You can specify particular arguments by altering ```Project | Properties | Debug | Command line arguments```. By default, the application is started in a database ```default```. To start the application in any other database, such as ```foo```, add this to ```Command line arguments```: ```-d=foo```.
 
-<a href="http://starcounter.io/wp-content/uploads/2015/06/cbbdaef6-d55f-11e5-933e-f1c8dda21a12.png" rel="attachment wp-att-14768"><img src="http://starcounter.io/wp-content/uploads/2015/06/cbbdaef6-d55f-11e5-933e-f1c8dda21a12.png" alt="cbbdaef6-d55f-11e5-933e-f1c8dda21a12" width="887" height="181" class="alignnone size-full wp-image-14768" /></a>
+![starting from vs](/assets/cbbdaef6-d55f-11e5-933e-f1c8dda21a12.png)
 
 ## Stopping
 

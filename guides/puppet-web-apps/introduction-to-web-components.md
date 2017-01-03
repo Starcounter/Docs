@@ -2,7 +2,7 @@
 
 If you are writing web applications and you're allowed to use modern browser features, Web Components is a very powerful ally. A very good introduction can be found on [WebComponents.org](http://webcomponents.org/tags/introduction/), but we will provide you with a quick summary.
 
-<a href="http://starcounter.io/wp-content/uploads/2015/07/web-components-breakdown.png"><img src="http://starcounter.io/wp-content/uploads/2015/07/web-components-breakdown.png" alt="Web Components" class="alignnone wp-image-13615" /></a>
+![web components breakdown](/assets/web-components-breakdown.png)
 
 Web Components are a set of new features in HTML 5 and beyond. Each feature is useable on its own and is not dependent on the other features, but together they really have the potential to change the way web applications are developed.
 

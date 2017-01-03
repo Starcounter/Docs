@@ -38,7 +38,7 @@ To make it easier to use with Starcounter, this element is wrapped in [starcount
 
 The following chart shows the bird-eye's view on the client side libraries used.
 
-<a href="http://starcounter.io/wp-content/uploads/2016/06/client-side-components.svg"><img src="http://starcounter.io/wp-content/uploads/2016/06/client-side-components.svg" alt="Client side components"></a>
+![client side components](/assets/client-side-components.svg)
 
 ## Versions
 

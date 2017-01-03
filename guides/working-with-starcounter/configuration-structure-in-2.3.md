@@ -72,7 +72,8 @@ The port we expose the Web Adminstrator on. Can be customized in the installer. 
 Default configuration values we use when a new database is created. Customizing this allow a user to fine tune defaults for all future databases.
 
 Example file (trimmed and simplified):
-<a href="https://starcounter.io/wp-content/uploads/2016/12/c326dc5e-c38e-11e6-8fd6-c095de9c6229.png" rel="attachment wp-att-17792"><img src="https://starcounter.io/wp-content/uploads/2016/12/c326dc5e-c38e-11e6-8fd6-c095de9c6229-1024x246.png" alt="example file" width="669" height="161" class="alignnone size-large wp-image-17792" /></a>
+
+![example file](/assets/c326dc5e-c38e-11e6-8fd6-c095de9c6229-1024x246.png)
 
 ##### Database configuration files
 
@@ -99,5 +100,5 @@ The directory where transaction logs are stored. Default value: same principle a
 The port used for handlers registered in user code, if no port is explicitly given: Default:8080.
 
 Example file (trimmed and simplified):
-<a href="https://starcounter.io/wp-content/uploads/2016/12/0ea702a6-c391-11e6-9949-cd3876f30acb.png" rel="attachment wp-att-17802"><img src="https://starcounter.io/wp-content/uploads/2016/12/0ea702a6-c391-11e6-9949-cd3876f30acb-1024x117.png" alt="example file" width="669" height="76" class="alignnone size-large wp-image-17802" /></a>
 
+![config files](/assets/0ea702a6-c391-11e6-9949-cd3876f30acb-1024x117.png)

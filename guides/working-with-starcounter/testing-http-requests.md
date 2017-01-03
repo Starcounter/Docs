@@ -66,7 +66,7 @@ Welcome Olle you are 49 years old.
 
 The below screenshot shows the same request (& response) as above, sent in Postman:
 
-![](https://raw.github.com/wiki/Starcounter/Starcounter/images/postman.png)
+![postman](/assets/postman.png)
 
 ## JavaScript (XMLHttpRequest)
 

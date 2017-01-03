@@ -22,4 +22,4 @@ AND c.UniqueIdentifier NOT LIKE 'SocietyObjects%'
 
 For example, if the query is run after following the steps in<a href='https://starcounter.io/hello-world/create-a-database-class-hello-world-part-1/'> part one</a> of the HelloWorld tutorial, it should look like this:
 
-<a href="https://starcounter.io/wp-content/uploads/2016/12/Capture.png" rel="attachment wp-att-17727"><img src="https://starcounter.io/wp-content/uploads/2016/12/Capture.png" alt="Query result" width="672" height="331" class="alignnone size-full wp-image-17727" /></a>
+![Screenshot of query](/assets/Capture.png)

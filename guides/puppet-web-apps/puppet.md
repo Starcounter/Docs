@@ -4,7 +4,7 @@ PuppetJs is a library that implements a radically simple, standards-compliant pr
 
 ## Puppets protocol
 
-<a href="http://starcounter.io/wp-content/uploads/2015/11/puppet-flow.png" rel="attachment wp-att-15049"><img src="http://starcounter.io/wp-content/uploads/2015/11/puppet-flow.png" alt="puppet flow" style="max-width: 250px; margin-left: 40px; margin-bottom: 20px;" class="alignright size-full wp-image-15049" /></a>
+![puppet flow](/assets/puppet-flow.png)
 
 Starcounter is embracing web standards to allow stateful, thin client web apps done by existing web standards. The application state is simply kept in JSON. Any changes to it, coming from the client or the server, are expressed in automatically generated JSON-Patch ([RFC 6902](http://tools.ietf.org/html/rfc6902)). HTTP PATCH and WebSocket are used to send the changes over the network.
 

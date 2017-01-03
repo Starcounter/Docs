@@ -10,7 +10,7 @@ IIS is available from the `Turn Windows features on or off` console.
 
 The following items should be installed.
 
-<a href="http://starcounter.io/wp-content/uploads/2016/10/starcounter-https-iis-0.png" rel="attachment wp-att-15862"><img src="http://starcounter.io/wp-content/uploads/2016/10/starcounter-https-iis-0.png" alt="Installing IIS features" width="415" height="870" class="alignnone size-full wp-image-15862" /></a>
+![Installing IIS](/assets/starcounter-https-iis-0.png)
 
 You can add any extra features if needed.
 
@@ -21,23 +21,24 @@ Open Internet Information Services (IIS) Manager from the Start menu. And instal
 - URL Rewrite 2.0
 - Application Request Routing 3.0
 
-<a href="http://starcounter.io/wp-content/uploads/2016/10/starcounter-https-iis-1.png" rel="attachment wp-att-15863"><img src="http://starcounter.io/wp-content/uploads/2016/10/starcounter-https-iis-1.png" alt="IIS Url Rewrite &amp; Application Request Routing" width="686" height="473" class="alignnone size-full wp-image-15863" /></a>
+
+![Setting up 1](/assets/starcounter-https-iis-1.png)
 
 Enable `system.webServer/webSocket` configuration section via Configuration Editor.
 
-<a href="http://starcounter.io/wp-content/uploads/2016/10/starcounter-https-iis-2.png" rel="attachment wp-att-15864"><img src="http://starcounter.io/wp-content/uploads/2016/10/starcounter-https-iis-2.png" alt="IIS - system.webServer/webSocket" width="1071" height="633" class="alignnone size-full wp-image-15864" /></a>
+![Setting up 2](/assets/starcounter-https-iis-2.png)
 
 Restart the machine.
 
 Open `Application Request Routing Cache` section and go to it's settings page.
 
-<a href="http://starcounter.io/wp-content/uploads/2016/10/starcounter-https-iis-3.png" rel="attachment wp-att-15865"><img src="http://starcounter.io/wp-content/uploads/2016/10/starcounter-https-iis-3.png" alt="IIS - Application Request Routing Cache" width="896" height="625" class="alignnone size-full wp-image-15865" /></a>
+![setting up 3](/assets/starcounter-https-iis-3.png)
 
-<a href="http://starcounter.io/wp-content/uploads/2016/10/starcounter-https-iis-4.png" rel="attachment wp-att-15866"><img src="http://starcounter.io/wp-content/uploads/2016/10/starcounter-https-iis-4.png" alt="IIS - Application Request Routing Cache" width="903" height="633" class="alignnone size-full wp-image-15866" /></a>
+![setting up 4](/assets/starcounter-https-iis-4.png)
 
 Enable proxy, update timeout to `600` seconds, and click the `Apply` button.
 
-<a href="http://starcounter.io/wp-content/uploads/2016/10/starcounter-https-iis-5.png" rel="attachment wp-att-15867"><img src="http://starcounter.io/wp-content/uploads/2016/10/starcounter-https-iis-5.png" alt="IIS - Application Request Routing Cache Settings" width="904" height="632" class="alignnone size-full wp-image-15867" /></a>
+![setting up 5](/assets/starcounter-https-iis-5.png)
 
 ## Setting up IIS website
 

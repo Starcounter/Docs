@@ -41,7 +41,7 @@ It is recommended to keep the testing project in the same solution as the tested
 
 Call the new project "Launcher.AcceptanceTest". We will use `Launcher\test\` as the project location.
 
-<a href="http://starcounter.io/wp-content/uploads/2016/04/2016-04-01-13_03_00-Add-New-Project.png" rel="attachment wp-att-14808"><img src="http://starcounter.io/wp-content/uploads/2016/04/2016-04-01-13_03_00-Add-New-Project.png" alt="2016-04-01 13_03_00-Add New Project" width="941" height="653" class="alignnone size-full wp-image-14808" /></a>
+![add new project](/assets/2016-04-01-13_03_00-Add-New-Project.png)
 
 ## Install required packages
 
@@ -51,7 +51,7 @@ Open the package manager (<kbd>Tools</kbd> → <kbd>NuGet Packet Manager</kbd> �
 
 **Important:** In the console, choose your test project from the "Default project" dropdown.
 
-<a href="http://starcounter.io/wp-content/uploads/2016/04/2016-04-01-13_05_38-Launcher-Microsoft-Visual-Studio.png" rel="attachment wp-att-14809"><img src="http://starcounter.io/wp-content/uploads/2016/04/2016-04-01-13_05_38-Launcher-Microsoft-Visual-Studio.png" alt="2016-04-01 13_05_38-Launcher - Microsoft Visual Studio" width="1637" height="1093" class="alignnone size-full wp-image-14809" /></a>
+![install required packages](/assets/2016-04-01-13_05_38-Launcher-Microsoft-Visual-Studio.png)
 
 Run the following commands in the console to install the required dependencies:
 
@@ -73,11 +73,11 @@ Make sure that the project that you want to test is already running. For me it m
 
 To record the first test, go to Firefox, and click on the Selenium IDE icon.
 
-<a href="http://starcounter.io/wp-content/uploads/2016/04/2016-04-01-13_24_19-Mozilla-Firefox.png" rel="attachment wp-att-14810"><img src="http://starcounter.io/wp-content/uploads/2016/04/2016-04-01-13_24_19-Mozilla-Firefox.png" alt="2016-04-01 13_24_19-Mozilla Firefox" width="856" height="595" class="alignnone size-full wp-image-14810" /></a>
+![record first test location](/assets/2016-04-01-13_24_19-Mozilla-Firefox.png)
 
 When the Selenium IDE opens, it automatically starts recording. 
 
-<a href="http://starcounter.io/wp-content/uploads/2016/04/2016-04-01-13_25_24-Mozilla-Firefox.png" rel="attachment wp-att-14812"><img src="http://starcounter.io/wp-content/uploads/2016/04/2016-04-01-13_25_24-Mozilla-Firefox.png" alt="2016-04-01 13_25_24-Mozilla Firefox" width="1070" height="721" class="alignnone size-full wp-image-14812" /></a>
+![selenium IDE](/assets/2016-04-01-13_25_24-Mozilla-Firefox.png)
 
 Now, you need to focus your main Firefox window again. Type in the URL of your app, press ENTER and wait until the page loads.
 
@@ -85,7 +85,7 @@ When the page is loaded, right click anywhere on the page. In the context menu, 
 
 Now go back to Selenium IDE and press the red circle to stop recording. The recorded output should look like this:
 
-<a href="http://starcounter.io/wp-content/uploads/2016/04/2016-04-01-13_29_20-Launcher.png" rel="attachment wp-att-14811"><img src="http://starcounter.io/wp-content/uploads/2016/04/2016-04-01-13_29_20-Launcher.png" alt="2016-04-01 13_29_20-Launcher" width="1070" height="721" class="alignnone size-full wp-image-14811" /></a>
+![start recording](/assets/2016-04-01-13_29_20-Launcher.png)
 
 Now, you can save this recording as a `.cs` file. In Selenium IDE, click <kbd>File</kbd> → <kbd>Export Test Case As…</kbd> → <kbd>C# / Nunit / WebDriver</kbd>.
 
@@ -99,11 +99,11 @@ Still in Visual Studio, open the Test Explorer window pane, by clicking on <kbd>
 
 Build your test project. If it builds correctly, you should see this:
 
-<a href="http://starcounter.io/wp-content/uploads/2016/04/2016-04-01-13_34_52-Launcher-Microsoft-Visual-Studio.png" rel="attachment wp-att-14813"><img src="http://starcounter.io/wp-content/uploads/2016/04/2016-04-01-13_34_52-Launcher-Microsoft-Visual-Studio.png" alt="2016-04-01 13_34_52-Launcher - Microsoft Visual Studio" width="1637" height="1093" class="alignnone size-full wp-image-14813" /></a>
+![Seleninium result screenshot](/assets/2016-04-01-13_34_52-Launcher-Microsoft-Visual-Studio.png)
 
 Now, the only thing left to do is to run that test! In the Test Explorer, click on the "Run All" button. In the following seconds, put your hands up from your mouse and keyboard, because Selenium will take control of your system and perform the test. If it works well, you should see your tests passing.
 
-<a href="http://starcounter.io/wp-content/uploads/2016/04/2016-04-01-13_40_22-Launcher-Microsoft-Visual-Studio.png" rel="attachment wp-att-14818"><img src="http://starcounter.io/wp-content/uploads/2016/04/2016-04-01-13_40_22-Launcher-Microsoft-Visual-Studio.png" alt="2016-04-01 13_40_22-Launcher - Microsoft Visual Studio" width="299" height="153" class="alignnone size-full wp-image-14818" /></a>
+![test explorer](/assets/2016-04-01-13_40_22-Launcher-Microsoft-Visual-Studio.png)
 
 ## Running in multiple browsers
 
@@ -212,13 +212,13 @@ When you rebuild the test project now, you should see 3 tests in the Test Explor
 
 The final setup looks like this:
 
-<a href="http://starcounter.io/wp-content/uploads/2016/04/2016-04-01-13_51_26-Launcher-Microsoft-Visual-Studio.png" rel="attachment wp-att-14814"><img src="http://starcounter.io/wp-content/uploads/2016/04/2016-04-01-13_51_26-Launcher-Microsoft-Visual-Studio.png" alt="2016-04-01 13_51_26-Launcher - Microsoft Visual Studio" width="1637" height="1093" class="alignnone size-full wp-image-14814" /></a>
+![visual studio selenium screenshot](/assets/2016-04-01-13_51_26-Launcher-Microsoft-Visual-Studio.png)
 
 Before you can execute the tests, start Selenium Server Standalone by calling `java -jar selenium-server-standalone-3.0.0-beta3.jar`.
 
 Now, press "Run All" and relax. This will take a while as the system runs your test in three different browsers!
 
-<a href="http://starcounter.io/wp-content/uploads/2016/04/2016-04-01-15_38_44-Launcher-Microsoft-Visual-Studio.png" rel="attachment wp-att-14816"><img src="http://starcounter.io/wp-content/uploads/2016/04/2016-04-01-15_38_44-Launcher-Microsoft-Visual-Studio.png" alt="2016-04-01 15_38_44-Launcher - Microsoft Visual Studio" width="303" height="185" class="alignnone size-full wp-image-14816" /></a>
+![test explorer screenshot](/assets/2016-04-01-15_38_44-Launcher-Microsoft-Visual-Studio.png)
 
 ## Wait for asynchronous content
 

@@ -18,7 +18,7 @@ Sharing of the screen happens automatically when you use URI mapping. It boils d
 
 The apps share the screen when a user request gets a response composed from multiple sub-responses. 
 
-<img class="aligncenter size-full wp-image-15107" src="http://starcounter.io/wp-content/uploads/2015/11/105_5.gif" alt="composable apps gif" width="2000" height="882" />
+![Sharing screen gif](/assets/105_5.gif)
 
 This is how it works. Your app has a URL handler. That handler makes a request to another URL handler in your app, which is mapped to a specific database table name.
 
@@ -26,7 +26,7 @@ If in the database there is my app running and it happens to also have a URL han
 
 ## Four steps for sharing the screen
 
-<a href="http://starcounter.io/wp-content/uploads/2015/11/Screenshot-2015-11-17-22.51.15.png"><img src="http://starcounter.io/wp-content/uploads/2015/11/Screenshot-2015-11-17-22.51.15-225x300.png" alt="Screenshot 2015-11-17 22.51.15" width="225" height="300" class="alignright size-medium wp-image-14168" /></a>
+![Product details screenshot](/assets/Screenshot-2015-11-17-22.51.15.png)
 
 Our [developer samples](http://github.com/StarcounterSamples) use this in multiple places. One of our favourite examples is how products display images, when [Products](https://github.com/StarcounterSamples/Products) app shares the screen with [Images](https://github.com/StarcounterSamples/Images) app.
 
