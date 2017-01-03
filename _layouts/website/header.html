@@ -10,29 +10,44 @@
       float: right;
       width: 90%;
     }
-    
+
     @media (max-width: 540px) {
       .header {
         width: 85%;
       }
     }
-    
+
     .starcounter-logo {
       margin-top: 8px;
       margin-right: 20px;
       float: left;
     }
-    
+
     @media (max-width: 1047px) {
       .starcounter-logo {
         display: none;
       }
     }
-    
+
+    @media (max-width: 800px) {
+      .big-header {
+        display: none;
+      }
+      .small-header {
+        display: inline-block;
+      }
+    }
+
+    @media (min-width: 800px) {
+      .small-header {
+        display: none;
+      }
+    }
+
     .menu-button-form {
       height: 62.7px;
     }
-    
+
     .menu-button-input {
       height: 98%;
       color: black;
@@ -45,17 +60,17 @@
       bottom:0;
       margin-right: 10px;
     }
-    
+
     .menu-button-input:hover {
       color: #f47e0c;
       background: linear-gradient(0deg, white 94%, #f47e0c 6%);
     }
-    
+
     .company-button-outer:hover {
       color: #f47e0c;
       background: linear-gradient(0deg, white 94%, #f47e0c 6%);
     }
-    
+
     .company-button-link {
       background-color: #463f4a;
       border: none;
@@ -69,8 +84,72 @@
       font-family: 'Montserrat', Arial, Helvetica, sans-serif;
       margin-top: 11px;
     }
+
+      /* Dropdown Button */
+    .dropbtn {
+        background: linear-gradient(0deg, white 91%, black 9%);
+        color: black;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        width: 100px;
+    }
+
+    /* Dropdown button on hover & focus */
+    .dropbtn:hover, .dropbtn:focus {
+        background: linear-gradient(0deg, white 91%, #f47e0c 9%);
+        color: #f47e0c
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        float: right;
+        margin-right: 10px;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1000;
+        width: 100%;
+    }
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {background-color: #f1f1f1}
+
+    /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+    .show {display:block;}
+
     </style>
-    <div class="header" height="42" width="100%">
+    <div class="small-header header" height="42" width="100%">
+      <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">MENU</button>
+        <div id="myDropdown" class="dropdown-content">
+          <a href="https://starcounter.io/">HOME</a>
+          <a href="https://starcounter.io/download/">DOWNLOAD</a>
+          <a href="https://docs.starcounter.com">DOCS</a>
+          <a href="https://starcounter.io/community/">COMMUNITY & SUPPORT</a>
+          <a href="https://starcounter.io/apps/">APP HUB</a>
+          <a href="https://starcounter.io/blog/">BLOG</a>
+        </div>
+      </div>
+    </div>
+    <div class="big-header header" height="42" width="100%">
       <a href="https://starcounter.io/">
         <img class="starcounter-logo" src="https://starcounter.io/wp-content/uploads/2015/06/logo_io_2x.png" height="42" width="226">
       </a>
@@ -80,7 +159,7 @@
       <form class="menu-button-form" action="https://starcounter.io/download/">
         <input class="menu-button-input" type="submit" value="DOWNLOAD" />
       </form>
-      <form class="menu-button-form" action="http://localhost:4000/">
+      <form class="menu-button-form" action="https://docs.starcounter.com">
         <input class="menu-button-input" type="submit" value="DOCS" />
       </form>
       <form class="menu-button-form" action="https://starcounter.io/community/">
@@ -96,5 +175,27 @@
         <a class="company-button-link" href="https://starcounter.com/">COMPANY</a>
       </div>
     </div>
+    <script>
+    /* When the user clicks on the button,
+    toggle between hiding and showing the dropdown content */
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropbtn')) {
+
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+  </script>
 </div>
 {% endblock %}
