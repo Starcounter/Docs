@@ -12,7 +12,7 @@ This is a GitBook to test the feasibility of using this for the Starcounter docu
 
 #### Adding pages
 
-1. In the files tree section of GitBook, if there's already a directory where the page goes, simple add a file and name it the same as the original page, i.e `commit-hooks.md`. Otherwise create a directory where the page should be.
+1. In the files tree section of GitBook, if there's already a directory where the page goes, simple add a file and name it the same as the original page, i.e the page "Commit hooks" becomes `commit-hooks.md`. If there's not an already existing directory, then create a directory where the page should be and add it to `SUMMARY.md`.
 2. Go to `SUMMARY.md` and add a reference to the page in the correct place like this: `[<my-page-name>](<page-directory>/<page-file>)`
 3. Copy the markdown from WordPress into the newly created markdown file.
 4. Add a headline of the size `<h1>`
@@ -21,9 +21,3 @@ This is a GitBook to test the feasibility of using this for the Starcounter docu
     * Download the image from the original
     * Simply drag the file into GitBook and give it a descriptive name
 7. Click save and add a commit message
-
-#### To do later
-* Fix all the internal links
-* Host this GitBook on docs.starcounter.com
-* Deal with ugly code boxes
-* Implement custom CSS
