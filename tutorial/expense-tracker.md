@@ -118,11 +118,11 @@ namespace HelloWorld
 ```
 `public Person Spender` binds every `Expense` to a `Person`. Without it we would have to look in every `Person` to find who has a certain `Expense`.
 
-While we are tinkering with the databases, we should also add Spendings and CurrentBalance to the Person class. 
-
 <aside class="read-more">
     <a href="http://starcounter.io/guides/sql/">Learn more about using SQL in Starcounter</a>
 </aside>
+
+While we are tinkering with the databases, we should also add Spendings and CurrentBalance to the Person class. 
 
 <div class="code-name">Program.cs</div>
 ```cs
