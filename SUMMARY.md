@@ -1,22 +1,168 @@
 # Summary
 
 * [Introduction](README.md)
-* [What is Starcounter?](what-is-starcounter/what-is-starcounter.md)
-    * [Collapsing the Stack](what-is-starcounter/collapsing-the-stack/collapsing-the-stack.md)
-        * [System Complexity and Scalability Trade-off](what-is-starcounter/collapsing-the-stack/system-complexity-and-scalability.md)
-        * [Starcounter and the Future of Microservices](what-is-starcounter/collapsing-the-stack/the-future-of-microservices.md)
-        * [10 Benefits of Collapsing the Stack](what-is-starcounter/collapsing-the-stack/10-benefits-of-collapsing-the-stack.md)
-    * [Database and Webserver, Integrated](what-is-starcounter/database-and-webserver-integrated.md)
+
+---
+
 * [Tutorial](tutorial/hello-world-tutorial.md)
     * [Create a Database Class](tutorial/create-a-database-class.md)
-* [Guides](guides/guides-intro.md)
+    * [Create a Real Time UI](tutorial/create-a-real-time-ui.md)
+    * [First Interactive UI](tutorial/first-interactive-ui.md)
+    * [Computed Properties](tutorial/computed-properties.md)
+    * [Expense Tracker](tutorial/expense-tracker.md)
+    * [Cancel and Delete](tutorial/cancel-and-delete.md)
+    * [Using a Shared Data Model](tutorial/using-a-shared-data-model.md)
+    * [Mapper App for Images](tutorial/mapper-app-for-images.md)
+    * [UI Blending](tutorial/ui-blending.md)
+    * [The Next Step](tutorial/the-next-step.md)
+    
+---
+    
+* [Guides](guides/guides.md)
+
+    ---
+
     * [Database](guides/database/database.md)
         * [Creating Database Classes](guides/database/creating-database-classes.md)
         * [Data manipulation](guides/database/data-manipulation.md)
         * [Object identity and object references](guides/database/object-identity-and-object-references.md)
-        * [Querying using SQL](guides/database/querying-using.sql.md)
+        * [Querying using SQL](guides/database/querying-using-sql.md)
         * [Variables](guides/database/variables.md)
-* [Cookbook](cookbook/cookbook.md)
-* [Glossary](glossary/glossary.md)
-* [Sample Apps](sample-apps/sample-apps.md)
+        * [Datatypes](guides/database/datatypes.md)
+        * [Query processing errors](guides/database/query-processing-errors.md)
+        * [Relations](guides/database/relations.md)
+        * [One-to-many relations](guides/database/one-to-many-relations.md)
+        * [Many-to-many relations](guides/database/many-to-many-relations.md)
+        * [Inheritance](guides/database/inheritance.md)
+        * [Database configuration](guides/database/database-configuration.md)
+        * [Comparing database objects](guides/database/comparing-database-objects.md)
+        * [Referential Integrity and Constraints](guides/database/referential-integrity-and-constraints.md)
+        
+        ---
+        
+    * [SQL](guides/SQL/sql.md)
+        * [Identifiers](guides/SQL/identifiers.md)
+        * [Literals](guides/SQL/literals.md)
+        * [Path expressions](guides/SQL/path-expressions.md)
+        * [Cast operation](guides/SQL/cast-operation.md)
+        * [Data operators](guides/SQL/data-operators.md)
+        * [Joins](guides/SQL/joins.md)
+        * [Aggregates](guides/SQL/aggregates.md)
+        * [Comparison predicates](guides/SQL/comparison-predicates.md)
+        * [Logical operators](guides/SQL/logical-operators.md)
+        * [Sorting](guides/SQL/sorting.md)
+        * [Fetch](guides/SQL/fetch.md)
+        * [Offset key](guides/SQL/offset-key.md)
+        * [Indexes](guides/SQL/indexes.md)
+        * [Query plan hints](guides/SQL/query-plan-hints.md)
+        * [Reserved words](guides/SQL/reserved-words.md)
+        * [Limitations](guides/SQL/limitations.md)
+        * [Query for Database Tables](guides/SQL/query-for-database-tables.md)
+        * [SQL isolation between applications](guides/SQL/sql-isolation-between-applications.md)
+        
+        ---
+        
+    * [Transactions](guides/transactions/transactions.md)
+        * [Commit hooks](guides/transactions/commit-hooks.md)
+        * [More on transactions](guides/transactions/more-on-transactions.md)
+        * [Long running transactions](guides/transactions/long-running-transactions.md)
+        * [Running background jobs](guides/transactions/running-background-jobs.md)
+        
+        ---
+        
+    * [Typed JSON](guides/typed-json/typed-json.md)
+        * [JSON-by-example](guides/typed-json/json-by-example.md)
+        * [Code-behind](guides/typed-json/code-behind.md)
+        * [Populate JSON with database data](guides/typed-json/populate-json-with-database-data.md)
+        * [JSON data binding](guides/typed-json/json-data-binding.md)
+        * [Primitive arrays and single value types](guides/typed-json/primitive-arrays-and-single-value-types.md)
+        * [Typed JSON Internals](guides/typed-json/typed-json-internals.md)
+        * [Callback methods of Starcounter JS](guides/typed-json/callback-methods-of-starcounter-js.md)
+        
+        ---
+        
+    * [Puppet web apps](guides/puppet-web-apps/puppet-web-apps.md)
+        * [Starcounter MVVM](guides/puppet-web-apps/starcounter-mvvm.md)
+        * [Thin vs fat client](guides/puppet-web-apps/thin-vs-fat-client.md)
+        * [Puppet](guides/puppet-web-apps/puppet.md)
+        * [Client-side stack](guides/puppet-web-apps/client-side-stack.md)
+        * [Creating a browser page](guides/puppet-web-apps/creating-a-browser-page.md)
+        * [Sessions](guides/puppet-web-apps/sessions.md)
+        * [Creating a browser page without a launcher](guides/puppet-web-apps/creating-a-browser-page-without-a-launcher.md)
+        * [Multiple pages](guides/puppet-web-apps/multiple-pages.md)
+        * [Partials](guides/puppet-web-apps/partials.md)
+        * [More on partials](guides/puppet-web-apps/more-on-partials.md)
+        * [Introduction to Web Components](guides/puppet-web-apps/introduction-to-web-components.md)
+        * [Using Web Components](guides/puppet-web-apps/using-web-components.md)
+        * [Import HTML composition](guides/puppet-web-apps/import-html-composition.md)
+        * [Acceptance testing with Selenium](guides/puppet-web-apps/acceptance-testing-with-selenium.md)
+        
+        ---
+        
+    * [RESTful web apps](guides/restful-web-apps/restful-web-apps.md)
+        * [Responding with JSON](guides/restful-web-apps/responding-with-json.md)
+        * [Accepting JSON in requests](guides/restful-web-apps/accepting-json-in-requests.md)
+        
+        ---
+        
+    * [Network](guides/network/network.md)
+        * [Handling HTTP requests](guides/network/handling-http-requests.md)
+        * [Anonymous or substitute handlers](guides/network/anonymous-or-substitute-handlers.md)
+        * [Static file server](guides/network/static-file-server.md)
+        * [Creating HTTP responses](guides/network/creating-http-responses.md)
+        * [Request and Response filters](guides/network/request-and-response-filters.md)
+        * [URL aliases and redirects](guides/network/url-aliases-and-redirects.md)
+        * [Internal Self calls](guides/network/internal-self-calls.md)
+        * [External HTTP calls and Node usage](guides/network/external-http-calls.md)
+        * [Using middleware](guides/network/using-middleware.md)
+        * [WebSocket](guides/network/websocket.md)
+        * [TCP sockets](guides/network/tcp-sockets.md)
+        * [UDP sockets](guides/network/udp-sockets.md)
+        * [Network Gateway](guides/network/network-gateway.md)
+        
+        ---
+        
+    * [Mapping and Blending](guides/mapping-and-blending/mapping-and-blending.md)
+        * [Do one thing and do it well](guides/mapping-and-blending/do-one-thing-and-do-it-well.md)
+        * [Sharing data](guides/mapping-and-blending/sharing-data.md)
+        * [Database mapping](guides/mapping-and-blending/database-mapping.md)
+        * [Sharing screen](guides/mapping-and-blending/sharing-screen.md)
+        * [URI mapping](guides/mapping-and-blending/uri-mapping.md)
+        * [Ontology mapping](guides/mapping-and-blending/ontology-mapping.md)
+        * [Launcher](guides/mapping-and-blending/launcher.md)
+        * [Blending](guides/mapping-and-blending/blending.md)
+        * [Making Apps Blendable](guides/mapping-and-blending/making-apps-blendable.md)
+        * [Avoiding URI conflicts](guides/mapping-and-blending/avoiding-uri-conflicts.md)
+        * [Avoiding CSS conflicts](guides/mapping-and-blending/avoiding-css-conflicts.md)
+        
+        ---
+        
+    * [Working with Starcounter](guides/working-with-starcounter/working-with-starcounter.md)
+        * [Release channels in Starcounter](guides/working-with-starcounter/release-channels-in-starcounter.md)
+        * [Starting and stopping apps](guides/working-with-starcounter/starting-and-stopping-apps.md)
+        * [Administrator Web UI](guides/working-with-starcounter/administrator-web-ui.md)
+        * [Staradmin CLI](guides/working-with-starcounter/staradmin-cli.md)
+        * [Error log](guides/working-with-starcounter/error-log.md)
+        * [Testing HTTP requests](guides/working-with-starcounter/testing-http-requests.md)
+        * [Using HTTPS on NGINX](guides/working-with-starcounter/using-https-on-nginx.md)
+        * [Using HTTPS on IIS](guides/working-with-starcounter/using-https-on-iis.md)
+        * [Run Starcounter in production](guides/working-with-starcounter/run-starcounter-in-production.md)
+        * [Weaver](guides/working-with-starcounter/weaver.md)
+        * [Investigating app crashes](guides/working-with-starcounter/investigating-app-crashes.md)
+        * [Configuration Structure in 2.3](guides/working-with-starcounter/configuration-structure-in-2.3.md)
+        * [Database Refactoring in 2.3](guides/working-with-starcounter/database-refactoring-in-2.3.md)
+        * [Migrating from 2.2 to 2.4](guides/working-with-starcounter/migrating-from-2.2-to-2.4.md)
 
+    
+        
+---
+
+* [Cookbook](cookbook/cookbook.md)
+    * [Accessing methods in nested view-models](cookbook/accessing-methods-in-nested-view-models.md)
+    * [Attach a request to long running transaction](cookbook/attach-a-request-to-long-running-transaction.md)
+    * [Cookie-based authentication](cookbook/cookie-based-authentication.md)
+
+---
+* [Glossary](glossary/glossary.md)
+
+---
