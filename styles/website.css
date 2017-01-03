@@ -133,3 +133,8 @@ kbd {
 .code-name + p {
     display: none;
 }
+
+.book-summary {
+    background: #f29191;
+    color: black;
+}
