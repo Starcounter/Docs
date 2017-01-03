@@ -10,7 +10,7 @@
 * [Tutorial](tutorial/hello-world-tutorial.md)
     * [Create a Database Class](tutorial/create-a-database-class.md)
 * [Guides](guides/guides-intro.md)
-    * [Database](guides/database/database-intro.md)
+    * [Database](guides/database/database.md)
         * [Creating Database Classes](guides/database/creating-database-classes.md)
 * [Cookbook](cookbook/cookbook.md)
 * [Glossary](glossary/glossary.md)
