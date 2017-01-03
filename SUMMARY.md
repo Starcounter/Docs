@@ -98,7 +98,18 @@
         * [TCP sockets](guides/network/tcp-sockets.md)
         * [UDP sockets](guides/network/udp-sockets.md)
         * [Network Gateway](guides/network/network-gateway.md)
-        
+    * [Mapping and Blending](guides/mapping-and-blending/mapping-and-blending.md)
+        * [Do one thing and do it well](guides/mapping-and-blending/do-one-thing-and-do-it-well.md)
+        * [Sharing data](guides/mapping-and-blending/sharing-data.md)
+        * [Database mapping](guides/mapping-and-blending/database-mapping.md)
+        * [Sharing screen](guides/mapping-and-blending/sharing-screen.md)
+        * [URI mapping](guides/mapping-and-blending/uri-mapping.md)
+        * [Ontology mapping](guides/mapping-and-blending/ontology-mapping.md)
+        * [Launcher](guides/mapping-and-blending/launcher.md)
+        * [Blending](guides/mapping-and-blending/blending.md)
+        * [Making Apps Blendable](guides/mapping-and-blending/making-apps-blendable.md)
+        * [Avoiding URI conflicts](guides/mapping-and-blending/avoiding-uri-conflicts.md)
+        * [Avoiding CSS conflicts](guides/mapping-and-blending/avoiding-css-conflicts.md)
 ---
 
 * [Cookbook](cookbook/cookbook.md)
