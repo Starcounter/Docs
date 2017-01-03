@@ -137,3 +137,11 @@ kbd {
 .book-summary {
     background: white;
 }
+
+.book-summary ul.summary li.active > a {
+  color: #f47e0c;
+}
+
+.markdown-section a {
+  color: #f47e0c;
+}
