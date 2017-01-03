@@ -14,6 +14,8 @@
         * [Creating Database Classes](guides/database/creating-database-classes.md)
         * [Data manipulation](guides/database/data-manipulation.md)
         * [Object identity and object references](guides/database/object-identity-and-object-references.md)
+        * [Querying using SQL](guides/database/querying-using.sql.md)
+
 * [Cookbook](cookbook/cookbook.md)
 * [Glossary](glossary/glossary.md)
 * [Sample Apps](sample-apps/sample-apps.md)
