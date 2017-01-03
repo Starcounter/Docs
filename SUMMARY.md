@@ -13,6 +13,7 @@
     * [Database](guides/database/database.md)
         * [Creating Database Classes](guides/database/creating-database-classes.md)
         * [Data manipulation](guides/database/data-manipulation.md)
+        * [Object identity and object references](guides/database/object-identity-and-object-references.md)
 * [Cookbook](cookbook/cookbook.md)
 * [Glossary](glossary/glossary.md)
 * [Sample Apps](sample-apps/sample-apps.md)
