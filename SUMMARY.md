@@ -1,6 +1,9 @@
 # Summary
 
 * [Introduction](README.md)
+
+## Hello World Tutorial
+
 * [Tutorial](tutorial/hello-world-tutorial.md)
     * [Create a Database Class](tutorial/create-a-database-class.md)
     * [Create a Real Time UI](tutorial/create-a-real-time-ui.md)
@@ -12,6 +15,9 @@
     * [Mapper App for Images](tutorial/mapper-app-for-images.md)
     * [UI Blending](tutorial/ui-blending.md)
     * [The Next Step](tutorial/the-next-step.md)
+    
+## Guide of Starcounter technology
+    
 * [Guides](guides/guides.md)
     * [Database](guides/database/database.md)
         * [Creating Database Classes](guides/database/creating-database-classes.md)
@@ -93,7 +99,14 @@
         * [UDP sockets](guides/network/udp-sockets.md)
         * [Network Gateway](guides/network/network-gateway.md)
         
+---
+
 * [Cookbook](cookbook/cookbook.md)
+
+---
 * [Glossary](glossary/glossary.md)
+
+---
+
 * [Sample Apps](sample-apps/sample-apps.md)
 
