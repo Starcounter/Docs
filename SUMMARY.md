@@ -19,6 +19,7 @@
         * [Object identity and object references](guides/database/object-identity-and-object-references.md)
         * [Querying using SQL](guides/database/querying-using-sql.md)
         * [Variables](guides/database/variables.md)
+        * [Datatypes](guides/database/datatypes.md)
 * [Cookbook](cookbook/cookbook.md)
 * [Glossary](glossary/glossary.md)
 * [Sample Apps](sample-apps/sample-apps.md)
