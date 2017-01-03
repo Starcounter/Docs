@@ -158,11 +158,11 @@
 ---
 
 * [Cookbook](cookbook/cookbook.md)
+    * [Accessing methods in nested view-models](cookbook/accessing-methods-in-nested-view-models.md)
+    * [Attach a request to long running transaction](cookbook/attach-a-request-to-long-running-transaction.md)
+    * [Cookie-based authentication](cookbook/cookie-based-authentication.md)
 
 ---
 * [Glossary](glossary/glossary.md)
 
 ---
-
-* [Sample Apps](sample-apps/sample-apps.md)
-
