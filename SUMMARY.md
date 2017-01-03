@@ -2,7 +2,7 @@
 
 * [Introduction](README.md)
 
-## Hello World Tutorial
+---
 
 * [Tutorial](tutorial/hello-world-tutorial.md)
     * [Create a Database Class](tutorial/create-a-database-class.md)
@@ -16,7 +16,7 @@
     * [UI Blending](tutorial/ui-blending.md)
     * [The Next Step](tutorial/the-next-step.md)
     
-## Guide of Starcounter technology
+---
     
 * [Guides](guides/guides.md)
     * [Database](guides/database/database.md)
