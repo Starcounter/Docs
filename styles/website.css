@@ -5,11 +5,10 @@
 }
 
 .markdown-section aside {
-    width: 205px;
+    width: 100%;
     font-size: 14px;
     line-height: 17px;
     color: #000;
-    float: right;
     margin-left: 10px;
 }
 

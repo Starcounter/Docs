@@ -1,10 +1,10 @@
 # First Interactive UI
 
+In order to make our UI interactive, we first have to make the data in the view-model editable. In JSON we do this by adding a `$` at the end of our property. That allows us to edit these JSON values from the view. In addition to adding `$` to our already existing properties, we will add the property `"Save$"` which will act as a trigger between the view and the code-behind.
+
 <aside class="read-more">
     <a href="http://starcounter.io/guides/json/json-by-example/">Learn more about JSON in Starcounter</a>
 </aside>
-
-In order to make our UI interactive, we first have to make the data in the view-model editable. In JSON we do this by adding a `$` at the end of our property. That allows us to edit these JSON values from the view. In addition to adding `$` to our already existing properties, we will add the property `"Save$"` which will act as a trigger between the view and the code-behind.
 
 <div class="code-name">PersonJson.json</div>
 ```json
@@ -44,15 +44,15 @@ void Handle(Input.Save action)
     Transaction.Commit();
 }
 ```
-`Input.Save action` makes the method run when a change is detected in the Save value. Note that we do not need to use a `$` here like in the JSON. The rule is that we use `$` for the view, and view-model, but not in anything we write in C#. 
+`Input.Save action` makes the method run when a change is detected in the Save value. Note that we do not need to use a `$` here like in the JSON. The rule is that we use `$` for the view, and view-model, but not in anything we write in C#.
 
-`Transaction.Commit()` simply commits the input to the database so that the data is accessible from other sessions. 
+`Transaction.Commit()` simply commits the input to the database so that the data is accessible from other sessions.
 
 <aside class="read-more">
     <a href="http://starcounter.io/guides/web/server-side-view-models/">Learn about Starcounter's MVVM</a>
 </aside>
 
-With server-side view-models, you don't have to write a single line of "glue code" to update the view in HTML. Any change in the view-model made in C# will instantly be synced to the client using PuppetJs, which in turn automatically renders because of Polymer's data bindings. This saves you from creating single-purpose REST APIs, need for double validation of user input, and more. 
+With server-side view-models, you don't have to write a single line of "glue code" to update the view in HTML. Any change in the view-model made in C# will instantly be synced to the client using PuppetJs, which in turn automatically renders because of Polymer's data bindings. This saves you from creating single-purpose REST APIs, need for double validation of user input, and more.
 
 <aside class="read-more">
     <a href="http://starcounter.io/guides/transactions/long-running-transactions/">Read more about long-running transactions</a>
@@ -62,7 +62,7 @@ The last step is to modify our `Program.cs` file to create a long running transa
 
 <div class="code-name">Program.cs</div><div class="code-name code-title">Add Db.Scope</div>
 ```cs
-Handle.GET("/HelloWorld", () => 
+Handle.GET("/HelloWorld", () =>
 {
     return Db.Scope(() =>
     {
