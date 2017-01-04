@@ -2,11 +2,11 @@
 
 We will now turn our application into a simple expense tracker. This will allow us to practice using multiple object instances and relations.
 
+With Starcounter you can divide a view-model into several smaller view-models that are called partials. That's exactly what we will do with our application. We will let PersonJson be one view-model and ExpenseJson another. Doing this makes our application more modular and easier to maintain. Let's start by creating the appropriate files.
+
 <aside class="read-more">
     <a href="http://starcounter.io/guides/web/partials/">Read more about partials</a>
 </aside>
-
-With Starcounter you can divide a view-model into several smaller view-models that are called partials. That's exactly what we will do with our application. We will let PersonJson be one view-model and ExpenseJson another. Doing this makes our application more modular and easier to maintain. Let's start by creating the appropriate files.
 
 1. Add a new Starcounter HTML template with dom-bind in the HelloWorld folder together with `PersonJson.html`. Name it `ExpenseJson.html`.
 2. Add a new Starcounter Typed JSON with Code-behind file to the HelloWorld project together with `PersonJson.json` and `PersonJson.json.cs`. Name it `ExpenseJson.json`.
@@ -34,11 +34,12 @@ To create a list of the expenses we will use the power of Polymer. Our first ste
     </template>
 <template>
 ```
+
+Great! Now we just need to stack these templates inside the `Person` view. We can do that easily using dom-repeat. While we are on it, we will also modify the headline and add a button to add new expenses.
+
 <aside class="read-more">
     <a href="https://www.polymer-project.org/1.0/docs/devguide/templates">Read more about dom-repeat</a>
 </aside>
-
-Great! Now we just need to stack these templates inside the `Person` view. We can do that easily using dom-repeat. While we are on it, we will also modify the headline and add a button to add new expenses.
 
 <div class="code-name">PersonJson.html</div>
 ```html
@@ -118,10 +119,6 @@ namespace HelloWorld
 ```
 `public Person Spender` binds every `Expense` to a `Person`. Without it we would have to look in every `Person` to find who has a certain `Expense`.
 
-<aside class="read-more">
-    <a href="http://starcounter.io/guides/sql/">Learn more about using SQL in Starcounter</a>
-</aside>
-
 While we are tinkering with the databases, we should also add Spendings and CurrentBalance to the Person class. 
 
 <div class="code-name">Program.cs</div>
@@ -139,6 +136,10 @@ public decimal CurrentBalance => Db.SQL<decimal>("SELECT SUM(e.Amount) FROM Hell
 <code>CurrentBalance</code> is the sum of all those expenses.
 
 These two are calculated every time they are used by searching through the database so that they are always up to date.
+
+<aside class="read-more">
+    <a href="http://starcounter.io/guides/sql/">Learn more about using SQL in Starcounter</a>
+</aside>
 
 Inside the Program class, you should also add the following GET handler which helps with looking up the expenses.
 
