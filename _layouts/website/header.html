@@ -3,7 +3,7 @@
     <div class="header" height="42" width="100%">
       <div class="dropdown small-header">
         <button onclick="toggleDropdown()" class="dropbtn">MENU</button>
-        <div id="myDropdown" class="dropdown-content">
+        <div id="menu-dropdown" class="dropdown-content">
           <a href="https://starcounter.io/">HOME</a>
           <a href="https://starcounter.io/download/">DOWNLOAD</a>
           <a href="https://docs.starcounter.com">DOCS</a>
@@ -48,7 +48,7 @@
     /* When the user clicks on the button,
     toggle between hiding and showing the dropdown content */
     function toggleDropdown() {
-        document.getElementById("myDropdown").classList.toggle("show");
+        document.getElementById("menu-dropdown").classList.toggle("show");
     }
 
     // Close the dropdown menu if the user clicks outside of it

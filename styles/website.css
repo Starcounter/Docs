@@ -1,32 +1,25 @@
-/* CSS for website */
-
+/* Make code blocks reach as far as the text */
 .markdown-section pre {
     width: 100%;
-}
-
-.markdown-section aside {
-    width: 100%;
-    font-size: 14px;
-    line-height: 17px;
-    color: #000;
-    margin-left: 10px;
-}
-
-.markdown-section aside {
-    margin-bottom: 20px;
+    margin-bottom: 1em;
 }
 
 .markdown-section aside.read-more {
-    background-image: url(../assets/read-more.svg);
+    background-image: url(assets/read-more.svg);
     background-repeat: no-repeat;
     background-position: 0px 5px;
     background-size: 26px;
     padding: 0 0 0 28px;
+    width: 100%;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000;
+    margin: 0 0 20px 10px;
 }
 
 .markdown-section section.see-yourself {
     background-color: #EEFCFF;
-    background-image: url(../assets/try-sample.svg);
+    background-image: url(assets/try-sample.svg);
     padding-left: 100px;
     background-size: 60px;
     background-repeat: no-repeat;
@@ -51,13 +44,12 @@
 pre::after {
     display: none;
 }
-.code-name + pre {
-    margin: 0 0 1em;
-}
 
 .code-name + pre code {
     border-radius: 0 3px 3px 3px;
 }
+
+/* File name on top left of pre elements/code-boxes */
 
 .code-name {
     height: 26px;
@@ -83,6 +75,8 @@ pre::after {
     right: -25px;
 }
 
+/* Code title on top right of pre-element/code-box */
+
 .code-title {
     float: right;
 }
@@ -102,6 +96,8 @@ pre::after {
     border-color: transparent transparent transparent transparent;
 }
 
+/* Orange box for short summaries or simmilarly */
+
 .markdown-section section.hero {
     margin-bottom: 20px;
     border: 2px solid #f47e0c;
@@ -110,6 +106,8 @@ pre::after {
     line-height: 1.6em;
     text-align: center;
 }
+
+/* Element that resembles a keyboard button */
 
 kbd {
     display: inline-block;
@@ -125,6 +123,8 @@ kbd {
     box-shadow: inset 0 -1px 0 #bbb;
 }
 
+/* Hide p elements that are created after code-title and code-name elements */
+
 .code-title + p {
     display: none;
 }
@@ -133,9 +133,13 @@ kbd {
     display: none;
 }
 
+/* Change background from grey to white on the book navigation on the left */
+
 .book-summary {
     background: white;
 }
+
+/* Make links Starcounter orange */
 
 .book-summary ul.summary li.active > a {
   color: #f47e0c;
@@ -144,6 +148,8 @@ kbd {
 .markdown-section a {
   color: #f47e0c;
 }
+
+/* Formatting for the menu buttons displayed when the screen is wider than 1040px */
 
 .big-header-buttons {
   display: flex;
@@ -154,10 +160,14 @@ kbd {
   float: right;
 }
 
+/* Set the starcounter logo to stay on the left of the header */
+
 .starcounter-logo {
   float: left;
   margin-top: 5px;
 }
+
+/* Color the hamburger */
 
 .fa-align-justify {
   color: black;
@@ -168,21 +178,31 @@ kbd {
   color: #f47e0c;
 }
 
+/* Add a margin top to the hamburger to align with the logo */
+
 .book-header .btn {
   margin-top: 5px;
 }
+
+/* Make the search result links orange */
 
 #book-search-results .search-results .has-results .search-results-item a {
   color: #f47e0c;
 }
 
+/* Hide the link to GitBook on the bottom of the section navigation/summary element */
+
 .gitbook-link {
   display: none;
 }
 
+/* Hide the small logo (the round one without text) by default */
+
 .small-logo {
   display: none;
 }
+
+/* Hide the big logo and display the small logo on phone-sized screens in portrait mode */
 
 @media (max-width: 418px) {
   .big-logo {
@@ -192,6 +212,8 @@ kbd {
     display: block;
   }
 }
+
+/* Hide large menu buttons and display the dropdown button with moderately small screens */
 
 @media (max-width: 1040px) {
   .big-header-buttons {
@@ -207,6 +229,8 @@ kbd {
     display: none;
   }
 }
+
+/* Styling for the menu buttons */
 
 .menu-button-height {
   height: 62.7px;
@@ -235,6 +259,8 @@ kbd {
   background: linear-gradient(0deg, white 94%, #f47e0c 6%);
 }
 
+/* Styling for the brown button that links to starcounter.com */
+
 .company-button {
   background-color: #463f4a;
   border: none;
@@ -249,7 +275,7 @@ kbd {
   margin-top: 11px;
 }
 
-  /* Dropdown Button */
+/* Dropdown Button */
 .dropbtn {
     background: linear-gradient(0deg, white 91%, black 9%);
     color: black;
@@ -298,7 +324,7 @@ kbd {
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {background-color: #f1f1f1}
 
-/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+/* Show the dropdown menu (added with js from header.html) */
 .show {display:block;}
 
 /* Make space for header */
