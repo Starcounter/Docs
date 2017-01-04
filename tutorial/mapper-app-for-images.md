@@ -9,9 +9,6 @@ To implement this we need to do some setup.
 3. Create a reference to the <code>HelloWorld</code>. You can find this in the <code>Projects</code> tab of the <code>Reference Manager</code>.
 4. Change the <code>Copy Local</code> property to False for the <code>Simplified.Data.Model</code>.
 
-<aside class="read-more">
-   <a href="http://starcounter.io/guides/apps/ontology-mapping/">Learn about ontology mapping</a>
-</aside>
 Now we can start getting some code in there. As mentioned earlier, we simply copy the mapping code from [here](https://github.com/StarcounterPrefabs/Images/blob/master/README.md) into the <code>Main</code> method of <code>Program.cs</code> in <code>HelloWorldMapper</code> and do some small adjustments. In addition, you have to add <code>using Starcounter.Internal</code> to the beginning of the same file in order to use <code>StarcounterEnvironment.RunWithinApplication</code>. 
 
 <div class="code-name">Program.cs</div>
@@ -27,6 +24,10 @@ Handle.GET("/images/partials/concept-expense/{?}", (string objectId) => {
      });
 });
 ```
+
+<aside class="read-more">
+   <a href="http://starcounter.io/guides/apps/ontology-mapping/">Learn about ontology mapping</a>
+</aside>
 
 To get the applications up and running correctly, start them in this order:
 

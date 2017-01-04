@@ -6,10 +6,6 @@ First, download the `CompositionEditor` and `CompositionProvider` from the App W
 
 You can now, if you haven't already, fire up the applications <code>HelloWorld</code>, <code>HelloWorldMapper</code>, <code>Images</code>, `CompositionEditor`, and `CompositionProvider`.
 
-<aside class="read-more">
-   <a href="http://starcounter.io/guides/web/import-html-compositions/">Read about alternative HTML composition</a>
-</aside>
-
 Open <code>HelloWorld</code> in the Starcounter Administrator and press <kbd>Ctrl</kbd> + <kbd>E</kbd>. Double click on the "css selector for partial to edit" input field and choose the alternative <code>[partial-id="/sc/htmlmerger?HelloWorld=/HelloWorld/ExpenseJson.html&Images=/Images/viewmodels/ConceptPage.html"]</code>.
 
 What this does is that it uses htmlmerger, a class within Starcounter, to merge the files <code>ExpenseJson.html</code> and <code>ConceptPage.html</code> in HelloWorld and Images respectively.
@@ -27,6 +23,10 @@ Now, when we have described what files to merge we also want to describe how the
 ```
 
 This code describes that we don't want to display the label for the images and that we adjust the width and height of them. It also orders the different elements in the way we want. Feel free to play around with these and see how it changes the layout on your page. 
+
+<aside class="read-more">
+   <a href="http://starcounter.io/guides/web/import-html-compositions/">Read about alternative HTML composition</a>
+</aside>
 
 Close the layout editor with <kbd>ctrl</kbd> + <kbd>E</kbd> should now see the following page:
 

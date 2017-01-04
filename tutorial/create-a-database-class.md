@@ -4,14 +4,11 @@ Welcome to the first part of our Hello World tutorial!
 
 We will start by creating a Starcounter application in Visual Studio by going to <code>New Project -> Templates -> Visual C# -> Starcounter -> Starcounter Application</code>. We will name the application <code>HelloWorld</code>.
 
+Establish a new class called <code>Person</code> with the attribute <code>[Database]</code> inside the <code>HelloWorld</code> namespace. This attribute tag will make all instances of the class persistent. Add the fields <code>FirstName</code> and <code>LastName</code> to this class. Your code should now look like this:
 
 <aside class="read-more">
     <a href="http://starcounter.io/guides/database/creating-database-classes/">Read about the  [Database] attribute</a>
 </aside>
-
-
-Establish a new class called <code>Person</code> with the attribute <code>[Database]</code> inside the <code>HelloWorld</code> namespace. This attribute tag will make all instances of the class persistent. Add the fields <code>FirstName</code> and <code>LastName</code> to this class. Your code should now look like this:
-
 
 <div class="code-name">Program.cs</div><div class="code-name code-title">Define database</div>
 ```cs
@@ -35,10 +32,11 @@ namespace HelloWorld
     }
 }
 ```
+Add your first instance to the database by defining a new person, its properties, and wrapping it in a <code>Db.Transact()</code> which will keep this person in the database.
+
 <aside class="read-more">
     <a href="http://starcounter.io/guides/transactions/">Read more about transactions in Starcounter</a>
 </aside>
-Add your first instance to the database by defining a new person, its properties, and wrapping it in a <code>Db.Transact()</code> which will keep this person in the database.
 
 <div class="code-name">Program.cs</div><div class="code-name code-title">Add instance</div>
 ```cs

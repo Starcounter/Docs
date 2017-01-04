@@ -34,18 +34,17 @@ To accomplish this we will use the `label` and `strong`> tags. It's not essentia
 </template>
 ```
 
+The double curly bracket syntax is a way of denoting two-way bindings in Polymer. `model` represents our JSON file, so `{{model.FirstName}}` is the `FirstName` value in `PersonJson.json`.
+
 <aside class="read-more">
     <a href="https://www.polymer-project.org/1.0/docs/devguide/data-binding">Learn about Polymer bindings</a>
 </aside>
 
-
-The double curly bracket syntax is a way of denoting two-way bindings in Polymer. `model` represents our JSON file, so `{{model.FirstName}}` is the `FirstName` value in `PersonJson.json`.
+In the JSON file, create three properties called `Html`, `FirstName`, and `LastName`. The values of these properties will be the values that are bound to the Polymer bindings that we just created _and_ the database. It is therefore crucial, for this example, that you name these keys the same as the properties that we have in our Person class, otherwise they will not bind properly.
 
 <aside class="read-more">
     <a href="http://starcounter.io/guides/json/json-data-binding/">Learn more about JSON bindings</a>
 </aside>
-
-In the JSON file, create three properties called `Html`, `FirstName`, and `LastName`. The values of these properties will be the values that are bound to the Polymer bindings that we just created _and_ the database. It is therefore crucial, for this example, that you name these keys the same as the properties that we have in our Person class, otherwise they will not bind properly.
 
 <div class="code-name">PersonJson.json</div><div class="code-name code-title">Set JSON</div>
 
@@ -66,11 +65,11 @@ Before we move on, quickly make sure that your partial class in `PersonJson.json
 partial class PersonJson : Json
 ```
 
+Go to `Program.cs` and type in the following code inside the `Main()` method. This code adds the correct information to our previously empty JSON file and creates a new [session](http://starcounter.io/guides/web/sessions/).
+
 <aside class="read-more">
     <a href="http://starcounter.io/guides/web/">Read more about sessions, partials and more</a>
 </aside>
-
-Go to `Program.cs` and type in the following code inside the `Main()` method. This code adds the correct information to our previously empty JSON file and creates a new [session](http://starcounter.io/guides/web/sessions/).
 
 <div class="code-name">Program.cs</div><div class="code-name code-title">Bind JSON</div>
 ```cs
