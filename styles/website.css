@@ -5,7 +5,7 @@
 }
 
 .markdown-section aside.read-more {
-    background-image: url(assets/read-more.svg);
+    background-image: url(https://mackiovello.gitbooks.io/docs/content/assets//read-more.svg);
     background-repeat: no-repeat;
     background-position: 0px 5px;
     background-size: 26px;
@@ -19,7 +19,7 @@
 
 .markdown-section section.see-yourself {
     background-color: #EEFCFF;
-    background-image: url(assets/try-sample.svg);
+    background-image: url(https://mackiovello.gitbooks.io/docs/content/assets/try-sample.svg);
     padding-left: 100px;
     background-size: 60px;
     background-repeat: no-repeat;
