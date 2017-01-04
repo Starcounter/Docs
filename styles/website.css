@@ -145,3 +145,160 @@ kbd {
 .markdown-section a {
   color: #f47e0c;
 }
+
+.big-header-buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  width: 70%;
+  float: right;
+}
+
+.starcounter-logo {
+  float: left;
+  margin-top: 5px;
+}
+
+/*
+.small-header {
+  display: none;
+}
+*/
+
+.fa-align-justify {
+  color: black;
+}
+
+/* Hover color on hamburger */
+.fa-align-justify:hover {
+  color: #f47e0c;
+}
+
+#book-search-results .search-results .has-results .search-results-item a {
+  color: #f47e0c;
+}
+
+.gitbook-link {
+  display: none;
+}
+
+@media (max-width: 1040px) {
+  .big-header-buttons {
+    display: none;
+  }
+}
+
+@media (min-width: 1040px) {
+  .small-header {
+    display: none;
+  }
+  .dropbtn {
+    display: none;
+  }
+}
+
+.menu-button-form {
+  height: 62.7px;
+}
+
+.menu-button-input {
+  height: 98%;
+  color: black;
+  background-color: white;
+  border: none;
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  line-height: 60px;
+  font-weight: 400;
+  font-size: 14px;
+  bottom:0;
+  margin-right: 10px;
+}
+
+.menu-button-input:hover {
+  color: #f47e0c;
+  background: linear-gradient(0deg, white 94%, #f47e0c 6%);
+}
+
+.company-button-outer:hover {
+  color: #f47e0c;
+  background: linear-gradient(0deg, white 94%, #f47e0c 6%);
+}
+
+.company-button-link {
+  background-color: #463f4a;
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 10px;
+  display: inline-block;
+  font-size: 14px;
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  margin-top: 11px;
+}
+
+  /* Dropdown Button */
+.dropbtn {
+    background: linear-gradient(0deg, white 91%, black 9%);
+    color: black;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    width: 100px;
+    float: right;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+    background: linear-gradient(0deg, white 91%, #f47e0c 9%);
+    color: #f47e0c
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;;
+    float: right;
+    margin-right: 10px;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1000;
+    width: 100%;
+    margin-top: 50px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+
+.book-summary {
+  margin-top:50px;
+}
+
+.book-body {
+  margin-top: 50px;
+}
+
+script {
+  display: none !important;
+}
