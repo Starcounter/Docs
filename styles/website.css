@@ -160,12 +160,6 @@ kbd {
   margin-top: 5px;
 }
 
-/*
-.small-header {
-  display: none;
-}
-*/
-
 .fa-align-justify {
   color: black;
 }
@@ -173,6 +167,10 @@ kbd {
 /* Hover color on hamburger */
 .fa-align-justify:hover {
   color: #f47e0c;
+}
+
+.book-header .btn {
+  margin-top: 5px;
 }
 
 #book-search-results .search-results .has-results .search-results-item a {
@@ -211,7 +209,7 @@ kbd {
   }
 }
 
-.menu-button-form {
+.menu-button-height {
   height: 62.7px;
 }
 
@@ -233,12 +231,12 @@ kbd {
   background: linear-gradient(0deg, white 94%, #f47e0c 6%);
 }
 
-.company-button-outer:hover {
+.company-button-background:hover {
   color: #f47e0c;
   background: linear-gradient(0deg, white 94%, #f47e0c 6%);
 }
 
-.company-button-link {
+.company-button {
   background-color: #463f4a;
   border: none;
   color: white;
@@ -304,6 +302,7 @@ kbd {
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
 
+/* Make space for header */
 .book-summary {
   margin-top:50px;
 }
@@ -312,6 +311,7 @@ kbd {
   margin-top: 50px;
 }
 
+/* Hide the script that sometimes is displayed due to some bug */
 script {
   display: none !important;
 }
