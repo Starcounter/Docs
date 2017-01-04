@@ -193,7 +193,7 @@ kbd {
 /* Hide the link to GitBook on the bottom of the section navigation/summary element */
 
 .gitbook-link {
-  display: none;
+  display: none !important;
 }
 
 /* Hide the small logo (the round one without text) by default */
@@ -339,4 +339,17 @@ kbd {
 /* Hide the script that sometimes is displayed due to some bug */
 script {
   display: none !important;
+}
+
+.book-summary {
+  border-right: none;
+}
+
+.divider {
+  display: none
+}
+
+#book-search-input {
+  border-bottom: none !important;
+  margin-bottom: 0 !important;
 }

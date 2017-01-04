@@ -1,10 +1,6 @@
 # Summary
 
----
-
 * [Introduction](README.md)
-
----
 
 * [Tutorial](tutorial/hello-world-tutorial.md)
     * [Create a Database Class](tutorial/create-a-database-class.md)
@@ -18,11 +14,7 @@
     * [UI Blending](tutorial/ui-blending.md)
     * [The Next Step](tutorial/the-next-step.md)
 
----
-
 * [Guides](guides/guides.md)
-
-    ---
 
     * [Database](guides/database/database.md)
         * [Creating Database Classes](guides/database/creating-database-classes.md)
@@ -39,8 +31,6 @@
         * [Database configuration](guides/database/database-configuration.md)
         * [Comparing database objects](guides/database/comparing-database-objects.md)
         * [Referential Integrity and Constraints](guides/database/referential-integrity-and-constraints.md)
-
-        ---
 
     * [SQL](guides/SQL/sql.md)
         * [Identifiers](guides/SQL/identifiers.md)
@@ -62,15 +52,11 @@
         * [Query for Database Tables](guides/SQL/query-for-database-tables.md)
         * [SQL isolation between applications](guides/SQL/sql-isolation-between-applications.md)
 
-        ---
-
     * [Transactions](guides/transactions/transactions.md)
         * [Commit hooks](guides/transactions/commit-hooks.md)
         * [More on transactions](guides/transactions/more-on-transactions.md)
         * [Long running transactions](guides/transactions/long-running-transactions.md)
         * [Running background jobs](guides/transactions/running-background-jobs.md)
-
-        ---
 
     * [Typed JSON](guides/typed-json/typed-json.md)
         * [JSON-by-example](guides/typed-json/json-by-example.md)
@@ -80,8 +66,6 @@
         * [Primitive arrays and single value types](guides/typed-json/primitive-arrays-and-single-value-types.md)
         * [Typed JSON Internals](guides/typed-json/typed-json-internals.md)
         * [Callback methods of Starcounter JS](guides/typed-json/callback-methods-of-starcounter-js.md)
-
-        ---
 
     * [Puppet web apps](guides/puppet-web-apps/puppet-web-apps.md)
         * [Starcounter MVVM](guides/puppet-web-apps/starcounter-mvvm.md)
@@ -99,13 +83,9 @@
         * [Import HTML composition](guides/puppet-web-apps/import-html-composition.md)
         * [Acceptance testing with Selenium](guides/puppet-web-apps/acceptance-testing-with-selenium.md)
 
-        ---
-
     * [RESTful web apps](guides/restful-web-apps/restful-web-apps.md)
         * [Responding with JSON](guides/restful-web-apps/responding-with-json.md)
         * [Accepting JSON in requests](guides/restful-web-apps/accepting-json-in-requests.md)
-
-        ---
 
     * [Network](guides/network/network.md)
         * [Handling HTTP requests](guides/network/handling-http-requests.md)
@@ -122,8 +102,6 @@
         * [UDP sockets](guides/network/udp-sockets.md)
         * [Network Gateway](guides/network/network-gateway.md)
 
-        ---
-
     * [Mapping and Blending](guides/mapping-and-blending/mapping-and-blending.md)
         * [Do one thing and do it well](guides/mapping-and-blending/do-one-thing-and-do-it-well.md)
         * [Sharing data](guides/mapping-and-blending/sharing-data.md)
@@ -136,8 +114,6 @@
         * [Making Apps Blendable](guides/mapping-and-blending/making-apps-blendable.md)
         * [Avoiding URI conflicts](guides/mapping-and-blending/avoiding-uri-conflicts.md)
         * [Avoiding CSS conflicts](guides/mapping-and-blending/avoiding-css-conflicts.md)
-
-        ---
 
     * [Working with Starcounter](guides/working-with-starcounter/working-with-starcounter.md)
         * [Release channels in Starcounter](guides/working-with-starcounter/release-channels-in-starcounter.md)
@@ -155,16 +131,9 @@
         * [Database Refactoring in 2.3](guides/working-with-starcounter/database-refactoring-in-2.3.md)
         * [Migrating from 2.2 to 2.4](guides/working-with-starcounter/migrating-from-2.2-to-2.4.md)
 
-
-
----
-
 * [Cookbook](cookbook/cookbook.md)
     * [Accessing methods in nested view-models](cookbook/accessing-methods-in-nested-view-models.md)
     * [Attach a request to long running transaction](cookbook/attach-a-request-to-long-running-transaction.md)
     * [Cookie-based authentication](cookbook/cookie-based-authentication.md)
 
----
 * [Glossary](glossary/glossary.md)
-
----
