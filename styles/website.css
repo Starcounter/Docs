@@ -183,6 +183,19 @@ kbd {
   display: none;
 }
 
+.small-logo {
+  display: none;
+}
+
+@media (max-width: 418px) {
+  .big-logo {
+    display: none !important;
+  }
+  .small-logo {
+    display: block;
+  }
+}
+
 @media (max-width: 1040px) {
   .big-header-buttons {
     display: none;
