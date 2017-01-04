@@ -158,6 +158,7 @@ kbd {
   justify-content: flex-end;
   width: 70%;
   float: right;
+  margin-right: 15px;
 }
 
 /* Set the starcounter logo to stay on the left of the header */
