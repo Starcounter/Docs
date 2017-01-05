@@ -348,7 +348,11 @@ script {
 }
 
 .divider {
-  display: none
+  display: none !important;
+}
+
+.custom-link {
+  display: none;
 }
 
 #book-search-input {
