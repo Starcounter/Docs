@@ -352,7 +352,7 @@ script {
 }
 
 .custom-link {
-  display: none;
+  display: none !important;
 }
 
 #book-search-input {
