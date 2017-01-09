@@ -342,6 +342,11 @@ kbd {
   margin-top:50px;
 }
 
+.page-inner {
+  max-width: none;
+  margin: 0 110px 0 110px;
+}
+
 .book-body {
   margin-top: 50px;
 }
