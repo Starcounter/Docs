@@ -3,7 +3,7 @@
 In order to make our UI interactive, we first have to make the data in the view-model editable. In JSON we do this by adding a `$` at the end of our property. That allows us to edit these JSON values from the view. In addition to adding `$` to our already existing properties, we will add the property `"Save$"` which will act as a trigger between the view and the code-behind.
 
 <aside class="read-more">
-    <a href="http://starcounter.io/guides/json/json-by-example/">Learn more about JSON in Starcounter</a>
+    <a href="/guides/typed-json/json-by-example.html">Learn more about JSON in Starcounter</a>
 </aside>
 
 <div class="code-name">PersonJson.json</div>
@@ -51,13 +51,13 @@ void Handle(Input.Save action)
 With server-side view-models, you don't have to write a single line of "glue code" to update the view in HTML. Any change in the view-model made in C# will instantly be synced to the client using PuppetJs, which in turn automatically renders because of Polymer's data bindings. This saves you from creating single-purpose REST APIs, need for double validation of user input, and more.
 
 <aside class="read-more">
-    <a href="http://starcounter.io/guides/web/server-side-view-models/">Learn about Starcounter's MVVM</a>
+    <a href="/guides/puppet-web-apps/starcounter-mvvm.html">Learn about Starcounter's MVVM</a>
 </aside>
 
 The last step is to modify our `Program.cs` file to create a long running transaction that will allow us to make changes to our database multiple times during our session. We do that by wrapping everything in our `Handle.GET` inside a `Db.Scope`.
 
 <aside class="read-more">
-    <a href="http://starcounter.io/guides/transactions/long-running-transactions/">Read more about long-running transactions</a>
+    <a href="/guides/transactions/long-running-transactions.html">Read more about long-running transactions</a>
 </aside>
 
 <div class="code-name">Program.cs</div><div class="code-name code-title">Add Db.Scope</div>

@@ -3,7 +3,7 @@
 While Starcounter offers replication facilities for the enterprises to implement their high availability business scenarios (e.g., when a point-of-sales is disconnected from a main server, but continues to operate autonomously until the connection resumes), it doesn't provide a built-in support for disasters-related scenarios such as hot failover, regular backups and disaster recovery. A large variety of ready-made facilities are available today to support those disaster-related scenarios out of the box. E.g., most of the facilities needed for those are shipped with Windows Server 2012 R2 Standard off the shelf.
 
 When it comes to running applications, developers want to perform the "full replication" of their apps, which means not only data itself, but also database configurations, static files, text log files, bulk data database files, user downloads etc. This goes beyond the scope of pure database replication for disaster recovery (like SQL Server AlwaysOn): either you try to store everything in the database to rely on its facilities for failover, or you run database facilities along with manual maintenance of failover machine. Instead of pure database facilities, it is possible to choose more general facility which will fit in most of use cases and works on the level of operating system.
- 
+
 Starcounter is not taking a goal to outperform those with any of our potential house-grown tools, preferring to focus on our core unique features. Instead, we do our best to supply our customers with the latest information on doing these scenarios with the OS standard facilities. This article aims to provide such information for community version users as well.
 
 ## Logs and checkpoint files
@@ -26,7 +26,7 @@ Starcounter works with data files on a byte level, so that some of these files a
 
 The simplest way to backup your data is a __cold backup__: stop Starcounter, wait when log writer finishes writing changes to disk, copy data files, start Starcounter. We do not recommend doing cold data backup unless you have a strong reason to "stop the world". A better, stop-less way to backup data is regularly available within all workstation and server editions of Windows operating system.
 
-Windows [Volume Shadow Copy Service (VSS)](https://en.wikipedia.org/wiki/Shadow_Copy) allows making consistent copies of data files (known as VSS snapshots) even when the files are in use, and hence enables __hot backup__ of your data. A VSS snapshot is a read-only point-in-time copy of a (disk) volume. Snapshots allow the creation of consistent backups of the volume, ensuring that the contents do not change and are not locked while the backup is being made. This is indeed an optimistic snapshot isolation technique similar to [how transactions work in Starcounter](http://starcounter.io/guides/transactions/), applied on a disk volume level by the operating system. While VSS snapshots the whole volume, it enables extraction of separate files from a snapshot, which is a point-in-time consistent backup of these files.
+Windows [Volume Shadow Copy Service (VSS)](https://en.wikipedia.org/wiki/Shadow_Copy) allows making consistent copies of data files (known as VSS snapshots) even when the files are in use, and hence enables __hot backup__ of your data. A VSS snapshot is a read-only point-in-time copy of a (disk) volume. Snapshots allow the creation of consistent backups of the volume, ensuring that the contents do not change and are not locked while the backup is being made. This is indeed an optimistic snapshot isolation technique similar to [how transactions work in Starcounter](/guides/transactions/transactions.html), applied on a disk volume level by the operating system. While VSS snapshots the whole volume, it enables extraction of separate files from a snapshot, which is a point-in-time consistent backup of these files.
 
 __Hot backup of database files using VSS__. Native tools to create and access VSS snapshots are available in Windows Server (```diskshadow.exe```), but are not included in other Windows environments. We will use a tool that works effortlessly on all modern Windows operating systems (desktop and server). The below instruction explains how to backup the most recently available VSS snapshot of all files from a given location to another given location.
 
@@ -58,7 +58,7 @@ Follow these steps to find these files:
 7. Find the parameter `TransactionLogDirectory`and go to the path specified. There you will find the files that are necessary for backup.
 8. Use the directory above for the VSS backup.
 
-In the case that there is no full `.log` file in the directory, there will be no `.optlog` file. 
+In the case that there is no full `.log` file in the directory, there will be no `.optlog` file.
 
 ## Restoring a database from a backup
 

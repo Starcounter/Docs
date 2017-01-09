@@ -4,50 +4,50 @@ A widely accepted <a href="http://databases.about.com/cs/administration/g/refint
 
 You can get a more in-depth explanation of this concept on <a href="https://en.wikipedia.org/wiki/Referential_integrity">Wikipedia</a>.
 
-Starcounter does not, in the status quo, have complete support for referential integrity. Instead, referential integrity can be achieved using <a href="http://starcounter.io/guides/transactions/commit-hooks/">commit hooks</a> which allow the developer to ensure that the correct corresponding item is deleted or added when removing or committing an item to the database.
+Starcounter does not, in the status quo, have complete support for referential integrity. Instead, referential integrity can be achieved using <a href="/guides/transactions/commit-hooks.html">commit hooks</a> which allow the developer to ensure that the correct corresponding item is deleted or added when removing or committing an item to the database.
 
 These commit hooks should be implemented in a separate class and then registered when the application is started. Here's an example of that:
 
 Let's say you have two DB classes: parent <code>Order</code> and child <code>OrderItem</code>:
 ```cs
 [Database]
-public class Order 
+public class Order
 {
     public string Customer;
-    public DateTime Date; 
+    public DateTime Date;
 }
 
 [Database]
-public class OrderItem 
+public class OrderItem
 {
     public Order Order;
     public string Product;
-    public int Quantity; 
+    public int Quantity;
 }
 ```
 
 Here the commit hooks are declared in a separate class within a <code>Register</code> method:
 ```cs
-public class Hooks 
+public class Hooks
 {
-    public void Register() 
+    public void Register()
     {
-        Hook<Order>.BeforeDelete += (sender, entity) => 
+        Hook<Order>.BeforeDelete += (sender, entity) =>
         {
             Db.SlowSQL("DELETE FROM OrderItem oi WHERE oi.\"Order\" = ?", entity);
         };
-		
-        Hook<OrderItem>.CommitInsert += (sender, entity) => 
+
+        Hook<OrderItem>.CommitInsert += (sender, entity) =>
         {
-            if (entity.Order == null) 
+            if (entity.Order == null)
             {
                 throw new Exception("OrderItem.Order is not a null property");
             }
         };
-		
-        Hook<OrderItem>.CommitUpdate += (sender, entity) => 
+
+        Hook<OrderItem>.CommitUpdate += (sender, entity) =>
         {
-            if (entity.Order == null) 
+            if (entity.Order == null)
             {
                 throw new Exception("OrderItem.Order is not a null property");
             }
@@ -62,40 +62,40 @@ In this code, we register the hooks by simply using `Hooks hooks = new Hooks();`
 public class Program {
     public void Main() {
         Hooks hooks = new Hooks();
-		
+
         hooks.Register();
-		
+
         // This transaction will pass without errors.
-        Db.Transact(() => 
+        Db.Transact(() =>
         {
-            Order order = new Order() 
+            Order order = new Order()
             {
                 Customer = "A customer",
-                Date = DateTime.Now 
+                Date = DateTime.Now
             };
-			
-            OrderItem item = new OrderItem() 
+
+            OrderItem item = new OrderItem()
             {
                 Order = Order,
                 Product = "Starcounter license",
                 Quantity = 10       
             };
         });
-		
-        // This transaction will fail with an exception 
+
+        // This transaction will fail with an exception
         // since the Order property of the OrderItem is NULL.
-        Db.Transact(() => 
+        Db.Transact(() =>
         {
-            OrderItem item = new OrderItem() 
+            OrderItem item = new OrderItem()
             {
                 Product = "Starcounter license",
-                Quantity = 10	
+                Quantity = 10
             };
         });
-		
-        // This transaction will delete all Order and OrderItem entries. 
+
+        // This transaction will delete all Order and OrderItem entries.
         // The OrderItem entries will be deleted by the BeforeDelete commit hook on the Order class.
-	Db.Transact(() => 
+	Db.Transact(() =>
         {
             Db.SlowSQL("DELETE FROM \"Order\"");
         });
@@ -110,16 +110,16 @@ There are essentially two things that are done here:
 
 ### OnDelete
 
-As an alternative to the `BeforeDelete` commit hook, you can use the Starcounter method `OnDelete`. 
+As an alternative to the `BeforeDelete` commit hook, you can use the Starcounter method `OnDelete`.
 
-`OnDelete` works similar to the `OnData` and `HasChanged` callback methods that are explained <a href="https://starcounter.io/guides/json/callback-methodas/">here</a>. It executes some code every time an instance of that class is deleted. To accomplish this you have to make use of the `IEntity` interface. 
+`OnDelete` works similar to the `OnData` and `HasChanged` callback methods that are explained <a href="/guides/typed-json/callback-methods-of-starcounter-js.html">here</a>. It executes some code every time an instance of that class is deleted. To accomplish this you have to make use of the `IEntity` interface.
 
 This is how it would look in code:
 ```cs
-[Database] 
-public class Foo : IEntity 
+[Database]
+public class Foo : IEntity
 {
-    public void OnDelete() 
+    public void OnDelete()
     {
         CalledWhenInstanceIsDeleted();
     }
@@ -131,6 +131,6 @@ So if we create a new instance of the class `Foo` and then delete it by calling 
 
 Database constraints define certain requirements that a database has to comply with.
 
-Starcounter does not have database constraints as a part of its schema definition. As a consequence of this, you cannot define constraints in Starcounter the same way you would do with most SQL databases. 
+Starcounter does not have database constraints as a part of its schema definition. As a consequence of this, you cannot define constraints in Starcounter the same way you would do with most SQL databases.
 
-One of the most common constraints is the unique constraint which states that values in specified columns must be unique for every row in the table. This constraint can be set in Starcounter, even though it's not a part of the schema definition, by using [indexes](http://starcounter.io/guides/sql/indexes/).
+One of the most common constraints is the unique constraint which states that values in specified columns must be unique for every row in the table. This constraint can be set in Starcounter, even though it's not a part of the schema definition, by using [indexes](/guides/SQL/indexes.html).
