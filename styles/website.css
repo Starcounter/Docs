@@ -212,6 +212,9 @@ kbd {
   .small-logo {
     display: block;
   }
+  .markdown-section section.see-yourself {
+    width: 100%;
+  }
 }
 
 /* Hide large menu buttons and display the dropdown button with moderately small screens */
