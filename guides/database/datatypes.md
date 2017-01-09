@@ -33,29 +33,26 @@ The datatype <code>Binary</code> is for representing binary data up to 8 kB. Not
 
 If you want to store <code>null</code> values for datatypes that essentially are value types, you can instead use the corresponding nullable datatypes:
 
-<ul>
-<!-- <li><code>Nullable&lt;Binary&gt;</code>, </li> -->
-<li><code>Nullable&lt;Boolean&gt;</code>, </li>
-<li><code>Nullable&lt;Byte&gt;</code>, </li>
-<li><code>Nullable&lt;DateTime&gt;</code>, </li>
-<li><code>Nullable&lt;Decimal&gt;</code>, </li>
-<li><code>Nullable&lt;Double&gt;</code>, </li>
-<li><code>Nullable&lt;Int16&gt;</code>, </li>
-<li><code>Nullable&lt;Int32&gt;</code>, </li>
-<li><code>Nullable&lt;Int64&gt;</code>, </li>
-<li><code>Nullable&lt;SByte&gt;</code>, </li>
-<li><code>Nullable&lt;Single&gt;</code>, </li>
-<li><code>Nullable&lt;UInt16&gt;</code>, </li>
-<li><code>Nullable&lt;UInt32&gt;</code>, </li>
-<li><code>Nullable&lt;UInt64&gt;</code>.</li>
-</ul>
-<!--
-<p>Internally, in Starcounter SQL, all signed integers (<code>Int64</code>, <code>Int32</code>,
-<code>Int16</code>, <code>SByte</code>) are represented as <code>Int64</code>, all unsigned integers
-(<code>UInt64</code>, <code>UInt32</code>, <code>UInt16</code>, <code>Byte</code>) are
-represented as <code>UInt64</code>, and all approximate numerical types (<code>Single</code>,
-<code>Double</code>) are represented as <code>Double</code>.</p>
--->
+[](* `Nullable&lt;Binary&gt;`,)
+* <code>Nullable&lt;Boolean&gt;</code>,
+* <code>Nullable&lt;Byte&gt;</code>,
+* <code>Nullable&lt;DateTime&gt;</code>,
+* <code>Nullable&lt;Decimal&gt;</code>,
+* <code>Nullable&lt;Double&gt;</code>,
+* <code>Nullable&lt;Int16&gt;</code>,
+* <code>Nullable&lt;Int32&gt;</code>,
+* <code>Nullable&lt;Int64&gt;</code>,
+* <code>Nullable&lt;SByte&gt;</code>,
+* <code>Nullable&lt;Single&gt;</code>,
+* <code>Nullable&lt;UInt16&gt;</code>,
+* <code>Nullable&lt;UInt32&gt;</code>,
+* <code>Nullable&lt;UInt64&gt;</code>.
+
+[](<p>Internally, in Starcounter SQL, all signed integers <code>Int64</code>, <code>Int32</code>,
+<code>Int16</code>, <code>SByte</code> are represented as <code>Int64</code>, all unsigned integers
+<code>UInt64</code>, <code>UInt32</code>, <code>UInt16</code>, <code>Byte</code> are
+represented as <code>UInt64</code>, and all approximate numerical types <code>Single</code>,
+<code>Double</code> are represented as <code>Double</code>.</p>)
 
 ## Arithmetic operations
 
