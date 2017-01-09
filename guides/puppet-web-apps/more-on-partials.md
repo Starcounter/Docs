@@ -7,7 +7,7 @@ Most of Web apps will divide its code to partials. We strongly favor use of nati
 You can naturally use static HTML files with just
 
 ```html
-<starcounter-include 
+<starcounter-include
     partial='{"Html": "/path/to/file.html"}'></starcounter-include>
 ```
 
@@ -73,7 +73,7 @@ It will stamp template from `GET text/html` for `Page.Html`, and attach `GET app
 
 ## Dynamic partials with Mixed Apps
 
-If you run your [dynamic partials](#dynamic-partials) with [mixed apps](http://starcounter.io/guides/apps/) environment, Starcounter may attach other apps' responses that matches the concept from your partial.
+If you run your [dynamic partials](#dynamic-partials) with [mixed apps](/guides/mapping-and-blending/mapping-and-blending.html) environment, Starcounter may attach other apps' responses that matches the concept from your partial.
 
 Fortunately, you do not have to bother about this much, the C# code remains untouched, and Starcounter will handle it by itself. You only need to be aware that few more elements may get stamped from your `starcounter-include` (`imported-template`).
 
@@ -96,7 +96,7 @@ If you want to forcefully disable styling, layout features but still include a d
 
  ```html
  <div>
-     <template is="imported-template" model="{{PlaceInViewModel}}" 
+     <template is="imported-template" model="{{PlaceInViewModel}}"
          content$="{{PlaceInViewModel.Html}}"></template>
  </div>
  ```
@@ -117,11 +117,11 @@ page.PlaceInViewModel = partialPage;
 and insert it into HTML with `<starcounter-include>` or `imported-template` (whichever suits you better)
 
 ```html
-<starcounter-include 
+<starcounter-include
     partial="{{PlaceInViewModel}}"></starcounter-include>
 or
 <div>
-    <template is="include-template" model="{{PlaceInViewModel}}" 
+    <template is="include-template" model="{{PlaceInViewModel}}"
         content$="{{PlaceInViewModel.Html}}"></template>
 </div>
 ```

@@ -20,6 +20,6 @@ AND c.UniqueIdentifier NOT LIKE 'Starcounter.%'
 AND c.UniqueIdentifier NOT LIKE 'SocietyObjects%'
 ```
 
-For example, if the query is run after following the steps in<a href='https://starcounter.io/hello-world/create-a-database-class-hello-world-part-1/'> part one</a> of the HelloWorld tutorial, it should look like this:
+For example, if the query is run after following the steps in<a href='/tutorial/create-a-database-class.html'> part one</a> of the HelloWorld tutorial, it should look like this:
 
 ![Screenshot of query](/assets/Capture.png)

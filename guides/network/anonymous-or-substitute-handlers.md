@@ -10,7 +10,7 @@ model.Partial = Self.GET("/custom-url", () => {
 });
 ```
 
-The `model.Partial` will contain the returned `new Page()` and all the responses from all the apps mapped to the `"/custom-url"`. The anonymous handler can be called to any url. 
+The `model.Partial` will contain the returned `new Page()` and all the responses from all the apps mapped to the `"/custom-url"`. The anonymous handler can be called to any url.
 
 #### Things to know about anonymous handlers
 
@@ -37,11 +37,11 @@ The `model.Menu` contains merged responses from all handlers mapped to `/sc/mapp
 UriMapping.Map("/Products/menu", UriMapping.MappingUriPrefix + "/menu");
 ```
 
-Read more about mapping here: [Mixing apps](http://starcounter.io/guides/apps/).
+Read more about mapping here: [Mixing apps](/guides/mapping-and-blending/mapping-and-blending.html).
 
 #### UI blending with layout editor
 
-Blending technology requires some extra HTML elements and JSON wrapping which are injected per partial [using middleware](http://starcounter.io/guides/network/using-middleware/). This means that partials which are created without a request won't be available for layout blending.
+Blending technology requires some extra HTML elements and JSON wrapping which are injected per partial [using middleware](/guides/network/using-middleware.html). This means that partials which are created without a request won't be available for layout blending.
 
 ```cs
 // The IndexPage is available for layout blending.
