@@ -1,6 +1,6 @@
 # Commit hooks
 
-Commit hook is a logic flow control pattern similar to [trigger](https://en.wikipedia.org/wiki/Trigger) in relational databases. It enables to hook the [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) events per objects of particular class. For cases when an object is being created (with a ```new``` operator), updated (by writing to a field) and deleted (when the ```.Delete()``` is called, and after the committed delete), additional event handlers of code might be added for execution. 
+Commit hook is a logic flow control pattern similar to [trigger](https://en.wikipedia.org/wiki/Trigger) in relational databases. It enables to hook the [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) events per objects of particular class. For cases when an object is being created (with a ```new``` operator), updated (by writing to a field) and deleted (when the ```.Delete()``` is called, and after the committed delete), additional event handlers of code might be added for execution.
 
 The app ```TestHooks``` shows a full set of use cases for commit hooks.
 
@@ -65,7 +65,7 @@ namespace TestHooks {
 }
 ```
 
-The output produced is as follows (accurate to [ObjectNo](http://starcounter.io/guides/database/object-identity/)):
+The output produced is as follows (accurate to [ObjectNo](/guides/database/object-identity-and-object-references.html)):
 
 ```
 Hooked: Object 29 is created
@@ -84,7 +84,7 @@ Hooked: Object 29 is deleted
 
 Those familiar with .NET recognize Starcounter follows a convention of .NET [EventHandler<T>](https://msdn.microsoft.com/en-us/library/db0etb8x(v=vs.110).aspx) for commit hooks. Currently, the first argument of the callback isn't used. The second argument is a reference to an object being transacted (for create, update and pre-delete events) or an ```ObjectNo``` of the object which itself is already deleted (for post-delete event). As in the .NET convention one can have an arbitrary number of event handlers registered per event, which will be triggered in the order of registration on the event occurrence.
 
-__Why there are separate pre-delete (```BeforeDelete```) and post-delete (```CommitDelete```) hooks?__ Remember that after object is physically deleted in the end of a successful transaction scope, you can no longer access it in a post-delete commit hook delegate. However you might still want to do something meaningful with it just around the moment of deletion. That is why the pre-delete hook is introduced. Note that a pre-delete hook triggers callback inside the transaction scope, but not in the end of transaction. It means that, in case a transaction has been [retried ```N``` times](http://starcounter.io/guides/transactions/more-on-transactions/), any pre-delete hook for any object deleted inside this transaction will also be executed ```N``` times, while all other hooks will be executed exactly once, right after a successful transaction commit. Thus, consider pre-delete hook behaving as a transaction side-effect.
+__Why there are separate pre-delete (```BeforeDelete```) and post-delete (```CommitDelete```) hooks?__ Remember that after object is physically deleted in the end of a successful transaction scope, you can no longer access it in a post-delete commit hook delegate. However you might still want to do something meaningful with it just around the moment of deletion. That is why the pre-delete hook is introduced. Note that a pre-delete hook triggers callback inside the transaction scope, but not in the end of transaction. It means that, in case a transaction has been [retried ```N``` times](/guides/transactions/more-on-transactions.html), any pre-delete hook for any object deleted inside this transaction will also be executed ```N``` times, while all other hooks will be executed exactly once, right after a successful transaction commit. Thus, consider pre-delete hook behaving as a transaction side-effect.
 
 __In general, in situations where you can choose, we recommend to avoid using commit hooks__. They introduce non-linear flows in the logic, hence producing more complicated and less maintainable code. Commit hooks is a powerful tool that should only be used in situations where benefits of using them overweight the drawbacks. One popular example is separate logging of changes in objects of selected classes.
 

@@ -6,8 +6,8 @@ In this article we will deepen into the methods of Starcounter JS triggered by t
 
 <h2>OnData</h2>
 
-Typed JSON objects have properties, which exist as a playground for your actions. 
-Therefore, once you update a <code>DataType</code> mandatory property internally on Typed JSON object their own <code>OnData</code> method will be triggered, indicating property initialization / update. Moreover when a new data object is set, <code>OnData</code> method can implement the update for other linked properties in the <a href="http://starcounter.io/guides/json/code-behind/">code-behind file</a> of the view-model.
+Typed JSON objects have properties, which exist as a playground for your actions.
+Therefore, once you update a <code>DataType</code> mandatory property internally on Typed JSON object their own <code>OnData</code> method will be triggered, indicating property initialization / update. Moreover when a new data object is set, <code>OnData</code> method can implement the update for other linked properties in the <a href="/guides/typed-json/code-behind.html">code-behind file</a> of the view-model.
 
 The result of <code>OnData</code> functionality is that after connecting a database object to the view-model method will refresh the view every time you set the new property. No more copying and setting values through added functionality. Use case of the method can be studied from our explicit Tutorial.
 
@@ -17,7 +17,7 @@ And the same goes for <code>HasChanged</code> - that method is always called whe
 
 <blockquote>To capture a change in a child subtree, it is efficient to define another partial class and use HasChanged method there.</blockquote>
 
-This method implemented in the same way as <code>OnData</code> - all the declaration is happening in the <a href="http://starcounter.io/guides/json/code-behind/">code-behind file</a>. 
+This method implemented in the same way as <code>OnData</code> - all the declaration is happening in the <a href="/guides/typed-json/code-behind.html">code-behind file</a>.
 Unlike <code>OnData</code> the method <code>HasChanged</code> is not that commonly used but only when there is a need for auto-committed database transactions every time data updates.
 There is a quick example on <code>HasChanged</code> usage:
 

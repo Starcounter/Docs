@@ -20,7 +20,7 @@ Finally, most commands will require or at least support some **command parameter
 
 ### Getting help
 
-To see the latest help overview, run `staradmin --help`. 
+To see the latest help overview, run `staradmin --help`.
 
 To find extended help on a certain command or a known topic, issue `staradmin help <command|topic>`, for example `staradmin help stop` to see the help for the *stop* command.
 
@@ -32,7 +32,7 @@ The **console** command shows the console output from applications
 staradmin console [<databases>]
 ```
 
-Running `staradmin console` without parameters shows the console output from the default database. 
+Running `staradmin console` without parameters shows the console output from the default database.
 
 Running `staradmin -d=foo console` shows console output from the "foo" database.
 
@@ -45,10 +45,10 @@ The **delete** command deletes various types of objects, e.g. databases. Usage:
 ```nginx
 staradmin delete [--force] [--failmissing]
 ```
-<strong>Example: delete database </strong> 
+<strong>Example: delete database </strong>
 
-To create a user-specified database use 
-```cmd 
+To create a user-specified database use
+```cmd
 C:\>staradmin --database=NewDbName delete db  
 ```
 ##### Command options
@@ -82,7 +82,7 @@ The **kill** command kills processes relating to Starcounter. Usage:
 staradmin kill <target>
 ```
 
-Use `all` as the command parameter to target killing all processes relating to Starcounter on the current machine. Use this option with care and make sure no mission-critical processes are running. 
+Use `all` as the command parameter to target killing all processes relating to Starcounter on the current machine. Use this option with care and make sure no mission-critical processes are running.
 
 ## List command
 
@@ -122,10 +122,10 @@ staradmin new <type>
 
 where *type* specifies the kind of artifact to create. To create a database, use the **db** type; for applications, use **app**.
 
-<strong>Example: create database </strong> 
+<strong>Example: create database </strong>
 
-To create a user-specified database use 
-```cmd 
+To create a user-specified database use
+```cmd
 C:\>staradmin --database=NewDbName new db
 ```
 ##### Object types
@@ -172,7 +172,7 @@ The reload command supports the `--file=<path>` option. The filename is resolved
 
 ```nginx
 staradmin -d=bar reload db --file=data.sql
-``` 
+```
 
 *Reloads the "data.sql" file into the "bar" database.*
 
@@ -186,18 +186,18 @@ staradmin start <type>
 
 where *type* specifies what should be started. Use  `staradmin start db` to start the default database; use `staradmin start server` to start the Starcounter server.
 
-<strong>Example: start database</strong> 
+<strong>Example: start database</strong>
 
 To start a user-specified database use
-```cmd 
+```cmd
 C:\>staradmin --database=UserDbName start db
 ```
 To start the application with <code>.exe</code> extension on a specified database use:
 ```cmd
 C:\"path to your application">star --database=newdb YourApplicationName.exe
 ```
-To find out more about how to start and stop applications read <a href="http://starcounter.io/guides/tools/starting-and-stopping-apps/">this article</a>.
-The console output does not go to the console, but directed to a server side memory buffer and it is possible to view it from the <a href="http://starcounter.io/guides/tools/administrator/">Administrator Web UI</a>.
+To find out more about how to start and stop applications read <a href="/guides/working-with-starcounter/starting-and-stopping-apps.html">this article</a>.
+The console output does not go to the console, but directed to a server side memory buffer and it is possible to view it from the <a href="/guides/working-with-starcounter/administrator-web-ui.html">Administrator Web UI</a>.
 
 **NOTE**: Starting databases or the server like this is not the normal scenario. Instead, Starcounter employs a design where processes are started on demand. When starting applications, using `star <app>` or from within Visual Studio, doing "Start" on a **Starcounter Application project**, these processes are started for you automatically (if not already running).
 
@@ -224,10 +224,10 @@ staradmin stop <type> [reference]
 
 where *type* will indicate the type of the given reference. As an example, to stop an application with the name *foo*, use `staradmin stop app foo`. To stop a database named *bar*, use `staradmin -d=bar stop db`. To stop the default database, use `staradmin stop db`.
 
-<strong>Example: stop database</strong> 
+<strong>Example: stop database</strong>
 
 To start a user-specified database use
-```cmd 
+```cmd
 C:\>staradmin --database=UserDbName stop db
 ```
 
@@ -259,16 +259,16 @@ The unload command supports the `--file=<path>` option. The filename is resolved
 
 ```nginx
 staradmin -d=bar unload db --file=data.sql
-``` 
+```
 
 *Unloads the "bar" database into the "data.sql" file.*
 
 The `--allowPartial` option unloads the database, allowing the unload to be partial. Usage: `staradmin unload db --allowPartial`.
 
-The `--shiftKey` option makes every key being unloaded increase with the given number. 
+The `--shiftKey` option makes every key being unloaded increase with the given number.
 
 ```nginx
 staradmin unload db --shiftKey=99999
-``` 
+```
 
 *Makes every key being unloaded increase by 99999.*

@@ -1,15 +1,15 @@
 # Mapper App for Images
 
-To display our images, we will use a prefabricated application called "Images" that we can get from the Starcounter App Warehouse. This application will be on the same shared screen as the application we've built. To accomplish this, we will do something called mapping. Fortunately, the Images [README.md](https://github.com/starcounterprefabs/images) provides us with a mapping sample that we can use in our code. 
+To display our images, we will use a prefabricated application called "Images" that we can get from the Starcounter App Warehouse. This application will be on the same shared screen as the application we've built. To accomplish this, we will do something called mapping. Fortunately, the Images [README.md](https://github.com/starcounterprefabs/images) provides us with a mapping sample that we can use in our code.
 
-To implement this we need to do some setup. 
+To implement this we need to do some setup.
 
 1. Create a new project and call it <code>HelloWorldMapper</code>.
 2. Add <code>Simplified.Data.Model</code> to this project the same way we did with the <code>HelloWorld</code> project.
 3. Create a reference to the <code>HelloWorld</code>. You can find this in the <code>Projects</code> tab of the <code>Reference Manager</code>.
 4. Change the <code>Copy Local</code> property to False for the <code>Simplified.Data.Model</code>.
 
-Now we can start getting some code in there. As mentioned earlier, we simply copy the mapping code from [here](https://github.com/StarcounterPrefabs/Images/blob/master/README.md) into the <code>Main</code> method of <code>Program.cs</code> in <code>HelloWorldMapper</code> and do some small adjustments. In addition, you have to add <code>using Starcounter.Internal</code> to the beginning of the same file in order to use <code>StarcounterEnvironment.RunWithinApplication</code>. 
+Now we can start getting some code in there. As mentioned earlier, we simply copy the mapping code from [here](https://github.com/StarcounterPrefabs/Images/blob/master/README.md) into the <code>Main</code> method of <code>Program.cs</code> in <code>HelloWorldMapper</code> and do some small adjustments. In addition, you have to add <code>using Starcounter.Internal</code> to the beginning of the same file in order to use <code>StarcounterEnvironment.RunWithinApplication</code>.
 
 <div class="code-name">Program.cs</div>
 ```cs
@@ -26,7 +26,7 @@ Handle.GET("/images/partials/concept-expense/{?}", (string objectId) => {
 ```
 
 <aside class="read-more">
-   <a href="http://starcounter.io/guides/apps/ontology-mapping/">Learn about ontology mapping</a>
+   <a href="/guides/mapping-and-blending/ontology-mapping.html">Learn about ontology mapping</a>
 </aside>
 
 To get the applications up and running correctly, start them in this order:
@@ -35,7 +35,7 @@ To get the applications up and running correctly, start them in this order:
 2. Images
 3. HelloWorldMapper
 
-It is advisable to first start HelloWorld, then go to [`http://localhost:8181/#/databases/default/appstore`](http://localhost:8181/#/databases/default/appstore), find Images under Starcounter Prefabs Store and click `Download`. It will then be possible to go to `http://localhost:8181/#/databases/default` and simply press `Start`. At last, start HelloWorldMapper from Visual Studio or the command line. 
+It is advisable to first start HelloWorld, then go to [`http://localhost:8181/#/databases/default/appstore`](http://localhost:8181/#/databases/default/appstore), find Images under Starcounter Prefabs Store and click `Download`. It will then be possible to go to `http://localhost:8181/#/databases/default` and simply press `Start`. At last, start HelloWorldMapper from Visual Studio or the command line.
 
 Open up <code>HelloWorld</code> in the <code>Starcounter Administrator</code> and you should see a screen that looks like this after you have added your images:
 
