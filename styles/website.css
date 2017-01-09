@@ -240,12 +240,7 @@ kbd {
 }
 
 /* Styling for the menu buttons */
-
-.menu-button-height {
-  height: 62.7px;
-}
-
-.menu-button-input {
+.menu-button{
   height: 98%;
   color: black;
   background-color: white;
@@ -258,7 +253,7 @@ kbd {
   margin-right: 10px;
 }
 
-.menu-button-input:hover {
+.menu-button:hover {
   color: #f47e0c;
   background: linear-gradient(0deg, white 94%, #f47e0c 6%);
 }
@@ -342,6 +337,11 @@ kbd {
   margin-top:50px;
 }
 
+.page-inner {
+  max-width: none;
+  margin: 0 110px 0 110px;
+}
+
 .book-body {
   margin-top: 50px;
 }
@@ -360,6 +360,15 @@ script {
 }
 
 .custom-link {
+  display: none !important;
+}
+
+/* Hide deleted branches */
+[value="http://docs.starcounter.io/v/2.3/"] {
+  display: none !important;
+}
+
+[value="http://docs.starcounter.io/v/master/"] {
   display: none !important;
 }
 

@@ -26,7 +26,7 @@ The default port is `8181`. This can be changed during installation or in the se
 
 ## Database
 
-In Starcounter, your classes are your tables and the class instances are your rows. To revise data object concept in Starcounter please visit <a href="http://localhost:8181/#/databases">Database</a>. 
+In Starcounter, your classes are your tables and the class instances are your rows. To revise data object concept in Starcounter please visit <a href="http://localhost:8181/#/databases">Database</a>.
 Using <strong>Databases tool</strong> Administrator can manage one or multiple databases, create new ones and more. It is accessible after starting <code>Starcounter Personal Administrator.exe</code> on the link <a href="http://127.0.0.1:8181/#/databases">localhost:8181/#/databases</a>  
 
 ### Database home screen
@@ -38,7 +38,7 @@ In web you can see, that Starcounter provides a <code>default</code> database in
 
 When no applications are running default database is uninitialized.
 
-<blockquote>You can read more about StarAdmin Command Line Interface <a href="http://starcounter.io/guides/tools/staradmin/">here</a>.</blockquote>
+<blockquote>You can read more about StarAdmin Command Line Interface <a href="/guides/working-with-starcounter/staradmin-cli.html">here</a>.</blockquote>
 
 
 #### Creating and deleting databases
@@ -74,9 +74,7 @@ Navigate to the database by clicking on its name (e.g., default) in the list of 
 
 On the Database page apps can be Started, Stopped and Deleted.
 
-```Auto-Start``` indicates if the app should start along with the database. The ```Padlock``` icon is used to lock an app from being deleted.
-
-<a href="http://starcounter.io/wp-content/uploads/2015/09/Database.png"><img class="alignnone size-full wp-image-13782" src="http://starcounter.io/wp-content/uploads/2015/09/Database.png" alt="Database" width="867" height="328" /></a>
+`Auto-Start` indicates if the app should start along with the database. The `Padlock` icon is used to lock an app from being deleted.
 
 ![database control](/assets/Database.png)
 
@@ -84,12 +82,12 @@ On the Database page apps can be Started, Stopped and Deleted.
 
 #### Executing SQL queries
 
-In the SQL browser of a database you can write queries to that database. See [SQL reference](/guides/sql/) for details on syntax.
+In the SQL browser of a database you can write queries to that database. See [SQL reference](/guides/SQL/sql.html) for details on syntax.
 
 The queries that are supported by the method <code>Db.SQL</code> are also supported here with few differences:
 
-- [literals](/guides/sql/literals/) are supported,
-- [variables](/guides/database/variables/) are <strong>not</strong> supported.
+- [literals](/guides/SQL/literals.html) are supported,
+- [variables](/guides/SQL/variables.html) are <strong>not</strong> supported.
 - literals of type <code>Binary</code> are <strong>not</strong> supported.
 
 Before running a query an executable that defines the class should be started in the targeted database. Then queries are issued in terms of database classes and properties defined in the executable(s). Classes correspond to tables and properties or fields - to columns in SQL queries.
@@ -124,7 +122,7 @@ Click the ```Download``` button to download an app. Downloaded apps can be contr
 
 ### Start executable
 
-You can launch your application on a currently running database by redirecting to <a href="http://127.0.0.1:8181/#/databases/default/executabeStart">Start Executable</a>. 
+You can launch your application on a currently running database by redirecting to <a href="http://127.0.0.1:8181/#/databases/default/executabeStart">Start Executable</a>.
 Specify the path to your <code>.exe</code>application in the dedicated field.
 
 ![start executable](/assets/6.png)
@@ -132,26 +130,26 @@ Specify the path to your <code>.exe</code>application in the dedicated field.
 ### Database configuration
 
 You can access your database settings by redirecting to <a href="http://127.0.0.1:8181/#/databases/default/settings">Settings Icon</a>.
-It is possible to specify database port to have databases running in parallel on one kernel along with Scheduler Count that defines the degree of  parallelization and Chunks (internal setting, shouldn't be modified). 
+It is possible to specify database port to have databases running in parallel on one kernel along with Scheduler Count that defines the degree of  parallelization and Chunks (internal setting, shouldn't be modified).
 
 ![database configuration](/assets/7.png)
 
 ## Log
 
-To have a track of activity within your environment redirect to <a href="http://127.0.0.1:8181/#/server/log">Log</a>. You can see debug steps, notices, warnings and errors with explicit descriptions. After sorting log notes by "Source" it is possible to track the behavior of specific component. 
+To have a track of activity within your environment redirect to <a href="http://127.0.0.1:8181/#/server/log">Log</a>. You can see debug steps, notices, warnings and errors with explicit descriptions. After sorting log notes by "Source" it is possible to track the behavior of specific component.
 
 ![Log screenshot](/assets/8.png)
 
 ## Network
 
-By accessing <a href="http://127.0.0.1:8181/#/server/network">Network </a>tab it is possible to see internal environment, the information about network facilities for Starcounter installation that comes by the means of network gateway. 
+By accessing <a href="http://127.0.0.1:8181/#/server/network">Network </a>tab it is possible to see internal environment, the information about network facilities for Starcounter installation that comes by the means of network gateway.
 
 ![Network screenshot](/assets/9.png)
 
 ## Server configuration
 
-To access server network settings redirect to <a href="http://127.0.0.1:8181/#/server/settings">Settings</a>. 
-For internal system communications and management specify <strong>System port</strong>. 
+To access server network settings redirect to <a href="http://127.0.0.1:8181/#/server/settings">Settings</a>.
+For internal system communications and management specify <strong>System port</strong>.
 For outbound operations specify <strong>Gateway port</strong>.
 
 ![Server configuration](/assets/10.png)

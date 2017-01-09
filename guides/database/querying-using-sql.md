@@ -4,7 +4,7 @@ There is no [ORM](http://en.wikipedia.org/wiki/Object-relational_mapping) mappin
 
 SQL queries are executed using the <code>Db.SQL</code> function. The function returns `Starcounter.QueryResultRows<T> : IEnumerable<T>`. To get the first object in the enumeration, you can use the property <code>First</code>. In addition to traditional SQL, Starcounter allows you to select objects in addition to primitive types such as strings and numbers. Also it allows you to use C# style path expressions such as <code>person.FullName</code>.
 
-See more about SQL in [Guides: SQL](http://starcounter.io/guides/sql/).
+See more about SQL in [Guides: SQL](/guides/sql.html).
 
 ```cs
 using Starcounter;
@@ -40,13 +40,13 @@ namespace Querying
          }
      }
 }
-  
+
 ```
 
 Run this application by pressing <kbd>f5</kbd> and go to `localhost:8080/querying`. "John Doe" should be displayed in the browser.
 
 **Disclaimer**
-This code is purely for example and should not be used for practical purposes because JavaScript can be stored in `person.Name` and cause security issues. 
+This code is purely for example and should not be used for practical purposes because JavaScript can be stored in `person.Name` and cause security issues.
 
 ## Strings vs Linq
 

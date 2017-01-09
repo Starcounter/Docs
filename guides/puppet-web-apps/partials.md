@@ -25,7 +25,7 @@ A page of a Starcounter app can be accessed either:
 
 ### Partial
 
-**Partial** is a conceptually separated UI part (like person form, map for address, etc.) returned as the response to an HTTP request. The request may come from the inside of an app as well as from the outside (through [mapping](http://starcounter.io/guides/apps/)).
+**Partial** is a conceptually separated UI part (like person form, map for address, etc.) returned as the response to an HTTP request. The request may come from the inside of an app as well as from the outside (through [mapping](/guides/mapping-and-blending/mapping-and-blending.html)).
 
 Technically, a partial is a triplet consisting of the following:
 
@@ -48,22 +48,22 @@ So the requirements and behavior, comes from [HTML Imports](http://www.w3.org/TR
 
 ##### Example:
 ```html
-<!-- 
+<!--
     Load you dependencies: <script>s HTML Imports, CSS stylesheets
     That data will only be executed once, when the partial is imported
 -->
 <!-- For example you may like to use Polymer's `dom-bind` custom element -->
 <link rel="import" href="/sys/polymer/polymer.html" />
 
-<!-- 
+<!--
     Everything from this template will be stamped into the parent page's DOM,
     and <script>s inside will be executed for every instance of this partial.
     All child nodes will receive `.model` property with JSON view model,
     which is bound to server-side automatically.
---> 
+-->
 <template>
     <template is="dom-bind">
-        <!-- 
+        <!--
             Now, you can use mustache {{}} syntax for two-way data binding
             HTML <-> serverside, for example:
          -->
@@ -98,14 +98,14 @@ If you want to read in more detail how to use partials, how it technically work,
 
 # Partials and Mixed Apps
 
-With small enhancement to simple partials shown above, Starcounter gives a huge experience improvement to the entire ecosystem of [mixed apps](http://starcounter.io/guides/apps/).
+With small enhancement to simple partials shown above, Starcounter gives a huge experience improvement to the entire ecosystem of [mixed apps](/guides/mapping-and-blending/mapping-and-blending.html).
 
 By using _partials_ the way we suggest, you support unlimited UI integration between all other apps, without any API pain.
 
 ## Definitions:
 
 ### Merged Partial
-**merged partial** is a _partial_ from given main app (origin of `Self.GET` request) concatenated with partial sibling responses from other apps [mapped](http://starcounter.io/guides/apps/) to the same Starcounter ontology
+**merged partial** is a _partial_ from given main app (origin of `Self.GET` request) concatenated with partial sibling responses from other apps [mapped](/guides/mapping-and-blending/mapping-and-blending.html) to the same Starcounter ontology
 
 ##### Example:
 **Merged JSON view model** send to the browser. Individual view-models are name-spaced. However, you should not bother about it too much - `<starcounter-include>` will resolve it for you.
@@ -164,7 +164,7 @@ By using _partials_ the way we suggest, you support unlimited UI integration bet
 ## Partial Usage
 In echosystem of Starcounter apps _partials_ are used and created exactly as in any other standalone Starcounter app, the only difference is that _merged partial_ may get included into _insertion point_, so the children list of HTML node `<starcounter-include partial="{{SubPage}}"></starcounter-include>` may contain nodes from other apps as well, and JSON subtree at this node may contain namespaced view models from other apps.
 
-For more details check [More on partials](/guides/web/more-on-partials/).
+For more details check [More on partials](/guides/puppet-web-apps/more-on-partials.html).
 
 ## Features for Partials in Starcounter
 
