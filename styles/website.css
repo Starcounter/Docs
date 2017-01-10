@@ -222,6 +222,12 @@ kbd {
   }
 }
 
+@media (max-width: 580px) {
+  .page-inner {
+    margin: 0 !important;
+  }
+}
+
 /* Hide large menu buttons and display the dropdown button with moderately small screens */
 
 @media (max-width: 1040px) {
