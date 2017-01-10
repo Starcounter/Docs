@@ -23,3 +23,8 @@ This channel is unstable iterated release channel, that is updated every night a
 Stability: **Varied**, Frequency: **Varied**
 
 This channel is for custom builds that are used for specific purposes. It may, for example, help to detect problems in an environment. Releases of this channel should mainly be used by developers who are explicitly directed to them by our support.
+
+#### Long-term support (LTS)
+Stability: **High**, Frequency: **Low-Medium**
+
+This channel is updated nightly when there are hotfixes and patches for the latest release of the Release channel. There will not be a major release in this channel unless there is also a release in the Release channel, thus, this channel and the Release channel does not differ in functionality. 
