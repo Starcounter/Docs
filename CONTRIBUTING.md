@@ -38,7 +38,7 @@ Here are some cases where a review is appropriate:
 
 * Creating a completely new page
 * Significantly changing the content of an existing page
-* Saking refactoring changes spanning over several pages
+* Making refactoring changes spanning over several pages
 
 Some cases when a review is not neccesary:
 
