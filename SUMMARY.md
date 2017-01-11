@@ -129,7 +129,7 @@
         * [Investigating app crashes](guides/working-with-starcounter/investigating-app-crashes.md)
         * [Configuration Structure in 2.3](guides/working-with-starcounter/configuration-structure-in-2.3.md)
         * [Database Refactoring in 2.3](guides/working-with-starcounter/database-refactoring-in-2.3.md)
-        * [Migrating from 2.2 to 2.4](guides/working-with-starcounter/migrating-from-2.2-to-2.4.md)
+        * [Migrating from 2.2 to 2.3+](guides/working-with-starcounter/migrating-from-2.2-to-2.3+.md)
 
 * [Cookbook](cookbook/cookbook.md)
     * [Accessing methods in nested view-models](cookbook/accessing-methods-in-nested-view-models.md)
