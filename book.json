@@ -5,8 +5,7 @@
           "options": [
               {
                   "value": "https://docs.starcounter.io/",
-                  "text": "2.2.1.3234",
-                  "selected": true
+                  "text": "2.2.1.3234 - current release"
               },
               {
                   "value": "https://docs.starcounter.io/v/2.1.177/",
@@ -18,7 +17,7 @@
               },
               {
                   "value": "https://docs.starcounter.io/v/RC/",
-                  "text": "RC"
+                  "text": "Release Candidate"
               },
               {
                   "value": "https://docs.starcounter.io/v/Develop/",
