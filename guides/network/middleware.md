@@ -1,6 +1,6 @@
 # Middleware
 
-Middleware is code that affect the *request pipeline*. Essentially, it enables applications to customize how the server handles requests. This customization comes in three different shapes:
+Middleware is code that affects the *request pipeline*. Essentially, it enables applications to customize how the server handles requests. This customization comes in three different shapes:
 
 1. request filters
 2. response filters
@@ -10,7 +10,7 @@ These can help with a range of issues, such as security, logging, wrapping, requ
 
 An example of this is the [Launcher](https://github.com/StarcounterPrefabs/Launcher) which uses request filters to wrap responses from other applications into its own response.
 
-All middleware is registered with the `Application.Current.Use` API which has three overloads corresponding to the different shapes of middleware listed above. This registration is usually done at the entrypoint of the application. It can look something like this:
+All middleware is registered with the `Application.Current.Use` API which has three overloads corresponding to the different shapes of middleware listed above. This registration is usually done at the entry point of the application. It can look something like this:
 
 ```cs
 static void Main()
@@ -48,7 +48,7 @@ Application.Current.Use((req) => {
 });
 ```
 
-When there is incoming request, this request filter checks if the URI contains the string "spam", and returns a `Response` object if that's the case which means that the request will be blocked without reaching the handler. Otherwise it returns `null`, which allows the request to move on to the next request filter if there are more of them or go to the handler if there was only one request filter.
+When there is an incoming request, this request filter checks if the URI contains the string "spam", and returns a `Response` object if that's the case which means that the request will be blocked without reaching the handler. Otherwise, it returns `null`, which allows the request to move on to the next request filter if there are more of them or go to the handler if there was only one request filter.
 
 To let a handler bypass all request filters, use the class `HandlerOptions` and set `SkipRequestFilters` to `true`. Like this:
 
@@ -147,7 +147,7 @@ If the HTML at the path would be a complete HTML document, this would be suffici
 
 ### PartialToStandaloneHtmlProvider
 
-This middleware class checks if the HTML is a full document, or essentially that it starts with a `doctype`. If it is not a full HTML document, it wraps the template inside the body of an HTML document that contains the `puppet-client` element to create a WebSocket connection, import links to the Starcounter custom elements `starcounter-include` and `starcounter-debug-aid`, import links to the outside libraries Polymer and Bootstrap, and the session URL which makes it possible for PuppetJs to request the relevant JSON in a following request.
+This middleware class checks if the HTML is a full document, or essentially that it starts with a `doctype`. If it is not a full HTML document, it wraps the template inside the body of an HTML document that contains the `puppet-client` element to create a WebSocket connection, import links to the Starcounter custom elements `starcounter-include` and `starcounter-debug-aid`, import links to the outside libraries Polymer and Bootstrap, and the session URL which makes it possible for PuppetJs to request the relevant JSON in a future request.
 
 Since `PartialToStandaloneHtmlProvider` wraps the actual response from the handler, it will also have the HTTP status code that was returned.
 
