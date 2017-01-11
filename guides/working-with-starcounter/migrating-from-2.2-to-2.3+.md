@@ -1,4 +1,4 @@
-# Migrating from 2.2 to 2.4
+# Migrating from 2.2 to 2.3+
 
 ## The StarDump tool
 
