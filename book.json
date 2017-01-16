@@ -1,8 +1,13 @@
 {
-    "plugins": [ "versions", "collapsible-menu"],
-    "pluginsConfig": {
-        "versions": {
-            "type": "branches"
-        }
-    }
+	"plugins": ["-hightlight", "prism", "versions", "collapsible-menu"],
+	"pluginsConfig": {
+		"versions": {
+			"type": "branches"
+		},
+		"prism": {
+			"css": [
+				"prismjs/themes/prism-tomorrow.css"
+			]
+		}
+	}
 }
