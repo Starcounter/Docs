@@ -21,7 +21,8 @@ This method implemented in the same way as <code>OnData</code> - all the declara
 Unlike <code>OnData</code> the method <code>HasChanged</code> is not that commonly used but only when there is a need for auto-committed database transactions every time data updates.
 There is a quick example on <code>HasChanged</code> usage:
 
-<pre><code class="cs">using Starcounter;
+```cs
+using Starcounter;
 using Starcounter.Templates;
 
 namespace ModelChangeEventTestProject
@@ -35,13 +36,15 @@ namespace ModelChangeEventTestProject
     }
 
     [Page2_json.Property2]
-    partial class Page2Property2 : Page {
-        protected override void HasChanged(TValue property) {
+    partial class Page2Property2 : Page
+    {
+        protected override void HasChanged(TValue property)
+        {
             base.HasChanged(property);
         }
     }
 }  
-</code></pre>
+```
 
 Just to sum up methods purposes:
 

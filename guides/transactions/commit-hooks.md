@@ -8,50 +8,76 @@ The app ```TestHooks``` shows a full set of use cases for commit hooks.
 using System;
 using Starcounter;
 
-namespace TestHooks {
+namespace TestHooks
+{
    [Database]
-   public class Hooked {
+   public class Hooked
+   {
       public string state;
    }
+
    [Database]
-   public class YetAnotherClass {
+   public class YetAnotherClass
+   {
       public int Stock;
    }
+
    class Program {
-      static void Main() {
-         Hook<Hooked>.BeforeDelete += (s, obj) => {
+      static void Main()
+      {
+         Hook<Hooked>.BeforeDelete += (s, obj) =>
+         {
             obj.state = "is about to be deleted";
             Console.WriteLine("Hooked: Object {0} is to be deleted", obj.GetObjectNo());
          };
-         Hook<Hooked>.CommitInsert += (s, obj) => {
+
+         Hook<Hooked>.CommitInsert += (s, obj) =>
+         {
             obj.state = "is created";
             Console.WriteLine("Hooked: Object {0} is created", obj.GetObjectNo());
             var nobj = new YetAnotherClass() { Stock = 42 };
          };
-         Hook<Hooked>.CommitUpdate += (s, obj) => {
+
+         Hook<Hooked>.CommitUpdate += (s, obj) =>
+         {
             obj.state = "is updated";
             Console.WriteLine("Hooked: Object {0} is updated", obj.GetObjectNo());
          };
-         Hook<Hooked>.CommitUpdate += (s, obj) => { // a second callback
+
+         Hook<Hooked>.CommitUpdate += (s, obj) => // a second callback
+         {
             Console.WriteLine("Hooked: We promise you, object {0} is updated", obj.GetObjectNo());
          };
-         Hook<Hooked>.CommitDelete += (s, onum) => {
+
+         Hook<Hooked>.CommitDelete += (s, onum) =>
+         {
             Console.WriteLine("Hooked: Object {0} is deleted", onum);
             Hooked rp = (Hooked)DbHelper.FromID(onum); // returns null here
             // the following will cause an exception
             // Console.WriteLine("We cannot do like this: {0}", rp.state);
          };
-         Hook<YetAnotherClass>.CommitInsert += (s, obj) => {
+
+         Hook<YetAnotherClass>.CommitInsert += (s, obj) =>
+         {
             Console.WriteLine("Never triggered in this app, since it happens to get invoked inside another hook");
          };
+
          Hooked p = null;
-         Db.Transact(() => { p = new Hooked() { state = "created" }; });
-         Db.Transact(() => {
+         Db.Transact(() =>
+         {
+           p = new Hooked() { state = "created" };
+         });
+
+         Db.Transact(() =>
+         {
             p.state = "property changed";
             Console.WriteLine("01: The changed object isn't yet commited", p.GetObjectNo());
          });
+
          Console.WriteLine("02: Change for property of {0} is committed", p.GetObjectNo());
-         Db.Transact(() => {
+
+         Db.Transact(() =>
+         {
             Console.WriteLine("03: We have entered the transaction scope");
             Console.WriteLine("04: We are about to delete an object {0}, yet it still exists", p.GetObjectNo());
             p.state = "deleted";

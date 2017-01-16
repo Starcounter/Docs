@@ -95,7 +95,7 @@ public class Program {
 
         // This transaction will delete all Order and OrderItem entries.
         // The OrderItem entries will be deleted by the BeforeDelete commit hook on the Order class.
-	Db.Transact(() =>
+        Db.Transact(() =>
         {
             Db.SlowSQL("DELETE FROM \"Order\"");
         });

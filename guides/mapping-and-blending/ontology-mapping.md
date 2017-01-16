@@ -11,7 +11,7 @@ Here is the description of the `UriMapping.OntologyMap` function:
 ```cs
 void OntologyMap(
     String appProcessedUri,
-    String mappedClassInfo, 
+    String mappedClassInfo,
     Func<String, String> converterToClass,
     Func<String, String> converterFromClass)
 
@@ -27,23 +27,23 @@ where
 Here is an example of mapping People application's handler `/people/partials/persons/{?}` to class Person in a given class hierarchy to which this class Person belongs:
 
 ```cs
-UriMapping.OntologyMap("/people/partials/persons/{?}", 
-                       typeof(Person).FullName, null, null);
+UriMapping.OntologyMap("/people/partials/persons/{?}", typeof(Person).FullName, null, null);
 ```
 
 and here is how the mapped handler looks like:
 
 ```cs
-Handle.GET<string>("/people/partials/persons/{?}", (string id) => {
-	return Db.Scope<PersonPage>(() => {
-		PersonPage page = new PersonPage() {
-			Html = "/People/viewmodels/PersonPage.html"
-		};
-
-		page.RefreshPerson(id);
-
-		return page;
-	});
+Handle.GET<string>("/people/partials/persons/{?}", (string id) =>
+{
+  return Db.Scope<PersonPage>(() =>
+  {
+    PersonPage page = new PersonPage()
+    {
+      Html = "/People/viewmodels/PersonPage.html"
+    };
+    page.RefreshPerson(id);
+    return page;
+  });
 });
 ```
 

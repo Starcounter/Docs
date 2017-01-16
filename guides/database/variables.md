@@ -6,7 +6,8 @@ SQL variables are represented by question marks (?) in the query string, and you
 
 ```cs
 QueryResultRows<Employee> result = Db.SQL<Employee>("SELECT e FROM Employee e WHERE e.FirstName = ?", "Joe");
-foreach (Employee emp in result) {
+foreach (Employee emp in result)
+{
   Console.WriteLine(emp.FirstName + " " + emp.LastName);
 }
 ```
@@ -16,10 +17,9 @@ You can pass an arbitrary number of variable values to the method <code>SQL</cod
 ```cs
 string lastName = "Smith";
 Employee manager; //Assume some value is assigned to the variable manager.
-QueryResultRows<Employee> result = Db.SQL<Employee>("SELECT 
-             e FROM Employee e 
-             WHERE e.LastName = ? AND e.Manager = ?", lastName, manager);
-foreach (Employee emp in result) {
+QueryResultRows<Employee> result = Db.SQL<Employee>("SELECT e FROM Employee e WHERE e.LastName = ? AND e.Manager = ?", lastName, manager);
+foreach (Employee emp in result)
+{
   Console.WriteLine(emp.LastName + "; " + emp.Manager.LastName);
 }
 ```

@@ -5,9 +5,12 @@
 Incoming HTTP 1.0/1.1 requests are caught using the static `Handle` class.
 
 ```cs
-class Hello {
-   static void Main() {
-      Handle.GET("/hello", () => {
+class Hello
+{
+   static void Main()
+   {
+      Handle.GET("/hello", () =>
+      {
          return "Hello World";
       });
    }
@@ -21,15 +24,22 @@ You can register new handlers at any time, so there is no need to do it in the `
 The basic HTTP methods `GET`, `POST`, `PUT`, `DELETE` and `PATCH` can be caught by convenient methods with the same name in the `Handle` class.
 
 ```cs
-class Hello {
-   static void Main() {
-      Handle.GET("/hello", () => {
+class Hello
+{
+   static void Main()
+   {
+      Handle.GET("/hello", () =>
+      {
          return "Hello World";
       });
-      Handle.POST("/hello", () => {
+
+      Handle.POST("/hello", () =>
+      {
          return 500;
       });
-      Handle.DELETE("/hello", () => {
+
+      Handle.DELETE("/hello", () =>
+      {
          return 500;
       });
    }
@@ -41,21 +51,27 @@ class Hello {
 Using the `CUSTOM` method in `Handle`, you can register other HTTP methods (verbs) or even catch all methods and URIs.
 
 ```cs
-class Hello {
-   static void Main() {
-      Handle.CUSTOM("REPORT /hello/{?}", (String p1) => {
+class Hello
+{
+   static void Main()
+   {
+      Handle.CUSTOM("REPORT /hello/{?}", (String p1) =>
+      {
          return 500;
       });
 
-      Handle.CUSTOM("{?} /hello/{?}", (String method, String p1) => {
+      Handle.CUSTOM("{?} /hello/{?}", (String method, String p1) =>
+      {
          return p1;
       });
 
-      Handle.CUSTOM("OPTIONS", "/hello/{?}", (String p1) => {
+      Handle.CUSTOM("OPTIONS", "/hello/{?}", (String p1) =>
+      {
          return p1;
       });
 
-      Handle.CUSTOM("{?}", (String methodAndUri) => {
+      Handle.CUSTOM("{?}", (String methodAndUri) =>
+      {
          return "Catched: " + methodAndUri;
       });
    }
@@ -67,12 +83,17 @@ class Hello {
 Together with the enumerated parameters, you can also declare a `Request` parameter. It encapsulates the entire request.
 
 ```cs
-class Hello {
-   static void Main() {
-      Handle.GET("/hello", (Request request) => {
+class Hello
+{
+   static void Main()
+   {
+      Handle.GET("/hello", (Request request) =>
+      {
          return 500;
       });
-      Handle.GET("/persons/{?}", (string name, Request request) => {
+
+      Handle.GET("/persons/{?}", (string name, Request request) =>
+      {
          return 500;
       });
    }
@@ -96,7 +117,7 @@ To know to which application the request belongs (useful when working with reque
 
 ## Notable handler options
 
-When creating (using `Handle.` interface) and calling handlers (using `Self.` interface) one can supply last `HandlerOptions` parameter, which specifies certain options for handler calls or registration. Here are the notable handler options: 
+When creating (using `Handle.` interface) and calling handlers (using `Self.` interface) one can supply last `HandlerOptions` parameter, which specifies certain options for handler calls or registration. Here are the notable handler options:
 
 * `SkipRequestFilters`: used to declare a handler for which request (previously middleware) filters will not be applied.
 * `ReplaceExistingHandler`: replace an existing handler if it was registered.
@@ -109,16 +130,16 @@ When creating (using `Handle.` interface) and calling handlers (using `Self.` in
 
 Registering handler that skips middleware filters and is being called directly externally:
 ```cs
-Handle.POST("/myhandler", (Request request) => {
+Handle.POST("/myhandler", (Request request) =>
+{
 	return 204;
-}, new HandlerOptions() {
-	SkipMiddlewareFilters = true
-});
+}, new HandlerOptions() { SkipMiddlewareFilters = true });
 ```
 
 Calling URI handler "/MyPostHandler" on handlers level `ApplicationLevel`:
 ```cs
-Self.POST("/MyPostHandler", null, null, null, 0, new HandlerOptions() { 
+Self.POST("/MyPostHandler", null, null, null, 0, new HandlerOptions()
+{
 	HandlerLevel = HandlerOptions.HandlerLevels.ApplicationLevel
 });
 ```
@@ -129,18 +150,21 @@ Self.POST("/MyPostHandler", null, null, null, 0, new HandlerOptions() {
 Internal requests are requests made to handlers within same user application (`sccode` instance) using `Node` and `X`. Internal requests and handlers can be nested and create a call hierarchy. Sometimes its useful to cast a specific exception deep down in the hierarchy and handle it on another level or let the system handle it (for example by automatically sending the response). This can be achieved using `ResponseException` exception object. The following example illustrates this concept:
 
 ```cs
-Handle.GET("/exc1", (Request req) => {
+Handle.GET("/exc1", (Request req) =>
+{
     Response resp = Self.GET("/exc2");
-
     return resp;
 });
 
-Handle.GET("/exc2", (Request req) => {
-    try {
+Handle.GET("/exc2", (Request req) =>
+{
+    try
+    {
         Response resp = Self.GET("/exc3");
         return resp;
     }
-    catch (ResponseException exc) {
+    catch (ResponseException exc)
+    {
         exc.ResponseObject.StatusDescription = "Modified!";
         exc.ResponseObject.Headers["MyHeader"] = "Super value!";
         exc.UserObject = "My user object!";
@@ -148,11 +172,14 @@ Handle.GET("/exc2", (Request req) => {
     }
 });
 
-Handle.GET("/exc3", (Request req) => {
-    Response resp = new Response() {
+Handle.GET("/exc3", (Request req) =>
+{
+    Response resp = new Response()
+    {
         StatusCode = 404,
         StatusDescription = "Not found!"
     };
+    
     throw new ResponseException(resp);
 });
 ```

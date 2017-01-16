@@ -7,7 +7,8 @@ For example, the simplest transformation might look something like this:
 **Before**:
 ```cs
 [Database]
-public class Person {
+public class Person
+{
   public string Name;
 }
 ```
@@ -15,8 +16,10 @@ public class Person {
 **After**:
 ```cs
 [Database]
-public class Person {
-  public string Name {
+public class Person
+{
+  public string Name
+  {
     get { return Db.ReadString(123); }
     set { return Db.WriteString(123, value); }
   }
@@ -98,7 +101,7 @@ The effect of that is that the weaver will run, trying to analyze and weave (i.e
 Let's look at an example. Notice the options we used to get the maximum of diagnostics: `--nocache --verbosity=diagnostic`.
 
 ```text
-C:\Users\Per\Bogota\bin\Debug>scweaver --nocache --verbosity=diagnostic bogota.exe 
+C:\Users\Per\Bogota\bin\Debug>scweaver --nocache --verbosity=diagnostic bogota.exe
 
 === Bootstrap diagnostics ===
 Code weaver:
@@ -282,4 +285,3 @@ Code weaver:
     System.IO.Compression.FileSystem.dll:
 ======
 ```
-

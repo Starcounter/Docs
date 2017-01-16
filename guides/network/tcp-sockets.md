@@ -1,6 +1,6 @@
 # TCP sockets
 
-TCP is a connection-oriented protocol. 
+TCP is a connection-oriented protocol.
 
 > Learn more about <a class="fusion-button button-flat button-round button-xsmall button-default button-2" href="http://en.wikipedia.org/wiki/Transmission_Control_Protocol"><i class="fa fa-book button-icon-left"></i><span class="fusion-button-text">TCP on Wikipedia</span></a>
 
@@ -29,15 +29,13 @@ Once the TCP socket object is returned, user can fetch the ID representing this 
 In the following example we process TCP sockects on port 8585 and send echo data back. The example shows how socket ID can be used to associate socket with resources, for example objects in database:
 
 ```cs
-Handle.Tcp(8585, (TcpSocket tcpSocket, Byte[] incomingData) => {
-
+Handle.Tcp(8585, (TcpSocket tcpSocket, Byte[] incomingData) =>
+{
 	UInt64 socketId = tcpSocket.ToUInt64();
-
 	// Checking if we have socket disconnect here.
-	if (null == incomingData) {
-
+	if (null == incomingData)
+	{
 		// One can use "socketId" to dispose resources associated with this socket.
-
 		return;
 	}
 
@@ -47,6 +45,6 @@ Handle.Tcp(8585, (TcpSocket tcpSocket, Byte[] incomingData) => {
 	// Sending the echo back.
 	tcpSocket.Send(incomingData);
 
-        // Or even more data, if its needed: tcpSocket.Send(someMoreData);
+  // Or even more data, if its needed: tcpSocket.Send(someMoreData);
 });
 ```

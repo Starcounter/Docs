@@ -16,8 +16,10 @@ To create a Typed JSON class with code-behind, choose `New item` in Visual Studi
 ```cs
 using Starcounter;
 
-namespace MyApp {
-    partial class PersonViewModel : Json {
+namespace MyApp
+{
+    partial class PersonViewModel : Json
+    {
     }
 }
 ```
@@ -43,10 +45,14 @@ You might observe changes to this property using a Code-behind method `Handle`:
 ```cs
 using Starcounter;
 
-namespace MyApp {
-    partial class PersonViewModel : Json {
-        void Handle(Input.FirstName input) {
-            if (input.Value == "Albert") {
+namespace MyApp
+{
+    partial class PersonViewModel : Json
+    {
+        void Handle(Input.FirstName input)
+        {
+            if (input.Value == "Albert")
+            {
                 Message = "You are not allowed to enter Albert. There can be only one.";
                 input.Cancel();
             }
@@ -87,21 +93,26 @@ You can provide code-behind for the root level and `Name`-level as two separate 
 using Starcounter;
 
 namespace Nara {
-    partial class PersonViewModel : Json {
-        void Handle(Input.FullName input) {
+    partial class PersonViewModel : Json
+    {
+        void Handle(Input.FullName input)
+        {
             var words = input.Value.Split(' ');
             this.Name.FirstName = words[0];
             this.Name.LastName = words[1];
         }
 
         [PersonViewModel_json.Name]
-        partial class PersonViewModelName : Json {
-            void Handle(Input.FirstName input) {
+        partial class PersonViewModelName : Json
+        {
+            void Handle(Input.FirstName input)
+            {
                 var parent = (PersonViewModel)this.Parent;
                 parent.FullName = input.Value + " " + this.LastName;
             }
 
-            void Handle(Input.LastName input) {
+            void Handle(Input.LastName input)
+            {
                 var parent = (PersonViewModel)this.Parent;
                 parent.FullName = this.FirstName + " " + input.Value;
             }
@@ -115,7 +126,3 @@ The attribute `[PersonViewModel_json.Name]` is used to hint what is the path in 
 As you might have noticed, accessing a child object from a parent object in code-behind is as simple as providing a path expression: `this.Name.FirstName = words[0]`. The child property (`this.Name`) is of known type (`PersonViewModelName`).
 
 However, accessing a parent from a child requires casting (`var parent = (PersonViewModel)this.Parent`). This is because there might be various parents that employ this particular child. In general, using the `Parent` property is discouraged, because it **breaks the single-direction data flow**. Child should be controlled by the parent and not vice versa.
-
-
-
-

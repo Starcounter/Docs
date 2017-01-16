@@ -29,15 +29,20 @@ In the following example the binding will succeed since the property `Name` exis
 
 ```cs
 [Database]
-public class Person {
+public class Person
+{
 	public string Name;
 }
 
-public class Program {
-  public static void Main() {
-    Handle.GET("/person/any", () => {
-      return new PersonJson() { 
-        Data = Db.SQL<Person>("SELECT p FROM Person p").First; 
+public class Program
+{
+  public static void Main()
+  {
+    Handle.GET("/person/any", () =>
+    {
+      return new PersonJson()
+      {
+        Data = Db.SQL<Person>("SELECT p FROM Person p").First;
       });
     }
   }
@@ -48,7 +53,7 @@ Here, the property `Name` in the JSON `PersonJson` will be bound to the property
 Assuming there is one person in the database with the name "Christian", the resulting JSON from the request will be:
 
 ```javascript
-{ "Name": "Christian" } 
+{ "Name": "Christian" }
 ```
 
 ### Different type of bindings
@@ -56,18 +61,18 @@ Assuming there is one person in the database with the name "Christian", the resu
 There are different settings that can be specified on each property or JSON object. Auto, Bound, Unbound or Parent.
 
 **Auto**
-When the binding is specified as auto (which is the default setting) each property is matched against the code-behind and the data object (if any). If a code-property with the same name or with a name specified as binding is found the JSON property is treated as bound and getting and setting values to it will get and set the value on the underlying property. 
+When the binding is specified as auto (which is the default setting) each property is matched against the code-behind and the data object (if any). If a code-property with the same name or with a name specified as binding is found the JSON property is treated as bound and getting and setting values to it will get and set the value on the underlying property.
 
-If no matching property is found, the JSON property is treated as unbound and values will be stored in the JSON. 
+If no matching property is found, the JSON property is treated as unbound and values will be stored in the JSON.
 
 **Bound**
-When a JSON property is specified as bound a compiler error or runtime error, depending on if the type to bind to is specified, is thrown. A JSON property declared as Bound **must** match a property in the code-behind or data object. 
+When a JSON property is specified as bound a compiler error or runtime error, depending on if the type to bind to is specified, is thrown. A JSON property declared as Bound **must** match a property in the code-behind or data object.
 
 **Unbound**
 An unbound JSON property will store the value in the JSON.
 
 **Parent**
-The same setting as specified on a parent is used, which will be one of the above (auto, bound, unbound). 
+The same setting as specified on a parent is used, which will be one of the above (auto, bound, unbound).
 
 ### Setting type of binding for all children
 JSON objects that can contain children (with a template of type `Starcounter.Templates.TObject`) can also specify how the bindings on the children will be treated.
@@ -89,15 +94,14 @@ The enumerable has the following values: "Auto", "Bound", and "Unbound".
 ### Specify data type
 
 Denoting a specific type that is used as data-object is optional but comes with some benefits.
- 
+
 If the JSON object is static, that is all properties are known compile-time, you will get an error during compilation if bound properties are invalid, instead of getting a runtime error on first use. The Data property itself will also be typed to the correct type which means that you don't need to cast the data-object when using it.
 
 The JSON code-behind class has to implement `IBound<T>` to set custom data type.
 
 ```cs
 [PersonJson_json]
-public partial class PersonJson : Json, IBound<MyNamespace.Person> {
-}
+public partial class PersonJson : Json, IBound<MyNamespace.Person>
 ```
 
 **Note:** the empty JSON objects like `{ }` do not have code-behind classes therefore it is not possible to declare custom data type.
@@ -108,7 +112,8 @@ All examples in this section use the same `Person` database class.
 
 ```cs
 [Database]
-public class Person {
+public class Person
+{
     public string Name { get; set; }
     public string Surname { get; set; }
     public Person Father { get; set; }
@@ -126,16 +131,18 @@ If a property should be bound to a property that has a different name than the p
   "FirstName": "",
   "LastName": ""
 }
-``` 
+```
 
 ```cs
-public class PersonJson : Json, IBound<Person> {
-    static PersonJson() {
+public class PersonJson : Json, IBound<Person>
+{
+    static PersonJson()
+    {
         PersonJson.DefaultTemplate.FirstName.Bind = "Name";
         PersonJson.DefaultTemplate.LastName.Bind = "Surname";
     }
 }
-``` 
+```
 
 #### Binding to a deep property
 
@@ -166,15 +173,16 @@ Binding to custom properties in code-behind works the same way.
 ```
 
 ```cs
-public class PersonJson : Json, IBound<Person> {
-    static PersonJson() {
+public class PersonJson : Json, IBound<Person>
+{
+    static PersonJson()
+    {
         PersonJson.DefaultTemplate.FullName.Bind = "FullNameBind";
     }
 
-    public string FullNameBind {
-        get {
-            return string.Format("{0} - {1}", this.Name, this.Surname);
-        }
+    public string FullNameBind
+    {
+        get { return string.Format("{0} - {1}", this.Name, this.Surname); }
     }
 }
 ```
@@ -199,11 +207,11 @@ In the following example `FullName` in json will be automatically bound to the p
 ```
 
 ```cs
-public class PersonJson : Json, IBound<Person> {
-    public string FullName {
-        get {
-            return string.Format("{0} - {1}", this.Name, this.Surname);
-        }
+public class PersonJson : Json, IBound<Person>
+{
+    public string FullName
+    {
+        get { return string.Format("{0} - {1}", this.Name, this.Surname); }
     }
 }
 ```
@@ -251,7 +259,7 @@ The `Reuse` keyword is used to reuse same JSON object multiple times. For exampl
 
 ##### DetailsPage.json
 
-```
+```json
 {
     "Entity": {
         "$": { "Reuse": "AppNamespace.EntityJson.cs" }
@@ -261,9 +269,10 @@ The `Reuse` keyword is used to reuse same JSON object multiple times. For exampl
 
 **Note:** in case of `Reuse` you cannot specify custom code-behind class.
 
-```
+```cs
 [ListPage_json.Items]
-partial class ListPageItem : Json {
+partial class ListPageItem : Json
+{
     //This is wrong since the EntityJson.cs class already exists.
 }
 ```
@@ -280,13 +289,15 @@ partial class ListPageItem : Json {
 
 ##### ListPage.json.cs
 
-```csharp
+```cs
 using AppNamespace;
 
-partial class ListPage : Json {
-	static ListPage(){
-    	DefaultTemplate.Items.ElementType.InstanceType = typeof(EntityJson);
-    }
+partial class ListPage : Json
+{
+  static ListPage()
+  {
+    DefaultTemplate.Items.ElementType.InstanceType = typeof(EntityJson);
+  }
 }
 ```
 
@@ -300,13 +311,15 @@ partial class ListPage : Json {
 
 ##### DetailsPage.json.cs
 
-```csharp
+```cs
 using AppNamespace;
 
-partial class DetailsPage : Json {
-	static DetailsPage(){
-    	DefaultTemplate.Entity.InstanceType = typeof(EntityJson);
-    }
+partial class DetailsPage : Json
+{
+  static DetailsPage()
+  {
+    DefaultTemplate.Entity.InstanceType = typeof(EntityJson);
+  }
 }
 ```
 ### IExplicitBound
@@ -355,6 +368,6 @@ Now, the code will compile successfully because it is explicitly described that 
 <section class="hero"><code>IExplicitBound</code> requires Starcounter 2.2.2.3779, 2.3.0.4846 or higher. <code>IBound</code> can still be used the same way and in the same versions as before.</section>
 
 ### Rules when bindings are created
-1. If a code-behind file exists, a property is searched for there. 
-2. If a property was not found in the code-behind or no code-behind exists, a property in the data object is searched for. 
-3. If no property was found in steps 1 and 2 and the binding is set to `Auto`, the property will be unbound. If binding was set to `Bound` an exception will be raised. 
+1. If a code-behind file exists, a property is searched for there.
+2. If a property was not found in the code-behind or no code-behind exists, a property in the data object is searched for.
+3. If no property was found in steps 1 and 2 and the binding is set to `Auto`, the property will be unbound. If binding was set to `Bound` an exception will be raised.

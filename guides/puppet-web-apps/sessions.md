@@ -1,11 +1,12 @@
 # Sessions
 
-When you are running multiple apps, the first app to handle the request gets to create the session. When you are running  launcher (see [Launcher](/guides/web/launcher/)), it's always a launcher who creates the session. 
+When you are running multiple apps, the first app to handle the request gets to create the session. When you are running  launcher (see [Launcher](/guides/web/launcher/)), it's always a launcher who creates the session.
 
 To just use a session that was created by launcher, do:
 
 ```cs
-Handle.GET("/myapp/master", () => {
+Handle.GET("/myapp/master", () =>
+{
   var master = new MasterPage();
   master.Session = Session.Current;
   return master;
@@ -32,20 +33,23 @@ Json m = new Json();
 
 // Creating a new session
 
-Session.Current = new Session() {
+Session.Current = new Session()
+{
     Data = m,
     UseSessionCookie = true
 };
 
 // Above is EXACTLY the same as
 
-m.Session = new Session() {
+m.Session = new Session()
+{
     UseSessionCookie = true
 };
 
 // Above is EXACTLY the same as
 
-m.Session = new Session() {
+m.Session = new Session()
+{
     UseSessionCookie = true,
     Data = m
 };
@@ -65,7 +69,8 @@ When using WebSockets protocol, the session is automatically created (unless its
 Session value can be specified as one of URI parameters when defining a handler, for example:
 
 ```cs
-Handle.PATCH(/usesession/{?}, (Session session, Request request) => {
+Handle.PATCH(/usesession/{?}, (Session session, Request request) =>
+{
     ...
 });
 ```
@@ -101,30 +106,31 @@ One can store sessions by obtaining session ID string (`Session.SessionId`). Ses
 There is a variation of `Session.ScheduleTask` that takes care of sessions grouped by some principle: `Session.ScheduleTask(IEnumerable<String> sessionIds, Action<Session, String> task)`. Use it if you want to operate on a group of sessions, like in the following chat application example:
 
 ```cs
-
 [Database]
-public class SavedSession {
+public class SavedSession
+{
    public string SessionId;
    public string GroupName;
 }
 
-Session.ScheduleTask(Db.SQL<SavedSession>("SELECT s FROM GroupedSession s WHERE s.GroupName = ?", myGroupName).Select(x => x.SessionId).ToList(),
-	(Session s, String sessionId) => {
+Session.ScheduleTask(Db.SQL<SavedSession>("SELECT s FROM GroupedSession s WHERE s.GroupName = ?", myGroupName).Select(x => x.SessionId).ToList(), (Session s, String sessionId) =>
+{
+  StandalonePage master = s.Data as StandalonePage;
 
-	StandalonePage master = s.Data as StandalonePage;
+  if (master != null && master.CurrentPage is ChatGroupPage)
+  {
+    ChatGroupPage page = (ChatGroupPage)master.CurrentPage;
 
-	if (master != null && master.CurrentPage is ChatGroupPage) {
-		ChatGroupPage page = (ChatGroupPage)master.CurrentPage;
-
-		if (page.Data.Equals(this.Data)) {
-			if (page.ChatMessagePages.Count >= maxMsgs) {
-				page.ChatMessagePages.RemoveAt(0);
-			}
-
-			page.ChatMessagePages.Add(Self.GET<Json>("/chatter/partials/chatmessages/" + ChatMessageKey));
-			s.CalculatePatchAndPushOnWebSocket();
-		}
-	}
+    if (page.Data.Equals(this.Data))
+    {
+      if (page.ChatMessagePages.Count >= maxMsgs)
+      {
+      	page.ChatMessagePages.RemoveAt(0);
+      }
+    page.ChatMessagePages.Add(Self.GET<Json>("/chatter/partials/chatmessages/" + ChatMessageKey));
+    s.CalculatePatchAndPushOnWebSocket();
+    }
+  }
 });
 ```
 
@@ -152,15 +158,18 @@ JSON object can be attached to session by assigning `Data` property on `Session`
 ```cs
 using Starcounter;
 
-class Program  {
-   static void Main() {
-      Handle.POST("/persons", () => {
-         var obj = new PersonView();
+class Program  
+{
+  static void Main()
+  {
+    Handle.POST("/persons", () =>
+    {
+      var obj = new PersonView();
 
-         Session.Data = obj;
-         return obj;
-      });
-   }
+      Session.Data = obj;
+      return obj;
+    });
+  }
 }
 ```
 When responding to a request, Starcounter will check if Session.Data is null. If not, Starcounter will create a resource with a unique URI to represent a session. In this case, the URI might be ```/__default/D11C498A1A5F64ABD0000010```.

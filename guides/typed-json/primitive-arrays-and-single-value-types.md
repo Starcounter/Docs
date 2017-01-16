@@ -19,7 +19,9 @@ In the following example we create a JSON-by-example file containing of a single
 
 <div class="code-name">Program.cs</div>
 
-<pre><code class="cs">public static void Main() {
+```cs
+public static void Main()
+{
     var json = new SingleValueJson();
     Console.WriteLine("Json is string: " + json.IsString);
     Console.WriteLine("Value is: " + json.StringValue);
@@ -27,7 +29,7 @@ In the following example we create a JSON-by-example file containing of a single
     Console.WriteLine("Value is: " + json.StringValue);
     Console.WriteLine("ToJSon: " + json.ToJson());
 }
-</code></pre>
+```
 
 Running this example (project called SingleValueTest) will print the following to the console:
 
@@ -50,7 +52,9 @@ A single array containing integers. We add two items and print.
 
 <div class="code-name">Program.cs</div>
 
-<pre><code class="cs">public static void Main() {
+```cs
+public static void Main()
+{
     var json = new SingleArrayJson();
 
     var item = json.Add(); // Adding an item to the array.
@@ -58,12 +62,13 @@ A single array containing integers. We add two items and print.
     var item2 = json.Add(); // Adding another item.
     item2.IntegerValue = 2;
 
-    foreach (Json child in json) {
+    foreach (Json child in json)
+    {
         Console.WriteLine(child.StringValue);
     }
     Console.WriteLine("ToJSon: " + json.ToJson());
 }
-</code></pre>
+```
 
 Running this example (project called SingleArrayTest) will print the following to the console:
 

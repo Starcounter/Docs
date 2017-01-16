@@ -15,8 +15,10 @@ The `Response` class has many implicit cast operators to make this convenient.
 When you create a Response object, you have the choice of setting the body to a `byte[]`, a `string`.
 
 ```cs
-GET("/hello", () => {
-    new Response() {
+GET("/hello", () =>
+{
+    new Response()
+    {
         ContentType="text/plain",
         Body="Hello World"
     };
@@ -27,8 +29,10 @@ GET("/hello", () => {
 
 If you return an instance of the `Json` class, the mime type will be `application/json` and the body will contain a JSON string.
 ```cs
-GET("/hello", () => {
-    return new PersonData() {
+GET("/hello", () =>
+{
+    return new PersonData()
+    {
         FirstName="Joachim",
         LastName="Wester"
     };
@@ -47,8 +51,10 @@ GET("/hello", () => "Hello World" );
 Create a `Response` object:
 
 ```cs
-GET("/hello", () => {
-    return new Response() {
+GET("/hello", () =>
+{
+    return new Response()
+    {
         StatusCode = 404,
         StatusDescription = "Not Found"
     };
@@ -67,7 +73,8 @@ To resolve a static resource, there is a method `Handle.ResolveStaticResource` w
 ```cs
 Response resp = Handle.ResolveStaticResource(req.Uri, req);
 
-if (404 == resp.StatusCode) {
+if (404 == resp.StatusCode)
+{
     resp = Self.GET("/404.html");
 }
 return resp;
@@ -81,16 +88,15 @@ Sometimes the `Response` object can not be returned immediately in the handler. 
 For example:
 
 ```cs
-Handle.GET("/postponed", (Request req) => {
-    Http.POST("/posttest", "Here I do a post!", null, null, 
-        (Response resp, Object userObject) => {
-        
+Handle.GET("/postponed", (Request req) =>
+{
+    Http.POST("/posttest", "Here I do a post!", null, null, (Response resp, Object userObject) =>
+    {
         // Modifying the response object by injecting some data.
         resp.Headers["MySuperHeader"] = "Here is my header value!";
         resp.Headers["Set-Cookie"] = "MySuperCookie=CookieValue";
         req.Response = resp;
     }); // "resp" object will be automatically sent when delegate exits.
-
     return HandlerStatus.Handled;
 });
 ```
@@ -115,8 +121,10 @@ The following `Response.ConnectionFlags` values are available:
 Example:
 
 ```cs
-Handle.GET(8080, "/shutdown", (Request req) => {
-    return new Response() {
+Handle.GET(8080, "/shutdown", (Request req) =>
+{
+    return new Response()
+    {
         Body = "Closing connection with you!",
         ConnFlags = Response.ConnectionFlags.DisconnectAfterSend
     };
@@ -126,8 +134,10 @@ Handle.GET(8080, "/shutdown", (Request req) => {
 Setting arbitrary HTTP headers on `Responce` object is straight forward using `Headers` property:
 
 ```cs
-Handle.GET("/response1", () => {
-    Response r = new Response() {
+Handle.GET("/response1", () =>
+{
+    Response r = new Response()
+    {
         StatusCode = 404,
         StatusDescription = "Not Found",
         ContentType = "text/html",
@@ -153,14 +163,18 @@ Remarks:
 Response resp;
 ...
 if ("SC" == resp.Headers["Server"])
-  return resp.Headers["Accept-Ranges"];
+{
+  return resp.Headers["Accept-Ranges"];  
+}
 ```
 
 Examples:
 
 ```cs
-Handle.GET("/hello", () => {
-  return new Response() {
+Handle.GET("/hello", () =>
+{
+  return new Response()
+  {
     StatusCode = 404,
     StatusDescription = "Not Found",
     ContentType = "text/html",
@@ -172,16 +186,18 @@ Handle.GET("/hello", () => {
 ```
 
 ## Returning a streamed body
- 
+
 When you create a Response object, you have the choice of setting the body to a `byte[]`, a `string` or a `Stream`.
 As Starcounter schedules threads in a highly optimized way, it is recommended that you allow Starcounter to handle streaming. This is done by assigning you `stream` to the Response object and then returning the response, relying on Starcounter to read the stream and send the network traffic on its own accord. Streamed object should allow getting length of the stream in bytes (`Length` property).
 
 ```cs
-GET("/movie", () => {
+GET("/movie", () =>
+{
    FileStream stream = File.Open("bigfile.mpg", FileMode.Open, FileAccess.Read, FileShare.Read));
-   Response r = new Response() {
-	StreamedBody = stream,
-	ContentType = "application/octet-stream"
+   Response r = new Response()
+   {
+    	StreamedBody = stream,
+    	ContentType = "application/octet-stream"
    };
    return r;
 });
