@@ -102,19 +102,12 @@ Right now, this handler will not function because we haven't defined the `Expens
 
 <div class="code-name">Program.cs</div><div class="code-name code-title">Add more fields</div>
 ```cs
-namespace HelloWorld
+[Database]
+public class Expense
 {
-.
-.
-    [Database]
-    public class Expense
-    {
-        public Person Spender;
-        public string Description;
-        public decimal Amount;
-    }
-.
-.
+    public Person Spender;
+    public string Description;
+    public decimal Amount;
 }
 ```
 `public Person Spender` binds every `Expense` to a `Person`. Without it we would have to look in every `Person` to find who has a certain `Expense`.
@@ -125,9 +118,7 @@ While we are tinkering with the databases, we should also add Spendings and Curr
 ```cs
 public string FirstName;
 public string LastName;
-
 public QueryResultRows<Expense> Spendings => Db.SQL<Expense>("SELECT e FROM HelloWorld.Expense e WHERE e.Spender = ?", this);
-
 public decimal CurrentBalance => Db.SQL<decimal>("SELECT SUM(e.Amount) FROM HelloWorld.Expense e WHERE e.Spender = ?", this).First;
 ```
 
