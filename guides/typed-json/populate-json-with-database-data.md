@@ -30,31 +30,35 @@ By setting the ```Data``` property on the typed JSON object, you will bind each 
 using System.Collections;
 using Starcounter;
 
-class Hello {
-   static void Main() {
-      Handle.GET("/hello/{?}", ( string name ) => {
-         Person p = Db.SQL<Person>("SELECT P FROM Person P WHERE FirstName=?", name ).First;
+class Hello
+{
+   static void Main()
+   {
+      Handle.GET("/hello/{?}", (string name) =>
+      {
+         Person p = Db.SQL<Person>("SELECT P FROM Person P WHERE FirstName=?", name).First;
          var json = new PersonMsg();
          json.Data = p;
          return json;
       });         
    }
 }
- 
+
 [Database]
-public class Person {
+public class Person
+{
    public string FirstName;
    public string LastName;
    public string FullName { get { return FirstName + " " + LastName; } }
-   public IEnumerable Quotes { 
-     get { 
-       return Db.SQL<Quote>("SELECT Q FROM Quote Q WHERE Person=?", this ); 
-     } 
-   } 
+   public IEnumerable Quotes
+   {
+     get { return Db.SQL<Quote>("SELECT Q FROM Quote Q WHERE Person=?", this); }
+   }
  }
 
 [Database]
-public class Quote {
+public class Quote
+{
    public Person Person;
    public string Text;
 }

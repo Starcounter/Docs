@@ -4,7 +4,7 @@ It is <strong>very</strong> important to declare the right indexes to achieve  o
 
 ## Declaring indexes
 
-Indexes are declared in an application using method `Db.SQL(String query)`, where query string contains an index declaration and has the form `CREATE [UNIQUE] INDEX indexName ON typeName (propertyName [ASC/DESC], ...)`. 
+Indexes are declared in an application using method `Db.SQL(String query)`, where query string contains an index declaration and has the form `CREATE [UNIQUE] INDEX indexName ON typeName (propertyName [ASC/DESC], ...)`.
 
 It is recommended to declare indexes before any retrieval query is issued. **Note** that indexes should be declared **outside** a transaction scope.
 
@@ -29,17 +29,13 @@ You can declare indexes on properties/columns of the following datatypes (<code>
 You can declare combined indexes on up to ten different properties/columns of a class/table. In the examples (6), (7), (8) and (9) we have some combined indexes on two properties/columns of the class/table <code>Employee</code>.
 
 ```sql
-(6) CREATE INDEX EmpLastnameFirstNameIndex 
-        ON Employee (LastName ASC, FirstName ASC)
+(6) CREATE INDEX EmpLastnameFirstNameIndex ON Employee (LastName ASC, FirstName ASC)
 
-(7) CREATE INDEX EmpFirstNameLastNameIndex1 
-        ON Employee (FirstName ASC, LastName ASC)
+(7) CREATE INDEX EmpFirstNameLastNameIndex1 ON Employee (FirstName ASC, LastName ASC)
 
-(8) CREATE INDEX EmpFirstNameLastNameIndex2 
-        ON Employee (FirstName DESC, LastName ASC)
+(8) CREATE INDEX EmpFirstNameLastNameIndex2 ON Employee (FirstName DESC, LastName ASC)
 
-(9) CREATE INDEX EmpDepartmentSalaryIndex 
-        ON Employee (Department ASC, Salary DESC)
+(9) CREATE INDEX EmpDepartmentSalaryIndex ON Employee (Department ASC, Salary DESC)
 ```
 
 <!-- <p>[TODO: More info about and examples with UNIQUE INDEX.]</p> -->
@@ -90,7 +86,7 @@ An execution of the query (17) can make use of the combined index (7) in the rev
 
 (13) SELECT e FROM Employee e WHERE e.FirstName = ? AND e.LastName > ?
 
-(14) SELECT e, d FROM Employee e JOIN Department d 
+(14) SELECT e, d FROM Employee e JOIN Department d
          ON e.Department = d WHERE d.Name = ?
 
 (15) SELECT e FROM Employee e ORDER BY e.LastName ASC, e.FirstName ASC
@@ -110,15 +106,16 @@ The current version do not support derived indexes. You need to define index on 
 
 ```cs
 [Database]
-public class LegalEntity {
+public class LegalEntity
+{
    public string Name;
 }
 
-public class Company : LegalEntity {
-}
+public class Company : LegalEntity
+{}
 
-public class Person : LegalEntity {
-}
+public class Person : LegalEntity
+{}
 ```
 
 You will need to define index on <code>Name</code> for both <code>Company</code> and <code>Person</code>.

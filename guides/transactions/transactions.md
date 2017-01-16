@@ -12,27 +12,38 @@ You define transactional scope using the `Db.Transact` function. The scoped tran
 ```cs
 using Starcounter;
 
-class Hello {
-   static void Main() {
-      Db.Transact( () => {
-         var albert = new Person() { FirstName="Albert", LastName="Einstein" };
-         new Quote() { 
-           Person=albert,  
-           Text="Make things as simple as possible, but not simpler" 
+class Hello
+{
+   static void Main()
+   {
+      Db.Transact(() =>
+      {
+         var albert = new Person()
+         {
+           FirstName = "Albert",
+           LastName = "Einstein"
+         };
+
+         new Quote()
+         {
+           Person = albert,  
+           Text = "Make things as simple as possible, but not simpler"
          };
       });
    }
 }
 
 [Database]
-public class Person {
+public class Person
+{
    public string FirstName;
    public string LastName;
    public string FullName { get { return FirstName + " " + LastName; } }
 }
 
 [Database]
-public class Quote {
+public class Quote
+{
    public Person Person;
    public string Text;
 }

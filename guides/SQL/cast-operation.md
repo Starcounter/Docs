@@ -1,22 +1,24 @@
 # Cast operation
 
-In some path expressions you need to cast the type of a property/column. 
+In some path expressions you need to cast the type of a property/column.
 
 Assume <code>Employee</code> is a subtype of <code>Person</code>, the property <code>Father</code> is of type <code>Person</code> and is defined in <code>Person</code>, the property <code>Manager</code> is of type <code>Employee</code> and is defined in <code>Employee</code>, and you want to select the manager of each person's father whenever such manager exists.
 
 ```cs
 [Database]
-public class Person {
+public class Person
+{
   public Person Father;
 }
 
 [Database]
-public class Employee : Person {
+public class Employee : Person
+{
   public Person Manager;
 }
 ```
 
-In this case the query below would be incorrect because <code>Father</code> is of type <code>Person</code> and this type have no property called <code>Manager</code>. 
+In this case the query below would be incorrect because <code>Father</code> is of type <code>Person</code> and this type have no property called <code>Manager</code>.
 
 ```sql
 /* incorrect */

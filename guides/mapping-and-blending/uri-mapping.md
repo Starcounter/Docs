@@ -1,11 +1,12 @@
 # URI mapping
 
-Starcounter applications are isolated, meaning that they don't know about each other's presence, registered handlers, database classes and so on. However when composing several applications together, one would like to display each application's elements on the shared screen, for example, in menu section or in search results. URI mapping allows mapping application handlers onto common URIs. Let's take an example where two applications, People and Products would like to display their elements in the Menu section of the wrapping (or also known as Launcher) application: 
+Starcounter applications are isolated, meaning that they don't know about each other's presence, registered handlers, database classes and so on. However when composing several applications together, one would like to display each application's elements on the shared screen, for example, in menu section or in search results. URI mapping allows mapping application handlers onto common URIs. Let's take an example where two applications, People and Products would like to display their elements in the Menu section of the wrapping (or also known as Launcher) application:
 
 Menu partial from the People application:
 
 ```cs
-Handle.GET("/people/menu", () => {
+Handle.GET("/people/menu", () =>
+{
     return new Page() { Html = "/People/viewmodels/Menu.html" };
 });
 ```
@@ -13,7 +14,8 @@ Handle.GET("/people/menu", () => {
 Menu partial from the Products application:
 
 ```cs
-Handle.GET("/products/menu", () => {
+Handle.GET("/products/menu", () =>
+{
     return new Page() { Html = "/products/viewmodels/Menu.html" };
 });
 ```
@@ -27,7 +29,7 @@ UriMapping.Map("/products/menu", "/sc/mapping/menu");
 
 Now by calling the common URI "/sc/mapping/menu" (from the common wrapping application) and serializing the response to the client (e.g. browser) we will get a merged JSON response from both applications and a link to merged HTML response in common HTML property:
 
-```cs
+```json
 {
 "People": {
     "Html": "/People/viewmodels/Menu.html"
@@ -47,8 +49,8 @@ In conclusion, by calling any of mapped URIs ("/people/menu" or "/products/menu"
 
 The syntax for `UriMapping.Map` is the following:
 ```cs
-void Map(String appProcessedUri, 
-         String mapProcessedUri, 
+void Map(String appProcessedUri,
+         String mapProcessedUri,
          String method = Handle.GET_METHOD)
 ```
 

@@ -7,14 +7,17 @@ One solution to this is to use <code>Action</code>. <code>Action</code> is a pub
 In order to use <code>Action</code>, one must first declare it.
 
 <div class="code-name">CustomElementRelationPage.json.cs</div>
+
 ```cs
 using System;
 using Starcounter;
 using Simplified.Ring3;
 
-namespace People {
+namespace People
+{
     [CustomElementRelationPage_json]
-    partial class CustomElementRelationPage : Json, IBound<CustomElementRelation> {
+    partial class CustomElementRelationPage : Json, IBound<CustomElementRelation>
+    {
         protected ContactInfoProvider contactInfoProvider = new ContactInfoProvider();
         public Action NeedRefresh { get; set; } // Declares the Action delegate
 ...
@@ -25,16 +28,20 @@ namespace People {
 The other thing that must be done is to actually pass a method to the <code>Action</code> delegate. This can be done outside the scope of our object.
 
 <div class="code-name">PersonPage.json.cs</div>
+
 ```cs
-public void RefreshCustomElements() {
+public void RefreshCustomElements()
+{
     this.CustomElements.Clear();
 
-    foreach (CustomElementRelation row in contactInfoProvider.SelectCustomElementRelations(this.Data)) {
-    CustomElementRelationPage page = Self.GET<CustomElementRelationPage>("/people/partials/custom-element-relations/" + row.Key);
-                
+    foreach (CustomElementRelation row in contactInfoProvider.SelectCustomElementRelations(this.Data))
+    {
+        CustomElementRelationPage page = Self.GET<CustomElementRelationPage>("/people/partials/custom-element-relations/" + row.Key);
+
         // This is where we pass a method to our Action delegate
         // Here, the content gets set to "RefreshCustomElements();"
-        page.NeedRefresh = () => {
+        page.NeedRefresh = () =>
+        {
             this.RefreshCustomElements();
         };
 
@@ -51,12 +58,16 @@ In this example, the path points to <code>this.RefreshCustomElements();</code>, 
 After declaring our <code>Action</code> delegate, and assigning it content (in this case <code>this.RefreshCustomElements();</code>) we must invoke <code>NeedRefresh</code>
 
 <div class="code-name">CustomElementRelationPage.json.cs</div>
-```
-void AddNewItem(Input.SelectedType input) {
+```cs
+void AddNewItem(Input.SelectedType input)
+{
     string inputValue = input.Value;
-    if (inputValue != null && inputValue != "") {
-        if(CheckAvailability(input.Value)) {
-            Db.Transact(delegate {
+    if (inputValue != null && inputValue != "")
+    {
+        if(CheckAvailability(input.Value))
+        {
+            Db.Transact(delegate
+            {
                 CustomElementRelationType type = new CustomElementRelationType();
                 type.Name = inputValue;
             });

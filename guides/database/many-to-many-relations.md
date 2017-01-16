@@ -8,27 +8,31 @@ In the code example below there is a many-to-many relation between the entities/
 
 ```cs
 [Database]
-public class Person {
+public class Person
+{
   ...
-  public IEnumerable EquityPortfolio {
-    get {
-      return Db.SQL<Shares>("select s.Equity from Shares s where s.Owner = ?", this);
-    }
+  public IEnumerable EquityPortfolio
+  {
+    get { return Db.SQL<Shares>("select s.Equity from Shares s where s.Owner = ?", this);}
   }
 }
 
 [Database]
-public class Company {
+public class Company
+{
   ...
-  public IEnumerable ShareHolders {
-    get {
+  public IEnumerable ShareHolders
+  {
+    get
+    {
       return Db.SQL<Shares>("select s.Owner from Shares s where s.Equity = ?", this);
     }
   }
 }
 
 [Database]
-public class Shares {
+public class Shares
+{
   public Person Owner;
   public Company Equity;
   public Int64 Quantity;

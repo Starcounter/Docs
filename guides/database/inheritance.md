@@ -4,15 +4,18 @@ Starcounter allows any database object to inherit from any other database object
 
 ```cs
 [Database]
-public class Customer {
+public class Customer
+{
    public string Name;
 }
 
-public class PrivateCustomer : Customer {
+public class PrivateCustomer : Customer
+{
    public string Gender;
 }
 
-public class CorporateCustomer : Customer {
+public class CorporateCustomer : Customer
+{
    public string VatNumber;
 }
 ```
@@ -24,26 +27,25 @@ The table `Customer` will contain all `PrivateCustomers` and all `CorporateCusto
 ### Base classes
 
 A base class contains all instances of all derived classes in addition to the instances with the its own exact type.
-```SQL
+```sql
 SELECT C FROM Customer C WHERE Name LIKE 'Goldman%'
 ```
 Returns ```[ { Name:"Goldman Sachs" }, { Name:"Goldman, Carl" } ]```
 
 ### Derived classes
-```SQL
+```sql
 SELECT C FROM PrivateCustomer C WHERE Name LIKE 'Goldman%'
 ```
 Returns ```[{ Name:"Goldman, Carl", Gender:"Male" }]```
 
-```SQL
+```sql
 SELECT C FROM CorporateCustomer C WHERE Name LIKE 'Goldman%'
 ```
 Returns ```[{ Name:"Goldman Sachs", VatNumber:"1234" } ]```
 
 As a side note, you can use the GetType() function to get only instances of a exact class
 
-```SQL
-SELECT C FROM Customer C WHERE Name LIKE 'Goldman%' 
-  AND GetType() == typeof(Customer)
+```sql
+SELECT C FROM Customer C WHERE Name LIKE 'Goldman%' AND GetType() == typeof(Customer)
 ```
 Returns ```[ ]```

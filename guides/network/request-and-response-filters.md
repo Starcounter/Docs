@@ -12,14 +12,17 @@ Handlers respond to requests for <strong>resources</strong>. The request include
 
 Handlers return <code>Response</code> objects. In their native form, application developers define handlers that return response objects constructed explicitly:
 
-<pre><code class="cs">Handle.GET("/author", () =&gt; {
-  return new Response() {
+```cs
+Handle.GET("/author", () =>
+{
+  return new Response()
+  {
     StatusCode = 200,
     ContentType = "text/plain",
     Body = "Per Samuelsson"    
   };
 });
-</code></pre>
+```
 
 <h2>The JSON data format</h2>
 
@@ -29,35 +32,40 @@ Most notably, <a href="/guides/typed-json/typed-json.html">TypedJSON </a>allow y
 
 With that, by defining this:
 
-<pre><code class="cs">{
+```json
+{
   "Name": "Per",
   "Surname": "Samuelsson"
 }
-</code></pre>
+```
 
 you can instantly enjoy this:
 
-<pre><code class="cs">var a = new Author();
+```cs
+var a = new Author();
 Console.WriteLine(a.Name + " " + a.Surname);
 // Output: Per Samuelsson
-</code></pre>
+```
 
 and go from the instance back to the JSON text using this:
 
-<pre><code class="cs">Console.WriteLine(a.ToJson());
+```cs
+Console.WriteLine(a.ToJson());
 // Output:
 //{
 //  "Name": "Per",
 //  "Surname": "Samuelsson"
 //}
-</code></pre>
+```
 
 Underneath, the generated class derives from a built-in class, <code>Json</code>.
 
-<pre><code class="cs">class Author : Json {
+```cs
+class Author : Json
+{
   // ...
 }
-</code></pre>
+```
 
 Lets take a closer look to what that means in the context of handling requests.
 
@@ -67,27 +75,33 @@ In the introduction, you learned that handlers return <code>Response</code> obje
 
 Because we choose JSON as the dominant data exchange format in Starcounter, we've added convenience methods that allow you to return instances of Typed JSON. You'll often see handlers defined like this:
 
-<pre><code class="cs">Handle.GET("/author", () =&gt; {
+```cs
+Handle.GET("/author", () =>
+{
   return new Author();
 });
-</code></pre>
+```
 
 Technically, it is enabled by a simple <em>implicit </em>cast, that allows any object of type <code>Json</code> to be cast to a <code>Response</code>, such as this:
 
-<pre><code class="cs">Author a = new Author();
+```cs
+Author a = new Author();
 Response r = a;
-</code></pre>
+```
 
 Hence, the above translate approximately to this:
 
-<pre><code class="cs">Handle.GET("/author", () =&gt; {
-  return new Response() {
+```cs
+Handle.GET("/author", () =>;
+{
+  return new Response()
+  {
     StatusCode = 200,
     ContentType = "application/json",
     Body = "{ Name: \"Per\", Surname: \"Samuelsson\"}"            
   };
 });
-</code></pre>
+```
 
 Why approximately? Because there is another very important detour underneath, one we'll look at next.
 
@@ -101,19 +115,24 @@ The answer is found by taking a closer look at the <code>Response</code> class. 
 
 Going back to returning JSON directly from handlers. When you do this:
 
-<pre><code class="cs">Handle.GET("/author", () =&gt; {
+```cs
+Handle.GET("/author", () =>;
+{
   return new Author();
 });
-</code></pre>
+```
 
 what actually happens is this:
 
-<pre><code class="cs">Handle.GET("/author", () =&gt; {
-  return new Response() {
+```cs
+Handle.GET("/author", () =>;
+{
+  return new Response()
+  {
     Resource = new Author();
   }
 });
-</code></pre>
+```
 
 Simply put: any <code>Json</code> instance is a <strong>resource </strong>that can <strong>represent itself</strong> as <code>application/json</code>.
 
@@ -131,29 +150,38 @@ To support multiple representations, two alternatives exist: <em>inline</em>, no
 
 The recommended pattern to define handlers that return multiple representations <em>inline </em>is by using the <code>Resource</code> class. At its core, it allows the developer to support a set of representations by mapping each MIME type to <em>providers</em>.
 
-<pre><code class="cs">Handle.GET("/author", () =&gt; {
+```cs
+Handle.GET("/author", () =>
+{
   var json = new Author();
-  var html = "&lt;b&gt;Per&lt;/b&gt;&lt;br/&gt;&lt;div&gt;Samuelsson&lt;/div&gt;";
+  var html = "<b>Per</b><br><div>Samuelsson</div>";
 
   var r = new Resource();
   return r.Json(json).Html(() =&gt; return UTF8.GetBytes(html));
 });
-</code></pre>
+```
 
 Taking a closer look at what goes on here, <code>Resource</code> expose as its central method <code>AsMime</code> and a few convenient-methods for the most common data types, like JSON:
 
-<pre><code class="cs">class Resource : IResource {
-  public IResource AsMime(string mimeType, IResource provider) {
-    return AsMime(mimeType, () =&gt; return resource.AsMimeType(mimeType));
+```cs
+class Resource : IResource
+{
+  public IResource AsMime(string mimeType, IResource provider)
+  {
+    return AsMime(mimeType, () => return resource.AsMimeType(mimeType));
   }
-  public IResource AsMime(string mimeType, Func&lt;byte[]&gt; provider) {
+
+  public IResource AsMime(string mimeType, Func&lt;byte[]&gt; provider)
+  {
     // ... store provider
   }
-  public IResource Json(IResource provider) {
+
+  public IResource Json(IResource provider)
+  {
     return AsMime("application/json", provider);    
   }
 }
-</code></pre>
+```
 
 Based on the incoming request, the server will then pick the appropriate provider(s) to invoke and construct the response from the result.
 
@@ -163,22 +191,27 @@ With <em>middleware</em>, applications can customize the request pipeline. Using
 
 The <code>MimeProvider</code> class expose itself just like that.
 
-<pre><code class="cs">void Main() {
+```cs
+void Main()
+{
   var app = Application.Current;
 
-  app.Use(MimeProvider.Html((context, next) =&gt; {
+  app.Use(MimeProvider.Html((context, next) =>
+  {
     var json = context.Resource as Json;
-    if (json != null) {
+    if (json != null)
+    {
       context.Result = Self.GET&lt;byte[]&gt;(json["Html"]);
     }
     next();
   });
 
-  Handle.GET("/author", () =&gt; {
+  Handle.GET("/author", () =>
+  {
     return new Author();
   });
 }
-</code></pre>
+```
 
 Middleware in the form of MIME providers accept as their input a <em>context </em>(<code>MimeProviderContext</code>) and a delegate that reference the next middleware in the chain. From the context, the <code>IResource</code> that has failed to represent itself in the requested type can be retrieived. The role of the middleware provider is to <em>extend </em>that resource by returning the requested representation.
 
@@ -200,51 +233,57 @@ Simply put, a <em>template engine</em> take some kind of <strong>template</stron
 
 <div class="code-name">Author.html</div>
 
-<pre><code class="html">&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;Author&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
+```html
+<html>
+<head>
+  <title>Author</title>
+</head>
+<body>
   Name: {{model.Name}},
   Surname: {{model.Surname}}
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+</body>
+</html>
+```
 
 <div class="code-name">Author.json</div>
 
-<pre><code class="json">{
+```json
+{
   "Html": "/author.html",
   "Name": "Per",
   "Surname": "Samuelsson"
 }
-</code></pre>
+```
 
 <div class="code-name">Program.cs</div>
 
-<pre><code class="cs">void Main() {
+```cs
+void Main()
+{
   var app = Application.Current;
 
   app.Use(new HtmlFromJsonProvider());
 
-  Handle.GET("/author", () =&gt; {
+  Handle.GET("/author", () =>
+  {
     return new Author();
   });
 }
-</code></pre>
+```
 
 The <code>HtmlFromJsonProvider</code> middleware comes as part of Starcounter and, based on previous sections, you can probably guess what it's about. It's little more than this code, wrapped up in a class:
 
-<pre><code class="cs">app.Use(MimeProvider.Html((context, next) =&gt; {
+```cs
+app.Use(MimeProvider.Html((context, next) =>
+{
   var json = context.Resource as Json;
-  if (json != null) {
-    context.Result = Self.GET&lt;byte[]&gt;(json["Html"]);
+  if (json != null)
+  {
+    context.Result = Self.GET<byte[]>(json["Html"]);
   }
-
   next();
-
 });
-</code></pre>
+```
 
 The focus here is to illustrate a pattern, not to provide code that can run out of the box. Still, what was just presented is very close to the code you'll see in our real-world sample apps.
 
@@ -281,12 +320,15 @@ In the current implementation, MIME providers are only invoked on resources of t
 
 Furthermore, registering a MIME provider for the JSON format itself, like this:
 
-<pre><code class="cs">void Main() {
-  Application.Current.Use(MimeProvider.For("application/json", (context, next) =&gt; {
+```cs
+void Main()
+{
+  Application.Current.Use(MimeProvider.For("application/json", (context, next) =>
+  {
     // Do our thing ...
     next();
-  }));
+  });
 }
-</code></pre>
+```
 
 will currently <strong>not trigger</strong>. This is due to a legacy, where Starcounter treat JSON as a first-class citizen and optimize some flows for that. This will also be changed in upcoming versions.

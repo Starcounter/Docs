@@ -29,11 +29,12 @@ This is how the form gets submitted to force using HTTP:
 <div class="code-name">
 <a href="https://github.com/StarcounterPrefabs/SignIn/blob/master/src/SignIn/wwwroot/SignIn/elements/signin-element.html" target="_blank">signin-element.html</a></div>
 
-<pre><code class="cs">var password = Sha1.hash(this.password);
+```cs
+var password = Sha1.hash(this.password);
 var url = this.url + this.username + "/" + password + "/" + this.rememberMe;
 this.set("password", "");
 document.querySelector("puppet-client").network.changeState(url);
-</code></pre>
+```
 
 <h2>HTTP handler that sets the cookie</h2>
 
@@ -42,21 +43,25 @@ When the user submits the form, a relevant HTTP handler tries to authenticate th
 <div class="code-name">
 <a href="https://github.com/StarcounterPrefabs/Simplified/blob/master/Ring3/User/SystemUser.Static.cs" target="_blank">Simplified/blob/master/Ring3/User/SystemUser.Static.cs</a></div>
 
-<pre><code class="cs">SystemUser systemUser = Db.SQL&lt;SystemUser&gt;("SELECT o FROM Simplified.Ring3.SystemUser o WHERE o.Username = ?", Username).First;
+```cs
+SystemUser systemUser = Db.SQL&lt;SystemUser&gt;("SELECT o FROM Simplified.Ring3.SystemUser o WHERE o.Username = ?", Username).First;
 
-if (systemUser == null) {
+if (systemUser == null)
+{
     return null;
 }
 
 GeneratePasswordHash(Username.ToLower(), Password, systemUser.PasswordSalt, out hashedPassword);
 
-if (systemUser.Password != hashedPassword) {
+if (systemUser.Password != hashedPassword)
+{
     return null;
 }
 
 SystemUserSession userSession = null;
 
-Db.Transact(() =&gt; {
+Db.Transact(() =>
+{
     SystemUserTokenKey token = new SystemUserTokenKey();
 
     token.Created = token.LastUsed = DateTime.UtcNow;
@@ -65,31 +70,39 @@ Db.Transact(() =&gt; {
 
     userSession = AssureSystemUserSession(token);
 });
-</code></pre>
+```
 
 Auth token is now sent to the user as a cookie in the HTTP response. Future HTTP requests from that user will include the auth token cookie:
 
 <div class="code-name">
 <a href="https://github.com/StarcounterPrefabs/SignIn/blob/master/src/SignIn/Api/MainHandlers.cs" target="_blank">MainHandlers.cs</a></div>
 
-<pre><code class="cs">Cookie cookie = new Cookie() {
+```cs
+Cookie cookie = new Cookie()
+{
     Name = AuthCookieName
 };
 
-if (Session != null &amp;&amp; Session.Token != null) {
+if (Session != null &amp;&amp; Session.Token != null)
+{
     cookie.Value = Session.Token.Token;
 }
 
-if (Session == null) {
+if (Session == null)
+{
     cookie.Expires = DateTime.Today;
-} else if (RememberMe) {
+}
+else if (RememberMe)
+{
     cookie.Expires = DateTime.Now.AddDays(rememberMeDays);
-} else {
+}
+else
+{
     cookie.Expires = DateTime.Now.AddDays(1);
 }
 
 Handle.AddOutgoingCookie(cookie.Name, cookie.GetFullValueString());
-</code></pre>
+```
 
 <h2>Middleware that reads the cookie</h2>
 
@@ -100,32 +113,39 @@ If the auth token is correct, the middleware creates a Session object and identi
 <div class="code-name">
 <a href="https://github.com/StarcounterPrefabs/SignIn/blob/master/src/SignIn/Api/MainHandlers.cs" target="_blank">MainHandlers.cs</a></div>
 
-<pre><code class="cs">Application.Current.Use((Request req) =&gt; {
+```cs
+Application.Current.Use((Request req) =>
+{
     Cookie cookie = GetSignInCookie();
 
-    if (cookie != null) {
-        if (Session.Current == null) {
+    if (cookie != null)
+    {
+        if (Session.Current == null)
+        {
             Session.Current = new Session(SessionOptions.PatchVersioning);
         }
 
         SystemUserSession session = SystemUser.SignInSystemUser(cookie.Value);
 
-        if (session != null) {
+        if (session != null)
+        {
             RefreshAuthCookie(session);
         }
     }
 
     return null;
 });
-</code></pre>
+```
 
 With this middleware, any app that handles this request will see that the session already exists. In case of our sample apps, the User Admin app shares the data model with the Sign In app. A simple lookup in the <code>SystemUserSession</code> table will get the relevant <code>SystemUser</code> object.
 
 <div class="code-name">
 <a href="https://github.com/StarcounterPrefabs/UserAdmin/blob/master/src/UserAdmin/Helpers/Helper.cs" target="_blank">UserAdmin/Helpers/Helper.cs</a></div>
 
-<pre><code>SystemUserSession userSession = Db.SQL&lt;SystemUserSession&gt;("SELECT o FROM Simplified.Ring5.SystemUserSession o WHERE o.SessionIdString=?", Session.Current.SessionId).First;
-if (userSession == null) {
+```cs
+SystemUserSession userSession = Db.SQL&lt;SystemUserSession&gt;("SELECT o FROM Simplified.Ring5.SystemUserSession o WHERE o.SessionIdString=?", Session.Current.SessionId).First;
+if (userSession == null)
+{
     return null;
 }
 
@@ -134,4 +154,4 @@ if (userSession.Token == null) {
 }
 
 return userSession.Token.User;
-</code></pre>
+```

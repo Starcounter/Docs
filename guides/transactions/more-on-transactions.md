@@ -42,10 +42,12 @@ To the method <code>Transact</code> you pass a delegate with the code that
 should be run within the transaction.
 
 ```cs
-Db.Transact(delegate() {
+Db.Transact(delegate()
+{
     String query = "SELECT e FROM Employee e";
     QueryResultRows<Employee> result = Db.SQL<Employee>(query);
-    foreach (Employee emp in result) {
+    foreach (Employee emp in result)
+    {
         Console.WriteLine(emp.FirstName + " " + emp.LastName);
     }
 });
@@ -103,26 +105,29 @@ In Starcounter, you declare transaction scopes. A transaction scope surrounds it
 using Starcounter;
 
 [Database]
-public class Account {
+public class Account
+{
    public string AccountId;
    public decimal Amount;
 }
 
-public class MoneyTransfer {
+public class MoneyTransfer
+{
   public Account FromAccount;
   public Account ToAccount;
   public decimal Amount;
 
-  public static void MoveMoney( Account fromAccount, Account toAccount, 
-                                decimal amount ) {
-      Db.Transact( delegate {
+  public static void MoveMoney(Account fromAccount, Account toAccount, decimal amount)
+  {
+      Db.Transact( delegate
+      {
          MoneyTransfer a = new MoneyTransfer();
          a.FromAccount = fromAccount;
          a.ToAccount = toAccount;
          a.Amount = amount;
          fromAccount.Amount -= amount;
          toAccount.Amount += amount;
-     } );
+     });
   }
 }
 ```
@@ -136,23 +141,26 @@ When you nest transactions scopes, only the topmost transaction scope will actua
 
 ```cs
 [Database]
-public class Account {
+public class Account
+{
    public string AccountId;
    public decimal Amount;
-
-   public static Account GetAccount( string id )  {
+   public static Account GetAccount(string id)  
+   {
       return Db.SQL<Account>("SELECT A FROM Account A WHERE AccountId=?", id ).First;
    }
 }
 
-public class MoneyTransfer {
+public class MoneyTransfer
+{
   public Account FromAccount;
   public Account ToAccount;
   public decimal Amount;
 
-  public static void MoveMoney( Account fromAccount, Account toAccount, 
-                                decimal amount ) {
-      Db.Transact(delegate {
+  public static void MoveMoney(Account fromAccount, Account toAccount, decimal amount)
+  {
+      Db.Transact(delegate
+      {
          MoneyTransfer a = new MoneyTransfer();
          a.FromAccount = fromAccount;
          a.ToAccount = toAccount;
@@ -162,8 +170,10 @@ public class MoneyTransfer {
       });
   }
 
-  public static void HelloScope( decimal amount )  {
-     Db.Transact(delegate {
+  public static void HelloScope(decimal amount)  
+  {
+     Db.Transact(delegate
+     {
         MoveMoney( GetAccount("Client A"), GetAccount("Client D"), 100 );
         MoveMoney( GetAccount("Client B"), GetAccount("Client D"), 100 );
         MoveMoney( GetAccount("Client C"), GetAccount("Client D"), 100 );

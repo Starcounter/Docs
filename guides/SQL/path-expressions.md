@@ -10,11 +10,10 @@ SELECT e.Manager.Department.Location.Street FROM Employee e
 
 Note that if some identifier in a path expression will return <code>null</code> then the complete path expression will also return <code>null</code>.
 
-In fact, you do not have to qualify (start with an extent/table alias) a path expression. You are allowed to omit the qualifications of the path expressions (column references) as in the   query (2) below. 
+In fact, you do not have to qualify (start with an extent/table alias) a path expression. You are allowed to omit the qualifications of the path expressions (column references) as in the   query (2) below.
 
 ```sql
-SELECT Manager.Department.Location.Street, Name FROM Employee 
-  JOIN Department ON DepartmentId = Id
+SELECT Manager.Department.Location.Street, Name FROM Employee JOIN Department ON DepartmentId = Id
 ```
 
 However, you are only allowed to omit the qualifications as long as the names of the  properties/columns are unique, and this may change over time. Therefore we strongly recommend that when you write SQL statements in program code you always qualify all path expressions so your code will hold for future modifications of the database schema.

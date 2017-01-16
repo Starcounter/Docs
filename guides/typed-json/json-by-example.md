@@ -4,11 +4,11 @@ Starcounter lets you define JSON schemas by providing a sample instance of the J
 
 The advantages of JSON-by-example over regular C# classes are mainly:
 
-* They can double directly as a JSON mockup (for instance in a web browser expecting such a JSON object). 
+* They can double directly as a JSON mockup (for instance in a web browser expecting such a JSON object).
 * They can express trees of objects and arrays
 * Default values can easily be specified
 
-To create a Typed JSON class, choose <code>New item</code> in Visual Studio and then choose <code>Starcounter Typed JSON</code> and name it **PersonMsg**. 
+To create a Typed JSON class, choose <code>New item</code> in Visual Studio and then choose <code>Starcounter Typed JSON</code> and name it **PersonMsg**.
 
 <div class="code-name">PersonMsg.json</div>
 
@@ -31,10 +31,14 @@ The above example will act as partial nested C# classes supporting intelligence 
 ```cs
 using Starcounter;
 
-class Hello {
-   static void Main() {
-      Handle.GET("/hello", () => {
-         var json = new PersonMsg() {
+class Hello
+{
+   static void Main()
+   {
+      Handle.GET("/hello", () =>
+      {
+         var json = new PersonMsg()
+         {
             FirstName = "Albert",
             LastName = "Einstein"
          };

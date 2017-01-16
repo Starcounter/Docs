@@ -85,8 +85,8 @@ namespace MultiplePagesDemo
     }
   }],
   "Focused":{
-    "Html": "", 
-    "Title": "", 
+    "Html": "",
+    "Title": "",
     "Content": ""
   }
 }
@@ -109,10 +109,7 @@ namespace MultiplePagesDemo
     {
         public string GetUrl
         {
-            get 
-            { 
-                return "/MultiplePagesDemo/mails/" + this.Data.GetObjectID(); 
-            }
+            get { return "/MultiplePagesDemo/mails/" + this.Data.GetObjectID(); }
         }
     }
 }
@@ -177,9 +174,9 @@ In the above example, the user could bookmark `www.mysampleapp.com/emails/123` a
 
 ### What is happening behind the scenes
 
-Normally, when you visit a new page in a browser, the current page is dropped and a new page is parsed. This is built in to the browser and cannot be changed. So how does a SPA page load a new sub page? 
+Normally, when you visit a new page in a browser, the current page is dropped and a new page is parsed. This is built in to the browser and cannot be changed. So how does a SPA page load a new sub page?
 
-The answer is that it uses the JavaScript XHR support. Starcounter provides an implementation of loading partial data using the standard JSON-Patch format. So when you visit `www.mysampleapp.com/emails/123` from the browser address bar, the call will get the entire page and when you visit the same url in an existing session, a GET will be sent using the `Accept: application/json-patch+json` header via the JavaScript XHR and only the data needed to morph the current page into the new page is sent. 
+The answer is that it uses the JavaScript XHR support. Starcounter provides an implementation of loading partial data using the standard JSON-Patch format. So when you visit `www.mysampleapp.com/emails/123` from the browser address bar, the call will get the entire page and when you visit the same url in an existing session, a GET will be sent using the `Accept: application/json-patch+json` header via the JavaScript XHR and only the data needed to morph the current page into the new page is sent.
 
 You can read more on how the JSON-Patch protocol is used over at [PuppetJs spec](https://github.com/PuppetJs/PuppetJs/wiki/Server-communication).
 

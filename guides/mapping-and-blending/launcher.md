@@ -42,15 +42,16 @@ The links in Launcher's left hand side menu are composed from the responses to <
 
 A typical menu item response looks like:
 
-<pre><code class="html">&lt;template&gt;
-    &lt;li&gt;
-        &lt;a href="/products"&gt;
-            &lt;i class="glyphicon glyphicon-oil"&gt;&lt;/i&gt;
-            &lt;span&gt;Products&lt;/span&gt;
-        &lt;/a&gt;
-    &lt;/li&gt;
-&lt;/template&gt;
-</code></pre>
+```html
+<template>
+  <li>
+    <a href="/products">
+      <i class="glyphicon glyphicon-oil"></i>
+      <span>Products</span>
+    </a>
+  </li>
+</template>
+```
 
 You can put your app's response there by mapping a HTTP GET request handler to this URI using <a href="/guides/apps/uri-mapping/">UriMapping.Map</a>.
 
