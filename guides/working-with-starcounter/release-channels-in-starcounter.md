@@ -1,6 +1,6 @@
 # Release channels in Starcounter
 
-Starcounter supports a number of different <a href="http://downloads.starcounter.com/download">release channels</a></span>. We use these channels to roll out updates to users, starting with our close to hourly builds, all the way up to our Release channel releases.
+Starcounter supports a number of different release [channels](http://downloads.starcounter.com/download). We use these channels to roll out updates to users, starting with our close to hourly builds, all the way up to our Release channel releases.
 
 ### Types of releases:
 
@@ -27,4 +27,4 @@ This channel is for custom builds that are used for specific purposes. It may, f
 #### Long-term support (LTS)
 Stability: **High**, Frequency: **Low-Medium**
 
-This channel is updated nightly when there are hotfixes and patches for the latest release of the Release channel. There will not be a major release in this channel unless there is also a release in the Release channel, thus, this channel and the Release channel does not differ in functionality. 
+This channel is updated nightly when there are hotfixes and patches for the latest release of the Release channel. There will not be a major release in this channel unless there is also a release in the Release channel, thus, this channel and the Release channel does not differ in functionality.
