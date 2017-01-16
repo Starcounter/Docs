@@ -49,6 +49,6 @@ Properties of the view-model have to be bound to (in dynamic JSON) Common Langua
 
 If JSON object is static it is beneficial to denote a specific type that is used as data-object. Otherwise, opposite to dynamic JSON objects, faulty static properties will result in compilation error instead of runtime. Moreover, it allows binding data properties to the correct types without manual involvement.
 <a href="/guides/typed-json/json-data-binding.html">There are two ways of doing that:</a>
-<ul>
+
 1. Set a metadata inside the view-model
-2. Use the <code>IBound interface</code> to tag the code-behind class</ul>
+2. Use the <code>IBound interface</code> to tag the code-behind class
