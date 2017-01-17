@@ -33,11 +33,10 @@ Middleware does not impact internal `Self.GET` calls.
 
 When allowing external HTTP requests, it might be useful to pre-process or filter out certain requests before the designated handler is called. Request filters make it possible to do exactly that. They are lists of user-supplied delegates, or filters, that are executed on external requests before the actual handlers are called. These filters are executed one by one until one of the filters returns a non-null `Response`. If a `Response` was returned from the request filter, then this response is returned to the client without calling the handler. If none of the filters returned a `Response` object, then the request will be passed on and dealt with by the handler.
 
-![Middleware example](../assets/Middleware-example.png)
+![Middleware example](../../assets/Middleware-example.png)
 
 An example of this can be an extremely basic spam filter:
 
-<div class="code-name code-title">Request spam filter</div>
 ```cs
 Application.Current.Use((req) =>
 {
@@ -55,17 +54,23 @@ Application.Current.Use((req) =>
 
 When there is an incoming request, this request filter checks if the URI contains the string "spam", and returns a `Response` object if that's the case which means that the request will be blocked without reaching the handler. Otherwise, it returns `null`, which allows the request to move on to the next request filter if there are more of them or go to the handler if there was only one request filter.
 
+### Skip request filters
+
 To let requests to a certain handler bypass all request filters, use the class `HandlerOptions` and set `SkipRequestFilters` to `true`. Like this:
 
 ```cs
 Handle.GET("/my-url", () => new Page(), new HandlerOptions() { SkipRequestFilters = true });
 ```
 
-As an important distinction from response filters, request filters does only catch requests to handlers in the current application. That means that request filters running in one application will not interfere with requests coming to other applications running simultaneously.
+This only affects request filters and not response filters.
 
 ## Response filters
 
-Response filters do the opposite of request filters; they make alterations to outgoing responses. For example, response filters makes it possible to add a certain HTTP header to responses for requests with a `/special` URI prefix after the request has been dealt with by the handler:
+Response filters do the opposite of request filters; they make alterations to outgoing responses. They work similarly to request filters by being executed one by one until one returns a non-null response, the main difference is that response filters are called after the handler has been called while request filters are called before. Response filters can either create entirely new responses and return those, or simply modify the response coming from the handler.
+
+![Middleware response example](../../assets/middleware-response.PNG)
+
+ For example, response filters makes it possible to add a certain HTTP header to responses for requests with a `/special` URI prefix after the request has been dealt with by the handler:
 
 ```cs
 Application.Current.Use((request, response) =>
@@ -114,9 +119,88 @@ Application.Current.Use((Request request, Response response) =>
 
 Here, the response filter makes it possible to return a descriptive `404` page by checking the outgoing responses for the `404` status code and in that case return a response containing an HTML page.
 
+### Response and request filter interaction
+
+When using both request and response filters, response filters will intercept responses coming from request filters. Consider the following example:
+
+```cs
+static void Main()
+{
+    // Request filter
+    Application.Current.Use((Request request) =>
+    {
+        return new Response()
+        {
+            StatusCode = 404,
+            StatusDescription = "Not Found",
+            Body = "THIS IS FROM THE REQUEST FILTER"
+        };
+    });
+
+    // Response filter
+    Application.Current.Use((Request request, Response response) =>
+    {
+        if (response.StatusCode == 404)
+        {
+            return new Response()
+            {
+                StatusCode = 404,
+                StatusDescription = "Not Found",
+                Body = "THIS IS FROM THE RESPONSE FILTER"
+            };
+        }
+        return null;
+    });
+
+    Handle.GET("/Test", () =>
+    {
+        return "This will never be seen";
+    });
+}
+```
+
+When a request is sent to the `/Test` handler, it will be intercepted by the request filter that creates a new `Response` object. This response is in turn intercepted by the response filter which creates yet another `Response` object which will be the one received by the client. So when this code is run, "THIS IS FROM THE RESPONSE FILTER" will be displayed.
+
+### Middleware interaction with other applications
+
+Both request and response filters catch requests to handlers in other applications that are running simultaneously.
+
+Consider the following request filter:
+```cs
+Application.Current.Use((Request request) =>
+{
+    return new Response()
+    {
+        StatusCode = 404,
+        StatusDescription = "Not Found",
+        Body = "THIS IS FROM THE REQUEST FILTER"
+    };
+});
+```
+
+By having this request filter in one application, all requests, to all applications, will be met by the `404` response.
+
+This can be remedied by adding an `if` statement like this:
+
+```cs
+Application.Current.Use((Request request) =>
+{
+    if (request.Uri.StartsWith("/MyApp"))
+    {
+        return new Response()
+        {
+            StatusCode = 404,
+            StatusDescription = "Not Found",
+            Body = "THIS IS FROM THE REQUEST FILTER"
+        };
+    }
+    return null;
+});
+```
+
 ## Middleware classes
 
-In addition to request and response filters, `Application.Current.Use` allow for custom middleware classes that can be exposed and used by all applications. These custom middleware classes implement the `IMiddleware` interface and do not look much different from the response and request filters explained above.
+In addition to request and response filters, `Application.Current.Use` allow for custom middleware classes that can be exposed and used by all applications. These custom middleware classes implement the `IMiddleware` interface.
 
 Here's an example of an application using a custom middleware class:
 ```cs
@@ -151,11 +235,13 @@ class Program {
 
 In this case, a custom middleware class is created using the `IMiddleware` interface. The middleware created in this case is a request filter that simply returns an unhelpful response no matter what the incoming request is.
 
-By using custom middleware, it is possible to achieve a higher level of abstraction by hiding the implementation of the middleware.
+By using middleware classes, it is possible to achieve a higher level of abstraction by hiding the implementation of the middleware.
+
+It is also worth nothing that these classes do not have to contain request or response filters. Although, that would be the most common usage of middleware classes.
 
 ### HtmlFromJsonProvider
 
-`HtmlFromJsonProvider` is a custom middleware class provided in the `Starcounter` namespace. It acts as a response filter by intercepting outgoing responses containing JSON objects and instead responding with the corresponding HTML. For example, look at the following application:
+`HtmlFromJsonProvider` is a custom middleware class provided by Starcounter. It acts as a response filter by intercepting outgoing responses containing JSON objects and instead responding with the corresponding HTML. For example, look at the following application:
 
 <div class="code-name">Person.html</div>
 ```html
