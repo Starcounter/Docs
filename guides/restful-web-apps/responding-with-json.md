@@ -16,9 +16,12 @@ Typed JSON objects are serialized automatically to `application/json` format whe
 ```cs
 using Starcounter;
 
-class Hello {
-    static void Main() {
-        Handle.GET("/hello", () => {
+class Hello
+{
+    static void Main()
+    {
+        Handle.GET("/hello", () =>
+        {
             var json = new PersonJson();
             return json;
         });         
@@ -43,17 +46,23 @@ To achieve a different HTTP status code, define it explicitly in a `Response` ob
 ```cs
 using Starcounter;
 
-class Hello {
-    static void Main() {
-        Handle.GET("/hello", () => {
-            var json = new ErrorJson() {
+class Hello
+{
+    static void Main()
+    {
+        Handle.GET("/hello", () =>
+        {
+            var json = new ErrorJson()
+            {
               ErrorDescription = "Hello not found"
             };
-            return new Response() {
+
+            return new Response()
+            {
                 StatusCode = 404,
                 StatusDescription = "Not Found"
                 Body = json
-            };;
+            };
         });         
     }
 }

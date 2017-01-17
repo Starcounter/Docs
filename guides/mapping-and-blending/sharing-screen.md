@@ -2,9 +2,9 @@
 
 Sharing data and sharing screen are two unrelated concepts that go the best together.
 
-Sharing of the screen happens when a JSON view-model of an app A is merged as a sibling to the JSON view-model of an app B. 
+Sharing of the screen happens when a JSON view-model of an app A is merged as a sibling to the JSON view-model of an app B.
 
-It is desired for apps A and B to share data (see the previous page) at the same time as they share screen. This results in a user experience of a well-knit app suite. 
+It is desired for apps A and B to share data (see the previous page) at the same time as they share screen. This results in a user experience of a well-knit app suite.
 
 ## How not to share the screen between apps
 
@@ -16,7 +16,7 @@ Sharing of the screen happens automatically when you use URI mapping. It boils d
 
 ## More details, please
 
-The apps share the screen when a user request gets a response composed from multiple sub-responses. 
+The apps share the screen when a user request gets a response composed from multiple sub-responses.
 
 ![Sharing screen gif](/assets/105_5.gif)
 
@@ -41,14 +41,15 @@ Attach the result of this request to the view-model of your app. This becomes th
 <div class="code-name"><a href="https://github.com/StarcounterSamples/Products/blob/master/src/Products/Api/MainHandlers.cs">MainHandlers.cs</a></div>
 
 ```cs
-Handle.GET("/products/product/{?}", (string objectId) => {
+Handle.GET("/products/product/{?}", (string objectId) =>
+{
     StandalonePage master = (StandalonePage)Self.GET("/Products/standalone");
 
-    master.CurrentPage = Db.Scope<Json>(() => {
+    master.CurrentPage = Db.Scope<Json>(() =>
+    {
       var partialUrl = "/Products/partials/product/" + objectId;
       return Self.GET<EditProductPage>(partialUrl);
     });
-
     return master;
 });
 ```
@@ -66,7 +67,7 @@ This becomes the **HTML insertion point** for the response of the internal reque
 ```html
 <template>
     <template is="dom-bind">
-        <starcounter-include 
+        <starcounter-include
           partial="{{model.CurrentPage}}"></starcounter-include>
     </template>
 </template>
@@ -83,10 +84,13 @@ This is the request handler in Products app:
 <div class="code-name"><a href="https://github.com/StarcounterSamples/Products/blob/master/src/Products/Api/MainHandlers.cs">MainHandlers.cs</a></div>
 
 ```cs
-Handle.GET("/products/partials/product/{?}", (string objectId) => {
-    return Db.Scope(() => {
-        var page = new EditProductPage() { 
-            Html = "/Products/viewmodels/EditProductPage.html" 
+Handle.GET("/products/partials/product/{?}", (string objectId) =>
+{
+    return Db.Scope(() =>
+    {
+        var page = new EditProductPage()
+        {
+            Html = "/Products/viewmodels/EditProductPage.html"
         };
         UInt64 _objectId = DbHelper.Base64DecodeObjectID(objectId);
         var product = DbHelper.FromID(_objectId) as Product;
@@ -102,10 +106,13 @@ And this is the internal request handler in Images app:
 <div class="code-name"><a href="https://github.com/StarcounterSamples/Images/blob/master/src/Images/Api/MainHandlers.cs">MainHandlers.cs</a></div>
 
 ```cs
-Handle.GET("/images/partials/concept/{?}", (string objectId) => {
-    return Db.Scope<Json>(() => {
+Handle.GET("/images/partials/concept/{?}", (string objectId) =>
+{
+    return Db.Scope<Json>(() =>
+    {
         Something something = Db.SQL<Something>("SELECT o FROM Simplified.Ring1.Something o WHERE ObjectID = ?", objectId).First;
-        ConceptPage a = new ConceptPage() {
+        ConceptPage a = new ConceptPage()
+        {
             Html = "/Images/viewmodels/ConceptPage.html",
             Data = something
         };
@@ -113,7 +120,8 @@ Handle.GET("/images/partials/concept/{?}", (string objectId) => {
     });
 });
 
-Handle.GET("/images/partials/concept-vendible/{?}", (string objectId) => {
+Handle.GET("/images/partials/concept-vendible/{?}", (string objectId) =>
+{
     return Self.GET("/images/partials/concept/" + objectId);
 });
 ```
@@ -128,7 +136,7 @@ Thus, Products app maps the internal request handler the following way:
 <div class="code-name"><a href="https://github.com/StarcounterSamples/Products/blob/master/src/Products/Api/OntologyHooks.cs">OntologyHooks.cs</a></div>
 
 ```cs
-UriMapping.OntologyMap("/Products/partials/product/{?}", 
+UriMapping.OntologyMap("/Products/partials/product/{?}",
     typeof(Product).FullName, null, null);
 ```
 
@@ -137,7 +145,7 @@ Similarly, Images app maps its internal request handler:
 <div class="code-name"><a href="https://github.com/StarcounterSamples/Images/blob/master/src/Images/Api/MainHandlers.cs">MainHandlers.cs</a></div>
 
 ```cs
-UriMapping.OntologyMap("/images/partials/concept-vendible/{?}", 
+UriMapping.OntologyMap("/images/partials/concept-vendible/{?}",
     typeof(Product).FullName, null, null);
 ```
 

@@ -3,8 +3,10 @@
 Sometimes it is required to get a partial without declaring a handler. This is when anonymous handlers became handy.
 
 ```cs
-model.Partial = Self.GET("/custom-url", () => {
-    return new Page() {
+model.Partial = Self.GET("/custom-url", () =>
+{
+    return new Page()
+    {
         Html = "/custom-page.html"
     };
 });
@@ -50,7 +52,8 @@ Handle.GET("/my-app", () => new IndexPage());
 ```
 
 ```cs
-Handle.GET("/my-app", () => new MasterPage() {
+Handle.GET("/my-app", () => new MasterPage()
+{
     // The IndexPage is not available for layout blending.
     // It is retrieved without a request.
     CurrentPage = new IndexPage()
@@ -60,7 +63,8 @@ Handle.GET("/my-app", () => new MasterPage() {
 ```cs
 // The MasterPage and the IndexPage are both retrieved
 // with a request and available for layout blending.
-Handle.GET("/my-app", () => MasterPage() {
+Handle.GET("/my-app", () => MasterPage()
+{
     CurrentPage = Self.GET("/my-app/partials/index")
 });
 
@@ -72,7 +76,8 @@ An anonymous handler can be used instead of the custom partial handler definitio
 ```cs
 // The IndexPage is still available for layout blending,
 // It is retrieved with an anonymous request.
-Handle.GET("/my-app", () => MasterPage() {
+Handle.GET("/my-app", () => MasterPage()
+{
     CurrentPage = Self.GET("/my-app/partials", () => new IndexPage())
 });
 ```

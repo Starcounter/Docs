@@ -8,20 +8,20 @@ One reason why you would use `Http` and `Node` instead of using another HTTP cli
 
 ## How to use Http
 
-A convenient way to use synchronous or asynchronous HTTP calls is to use the ```Http``` class and its functions ```GET```, ```POST```, ```PUT```, ```PATCH``` and ```DELETE```. To use these calls synchronously makes using HTTP requests very similar to using regular function calls. 
+A convenient way to use synchronous or asynchronous HTTP calls is to use the ```Http``` class and its functions ```GET```, ```POST```, ```PUT```, ```PATCH``` and ```DELETE```. To use these calls synchronously makes using HTTP requests very similar to using regular function calls.
 
 ## How to use Node
 
-Instead of using static function calls, you can instantiate a representation of an external HTTP server. This is recommended when performance is critical as this method allows Node to avoid the overhead of parsing the host from the URL and ensures optimal connection reuse. Using the static ```Http``` class still reuses connections and caches Node instances internally, but it comes at a slight overhead and you run into the risk of the Node instances being disposed and recreated more times than necessary. 
+Instead of using static function calls, you can instantiate a representation of an external HTTP server. This is recommended when performance is critical as this method allows Node to avoid the overhead of parsing the host from the URL and ensures optimal connection reuse. Using the static ```Http``` class still reuses connections and caches Node instances internally, but it comes at a slight overhead and you run into the risk of the Node instances being disposed and recreated more times than necessary.
 
 ### Constructing a Node instance
 The Node constructor accepts the following parameters: the DNS host name of the server we are trying to communicate to, an optional port number, aggregation parameters and an optional receive timeout:
 
 ```cs
-Node(String hostName, 
-     UInt16 portNumber = 0, 
-     Int32 defaultReceiveTimeoutMs = 0, 
-     Boolean useAggregation = false, 
+Node(String hostName,
+     UInt16 portNumber = 0,
+     Int32 defaultReceiveTimeoutMs = 0,
+     Boolean useAggregation = false,
      UInt16 aggrPortNumber = 0)
 ```
 
@@ -33,7 +33,7 @@ Node localNode2 = new Node("127.0.0.1", 8080);
 Node localNode3 = new Node("buildserver", 8080);
 ```
 
-## Prerequisites 
+## Prerequisites
 To use Node you need to reference the assembly ```Starcounter.Rest``` (to use Request and Response add also a reference to _Starcounter.Internal_)
 
 **NOTE**: To use Node outside of Starcounter in 32-bit software you should reference the same libraries in the ```32BitComponents``` subfolder in pointed to by the environment variable ```StarcounterBin```, since the 32-bit libraries are not placed in the Windows GAC.
@@ -48,10 +48,10 @@ Node supports most popular HTTP methods: GET, POST, PUT, DELETE. User can specif
 For example, one of the Node REST **asynchronous** GET call has the following signature:
 
 ```cs
-void GET(String uri, 
-         String customHeaders, 
-         Object userObject, 
-         Action<Response, Object> userDelegate, 
+void GET(String uri,
+         String customHeaders,
+         Object userObject,
+         Action<Response, Object> userDelegate,
          Int32 receiveTimeoutMs = 0)
 ```
 
@@ -78,11 +78,11 @@ Returned `Response` should never be null.
 Other standard HTTP method calls (PUT, POST, DELETE) have an optional body parameter, for example:
 
 ```cs
-void PUT(String uri, 
-         String body, 
-         String customHeaders, 
-         Object userObject, 
-         Action<Response, Object> userDelegate, 
+void PUT(String uri,
+         String body,
+         String customHeaders,
+         Object userObject,
+         Action<Response, Object> userDelegate,
          Int32 receiveTimeoutMs = 0)
 ```
 
@@ -91,12 +91,12 @@ which also has a corresponding version of function that returns HTTP response in
 In order to user arbitrary user HTTP method you can call the following Node call:
 
 ```cs
-void CustomRESTRequest(String method, 
-       String uri, 
-       String body, 
-       String customHeaders, 
-       Object userObject, 
-       Action<Response, Object> userDelegate, 
+void CustomRESTRequest(String method,
+       String uri,
+       String body,
+       String customHeaders,
+       Object userObject,
+       Action<Response, Object> userDelegate,
        Int32 receiveTimeoutMs = 0)
 ```
 
@@ -111,10 +111,10 @@ You can obtain some information about Node instance using the following methods:
 User delegate described above accepts two parameters: received `Response` object and object supplied by user. When delegate exits `Node` checks if response should be returned to the original `Request`. User indicates that by setting the `Response` object property on original `Request` object, like in the following example:
 
 ```cs
-Handle.GET("/postponed", (Request req) => {
-    Http.POST("http://www.mywebsite.com/echotest", "Here we go!", 
-        null, null, (Response resp, Object userObject) => {
- 
+Handle.GET("/postponed", (Request req) =>
+{
+    Http.POST("http://www.mywebsite.com/echotest", "Here we go!", null, null, (Response resp, Object userObject) =>
+    {
         // Modifying the response object by injecting some data.
         resp.Headers["MySuperHeader"] = "Here is my header value!";
         resp.Headers["Set-Cookie"] = resp.Headers["Set-Cookie"] + ";MySuperCookie=CookieValue";
@@ -133,16 +133,17 @@ The code below demonstrates the redirection of root HTTP URI "/" to startup HTML
 
 ```cs
 // Redirecting root to index.html.
-GET("/", (Request req) => {
+GET("/", (Request req) =>
+{
     // Doing another request to obtain static file response.
     Response resp = Http.GET("http://www.mywebsite.com/index.html");
 
     // Checking that response status is correct.
-    if (!resp.IsSuccessStatusCode) {
-        throw new Exception(@"REST call returned 
+    if (!resp.IsSuccessStatusCode)
+    {
+        throw new Exception(@"REST call returned
             status code: " + resp.StatusCode);
     }
-
     // Returns this response to original request.
     return resp;
 });
@@ -150,7 +151,7 @@ GET("/", (Request req) => {
 
 ## Setting receive timeout
 
-User can specify receive timeout both in synchronous and asynchronous `Node` and `Http` modes. Timeout is specified in milliseconds as last parameter for each method (GET, POST, PUT, etc), for example: 
+User can specify receive timeout both in synchronous and asynchronous `Node` and `Http` modes. Timeout is specified in milliseconds as last parameter for each method (GET, POST, PUT, etc), for example:
 
 ```cs
 Response GET(String uri, Int32 receiveTimeoutMs = 0)

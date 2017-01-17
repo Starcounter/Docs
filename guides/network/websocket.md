@@ -9,23 +9,25 @@ Starcounter WebSocket implementation is based on <a href="http://tools.ietf.org/
 WebSocket connection upgrade can be made inside an ordinary HTTP handler by calling `SendUpgrade` method on received HTTP `Request` object, for example:
 
 ```cs
-Handle.GET(8080, "/wstest", (Request req) => {
-
+Handle.GET(8080, "/wstest", (Request req) =>
+{
     // Checking if its a WebSocket upgrade request.
-    if (req.WebSocketUpgrade) {
-
+    if (req.WebSocketUpgrade)
+    {
         // Setting some headers and cookies on response for WebSockets upgrade.
-        List<String> myCookies = new List<String> {
+        List<String> myCookies = new List<String>
+        {
             "MyCookie1=123", "MyCookie2=456"
         };
 
-        var myHeaders = new Dictionary<String, String>() {
+        var myHeaders = new Dictionary<String, String>()
+        {
             { "MyHeader", "MyHeaderData" }
         };
 
         // Performing upgrade and getting WebSocket object
         // (SendUpgrade call implicitly sends an HTTP response confirming
-        // WebSocket upgrade, so another response can't be returned 
+        // WebSocket upgrade, so another response can't be returned
         // in this handler).
         WebSocket ws = req.SendUpgrade("echotestws", myCookies, myHeaders);
 
@@ -42,10 +44,10 @@ Handle.GET(8080, "/wstest", (Request req) => {
 
     // We only support WebSockets upgrades in this HTTP handler
     // and not other ordinary HTTP requests.
-    return new Response() {
+    return new Response()
+    {
         StatusCode = 500,
-        StatusDescription = "WebSocket upgrade on " + 
-            req.Uri + " was not approved."
+        StatusDescription = "WebSocket upgrade on " + req.Uri + " was not approved."
     };
 });
 ```
@@ -88,13 +90,15 @@ Once the WebSocket object is returned, user can fetch the ID representing this W
 To register a specific WebSocket group to handle WebSocket data receiving events, the `Handle.WebSocket` method should be used, for example:
 
 ```cs
-Handle.WebSocket("echotestws", (String s, WebSocket ws) => {
+Handle.WebSocket("echotestws", (String s, WebSocket ws) =>
+{
     Console.WriteLine("Received on WebSocket: " + s);
     WebSocket.Current.Send("Here is the server push!");
     ws.Send("Here is the server push!"); // Does the same as previous line.   
 });
 
-Handle.WebSocket("echotestws", (Byte[] s, WebSocket ws) => {
+Handle.WebSocket("echotestws", (Byte[] s, WebSocket ws) =>
+{
     ws.Send(s);
 });
 ```
@@ -106,7 +110,8 @@ Note that if arriving frame type is `Text` and the only registered handler is fo
 To handle WebSocket disconnect event, the `Handle.WebSocketDisconnect` method should be used, for example:
 
 ```cs
-Handle.WebSocketDisconnect("echotestws", (WebSocket ws) => {
+Handle.WebSocketDisconnect("echotestws", (WebSocket ws) =>
+{
     // Handle resources associated with WebSocket ws.
 });
 ```
@@ -119,15 +124,15 @@ The returned `WebSocket` object contains the following notable methods:
 
 Sending string data on WebSocket:
 ```cs
-void Send(String data, 
-  Boolean isText = true, 
+void Send(String data,
+  Boolean isText = true,
   Response.ConnectionFlags connFlags = Response.ConnectionFlags.NoSpecialFlags)
 ```
 
 Sending binary data on WebSocket:
 ```cs
-void Send(Byte[] data, 
-  Boolean isText = false, 
+void Send(Byte[] data,
+  Boolean isText = false,
   Response.ConnectionFlags connFlags = Response.ConnectionFlags.NoSpecialFlags)
 ```
 
@@ -139,7 +144,7 @@ Using `isText` parameter you can specify if your WebSocket data should be sent a
 
 Disconnecting an active WebSocket (with an error message and/or close code according to RFC6455):
 ```cs
-void Disconnect(String message = null, 
+void Disconnect(String message = null,
   WebSocketCloseCodes code = WebSocketCloseCodes.WS_CLOSE_NORMAL)
 ```
 
@@ -158,8 +163,8 @@ Sometimes its needed to perform the some "action" on a group of WebSocket connec
 ```cs
 
 [Database]
-public class WebSocketId {
-
+public class WebSocketId
+{
     // WebSocket identifier.
     public UInt64 Id;
 
@@ -168,23 +173,22 @@ public class WebSocketId {
 }
 
 ...
-WebSocketSessionsTimer = new Timer((state) => {
-
+WebSocketSessionsTimer = new Timer((state) =>
+{
     // Getting sessions for current scheduler.
-    Scheduling.ScheduleTask(() => {
-
-        Db.Transact(() => {
-
+    Scheduling.ScheduleTask(() =>
+    {
+        Db.Transact(() =>
+        {
             // Going through all active WebSockets.
             var result = Db.SQL("SELECT w FROM WebSocketId w");
-            foreach (WebSocketId wsDb in result) {
-
+            foreach (WebSocketId wsDb in result)
+            {
                 WebSocket ws = new WebSocket(wsDb.Id);
-
-                // Checking if ready to disconnect 
+                // Checking if ready to disconnect
                 // after certain amount of sends.
-                if (wsDb.NumBroadcasted == 100) {
-
+                if (wsDb.NumBroadcasted == 100)
+                {
                     // Disconnecting this WebSocket.
                     ws.Disconnect();
                     wsDb.Delete();
@@ -192,18 +196,13 @@ WebSocketSessionsTimer = new Timer((state) => {
                     // Proceeding to next active WebSocket.
                     continue;
                 }
-
                 String sendMsg = "Broadcasting id: " + wsDb.Id;
-
                 // Sending message to this WebSocket.
                 ws.Send(sendMsg);
-
                 wsDb.NumBroadcasted++;
             }
         });
-
     });
-
 }, null, 1000, 1000);
 ```
 

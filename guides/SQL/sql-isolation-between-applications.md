@@ -13,10 +13,11 @@ The principle for SQL isolation is that database classes of one application shou
 For example, first application defines database class `App1Class` in its namespace:
 ```cs
 // We are in first application.
-namespace App1 {
-
+namespace App1
+{
     [Database]
-    public class App1Class {
+    public class App1Class
+    {
         public string App1ClassField;
     }
 }
@@ -25,10 +26,11 @@ the same does the second application but in own namespace:
 
 ```cs
 // We are in second application.
-namespace App2 {
-
+namespace App2
+{
     [Database]
-    public class App2Class {
+    public class App2Class
+    {
         public string App2ClassField;
     }
 }
@@ -47,7 +49,7 @@ However, the first application will not be able to retrieve classes from second 
 ```cs
 // We are in first application.
 // The following SQL query will throw an exception:
-// "Failed to process query: SELECT c FROM App2Class 
+// "Failed to process query: SELECT c FROM App2Class
 // c: Unknown class App2Class."
 var x = Db.SQL("SELECT c FROM App2Class c").First;
 ```
@@ -60,10 +62,11 @@ If first and second application are referencing the same library, for example "S
 
 ```cs
 // We are inside shared library.
-namespace SharedDll {
-
+namespace SharedDll
+{
     [Database]
-    public class SharedDllClass {
+    public class SharedDllClass
+    {
         public string SharedDllClassField;
     }
 }
@@ -86,4 +89,3 @@ Currently Starcounter Administrator only supports SQL queries with fully namespa
 "SELECT c FROM App2.App2Class c"
 "SELECT c FROM SharedDll.SharedDllClass c"
 ```
-

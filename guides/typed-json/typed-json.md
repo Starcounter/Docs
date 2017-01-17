@@ -35,9 +35,11 @@ To specify that a member in Json-by-example should be of type `Double` is done i
 
 *Foo.json.cs*
 ```csharp
-partial class Foo : Json {
-    static void Foo(){
-    	// Value should be of type double, not decimal.
+partial class Foo : Json
+{
+    static void Foo()
+    {
+    	  // Value should be of type double, not decimal.
         DefaultTemplate.Value.InstanceType = typeof(double);
     }
 }

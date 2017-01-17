@@ -21,15 +21,16 @@ Place your HTML composition in a file like this one of Hello World:
 
 <div class="code-name"><a href="https://github.com/StarcounterSamples/HelloWorld/blob/tutorial-20161018/src/HelloWorldMapper/ExpenseJsonComposition.html">ExpenseJsonComposition.html</a></div>
 
-<pre><code class="html">&lt;content select="[slot='HelloWorld/description']"&gt;&lt;/content&gt;
-&lt;content select="[slot='HelloWorld/amount']"&gt;&lt;/content&gt;
-&lt;div style="display: none"&gt;
-&lt;content select="[slot='Images/label']"&gt;&lt;/content&gt;
-&lt;/div&gt;
-&lt;div style="width: 200px; height: 200px"&gt;
-&lt;content select="[slot='Images/control']"&gt;&lt;/content&gt;
-&lt;/div&gt;
-</code></pre>
+```html
+<content select="[slot='HelloWorld/description']"></content>
+<content select="[slot='HelloWorld/amount']"></content>
+<div style="display: none">
+  <content select="[slot='Images/label']"></content>
+</div>
+<div style="width: 200px; height: 200px">
+  <content select="[slot='Images/control']"></content>
+</div>
+```
 
 This code merges the different elements from <code>Images</code> and <code>HelloWorld</code>. It also resizes the images and hides the image labels to make it align better with the rest of the page. This can obviously be edited by you to create the exact look that you want.
 

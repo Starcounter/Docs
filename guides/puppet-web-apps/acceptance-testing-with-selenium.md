@@ -23,7 +23,7 @@ You can learn more about Selenium at their [website (docs.seleniumhq.org)](http:
 
 ## What is NUnit
 
-NUnit is a testing framework that has great integration with Visual Studio as well as continuous integration systems (TeamCity, etc). We will use NUnit to run our Selenium tests. 
+NUnit is a testing framework that has great integration with Visual Studio as well as continuous integration systems (TeamCity, etc). We will use NUnit to run our Selenium tests.
 
 NUnit provides a [test runner](http://nunit.org/index.php?p=runningTests&r=2.6.4) (command line and built into Visual Studio), [attributes](http://nunit.org/index.php?p=attributes&r=2.6.4) to define the classes and functions that carry the testing code, [assertions](http://nunit.org/index.php?p=assertions&r=2.6.4) that test the actual values.
 
@@ -35,9 +35,9 @@ You can learn more about NUnit at their [website (nunit.org)](http://nunit.org/i
 
 ## Create a test project
 
-It is recommended to keep the testing project in the same solution as the tested project. Note that they are two different projects. 
+It is recommended to keep the testing project in the same solution as the tested project. Note that they are two different projects.
 
-In the following example, we will add acceptance tests to Launcher. Let's create a new test project in Visual Studio, by clicking <kbd>Add New Project</kbd> → <kbd>Visual C#</kbd> → <kbd>Test</kbd> → <kbd>Unit Test Project</kbd>. 
+In the following example, we will add acceptance tests to Launcher. Let's create a new test project in Visual Studio, by clicking <kbd>Add New Project</kbd> → <kbd>Visual C#</kbd> → <kbd>Test</kbd> → <kbd>Unit Test Project</kbd>.
 
 Call the new project "Launcher.AcceptanceTest". We will use `Launcher\test\` as the project location.
 
@@ -45,9 +45,9 @@ Call the new project "Launcher.AcceptanceTest". We will use `Launcher\test\` as 
 
 ## Install required packages
 
-Open the newly created test project. Now, we need to install a bunch of libraries mentioned above. 
+Open the newly created test project. Now, we need to install a bunch of libraries mentioned above.
 
-Open the package manager (<kbd>Tools</kbd> → <kbd>NuGet Packet Manager</kbd> → <kbd>Packet Manager Console</kbd>). 
+Open the package manager (<kbd>Tools</kbd> → <kbd>NuGet Packet Manager</kbd> → <kbd>Packet Manager Console</kbd>).
 
 **Important:** In the console, choose your test project from the "Default project" dropdown.
 
@@ -75,7 +75,7 @@ To record the first test, go to Firefox, and click on the Selenium IDE icon.
 
 ![record first test location](/assets/2016-04-01-13_24_19-Mozilla-Firefox.png)
 
-When the Selenium IDE opens, it automatically starts recording. 
+When the Selenium IDE opens, it automatically starts recording.
 
 ![selenium IDE](/assets/2016-04-01-13_25_24-Mozilla-Firefox.png)
 
@@ -122,7 +122,7 @@ To make this happen, you will need to install some additional software.
   - Google Chrome Driver (`chromedriver.exe`)
 - Put the `jar` file as well as 3 `exe` files directly in `C:\selenium`
 
-Open your <code>Properties</code> in the <code>Tests</code> project. Go to <code>Reference Paths</code>, enter C:\selenium and click Add Folder. 
+Open your <code>Properties</code> in the <code>Tests</code> project. Go to <code>Reference Paths</code>, enter C:\selenium and click Add Folder.
 
 ### Edit the tests to run in multiple projects
 
@@ -134,14 +134,17 @@ using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
 using System;
 
-class WebDriverFactory {
+class WebDriverFactory
+{
     private static Uri remoteWebDriverUri = new Uri("http://127.0.0.1:4444/wd/hub");
 
-    public static IWebDriver Create(string browser) {
+    public static IWebDriver Create(string browser)
+    {
         DesiredCapabilities capabilities;
         IWebDriver driver;
 
-        switch (browser) {
+        switch (browser)
+        {
             case "chrome":
                 capabilities = DesiredCapabilities.Chrome();
                 driver = new RemoteWebDriver(remoteWebDriverUri, capabilities);
@@ -161,7 +164,6 @@ class WebDriverFactory {
                 driver = new RemoteWebDriver(remoteWebDriverUri, capabilities);
                 break;
         }
-
         return driver;
     }
 }
@@ -173,7 +175,7 @@ In the file you created in the previous step (`PageLoads.cs`), locate the follow
 
 ```cs
 driver = new FirefoxDriver();
-``` 
+```
 
 Change it to:
 
@@ -192,7 +194,7 @@ What this means is that you need to change every instance of :
 To be:
 
 ```cs
-[TestFixture("firefox")]	
+[TestFixture("firefox")]
 [TestFixture("chrome")]
 [TestFixture("edge")]
 ```
@@ -203,7 +205,8 @@ Finally, add this constructor somewhere on top of the class. It stores the fixtu
 ```cs
 private string browser;
 
-public PageLoads(string browser) {
+public PageLoads(string browser)
+{
     this.browser = browser;
 }
 ```
@@ -222,7 +225,7 @@ Now, press "Run All" and relax. This will take a while as the system runs your t
 
 ## Wait for asynchronous content
 
-There is one common pitfall when writing Selenium tests. The test is executed with disregard of the asynchronously loaded content. This means that your tests need to explicitly wait for UI elements to appear before running any actions or assertions on them. 
+There is one common pitfall when writing Selenium tests. The test is executed with disregard of the asynchronously loaded content. This means that your tests need to explicitly wait for UI elements to appear before running any actions or assertions on them.
 
 It is a good practice to always wait:
 
@@ -230,25 +233,27 @@ It is a good practice to always wait:
 - wait for an input field to be present, before you type in that input field
 - wait for a button to be present, before you click on that button
 
-The following code sample from KitchenSink's [TextPageTest.cs](https://github.com/StarcounterSamples/KitchenSink/blob/master/test/KitchenSink.Tests/Tests/TextPageTest.cs) shows how to: 
+The following code sample from KitchenSink's [TextPageTest.cs](https://github.com/StarcounterSamples/KitchenSink/blob/master/test/KitchenSink.Tests/Tests/TextPageTest.cs) shows how to:
 
 1. wait for presence of an input field before typing in it
 2. wait for the asynchronous response from the server with derivative result
 
 ```cs
 [Test]
-public void TextPropagationOnUnfocus() {
+public void TextPropagationOnUnfocus()
+{
     driver.Navigate().GoToUrl(baseURL + "/Text");
     WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
     IWebElement element = wait.Until(_driver => _driver.FindElement(By.XPath("(//input)[1]")));
-    
+
     var label = driver.FindElement(By.XPath("(//label[@class='control-label'])[1]"));
     var originalText = label.Text;
     driver.FindElement(By.XPath("(//input)[1]")).Clear();
     driver.FindElement(By.XPath("(//input)[1]")).SendKeys("Marcin");
     driver.FindElement(By.XPath("//body")).Click();
-    
-    wait.Until((x) => {
+
+    wait.Until((x) =>
+    {
         return !label.Text.Equals(originalText);
     });
     Assert.AreEqual("Hi, Marcin!", driver.FindElement(By.XPath("(//label[@class='control-label'])[1]")).Text);

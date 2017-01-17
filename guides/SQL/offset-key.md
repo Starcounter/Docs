@@ -14,7 +14,7 @@ The initial query must be identical with the subsequent queries apart from the `
 
 The `OFFSETKEY` clause is placed at the end of the `SELECT` statement and can be together with [FETCH](/guides/sql/fetch/) clause, e.g.:
 
-```SQL
+```sql
 SELECT u FROM User u FETCH ? OFFSETKEY ?
 ```
 
@@ -42,15 +42,18 @@ The offset key is obtained at any valid state of enumerator, i.e., after `MoveNe
 
 ```cs
 byte[] key = null;
-using (IRowEnumerator<User> rows = Db.SQL<User>("SELECT u FROM User u").GetEnumerator()) {
-
+using (IRowEnumerator<User> rows = Db.SQL<User>("SELECT u FROM User u").GetEnumerator())
+{
     int i = 0;
-    while (rows.MoveNext()) {
+    while (rows.MoveNext())
+    {
         User u = rows.Current;
         ...
         i++;
         if (i == 3)
-            key = rows.GetOffsetKey();
+        {
+          key = rows.GetOffsetKey();  
+        }
     }
 }
 ```
@@ -58,9 +61,10 @@ The offset key can be obtained after query with FETCH clause was enumerated. The
 
 ```cs
 byte[] key = null;
-using (IRowEnumerator<User> rows = Db.SQL<User>("SELECT u FROM User u").GetEnumerator()) {
-
-    while (rows.MoveNext()) {
+using (IRowEnumerator<User> rows = Db.SQL<User>("SELECT u FROM User u").GetEnumerator())
+{
+    while (rows.MoveNext())
+    {
         User u = rows.Current;
         ...
     }
@@ -132,8 +136,10 @@ The code above will return:
 
 ```cs
 byte[] k  = null;
-using (IRowEnumerator<Account> e = Db.SQL<Account>("SELECT a FROM Account a WHERE a.AccountId < ? FETCH ?", 100, 10).GetEnumerator()) {
-   while (e.MoveNext() {
+using (IRowEnumerator<Account> e = Db.SQL<Account>("SELECT a FROM Account a WHERE a.AccountId < ? FETCH ?", 100, 10).GetEnumerator())
+{
+   while (e.MoveNext()
+   {
        Account a = e.Current;
        Console.Write(a.AccountId + " ");
    }
@@ -143,8 +149,10 @@ using (IRowEnumerator<Account> e = Db.SQL<Account>("SELECT a FROM Account a WHER
 if (k == null) return;
 Console.WriteLine();
 
-using (IRowEnumerator<Account> e = Db.SQL<Account>("SELECT a FROM Account a WHERE a.AccountId < ? FETCH ? OFFSETKEY ?", 100, 5, k).GetEnumerator()) {
-   while (e.MoveNext() {
+using (IRowEnumerator<Account> e = Db.SQL<Account>("SELECT a FROM Account a WHERE a.AccountId < ? FETCH ? OFFSETKEY ?", 100, 5, k).GetEnumerator())
+{
+   while (e.MoveNext()
+   {
        Account a = e.Current;
        Console.Write(a.AccountId + " ");
    }

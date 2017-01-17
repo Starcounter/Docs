@@ -8,17 +8,18 @@ In the code example below there is a one-to-many relation between the entities/c
 
 ```cs
 [Database]
-public class Department {
+public class Department
+{
   ...
-  public IEnumerable Employees {
-    get {
-      return Db.SQL<Employee>("select e from Employee e where e.Department = ?", this);
-    }
+  public IEnumerable Employees
+  {
+    get { return Db.SQL<Employee>("select e from Employee e where e.Department = ?", this); }
   }
 }
 
 [Database]
-public class Employee {
+public class Employee
+{
   ...
   public Department Department;
 }

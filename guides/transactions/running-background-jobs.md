@@ -17,7 +17,7 @@ Each Starcounter scheduler has a queue of tasks that are supposed to be run on t
 ```csharp
 void ScheduleTask(
 	Action action,
-	Boolean waitForCompletion = false, 
+	Boolean waitForCompletion = false,
 	Byte schedulerId = StarcounterEnvironment.InvalidSchedulerId)
 ```
 where:
@@ -31,9 +31,9 @@ To determine if current thread is on scheduler call `StarcounterEnvironment.IsOn
 
 ## Using a timer
 
-Running a short-lived job using some timer. In this example the .Net class `System.Timers.Timer` is used. 
+Running a short-lived job using some timer. In this example the .Net class `System.Timers.Timer` is used.
 
-The following sample will execute a job every minute and do needed database operations and then exit, until the timer trigger again. 
+The following sample will execute a job every minute and do needed database operations and then exit, until the timer trigger again.
 
 The same scheduler is used in these samples (scheduler 0) for simplicity but a better solution might be to schedule jobs on all available schedulers.
 
@@ -42,60 +42,73 @@ using System;
 using System.Timers;
 using Starcounter;
 
-namespace TimerSample {
-    class Program {
-        private static Timer timer; // keep it to avoid the timer being GC:ed
+namespace TimerSample
+{
+	class Program
+	{
+		private static Timer timer; // keep it to avoid the timer being GC:ed
 
-        static void Main() {
-            timer = new Timer(60 * 1000); // 1 minute interval
-            timer.AutoReset = true;
-            timer.Elapsed += OnTimer;
-            timer.Start();
-        }
+		static void Main()
+		{
+			timer = new Timer(60 * 1000); // 1 minute interval
+			timer.AutoReset = true;
+			timer.Elapsed += OnTimer;
+			timer.Start();
+		}
 
-        static void OnTimer(object sender, ElapsedEventArgs e) {
-            // Schedule a job on scheduler 0 without waiting for its completion.
-            Scheduling.ScheduleTask(() => {
-                Db.Transact(() => {
-                    // Access database.
-                }, false, 0);
-            });
-        }
-    }
+		static void OnTimer(object sender, ElapsedEventArgs e)
+		{
+			// Schedule a job on scheduler 0 without waiting for its completion.
+			Scheduling.ScheduleTask(() =>
+			{
+				Db.Transact(() =>
+				{
+						// Access database.
+				}, false, 0);
+			});
+		}
+	}
 }
 ```
 
 ## Running a separate (non-database) thread
 
-Running a separate (non-database) thread that regularly schedules jobs that access database instead of using a timer will work as solution for the first problem, deleting and purging objects, but have another issue with shutting down the codehost. This is due to lack of event that usercode can listen to when codehost is terminating. 
+Running a separate (non-database) thread that regularly schedules jobs that access database instead of using a timer will work as solution for the first problem, deleting and purging objects, but have another issue with shutting down the codehost. This is due to lack of event that usercode can listen to when codehost is terminating.
 
-```csharp
+```cs
 using System.Threading;
 using Starcounter;
 
-namespace StarcounterApplication4 {
-    class Program {
-        private static AutoResetEvent arEvent;
+namespace StarcounterApplication4
+{
+	class Program
+	{
+		private static AutoResetEvent arEvent;
 
-        static void Main() {
-            arEvent = new AutoResetEvent(false);
-            ThreadPool.QueueUserWorkItem(o => { RunForever(); });
-        }
+		static void Main()
+		{
+			arEvent = new AutoResetEvent(false);
+			ThreadPool.QueueUserWorkItem(o => { RunForever(); });
+		}
 
-        static void RunForever() {
-            while (true) {
-                Scheduling.ScheduleTask(() => { // Schedule a job on scheduler 0
-                    Db.Transact(() => {
-                        // Access database.
-                    });
-                    arEvent.Set(); // Signal job complete.
-                }, 0);
+		static void RunForever()
+		{
+			while (true)
+			{
+				Scheduling.ScheduleTask(() => // Schedule a job on scheduler 0
+				{
+					Db.Transact(() =>
+					{
+							// Access database.
+					});
+					arEvent.Set(); // Signal job complete.
+				}, false);
 
-                System.Threading.Thread.Sleep(1000);
-                arEvent.WaitOne(); // Wait until current job is finished
-            }
-        }
-    }
+				System.Threading.Thread.Sleep(1000);
+				arEvent.WaitOne(); // Wait until current job is finished
+			}
+		}
+	}
 }
 ```
 

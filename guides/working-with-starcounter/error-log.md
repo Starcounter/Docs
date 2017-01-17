@@ -63,8 +63,10 @@ Not only Starcounter components can write to the log. Applications running in St
 using Starcounter;
 using Starcounter.Logging;
 
-class Program {
-    static void Main() {
+class Program
+{
+    static void Main()
+    {
         new LogSource("PerSamuelsson").LogWarning("I dont do any good!");
     }
 }
