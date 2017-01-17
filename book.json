@@ -1,5 +1,5 @@
 {
-	"plugins": ["-hightlight", "prism", "versions", "collapsible-menu"],
+	"plugins": ["-hightlight", "prism", "collapsible-menu"],
 	"pluginsConfig": {
 		"versions": {
 			"type": "branches"

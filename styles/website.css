@@ -362,6 +362,11 @@ script {
   border-right: none;
 }
 
+.version-select {
+  width: 90%;
+  margin: 10px 15px;
+}
+
 .divider {
   display: none !important;
 }
