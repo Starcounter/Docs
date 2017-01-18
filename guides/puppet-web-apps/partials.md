@@ -47,6 +47,7 @@ So the requirements and behavior, comes from [HTML Imports](http://www.w3.org/TR
 - Every node from `<template>` will be stamped with model property attached. Then custom element, template binding framework, or just a JS script may use this data to populate the view.
 
 ##### Example:
+{% raw %}
 ```html
 <!--
     Load you dependencies: <script>s HTML Imports, CSS stylesheets
@@ -73,6 +74,8 @@ So the requirements and behavior, comes from [HTML Imports](http://www.w3.org/TR
     </template>
 </template>
 ```
+{% endraw %}
+
 ## Partial Usage
 Once you create handler for your partial page:
 
@@ -86,9 +89,12 @@ mainPage.SubPage = Self.GET("/your/partial/url");
 ```
 and _HTML insertion point_ in your HTML markup
 
+{% raw %}
 ```html
 <starcounter-include partial="{{SubPage}}"></starcounter-include>
 ```
+{% endraw %}
+
 Thanks to that, HTML markup will get stamped from external file, and applicable view model will be attached.
 
 ## Advanced Partials usage
@@ -130,6 +136,7 @@ By using _partials_ the way we suggest, you support unlimited UI integration bet
 
 **Merged Partial HTML**. Individual Partial HTMLs are wrapped into `<imported-template-scope>`, so `<starcounter-include>`/`imported-template` could bind correct view-model to each part, then HTML is just concatenated together.
 
+{% raw %}
 ```html
 <!-- a hint added automatically by Launcher, so imported-template could bind app's scope to the template -->
 <imported-template-scope scope="AppA">
@@ -175,3 +182,4 @@ On how `<starcounter-include>` is extended, you can read [here](https://github.c
 <i class="fa fa-lightbulb-o button-icon-left"></i> To use/stamp HTML partial with Starcounter UI mixing, but without layout editing features, app dev could use just `imported-template`, for example `<template is="imported-template" model="{{SubPage}}" content$="{{SubPage.Html}}">`
 
 <i class="fa fa-lightbulb-o button-icon-left"></i> To use/stamp HTML partial without any Starcounter features, app dev could use just `imported-template` custom element with path to given html file, for example `<template is="imported-template" content="/MyApp/file.html"></template>`
+{% endraw %}
