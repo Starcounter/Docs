@@ -63,9 +63,6 @@ Under the hood `Db.Transact` is implemented in terms of `Db.TransactAsync` funct
 System.Threading.Tasks.Task TransactAsync(Action action, ...);
 ```  
 
-<div class="part-box">
-  <h2 class="toc-headline">Articles in the {{ page. title}} section</h2>
-  {% for item in summary.parts[0].articles[2].articles[2].articles %}
-    <a href="../../{{ item.path}}"><p class="toc-text">{{ item.title }}</p></a>
-  {% endfor %}
-</div>
+{% import "../../macros.html" as macros %}
+
+{{ macros.tocGenerator(page.title, summary.parts[0].articles[2].articles[2].articles) }}

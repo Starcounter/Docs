@@ -1,0 +1,12 @@
+{% macro tocGenerator(pageTitle, articles) %}
+  <div class="part-box">
+    <h2 class="toc-headline">Articles in the {{ pageTitle }} section</h2>
+    {% for article in articles %}
+      {% if article.depth == 3 %}
+        <a href="../../{{ article.path }}"><p class="toc-text">{{ article.title }}</p></a>
+      {% elif article.depth == 2 %}
+        <a href="../{{ article.path }}"><p class="toc-text">{{ article.title }}</p></a>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endmacro %}

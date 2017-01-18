@@ -6,9 +6,6 @@ While REST is a standard option for web apps, Starcounter has also built-in supp
 
 Starcounter apps can make `Self` requests, which can be used for internal signalling or composing responses from smaller bits and pieces.
 
-<div class="part-box">
-  <h2 class="toc-headline">Articles in the {{ page. title}} section</h2>
-  {% for item in summary.parts[0].articles[2].articles[6].articles %}
-    <a href="../../{{ item.path}}"><p class="toc-text">{{ item.title }}</p></a>
-  {% endfor %}
-</div>
+{% import "../../macros.html" as macros %}
+
+{{ macros.tocGenerator(page.title, summary.parts[0].articles[2].articles[6].articles) }}
