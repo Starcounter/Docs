@@ -39,3 +39,10 @@ Starcounter implements 3 distinct mapping APIs:
 ## Blending
 
 [Blending](/guides/web/blending/) is a feature of a Launcher app that allows to rearrange the rendering of the HTML response. It is the client-side feature that makes the result of `UriMapping.Map` and `UriMapping.OntologyMap` appear like a single app, even though it is composed from separate micro apps.
+
+<div class="part-box">
+  <h2 class="toc-headline">Articles in the {{ page. title}} section</h2>
+  {% for item in summary.parts[0].articles[2].articles[7].articles %}
+    <a href="../../{{ item.path}}"><p class="toc-text">{{ item.title }}</p></a>
+  {% endfor %}
+</div>
