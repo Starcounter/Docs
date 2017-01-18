@@ -46,6 +46,35 @@ pre::after {
     display: none;
 }
 
+/* styling for article ToC on the bottom of each section page */
+.part-box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: space-around;
+  border-color: #f47e0c;
+  border-style: dotted;
+  border-width: 8px;
+  border-radius: 30px;
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  margin-top: 20px;
+}
+
+.toc-text {
+  color: black;
+  margin-left: 15px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.toc-headline {
+  margin-top: 0.5em !important;
+  color: #f47e0c;
+  text-align: center;
+  width: 100%;
+}
+
 .code-name + pre code {
     border-radius: 0 3px 3px 3px;
 }
@@ -227,6 +256,11 @@ kbd {
   .page-inner {
     margin: 0 !important;
   }
+  .toc-text {
+    font-size: larger !important;
+    line-height: normal !important;
+    margin-left: 1em !important;
+  }
 }
 
 /* Hide large menu buttons and display the dropdown button with moderately small screens */
@@ -355,6 +389,10 @@ kbd {
 
 /* Hide the script that sometimes is displayed due to some bug */
 script {
+  display: none !important;
+}
+
+.custom-link {
   display: none !important;
 }
 
