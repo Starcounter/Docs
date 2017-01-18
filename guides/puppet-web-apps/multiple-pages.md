@@ -118,6 +118,7 @@ namespace MultiplePagesDemo
 
 <div class="code-name">wwwroot/MailsPage.html</div>
 
+{% raw %}
 ```html
 <!DOCTYPE html>
 <html>
@@ -165,6 +166,7 @@ namespace MultiplePagesDemo
 </body>
 </html>
 ```
+{% endraw %}
 
 Let's assume that the user first visits the URL `www.mysampleapp.com/emails` using a browser. The handler registered using `Handle.GET("/emails",...)` will be called and the html page master.html will be returned. If the user then clicks on a specific email, he will hit the handler for `www.mysampleapp.com/emails/123`. But as the master page is already cached, the browser will not leave the current page. Instead it will update the existing page by changing the content (the DOM) of its sub page named `Focused`.
 

@@ -12,6 +12,8 @@ To implement this we need to do some setup.
 Now we can start getting some code in there. As mentioned earlier, we simply copy the mapping code from [here](https://github.com/StarcounterPrefabs/Images/blob/master/README.md) into the <code>Main</code> method of <code>Program.cs</code> in <code>HelloWorldMapper</code> and do some small adjustments. In addition, you have to add <code>using Starcounter.Internal</code> to the beginning of the same file in order to use <code>StarcounterEnvironment.RunWithinApplication</code>.
 
 <div class="code-name">Program.cs</div>
+
+{% raw %}
 ```cs
 UriMapping.OntologyMap<HelloWorld.Expense>("/HelloWorld/partial/expense/{?}");
 
@@ -24,6 +26,7 @@ Handle.GET("/images/partials/concept-expense/{?}", (string objectId) => {
      });
 });
 ```
+{% endraw %}
 
 <aside class="read-more">
    <a href="/guides/mapping-and-blending/ontology-mapping.html">Learn about ontology mapping</a>
