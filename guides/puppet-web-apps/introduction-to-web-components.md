@@ -10,6 +10,7 @@ For instance, Web Components allow us to render a list of products and their bar
 
 <div class="code-name">BarcodesPage.html</div>
 
+{% raw %}
 ```html
 <link rel="import" href="/sys/x-barcode/src/x-barcode.html">
 <link rel="import" href="/sys/puppet-client/puppet-client.html">
@@ -21,6 +22,7 @@ For instance, Web Components allow us to render a list of products and their bar
 </template>
 <puppet-client ref="root"></puppet-client>
 ```
+{% endraw %}
 
 This is only a fraction of what would be required in traditional frameworks, such as Backbone.
 
