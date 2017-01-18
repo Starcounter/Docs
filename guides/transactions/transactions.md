@@ -53,7 +53,12 @@ For your convenience there are some overloads of the `Db.Transact` function that
 
 ```cs
 Db.Transact(Action action, ...);
-Db.Transact<T>(Action<T> action, T arg, ...);
 TResult Db.Transact<TResult>(Func<TResult> func, ...);
-TResult Db.Transact<T, TResult>(Func<T, TResult> func, T arg, ...);
+```  
+
+### The Db.TransactAsync function
+Under the hood `Db.Transact` is implemented in terms of `Db.TransactAsync` functions. `Db.TransactAsync` returns Task object, that is marked completed on flushing transaction log for this transaction. `Db.Transact` family is a thin wrapper around `Db.TransactAsync`, that effectively just calls Db.TransactAsync() and synchronously waits for returned Task. Thus Db.Transact() is a blocking call that waits for IO on write transactions. Take a look at the corresponding section at [More on transactions](more-on-transactions.md) for reasoning and possible performance implications.
+
+```cs
+System.Threading.Tasks.Task TransactAsync(Action action, ...);
 ```  
