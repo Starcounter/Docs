@@ -59,7 +59,7 @@ When there is an incoming request, this request filter checks if the URI contain
 To let requests to a certain handler bypass all request filters, use the class `HandlerOptions` and set `SkipRequestFilters` to `true`. Like this:
 
 ```cs
-Handle.GET("/my-url", () => new Page(), new HandlerOptions() { SkipRequestFilters = true });
+Handle.GET("/my-url", () => new Json(), new HandlerOptions() { SkipRequestFilters = true });
 ```
 
 This only affects request filters and not response filters.
@@ -287,7 +287,7 @@ If the HTML at the path would be a complete HTML document, this would be suffici
 
 ### PartialToStandaloneHtmlProvider
 
-This middleware class checks if the HTML is a full document, or essentially if it starts with a `doctype`. If it is not a full HTML document, it wraps the existing HTML inside the body of an HTML document that contains the following:
+This middleware class checks if the HTML is a full document, or essentially if it starts with a `<!DOCTYPE html>`. If it is not a full HTML document, it wraps the existing HTML inside the body of an HTML document that contains the following:
 
 1. A `puppet-client` element to create a WebSocket connection
 2. Import links to the Starcounter custom elements `starcounter-include` and `starcounter-debug-aid`
