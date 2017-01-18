@@ -1,4 +1,4 @@
-# Avoiding CSS conflicts (BEM naming convention) 
+# Avoiding CSS conflicts (BEM naming convention)
 
 A complex web app is composed out of HTML responses from multiple apps. This means that the merged HTML, CSS and JavaScript runs in the global namespace.
 
@@ -6,7 +6,7 @@ How to make sure that your CSS does not have side effects in other apps?
 
 ## Future standards way: CSS Scoping
 
-There might be a web standard in future that solves the problem of defining stylesheet for only a part of an HTML document. 
+There might be a web standard in future that solves the problem of defining stylesheet for only a part of an HTML document.
 
 [CSS Scoping](https://drafts.csswg.org/css-scoping/) proposal adds a new `scoped` attribute to the `<style>` element. When a stylesheet is provided inside of a `<style scoped>` element, it will only be applied to the current parent element and its children.
 
@@ -77,7 +77,7 @@ To isolate BEM used in your apps from BEM used in the other apps, the Block shou
 
 ### 4. Use lowercase names, separate words with hyphen
 
-We advise to always use lowercase. 
+We advise to always use lowercase.
 
 When you have to use multiple words in Block, Element or Modifier section, separate them with a hyphen (`-`), for example: `.chatter-chat-message__message-text`.
 
@@ -124,6 +124,7 @@ Even though Bootstrap does not follow BEM, it is totally fine to mix Bootstrap a
 
 It is **not** fine to override Bootstrap classes in your app's stylesheet. The only proper way to extend style is to with a BEM selector, for example:
 
+{% raw %}
 ```html
 <ul class="chatter-autocomplete">
     <template is="dom-repeat" items="{{model.FoundAttachment}}">
@@ -133,6 +134,7 @@ It is **not** fine to override Bootstrap classes in your app's stylesheet. The o
     </template>
 </ul>
 ```
+{% endraw %}
 
 For reference, the available Bootstrap CSS class names can be found in [bootstrap.css](https://github.com/Starcounter/Starcounter/blob/develop/src/BuildSystem/ClientFiles/StaticFiles/sys/bootswatch/paper/bootstrap.css).
 

@@ -26,6 +26,8 @@ Now we have enough information to create the view for the expenses, so let's do 
 To create a list of the expenses we will use the power of Polymer. Our first step is to create a template for the `Description` and `Amount`.
 
 <div class="code-name">ExpenseJson.html</div>
+
+{% raw %}
 ```html
 <template>
     <template is="dom-bind">
@@ -34,6 +36,7 @@ To create a list of the expenses we will use the power of Polymer. Our first ste
     </template>
 <template>
 ```
+{% endraw %}
 
 Great! Now we just need to stack these templates inside the `Person` view. We can do that easily using dom-repeat. While we are on it, we will also modify the headline and add a button to add new expenses.
 
@@ -42,6 +45,8 @@ Great! Now we just need to stack these templates inside the `Person` view. We ca
 </aside>
 
 <div class="code-name">PersonJson.html</div>
+
+{% raw %}
 ```html
 <h1>{{model.FullName}}'s expense list</h1>
 .
@@ -57,6 +62,8 @@ Great! Now we just need to stack these templates inside the `Person` view. We ca
 <hr>
 <h2>Current Balance: {{model.CurrentBalance}}</h2>
 ```
+{% endraw %}
+
 `starcounter-include` is an insertion point for another template. In this case it's representing the template in ExpenseJson so that we can keep our code separate.
 
 As you can see above, we are using AddNewExpense, which we haven't defined yet. Let's go and fix that now.

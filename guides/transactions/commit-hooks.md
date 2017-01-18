@@ -4,6 +4,7 @@ Commit hook is a logic flow control pattern similar to [trigger](https://en.wiki
 
 The app ```TestHooks``` shows a full set of use cases for commit hooks.
 
+{% raw %}
 ```cs
 using System;
 using Starcounter;
@@ -90,6 +91,7 @@ namespace TestHooks
    }
 }
 ```
+{% endraw %}
 
 The output produced is as follows (accurate to [ObjectNo](/guides/database/object-identity-and-object-references.html)):
 

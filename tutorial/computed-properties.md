@@ -1,8 +1,8 @@
 # Computed Properties
 
-Starcounter allows you to use computed properties in your data model. Computing values on the fly is often as fast as accessing cached data and brings additional benefits. It allows you to save memory and always be sure that you get the current value. 
+Starcounter allows you to use computed properties in your data model. Computing values on the fly is often as fast as accessing cached data and brings additional benefits. It allows you to save memory and always be sure that you get the current value.
 
-Let us compute the `FullName` of a person from their `FirstName` and `LastName` and display it without any delay! 
+Let us compute the `FullName` of a person from their `FirstName` and `LastName` and display it without any delay!
 
 We start by simply adding the `FullName` property to our JSON.
 
@@ -22,13 +22,17 @@ class PersonJson : Json
     public string FullName => FirstName + " " + LastName;
 ```
 
-It's that easy.
+It´s that easy.
 
 All that remains is to add `FullName` to the view. We do that using a Polymer binding to the JSON property `FullName`.
+
 <div class="code-name">PersonJson.html</div>
+
+{% raw %}
 ```html
 <h1>Hey, {{model.FullName}}!</h1>
 ```
+{% endraw %}
 
 That was all for this part. Check out what you have achieved and we will move on to the next step.
 
