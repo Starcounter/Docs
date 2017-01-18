@@ -294,7 +294,38 @@ This middleware class checks if the HTML is a full document, or essentially if i
 3. Import links to the outside libraries Polymer and Bootstrap
 4. The session URL which makes it possible for PuppetJs to request the relevant JSON in a future request
 
-It is possible to override this default HTML by passing a string containing HTML as a parameter.
+It is possible to override this default HTML by passing a string containing HTML as a parameter. Here's an example of that:
+
+{% raw %}
+```cs
+var html = @"<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=""utf-8"">
+    <title>{0}</title>
+    <script src=""/sys/webcomponentsjs/webcomponents.min.js""></script>
+    <link rel=""import"" href=""/sys/polymer/polymer.html"">
+    <link rel=""import"" href=""/sys/starcounter.html"">
+    <link rel=""import"" href=""/sys/starcounter-include/starcounter-include.html"">
+    <link rel=""import"" href=""/sys/starcounter-debug-aid/src/starcounter-debug-aid.html"">
+    <link rel=""import"" href=""/sys/bootstrap.html"">
+    <style>
+        body {{
+            margin: 20px;
+        }}
+    </style>
+</head>
+<body>
+    <template is=""dom-bind"" id=""puppet-root"">
+        <template is=""imported-template"" content$=""{{{{model.Html}}}}"" model=""{{{{model}}}}""></template>
+    </template>
+    <puppet-client ref=""puppet-root"" remote-url=""{1}""></puppet-client>
+    <starcounter-debug-aid></starcounter-debug-aid>
+</body>
+</html>";
+Application.Current.Use(new PartialToStandaloneHtmlProvider(html))
+```
+{% endraw %}
 
 Since `PartialToStandaloneHtmlProvider` wraps the actual response from the handler, it will also have the HTTP status code that was returned.
 
