@@ -57,3 +57,7 @@ Db.Transact<T>(Action<T> action, T arg, ...);
 TResult Db.Transact<TResult>(Func<TResult> func, ...);
 TResult Db.Transact<T, TResult>(Func<T, TResult> func, T arg, ...);
 ```  
+
+{% import "../../macros.html" as macros %}
+
+{{ macros.tocGenerator(page.title, summary.parts[0].articles[2].articles[2].articles) }}

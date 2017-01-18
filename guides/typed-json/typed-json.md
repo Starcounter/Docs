@@ -54,3 +54,7 @@ If JSON object is static it is beneficial to denote a specific type that is used
 
 1. Set a metadata inside the view-model
 2. Use the <code>IBound interface</code> to tag the code-behind class
+
+{% import "../../macros.html" as macros %}
+
+{{ macros.tocGenerator(page.title, summary.parts[0].articles[2].articles[3].articles) }}

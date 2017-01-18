@@ -16,7 +16,7 @@ Our view will be, for now, a simple interface displaying the `FirstName` and `La
 To accomplish this we will use the `label` and `strong`> tags. It's not essential that you use exactly these elements. `p`, `span`, and many others would work just as well. To make Polymer's template engine work, we also have to import it into our file with the `rel="import"`.
 
 <div class="code-name">PersonJson.html</div><div class="code-name code-title">Create view</div>
-
+{% raw %}
 ```html
 <link rel="import" href="/sys/polymer/polymer.html"/>
 <template>
@@ -35,6 +35,7 @@ To accomplish this we will use the `label` and `strong`> tags. It's not essentia
 ```
 
 The double curly bracket syntax is a way of denoting two-way bindings in Polymer. `model` represents our JSON file, so `{{model.FirstName}}` is the `FirstName` value in `PersonJson.json`.
+{% endraw %}
 
 <aside class="read-more">
     <a href="https://www.polymer-project.org/1.0/docs/devguide/data-binding">Learn about Polymer bindings</a>
@@ -98,7 +99,7 @@ Handle.GET("/HelloWorld", () =>
 
 We have now established a model-view-view-model (MVVM) binding that's real time. The JSON, which is our view-model, is bound to the model (database) with no latency; our view, the HTML, is in turn bound to the JSON, which is synced in real time using WebSocket and HTTP. Polymer helps us display this instantaneously to the user.
 
-<section class="see-yourself">Start the application with <kbd>F5</kbd> and go to `http://localhost:8080/HelloWorld` in your web browser. You should see the name of your `Person` appear.</section>
+<section class="see-yourself">Start the application with <kbd>F5</kbd> and go to <code>http://localhost:8080/HelloWorld</code> in your web browser. You should see the name of your `Person` appear.</section>
 
 ![Screenshot part 2](/assets/part2.png)
 

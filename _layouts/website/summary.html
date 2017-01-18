@@ -1,0 +1,55 @@
+{% macro articles(_articles) %}
+    {% for article in _articles %}
+        <li class="chapter {% if article.path == file.path and not article.anchor %}active{% endif %}" data-level="{{ article.level }}" {% if article.path %}data-path="{{ article.path|resolveFile }}"{% endif %}>
+            {% if article.path and getPageByPath(article.path) %}
+                <a href="{{ article.path|resolveFile }}{{ article.anchor }}">
+            {% elif article.url %}
+                <a target="_blank" href="{{ article.url }}">
+            {% else %}
+                <span>
+            {% endif %}
+                    {% if article.level != "0" and config.pluginsConfig['theme-default'].showLevel %}
+                        <b>{{ article.level }}.</b>
+                    {% endif %}
+                    {{ article.title }}
+            {% if article.path  or article.url %}
+                </a>
+            {% else %}
+                </span>
+            {% endif %}
+
+            {% if article.articles.length > 0 %}
+            <ul class="articles">
+                {{ articles(article.articles, file, config) }}
+            </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+{% endmacro %}
+
+<ul class="summary">
+    <select class="version-select" onchange="if (this.value) window.location.href=this.value">
+      <option value="http://docs.starcounter.io/" selected="true">2.2.1.3234</option>
+      <option value="http://docs.starcounter.io/v/2.1.177/">2.1.177</option>
+      <option value="http://docs.starcounter.io/v/2.2.1834/">2.2.1834</option>
+      <option value="http://docs.starcounter.io/v/Develop/">Develop</option>
+      <option value="http://docs.starcounter.io/v/RC/">RC</option>
+    </select>
+    {% set _divider = false %}
+    {% if config.links.sidebar  %}
+    {% for linkTitle, link in config.links.sidebar  %}
+        {% set _divider = true %}
+        <li>
+            <a href="{{ link }}" target="_blank" class="custom-link">{{ linkTitle }}</a>
+        </li>
+    {% endfor %}
+    {% endif %}
+
+    {% for part in summary.parts %}
+        {% if part.title %}
+        <li class="header">{{ part.title }}</li>
+        {% elif not loop.first %}
+        {% endif %}
+        {{ articles(part.articles, file, config) }}
+    {% endfor %}
+</ul>

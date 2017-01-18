@@ -10,6 +10,7 @@ To make applications blendable it's necessary to separate the functional element
 
 Here's an HTML template where the functional and layout elements are not separated:
 
+{% raw %}
 ```HTML
 <template>
   <style>
@@ -35,6 +36,7 @@ Here's an HTML template where the functional and layout elements are not separat
   </div>
 </template>
 ```
+{% endraw %}
 
 In this template, the functional elements are:
 1. `<h2>Subpage</h2>`
@@ -43,6 +45,7 @@ In this template, the functional elements are:
 
 Start by copying these elements to the top of the template. When that is done the top of the template should look like this:
 
+{% raw %}
 ```HTML
 <template>
   <h2>Subpage</h2>
@@ -61,6 +64,7 @@ Start by copying these elements to the top of the template. When that is done th
     }
   </style>
 ```
+{% endraw %}
 
 The rest will look the same as before. Notice that the `<template is="dom-bind">` is included with the `<p>` element, but the `<div>` is not. If there would be more elements that would require the use of `dom-bind` for Polymer two-way bindings, then these would all be put within the same `<template is="dom-bind"`.
 
@@ -75,9 +79,11 @@ Currently, the elements are in two places. That's not the way it should be. To f
 
 In a real scenario, more descriptive names would be beneficial.
 
-Now that slot elements are added, slot attributes should be added to the functional elements. The way to do this is by adding the attribute `slot="AnApp/ElementDescription"` to those elements. 
+Now that slot elements are added, slot attributes should be added to the functional elements. The way to do this is by adding the attribute `slot="AnApp/ElementDescription"` to those elements.
 
 At this point, the document should look like this:
+
+{% raw %}
 ```HTML
 <template>
   <h2 slot="AnApp/header">Subpage</h2>
@@ -110,6 +116,7 @@ At this point, the document should look like this:
   </template>
 </template>
 ```
+{% endraw %}
 
 In the case of a document that does not require a `starcounter-composition` because there are no layout elements, it would still be beneficial to add slot attributes to create semantic clarity. For example:
 ```HTML
@@ -130,6 +137,8 @@ Should be written as:
 As a final step, the styling pertaining to the layout of the page (margin, padding etc.) should be put within the `starcounter-composition` together with styling that might be changed when blending. It's encouraged to put styles pertaining to the functional elements in a separate stylesheet and to use internal style sheets inside `starcounter-composition`. Regarding the naming of CSS classes, they should be prefixed with the app name to ensure clarity when blended with other applications.
 
 The final result should look like this:
+
+{% raw %}
 ```HTML
 <template>
   <h2 slot="AnApp/header">Subpage</h2>
@@ -166,6 +175,7 @@ The final result should look like this:
   </template>
 </template>
 ```
+{% endraw %}
 
 ### Conclusion
-After following these steps, the application should look identical to how it was before. The only difference is that the functional elements will be exposed to blending and the slot names will be more semantic than in the previous case when the slot names would be set implicitly to a non-descriptive name. Making this change will also prepare the application better for future versions of Starcounter where the process of blending will be more streamlined and user-friendly. 
+After following these steps, the application should look identical to how it was before. The only difference is that the functional elements will be exposed to blending and the slot names will be more semantic than in the previous case when the slot names would be set implicitly to a non-descriptive name. Making this change will also prepare the application better for future versions of Starcounter where the process of blending will be more streamlined and user-friendly.

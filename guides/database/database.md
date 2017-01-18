@@ -14,3 +14,7 @@ Using object references in your code instead of foreign keys, it is easier than 
 
 ## Inheritance
 Starcounter allows any database object to [inherit from any other database object](/guides/database/inheritance/).
+
+{% import "../../macros.html" as macros %}
+
+{{ macros.tocGenerator(page.title, summary.parts[0].articles[2].articles[0].articles) }}

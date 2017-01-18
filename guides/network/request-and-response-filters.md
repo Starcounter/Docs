@@ -233,6 +233,7 @@ Simply put, a <em>template engine</em> take some kind of <strong>template</stron
 
 <div class="code-name">Author.html</div>
 
+{% raw %}
 ```html
 <html>
 <head>
@@ -244,6 +245,7 @@ Simply put, a <em>template engine</em> take some kind of <strong>template</stron
 </body>
 </html>
 ```
+{% endraw %}
 
 <div class="code-name">Author.json</div>
 
@@ -289,6 +291,7 @@ The focus here is to illustrate a pattern, not to provide code that can run out 
 
 Let's finally summarize this last section in a step-by-step to get the feeling of how it all fit together.
 
+{% raw %}
 <ol>
     <li>Client (e.g. browser) request <code>GET /author</code> with <code>text/html</code></li>
 
@@ -307,8 +310,8 @@ Let's finally summarize this last section in a step-by-step to get the feeling o
     <li>Server return data from Author.json</li>
 
     <li>The resulting web page is rendered inserting JSON data into the template</li>
-
 </ol>
+{% endraw %}
 
 <h2>What's next?</h2>
 
