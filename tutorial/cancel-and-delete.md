@@ -1,6 +1,6 @@
 # Cancel and Delete
 
-You have probably noticed that in the current app you can only add new expenses. That means that the database and the list of expenses will continue to grow endlessly. We can't accept that. 
+You have probably noticed that in the current app you can only add new expenses. That means that the database and the list of expenses will continue to grow endlessly. We can't accept that.
 
 In this part, we will add a cancel and delete button which allows the user to either cancel a change that has not been committed or delete all the expenses of a person.
 
@@ -18,6 +18,8 @@ No surprises here.
 Now, let's add the buttons that will increment these values in the same way that our `Save` button does now.
 
 <div class="code-name">PersonJson.html</div>
+
+{% raw %}
 ```html
 <button value="{{model.Save$::click}}" onmousedown="++this.value">Save</button>
 <button value="{{model.Cancel$::click}}" onmousedown="++this.value">Cancel</button>
@@ -26,6 +28,8 @@ Now, let's add the buttons that will increment these values in the same way that
 <h2>Current Balance: {{model.CurrentBalance}}</h2>
 <button value="{{model.DeleteAll$::click}}" onmousedown="++this.value">Delete all expenses</button>
 ```
+{% endraw %}
+
 
 We now expect the values `DeleteAll$` and `Cancel$` to be incremented on click.
 
@@ -38,7 +42,7 @@ void Handle(Input.Cancel action)
     Transaction.Rollback();
     RefreshExpenses(this.Data.Spendings);
 }
-  
+
 void Handle(Input.AddNewExpense action)
 .
 .
