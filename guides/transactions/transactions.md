@@ -57,3 +57,10 @@ Db.Transact<T>(Action<T> action, T arg, ...);
 TResult Db.Transact<TResult>(Func<TResult> func, ...);
 TResult Db.Transact<T, TResult>(Func<T, TResult> func, T arg, ...);
 ```  
+
+<div class="part-box">
+  <h2 class="toc-headline">Articles in the {{ page. title}} section</h2>
+  {% for item in summary.parts[0].articles[2].articles[2].articles %}
+    <a href="../../{{ item.path}}"><p class="toc-text">{{ item.title }}</p></a>
+  {% endfor %}
+</div>

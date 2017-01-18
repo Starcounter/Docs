@@ -14,3 +14,10 @@ Using object references in your code instead of foreign keys, it is easier than 
 
 ## Inheritance
 Starcounter allows any database object to [inherit from any other database object](/guides/database/inheritance/).
+
+<div class="part-box">
+  <h2 class="toc-headline">Articles in the {{ page. title}} section</h2>
+  {% for item in summary.parts[0].articles[2].articles[0].articles %}
+    <a href="../../{{ item.path}}"><p class="toc-text">{{ item.title }}</p></a>
+  {% endfor %}
+</div>
