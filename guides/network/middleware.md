@@ -244,6 +244,7 @@ It is also worth nothing that these classes do not have to contain request or re
 `HtmlFromJsonProvider` is a custom middleware class provided by Starcounter. It acts as a response filter by intercepting outgoing responses containing JSON objects and instead responding with the corresponding HTML. For example, look at the following application:
 
 <div class="code-name">Person.html</div>
+{% raw %}
 ```html
 <template>
     <template is="dom-bind">
@@ -252,6 +253,7 @@ It is also worth nothing that these classes do not have to contain request or re
     </template>
 </template>
 ```
+{% endraw %}
 
 <div class="code-name">Person.json</div>
 ```cs
