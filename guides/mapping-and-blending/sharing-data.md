@@ -19,4 +19,4 @@ If you have a separate data model that you would like to share between multiple 
 
 ## Sharing data through database mapping
 
-Starcounter is running a pilot [database mapping](/guides/apps/database-mapping/) program with selected partners. This allows to share data through mapping to a common data model, rather than sharing the same data model. Please contact us for details.
+Starcounter is running a pilot database mapping program with selected partners. This allows to share data through mapping to a common data model, rather than sharing the same data model. Please contact us for details.

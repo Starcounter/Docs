@@ -12,23 +12,23 @@ There are typically three logical tiers in a Starcounter application. The domain
 
 ### Tier 1 - The domain model
 
-In most database systems, the back end tier is normally a database management system (DBMS) and the next tier is a application layer that reads and writes data to the DBMS. In Starcounter, these two tiers are merged. 
+In most database systems, the back end tier is normally a database management system (DBMS) and the next tier is a application layer that reads and writes data to the DBMS. In Starcounter, these two tiers are merged.
 
 The database image master uses RAM instead of disk. The computer resources needed to move data to and from the database image are greater than actually executing the business logic. Because all data is already in RAM, the Starcounter application layer and the database layer is one and the same. In this way, programming becomes simplified and performance gets better.
 
 ### Tier 2 - The view-model
 
-Unlike most database systems, the view-model is mirrored between the client and the server. The server is the owner of the view-model and is the single source of truth. This means that the application logic on the server can simply change the view-model locally and the view is updated accordingly. 
+Unlike most database systems, the view-model is mirrored between the client and the server. The server is the owner of the view-model and is the single source of truth. This means that the application logic on the server can simply change the view-model locally and the view is updated accordingly.
 
 While it might sound expensive to keep a copy of each clients view on the server, all data on the server, including all the database data is already in RAM so very little new RAM needs to be allocated to keep track of what is going on. After all, more data exists in the database than is currently on screen on the clients at any given moment for most business applications.
 
-<aside class="read-more"><a href="/guides/json/">Read more about Typed JSON in Starcounter</a></aside>
+<aside class="read-more"><a href="/guides/typed-json.html">Read more about Typed JSON in Starcounter</a></aside>
 
 Starcounter view-models are Typed JSONs defined by the server. Although JSON is merely a text based notation format for object trees, the Typed JSON implementation is a dynamic runtime tree that allows you to add, remove and change objects.
 
 #### What is Typed JSON?
 
-Typed JSONs are multipurpose vehicles. It supports the six data types of JSON (object, array, boolean, number, string and null). It typically has two uses. The first is to create and receive JSON messages as you would typically do in a REST style service or client. The other is to represent live view-models that can be bound to a user interface (client) or a controller (server). 
+Typed JSONs are multipurpose vehicles. It supports the six data types of JSON (object, array, boolean, number, string and null). It typically has two uses. The first is to create and receive JSON messages as you would typically do in a REST style service or client. The other is to represent live view-models that can be bound to a user interface (client) or a controller (server).
 
 #### Schema-less or schema-full
 

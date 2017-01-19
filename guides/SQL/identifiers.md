@@ -23,13 +23,13 @@ As long as the class/table name is unique you do not have to specify the namespa
 SELECT m.MyProperty FROM MyClass m
 ```
 
-If you have some identifier in your database schema that conflicts with some 
-[reserved words](/guides/sql/reserved-words/) in Starcounter SQL, you can tell the SQL parser that the term should not be interpreted as the reserved word by putting it inside double quotes, as in query below. 
+If you have some identifier in your database schema that conflicts with some
+[reserved words](/guides/SQL/reserved-words.html) in Starcounter SQL, you can tell the SQL parser that the term should not be interpreted as the reserved word by putting it inside double quotes, as in query below. 
 
 ```sql
 SELECT n."Left", n."Right" FROM Node n
 ```
 
-<!--We strongly recommend that when you write SQL statements in program 
-code you always use double quotes around your identifiers so your code will be forward 
+<!--We strongly recommend that when you write SQL statements in program
+code you always use double quotes around your identifiers so your code will be forward
 compatible to future releases of Starcounter.-->
