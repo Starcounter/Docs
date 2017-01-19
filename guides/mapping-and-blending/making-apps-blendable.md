@@ -11,7 +11,7 @@ To make applications blendable it's necessary to separate the functional element
 Here's an HTML template where the functional and layout elements are not separated:
 
 {% raw %}
-```HTML
+```html
 <template>
   <style>
     .AnApp-article {
@@ -46,7 +46,7 @@ In this template, the functional elements are:
 Start by copying these elements to the top of the template. When that is done the top of the template should look like this:
 
 {% raw %}
-```HTML
+```html
 <template>
   <h2>Subpage</h2>
   <template is="dom-bind">
@@ -84,7 +84,7 @@ Now that slot elements are added, slot attributes should be added to the functio
 At this point, the document should look like this:
 
 {% raw %}
-```HTML
+```html
 <template>
   <h2 slot="AnApp/header">Subpage</h2>
   <template is="dom-bind">
@@ -119,14 +119,14 @@ At this point, the document should look like this:
 {% endraw %}
 
 In the case of a document that does not require a `starcounter-composition` because there are no layout elements, it would still be beneficial to add slot attributes to create semantic clarity. For example:
-```HTML
+```html
 <template>
   <h1>Some big text</h1>
   <h5>Some smaller text</h5>
 </template>
 ```
 Should be written as:
-```HTML
+```html
 <template>
   <h1 slot="AnApp/bigheader">Some big text</h1>
   <h5 slot="AnApp/smallerheader">Some smaller text</h5>
@@ -139,7 +139,7 @@ As a final step, the styling pertaining to the layout of the page (margin, paddi
 The final result should look like this:
 
 {% raw %}
-```HTML
+```html
 <template>
   <h2 slot="AnApp/header">Subpage</h2>
   <template is="dom-bind">

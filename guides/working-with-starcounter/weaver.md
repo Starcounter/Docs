@@ -59,7 +59,7 @@ To instruct the weaver to exclude files,
 3. Specify the name of each file on a single line in the file.
 
 A simple ```weaver.ignore``` file:
-```text
+```
 foo.dll
 bar.dll
 ```
@@ -100,7 +100,7 @@ The effect of that is that the weaver will run, trying to analyze and weave (i.e
 
 Let's look at an example. Notice the options we used to get the maximum of diagnostics: `--nocache --verbosity=diagnostic`.
 
-```text
+```
 C:\Users\Per\Bogota\bin\Debug>scweaver --nocache --verbosity=diagnostic bogota.exe
 
 === Bootstrap diagnostics ===
