@@ -1,6 +1,6 @@
 # Testing HTTP requests
 
-Some code examples in this guide describe handling of HTTP requests such as GET, POST, PUT, DELETE or PATCH. While it is trivial to make a GET request (you don't need anything more than a web browser), it may be troublesome to create a request with the other HTTP methods. 
+Some code examples in this guide describe handling of HTTP requests such as GET, POST, PUT, DELETE or PATCH. While it is trivial to make a GET request (you don't need anything more than a web browser), it may be troublesome to create a request with the other HTTP methods.
 
 The following guide shows 3 tools that make it easier: cURL, Postman and JavaScript (XMLHttpRequest).
 
@@ -20,8 +20,8 @@ $ curl -X GET -H "Content-Type: application/json" http://localhost:8080/invoiced
 Send a `PUT` request with a header `Content-Type: application/json` and body `{"FirstName":"Olle","LastName":"Svensson", "Age":49}` to `http://localhost:8080/hello/Olle`, show response body:  
 
 ```
-$ curl -X PUT -H "Content-Type: application/json" 
--d '{"FirstName":"Olle","LastName":"Svensson", "Age":49}' 
+$ curl -X PUT -H "Content-Type: application/json"
+-d '{"FirstName":"Olle","LastName":"Svensson", "Age":49}'
 http://localhost:8080/hello/Olle
 
 Welcome Olle you are 49 years old.
@@ -30,8 +30,8 @@ Welcome Olle you are 49 years old.
 Adding a `-v` parameter results in more information being displayed, including the request and response HTTP headers:
 
 ```
-$ curl -v -X PUT -H "Content-Type: application/json" 
--d '{"FirstName":"Olle","LastName":"Svensson", "Age":49}' 
+$ curl -v -X PUT -H "Content-Type: application/json"
+-d '{"FirstName":"Olle","LastName":"Svensson", "Age":49}'
 http://127.0.0.1:8080/hello/Olle
 
 * About to connect() to 127.0.0.1 port 8080 (#0)
@@ -48,14 +48,14 @@ http://127.0.0.1:8080/hello/Olle
 > Accept: */*
 > Content-Type: application/json
 > Content-Length: 52
-> 
+>
 * upload completely sent off: 52 out of 52 bytes
 < HTTP/1.1 200 OK
 * Server SC is not blacklisted
 < Server: SC
 < Cache-Control: no-cache
 < Content-Length: 34
-< 
+<
 * Connection #0 to host 127.0.0.1 left intact
 Welcome Olle you are 49 years old.
 ```
@@ -70,7 +70,7 @@ The below screenshot shows the same request (& response) as above, sent in Postm
 
 ## JavaScript (XMLHttpRequest)
 
-[XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) is a Web API for performing HTTP requests available in all modern web browsers. 
+[XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) is a Web API for performing HTTP requests available in all modern web browsers.
 
 The following JavaScript code makes the same request as above using XMLHttpRequest:
 
@@ -86,4 +86,4 @@ xhr.send('{"FirstName":"Olle","LastName":"Svensson", "Age":49}');
 
 Note that the web browser will execute the above request only if it is called from a document that was loaded from the same domain or if the server implements [CORS](http://enable-cors.org/).
 
-The server side code that handles this request can be found here: [Accepting JSON in requests](/guides/rest/accepting-json-in-requests/)
+The server side code that handles this request can be found here: [Accepting JSON in requests](/guides/restful-web-apps/accepting-json-in-requests.html)
