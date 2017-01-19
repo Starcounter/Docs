@@ -14,6 +14,7 @@ With Starcounter you can divide a view-model into several smaller view-models th
 In `ExpenseJson.json`, add the properties `Description`, `Amount`, and `Html`. `Description` and `Amount` will need to be editable.
 
 <div class="code-name">ExpenseJson.json</div>
+
 ```json
 {
   "Html": "/HelloWorld/ExpenseJson.html",
