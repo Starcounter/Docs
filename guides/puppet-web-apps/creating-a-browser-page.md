@@ -12,6 +12,7 @@ Most web app tutorials would teach you here how to build a full blown HTML templ
 
 and everything in between. But not with Puppet web apps! A view-model can be represented with a simple HTML template that looks like:
 
+{% raw %}
 ```html
 <template>
   <template is="dom-bind">
@@ -21,5 +22,6 @@ and everything in between. But not with Puppet web apps! A view-model can be rep
   </template>
 </template>
 ```
+{% endraw %}
 
 Where's the doctype and the `<head>`, you'll ask? It needs to be created by some app, for sure, but there is a class of apps that creates it for you - it's called "launchers". A sample Launcher is available in Starcounter App Store.

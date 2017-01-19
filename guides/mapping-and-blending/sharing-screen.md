@@ -64,6 +64,7 @@ This becomes the **HTML insertion point** for the response of the internal reque
 
 <div class="code-name"><a href="https://github.com/StarcounterSamples/Products/blob/master/src/Products/Api/MainHandlers.cs">LauncherWrapperPage.html</a></div>
 
+{% raw %}
 ```html
 <template>
     <template is="dom-bind">
@@ -74,6 +75,7 @@ This becomes the **HTML insertion point** for the response of the internal reque
 ```
 
 In the above example, `<starcounter-include partial="{{model.CurrentPage}}"></starcounter-include>` is the HTML insertion point for the result.
+{% endraw %}
 
 ### 3. Create the sub-request response
 
