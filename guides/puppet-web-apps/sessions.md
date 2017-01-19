@@ -1,6 +1,6 @@
 # Sessions
 
-When you are running multiple apps, the first app to handle the request gets to create the session. When you are running  launcher (see [Launcher](/guides/web/launcher/)), it's always a launcher who creates the session.
+When you are running multiple apps, the first app to handle the request gets to create the session. When you are running  launcher (see [Launcher](/guides/puppet-web-apps/launcher.html)), it's always a launcher who creates the session.
 
 To just use a session that was created by launcher, do:
 
