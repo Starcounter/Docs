@@ -1,6 +1,6 @@
 # Offset Key
 
-Starcounter allows to retrieve query results in portions without need to keep an `Enumerator` (a cursor) with query result open. In addition to standard [OFFSET](/guides/sql/fetch/) clause, Starcounter SQL is extended with `OFFSETKEY` clause, which re-creates the query enumerator and continues after the last retrieved record.
+Starcounter allows to retrieve query results in portions without need to keep an `Enumerator` (a cursor) with query result open. In addition to standard [OFFSET](/guides/SQL/fetch.html) clause, Starcounter SQL is extended with `OFFSETKEY` clause, which re-creates the query enumerator and continues after the last retrieved record.
 
 While a server side cursor can provide a snapshot isolation, the `OFFSETKEY` functionality is a good compromise. It provides for client side cursors with no server side state, just as `OFFSET` does, but without the duplicate or missing records common with `OFFSET`.
 
@@ -8,11 +8,11 @@ While a server side cursor can provide a snapshot isolation, the `OFFSETKEY` fun
 
 You retrieve each portion of the query result by sending a new query, just as you do with a standard `OFFSET` query. Instead of a number indicating the position you should skip to, you instead retrieve a string value (the offset key) at the end of each portion. For the next portion, you provide the exact same query, but with the new key as a parameter value.
 
-The query usually includes [FETCH](/guides/sql/fetch/) clause, which limits each retrieval (each portion). Each query will will begin to retrieve result after the last fetched row from the previous portion, taking into account any deletions, changes or insertions.
+The query usually includes [FETCH](/guides/SQL/fetch.html) clause, which limits each retrieval (each portion). Each query will will begin to retrieve result after the last fetched row from the previous portion, taking into account any deletions, changes or insertions.
 
 The initial query must be identical with the subsequent queries apart from the `FETCH` and `OFFSETKEY` clauses and actual fetch and offset key values supplied. The first time the query is executed (i.e. for the first portion), the offset key value should always be set to `null` or omitted.
 
-The `OFFSETKEY` clause is placed at the end of the `SELECT` statement and can be together with [FETCH](/guides/sql/fetch/) clause, e.g.:
+The `OFFSETKEY` clause is placed at the end of the `SELECT` statement and can be together with [FETCH](/guides/SQL/fetch.html) clause, e.g.:
 
 ```sql
 SELECT u FROM User u FETCH ? OFFSETKEY ?

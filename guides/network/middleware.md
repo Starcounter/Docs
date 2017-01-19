@@ -15,11 +15,11 @@ All middleware is registered with the `Application.Current.Use` API which has th
 ```cs
 static void Main()
 {
-  Application.Current.Use((request) => {
+  Application.Current.Use((Request request) => {
     // Request filter goes here
   });
 
-  Application.Current.Use((request, response) => {
+  Application.Current.Use((Request request, Response response) => {
     // Response filter goes here
   });
 
@@ -38,9 +38,9 @@ When allowing external HTTP requests, it might be useful to pre-process or filte
 An example of this can be an extremely basic spam filter:
 
 ```cs
-Application.Current.Use((req) =>
+Application.Current.Use((Request request) =>
 {
-    if (req.Uri.Contains("spam"))
+    if (request.Uri.Contains("spam"))
     {
         return new Response()
         {
@@ -73,11 +73,11 @@ Response filters do the opposite of request filters; they make alterations to ou
  For example, response filters makes it possible to add a certain HTTP header to responses for requests with a `/special` URI prefix after the request has been dealt with by the handler:
 
 ```cs
-Application.Current.Use((request, response) =>
+Application.Current.Use((Request request, Response response) =>
 {
     if (request.Uri.StartsWith("/special"))
     {
-        resp.Headers["MyHeaderName"] = "MyHeaderValue";
+        response.Headers["MyHeaderName"] = "MyHeaderValue";
         return response;
     }
     return null;
@@ -87,11 +87,11 @@ Application.Current.Use((request, response) =>
 In this case, a new header would be added to the response if the URI of the incoming request started with `/special`. It would then return the response and no other response filters would be called. If the request URI did not start with `/special`, then the next response filter would be called or the response would be returned if there were no more response filters to call. Take a look at this response filter by comparison:
 
 ```cs
-Application.Current.Use((request, response) =>
+Application.Current.Use((Request request, Response response) =>
 {
     if (request.Uri.StartsWith("/special"))
     {
-        resp.Headers["MyHeaderName"] = "MyHeaderValue";
+        response.Headers["MyHeaderName"] = "MyHeaderValue";
     }
     return return;
 });
@@ -208,7 +208,7 @@ class Blocker : IMiddleware
 {
     void IMiddleware.Register(Application application)
     {
-        application.Use((request) =>
+        application.Use((Request request) =>
         {
             return new Response()
             {

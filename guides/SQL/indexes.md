@@ -98,7 +98,7 @@ An execution of the query (17) can make use of the combined index (7) in the rev
 
 ## Index hints in queries
 
-You can give a hint to Starcounter on what index to use for a specific query. See [Hints](/guides/sql/query-plan-hints/) for more information.
+You can give a hint to Starcounter on what index to use for a specific query. See [Hints](/guides/SQL/query-plan-hints.html) for more information.
 
 ## Derived indexes
 
