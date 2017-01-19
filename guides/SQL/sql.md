@@ -1,19 +1,19 @@
 # SQL
 
-Starcounter SQL follows the established standard SQL92 (ANSI INCITS 135-1992, R1998) to support easy data exchange with other databases and external tools. Currently we only support the query part of SQL92 which consists of the `SELECT` statement. See [Limitations](/guides/sql/limitations/).
+Starcounter SQL follows the established standard SQL92 (ANSI INCITS 135-1992, R1998) to support easy data exchange with other databases and external tools. Currently we only support the query part of SQL92 which consists of the `SELECT` statement. See [Limitations](/guides/sql/limitations.html).
 
 ## Calling SQL
 
-You can write SQL queries synchronously integrated with your programming code using a static method `Db.SQL`. See [Querying using SQL](/guides/database/querying-using-sql/).
+You can write SQL queries synchronously integrated with your programming code using a static method `Db.SQL`. See [Querying using SQL](/guides/database/querying-using-sql.html).
 
-You can execute queries in the interactive SQL browser of [Starcounter Administrator](/guides/tools/administrator/).
+You can execute queries in the interactive SQL browser of [Starcounter Administrator](/guides/working-with-starcounter/administrator-web-ui.html).
 
 ## Object extensions to SQL
 
 Starcounter SQL contains some extensions to the SQL92 standard to better deal with objects, since the standard SQL only supports relational databases. For these extensions we follow the Object Data Standard ODMG 3.0 (ISBN 1-55860-647-4). The object extensions in Starcounter SQL are:
 
 - object references,
-- [path expressions](/guides/sql/path-expressions/).
+- [path expressions](/guides/sql/path-expressions.html).
 
 In traditional SQL you can only refer to tables, columns, rows and fields of values. The concept of an "object" is represented by a row in a table. You refer to an "object" by values on its primary key which are some specified columns.
 

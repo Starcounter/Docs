@@ -4,7 +4,7 @@ Starcounter SQL supports sorting (<code>ORDER BY</code>) as exemplified in query
 
 ```sql
 SELECT e.LastName, e.Salary
-  FROM Employee e 
+  FROM Employee e
   ORDER BY e.Salary DESC, e.LastName ASC
 ```
 
@@ -14,4 +14,4 @@ SELECT e.LastName, e.Salary
 CREATE INDEX EmployeeIndex ON Employee (Salary DESC, LastName ASC)
 ```
 
-See more information on [index declaration](/guides/sql/indexes/).</strong>
+See more information on [index declaration](/guides/SQL/indexes.html).</strong>

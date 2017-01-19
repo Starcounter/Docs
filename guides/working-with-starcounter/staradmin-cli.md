@@ -110,7 +110,7 @@ The list command supports the following type of objects to be listed.
 
 * **Databases**. Usage:  `staradmin list db`. List all databases part of the current installation, even those that are not running.
 * **Applications**. Usage:  `staradmin list apps`. List all applications currently running, including information on the database they are running in.
-* **Logs**. Usage:  `staradmin list log`. Shows the content of the server error log. See more usage on the [Error log](/guides/tools/error-log/) page.
+* **Logs**. Usage:  `staradmin list log`. Shows the content of the server error log. See more usage on the [Error log](/guides/working-with-starcounter/error-log.html) page.
 
 ## New command
 

@@ -6,7 +6,7 @@ This page describes the recommended way to create partials or, in other words, n
 2. How to create a partial that uses Starcounter features?
 3. What are the benefits that Starcounter gives for partials?
 
-The examples take benefit of the features of [Web Components](/guides/web/introduction-to-web-components/) and work best in Google Chrome. Other browsers are supported using a [polyfill](http://webcomponents.org/polyfills/).
+The examples take benefit of the features of [Web Components](/guides/puppet-web-apps/introduction-to-web-components.html) and work best in Google Chrome. Other browsers are supported using a [polyfill](http://webcomponents.org/polyfills/).
 
 # Partials in Starcounter
 
@@ -98,7 +98,7 @@ and _HTML insertion point_ in your HTML markup
 Thanks to that, HTML markup will get stamped from external file, and applicable view model will be attached.
 
 ## Advanced Partials usage
-If you want to read in more detail how to use partials, how it technically work, how to extend it, or use outside check at [More on partials](/guides/web/more-on-partials/).
+If you want to read in more detail how to use partials, how it technically work, how to extend it, or use outside check at [More on partials](/guides/puppet-web-apps/more-on-partials.html).
 
 -----
 
