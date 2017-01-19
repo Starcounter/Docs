@@ -56,7 +56,7 @@ You can use fully qualified paths, or relative paths. Relative paths are resolve
 
 ### Code
 
-Resources directory can also be added programmatically in your code, by calling `AppsBootstrapper.AddStaticFileDirectory`. The first parameter is relative/absolute static resources directory and second optional parameter is a port on which files should be served, for example: 
+Resources directory can also be added programmatically in your code, by calling `AppsBootstrapper.AddStaticFileDirectory`. The first parameter is relative/absolute static resources directory and second optional parameter is a port on which files should be served, for example:
 
 ```cs
 AppsBootstrapper.AddStaticFileDirectory("C:\\MyWebsite\\Content", 80);
@@ -67,7 +67,7 @@ In both command-line mode aswell as in Visual Studio, we have shown how to speci
 
 Specify multiple resource directories using ";" (semi-colon) as the separator, like this:
 
-```cmd
+```bash
 star --resourcedir=thirdpartyfiles;images;d:\mywebserver\htmlutils app.exe
 ```
 
@@ -84,6 +84,6 @@ result in an error like this
 
 > ScErrBadArguments (SCERR1001): One or more arguments was invalid. Parameter --resourcedir contains an illegal element: 'foo>>>', error: Illegal characters in path.
 
-## Directory locking 
+## Directory locking
 
 Once any file in the resource directory is served using HTTP - the parent directory can not be removed or renamed. This happens due to file changes observing mechanisms locking it. To be able to rename/delete/move the resource directory - the codehost has to be stopped for that operation.

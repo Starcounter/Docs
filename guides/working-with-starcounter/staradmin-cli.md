@@ -48,7 +48,7 @@ staradmin delete [--force] [--failmissing]
 <strong>Example: delete database </strong>
 
 To create a user-specified database use
-```cmd
+```bash
 C:\>staradmin --database=NewDbName delete db  
 ```
 ##### Command options
@@ -125,7 +125,7 @@ where *type* specifies the kind of artifact to create. To create a database, use
 <strong>Example: create database </strong>
 
 To create a user-specified database use
-```cmd
+```bash
 C:\>staradmin --database=NewDbName new db
 ```
 ##### Object types
@@ -189,11 +189,11 @@ where *type* specifies what should be started. Use  `staradmin start db` to star
 <strong>Example: start database</strong>
 
 To start a user-specified database use
-```cmd
+```bash
 C:\>staradmin --database=UserDbName start db
 ```
 To start the application with <code>.exe</code> extension on a specified database use:
-```cmd
+```bash
 C:\"path to your application">star --database=newdb YourApplicationName.exe
 ```
 To find out more about how to start and stop applications read <a href="/guides/working-with-starcounter/starting-and-stopping-apps.html">this article</a>.
@@ -227,7 +227,7 @@ where *type* will indicate the type of the given reference. As an example, to st
 <strong>Example: stop database</strong>
 
 To start a user-specified database use
-```cmd
+```bash
 C:\>staradmin --database=UserDbName stop db
 ```
 
