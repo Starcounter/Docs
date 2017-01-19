@@ -144,7 +144,7 @@ Just sent XHR for `GET text/html` for `PlaceInViewModel.Html`, and fetch `<templ
 If you want to use elements composition from a Launcher (or layout app), you can simply import it's `starcounter-include` implementation instead of default one.
 
 For example, install [Polyjuice/launcher-include](https://github.com/Polyjuice/launcher-include)
-```sh
+```bash
 $ bower install Polyjuice/launcher-include --save
 ```
 then
