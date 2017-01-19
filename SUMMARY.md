@@ -74,7 +74,6 @@
         * [Client-side stack](guides/puppet-web-apps/client-side-stack.md)
         * [Creating a browser page](guides/puppet-web-apps/creating-a-browser-page.md)
         * [Sessions](guides/puppet-web-apps/sessions.md)
-        * [Creating a browser page without a launcher](guides/puppet-web-apps/creating-a-browser-page-without-a-launcher.md)
         * [Multiple pages](guides/puppet-web-apps/multiple-pages.md)
         * [Partials](guides/puppet-web-apps/partials.md)
         * [More on partials](guides/puppet-web-apps/more-on-partials.md)
