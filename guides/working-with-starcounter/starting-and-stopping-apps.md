@@ -10,7 +10,7 @@ Applications in Starcounter are always run in the context of a single database. 
 
 When you run multiple apps in the same database, as with `hello.exe` and `test.cs` in the example below, they are all loaded into the same database process. The code you load keeps adding to the code being loaded into the database.
 
-Starting apps for the first time, even if you have other apps loaded, is fast. The reason for this is that there is no need to recycle the host process. On the other hand, if you want to restart an application, there is one thing that you have to keep in mind: restarting an app requires the host process to be recycled. The consequence of this is that all other apps that are running need to be stopped, unloaded, and started again. Due to this, it takes significantly more time to restart an application when there are other apps running than when you start an application. 
+Starting apps for the first time, even if you have other apps loaded, is fast. The reason for this is that there is no need to recycle the host process. On the other hand, if you want to restart an application, there is one thing that you have to keep in mind: restarting an app requires the host process to be recycled. The consequence of this is that all other apps that are running need to be stopped, unloaded, and started again. Due to this, it takes significantly more time to restart an application when there are other apps running than when you start an application.
 
 For example, if you have three apps up and running and you would like to start another app, let's name it `app4.exe`. Then you would simply run `star app4.exe` which would start the app without much delay. Now, if you want to **restart** two of the other apps, `app1.exe` and `app2.exe` the situation would be different. Simply running `star app1.exe` would require the host process to be recycled, `app2.exe`, `app3.exe`, and `app4.exe` to be stopped, unloaded, and started again. The same would be the case when we restart `app2.exe`. This code describes the gist of the process:
 
@@ -37,7 +37,7 @@ host = star(app2)
 
 To handle this in cases where you would like to restart a set of applications you can run <code>staradmin stop host</code> and then start the applications one at a time. This allows us to circumvent the inefficient `for` loop and start the application directly. If you have to restart several applications, this is the preferred approach.
 
-In other cases, where you just want to start an application from scratch or restart one or two applications in a small set of apps, you should simply start, or restart the desired application by running <code>star myapp.exe</code>. Starcounter will, in this case, make sure that the state of your applications is maintained and that all applications that were running previously are restarted. This may take some more time, as explained above. 
+In other cases, where you just want to start an application from scratch or restart one or two applications in a small set of apps, you should simply start, or restart the desired application by running <code>star myapp.exe</code>. Starcounter will, in this case, make sure that the state of your applications is maintained and that all applications that were running previously are restarted. This may take some more time, as explained above.
 
 All running Starcounter applications must have a unique name. You cannot run two instances of the same application in a single database.
 
@@ -53,24 +53,24 @@ To see the console output in Administrator, navigate to the database by clicking
 
 To start an app from the command line, you use the ```star``` command. It accepts .cs files in addition to .exe files.
 
-```cmd
+```bash
 C:\> star hello.exe
 [Starting "hello.exe" in "Default" on "Personal" (127.0.0.1:8181)]
-"hello.exe" started in database "Default". Default port is 8080 (Executable), 
+"hello.exe" started in database "Default". Default port is 8080 (Executable),
 8181 (Admin))
 
 C:\> star test.cs
 [Starting "test.cs" in "Default" on "Personal" (127.0.0.1:8181)]
-"test.cs" started in database "Default". Default port is 8080 (Executable), 
+"test.cs" started in database "Default". Default port is 8080 (Executable),
 8181 (Admin))
 ```
 
 The command line option ```--database``` (or ```-d```) can be used to specify what database to run the application in.
 
-```cmd
+```bash
 C:\> star --database=mydb hello.cs
 [Starting "hello.cs" in "mydb" on "Personal" (127.0.0.1:8181)]
-"hello.cs" started in database "mydb". Default port is 8080 (Executable), 
+"hello.cs" started in database "mydb". Default port is 8080 (Executable),
 8181 (Admin))
 ```
 
@@ -92,13 +92,13 @@ In fact, Visual Studio plugin supports most of the ```star.exe``` command line a
 
 ## Stopping
 
-Contrary to desktop programs, the program remains loaded after main has been executed. You can unload all code without stopping the database. The database memory lives in a separate process and the database memory is shared between you program code and the database process. 
+Contrary to desktop programs, the program remains loaded after main has been executed. You can unload all code without stopping the database. The database memory lives in a separate process and the database memory is shared between you program code and the database process.
 
 ### Stoping apps from the command line
 
 In order to unload a program, you need to run the ```star --stop <application>``` command.
 
-```cmd
+```bash
 C:\> star --stop hello.cs
 [Stopping "hello.cs" in "Default" on "Personal" (127.0.0.1:8181)]
   - Restarting database "Default"
