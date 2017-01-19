@@ -51,9 +51,12 @@ Then use `starcounter-include` (_HTML insertion point_), to include it into HTML
 
 <div class="code-name">parent.html</div>
 
+{% raw %}
 ```html
 <starcounter-include partial="{{PlaceInViewModel}}"></starcounter-include>
 ```
+{% endraw %}
+
 or with plain JavaScript, without (Polymer's) two-way data binding with mustaches:
 > <i class="fa fa-exclamation-circle  button-icon-left"></i> Note, that this is just a HTML Element, so it will work as well with your Angular, jQuery, or React magic.
 
@@ -94,12 +97,14 @@ If you want to forcefully disable styling, layout features but still include a d
  1. Create a partial as in [Dynamic partials](#dynamic-partials)
  2. Include it, using `imported-template` insertion point:
 
+{% raw %}
  ```html
  <div>
      <template is="imported-template" model="{{PlaceInViewModel}}"
          content$="{{PlaceInViewModel.Html}}"></template>
  </div>
  ```
+{% endraw %}
 
 ## Partials without any Starcounter UI mixing (mapping and merging)
 
@@ -116,6 +121,7 @@ page.PlaceInViewModel = partialPage;
 
 and insert it into HTML with `<starcounter-include>` or `imported-template` (whichever suits you better)
 
+{% raw %}
 ```html
 <starcounter-include
     partial="{{PlaceInViewModel}}"></starcounter-include>
@@ -125,6 +131,7 @@ or
         content$="{{PlaceInViewModel.Html}}"></template>
 </div>
 ```
+{% endraw %}
 
 ## Fetching partials in my very own way
 
