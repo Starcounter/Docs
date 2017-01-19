@@ -30,15 +30,13 @@ Mapping is how you make the apps share the data on a shared screen.
 
 Starcounter implements 3 distinct mapping APIs:
 
-- [UriMapping.Map](/guides/apps/uri-mapping/). Allows a single request (`Self.GET`) to trigger responses from multiple apps. The common key for the requests is an arbitrary URI (string), used as a key for all of the mapped URIs. This is used to build UI regions like menu, user sign in, launchpad icons.
+- [UriMapping.Map](/guides/mapping-and-blending/uri-mapping.html). Allows a single request (`Self.GET`) to trigger responses from multiple apps. The common key for the requests is an arbitrary URI (string), used as a key for all of the mapped URIs. This is used to build UI regions like menu, user sign in, launchpad icons.
 
-- [UriMapping.OntologyMap](/guides/apps/ontology-mapping/). Allows a single request (`Self.GET`) to trigger responses from multiple apps. The common key for requests is the fully qualified name of a database table (string). This is used to compose a view for a specific type/object (like person form, map for address, etc.).
-
-- [DbMapping.*](/guides/apps/database-mapping/). This is used to map data between data models.
+- [UriMapping.OntologyMap](/guides/mapping-and-blending/ontology-mapping.html). Allows a single request (`Self.GET`) to trigger responses from multiple apps. The common key for requests is the fully qualified name of a database table (string). This is used to compose a view for a specific type/object (like person form, map for address, etc.).
 
 ## Blending
 
-[Blending](/guides/web/blending/) is a feature of a Launcher app that allows to rearrange the rendering of the HTML response. It is the client-side feature that makes the result of `UriMapping.Map` and `UriMapping.OntologyMap` appear like a single app, even though it is composed from separate micro apps.
+[Blending](/guides/mapping-and-blending/blending.html) is a feature of a Launcher app that allows to rearrange the rendering of the HTML response. It is the client-side feature that makes the result of `UriMapping.Map` and `UriMapping.OntologyMap` appear like a single app, even though it is composed from separate micro apps.
 
 {% import "../../macros.html" as macros %}
 
