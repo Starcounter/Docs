@@ -80,7 +80,7 @@ Example file (trimmed and simplified):
 Each database is described by a configuration file. Starcounter will look for such files in the `DatabaseDirectory` as specified in the server configuration file (see above). For a database configuration file to be recognized, it must be stored in a directory that has the name of that database. The file itself must use a pattern using the same name.
 
 Example of two configured files:
-```txt
+```
 \Databases\
   Default\
     Default.db.config
