@@ -103,7 +103,6 @@
     * [Mapping and Blending](guides/mapping-and-blending/mapping-and-blending.md)
         * [Do one thing and do it well](guides/mapping-and-blending/do-one-thing-and-do-it-well.md)
         * [Sharing data](guides/mapping-and-blending/sharing-data.md)
-        * [Database mapping](guides/mapping-and-blending/database-mapping.md)
         * [Sharing screen](guides/mapping-and-blending/sharing-screen.md)
         * [URI mapping](guides/mapping-and-blending/uri-mapping.md)
         * [Ontology mapping](guides/mapping-and-blending/ontology-mapping.md)
