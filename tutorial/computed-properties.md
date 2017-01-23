@@ -7,6 +7,7 @@ Let us compute the `FullName` of a person from their `FirstName` and `LastName` 
 We start by simply adding the `FullName` property to our JSON.
 
 <div class="code-name">PersonJson.json</a></div>
+
 ```json
 "Save$": 0,
 "FullName": ""
@@ -16,6 +17,7 @@ Notice that we don't need to make `FullName` editable because we will modify it 
 
 We now calculate the `FullName` by simply concatenating `FirstName` and `LastName`.
 <div class="code-name">PersonJson.json.cs</div>
+
 ```cs
 class PersonJson : Json
 {
