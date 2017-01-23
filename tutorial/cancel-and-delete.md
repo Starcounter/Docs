@@ -7,6 +7,7 @@ In this part, we will add a cancel and delete button which allows the user to ei
 We start by adding our needed trigger properties for our future buttons to the `PersonJson.json`.
 
 <div class="code-name">PersonJson.json</div>
+
 ```json
 "CurrentBalance": 0,
 "Cancel$": 0,
