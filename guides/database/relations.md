@@ -1,6 +1,6 @@
 # Relations
 
-Starcounter is a database that offers relational access, graph access, object oriented access and document access all rolled into one. We feel that core of the database builds well on the theories of Dr.Codd. We have chosen to premiere implicit primary keys and foreign keys as object references.
+Starcounter is a database that offers relational access, graph access, object oriented access and document access all rolled into one. We feel that core of the database builds well on the [theories of Dr.Codd](https://www.seas.upenn.edu/~zives/03f/cis550/codd.pdf). We have chosen to premiere implicit primary keys and foreign keys as object references.
 
 You can make a traditional SQL query like this (given that you have a PersonId property):
 
