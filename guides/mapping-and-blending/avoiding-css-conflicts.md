@@ -4,17 +4,9 @@ A complex web app is composed out of HTML responses from multiple apps. This mea
 
 How to make sure that your CSS does not have side effects in other apps?
 
-## Future standards way: CSS Scoping
-
-There might be a web standard in future that solves the problem of defining stylesheet for only a part of an HTML document.
-
-[CSS Scoping](https://drafts.csswg.org/css-scoping/) proposal adds a new `scoped` attribute to the `<style>` element. When a stylesheet is provided inside of a `<style scoped>` element, it will only be applied to the current parent element and its children.
-
-So far, this proposal was not approved by Google and Microsoft. [Caniuse.com](http://caniuse.com/#feat=style-scoped) says that the only web browser that implements it as of 2016 is Mozilla Firefox.
-
 ## Current best practices way: BEM
 
-Another approach is to use a naming convention that works in every web browser. The naming convention that Starcounter advises is called BEM (Block Element Modifier).
+The primary way right now to avoid CSS conflicts is to use a naming convention that works in every web browser. The naming convention that Starcounter advises is called BEM (Block Element Modifier).
 
 The basic principle in BEM is to **only use classes in your stylesheets**.
 
@@ -175,3 +167,11 @@ Check out the source code of [KitchenSink](https://github.com/StarcounterSamples
 - [BEM-like Naming (cssguidelin.es)](http://cssguidelin.es/#bem-like-naming)
 - [MindBEMding – getting your head ’round BEM syntax (csswizardry.com)](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)
 - [An Introduction to the BEM Methodology (tutsplus.com)](http://webdesign.tutsplus.com/articles/an-introduction-to-the-bem-methodology--cms-19403)
+
+## Future standards way: CSS Scoping
+
+There might be a web standard in future that solves the problem of defining stylesheet for only a part of an HTML document.
+
+[CSS Scoping](https://drafts.csswg.org/css-scoping/) proposal adds a new `scoped` attribute to the `<style>` element. When a stylesheet is provided inside of a `<style scoped>` element, it will only be applied to the current parent element and its children.
+
+So far, this proposal was not approved by Google and Microsoft. [Caniuse.com](http://caniuse.com/#feat=style-scoped) says that the only web browser that implements it as of 2016 is Mozilla Firefox.

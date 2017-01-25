@@ -35,7 +35,7 @@ To create a list of the expenses we will use the power of Polymer. Our first ste
         <input value="{{model.Description$::input}}">
         <input value="{{model.Amount$::input}}">
     </template>
-<template>
+</template>
 ```
 {% endraw %}
 
