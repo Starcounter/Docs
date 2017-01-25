@@ -69,7 +69,7 @@ The `DeleteAll` handler deletes all the expenses for the current `Person` in the
 
 <div class="code-name">PersonJson.json.cs</div>
 ```cs
-public void RefreshExpenses(IEnumberable<Expense> expenses)
+public void RefreshExpenses(IEnumerable<Expense> expenses)
 {
     this.Expenses.Clear();
     foreach (Expense expense in expenses)
