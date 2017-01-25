@@ -397,6 +397,12 @@ kbd {
   margin-top: 50px;
 }
 
+@-moz-document url-prefix() {
+  .search-dropdown-content {
+    right: 40px;
+  }
+}
+
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {background-color: #f1f1f1}
 
