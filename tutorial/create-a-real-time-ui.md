@@ -9,6 +9,8 @@ Let's create our file structure that contains our view (HTML) and view-model (JS
 3. Add an HTML file into this folder by right-clicking and then choosing `>Add -> New Item... -> Starcounter -> Starcounter HTML template with dom-bind`. Name this file `PersonJson.html`.
 4. Add a JSON file into the root of your project. You can add this by going to `Add -> New Item... -> Starcounter -> Starcounter Typed JSON with Code-behind`. This will create a `.json` and `.json.cs` file. Both of these should have the name PersonJson.
 
+![file structure](/assets/file-structure.PNG)
+
 Now that we have a solid file structure we can continue by creating our view.
 
 Our view will be, for now, a simple interface displaying the `FirstName` and `LastName` of our `Person` instance.
