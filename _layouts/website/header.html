@@ -30,9 +30,23 @@
         <div class="company-button-background">
           <a class="company-button" href="https://starcounter.com/">COMPANY</a>
         </div>
+        <i onclick="toggleSearchDropdown()" class="fa fa-search search-dropdown"></i>
+        <div class="search-dropdown-content"></div>
       </div>
     </div>
     <script>
+    toggleSearchDropdown = function() {
+        document.getElementsByClassName("search-dropdown-content")[0].classList.toggle("show");
+    }
+
+    window.addEventListener("load", function() {
+      if (document.getElementsByClassName("big-header-buttons") != null) {
+        var search = document.getElementById("book-search-input");
+        document.getElementsByClassName("search-dropdown-content")[0].appendChild(search);
+      }
+    })
+
+
     /* When the user clicks on the button,
     toggle between hiding and showing the dropdown content */
     function toggleDropdown() {
@@ -41,16 +55,23 @@
 
     // Close the dropdown menu if the user clicks outside of it
     window.onclick = function(event) {
-      if (!event.target.matches('.dropbtn')) {
-
+      if (!event.target.matches('.dropbtn') && document.getElementsByClassName("big-header-buttons") == null) {
         var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
+        for (var i = 0; i < dropdowns.length; i++) {
           var openDropdown = dropdowns[i];
           if (openDropdown.classList.contains('show')) {
             openDropdown.classList.remove('show');
           }
         }
+      }
+
+      // Not a very beautiful if clause
+      if (!event.target.matches(".search-dropdown") &&
+          !event.target.matches("#book-search-input input") &&
+          !event.target.matches("#book-search-input") &&
+          document.getElementsByClassName("big-header-buttons") != null &&
+          document.getElementsByClassName("search-dropdown-content")[0].classList.contains("show")){
+            document.getElementsByClassName("search-dropdown-content")[0].classList.remove("show");
       }
     }
 

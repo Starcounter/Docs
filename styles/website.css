@@ -210,6 +210,17 @@ kbd {
   color: #f47e0c;
 }
 
+.big-header-buttons .fa-search{
+  font-size: 35px;
+  padding: 10px;
+  color: black;
+}
+
+.big-header-buttons .fa-search:hover {
+  background: linear-gradient(0deg, white 94%, #f47e0c 6%);
+  color: #f47e0c;
+}
+
 /* Add a margin top to the hamburger to align with the logo */
 
 .book-header .btn {
@@ -367,11 +378,32 @@ kbd {
     display: block;
 }
 
+.search-dropdown {
+  position: relative;
+  display: inline-block;;
+  float: right;
+  margin-right: 10px;
+}
+
+.search-dropdown-content {
+  display: none;
+  position: absolute;
+  height: 50px;
+  width: 230px;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1000;
+  margin-top: 50px;
+}
+
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {background-color: #f1f1f1}
 
 /* Show the dropdown menu (added with js from header.html) */
-.show {display:block;}
+.show {
+  display:block;
+}
 
 /* Make space for header */
 .book-summary {
@@ -405,11 +437,11 @@ script {
   margin: 10px 15px;
 }
 
-[value="http://docs.starcounter.io/v/middleware-revamp/"] {
-  display: none !important;
-}
-
 #book-search-input {
   border-bottom: none !important;
   margin-bottom: 0 !important;
+}
+
+a .js-toolbar-action {
+  display: none;
 }
