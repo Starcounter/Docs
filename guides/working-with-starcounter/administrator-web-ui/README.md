@@ -87,7 +87,7 @@ In the SQL browser of a database you can write queries to that database. See [SQ
 The queries that are supported by the method <code>Db.SQL</code> are also supported here with few differences:
 
 - [literals](/guides/SQL/literals) are supported,
-- [variables](/guides/SQL/variables) are <strong>not</strong> supported.
+- [variables](/guides/database/variables) are <strong>not</strong> supported.
 - literals of type <code>Binary</code> are <strong>not</strong> supported.
 
 Before running a query an executable that defines the class should be started in the targeted database. Then queries are issued in terms of database classes and properties defined in the executable(s). Classes correspond to tables and properties or fields - to columns in SQL queries.

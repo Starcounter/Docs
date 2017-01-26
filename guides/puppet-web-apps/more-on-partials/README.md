@@ -76,7 +76,7 @@ It will stamp template from `GET text/html` for `Page.Html`, and attach `GET app
 
 ## Dynamic partials with Mixed Apps
 
-If you run your [dynamic partials](#dynamic-partials) with [mixed apps](/guides/mapping-and-blending/mapping-and-blending.html) environment, Starcounter may attach other apps' responses that matches the concept from your partial.
+If you run your [dynamic partials](#dynamic-partials) with [mixed apps](/guides/mapping-and-blending/) environment, Starcounter may attach other apps' responses that matches the concept from your partial.
 
 Fortunately, you do not have to bother about this much, the C# code remains untouched, and Starcounter will handle it by itself. You only need to be aware that few more elements may get stamped from your `starcounter-include` (`imported-template`).
 
