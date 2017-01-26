@@ -14,4 +14,4 @@ String concatenation (<code><var>x</var> || <var>y</var></code>) is supported. S
 SELECT e.FirstName || ' ' || e.LastName FROM Employee e
 ```
 
-For the expected datatypes of an arithmetic operation, see [Datatypes](/guides/database/datatypes.html).
+For the expected datatypes of an arithmetic operation, see [Datatypes](/guides/database/datatypes).

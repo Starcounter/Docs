@@ -6,7 +6,7 @@ This page describes the recommended way to create partials or, in other words, n
 2. How to create a partial that uses Starcounter features?
 3. What are the benefits that Starcounter gives for partials?
 
-The examples take benefit of the features of [Web Components](/guides/puppet-web-apps/introduction-to-web-components.html) and work best in Google Chrome. Other browsers are supported using a [polyfill](http://webcomponents.org/polyfills/).
+The examples take benefit of the features of [Web Components](/guides/puppet-web-apps/introduction-to-web-components) and work best in Google Chrome. Other browsers are supported using a [polyfill](http://webcomponents.org/polyfills/).
 
 # Partials in Starcounter
 
@@ -25,7 +25,7 @@ A page of a Starcounter app can be accessed either:
 
 ### Partial
 
-**Partial** is a conceptually separated UI part (like person form, map for address, etc.) returned as the response to an HTTP request. The request may come from the inside of an app as well as from the outside (through [mapping](/guides/mapping-and-blending/mapping-and-blending.html)).
+**Partial** is a conceptually separated UI part (like person form, map for address, etc.) returned as the response to an HTTP request. The request may come from the inside of an app as well as from the outside (through [mapping](/guides/mapping-and-blending/mapping-and-blending)).
 
 Technically, a partial is a triplet consisting of the following:
 
@@ -98,20 +98,20 @@ and _HTML insertion point_ in your HTML markup
 Thanks to that, HTML markup will get stamped from external file, and applicable view model will be attached.
 
 ## Advanced Partials usage
-If you want to read in more detail how to use partials, how it technically work, how to extend it, or use outside check at [More on partials](/guides/puppet-web-apps/more-on-partials.html).
+If you want to read in more detail how to use partials, how it technically work, how to extend it, or use outside check at [More on partials](/guides/puppet-web-apps/more-on-partials).
 
 -----
 
 # Partials and Mixed Apps
 
-With small enhancement to simple partials shown above, Starcounter gives a huge experience improvement to the entire ecosystem of [mixed apps](/guides/mapping-and-blending/mapping-and-blending.html).
+With small enhancement to simple partials shown above, Starcounter gives a huge experience improvement to the entire ecosystem of [mixed apps](/guides/mapping-and-blending/mapping-and-blending).
 
 By using _partials_ the way we suggest, you support unlimited UI integration between all other apps, without any API pain.
 
 ## Definitions:
 
 ### Merged Partial
-**merged partial** is a _partial_ from given main app (origin of `Self.GET` request) concatenated with partial sibling responses from other apps [mapped](/guides/mapping-and-blending/mapping-and-blending.html) to the same Starcounter ontology
+**merged partial** is a _partial_ from given main app (origin of `Self.GET` request) concatenated with partial sibling responses from other apps [mapped](/guides/mapping-and-blending/mapping-and-blending) to the same Starcounter ontology
 
 ##### Example:
 **Merged JSON view model** send to the browser. Individual view-models are name-spaced. However, you should not bother about it too much - `<starcounter-include>` will resolve it for you.
@@ -171,7 +171,7 @@ By using _partials_ the way we suggest, you support unlimited UI integration bet
 ## Partial Usage
 In echosystem of Starcounter apps _partials_ are used and created exactly as in any other standalone Starcounter app, the only difference is that _merged partial_ may get included into _insertion point_, so the children list of HTML node `<starcounter-include partial="{{SubPage}}"></starcounter-include>` may contain nodes from other apps as well, and JSON subtree at this node may contain namespaced view models from other apps.
 
-For more details check [More on partials](/guides/puppet-web-apps/more-on-partials.html).
+For more details check [More on partials](/guides/puppet-web-apps/more-on-partials).
 
 ## Features for Partials in Starcounter
 

@@ -56,7 +56,7 @@ represented as <code>UInt64</code>, and all approximate numerical types <code>Si
 
 ## Arithmetic operations
 
-The datatype of the result of an [arithmetic operation](/guides/sql/data-operators.html) is one of the following:
+The datatype of the result of an [arithmetic operation](/guides/sql/data-operators) is one of the following:
 
 1. <code>Double</code> (representing approximate numeric values) [highest precedence],
 2. <code>Decimal</code> (representing exact numeric values),

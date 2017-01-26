@@ -46,7 +46,7 @@ The double curly bracket syntax is a way of denoting two-way bindings in Polymer
 In the JSON file, create three properties called `Html`, `FirstName`, and `LastName`. The values of these properties will be the values that are bound to the Polymer bindings that we just created _and_ the database. It is therefore crucial, for this example, that you name these keys the same as the properties that we have in our Person class, otherwise they will not bind properly.
 
 <aside class="read-more">
-    <a href="/guides/typed-json/json-data-binding.html">Learn more about JSON bindings</a>
+    <a href="/guides/typed-json/json-data-binding">Learn more about JSON bindings</a>
 </aside>
 
 <div class="code-name">PersonJson.json</div><div class="code-name code-title">Set JSON</div>
@@ -71,7 +71,7 @@ partial class PersonJson : Json
 Go to `Program.cs` and type in the following code inside the `Main()` method. This code adds the correct information to our previously empty JSON file and creates a new [session](/guides/puppet-web-apps/sessions.html).
 
 <aside class="read-more">
-    <a href="/guides/puppet-web-apps/puppet-web-apps.html">Read more about sessions, partials and more</a>
+    <a href="/guides/puppet-web-apps/puppet-web-apps">Read more about sessions, partials and more</a>
 </aside>
 
 <div class="code-name">Program.cs</div><div class="code-name code-title">Bind JSON</div>
@@ -97,7 +97,7 @@ Handle.GET("/HelloWorld", () =>
 ```
 `Application.Current.Use(new HtmlFromJsonProvider())` looks in your JSON file for the `Html` property and sends that document to your web browser.
 
-`Application.Current.Use(new PartialToStandaloneHtmlProvider());` sends the necessary files to inititate our [WebSocket](/guides/network/websocket.html) connection.
+`Application.Current.Use(new PartialToStandaloneHtmlProvider());` sends the necessary files to inititate our [WebSocket](/guides/network/websocket) connection.
 
 We have now established a model-view-view-model (MVVM) binding that's real time. The JSON, which is our view-model, is bound to the model (database) with no latency; our view, the HTML, is in turn bound to the JSON, which is synced in real time using WebSocket and HTTP. Polymer helps us display this instantaneously to the user.
 
