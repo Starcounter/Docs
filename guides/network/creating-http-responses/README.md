@@ -101,7 +101,7 @@ Handle.GET("/postponed", (Request req) =>
 });
 ```
 
-Please refer to [External HTTP calls and Node usage](/guides/network/external-http-calls.html) article for more information.
+Please refer to [External HTTP calls and Node usage](/guides/network/external-http-calls) article for more information.
 
 ## Summary of adjustable Response fields
 

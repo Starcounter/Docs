@@ -1,6 +1,6 @@
 # Introduction to Web Components
 
-If you are writing web applications and you're allowed to use modern browser features, Web Components is a very powerful ally. A very good introduction can be found on [WebComponents.org](http://webcomponents.org/tags/introduction/), but we will provide you with a quick summary.
+If you are writing web applications and you're allowed to use modern browser features, Web Components is a very powerful ally. A very good introduction can be found on [WebComponents.org](https://www.webcomponents.org/introduction/), but we will provide you with a quick summary.
 
 ![web components breakdown](/assets/web-components-breakdown.png)
 
@@ -46,4 +46,4 @@ Thousands of open sourced Custom Elements can be found on [customelements.io](ht
 
 Last but not least, the HTML Imports spec is the part of Web Components family that defines how to obtain fragments of code using a `<link>` tag. As can be seen on the above snippet, this is how a definition of a Custom Element is loaded.
 
-In addition to loading Custom Elements, Starcounter takes benefit from HTML Imports to compose complex apps using small templates known as  [partials](/guides/puppet-web-apps/partials.html), but you don't need to care much about that because it is done behind the scenes.
+In addition to loading Custom Elements, Starcounter takes benefit from HTML Imports to compose complex apps using small templates known as  [partials](/guides/puppet-web-apps/partials/), but you don't need to care much about that because it is done behind the scenes.

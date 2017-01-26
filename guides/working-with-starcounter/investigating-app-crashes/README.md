@@ -6,6 +6,6 @@ If your application crashed:
 
 1. Find event with ```event_id = 1000``` in Windows application log reporting crash of ```sccode.exe```. If the entry exists, you should enable Windows local crash dump collection.
 
-2. To enable Windows local crash dump collection, create a registry key ```HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps\@DumpType = 2``` and reproduce a crash. To finetune crash dumps collection, follow this article from Microsoft: [Collecting User-Mode Dumps](https://msdn.microsoft.com/en-us/library/bb787181(VS.85).aspx).
+2. To enable Windows local crash dump collection, create a registry key ```HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps\@DumpType = 2``` and reproduce a crash. To finetune crash dumps collection, follow this article from Microsoft: [Collecting User-Mode Dumps](https://msdn.microsoft.com/en-us/library/bb787181.aspx).
 
 3. On the next time of crash, collect the dumps at ``` %LOCALAPPDATA%\CrashDumps```.

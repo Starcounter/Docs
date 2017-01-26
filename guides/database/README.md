@@ -4,10 +4,10 @@ In Starcounter, classes are tables and class instances are rows. The database ob
 Read more in [Creating database classes](/guides/database/creating-database-classes) and [Data manipulation](/guides/database/data-manipulation).
 
 ## Object identity and object references
-Starcounter is a database that offers relational access, graph access, object oriented access and document access all rolled into one. We recommend using [object references](/guides/database/object-identity-and-object-refereces) (implicit keys) rather than primary keys and foreign keys (explicit keys) as object references.
+Starcounter is a database that offers relational access, graph access, object oriented access and document access all rolled into one. We recommend using [object references](/guides/database/object-identity-and-object-references/) (implicit keys) rather than primary keys and foreign keys (explicit keys) as object references.
 
 ## SQL
-Each class marked with the `[Database]` attribute or inheriting a class marked with the `[Database]` attribute are available to the [SQL query language](/guides/database/querying-using-sql). There is no [ORM](http://en.wikipedia.org/wiki/Object-relational\_mapping\) mapping needed as classes and tables are one and the same in Starcounter.
+Each class marked with the `[Database]` attribute or inheriting a class marked with the `[Database]` attribute are available to the [SQL query language](/guides/database/querying-using-sql). There is no [ORM](https://en.wikipedia.org/wiki/Object-relational_mapping) mapping needed as classes and tables are one and the same in Starcounter.
 
 ## Relations
 Using object references in your code instead of foreign keys, it is easier than ever to create [relations](/guides/database/relations) between objects. There are patters for creating [one-to-many](/guides/database/one-to-many-relations) and [many-to-many](/guides/database/many-to-many-relations) relations.

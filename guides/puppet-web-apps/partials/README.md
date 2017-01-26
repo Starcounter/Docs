@@ -25,7 +25,7 @@ A page of a Starcounter app can be accessed either:
 
 ### Partial
 
-**Partial** is a conceptually separated UI part (like person form, map for address, etc.) returned as the response to an HTTP request. The request may come from the inside of an app as well as from the outside (through [mapping](/guides/mapping-and-blending/mapping-and-blending)).
+**Partial** is a conceptually separated UI part (like person form, map for address, etc.) returned as the response to an HTTP request. The request may come from the inside of an app as well as from the outside (through [mapping](/guides/mapping-and-blending/)).
 
 Technically, a partial is a triplet consisting of the following:
 

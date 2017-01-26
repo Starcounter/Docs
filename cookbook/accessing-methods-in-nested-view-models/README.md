@@ -86,7 +86,7 @@ The example above shows how the <code>CustomElementRelationPage.json.cs</code> c
 ## Read more
 
 [MSDN Delegates](https://msdn.microsoft.com/en-us/library/ms173171.aspx)
-[MSDN Action Delegate](https://msdn.microsoft.com/en-us/library/system.action(v=vs.110).aspx)
+[MSDN Action Delegate](https://msdn.microsoft.com/en-us/library/system.action.aspx)
 
 
 ## See the full example
