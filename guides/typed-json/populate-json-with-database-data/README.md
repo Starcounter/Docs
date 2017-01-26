@@ -1,6 +1,6 @@
 # Populate JSON with database data
 
-In the [previous example](/guides/json/), we populated the JSON object with arbitrary data. A common scenario is that you want to create a JSON object from database data or from some CLR object. This can of course be done by setting one property at the time and iterating over result sets manually. But you can also bind the JSON object to a CLR object.
+In an [earlier example](/guides/typed-json/json-by-example/), we populated the JSON object with arbitrary data. A common scenario is that you want to create a JSON object from database data or from some CLR object. This can of course be done by setting one property at the time and iterating over result sets manually. But you can also bind the JSON object to a CLR object.
 
 ## Declaring the JSON document
 CLR objects and JSON documents work in concert. To create a JSON document that represents a CLR object, declare the class name of the root database object in the `DataType` metadata property. Metadata properties can be declared in a JSON object literal in the `$` property. This will map the entire JSON tree to the database object hierarchy by matching the property names. The data now lives in database RAM rather than .NET RAM. This is done at compile time such that you get compilation errors if you misspell a property and performance is maintained.

@@ -1,6 +1,6 @@
 # SQL
 
-Starcounter SQL follows the established standard SQL92 (ANSI INCITS 135-1992, R1998) to support easy data exchange with other databases and external tools. Currently we only support the query part of SQL92 which consists of the `SELECT` statement. See [Limitations](/guides/sql/limitations).
+Starcounter SQL follows the established standard SQL92 (ANSI INCITS 135-1992, R1998) to support easy data exchange with other databases and external tools. Currently we only support the query part of SQL92 which consists of the `SELECT` statement. See [Limitations](/guides/SQL/limitations).
 
 ## Calling SQL
 
