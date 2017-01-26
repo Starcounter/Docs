@@ -2,17 +2,17 @@
 
 * [Introduction](README.md)
 
-* [Tutorial](tutorial/hello-world-tutorial.md)
-    * [Create a Database Class](tutorial/create-a-database-class.md)
-    * [Create a Real Time UI](tutorial/create-a-real-time-ui.md)
-    * [First Interactive UI](tutorial/first-interactive-ui.md)
-    * [Computed Properties](tutorial/computed-properties.md)
-    * [Expense Tracker](tutorial/expense-tracker.md)
-    * [Cancel and Delete](tutorial/cancel-and-delete.md)
-    * [Using a Shared Data Model](tutorial/using-a-shared-data-model.md)
-    * [Mapper App for Images](tutorial/mapper-app-for-images.md)
-    * [UI Blending](tutorial/ui-blending.md)
-    * [The Next Step](tutorial/the-next-step.md)
+* [Tutorial](tutorial/README.md)
+    * [Create a Database Class](tutorial/create-a-database-class/README.md)
+    * [Create a Real Time UI](tutorial/create-a-real-time-ui/README.md)
+    * [First Interactive UI](tutorial/first-interactive-ui/README.md)
+    * [Computed Properties](tutorial/computed-properties/README.md)
+    * [Expense Tracker](tutorial/expense-tracker/README.md)
+    * [Cancel and Delete](tutorial/cancel-and-delete/README.md)
+    * [Using a Shared Data Model](tutorial/using-a-shared-data-model/README.md)
+    * [Mapper App for Images](tutorial/mapper-app-for-images/README.md)
+    * [UI Blending](tutorial/ui-blending/README.md)
+    * [The Next Step](tutorial/the-next-step/README.md)
 
 * [Guides](guides/guides.md)
 
