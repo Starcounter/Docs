@@ -14,4 +14,4 @@ SELECT e.LastName, e.Salary
 CREATE INDEX EmployeeIndex ON Employee (Salary DESC, LastName ASC)
 ```
 
-See more information on [index declaration](/guides/SQL/indexes.html).</strong>
+See more information on [index declaration](/guides/SQL/indexes).</strong>

@@ -7,7 +7,7 @@ We will start by creating a Starcounter application in Visual Studio by going to
 Establish a new class called <code>Person</code> with the attribute <code>[Database]</code> inside the <code>HelloWorld</code> namespace. This attribute tag will make all instances of the class persistent. Add the fields <code>FirstName</code> and <code>LastName</code> to this class. Your code should now look like this:
 
 <aside class="read-more">
-    <a href="/guides/database/creating-database-classes.html">Read about the  [Database] attribute</a>
+    <a href="/guides/database/creating-database-classes">Read about the  [Database] attribute</a>
 </aside>
 
 <div class="code-name">Program.cs</div><div class="code-name code-title">Define database</div>
@@ -35,7 +35,7 @@ namespace HelloWorld
 Add your first instance to the database by defining a new person, its properties, and wrapping it in a <code>Db.Transact()</code> which will keep this person in the database.
 
 <aside class="read-more">
-    <a href="/guides/transactions/transactions.html">Read more about transactions in Starcounter</a>
+    <a href="/guides/transactions/">Read more about transactions in Starcounter</a>
 </aside>
 
 <div class="code-name">Program.cs</div><div class="code-name code-title">Add instance</div>

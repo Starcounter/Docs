@@ -53,4 +53,4 @@ Since Starcounter SQL supports object references, you also need a way to represe
 SELECT e FROM Employee e WHERE e = OBJECT 123
 ```
 
-<strong>Performance note</strong>: In code, for performance reasons, are not allowed to use literals. Instead you should use [variables](/guides/database/variables.html) and parameters with values.
+<strong>Performance note</strong>: In code, for performance reasons, are not allowed to use literals. Instead you should use [variables](/guides/database/variables) and parameters with values.
