@@ -41,4 +41,4 @@ http://localhost:8080/hello/Olle
 Welcome Olle you are 49 years old.
 ```
 
-> More information about using cURL and other HTTP clients can be found on page [Testing HTTP Requests](/guides/working-with-starcounter/testing-http-requests.html)
+> More information about using cURL and other HTTP clients can be found on page [Testing HTTP Requests](/guides/working-with-starcounter/testing-http-requests)

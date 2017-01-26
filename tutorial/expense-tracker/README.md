@@ -5,7 +5,7 @@ We will now turn our application into a simple expense tracker. This will allow 
 With Starcounter you can divide a view-model into several smaller view-models that are called partials. That's exactly what we will do with our application. We will let PersonJson be one view-model and ExpenseJson another. Doing this makes our application more modular and easier to maintain. Let's start by creating the appropriate files.
 
 <aside class="read-more">
-    <a href="/guides/puppet-web-apps/partials.html">Read more about partials</a>
+    <a href="/guides/puppet-web-apps/partials">Read more about partials</a>
 </aside>
 
 1. Add a new Starcounter HTML template with dom-bind in the HelloWorld folder together with `PersonJson.html`. Name it `ExpenseJson.html`.
@@ -137,7 +137,7 @@ public decimal CurrentBalance => Db.SQL<decimal>("SELECT SUM(e.Amount) FROM Hell
 These two are calculated every time they are used by searching through the database so that they are always up to date.
 
 <aside class="read-more">
-    <a href="/guides/SQL/sql.html">Learn more about using SQL in Starcounter</a>
+    <a href="/guides/SQL/">Learn more about using SQL in Starcounter</a>
 </aside>
 
 Inside the Program class, you should also add the following GET handler which helps with looking up the expenses.

@@ -13,7 +13,7 @@ This is how it will look when you are done:
 
 In order to get through this tutorial, you will need to fulfill the [system requirements](http://starcounter.io/download/) which includes having Visual Studio and the [latest stable release](http://downloads.starcounter.com/download) of Starcounter installed.
 
-Since the author is a mere mortal, there might be mistakes in the code or text. If you experience that something doesn't work as intended, you can look at the source code that can be found [here](https://github.com/StarcounterSamples/HelloWorld). Each commit in this repository represents one step in the tutorial. For further explanations of the concepts discussed, you can take a look at the [guide section](/guides/guides.html).
+Since the author is a mere mortal, there might be mistakes in the code or text. If you experience that something doesn't work as intended, you can look at the source code that can be found [here](https://github.com/StarcounterSamples/HelloWorld). Each commit in this repository represents one step in the tutorial. For further explanations of the concepts discussed, you can take a look at the [guide section](/guides/).
 
 There's also a video edition of this tutorial available on our [youtube channel](https://www.youtube.com/watch?v=HyRoctAmYdU&list=PLzBy_ulksMjDppM_aNr4DedQDwYd4PL9Q) if that's your preferred format.
 

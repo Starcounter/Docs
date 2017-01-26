@@ -29,7 +29,7 @@ Handle.GET("/images/partials/concept-expense/{?}", (string objectId) => {
 {% endraw %}
 
 <aside class="read-more">
-   <a href="/guides/mapping-and-blending/ontology-mapping.html">Learn about ontology mapping</a>
+   <a href="/guides/mapping-and-blending/ontology-mapping">Learn about ontology mapping</a>
 </aside>
 
 To get the applications up and running correctly, start them in this order:

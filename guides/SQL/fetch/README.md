@@ -39,4 +39,4 @@ The standard `OFFSET` functionality typically used in RESTful web applications h
 
 Furthermore, `OFFSET` has performance limitations, since it is difficult to know which objects should be retrieved from each table to skip the requested number of rows in the result.
 
-For the reasons outlined above, it is advised to use [`OFFSETKEY`](/guides/SQL/offset-key.html) instead of OFFSET.
+For the reasons outlined above, it is advised to use [`OFFSETKEY`](/guides/SQL/offset-key) instead of OFFSET.

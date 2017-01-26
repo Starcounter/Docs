@@ -24,7 +24,7 @@ SELECT m.MyProperty FROM MyClass m
 ```
 
 If you have some identifier in your database schema that conflicts with some
-[reserved words](/guides/SQL/reserved-words.html) in Starcounter SQL, you can tell the SQL parser that the term should not be interpreted as the reserved word by putting it inside double quotes, as in query below. 
+[reserved words](/guides/SQL/reserved-words) in Starcounter SQL, you can tell the SQL parser that the term should not be interpreted as the reserved word by putting it inside double quotes, as in query below. 
 
 ```sql
 SELECT n."Left", n."Right" FROM Node n

@@ -93,7 +93,7 @@ namespace TestHooks
 ```
 {% endraw %}
 
-The output produced is as follows (accurate to [ObjectNo](/guides/database/object-identity-and-object-references.html)):
+The output produced is as follows (accurate to [ObjectNo](/guides/database/object-identity-and-object-references)):
 
 ```
 Hooked: Object 29 is created

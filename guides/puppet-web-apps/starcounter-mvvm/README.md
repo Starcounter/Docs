@@ -22,7 +22,7 @@ Unlike most database systems, the view-model is mirrored between the client and 
 
 While it might sound expensive to keep a copy of each clients view on the server, all data on the server, including all the database data is already in RAM so very little new RAM needs to be allocated to keep track of what is going on. After all, more data exists in the database than is currently on screen on the clients at any given moment for most business applications.
 
-<aside class="read-more"><a href="/guides/typed-json.html">Read more about Typed JSON in Starcounter</a></aside>
+<aside class="read-more"><a href="/guides/typed-json">Read more about Typed JSON in Starcounter</a></aside>
 
 Starcounter view-models are Typed JSONs defined by the server. Although JSON is merely a text based notation format for object trees, the Typed JSON implementation is a dynamic runtime tree that allows you to add, remove and change objects.
 
