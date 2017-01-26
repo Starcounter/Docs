@@ -38,7 +38,7 @@ In web you can see, that Starcounter provides a <code>default</code> database in
 
 When no applications are running default database is uninitialized.
 
-<blockquote>You can read more about StarAdmin Command Line Interface <a href="/guides/working-with-starcounter/staradmin-cli.html">here</a>.</blockquote>
+<blockquote>You can read more about StarAdmin Command Line Interface <a href="/guides/working-with-starcounter/staradmin-cli">here</a>.</blockquote>
 
 
 #### Creating and deleting databases
@@ -82,12 +82,12 @@ On the Database page apps can be Started, Stopped and Deleted.
 
 #### Executing SQL queries
 
-In the SQL browser of a database you can write queries to that database. See [SQL reference](/guides/SQL/sql.html) for details on syntax.
+In the SQL browser of a database you can write queries to that database. See [SQL reference](/guides/SQL/) for details on syntax.
 
 The queries that are supported by the method <code>Db.SQL</code> are also supported here with few differences:
 
-- [literals](/guides/SQL/literals.html) are supported,
-- [variables](/guides/SQL/variables.html) are <strong>not</strong> supported.
+- [literals](/guides/SQL/literals) are supported,
+- [variables](/guides/SQL/variables) are <strong>not</strong> supported.
 - literals of type <code>Binary</code> are <strong>not</strong> supported.
 
 Before running a query an executable that defines the class should be started in the targeted database. Then queries are issued in terms of database classes and properties defined in the executable(s). Classes correspond to tables and properties or fields - to columns in SQL queries.

@@ -4,7 +4,7 @@ A widely accepted <a href="http://databases.about.com/cs/administration/g/refint
 
 You can get a more in-depth explanation of this concept on <a href="https://en.wikipedia.org/wiki/Referential_integrity">Wikipedia</a>.
 
-Starcounter does not, in the status quo, have complete support for referential integrity. Instead, referential integrity can be achieved using <a href="/guides/transactions/commit-hooks.html">commit hooks</a> which allow the developer to ensure that the correct corresponding item is deleted or added when removing or committing an item to the database.
+Starcounter does not, in the status quo, have complete support for referential integrity. Instead, referential integrity can be achieved using <a href="/guides/transactions/commit-hooks">commit hooks</a> which allow the developer to ensure that the correct corresponding item is deleted or added when removing or committing an item to the database.
 
 These commit hooks should be implemented in a separate class and then registered when the application is started. Here's an example of that:
 
@@ -112,7 +112,7 @@ There are essentially two things that are done here:
 
 As an alternative to the `BeforeDelete` commit hook, you can use the Starcounter method `OnDelete`.
 
-`OnDelete` works similar to the `OnData` and `HasChanged` callback methods that are explained <a href="/guides/typed-json/callback-methods-of-starcounter-js.html">here</a>. It executes some code every time an instance of that class is deleted. To accomplish this you have to make use of the `IEntity` interface.
+`OnDelete` works similar to the `OnData` and `HasChanged` callback methods that are explained <a href="/guides/typed-json/callback-methods-of-starcounter-js">here</a>. It executes some code every time an instance of that class is deleted. To accomplish this you have to make use of the `IEntity` interface.
 
 This is how it would look in code:
 ```cs
@@ -133,4 +133,4 @@ Database constraints define certain requirements that a database has to comply w
 
 Starcounter does not have database constraints as a part of its schema definition. As a consequence of this, you cannot define constraints in Starcounter the same way you would do with most SQL databases.
 
-One of the most common constraints is the unique constraint which states that values in specified columns must be unique for every row in the table. This constraint can be set in Starcounter, even though it's not a part of the schema definition, by using [indexes](/guides/SQL/indexes.html).
+One of the most common constraints is the unique constraint which states that values in specified columns must be unique for every row in the table. This constraint can be set in Starcounter, even though it's not a part of the schema definition, by using [indexes](/guides/SQL/indexes).

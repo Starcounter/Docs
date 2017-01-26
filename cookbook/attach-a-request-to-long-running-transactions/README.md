@@ -48,7 +48,7 @@ Handle.GET<string>("/people/persons/{?}", (string id) =>
 
 ## Read more
 
-[Guide: Long-running transactions](/guides/transactions/long-running-transactions.html)
+[Guide: Long-running transactions](/guides/transactions/long-running-transactions)
 
 ## See the full example
 
