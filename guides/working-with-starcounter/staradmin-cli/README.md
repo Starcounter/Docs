@@ -110,7 +110,7 @@ The list command supports the following type of objects to be listed.
 
 * **Databases**. Usage:  `staradmin list db`. List all databases part of the current installation, even those that are not running.
 * **Applications**. Usage:  `staradmin list apps`. List all applications currently running, including information on the database they are running in.
-* **Logs**. Usage:  `staradmin list log`. Shows the content of the server error log. See more usage on the [Error log](/guides/working-with-starcounter/error-log.html) page.
+* **Logs**. Usage:  `staradmin list log`. Shows the content of the server error log. See more usage on the [Error log](/guides/working-with-starcounter/error-log) page.
 
 ## New command
 
@@ -196,12 +196,14 @@ To start the application with <code>.exe</code> extension on a specified databas
 ```bash
 C:\"path to your application">star --database=newdb YourApplicationName.exe
 ```
-To find out more about how to start and stop applications read <a href="/guides/working-with-starcounter/starting-and-stopping-apps.html">this article</a>.
-The console output does not go to the console, but directed to a server side memory buffer and it is possible to view it from the <a href="/guides/working-with-starcounter/administrator-web-ui.html">Administrator Web UI</a>.
+
+To find out more about how to start and stop applications read <a href="/guides/working-with-starcounter/starting-and-stopping-apps">this article</a>.
+The console output does not go to the console, but directed to a server side memory buffer and it is possible to view it from the <a href="/guides/working-with-starcounter/administrator-web-ui">Administrator Web UI</a>.
 
 **NOTE**: Starting databases or the server like this is not the normal scenario. Instead, Starcounter employs a design where processes are started on demand. When starting applications, using `star <app>` or from within Visual Studio, doing "Start" on a **Starcounter Application project**, these processes are started for you automatically (if not already running).
 
 *Starting the "foo" database*
+
 ```nginx
 staradmin -d=foo start db
 Starting foo (started, code host PID: 6048)

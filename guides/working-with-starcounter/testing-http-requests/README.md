@@ -86,4 +86,4 @@ xhr.send('{"FirstName":"Olle","LastName":"Svensson", "Age":49}');
 
 Note that the web browser will execute the above request only if it is called from a document that was loaded from the same domain or if the server implements [CORS](http://enable-cors.org/).
 
-The server side code that handles this request can be found here: [Accepting JSON in requests](/guides/restful-web-apps/accepting-json-in-requests.html)
+The server side code that handles this request can be found here: [Accepting JSON in requests](/guides/restful-web-apps/accepting-json-in-requests)
