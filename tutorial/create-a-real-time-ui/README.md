@@ -46,7 +46,7 @@ The double curly bracket syntax is a way of denoting two-way bindings in Polymer
 In the JSON file, create three properties called `Html`, `FirstName`, and `LastName`. The values of these properties will be the values that are bound to the Polymer bindings that we just created _and_ the database. It is therefore crucial, for this example, that you name these keys the same as the properties that we have in our Person class, otherwise they will not bind properly.
 
 <aside class="read-more">
-    <a href="/guides/typed-json/json-data-binding">Learn more about JSON bindings</a>
+    <a href="/guides/typed-json/json-data-bindings">Learn more about JSON bindings</a>
 </aside>
 
 <div class="code-name">PersonJson.json</div><div class="code-name code-title">Set JSON</div>
@@ -71,7 +71,7 @@ partial class PersonJson : Json
 Go to `Program.cs` and type in the following code inside the `Main()` method. This code adds the correct information to our previously empty JSON file and creates a new [session](/guides/puppet-web-apps/sessions.html).
 
 <aside class="read-more">
-    <a href="/guides/puppet-web-apps/puppet-web-apps">Read more about sessions, partials and more</a>
+    <a href="/guides/puppet-web-apps/">Read more about sessions, partials and more</a>
 </aside>
 
 <div class="code-name">Program.cs</div><div class="code-name code-title">Bind JSON</div>
