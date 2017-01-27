@@ -1,4 +1,4 @@
-# Database Refactoring in 2.3
+# Database Refactoring in
 
 ### About
 
@@ -64,9 +64,9 @@ namespace AddField
     {
         static void Main()
         {
-            Db.Transact(() => 
-            { 
-                new Foo(); 
+            Db.Transact(() =>
+            {
+                new Foo();
             });
         }
     }
@@ -80,7 +80,7 @@ using Starcounter;
 namespace AddField
 {
     [Database]
-    public class Foo 
+    public class Foo
     {
         public string Bar;
     }
@@ -89,9 +89,9 @@ namespace AddField
     {
         static void Main()
         {
-            Db.Transact(() => 
-            { 
-                new Foo(); 
+            Db.Transact(() =>
+            {
+                new Foo();
             });
         }
     }
@@ -135,9 +135,9 @@ namespace AddProperty
     {
         static void Main()
         {
-            Db.Transact(() => 
-            { 
-                new Foo(); 
+            Db.Transact(() =>
+            {
+                new Foo();
             });
         }
     }
@@ -150,7 +150,7 @@ using Starcounter;
 namespace AddProperty
 {
     [Database]
-    public class Foo 
+    public class Foo
     {
         public string Bar { get; set; }
     }
@@ -159,9 +159,9 @@ namespace AddProperty
     {
         static void Main()
         {
-            Db.Transact(() => 
-            { 
-                new Foo(); 
+            Db.Transact(() =>
+            {
+                new Foo();
             });
         }
     }
@@ -205,9 +205,9 @@ namespace AddProperty
     {
         static void Main()
         {
-            Db.Transact(() => 
-            { 
-                new Foo(); 
+            Db.Transact(() =>
+            {
+                new Foo();
             });
         }
     }
@@ -229,13 +229,13 @@ namespace AddProperty
     {
         static void Main()
         {
-            Db.Transact(() => 
-            { 
-                new Foo(); 
+            Db.Transact(() =>
+            {
+                new Foo();
             });
-            Db.Transact(() => 
-            { 
-                new Bar(); 
+            Db.Transact(() =>
+            {
+                new Bar();
             });
         }
     }
@@ -274,7 +274,7 @@ using Starcounter;
 namespace RemoveField
 {
     [Database]
-    public class Foo 
+    public class Foo
     {
         public string Bar;
     }
@@ -283,12 +283,12 @@ namespace RemoveField
     {
         static void Main()
         {
-            Db.Transact(() => 
-            { 
-                new Foo() 
-                { 
-                    Bar = "Value" 
-                }; 
+            Db.Transact(() =>
+            {
+                new Foo()
+                {
+                    Bar = "Value"
+                };
             });
         }
     }
@@ -307,9 +307,9 @@ namespace RemoveField
     {
         static void Main()
         {
-            Db.Transact(() => 
-            { 
-                new Foo(); 
+            Db.Transact(() =>
+            {
+                new Foo();
             });
         }
     }
@@ -350,7 +350,7 @@ using Starcounter;
 namespace RemoveProperty
 {
     [Database]
-    public class Foo 
+    public class Foo
     {
         public string Bar { get; set; }
     }
@@ -359,12 +359,12 @@ namespace RemoveProperty
     {
         static void Main()
         {
-            Db.Transact(() => 
-            { 
-                new Foo() 
-                { 
-                    Bar = "Value" 
-                }; 
+            Db.Transact(() =>
+            {
+                new Foo()
+                {
+                    Bar = "Value"
+                };
             });
         }
     }
@@ -383,9 +383,9 @@ namespace RemoveProperty
     {
         static void Main()
         {
-            Db.Transact(() => 
-            { 
-                new Foo(); 
+            Db.Transact(() =>
+            {
+                new Foo();
             });
         }
     }
@@ -429,7 +429,7 @@ namespace RemoveClass
     public class Foo {}
 
     [Database]
-    public class Bar 
+    public class Bar
     {
         public string Value { get; set; }
     }
@@ -438,16 +438,16 @@ namespace RemoveClass
     {
         static void Main()
         {
-            Db.Transact(() => 
-            { 
-                new Foo(); 
+            Db.Transact(() =>
+            {
+                new Foo();
             });
-            Db.Transact(() => 
-            { 
-                new Bar() 
-                { 
-                    Value = "Value" 
-                }; 
+            Db.Transact(() =>
+            {
+                new Bar()
+                {
+                    Value = "Value"
+                };
             });
         }
     }
@@ -466,9 +466,9 @@ namespace RemoveClass
     {
         static void Main()
         {
-            Db.Transact(() => 
-            { 
-                new Foo(); 
+            Db.Transact(() =>
+            {
+                new Foo();
             });
         }
     }
@@ -512,7 +512,7 @@ using Starcounter;
 namespace RenameField
 {
     [Database]
-    public class Foo 
+    public class Foo
     {
         public string Bar;
     }
@@ -521,9 +521,9 @@ namespace RenameField
     {
         static void Main()
         {
-            Db.Transact(() => 
-            { 
-                new Foo(); 
+            Db.Transact(() =>
+            {
+                new Foo();
             });
         }
     }
@@ -536,7 +536,7 @@ using Starcounter;
 namespace RenameField
 {
     [Database]
-    public class Foo 
+    public class Foo
     {
         public string BarRenamed;
     }
@@ -545,9 +545,9 @@ namespace RenameField
     {
         static void Main()
         {
-            Db.Transact(() => 
-            { 
-                new Foo(); 
+            Db.Transact(() =>
+            {
+                new Foo();
             });
         }
     }
@@ -571,7 +571,7 @@ using Starcounter;
 namespace RenameProperty
 {
     [Database]
-    public class Foo 
+    public class Foo
     {
         public string Bar { get; set; }
     }
@@ -580,9 +580,9 @@ namespace RenameProperty
     {
         static void Main()
         {
-            Db.Transact(() => 
-            { 
-                new Foo(); 
+            Db.Transact(() =>
+            {
+                new Foo();
             });
         }
     }
@@ -595,7 +595,7 @@ using Starcounter;
 namespace RenameProperty
 {
     [Database]
-    public class Foo 
+    public class Foo
     {
         public string BarRenamed { get; set; }
     }
@@ -604,9 +604,9 @@ namespace RenameProperty
     {
         static void Main()
         {
-            Db.Transact(() => 
-            { 
-                new Foo(); 
+            Db.Transact(() =>
+            {
+                new Foo();
             });
         }
     }
@@ -636,9 +636,9 @@ namespace RenameClass
     {
         static void Main()
         {
-            Db.Transact(() => 
-            { 
-                new Foo(); 
+            Db.Transact(() =>
+            {
+                new Foo();
             });
         }
     }
@@ -657,9 +657,9 @@ namespace RenameClass
     {
         static void Main()
         {
-            Db.Transact(() => 
-            { 
-                new FooRenamed(); 
+            Db.Transact(() =>
+            {
+                new FooRenamed();
             });
         }
     }

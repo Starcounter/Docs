@@ -1,4 +1,4 @@
-# Configuration Structure in 2.3
+# Configuration Structure
 
 ### Introduction
 
