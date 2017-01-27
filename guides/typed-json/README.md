@@ -19,10 +19,7 @@ The following is a list of the tokens in JSON and the equivalence in C#:
 | `"value"` | String |
 | `123` | Int64 |
 | `true`/`false` | Boolean |
-| `1.234` | Decimal |
-| `2E3` | Double |
-
-**NOTE:** From version 2.3.0.4343 (and forward) the syntax for double and decimal types have changed. The default C# type will always be `Decimal` for values containing a decimal point or exponent.
+| `1.234` and `2E3` | Decimal |
 
 To specify that a member in Json-by-example should be of type `Double` is done in the code-behind file.
 
