@@ -1,4 +1,4 @@
-# Database Refactoring in
+# Database Refactoring
 
 ### About
 
