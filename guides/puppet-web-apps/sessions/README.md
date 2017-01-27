@@ -26,33 +26,18 @@ New session is created by calling constructor on `Session` class. Current sessio
 
 Current session is determined and set automatically before user handler is called. Presence of session is determined by one of the ways described below.
 
-Here are some examples of creating a new session (property `UseSessionCookie` is described below). All examples will produce the same result:
+Here are some examples of creating a new session.
 
 ```cs
 Json m = new Json();
+Session s = new Session();
 
-// Creating a new session
+// The json and the session can then be connected by either setting the `Data` property on the
+// session or setting the `Session` property on json. Both will have the exact same outcome.
 
-Session.Current = new Session()
-{
-    Data = m,
-    UseSessionCookie = true
-};
-
-// Above is EXACTLY the same as
-
-m.Session = new Session()
-{
-    UseSessionCookie = true
-};
-
-// Above is EXACTLY the same as
-
-m.Session = new Session()
-{
-    UseSessionCookie = true,
-    Data = m
-};
+s.Data = m;
+// OR
+m.Session = s;
 ```
 
 ## Session determination
@@ -77,12 +62,11 @@ Handle.PATCH(/usesession/{?}, (Session session, Request request) =>
 
 * Session Cookie:
 
-`Session` object has a property called `UseSessionCookie` indicating that a Web browser's cookie `ScSessionCookie` should be used for transferring the session value. Client's Web browser can store and automatically send the `ScSessionCookie` cookie containing the session.
-NOTE: whenever `UseSessionCookie` is set, the `Location` header that is specified in the first case is not used.
+Use of automatic session cookie and the property `UseSessionCookie` have been obsoleted. Instead enable adding a header on outgoing response by setting property `UseSessionHeader` to `true` and optionally specify name of header with `SessionHeaderName` (default `X-Location`).
 
 **NOTE:**
-The priorities for session determination are the following (latter has higher priority than previous):
-session on socket, `Referer` header, session cookie, `X-Referer` header, session URI parameter.
+The priorities for session determination, for incoming requests, are the following (latter has higher priority than previous):
+session on socket, `Referer` header, `X-Referer` header, session URI parameter.
 
 ## Useful Session properties
 
