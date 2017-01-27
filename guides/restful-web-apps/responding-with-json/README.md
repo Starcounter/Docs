@@ -68,4 +68,4 @@ class Hello
 }
 ```
 
-> Browse the guide to find more information about [JSON](/guides/typed-json) and [Response](/guides/network/handling-http-requests)
+> Browse the guide to find more information about [JSON](/guides/typed-json/) and [Response](/guides/network/handling-http-requests)
