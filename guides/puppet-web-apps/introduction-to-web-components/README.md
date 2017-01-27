@@ -30,7 +30,7 @@ This is only a fraction of what would be required in traditional frameworks, suc
 
 Starcounter let's you create JSON view-models that expose the current application state. To render it in the UI, it is the simplest to use a client-side framework that provides two-way data binding between HTML and JSON.
 
-The `<template>` tag that was added to HTML5 as part of the Web Components spec family. It allows to define reusable chunks of HTML that work with any framework that supports this new web standard. Because it is now an established standard, we decided to use it to power [partials](/guides/puppet-web-apps/partials.html).
+The `<template>` tag that was added to HTML5 as part of the Web Components spec family. It allows to define reusable chunks of HTML that work with any framework that supports this new web standard. Because it is now an established standard, we decided to use it to power [partials](/guides/puppet-web-apps/partials).
 
 ## Custom Elements and Shadow DOM
 
