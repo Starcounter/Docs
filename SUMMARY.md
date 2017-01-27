@@ -123,8 +123,8 @@
         * [Run Starcounter in production](guides/working-with-starcounter/run-starcounter-in-production/README.md)
         * [Weaver](guides/working-with-starcounter/weaver/README.md)
         * [Investigating app crashes](guides/working-with-starcounter/investigating-app-crashes/README.md)
-        * [Configuration Structure in 2.3](guides/working-with-starcounter/configuration-structure-in-2.3/README.md)
-        * [Database Refactoring in 2.3](guides/working-with-starcounter/database-refactoring-in-2.3/README.md)
+        * [Configuration Structure](guides/working-with-starcounter/configuration-structure/README.md)
+        * [Database Refactoring](guides/working-with-starcounter/database-refactoring/README.md)
         * [Migrating from 2.2 to 2.3+](guides/working-with-starcounter/migrating-from-2.2-to-2.3+/README.md)
 
 * [Cookbook](cookbook/README.md)
