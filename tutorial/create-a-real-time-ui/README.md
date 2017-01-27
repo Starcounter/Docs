@@ -68,7 +68,7 @@ Before we move on, quickly make sure that your partial class in `PersonJson.json
 partial class PersonJson : Json
 ```
 
-Go to `Program.cs` and type in the following code inside the `Main()` method. This code adds the correct information to our previously empty JSON file and creates a new [session](/guides/puppet-web-apps/sessions.html).
+Go to `Program.cs` and type in the following code inside the `Main()` method. This code adds the correct information to our previously empty JSON file and creates a new [session](/guides/puppet-web-apps/sessions).
 
 <aside class="read-more">
     <a href="/guides/puppet-web-apps/">Read more about sessions, partials and more</a>

@@ -62,7 +62,7 @@ Welcome Olle you are 49 years old.
 
 ## Postman
 
-[Postman](https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm) is a graphical tool that comes as a Google Chrome Extension. It saves the previously sent requests which makes it convenient to reuse them.
+[Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop) is a graphical tool that comes as a Google Chrome Extension. It saves the previously sent requests which makes it convenient to reuse them.
 
 The below screenshot shows the same request (& response) as above, sent in Postman:
 
