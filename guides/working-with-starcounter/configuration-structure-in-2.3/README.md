@@ -2,7 +2,7 @@
 
 ### Introduction
 
-In this page, it's described how the Starcounter configuration structure looks after downloading &lt;a href="http://downloads.starcounter.com/"&gt;Starcounter 2.3&lt;/a&gt; and where to find the essential directories and configuration files.
+In this page, it's described how the Starcounter configuration structure looks after downloading <a href="http://downloads.starcounter.com/">Starcounter 2.3</a> and where to find the essential directories and configuration files.
 
 ### Established directories on installation
 
