@@ -5,11 +5,14 @@
 There are two exceptions:
 
 - It is still and will be used to mark editable properties.
-- Due to technical restrictions it is the only way to use the [Reuse](#Reuse-in-version-2.3.0.4343+) keyword.
-
-**NOTE: In versions starting with 2.3.0.4343 (currently labeled pnext) and forward the syntax for specifying reuse is changed, and can be specified in code-behind. The syntax is explained in the [Reuse](#reuse-same-json-object) section.**
+- Due to technical restrictions it is the only way to use the `Reuse` keyword.
 
 Properties declared in JSON (the view-model) can be bound to either a property in the code-behind file or a CLR object that exposes one or more public properties. Properties that are bound will read and write the values directly to the underlying object with no need to manually transfer the values to the view-model.
+
+## Rules when bindings are created
+1. If a code-behind file exists, a property is searched for there.
+2. If a property was not found in the code-behind or no code-behind exists, a property in the data object is searched for.
+3. If no property was found in steps 1 and 2 and the binding is set to `Auto`, the property will be unbound. If binding was set to `Bound` an exception will be raised.
 
 ### Default behaviour
 
@@ -233,51 +236,7 @@ PersonJson.DefaultTemplate.Street.BindingStrategy = BindingStrategy.Unbound;
 ...
 ```
 
-### Reuse same JSON object
-
-The `Reuse` keyword is used to reuse same JSON object multiple times. For example there is a page with list of entities and a page with an entity details. The entity itself is the same for both pages. It sounds reasonable to use same JSON object in both cases. The following code snippet demonstrates how to achieve that.
-
-##### EntityJson.json
-
-```json
-{
-    "Key": "",
-    "Name": "",
-    "Description": ""
-}
-```
-
-##### ListPage.json
-
-```json
-{
-    "Items": [{
-        "$": { "Reuse": "AppNamespace.EntityJson" }
-    }]
-}
-```
-
-##### DetailsPage.json
-
-```json
-{
-    "Entity": {
-        "$": { "Reuse": "AppNamespace.EntityJson.cs" }
-    }
-}
-```
-
-**Note:** in case of `Reuse` you cannot specify custom code-behind class.
-
-```cs
-[ListPage_json.Items]
-partial class ListPageItem : Json
-{
-    //This is wrong since the EntityJson.cs class already exists.
-}
-```
-
-#### Reuse in version 2.3.0.4343+
+#### Reuse the same JSON object
 
 ##### ListPage.json
 
@@ -364,10 +323,3 @@ static PersonPage()
 }
 ```
 Now, the code will compile successfully because it is explicitly described that the `Age` property will not be bound. This is further described in the section "Opt-out of Bindings".
-
-<section class="hero"><code>IExplicitBound</code> requires Starcounter 2.2.2.3779, 2.3.0.4846 or higher. <code>IBound</code> can still be used the same way and in the same versions as before.</section>
-
-### Rules when bindings are created
-1. If a code-behind file exists, a property is searched for there.
-2. If a property was not found in the code-behind or no code-behind exists, a property in the data object is searched for.
-3. If no property was found in steps 1 and 2 and the binding is set to `Auto`, the property will be unbound. If binding was set to `Bound` an exception will be raised.
