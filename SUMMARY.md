@@ -77,6 +77,7 @@
         * [Multiple pages](guides/puppet-web-apps/multiple-pages/README.md)
         * [Partials](guides/puppet-web-apps/partials/README.md)
         * [More on partials](guides/puppet-web-apps/more-on-partials/README.md)
+        * [HTML Template Guidelines](guides/puppet-web-apps/html-template-guidelines/README.md)
         * [Introduction to Web Components](guides/puppet-web-apps/introduction-to-web-components/README.md)
         * [Using Web Components](guides/puppet-web-apps/using-web-components/README.md)
         * [Import HTML composition](guides/puppet-web-apps/import-html-composition/README.md)
