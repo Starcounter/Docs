@@ -33,7 +33,7 @@ Middleware does not impact internal `Self.GET` calls.
 
 When allowing external HTTP requests, it might be useful to pre-process or filter out certain requests before the designated handler is called. Request filters make it possible to do exactly that. They are lists of user-supplied delegates, or filters, that are executed on external requests before the actual handlers are called. These filters are executed one by one until one of the filters returns a non-null `Response`. If a `Response` was returned from the request filter, then this response is returned to the client without calling the handler. If none of the filters returned a `Response` object, then the request will be passed on and dealt with by the handler.
 
-![Middleware example](../../assets/Middleware-example.PNG)
+![Middleware example](../../../assets/Middleware-example.PNG)
 
 An example of this can be an extremely basic spam filter:
 
@@ -68,7 +68,7 @@ This only affects request filters and not response filters.
 
 Response filters do the opposite of request filters; they make alterations to outgoing responses. They work similarly to request filters by being executed one by one until one returns a non-null response, the main difference is that response filters are called after the handler has been called while request filters are called before. Response filters can either create entirely new responses and return those, or simply modify the response coming from the handler.
 
-![Middleware response example](../../assets/middleware-response.PNG)
+![Middleware response example](../../../assets/middleware-response.PNG)
 
  For example, response filters makes it possible to add a certain HTTP header to responses for requests with a `/special` URI prefix after the request has been dealt with by the handler:
 
