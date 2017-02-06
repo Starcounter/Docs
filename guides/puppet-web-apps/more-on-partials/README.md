@@ -36,7 +36,7 @@ Handle.GET("/your/partial/url", () =>
 request it in parent Handler:
 
 ```csharp
-Handle.GET("/parent/path", (String objectId) =>
+Handle.GET("/parent/path/{?}", (String objectId) =>
 {
     ParentPage page = new ParentPage()
     {
