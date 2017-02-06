@@ -169,7 +169,7 @@ By using _partials_ the way we suggest, you support unlimited UI integration bet
 ```
 
 ## Partial Usage
-In echosystem of Starcounter apps _partials_ are used and created exactly as in any other standalone Starcounter app, the only difference is that _merged partial_ may get included into _insertion point_, so the children list of HTML node `<starcounter-include partial="{{SubPage}}"></starcounter-include>` may contain nodes from other apps as well, and JSON subtree at this node may contain namespaced view models from other apps.
+In the ecosystem of Starcounter apps, _partials_ are used and created exactly as in any other standalone Starcounter app, the only difference is that _merged partial_ may get included into the _insertion point_, so the children list of HTML node `<starcounter-include partial="{{SubPage}}"></starcounter-include>` may contain nodes from other apps as well, and JSON subtree at this node may contain namespaced view models from other apps.
 
 For more details check [More on partials](/guides/puppet-web-apps/more-on-partials).
 
