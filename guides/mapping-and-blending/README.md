@@ -28,7 +28,7 @@ As you start the apps, they are weaved to the database. At this point:
 
 Mapping is how you make the apps share the data on a shared screen.
 
-Starcounter implements 3 distinct mapping APIs:
+Starcounter implements 2 distinct mapping APIs:
 
 - [UriMapping.Map](/guides/mapping-and-blending/uri-mapping). Allows a single request (`Self.GET`) to trigger responses from multiple apps. The common key for the requests is an arbitrary URI (string), used as a key for all of the mapped URIs. This is used to build UI regions like menu, user sign in, launchpad icons.
 

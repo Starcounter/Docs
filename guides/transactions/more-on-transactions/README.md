@@ -42,16 +42,16 @@ To the method <code>Transact</code> you pass a delegate with the code that
 should be run within the transaction.
 
 ```cs
-Db.Transact(delegate()
+Db.Transact(() =>
 {
-    String query = "SELECT e FROM Employee e";
-    QueryResultRows<Employee> result = Db.SQL<Employee>(query);
-    foreach (Employee emp in result)
+    new Employee
     {
-        Console.WriteLine(emp.FirstName + " " + emp.LastName);
-    }
+        FirstName = "Samwise",
+        LastName = "Gamgee"
+    };
 });
 ```
+
 ## Nested transactions
 
 Code within nested transaction scopes will be run within the same transaction,
