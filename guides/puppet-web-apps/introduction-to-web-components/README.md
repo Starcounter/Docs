@@ -15,9 +15,9 @@ For instance, Web Components allow us to render a list of products and their bar
 <link rel="import" href="/sys/x-barcode/src/x-barcode.html">
 <link rel="import" href="/sys/puppet-client/puppet-client.html">
 <template id="root">
-  <template repeat="{{Products}}">
-    <h1>{{Name}}</h1>
-    <x-barcode code="{{Barcode}}"></x-barcode>
+  <template is="dom-repeat" items="{{model.Products}}">
+    <h1>{{item.Name}}</h1>
+    <x-barcode code="{{item.Barcode}}"></x-barcode>
   </template>
 </template>
 <puppet-client ref="root"></puppet-client>

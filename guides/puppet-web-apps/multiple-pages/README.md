@@ -148,18 +148,16 @@ namespace MultiplePagesDemo
 </head>
 
 <body>
-    <template id="root" bind>
+    <template id="root" is="dom-bind">
         <ul class="col-left">
-            <template repeat="{{Mails}}">
-                <li><a href="{{Url}}">{{Title}}</a></li>
+            <template is="dom-repeat" items="{{model.Mails}}">
+                <li><a href="{{item.Url}}">{{item.Title}}</a></li>
             </template>
         </ul>
 
         <div class="col-right">
-            <template bind="{{Focused}}">
-                <h1>{{Title}}</h1>
-                <article>{{Content}}</article>
-            </template>
+            <h1>{{model.Focused.Title}}</h1>
+            <article>{{model.Focused.Content}}</article>
         </div>
     </template>
     <puppet-client ref="root"></puppet-client>
