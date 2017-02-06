@@ -14,7 +14,7 @@ public class Person
 [Database]
 public class Employee : Person
 {
-  public Person Manager;
+  public Employee Manager;
 }
 ```
 
