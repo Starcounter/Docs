@@ -7,7 +7,7 @@ Menu partial from the People application:
 ```cs
 Handle.GET("/people/menu", () =>
 {
-    return new Page() { Html = "/People/viewmodels/Menu.html" };
+    return new Json() { Html = "/People/viewmodels/Menu.html" };
 });
 ```
 
@@ -16,7 +16,7 @@ Menu partial from the Products application:
 ```cs
 Handle.GET("/products/menu", () =>
 {
-    return new Page() { Html = "/products/viewmodels/Menu.html" };
+    return new Json() { Html = "/products/viewmodels/Menu.html" };
 });
 ```
 
