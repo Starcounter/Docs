@@ -27,7 +27,7 @@ using Starcounter.Templates;
 
 namespace ModelChangeEventTestProject
 {
-    partial class Page2 : Page
+    partial class Page2 : Json
     {
         protected override void HasChanged(TValue property)
         {
@@ -36,7 +36,7 @@ namespace ModelChangeEventTestProject
     }
 
     [Page2_json.Property2]
-    partial class Page2Property2 : Page
+    partial class Page2Property2 : Json
     {
         protected override void HasChanged(TValue property)
         {
