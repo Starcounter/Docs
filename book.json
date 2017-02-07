@@ -1,9 +1,6 @@
 {
 	"plugins": ["-hightlight", "prism", "collapsible-menu"],
 	"pluginsConfig": {
-		"versions": {
-			"type": "branches"
-		},
 		"prism": {
 			"css": [
 				"prismjs/themes/prism-tomorrow.css"
