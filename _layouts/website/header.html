@@ -39,12 +39,13 @@
         document.getElementsByClassName("search-dropdown-content")[0].classList.toggle("show");
     }
 
-    window.addEventListener("load", function() {
-      if (document.getElementsByClassName("big-header-buttons") != null) {
-        var search = document.getElementById("book-search-input");
-        document.getElementsByClassName("search-dropdown-content")[0].appendChild(search);
-      }
-    })
+    // Move the searchbar to the dropdown
+
+    var gitbook = gitbook || [];
+    gitbook.push(function() {
+      var search = document.getElementById("book-search-input");
+      document.getElementsByClassName("search-dropdown-content")[0].appendChild(search);
+    });
 
 
     /* When the user clicks on the button,
