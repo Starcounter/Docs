@@ -40,6 +40,10 @@ s.Data = m;
 m.Session = s;
 ```
 
+By default communication with jsonpatch and version control of the attached viewmodel are enabled (more information about how versioning works can be found at http://tomalec.github.io/PuppetJs-operational-transformation/why-puppet-ot.html) when creating a new Session.
+
+To disable viewmodel versioning use the constructor that takes a `Session.Flags` parameter with value of set to `Flags.None`, i.e. `new Session(Session.Flags.None);`
+
 ## Session determination
 
 Starcounter Gateway uses one of the following ways to determine the session that should be used for calling user handler.
