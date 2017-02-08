@@ -25,26 +25,26 @@ If you are using Starcounter JSON binding features, you can make your partials m
 ```csharp
 Handle.GET("/your/partial/url", () =>
 {
-    Page page = new Page()
+    var json = new Json()
     {
         Html = "/path/to/partial.html"
     };
     // ...
-    return page;
+    return json;
 });
 ```
 request it in parent Handler:
 
 ```csharp
-Handle.GET("/parent/path", (String objectId) =>
+Handle.GET("/parent/path/{?}", (String objectId) =>
 {
-    ParentPage page = new ParentPage()
+    var json = new ParentJson()
     {
         Html = "/parent.html"
     };
-    page.PlaceInViewModel = (Page)Self.GET("/your/partial/url");
+    json.PlaceInViewModel = (Json)Self.GET("/your/partial/url");
     // ...
-    return page;
+    return json;
 });
 ```
 Then use `starcounter-include` (_HTML insertion point_), to include it into HTML:
@@ -69,7 +69,7 @@ var insertionPoint = document.querySelector("#partialInsertionPoint");
 insertionPoint.partial = model.PlaceInViewModel;
 ```
 
-It will stamp template from `GET text/html` for `Page.Html`, and attach `GET application/json` for `Page` node - `Page` data model.
+It will stamp template from `GET text/html` for `Json.Html`, and attach `GET application/json` for `Json` node - `Json` data model.
 
 
 > In fact all that data is usually already there, so there is no need to actual request, this just just conceptual description.
@@ -111,12 +111,12 @@ If you want to forcefully disable styling, layout features but still include a d
 If you are sure, yo do not want Starcounter mixing of other apps, you can simply return your partial without `Self.GET`:
 
 ```csharp
-Page partialPage = new Page()
+var partialJson = new Json()
 {
     Html = "/path/to/partial.html"
 };
 // ...
-page.PlaceInViewModel = partialPage;
+json.PlaceInViewModel = partialJson;
 ```
 
 and insert it into HTML with `<starcounter-include>` or `imported-template` (whichever suits you better)
