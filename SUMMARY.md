@@ -2,13 +2,6 @@
 
 * [Introduction](README.md)
 
-* [Starcounter](starcounter/README.md)
-    * [Collapsing the Stack](starcounter/collapsing-the-stack/README.md)
-        * [Complexity and Scalability Tradeoff](starcounter/collapsing-the-stack/complexity-and-scalability-tradeoff/README.md)
-        * [The Future of Micro-Services](starcounter/collapsing-the-stack/the-future-of-micro-services/README.md)
-        * [10 Benefits of Collapsing the Stack](starcounter/collapsing-the-stack/10-benefits-of-collapsing-the-stack/README.md)
-    * [Integrated Database and Web Server](starcounter/integrated-database-and-web-server/README.md)
-
 * [Tutorial](tutorial/README.md)
     * [Create a Database Class](tutorial/create-a-database-class/README.md)
     * [Create a Real Time UI](tutorial/create-a-real-time-ui/README.md)
@@ -22,6 +15,7 @@
     * [The Next Step](tutorial/the-next-step/README.md)
 
 * [Guides](guides/README.md)
+
     * [Database](guides/database/README.md)
         * [Creating Database Classes](guides/database/creating-database-classes/README.md)
         * [Data manipulation](guides/database/data-manipulation/README.md)
@@ -37,6 +31,7 @@
         * [Database configuration](guides/database/database-configuration/README.md)
         * [Comparing database objects](guides/database/comparing-database-objects/README.md)
         * [Referential Integrity and Constraints](guides/database/referential-integrity-and-constraints/README.md)
+
     * [SQL](guides/SQL/README.md)
         * [Identifiers](guides/SQL/identifiers/README.md)
         * [Literals](guides/SQL/literals/README.md)
@@ -56,11 +51,13 @@
         * [Limitations](guides/SQL/limitations/README.md)
         * [Query for Database Tables](guides/SQL/query-for-database-tables/README.md)
         * [SQL isolation between applications](guides/SQL/sql-isolation-between-applications/README.md)
+
     * [Transactions](guides/transactions/README.md)
         * [Commit hooks](guides/transactions/commit-hooks/README.md)
         * [More on transactions](guides/transactions/more-on-transactions/README.md)
         * [Long running transactions](guides/transactions/long-running-transactions/README.md)
         * [Running background jobs](guides/transactions/running-background-jobs/README.md)
+
     * [Typed JSON](guides/typed-json/README.md)
         * [JSON-by-example](guides/typed-json/json-by-example/README.md)
         * [Code-behind](guides/typed-json/code-behind/README.md)
@@ -69,6 +66,7 @@
         * [Primitive arrays and single value types](guides/typed-json/primitive-arrays-and-single-value-types/README.md)
         * [Typed JSON Internals](guides/typed-json/typed-json-internals/README.md)
         * [Callback methods of Starcounter JS](guides/typed-json/callback-methods-of-starcounter-js/README.md)
+
     * [Puppet web apps](guides/puppet-web-apps/README.md)
         * [Starcounter MVVM](guides/puppet-web-apps/starcounter-mvvm/README.md)
         * [Thin vs fat client](guides/puppet-web-apps/thin-vs-fat-client/README.md)
@@ -83,9 +81,11 @@
         * [Using Web Components](guides/puppet-web-apps/using-web-components/README.md)
         * [Import HTML composition](guides/puppet-web-apps/import-html-composition/README.md)
         * [Acceptance testing with Selenium](guides/puppet-web-apps/acceptance-testing-with-selenium/README.md)
+
     * [RESTful web apps](guides/restful-web-apps/README.md)
         * [Responding with JSON](guides/restful-web-apps/responding-with-json/README.md)
         * [Accepting JSON in requests](guides/restful-web-apps/accepting-json-in-requests/README.md)
+
     * [Network](guides/network/README.md)
         * [Handling HTTP requests](guides/network/handling-http-requests/README.md)
         * [Anonymous or substitute handlers](guides/network/anonymous-or-substitute-handlers/README.md)
@@ -99,6 +99,7 @@
         * [TCP sockets](guides/network/tcp-sockets/README.md)
         * [UDP sockets](guides/network/udp-sockets/README.md)
         * [Network Gateway](guides/network/network-gateway/README.md)
+
     * [Mapping and Blending](guides/mapping-and-blending/README.md)
         * [Do one thing and do it well](guides/mapping-and-blending/do-one-thing-and-do-it-well/README.md)
         * [Sharing data](guides/mapping-and-blending/sharing-data/README.md)
@@ -109,6 +110,7 @@
         * [Blending](guides/mapping-and-blending/blending/README.md)
         * [Avoiding URI conflicts](guides/mapping-and-blending/avoiding-uri-conflicts/README.md)
         * [Avoiding CSS conflicts](guides/mapping-and-blending/avoiding-css-conflicts/README.md)
+
     * [Working with Starcounter](guides/working-with-starcounter/README.md)
         * [Release channels in Starcounter](guides/working-with-starcounter/release-channels-in-starcounter/README.md)
         * [Starting and stopping apps](guides/working-with-starcounter/starting-and-stopping-apps/README.md)
@@ -121,8 +123,10 @@
         * [Run Starcounter in production](guides/working-with-starcounter/run-starcounter-in-production/README.md)
         * [Weaver](guides/working-with-starcounter/weaver/README.md)
         * [Investigating app crashes](guides/working-with-starcounter/investigating-app-crashes/README.md)
+
 * [Cookbook](cookbook/README.md)
     * [Accessing methods in nested view-models](cookbook/accessing-methods-in-nested-view-models/README.md)
     * [Attach a request to long running transactions](cookbook/attach-a-request-to-long-running-transactions/README.md)
     * [Cookie-based authentication](cookbook/cookie-based-authentication/README.md)
+
 * [Glossary](glossary/README.md)
