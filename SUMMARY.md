@@ -80,6 +80,7 @@
         * [Introduction to Web Components](guides/puppet-web-apps/introduction-to-web-components/README.md)
         * [Using Web Components](guides/puppet-web-apps/using-web-components/README.md)
         * [Import HTML composition](guides/puppet-web-apps/import-html-composition/README.md)
+        * [Authorization Library](guides/authorization/README.md)
         * [Acceptance testing with Selenium](guides/puppet-web-apps/acceptance-testing-with-selenium/README.md)
 
     * [RESTful web apps](guides/restful-web-apps/README.md)
@@ -110,7 +111,11 @@
         * [Blending](guides/mapping-and-blending/blending/README.md)
         * [Avoiding URI conflicts](guides/mapping-and-blending/avoiding-uri-conflicts/README.md)
         * [Avoiding CSS conflicts](guides/mapping-and-blending/avoiding-css-conflicts/README.md)
-
+        
+    * [Routing, Middleware and Context](guides/routing/README.md)
+        * [Concepts](guides/routing/concepts/README.md)
+        * [Usage guide](guides/routing/usage/README.md)
+    
     * [Working with Starcounter](guides/working-with-starcounter/README.md)
         * [Release channels in Starcounter](guides/working-with-starcounter/release-channels-in-starcounter/README.md)
         * [Starting and stopping apps](guides/working-with-starcounter/starting-and-stopping-apps/README.md)
