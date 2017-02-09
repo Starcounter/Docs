@@ -454,24 +454,3 @@ script {
 a .js-toolbar-action {
   display: none;
 }
-
-.report-errors-link {
-  position: fixed; 
-  bottom: 20px; 
-  right: 20px;
-  padding: 2px;
-  color: black;
-}
-
-.report-errors-link a:link {
-  color: black;
-}
-
-.report-errors-link a:visited {
-  color: black;
-}
-
-.report-errors-link a:hover {
-  color: black;
-  border-bottom: 3px solid #f47e0c
-}
