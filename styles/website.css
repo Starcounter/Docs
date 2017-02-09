@@ -261,12 +261,12 @@ kbd {
     font-size: 30px;
     margin-top: 8px;
   }
+  .report-errors-link {
+    display: none;
+  }
 }
 
 @media (max-width: 700px) {
-  .page-inner {
-    margin: 0 !important;
-  }
   .toc-text {
     font-size: larger !important;
     line-height: normal !important;
@@ -279,6 +279,9 @@ kbd {
 @media (max-width: 1040px) {
   .big-header-buttons {
     display: none;
+  }
+  .page-inner {
+    margin: 0 !important;
   }
 }
 
