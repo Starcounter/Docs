@@ -80,7 +80,7 @@
         * [Introduction to Web Components](guides/puppet-web-apps/introduction-to-web-components/README.md)
         * [Using Web Components](guides/puppet-web-apps/using-web-components/README.md)
         * [Import HTML composition](guides/puppet-web-apps/import-html-composition/README.md)
-        * [Authorization Library](guides/authorization/README.md)
+        * [Authorization Library](guides/puppet-web-apps/authorization/README.md)
         * [Acceptance testing with Selenium](guides/puppet-web-apps/acceptance-testing-with-selenium/README.md)
 
     * [RESTful web apps](guides/restful-web-apps/README.md)
