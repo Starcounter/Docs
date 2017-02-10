@@ -7,7 +7,7 @@ For applications that have previously been developed without following these gui
 
 ### Guideline 1: Separate Functionality and Layout
 
-To make applications look great when running independently while allowing them to visually blend with other applications, it is beneficial to separate the functionality and layout in the HTML template. This is easily accomplished using the `<template is="starcounter-composition">` element.
+To make applications look great when running independently while also allowing them to visually blend with other applications, it is beneficial to separate the functionality and layout in the HTML template. This is easily accomplished using the `<template is="starcounter-composition">` element.
 
 The basic boilerplate of a Starcounter HTML template, which is created by adding a `Starcounter HTML template with dom-bind` file in Visual Studio, looks like this:
 
@@ -70,7 +70,6 @@ There are two kinds of nested elements that count as functional elements:
       </tr>
 </table>
 ```
-
 2. All elements, including `<div>` elements, when the child is a `<template>`.
 ```html
 <div>
@@ -153,6 +152,6 @@ Regarding styling, there are two ways to make the application easier to visually
 
 1. Prefix the class with the name of the app. As outlined in [Avoiding CSS Conflicts](https://docs.starcounter.io/guides/mapping-and-blending/avoiding-css-conflicts/), the class should be prefixed with the name of the app to avoid CSS conflicts with classes from other apps.
 
-2. Keep styling regarding layout inside the `starcounter-composition`. This includes CSS attributes such as `padding`, `margin`, `display` and `float`.
+2. Keep styling that will affect the layout inside the `starcounter-composition`. This includes CSS attributes such as `padding`, `margin`, `display` and `float`.
 
 {% endraw %}
