@@ -1,8 +1,10 @@
 # Long running transactions
 
-Starcounter supports long-running transactions. A long-running transaction, as its name indicates, spans over a longer period of time. To create a long-running transaction you use <code>Db.Scope(<var>Action</var>)</code> or <code>(new Transaction(...)).Scope(<var>Action</var>)</code> and attaches it to a view-model.
+Starcounter supports long-running transactions. A long-running transaction, as its name indicates, spans over a longer period of time. To create a long-running transaction you use <code>Db.Scope(<var>Action</var>)</code> or <code>(new Transaction(...)).Scope(<var>Action</var>)</code> and attach it to a view-model.
 
 There are some things that you need to consider when creating long-running transactions. You are opening a transaction that could contain objects that might be modified by others (other transactions) during the transactions lifetime. The concistency is default set to a lower isolation level for your transaction, which means that conflicts will not be detected, it is possible though to enable conflict detection if it's needed. This is different from the transaction scopes described earlier in this document that will retry the commits themselves numerous times.
+
+A long-running transaction can be used on any scheduled thread, however it cannot be used from more than one thread at a time. If two or more threads call `transaction.Scope(Action)`at the same time an exception will be thrown.
 
 ## Assigning JSON to a transaction
 
