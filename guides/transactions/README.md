@@ -65,4 +65,4 @@ System.Threading.Tasks.Task TransactAsync(Action action, ...);
 
 {% import "../../macros.html" as macros %}
 
-{{ macros.tocGenerator(page.title, summary.parts[0].articles[2].articles[2].articles) }}
+{{ macros.tocGenerator(page.title, summary.parts[0].articles[3].articles[2].articles) }}

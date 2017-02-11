@@ -8,4 +8,4 @@ This section presents the techniques used to achieve common patterns in REST API
 
 {% import "../../macros.html" as macros %}
 
-{{ macros.tocGenerator(page.title, summary.parts[0].articles[2].articles[5].articles) }}
+{{ macros.tocGenerator(page.title, summary.parts[0].articles[3].articles[5].articles) }}
