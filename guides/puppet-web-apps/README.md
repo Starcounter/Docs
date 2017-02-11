@@ -6,4 +6,4 @@ The UI can be presented to the user using a web standards-based, thin client lib
 
 {% import "../../macros.html" as macros %}
 
-{{ macros.tocGenerator(page.title, summary.parts[0].articles[2].articles[4].articles) }}
+{{ macros.tocGenerator(page.title, summary.parts[0].articles[3].articles[4].articles) }}
