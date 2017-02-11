@@ -44,4 +44,4 @@ optimized, which means we give no general guarantees regarding performance. Howe
 
 {% import "../../macros.html" as macros %}
 
-{{ macros.tocGenerator(page.title, summary.parts[0].articles[2].articles[1].articles) }}
+{{ macros.tocGenerator(page.title, summary.parts[0].articles[3].articles[1].articles) }}
