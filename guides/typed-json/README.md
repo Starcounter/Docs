@@ -55,4 +55,4 @@ If JSON object is static it is beneficial to denote a specific type that is used
 
 {% import "../../macros.html" as macros %}
 
-{{ macros.tocGenerator(page.title, summary.parts[0].articles[2].articles[3].articles) }}
+{{ macros.tocGenerator(page.title, summary.parts[0].articles[3].articles[3].articles) }}
