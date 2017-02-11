@@ -121,13 +121,9 @@
         * [Run Starcounter in production](guides/working-with-starcounter/run-starcounter-in-production/README.md)
         * [Weaver](guides/working-with-starcounter/weaver/README.md)
         * [Investigating app crashes](guides/working-with-starcounter/investigating-app-crashes/README.md)
-<<<<<<< HEAD
         * [Configuration Structure](guides/working-with-starcounter/configuration-structure/README.md)
         * [Database Refactoring](guides/working-with-starcounter/database-refactoring/README.md)
         * [Migrating from 2.2 to 2.3+](guides/working-with-starcounter/migrating-from-2.2-to-2.3+/README.md)
-
-=======
->>>>>>> f90cbfb... add 'What is Starcounter?
 * [Cookbook](cookbook/README.md)
     * [Accessing methods in nested view-models](cookbook/accessing-methods-in-nested-view-models/README.md)
     * [Attach a request to long running transactions](cookbook/attach-a-request-to-long-running-transactions/README.md)
