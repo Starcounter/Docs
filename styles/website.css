@@ -2,6 +2,7 @@
 .markdown-section pre {
     width: 100%;
     margin-bottom: 1em;
+    margin-top: 0;
 }
 
 .markdown-section aside.read-more {
@@ -43,6 +44,35 @@
 
 pre::after {
     display: none;
+}
+
+/* styling for article ToC on the bottom of each section page */
+.part-box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: space-around;
+  border-color: #f47e0c;
+  border-style: dotted;
+  border-width: 8px;
+  border-radius: 30px;
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  margin-top: 20px;
+}
+
+.toc-text {
+  color: black;
+  margin-left: 15px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.toc-headline {
+  margin-top: 0.5em !important;
+  color: #f47e0c;
+  text-align: center;
+  width: 100%;
 }
 
 .code-name + pre code {
@@ -180,6 +210,17 @@ kbd {
   color: #f47e0c;
 }
 
+.big-header-buttons .fa-search{
+  font-size: 35px;
+  padding: 10px;
+  color: black;
+}
+
+.big-header-buttons .fa-search:hover {
+  background: linear-gradient(0deg, white 94%, #f47e0c 6%);
+  color: #f47e0c;
+}
+
 /* Add a margin top to the hamburger to align with the logo */
 
 .book-header .btn {
@@ -220,11 +261,16 @@ kbd {
     font-size: 30px;
     margin-top: 8px;
   }
+  .report-errors-link {
+    display: none;
+  }
 }
 
 @media (max-width: 700px) {
-  .page-inner {
-    margin: 0 !important;
+  .toc-text {
+    font-size: larger !important;
+    line-height: normal !important;
+    margin-left: 1em !important;
   }
 }
 
@@ -233,6 +279,9 @@ kbd {
 @media (max-width: 1040px) {
   .big-header-buttons {
     display: none;
+  }
+  .page-inner {
+    margin: 0 !important;
   }
 }
 
@@ -332,11 +381,38 @@ kbd {
     display: block;
 }
 
+.search-dropdown {
+  position: relative;
+  display: inline-block;;
+  float: right;
+  margin-right: 10px;
+}
+
+.search-dropdown-content {
+  display: none;
+  position: absolute;
+  height: 50px;
+  width: 230px;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1000;
+  margin-top: 50px;
+}
+
+@-moz-document url-prefix() {
+  .search-dropdown-content {
+    right: 40px;
+  }
+}
+
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {background-color: #f1f1f1}
 
 /* Show the dropdown menu (added with js from header.html) */
-.show {display:block;}
+.show {
+  display:block;
+}
 
 /* Make space for header */
 .book-summary {
@@ -357,28 +433,45 @@ script {
   display: none !important;
 }
 
-.book-summary {
-  border-right: none;
-}
-
-.divider {
-  display: none !important;
-}
-
 .custom-link {
   display: none !important;
 }
 
-/* Hide deleted branches */
-[value="http://docs.starcounter.io/v/2.3/"] {
-  display: none !important;
+.book-summary {
+  border-right: none;
 }
 
-[value="http://docs.starcounter.io/v/master/"] {
-  display: none !important;
+.version-select {
+  width: 90%;
+  margin: 10px 15px;
 }
 
 #book-search-input {
   border-bottom: none !important;
   margin-bottom: 0 !important;
+}
+
+a .js-toolbar-action {
+  display: none;
+}
+
+.report-errors-link {
+  position: fixed; 
+  bottom: 20px; 
+  right: 20px;
+  padding: 2px;
+  color: black;
+}
+
+.report-errors-link a:link {
+  color: black;
+}
+
+.report-errors-link a:visited {
+  color: black;
+}
+
+.report-errors-link a:hover {
+  color: black;
+  border-bottom: 3px solid #f47e0c
 }
