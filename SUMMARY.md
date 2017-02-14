@@ -1,12 +1,20 @@
 # Summary
 
 * [Introduction](README.md)
+<<<<<<< HEAD
+=======
+
+>>>>>>> Develop
 * [Starcounter](starcounter/README.md)
     * [Collapsing the Stack](starcounter/collapsing-the-stack/README.md)
         * [Complexity and Scalability Tradeoff](starcounter/collapsing-the-stack/complexity-and-scalability-tradeoff/README.md)
         * [The Future of Micro-Services](starcounter/collapsing-the-stack/the-future-of-micro-services/README.md)
         * [10 Benefits of Collapsing the Stack](starcounter/collapsing-the-stack/10-benefits-of-collapsing-the-stack/README.md)
     * [Integrated Database and Web Server](starcounter/integrated-database-and-web-server/README.md)
+<<<<<<< HEAD
+=======
+
+>>>>>>> Develop
 * [Tutorial](tutorial/README.md)
     * [Create a Database Class](tutorial/create-a-database-class/README.md)
     * [Create a Real Time UI](tutorial/create-a-real-time-ui/README.md)
@@ -18,6 +26,10 @@
     * [Mapper App for Images](tutorial/mapper-app-for-images/README.md)
     * [UI Blending](tutorial/ui-blending/README.md)
     * [The Next Step](tutorial/the-next-step/README.md)
+<<<<<<< HEAD
+=======
+
+>>>>>>> Develop
 * [Guides](guides/README.md)
     * [Database](guides/database/README.md)
         * [Creating Database Classes](guides/database/creating-database-classes/README.md)
