@@ -1,14 +1,12 @@
 # Summary
 
 * [Introduction](README.md)
-
 * [Starcounter](starcounter/README.md)
     * [Collapsing the Stack](starcounter/collapsing-the-stack/README.md)
         * [Complexity and Scalability Tradeoff](starcounter/collapsing-the-stack/complexity-and-scalability-tradeoff/README.md)
         * [The Future of Micro-Services](starcounter/collapsing-the-stack/the-future-of-micro-services/README.md)
         * [10 Benefits of Collapsing the Stack](starcounter/collapsing-the-stack/10-benefits-of-collapsing-the-stack/README.md)
     * [Integrated Database and Web Server](starcounter/integrated-database-and-web-server/README.md)
-
 * [Tutorial](tutorial/README.md)
     * [Create a Database Class](tutorial/create-a-database-class/README.md)
     * [Create a Real Time UI](tutorial/create-a-real-time-ui/README.md)
@@ -20,7 +18,6 @@
     * [Mapper App for Images](tutorial/mapper-app-for-images/README.md)
     * [UI Blending](tutorial/ui-blending/README.md)
     * [The Next Step](tutorial/the-next-step/README.md)
-
 * [Guides](guides/README.md)
     * [Database](guides/database/README.md)
         * [Creating Database Classes](guides/database/creating-database-classes/README.md)
@@ -79,6 +76,7 @@
         * [Multiple pages](guides/puppet-web-apps/multiple-pages/README.md)
         * [Partials](guides/puppet-web-apps/partials/README.md)
         * [More on partials](guides/puppet-web-apps/more-on-partials/README.md)
+        * [HTML Template Guidelines](guides/puppet-web-apps/html-template-guidelines/README.md)
         * [Introduction to Web Components](guides/puppet-web-apps/introduction-to-web-components/README.md)
         * [Using Web Components](guides/puppet-web-apps/using-web-components/README.md)
         * [Import HTML composition](guides/puppet-web-apps/import-html-composition/README.md)
