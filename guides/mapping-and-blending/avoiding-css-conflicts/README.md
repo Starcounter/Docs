@@ -19,7 +19,7 @@ Possible combinations of Blocks, Elements and Modifiers are the following:
 .block__element--modifier {}
 ```
 
-A **Block** represents an logical area of your app's UI. For example:
+A **Block** represents a logical area of your app's UI. For example:
 
 - a menu
 - a login form
