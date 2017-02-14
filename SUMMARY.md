@@ -14,8 +14,14 @@
     * [UI Blending](tutorial/ui-blending/README.md)
     * [The Next Step](tutorial/the-next-step/README.md)
 
-* [Guides](guides/README.md)
+* [Starcounter](starcounter/README.md)
+    * [Collapsing the Stack](starcounter/collapsing-the-stack/README.md)
+        * [Complexity and Scalability Tradeoff](starcounter/collapsing-the-stack/complexity-and-scalability-tradeoff/README.md)
+        * [The Future of Micro-Services](starcounter/collapsing-the-stack/the-future-of-micro-services/README.md)
+        * [10 Benefits of Collapsing the Stack](starcounter/collapsing-the-stack/10-benefits-of-collapsing-the-stack/README.md)
+    * [Integrated Database and Web Server](starcounter/integrated-database-and-web-server/README.md)
 
+* [Guides](guides/README.md)
     * [Database](guides/database/README.md)
         * [Creating Database Classes](guides/database/creating-database-classes/README.md)
         * [Data manipulation](guides/database/data-manipulation/README.md)
@@ -87,6 +93,9 @@
         * [Responding with JSON](guides/restful-web-apps/responding-with-json/README.md)
         * [Accepting JSON in requests](guides/restful-web-apps/accepting-json-in-requests/README.md)
 
+    * [RESTful web apps](guides/restful-web-apps/README.md)
+        * [Responding with JSON](guides/restful-web-apps/responding-with-json/README.md)
+        * [Accepting JSON in requests](guides/restful-web-apps/accepting-json-in-requests/README.md)
     * [Network](guides/network/README.md)
         * [Handling HTTP requests](guides/network/handling-http-requests/README.md)
         * [Anonymous or substitute handlers](guides/network/anonymous-or-substitute-handlers/README.md)
