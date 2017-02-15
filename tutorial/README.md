@@ -9,7 +9,7 @@ In the four following steps, you will create an expense tracker by establishing 
 The last three steps consist of making the expense tracker integrate with other applications in a seamless fashion.
 
 This is how it will look when you are done:
-![Final-hello-world-screenshot](/assets/Capture-1.png)
+![Hello World Intro GIF](/assets/hello-world-intro-gif.gif)
 
 In order to get through this tutorial, you will need to fulfill the [system requirements](http://starcounter.io/download/) which includes having Visual Studio and the [latest stable release](http://downloads.starcounter.com/download) of Starcounter installed.
 
