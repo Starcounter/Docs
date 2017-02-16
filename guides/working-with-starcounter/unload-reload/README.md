@@ -72,7 +72,7 @@ WHERE Name LIKE 'Simplified.%';
 
 ### Renaming Columns
 
-There is no built in way to rename columns in DB Browser. The method is instead to create a new column with the new name, copy the data into that column, and delete or exclude the old column from the metadata. For example, if the database schema looks like this:
+Renaming columns is relatively easy in DB Browser. Consider the case where the goal is to rename the column `FirstName` to `Name` in the following model:
 
 ```cs
 [Database]
@@ -85,14 +85,15 @@ public class Teenager : Person { }
 public class Child : Teenager { }
 ```
 
-The goal is to change `FirstName` to `Name`. To accomplish that, follow these steps:
+Similar to how tables are renamed, it needs to be renamed in two places: in the table properties and in the metadata.
 
-1. Add a new column. This can be done by right clicking on the table in the `Database Structure` view and choosing `Modify Table...`. In this example case, the change should be applied to `Person`, and the tables that inherits from it, `Teenager` and `Child`. It should look like this:
-![Edit Column Name](../../../assets/edit-column-name.PNG)
-2. Copy the data to the new column. In the `Person` table, simply copy the data like so:
-![Copy Column Values](../../../assets/value-copy.gif)
-3. Include new column and exlude old column. In `Starcounter.Metadata.Column`, create new columns by clicking `New Record` and copy all the entries from the old column, except for the Name entry. Then, click on the old columns and delete them by clicking `Delete Record`. In the example it looks like so:
-![New Columns](../../../assets/new-columns.PNG)
+To rename the column of a specific table, simply right-click on it, in this case `Person` and choose `Modify Table...`. Double click on the field `FirstName` and enter `Name`. Repeat this step for all the tables that inherits this column, in this example, they are `Teenager` and `Child`.
+
+![Db Browser rename column](../../../assets/modify-table.png)
+
+Rename the column in the metadata at `Starcounter.Metadata.Column` by finding the columns `FirstName` and rename them to `Name`. If it is not completetly clear which columns that should be renamed, use the TableId to find the right columns. 
+
+![Db Browser rename metadata](../../../assets/rename-metadata.png)
 
 ## Modify the Database Schema in the Application
 
