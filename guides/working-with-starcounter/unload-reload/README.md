@@ -2,10 +2,10 @@
 
 When making changes to the database schema of an application, the change has to be made in the database and in the application. This is accomplished by following these steps:
 
-1. Unload the database
-2. Modify the schema in the database
+1. Unload the database using StarDump to SQLite
+2. Modify the schema in the database using DB Browser for SQLite
 3. Modify the schema in the application
-4. Reload the database
+4. Reload the database from SQLite to Starcounter using StarDump
 
 Before starting this process, make sure that there is a backup of the database in case anything goes awry. Information on how to do that can be found in [Run Starcounter in Production](/guides/working-with-starcounter/run-starcounter-in-production/).
 
@@ -135,6 +135,6 @@ stardump reload --database default --file C:\Users\[User]\Desktop\Dump.sqlite3
 If the default database already contains data, it is neccessary to delete it and create a new default database first. That is done using the following two commands:
 
 ```powershell
-stardmin -d=default delete --force db
-stardmin -d=default new db DefaultUserHttpPort=8080
+staradmin -d=default delete --force db
+staradmin -d=default new db DefaultUserHttpPort=8080
 ```
