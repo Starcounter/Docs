@@ -124,6 +124,7 @@
         * [Configuration Structure](guides/working-with-starcounter/configuration-structure/README.md)
         * [Database Refactoring](guides/working-with-starcounter/database-refactoring/README.md)
         * [Migrating from 2.2 to 2.3+](guides/working-with-starcounter/migrating-from-2.2-to-2.3+/README.md)
+        * [Unload/Reload](guides/working-with-starcounter/unload-reload/README.md)
 * [Cookbook](cookbook/README.md)
     * [Accessing methods in nested view-models](cookbook/accessing-methods-in-nested-view-models/README.md)
     * [Attach a request to long running transactions](cookbook/attach-a-request-to-long-running-transactions/README.md)
