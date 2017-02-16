@@ -42,7 +42,7 @@ public class Child : Teenager { }
 
 Then, the needed modification is rather limited. In the DB Browser, after unloading the database, the screen should look something like this:
 
-![Db Browser rename table](../../../assets/DB-browser-rename.png)
+![Db Browser rename table](../../../assets/DB-browser-rename.PNG)
 
 The classes from the application, `Person`, `Teenager` and `Child`, are at the top followed by the `Simplified` tables. The `Simplified` tables can in most cases be disregarded. 
 
@@ -89,11 +89,11 @@ Similar to how tables are renamed, it needs to be renamed in two places: in the 
 
 To rename the column of a specific table, simply right-click on it, in this case `Person` and choose `Modify Table...`. Double click on the field `FirstName` and enter `Name`. Repeat this step for all the tables that inherits this column, in this example, they are `Teenager` and `Child`.
 
-![Db Browser rename column](../../../assets/modify-table.png)
+![Db Browser rename column](../../../assets/modify-table.PNG)
 
 Rename the column in the metadata at `Starcounter.Metadata.Column` by finding the columns `FirstName` and rename them to `Name`. If it is not completetly clear which columns that should be renamed, use the TableId to find the right columns. 
 
-![Db Browser rename metadata](../../../assets/rename-metadata.png)
+![Db Browser rename metadata](../../../assets/rename-metadata.PNG)
 
 ## Modify the Database Schema in the Application
 
