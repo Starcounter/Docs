@@ -1,13 +1,13 @@
 
-# HTML Template Guidelines
+# HTML Views Guidelines
 
 In order to harness the full power of Starcounter, applications should be built to accomodate for complete visual and functional interoperability. To make this process easier for developers, we provide these guidelines for HTML views which, when followed, will allow applications to achieve seamless visual integration with other applications.
 
-For applications that have previously been developed without following these guidelines, take a look at the article [Convert Existing HTML Templates to starcounter-include](https://starcounter.io/making-apps-blendable/). To get a technical background, read the article [Layout compositions for HTML partials](https://starcounter.io/layout-compositions-html-partials/).
+To get a technical background, the article [Layout compositions for HTML partials](https://starcounter.io/layout-compositions-html-partials/) covers more of the underlying ideas of what's presented here.
 
-### Guideline 1: Separate the Functionality and Composition
+### Guideline 1: Separation of Presentation and Content
 
-To make applications look great when running independently while also allowing them to visually blend with other applications, it is beneficial to separate the functionality and composition in the HTML view. This is easily accomplished using the `<template is="starcounter-composition">` element.
+To make applications look great when running independently while also allowing them to visually blend with other applications, it is beneficial to separate the presentation and the content. This is accomplished using the `<template is="starcounter-composition">` element.
 
 The basic boilerplate of a Starcounter HTML view, which is created by adding a `Starcounter HTML template with dom-bind` file in Visual Studio, looks like this:
 
@@ -21,89 +21,86 @@ The basic boilerplate of a Starcounter HTML view, which is created by adding a `
 </template>
 ```
 
-To separate the functionality and the composition in this html file, the element mentioned above, `<template is="starcounter-composition">` should be used. This element should contain the composition of the application while the `<template is="dom-bind">` should contain the functional elements. In code, this is how it looks:
+To separate the presentation and content in this file, the element mentioned above, `<template is="starcounter-composition">` should be used. This element should contain the presentation of the HTML view while the `<template is="dom-bind">` should contain the content. In code, this is how it looks:
 
 ```html
 <link rel="import" href="/sys/polymer/polymer.html">
 
 <template>
     <template is="dom-bind">
-        <!-- functional elements go here -->
+        <!-- content goes here -->
     </template>
     <template is="starcounter-composition">
-        <!-- layout goes here -->
+        <!-- presentation goes here-->
     </template>
 </template>
 ```
 
-A more in-depth explanation of `starcounter-composition` and why the functionality and composition should be separated can be found in the [article linked above](https://starcounter.io/layout-compositions-html-partials/).
+The content are the elements that either present information to the user, such as `<h1>`, `<span>`, and `<a>`, or elements that create some kind of interaction between the user and the application, such as `<button>` and `<input>`.
 
-### Guideline 2: Define the Functional Elements
+### Guideline 2: Defining the Content
 
-Functional elements are elements that either interact with the user visually, such as `<h1>`, `<p>` and `<span>` elements, or provides some kind of interaction between the user and the application, such as `<input>` and `<button>` elements. To start building the HTML template, these elements should be added to the `dom-bind` template as seen in Guideline 1.
+When defining the content of a view, it is important to keep in mind that the slotable elements, which are the ones that will be exposed for blending, have to be on the root of the HTML view. Consider the following HTML view:
 
-To have complete clarity in what counts as a functional elements, here are some examples:
+```html
+<template>
+    <h1>A Headline</h1>
+    <p>Some text for te user to read</p>
+    <button>A button to click</button>
+</template>
+``` 
+
+Here, every element is at the root of the document and will be exposed for blending after they are attached to slots and distributed in the Shadow DOM. In some cases, putting every element on the root of the view, like we do in the example above, might not be desired. Then, the goal should still be to place as many elements as possible on the root of the view, especially elements like `<img>`, `<table>`, and custom elements that are visually obtrusive and might require blending to create a high level of interoperability. 
+
+Additionally, there might be situations where the developer would like to have a higher level of abstraction on some of his or her content. For example, consider this pagination bar:
+
+<div>
+<style>
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.pagination a:hover {
+    background-color: lightgray;
+}
+</style>
+
+<div class="pagination">
+  <a href="#">&laquo;</a>
+  <a href="#">1</a>
+  <a href="#">2</a>
+  <a href="#">3</a>
+  <a href="#">4</a>
+  <a href="#">5</a>
+  <a href="#">6</a>
+  <a href="#">&raquo;</a>
+</div>
+</div>
+
+Here, it would not make sense to break it up into the respective parts because they do not have any real meaning when presented individually. It would rather make sense to put the parent on the root level so that the whole bar is exposed for blending, and not the individual buttons.
+
+### Guideline 3: Attaching the Content to Slots
 
 {% raw %}
 
-**Simple elements:**
+To give clearer semantic meaning to the content of one application when mixing with other applications, explicit slot names are used. When not using explicit slot names, the elements at the root will get implicit slot names and look like this: `<content select="[slot='MyApp/0']"></content>`, the zero is simply the index of the element in the view. With an explicit slot name, it becomes much clearer what kind of element it is: `<content select="[slot='MyApp/MainHeadline']"></content>`.
 
-* `<button value="{{model.Submit::click}}">Submit</button>`
-* `<h1>Very Important Headline</h1>`
-* `<a href="/here/there">There</a>`
-* `<starcounter-include partial="{{model.MyPartial}}"></starcounter-include>`
+Slot names are added as attributes to the elements like so: `<button slot="MyApp/SubmitButton">Submit</button>`.
 
-**Nested elements:**
+### Guideline 4: Create the Presentation in `starcounter-composition`
 
-There are two kinds of nested elements that count as functional elements:
+As outlined in guideline 1, the presentation of the HTML template should be included within the `<template is="starcounter-composition">`.
 
-1. Elements such as `<table>`, `<nav>`, and `<ul>` which are not just pure container elements but also provide some kind of functionality to it's children.
-```html
-<table>
-      <tr>
-          <th>Name</th>
-          <th>Age</th>
-      </tr>
-      <tr>
-          <td>Alice</td>
-          <td>42</td>
-      </tr>
-</table>
-```
-2. All elements, including `<div>` elements, when the child is a `<template>`.
-```html
-<div>
-      <template is="dom-if" if="{{model.Person.Alive}}">
-          <strong>Still going strong</strong>
-      </template>
-</div>
-```
+The following syntax is used to distribute the content in the shadow DOM: `<content select="[slot='AppName/ElementName']"></content>`.
 
-All these element should be put on the root level of the `dom-bind` template.
-
-### Guideline 3: Attaching Functional Elements to Slots
-
-To give clearer semantic meaning to functional elements when mixing with other application, explicit slot names are used. This is how elements look when blending without explicit slot names: `<content select="[slot='MyApp/0']"></content>`, the zero is simply the index of the element in the template. With an explicit slot name, it becomes much clearer what kind of element it is: `<content select="[slot='MyApp/MainHeadline']"></content>`.
-
-Slot names are added as attributes to the functional elements like so:
-
-```html
-<button slot="MyApp/SubmitButton" value="{{model.Submit::click}}">Submit</button>
-
-<div slot="MyApp/LifeReport">
-    <template is="dom-if" if="{{model.Person.Alive}}">
-        <strong>Still going strong</strong>
-    </template>
-</div>
-```
-
-### Guideline 4: Create the Composition in `starcounter-composition`
-
-As outlined in guideline 1, the composition of the HTML template should be included within the `<template is="starcounter-composition">`.
-
-The following syntax is used to distribute functional elements in the shadow DOM: `<content select="[slot='AppName/ElementName']"></content>`.
-
-Consider the following HTML view only containing functional elements:
+Consider the following HTML view with three elements at the root:
 
 ```html
 <link rel="import" href="/sys/polymer/polymer.html">
@@ -146,12 +143,17 @@ To add a `starcounter-composition` to this HTML view, something like this can be
 </template>
 ```
 
+Here, the elements are distributed in the way that the view will look when no blending is applied or when the app is running in a standalone mode. 
+
+**Note:**
+For shadow DOM v1, the `slot` tag should be used instead of the `content` tag. Thus, the tag above would take this shape: `<slot name="AppName/ElementName"></slot>`.
+
 ### Guideline 5: Apply Styling to Avoid Conflicts and Allow Blending
 
 Regarding styling, there are two ways to make the application easier to visually integrate with other apps:
 
 1. Prefix the all class names with the name of the app. As outlined in [Avoiding CSS Conflicts](https://docs.starcounter.io/guides/mapping-and-blending/avoiding-css-conflicts/), the class should be prefixed with the name of the app to avoid CSS conflicts with classes from other apps.
 
-2. Keep styling that will affect the composition inside the `starcounter-composition`.
+2. Keep styling that will affect the layout inside the `starcounter-composition`.
 
 {% endraw %}
