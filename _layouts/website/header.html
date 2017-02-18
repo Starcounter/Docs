@@ -62,7 +62,9 @@
 
     function resetSelected(options){
           for(var x = 0; x < options.length; i++){
-            options[x].setAttribute("selected", "false");
+            if(options[x].nodeType == 1){
+              options[x].setAttribute("selected", "false");
+            }
           }
     }
 
