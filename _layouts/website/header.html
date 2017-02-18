@@ -48,6 +48,20 @@
     gitbook.push(function() {
       var search = document.getElementById("book-search-input");
       document.getElementsByClassName("search-dropdown-content")[0].appendChild(search);
+      var select = document.getElementsByClassName("version-select");
+      var options = select[0].childNodes;
+      var currentPageIsSet = false;
+      for(var i = 0; i < options.length; i++){
+        if(window.location.href.indexOf(options[i].innerHTML) && !currentPageIsSet){
+          if(options[i].nodeType == 1){
+            options[i].setAttribute("selected", "true");
+            currentPageIsSet = true;
+          }
+        }
+      }
+      if(!currentPageIsSet && options[0].nodeType == 1){
+        options[0].setAttribute("selected", "true");
+      }
     });
 
 
