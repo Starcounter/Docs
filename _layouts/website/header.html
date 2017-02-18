@@ -52,17 +52,19 @@
       var options = select[0].childNodes;
       var currentPageIsSet = false;
       for(var i = 0; i < options.length; i++){
-        if(window.location.href.indexOf(options[i].innerHTML) && !currentPageIsSet){
-          if(options[i].nodeType == 1){
-            options[i].setAttribute("selected", "true");
-            currentPageIsSet = true;
-          }
+        if(window.location.href.indexOf(options[i].innerHTML) != -1 && !currentPageIsSet && options[i].nodeType == 1){
+          resetSelected(options);
+          options[i].setAttribute("selected", "true");
+          currentPageIsSet = true;
         }
       }
-      if(!currentPageIsSet && options[0].nodeType == 1){
-        options[0].setAttribute("selected", "true");
-      }
     });
+
+    function resetSelected(options){
+          for(var x = 0; x < options.length; i++){
+            options[x].setAttribute("selected", "false");
+          }
+    }
 
 
     /* When the user clicks on the button,
