@@ -37,6 +37,8 @@ The branches are the following:
 2. Develop
 3. RC
 
+Changes should always be pushed to the lowest branch and then pushed upwards. For example, to make changes to all branches from 2.2.1834, push to 2.2.1834 and merge upwards 2.2.1834 -> 2.2.1.3234 -> RC -> Develop. If changes are to be made to all branches, push to the lowest branch (2.1.177) and merge the changes all the way up to Develop. 
+
 ## Adding a new page
 
 1. Read the instructions above
