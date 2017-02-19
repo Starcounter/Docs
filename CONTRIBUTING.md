@@ -37,8 +37,6 @@ The branches are the following:
 2. Develop
 3. RC
 
-If you make a change that only pertains to the current `Develop` version, then that change should only be pushed to the `Develop` branch. If the change is relevant to 2.2.1.3234, then push to that branch and then cherry-pick the commit to `RC` and `Develop`. This is according to the release channels described [here](https://github.com/Starcounter/RebelsLounge/issues/60).
-
 ## Adding a new page
 
 1. Read the instructions above
