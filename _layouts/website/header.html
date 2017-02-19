@@ -48,8 +48,25 @@
     gitbook.push(function() {
       var search = document.getElementById("book-search-input");
       document.getElementsByClassName("search-dropdown-content")[0].appendChild(search);
+      var select = document.getElementsByClassName("version-select");
+      var options = select[0].childNodes;
+      var currentPageIsSet = false;
+      for(var i = 0; i < options.length; i++){
+        if(window.location.href.indexOf(options[i].innerHTML) != -1 && !currentPageIsSet && options[i].nodeType == 1){
+          resetSelected(options);
+          options[i].setAttribute("selected", "true");
+          currentPageIsSet = true;
+        }
+      }
     });
 
+    function resetSelected(options){
+          for(var x = 0; x < options.length; x++){
+            if(options[x].nodeType == 1){
+              options[x].removeAttribute("selected");
+            }
+          }
+    }
 
     /* When the user clicks on the button,
     toggle between hiding and showing the dropdown content */

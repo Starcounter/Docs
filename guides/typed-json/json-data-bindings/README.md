@@ -281,6 +281,7 @@ partial class DetailsPage : Json
   }
 }
 ```
+
 ### IExplicitBound
 `IExplicitBound` is an improved implementation of `IBound`. They are used the exact same way, though `IExplicitBound` allows more control over the bindings.
 
