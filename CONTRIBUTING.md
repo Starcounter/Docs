@@ -1,6 +1,13 @@
 # Contribution Instructions
 
-## General instructions
+## Creating issues
+
+There are a few things to keep in mind when creating issues here:
+
+1. There are almost no bad issues, they can be created for typos, glitches, ambiguity, questions, and more. 
+2. Please link to the relevant page when creating the issue
+
+## Contributing to the Documentation
 
 Changes to this repo are conducted the same way we would make changes to a repo containing code. That means:
 
@@ -30,8 +37,10 @@ The branches are the following:
 2. Develop
 3. RC
 
+Changes should always be pushed to the lowest branch and then pushed upwards. For example, to make changes to all branches from 2.2.1834, push to 2.2.1834 and merge upwards 2.2.1834 -> 2.2.1.3234 -> RC -> Develop. If changes are to be made to all branches, push to the lowest branch (2.1.177) and merge the changes all the way up to Develop. 
+
 ## Adding a new page
 
 1. Read the instructions above
-2. Create a folder with the same name as the page in the right folder. For example, if you want to add a page pertaining to SQL in Starcounter, then you should add a folder containing a `README.md` file to in guides/SQL folder. All the content in the new page should be in the `README` file. 
+2. Create a folder with the same name as the page in the right folder. For example, if you want to add a page pertaining to SQL in Starcounter, then you should add a folder containing a `README.md` file to in guides/SQL folder. All the content in the new page should be in the `README` file
 3. Add your page to `SUMMARY.md` by making it a bullet point under the appropriate section by writing `[Your Page Headline](your-page-headline/README.md)`
