@@ -30,34 +30,6 @@ The branches are the following:
 2. Develop
 3. RC
 
-If you make a change that only pertains to the current `Develop` version, then that change should only be pushed to the `Develop` branch. If the change is relevant to 2.2.1.3234, then push to that branch and then cherry-pick the commit to `RC` and `Develop`. This is according to the release channels described [here](https://github.com/Starcounter/RebelsLounge/issues/60).
-
-### Deciding if a review is neccessary
-
-Here are some cases where a review is appropriate:
-
-* Creating a completely new page
-* Significantly changing the content of an existing page
-* Making refactoring changes spanning over several pages
-
-Some cases when a review is not neccessary:
-
-* Fixing typos
-* Refactoring within one page
-
-When choosing who will review the page, please consider who are most familiar with the content. If you're changing a page that was initially written by someone else, then the initial author should be assigned as the reviewer.
-
-[@Mackiovello](https://github.com/Mackiovello) is glad to help out reviewing if there is an already heavy workload on the reviewer or if there's a need for proofreading.
-
-## Editing already existing pages
-
-To edit an already existing page you simply follow the steps the "General Instructions" above. The two things you should keep in mind before making a change is:
-
-1. Should my changes be reviewed?
-2. What branches are my changes relevant to?
-
-If the changes are significant enough to justify a review, then create a new branch, make a pull request, and assign someone to review.
-
 ## Adding a new page
 
 1. Read the instructions above
