@@ -236,6 +236,7 @@ PersonJson.DefaultTemplate.Street.BindingStrategy = BindingStrategy.Unbound;
 ...
 ```
 
+<<<<<<< HEAD:guides/typed-json/json-data-bindings/README.md
 #### Reuse the same JSON object
 
 ##### ListPage.json
@@ -257,11 +258,35 @@ partial class ListPage : Json
   {
     DefaultTemplate.Items.ElementType.InstanceType = typeof(EntityJson);
   }
+=======
+### Reuse same JSON object
+
+The `Reuse` keyword is used to reuse same JSON object multiple times. For example there is a page with list of entities and a page with an entity details. The entity itself is the same for both pages. It sounds reasonable to use same JSON object in both cases. The following code snippet demonstrates how to achieve that.
+
+##### EntityJson.json
+
+```json
+{
+    "Key": "",
+    "Name": "",
+    "Description": ""
+}
+```
+
+##### ListPage.json
+
+```json
+{
+    "Items": [{
+        "$": { "Reuse": "AppNamespace.EntityJson" }
+    }]
+>>>>>>> 2.2.1.3234:guides/typed-json/json-data-bindings/README.md
 }
 ```
 
 ##### DetailsPage.json
 
+<<<<<<< HEAD:guides/typed-json/json-data-bindings/README.md
 ```
 {
     "Entity": {}
@@ -323,3 +348,27 @@ static PersonPage()
 }
 ```
 Now, the code will compile successfully because it is explicitly described that the `Age` property will not be bound. This is further described in the section "Opt-out of Bindings".
+=======
+```json
+{
+    "Entity": {
+        "$": { "Reuse": "AppNamespace.EntityJson.cs" }
+    }
+}
+```
+
+**Note:** in case of `Reuse` you cannot specify custom code-behind class.
+
+```cs
+[ListPage_json.Items]
+partial class ListPageItem : Json
+{
+    //This is wrong since the EntityJson.cs class already exists.
+}
+```
+
+### Rules when bindings are created
+1. If a code-behind file exists, a property is searched for there.
+2. If a property was not found in the code-behind or no code-behind exists, a property in the data object is searched for.
+3. If no property was found in steps 1 and 2 and the binding is set to `Auto`, the property will be unbound. If binding was set to `Bound` an exception will be raised.
+>>>>>>> 2.2.1.3234:guides/typed-json/json-data-bindings/README.md
