@@ -36,7 +36,9 @@ To separate the presentation and content in this file, the element mentioned abo
 </template>
 ```
 
-The content are the elements that either present information to the user, such as `<h1>`, `<span>`, and `<a>`, or elements that create some kind of interaction between the user and the application, such as `<button>` and `<input>`.
+The content are the elements that either contain information for the user, such as `<h1>`, `<span>`, and `<a>`, or elements that create some kind of interaction between the user and the application, such as `<button>` and `<input>`.
+
+The content of the HTML view is distributed to the presentation using a Shadow DOM concept called slots, as explained in guideline 4.
 
 ### Guideline 2: Defining the Content
 
@@ -96,9 +98,9 @@ Slot names are added as attributes to the elements like so: `<button slot="MyApp
 
 ### Guideline 4: Create the Presentation in `starcounter-composition`
 
-As outlined in guideline 1, the presentation of the HTML template should be included within the `<template is="starcounter-composition">`.
+As outlined in guideline 1, the presentation of the HTML view should be included within the `<template is="starcounter-composition">`.
 
-The following syntax is used to distribute the content in the shadow DOM: `<content select="[slot='AppName/ElementName']"></content>`.
+The following syntax is used to distribute the content in the Shadow DOM: `<content select="[slot='AppName/ElementName']"></content>`.
 
 Consider the following HTML view with three elements at the root:
 
@@ -146,7 +148,7 @@ To add a `starcounter-composition` to this HTML view, something like this can be
 Here, the elements are distributed in the way that the view will look when no blending is applied or when the app is running in a standalone mode. 
 
 **Note:**
-For shadow DOM v1, the `slot` tag should be used instead of the `content` tag. Thus, the tag above would take this shape: `<slot name="AppName/ElementName"></slot>`.
+For Shadow DOM v1, the `slot` tag should be used instead of the `content` tag. Thus, the tag above would take this shape: `<slot name="AppName/ElementName"></slot>`.
 
 ### Guideline 5: Apply Styling to Avoid Conflicts and Allow Blending
 
