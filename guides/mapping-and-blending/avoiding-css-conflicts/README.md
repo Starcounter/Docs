@@ -19,7 +19,7 @@ Possible combinations of Blocks, Elements and Modifiers are the following:
 .block__element--modifier {}
 ```
 
-When applied to a HTML structure, the above CSS class names are used in the following way:
+When applied to an HTML structure, the above CSS class names are used in the following way:
 
 ```html
 <div class="block">
