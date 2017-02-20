@@ -156,8 +156,8 @@ The following table contains the properties in class `Json` that have been marke
 | IsInteger | IsInteger() |
 | IsObject | IsObject() |
 | IsArray | IsArray() |
-| BooleanValue | GetBoolean(), SetBoolean(value) |
-| DecimalValue | GetDecimal(), SetDecimal(value) |
+| BooleanValue | GetBooleanValue(), SetBooleanValue(value) |
+| DecimalValue | GetDecimalValue(), SetDecimalValue(value) |
 | DoubleValue | GetDoubleValue(), SetDoubleValue(value) |
 | IntegerValue | GetIntegerValue(), SetIntegerValue(value) |
 | StringValue | GetStringValue(), SetStringValue(value) |
