@@ -19,6 +19,20 @@ Possible combinations of Blocks, Elements and Modifiers are the following:
 .block__element--modifier {}
 ```
 
+When applied to an HTML structure, the above CSS class names are used in the following way:
+
+```html
+<div class="block">
+  <div class="block__element"> ... </div>
+  <div class="block__element--modifier"> ... </div>
+</div>
+
+<div class="block--modifier">
+  <div class="block__element"> ... </div>
+  <div class="block__element--modifier"> ... </div>
+</div>
+```
+
 A **Block** represents a logical area of your app's UI. For example:
 
 - a menu
