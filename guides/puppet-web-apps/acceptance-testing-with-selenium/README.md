@@ -155,7 +155,7 @@ The final setup looks like this:
 
 ![visual studio selenium screenshot](/assets/2016-04-01-13_51_26-Launcher-Microsoft-Visual-Studio.png)
 
-Before you can execute the tests, start Selenium Server Standalone by calling `java -jar selenium-server-standalone-3.0.0-beta3.jar`.
+Before you can execute the tests, start Selenium Server Standalone by calling `java -jar selenium-server-standalone-3.*.jar`.
 
 ## Wait for asynchronous content
 
