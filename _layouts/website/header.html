@@ -59,15 +59,6 @@
           currentPageIsSet = true;
         }
       }
-
-      // Adds a backslash to the end of relative links
-      var links = document.querySelectorAll(".page-inner a");
-      for(var i = 0; i < links.length; i++){
-        var path = links[i].href;
-        if(path.startsWith("https://docs.starcounter.io/") && !path.endsWith("/")){
-          links[i].href = path.concat("/");
-        }
-      }
     });
 
     function resetSelected(options){

@@ -1,10 +1,13 @@
 {
-	"plugins": ["-hightlight", "prism", "collapsible-menu"],
+	"plugins": ["-hightlight", "prism", "collapsible-menu", "link-fixer"],
 	"pluginsConfig": {
 		"prism": {
 			"css": [
 				"prismjs/themes/prism-tomorrow.css"
 			]
+		},
+		"link-fixer": {
+			"link": "https://docs.starcounter.io/"
 		}
 	}
 }
