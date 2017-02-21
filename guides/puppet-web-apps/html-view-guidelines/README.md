@@ -21,7 +21,7 @@ The basic boilerplate of a Starcounter HTML view, which is created by adding a `
 </template>
 ```
 
-To separate the presentation and content in this file, the element mentioned above, `<template is="starcounter-composition">` should be used. This element should contain the presentation of the HTML view while the `<template is="dom-bind">` should contain the content. In code, this is how it looks:
+To separate the presentation and content in this file, the element mentioned above, `<template is="starcounter-composition">` should be used. This element should contain the presentation of the HTML view while the `<template is="dom-bind">` should contain the content. Note that this only applies when using Polymer as a templating engine. When using other frameworks, it will not use `dom-bind`, although, the principle of separating the presentation from the content will stay constant. In code, this is how it looks:
 
 ```html
 <link rel="import" href="/sys/polymer/polymer.html">
