@@ -37,7 +37,7 @@ The branches are the following:
 2. Develop
 3. RC
 
-If you make a change that only pertains to the current `Develop` version, then that change should only be pushed to the `Develop` branch. If the change is relevant to 2.2.1.3234, then push to that branch and then cherry-pick the commit to `RC` and `Develop`. This is according to the release channels described [here](https://github.com/Starcounter/RebelsLounge/issues/60).
+Changes should always be pushed to the lowest branch and then pushed upwards. For example, to make changes to all branches from 2.2.1834, push to 2.2.1834 and merge upwards 2.2.1834 -> 2.2.1.3234 -> RC -> Develop. If changes are to be made to all branches, push to the lowest branch (2.1.177) and merge the changes all the way up to Develop. 
 
 ## Adding a new page
 

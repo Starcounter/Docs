@@ -37,7 +37,7 @@ namespace MultiplePagesDemo
                     return Session.Current.Data;
                 }
                 MailsPage m = new MailsPage() { Html = "/MailsPage.html" };
-                m.Session = new Session(SessionOptions.PatchVersioning);
+                m.Session = new Session();
                 m.Mails = Db.SQL<Mail>("SELECT m FROM MultiplePagesDemo.Mail m LIMIT ?", 10);
                 m.Focused.Data = m.Mails[0].Data;
 

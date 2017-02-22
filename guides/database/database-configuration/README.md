@@ -1,10 +1,10 @@
 # Database configuration
 
-By default, the database configuration file is located inside the server directory `Databases\[DatabaseName]\[DatabaseName].db.config`.
+By default, the database configuration file is located inside the server directory `Databases\[DatabaseName]\[DatabaseName].db.config`. Further instructions on finding the database configuration file can be found on the [Configuration Structure](/guides/working-with-starcounter/configuration-structure/) page.
 
-The options in this file can be configured either directly in the file or from the [Administrator Web UI ](/guides/working-with-starcounter/administrator-web-ui/).
+The options in this file can be configured either directly in the file or from the [Administrator Web UI ](/guides/working-with-starcounter/administrator-web-ui/). It is also possible to set the configuration options on the creating of the database using the [Staradmin CLI](/guides/working-with-starcounter/staradmin-cli/).
 
-For further configurations regarding the network gateway, check the [Network Gateway](/guides/network/network-gateway/) page.
+For configurations regarding the network gateway, check the [Network Gateway](/guides/network/network-gateway/) page.
 
 ## Configuration options
 
