@@ -7,7 +7,7 @@ To get a technical background, the article [Layout compositions for HTML partial
 
 ### Guideline 1: Separation of Presentation and Content
 
-To make applications look great when running independently while also allowing them to visually blend with other applications, it is beneficial to separate the presentation and the content. This is accomplished using the `<template is="starcounter-composition">` element.
+To make applications look great when running independently while also allowing them to visually blend with other applications, it is beneficial to separate the presentation and the content. This is accomplished using the `<template is="declarative-shadow-dom">` element.
 
 The basic boilerplate of a Starcounter HTML view, which is created by adding a `Starcounter HTML template with dom-bind` file in Visual Studio, looks like this:
 
@@ -21,7 +21,7 @@ The basic boilerplate of a Starcounter HTML view, which is created by adding a `
 </template>
 ```
 
-To separate the presentation and content in this file, the element mentioned above, `<template is="starcounter-composition">` should be used. This element should contain the presentation of the HTML view while the `<template is="dom-bind">` should contain the content. Note that this only applies when using Polymer as a templating engine. When using other frameworks, it will not use `dom-bind`, although, the principle of separating the presentation from the content will stay constant. In code, this is how it looks:
+To separate the presentation and content in this file, the element mentioned above, `<template is="declarative-shadow-dom">` should be used. This element should contain the presentation of the HTML view while the `<template is="dom-bind">` should contain the content. Note that this only applies when using Polymer as a templating engine. When using other frameworks, it will not use `dom-bind`, although, the principle of separating the presentation from the content will stay constant. In code, this is how it looks:
 
 ```html
 <link rel="import" href="/sys/polymer/polymer.html">
@@ -30,7 +30,7 @@ To separate the presentation and content in this file, the element mentioned abo
     <template is="dom-bind">
         <!-- content goes here -->
     </template>
-    <template is="starcounter-composition">
+    <template is="declarative-shadow-dom">
         <!-- presentation goes here-->
     </template>
 </template>
@@ -92,15 +92,15 @@ Here, it would not make sense to break it up into the respective parts because t
 
 {% raw %}
 
-To give clearer semantic meaning to the content of one application when mixing with other applications, explicit slot names are used. When not using explicit slot names, the elements at the root will get implicit slot names and look like this: `<content select="[slot='MyApp/0']"></content>`, the zero is simply the index of the element in the view. With an explicit slot name, it becomes much clearer what kind of element it is: `<content select="[slot='MyApp/MainHeadline']"></content>`.
+To give clearer semantic meaning to the content of one application when mixing with other applications, explicit slot names are used. When not using explicit slot names, the elements at the root will get implicit slot names and look like this: `<slot name="MyApp/0"></slot>`, the zero is simply the index of the element in the view. With an explicit slot name, it becomes much clearer what kind of element it is: `<slot name="MyApp/MainHeadline"></slot>`.
 
 Slot names are added as attributes to the elements like so: `<button slot="MyApp/SubmitButton">Submit</button>`.
 
-### Guideline 4: Create the Presentation in `starcounter-composition`
+### Guideline 4: Create the Presentation in `declarative-shadow-dom`
 
-As outlined in guideline 1, the presentation of the HTML view should be included within the `<template is="starcounter-composition">`.
+As outlined in guideline 1, the presentation of the HTML view should be included within the `<template is="declarative-shadow-dom">`.
 
-The following syntax is used to distribute the content in the Shadow DOM: `<content select="[slot='AppName/ElementName']"></content>`.
+The following syntax is used to distribute the content in the Shadow DOM: `<slot name="AppName/ElementName"></slot>`.
 
 Consider the following HTML view with three elements at the root:
 
@@ -120,7 +120,7 @@ Consider the following HTML view with three elements at the root:
 </template>
 ```
 
-To add a `starcounter-composition` to this HTML view, something like this can be done:
+To add `declarative-shadow-dom` to this HTML view, something like this can be done:
 
 ```html
 <link rel="import" href="/sys/polymer/polymer.html">
@@ -135,11 +135,11 @@ To add a `starcounter-composition` to this HTML view, something like this can be
         </div>
         <input slot="MyApp/StatusInput" value="{{model.Status$::input}}" />
     </template>
-    <template is="starcounter-composition">
-        <content select="[slot='MyApp/ImportantHeadline']"></content>
+    <template is="declarative-shadow-dom">
+        <slot name="MyApp/ImportantHeadline"></slot>
         <div class="myapp-life-report">
-            <content select="[slot='MyApp/LifeReport']"></content>
-            <content select="[slot='MyApp/StatusInput']"></content>
+            <slot name="MyApp/LifeReport"></slot>
+            <slot name="MyApp/StatusInput"></slot>
         </div>
     </template>
 </template>
@@ -147,15 +147,12 @@ To add a `starcounter-composition` to this HTML view, something like this can be
 
 Here, the elements are distributed in the way that the view will look when no blending is applied or when the app is running in a standalone mode. 
 
-**Note:**
-For Shadow DOM v1, the `slot` tag should be used instead of the `content` tag. Thus, the tag above would take this shape: `<slot name="AppName/ElementName"></slot>`.
-
 ### Guideline 5: Apply Styling to Avoid Conflicts and Allow Blending
 
 Regarding styling, there are two ways to make the application easier to visually integrate with other apps:
 
 1. Prefix the all class names with the name of the app. As outlined in [Avoiding CSS Conflicts](https://docs.starcounter.io/guides/mapping-and-blending/avoiding-css-conflicts/), the class should be prefixed with the name of the app to avoid CSS conflicts with classes from other apps.
 
-2. Keep styling that will affect the layout inside the `starcounter-composition`.
+2. Keep styling that will affect the layout inside the `declarative-shadow-dom`.
 
 {% endraw %}
