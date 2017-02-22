@@ -1,5 +1,4 @@
-#
-Authorization Library
+# Authorization Library
 
 This library helps the developer to prevent the user from accessing / acting on data he doesn't have privileges to.
 
@@ -13,42 +12,43 @@ Whenever a user will perform an action (open the page, click a button) a Permiss
 
 Let's define some example database classes that will be useful in this guide:
 
-```c#
+```cs
 [Database]
 public class Invoice : Something
 {
-public bool IsSettled;
+    public bool IsSettled;
 }
 
 [Database]
 public class InvoiceRow : Something
 {
-public string Product;
-public decimal Price;
+    public string Product;
+    public decimal Price;
 }
 
 [Database]
 public class InvoiceInvoiceRow : Relation
 {
-[SynonymousTo(nameof(From))]
-public Invoice Invoice;
-[SynonymousTo(nameof(To))]
-public InvoiceRow InvoiceRow;
+    [SynonymousTo(nameof(From))]
+    public Invoice Invoice;
+    [SynonymousTo(nameof(To))]
+    public InvoiceRow InvoiceRow;
 }
 ```
 
 And now, let's define permissions that we'll use to describe the authorization rules later:
 
-```
+```cs
 public class ListInvoices: Permission
 {
 }
 
 public class DisplayInvoice: Permission
 {
-public Invoice Invoice {get; private set;}
-public DisplayInvoice(Invoice invoice)
+    public Invoice Invoice {get; private set;}
+    public DisplayInvoice(Invoice invoice)
 {
+
 this.Invoice = invoice;
 }
 }
@@ -60,14 +60,14 @@ Permissions can be anything as long as they derive from `Permission`, but some p
 
 Now let's define rules that will decide weather the user will be granted the permissions or not.
 
-```c#
+```cs
 var rules = new AuthorizationRules();
 rules.AddRule(new ClaimRule<ListInvoices, SystemUserClaim>((claim, permission) => claim.SystemUser.Name == "admin"));
 ```
 
 Rules implement `IAuthorizationRule<TPermission>` interface, which defines one method:
 
-```c#
+```cs
 public bool Evaluate(
 IEnumerable<Claim> claims, // each Claim represents a fact about the current user. Most popular ones are
 // SystemUserClaim and PersonClaim
@@ -87,7 +87,7 @@ There are other built-in rules in `Starcounter.Authorization.Core.Rules` namespa
 
 `AuthorizationEnforcement` is a class responsible for checking the if the current user has a specific permission with regard to a rule set. Let's create it using the rules we defined in previous steps:
 
-```c#
+```cs
 var enforcement = AuthorizationEnforcement(rules, new SystemUserAuthentication());
 ```
 
@@ -95,7 +95,7 @@ The second argument passed is a authentication backend (a something that obtains
 
 We can now use our new `IAuthorizationEnforcement` to check if we have a permission:
 
-```c#
+```cs
 bool canWe = enforcement.CheckPermission(new ListInvoices()); // note that the outcome depends on weather we are currently signed in as "admin"
 ```
 
@@ -109,7 +109,7 @@ Manual checking of permissions is powerful, but usually we need something that w
 
 To enable `SecurityMiddleware` add it to a Router:
 
-```c#
+```cs
 router.AddMiddleware(new SecurityMiddleware(
 enforcement,
 info => Response.FromStatusCode(403), // a function returning a Response to give instead of a restricted Page
@@ -121,7 +121,7 @@ PageSecurity.CreateThrowingDeniedHandler<Exception>())); // defines the behavior
 
 Primary mean of managing access to pages will be the `RequiredPermissionAttribute`. Let's use it to mark secure our example page:
 
-```c#
+```cs
 [Url("/invoices/invoices")]
 [RequirePermission(typeof(ListInvoices))]
 public partial class InvoicesPage : Json
@@ -134,29 +134,29 @@ After adding this attribute, every time a user will open the URL "/invoices/invo
 
 If you want to check a different permission before allowing a user to execute a handler, you can add the `RequiredPermissionAttribute` to the handler itself:
 
-```c#
+```cs
 [Url("/invoices/invoices")]
 [RequirePermission(typeof(ListInvoices))]
 public partial class InvoicesPage : Json
 {
-[RequirePermission(typeof(AddInvoice))]
-// this will override the required permission
-public void Handle(Input.AddInvoice)
+    [RequirePermission(typeof(AddInvoice))]
+    // this will override the required permission
+    public void Handle(Input.AddInvoice)
 {
 // ...
 }
 }
 ```
 This also works with subpages:
-```c#
+```cs
 [Url("/invoices/invoices")]
 [RequirePermission(typeof(ListInvoices))]
 public partial class InvoicesPage : Json
 {
-[RequirePermission(typeof(AddInvoice))]
-// this will override the required permission
-[InvoicesPage_json.SomeDialog]
-public partial class DialogItem : Json
+    [RequirePermission(typeof(AddInvoice))]
+    // this will override the required permission
+    [InvoicesPage_json.SomeDialog]
+    public partial class DialogItem : Json
 {
 // ...
 }
@@ -165,14 +165,14 @@ public partial class DialogItem : Json
 
 If you want to disable permission checking in some part (subpage / handler) of your Page you can just mark it as `[RequirePermission(null)]`
 
-```c#
+```cs
 [Url("/invoices/invoices")]
 [RequirePermission(typeof(ListInvoices))]
 public partial class InvoicesPage : Json
 {
-[RequirePermission(null)]
-// this will override the required permission
-public void Handle(Input.Back)
+    [RequirePermission(null)]
+    // this will override the required permission
+    public void Handle(Input.Back)
 {
 // ...
 }
@@ -183,11 +183,11 @@ public void Handle(Input.Back)
 
 So far, we've only checked permissions that accept no arguments in their constructors. That's easy - the library creates the permission objects using their default constructors. Another popular case is when the permission pertains to a specific object - like this one:
 
-```c#
+```cs
 public class DisplayInvoice: Permission
 {
-public Invoice Invoice {get; private set;}
-public DisplayInvoice(Invoice invoice)
+    public Invoice Invoice {get; private set;}
+    public DisplayInvoice(Invoice invoice)
 {
 this.Invoice = invoice;
 }
@@ -196,7 +196,7 @@ this.Invoice = invoice;
 
 To check that kind of Permission automatically, the Page's Context type would need to match the Permission's constructor parameter type (`Invoice`). This usually just means that the page is `IBound<Invoice>`:
 
-```c#
+```cs
 [Url("/invoices/invoices/{0}")]
 [RequirePermission(typeof(DisplayInvoice))]
 public partial class InvoicePage : Json, IBound<Invoice>
@@ -215,12 +215,12 @@ note: Remember, that in order to have the Context retrieved automatically you ne
 
 The permission to be checked could also be directly specified using the `CustomCheckClassAttribute` (name subject to discussion and change)):
 
-```c#
+```cs
 [Url("/invoices/invoices/{0}")]
 public partial class InvoicePage : Json, IBound<Invoice>
 {
-[CustomCheckClass]
-public static Permission CreatePermissionToCheck(Invoice context) => new DisplayInvoice(context);
+    [CustomCheckClass]
+    public static Permission CreatePermissionToCheck(Invoice context) => new DisplayInvoice(context);
 }
 ```
 

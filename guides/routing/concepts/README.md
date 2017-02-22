@@ -4,9 +4,9 @@
 
 Page is a class that is responsible for handling a request. It's usually a Json view-model (note that `Json` class defines an implicit conversion to `Response`). It should be annotated with `UrlAttribute` to associate it with a specific URL:
 
-```c#
-    [Url("/ChecklistDesigner/checklists/{?}")]
-    partial class ChecklistPage : IBound<Checklist>
+```cs
+[Url("/ChecklistDesigner/checklists/{?}")]
+partial class ChecklistPage : IBound<Checklist>
 ```
 
 ### RoutingInfo
@@ -21,7 +21,7 @@ Object of `RoutingInfo` class contains all the necessary information about the c
 
 Router is a mechanism (in form of a class `Router`) that is responsible for accepting HTTP requests, choosing appropriate Page type for them and feeding the requests into the Page to retrieve response. Usually router needs to be configured by its constructor:
 
-```c#
+```cs
 public Router(Func<RoutingInfo, Response> pageCreator)
 ```
 
@@ -30,13 +30,13 @@ public Router(Func<RoutingInfo, Response> pageCreator)
 ### Middleware
 
 Middleware is a mechanism to transform the request or the response before or after the page creation. Middleware has to implement `IPageMiddleware` interface and has to be registered with Router with `Router.AddMiddleware`. `IPageMiddleware` defines one method:
-```c#
+```cs
 Response Run(RoutingInfo routingInfo, Func<Response> next);
 ```
 
 It is run on every request handled by the Router. The `next` function runs pageCreator and all the middleware that were registered after this one and returns the resulting response. If you want to add behavior before handling the response, just add it before call to next. To add behavior after handling the response, add it after the call to next:
 
-```c#
+```cs
 Response Run(RoutingInfo routingInfo, Func<Response> next)
 {
   Logger.LogRequestStart(routingInfo);
@@ -48,7 +48,7 @@ Response Run(RoutingInfo routingInfo, Func<Response> next)
 
 If you want to prevent the original handling from happening, just don't call next and return an alternative response:
 
-```c#
+```cs
 Response Run(RoutingInfo routingInfo, Func<Response> next)
 {
   if(IsAuthorized(routingInfo)))
@@ -74,7 +74,7 @@ It's usually the best to register the `ContextMiddleware`, since it will automat
 
 If you want to customise the the Context type, way that is created or handled for your page, follow this example:
 
-```c#
+```cs
 [Url("/items/{0}/{1}")]
 public partial class ItemPage: IPageContext<Tuple<Item, SubItem>>, IBound<SubItem>
 //                             ^^-- this way you override the Context type, which would be inferred to SubItem
