@@ -130,4 +130,5 @@
     * [Accessing methods in nested view-models](cookbook/accessing-methods-in-nested-view-models/README.md)
     * [Attach a request to long running transactions](cookbook/attach-a-request-to-long-running-transactions/README.md)
     * [Cookie-based authentication](cookbook/cookie-based-authentication/README.md)
+    * [Timestamp on Object Creation](cookbook/timestamp-on-object-creation/README.md)
 * [Glossary](glossary/README.md)
