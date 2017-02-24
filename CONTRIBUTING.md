@@ -9,15 +9,65 @@ There are a few things to keep in mind when creating issues here:
 
 ## Contributing to the Documentation
 
-Changes to this repo are conducted the same way we would make changes to a repo containing code. That means:
+Changes to this repo are conducted the same way we would make changes to a repo containing code. In broad strokes, that means:
 
 1. Clone the repo to your local machine
-2. Create a new branch if the changes need to be reviewed
+2. Create a new branch
 3. Make changes using the text editor of your choice
 4. Commit with a descriptive message
-5. Push to the remote branch
+5. Push the branch
+6. Create a pull request (optional)
+7. Merge into one of the branches
+8. Merge changes to all other relevant branches
 
-If you wish to see a preview of your markdown you can use the [GitBook Editor](https://www.gitbook.com/editor). This editor has good integration with git and is easy to use. Although, to use the GitBook Editor you have to go to `File` -> `Preferences..` -> `Git` and uncheck the box `Automatically generate commit message from changes` in order to write your own commit messages. It's worth knowing that GitBook does not apply CSS styles, for that you have to follow the instructions below.
+When creating a new branch, do so from the oldest applicable branch. For example, if the change applies to all branches, then the new branch should be created from the oldest branch, which is 2.1.177. If it applies to all versions after 2.2, then the branch should be created from 2.2.1834, and so on. In git, it will look something like this:
+
+```git
+git checkout 2.1.177
+git checkout -b fix-typo
+git add .
+git commit -m "Description of the changes"
+git push -u origin fix-typo
+```
+
+To merge the changes, merge to the branch that the checkout was done from. So if the checkout was done from 2.1.177, as shown above, the following commands should be executed:
+
+```git
+git checkout 2.1.177
+git merge fix-typo
+```
+
+When the changes have been merged into the oldest applicable branch, the changes should be merged in a cascading fashion to all the newer branches. With the current branches, it looks like this:
+
+```
+git checkout 2.2.1834
+git merge 2.1.177
+git push
+
+git checkout 2.2.1.3234
+git merge 2.2.1834
+git push
+
+git checkout RC
+git merge 2.2.1.3234
+git push
+
+git checkout Develop
+git merge RC
+git push
+```
+
+When these changes are pushed, GitBook will sync, build, and upload them to the [Docs](https://docs.starcounter.io/).
+
+The branches that are uploaded to GitBook are:
+
+1. Every Release: 2.1.177, 2.2.1834, and 2.2.1.3234
+2. Develop
+3. RC
+
+### Using the Gitbook editor
+
+If you wish to see a preview of the markdown, the [GitBook Editor](https://www.gitbook.com/editor) can be used. This editor has good integration with git and is relatively easy to learn. Although, to use the GitBook Editor you have to go to `File` -> `Preferences..` -> `Git` and uncheck the box `Automatically generate commit message from changes` in order to write your own commit messages. It's worth knowing that GitBook does not apply CSS styles, for that you have to follow the instructions below.
 
 ### Checking changes locally
 
@@ -26,18 +76,6 @@ You're encouraged to check for yourself how the changes look before pushing it t
 1. run `npm install -g gitbook-cli`
 2. the first time, run `gitbook install` to install the plugins
 3. run `gitbook serve` and go to `localhost:4000` to see how the changes will look when they're live
-
-### Choosing the right branch
-
-The different branches in this repo correspond to the different versions of Starcounter. Thus, it's important to push to the right branches after having made changes.
-
-The branches are the following:
-
-1. Every Release: 2.1.177, 2.2.1834, and 2.2.1.3234
-2. Develop
-3. RC
-
-Changes should always be pushed to the lowest branch and then pushed upwards. For example, to make changes to all branches from 2.2.1834, push to 2.2.1834 and merge upwards 2.2.1834 -> 2.2.1.3234 -> RC -> Develop. If changes are to be made to all branches, push to the lowest branch (2.1.177) and merge the changes all the way up to Develop. 
 
 ## Adding a new page
 
