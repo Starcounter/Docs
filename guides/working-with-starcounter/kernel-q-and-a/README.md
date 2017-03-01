@@ -81,7 +81,7 @@ Starcounter doesn't try to pin database memory to the physical memory. It instea
 
 ### Are hot backups safe?
 
-No, it is not safe to do backups on active databases. More information can be found in [Making Database Backups](https://starcounter.io/guides/tools/run-starcounter-in-production/#making-database-backups). 
+No, it is generally not safe to do backups on active databases unless certain procedures are followed. This procedures and more can be found in [Making Database Backups](https://starcounter.io/guides/tools/run-starcounter-in-production/#making-database-backups). 
 
 ### What happens when the power goes off?
 
