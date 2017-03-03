@@ -5,6 +5,8 @@ In order to harness the full power of Starcounter, applications should be built 
 
 To get a technical background, the article [Layout compositions for HTML partials](https://starcounter.io/layout-compositions-html-partials/) covers more of the underlying ideas of what's presented here.
 
+**Note:** Currently, [CompositionProvider](https://github.com/Starcounter/CompositionProvider) has to run for the code in these guidelines to work. There are two ways to start `CompositionProvider`: follow the instructions in the [README file](https://github.com/Starcounter/CompositionProvider/blob/master/README.md), or, when Starcounter is running, go to `http://localhost:8181/#/databases/default/appstore`, click on the download button next to `CompositionProvider`, and click `Start` at `http://localhost:8181/#/databases/yourDatabase`. This requirement is temporary.
+
 ### Guideline 1: Separation of Presentation and Content
 
 To make applications look great when running independently while also allowing them to visually blend with other applications, it is beneficial to separate the presentation and the content. This is accomplished using the `<template is="declarative-shadow-dom">` element.
