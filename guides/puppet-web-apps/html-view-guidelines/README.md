@@ -1,6 +1,8 @@
 
 # HTML Views Guidelines
 
+{% raw %}
+
 In order to harness the full power of Starcounter, applications should be built to accomodate for complete visual and functional interoperability. To make this process easier for developers, we provide these guidelines for HTML views which, when followed, will allow applications to achieve seamless visual integration with other applications.
 
 To get a technical background, the article [Layout compositions for HTML partials](https://starcounter.io/layout-compositions-html-partials/) covers more of the underlying ideas of what's presented here.
@@ -37,6 +39,8 @@ To separate the presentation and content in this file, the element mentioned abo
 ```
 
 The content are the elements that either contain information for the user, such as `<h1>`, `<span>`, and `<a>`, or elements that create some kind of interaction between the user and the application, such as `<button>` and `<input>`.
+
+Keep in mind that the only elements that have to be in the `<template is="dom-bind">` are the ones that use Polymer bindings, as denoted with double curly-bracket syntax: `{{model.SomeProperty}}`.
 
 The content of the HTML view is distributed to the presentation using a Shadow DOM concept called slots, as explained in guideline 4.
 
@@ -89,8 +93,6 @@ Additionally, there might be situations where the developer would like to have a
 Here, it would not make sense to break it up into the respective parts because they do not have any real meaning when presented individually. It would rather make sense to put the parent on the root level so that the whole bar is exposed for blending, and not the individual buttons.
 
 ### Guideline 3: Attaching the Content to Slots
-
-{% raw %}
 
 To give clearer semantic meaning to the content of one application when mixing with other applications, explicit slot names are used. When not using explicit slot names, the elements at the root will get implicit slot names and look like this: `<content select="[slot='MyApp/0']"></content>`, the zero is simply the index of the element in the view. With an explicit slot name, it becomes much clearer what kind of element it is: `<content select="[slot='MyApp/MainHeadline']"></content>`.
 
