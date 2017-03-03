@@ -102,20 +102,36 @@ As outlined in guideline 1, the presentation of the HTML view should be included
 
 The following syntax is used to distribute the content in the Shadow DOM: `<content select="[slot='AppName/ElementName']"></content>`.
 
-Consider the following HTML view with three elements at the root:
+Consider the following HTML view definition:
 
 ```html
-<link rel="import" href="/sys/polymer/polymer.html">
+<link rel="import" href="/sys/puppet-redirect/puppet-redirect.html" />
 
 <template>
     <template is="dom-bind">
-        <h1 slot="MyApp/ImportantHeadline">Very Important Headline</h1>
-        <div slot="MyApp/LifeReport">
-            <template is="dom-if" if="{{model.Person.Alive}}">
-                <strong>Still going strong</strong>
-            </template>
-        </div>
-        <input slot="MyApp/StatusInput" value="{{model.Status$::input}}" />
+        <style>
+            .people-field {
+                display: flex;
+                flex-direction: row;
+                align-items: baseline;
+                margin-bottom: 5px;
+            }
+            .people-field__label {
+                flex: 0 0 75px;
+                margin-right: 20px;
+            }
+            .people-field__control {
+                flex: 1 1 75px;
+            }
+        </style>
+        <div class="people-field">
+            <div class="people-field__label">
+                <label slot="People/first-name-label" class="control-label">First name:</label>
+            </div>
+            <div class="people-field__control">
+                <input slot="People/first-name-control" type="text" value="{{model.FirstName$::change}}" placeholder="First name" class="form-control" />
+            </div>
+         </div>
     </template>
 </template>
 ```
@@ -123,29 +139,43 @@ Consider the following HTML view with three elements at the root:
 To add a `starcounter-composition` to this HTML view, something like this can be done:
 
 ```html
-<link rel="import" href="/sys/polymer/polymer.html">
+<link rel="import" href="/sys/puppet-redirect/puppet-redirect.html" />
 
 <template>
     <template is="dom-bind">
-        <h1 slot="MyApp/ImportantHeadline">Very Important Headline</h1>
-        <div slot="MyApp/LifeReport">
-            <template is="dom-if" if="{{model.Person.Alive}}">
-                <strong>Still going strong</strong>
-            </template>
-        </div>
-        <input slot="MyApp/StatusInput" value="{{model.Status$::input}}" />
+        <label slot="People/first-name-label" class="control-label">First name:</label>
+        <input slot="People/first-name-control" type="text" value="{{model.FirstName$::change}}" placeholder="First name" class="form-control" />
     </template>
     <template is="starcounter-composition">
-        <content select="[slot='MyApp/ImportantHeadline']"></content>
-        <div class="myapp-life-report">
-            <content select="[slot='MyApp/LifeReport']"></content>
-            <content select="[slot='MyApp/StatusInput']"></content>
-        </div>
+        <style>
+            .people-field {
+                display: flex;
+                flex-direction: row;
+                align-items: baseline;
+                margin-bottom: 5px;
+            }
+            .people-field__label {
+                flex: 0 0 75px;
+                margin-right: 20px;
+            }
+            .people-field__control {
+                flex: 1 1 75px;
+            }
+        </style>
+
+        <div class="people-field">
+            <div class="people-field__label">
+                <content select="[slot='People/first-name-label']"></content>
+            </div>
+            <div class="people-field__control">
+                <content select="[slot='People/first-name-control']"></content>
+            </div>
+         </div>
     </template>
 </template>
 ```
 
-Here, the elements are distributed in the way that the view will look when no blending is applied or when the app is running in a standalone mode. 
+Here, the elements are distributed in the way that the view will look when no blending is applied or when the app is running in standalone mode. 
 
 **Note:**
 For Shadow DOM v1, the `slot` tag should be used instead of the `content` tag. Thus, the tag above would take this shape: `<slot name="AppName/ElementName"></slot>`.
@@ -159,3 +189,7 @@ Regarding styling, there are two ways to make the application easier to visually
 2. Keep styling that will affect the layout inside the `starcounter-composition`.
 
 {% endraw %}
+
+### Additional Resources
+
+To find more information about creating HTML View definitions, take a look at [the article linked above](https://starcounter.io/layout-compositions-html-partials/) and the [People app](https://github.com/StarcounterSamples/People/tree/develop/src/People/wwwroot/People/viewmodels) which fully adhers to these guidelines.
