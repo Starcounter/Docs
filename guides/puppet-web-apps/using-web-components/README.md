@@ -6,7 +6,7 @@ Web Components are loaded by browser with HTML Imports. HTML Import for Polymer 
 <link rel="import" href="/sys/polymer/polymer.html" />
 ```
 
-## Avoiding loading the same files multiple times
+## Avoiding Loading the Same Files Multiple Times
 
 Browser loads HTML Imports only once, not like scripts and styles, which are loaded as many times as many references page has.
 
@@ -20,11 +20,11 @@ This will be loaded twice and then lead to a Polymer error:
 
 It is a good practice to avoid double loading of external libraries. Hence, you need to use the same URL pattern as other apps. The recommended way is to use the pattern: `/sys/<dependency-name>/<dependency-files>`.
 
-Starcounter has system folder called `StaticFiles` and located in the installation folder: `C:\Program Files\Starcounter\ClientFiles\StaticFiles`. There you can find `sys` folder, which includes some common components such as Polymer and PuppetJs. You can also [browse out GitHub repo](https://github.com/Starcounter/Starcounter/tree/develop/src/BuildSystem/ClientFiles/StaticFiles/sys) to see what client side libraries are included in that directory.
+Starcounter has system folder called `StaticFiles` and located in the installation folder: `C:\Program Files\Starcounter\ClientFiles\StaticFiles`. There you can find `sys` folder, which includes some common components such as Polymer and PuppetJs. You can also [browse our GitHub repo](https://github.com/Starcounter/Starcounter/tree/develop/src/BuildSystem/ClientFiles/StaticFiles/sys) to see what client side libraries are included in that directory.
 
 The benefit of this is that you can rely on having a specific version of Starcounter to include a specific version of Polymer, PuppetJs, etc.
 
-## Adding external dependencies to your apps
+## Adding External Dependencies to Your Apps
 
 In order to add files that match this pattern, simply put a `sys` folder in your `wwwroot` folder that holds the static files for your project.
 
@@ -103,10 +103,14 @@ A sample file looks like this:
 }
 ```
  
-## Starcounter static file server
+## Starcounter Static File Server
 
 The `StaticFiles` folder from Starcounter installation is automatically served as a static content folder. When Starcounter server receives a request for a static file, it searches for the file in all of the static content folders. The project folder has higher priority over internal folder.
 
 Read more here: <a href="https://github.com/Starcounter/Starcounter/wiki/Serving-static-content" target="_blank">https://github.com/Starcounter/Starcounter/wiki/Serving-static-content</a>.
 
 Keep that in mind you can simply use another version of Polymer by putting it into your local `sys` folder. This will affect all other apps, though.
+
+## Open Source Web Components
+
+A vast library of open source Web Components are available at [webcomponents.org](https://www.webcomponents.org/). 
