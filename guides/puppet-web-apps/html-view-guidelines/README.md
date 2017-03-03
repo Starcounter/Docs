@@ -102,20 +102,36 @@ As outlined in guideline 1, the presentation of the HTML view should be included
 
 The following syntax is used to distribute the content in the Shadow DOM: `<slot name="AppName/ElementName"></slot>`.
 
-Consider the following HTML view with three elements at the root:
+Consider the following HTML view definition:
 
 ```html
-<link rel="import" href="/sys/polymer/polymer.html">
+<link rel="import" href="/sys/puppet-redirect/puppet-redirect.html" />
 
 <template>
     <template is="dom-bind">
-        <h1 slot="MyApp/ImportantHeadline">Very Important Headline</h1>
-        <div slot="MyApp/LifeReport">
-            <template is="dom-if" if="{{model.Person.Alive}}">
-                <strong>Still going strong</strong>
-            </template>
-        </div>
-        <input slot="MyApp/StatusInput" value="{{model.Status$::input}}" />
+        <style>
+            .people-field {
+                display: flex;
+                flex-direction: row;
+                align-items: baseline;
+                margin-bottom: 5px;
+            }
+            .people-field__label {
+                flex: 0 0 75px;
+                margin-right: 20px;
+            }
+            .people-field__control {
+                flex: 1 1 75px;
+            }
+        </style>
+        <div class="people-field">
+            <div class="people-field__label">
+                <label slot="People/first-name-label" class="control-label">First name:</label>
+            </div>
+            <div class="people-field__control">
+                <input slot="People/first-name-control" type="text" value="{{model.FirstName$::change}}" placeholder="First name" class="form-control" />
+            </div>
+         </div>
     </template>
 </template>
 ```
@@ -123,29 +139,43 @@ Consider the following HTML view with three elements at the root:
 To add `declarative-shadow-dom` to this HTML view, something like this can be done:
 
 ```html
-<link rel="import" href="/sys/polymer/polymer.html">
+<link rel="import" href="/sys/puppet-redirect/puppet-redirect.html" />
 
 <template>
     <template is="dom-bind">
-        <h1 slot="MyApp/ImportantHeadline">Very Important Headline</h1>
-        <div slot="MyApp/LifeReport">
-            <template is="dom-if" if="{{model.Person.Alive}}">
-                <strong>Still going strong</strong>
-            </template>
-        </div>
-        <input slot="MyApp/StatusInput" value="{{model.Status$::input}}" />
+        <label slot="People/first-name-label" class="control-label">First name:</label>
+        <input slot="People/first-name-control" type="text" value="{{model.FirstName$::change}}" placeholder="First name" class="form-control" />
     </template>
     <template is="declarative-shadow-dom">
-        <slot name="MyApp/ImportantHeadline"></slot>
-        <div class="myapp-life-report">
-            <slot name="MyApp/LifeReport"></slot>
-            <slot name="MyApp/StatusInput"></slot>
-        </div>
+        <style>
+            .people-field {
+                display: flex;
+                flex-direction: row;
+                align-items: baseline;
+                margin-bottom: 5px;
+            }
+            .people-field__label {
+                flex: 0 0 75px;
+                margin-right: 20px;
+            }
+            .people-field__control {
+                flex: 1 1 75px;
+            }
+        </style>
+
+        <div class="people-field">
+            <div class="people-field__label">
+                <slot name="People/first-name-label"></slot>
+            </div>
+            <div class="people-field__control">
+                <slot name="People/first-name-control"></slot>
+            </div>
+         </div>
     </template>
 </template>
 ```
 
-Here, the elements are distributed in the way that the view will look when no blending is applied or when the app is running in a standalone mode. 
+Here, the elements are distributed in the way that the view will look when no blending is applied or when the app is running in standalone mode. 
 
 ### Guideline 5: Apply Styling to Avoid Conflicts and Allow Blending
 
@@ -156,3 +186,7 @@ Regarding styling, there are two ways to make the application easier to visually
 2. Keep styling that will affect the layout inside the `declarative-shadow-dom`.
 
 {% endraw %}
+
+### Additional Resources
+
+To find more information about creating HTML View definitions, take a look at [the article linked above](https://starcounter.io/layout-compositions-html-partials/) and the [People app](https://github.com/StarcounterSamples/People/tree/develop/src/People/wwwroot/People/viewmodels) which fully adhers to these guidelines.
