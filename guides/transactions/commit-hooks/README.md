@@ -123,3 +123,5 @@ __Notes.__
 1. It is currently not possible to detach commit hook event handlers.
 
 2. CRUD operations introduced inside a hook are not triggering additional hooks. For instance, in ```TestHooks``` the insert hook for ```YetAnotherClass``` is never invoked, because the only place for it triggered is in ```CommitInsert```, which is itself a commit hook.
+
+3. It is recommended to avoid sync tasks in commit hooks. Instead, wrap the tasks in `Session.ScheduleTask` or `Scheduling.ScheduleTask`. In essence, when doing anything more than updating database objects, an asynchronous task should be scheduled for it. Otherwise, unexpected behavior might occur, such as `Self.GET` calls returning `null`. 
