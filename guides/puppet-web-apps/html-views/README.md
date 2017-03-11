@@ -72,7 +72,11 @@ A partial HTML view may look something like this:
 -->
 <!-- For example, to use Polymer's dom-bind custom element: -->
 <link rel="import" href="/sys/polymer/polymer.html" />
-
+<style>
+.myapp-address-entry__name {
+    font-weight: bold;
+}
+</style>
 <!--
     Everything from this template will be stamped into the parent page's DOM,
     and <script>s will be executed for every instance of this partial.
@@ -82,10 +86,10 @@ A partial HTML view may look something like this:
 <template>
     <template is="dom-bind">
         <!--
-            Now, thedouble curly brace syntax "{{}}" can be used for two-way data bindings
+            Now, the double curly brace syntax "{{}}" can be used for two-way data bindings
             from the HTML view to serverside. For example:
          -->
-        <h2>{{model.FullName}}</h2>
+        <h2 class="myapp-address-entry__name">{{model.FullName}}</h2>
         <h4>Address</h4>
         <starcounter-include partial="{{model.Address}}"></starcounter-include>
     </template>
