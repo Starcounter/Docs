@@ -1,4 +1,4 @@
-# Partials
+# HTML Views
 
 This page describes the recommended way to create partials or, in other words, nested pages. Particularly, the following questions are answered:
 

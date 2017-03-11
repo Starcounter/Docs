@@ -1,5 +1,5 @@
 
-# HTML Views Guidelines
+# HTML Views Blending Guidelines
 
 {% raw %}
 
