@@ -97,11 +97,6 @@ and _HTML insertion point_ in your HTML markup
 
 Thanks to that, HTML markup will get stamped from external file, and applicable view model will be attached.
 
-## Advanced Partials usage
-If you want to read in more detail how to use partials, how it technically work, how to extend it, or use outside check at [More on partials](/guides/puppet-web-apps/more-on-partials).
-
------
-
 # Partials and Mixed Apps
 
 With small enhancement to simple partials shown above, Starcounter gives a huge experience improvement to the entire ecosystem of [mixed apps](/guides/mapping-and-blending/mapping-and-blending).
