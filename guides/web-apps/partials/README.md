@@ -6,7 +6,7 @@ This page describes the recommended way to create partials or, in other words, n
 2. How to create a partial that uses Starcounter features?
 3. What are the benefits that Starcounter gives for partials?
 
-The examples take benefit of the features of [Web Components](/guides/puppet-web-apps/introduction-to-web-components) and work best in Google Chrome. Other browsers are supported using a [polyfill](http://webcomponents.org/polyfills/).
+The examples take benefit of the features of [Web Components](/guides/web-apps/introduction-to-web-components) and work best in Google Chrome. Other browsers are supported using a [polyfill](http://webcomponents.org/polyfills/).
 
 # Partials in Starcounter
 
@@ -98,7 +98,7 @@ and _HTML insertion point_ in your HTML markup
 Thanks to that, HTML markup will get stamped from external file, and applicable view model will be attached.
 
 ## Advanced Partials usage
-If you want to read in more detail how to use partials, how it technically work, how to extend it, or use outside check at [More on partials](/guides/puppet-web-apps/more-on-partials).
+If you want to read in more detail how to use partials, how it technically work, how to extend it, or use outside check at [More on partials](/guides/web-apps/more-on-partials).
 
 -----
 
@@ -171,7 +171,7 @@ By using _partials_ the way we suggest, you support unlimited UI integration bet
 ## Partial Usage
 In the ecosystem of Starcounter apps, _partials_ are used and created exactly as in any other standalone Starcounter app, the only difference is that _merged partial_ may get included into the _insertion point_, so the children list of HTML node `<starcounter-include partial="{{SubPage}}"></starcounter-include>` may contain nodes from other apps as well, and JSON subtree at this node may contain namespaced view models from other apps.
 
-For more details check [More on partials](/guides/puppet-web-apps/more-on-partials).
+For more details check [More on partials](/guides/web-apps/more-on-partials).
 
 ## Features for Partials in Starcounter
 
