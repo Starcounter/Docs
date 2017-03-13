@@ -55,7 +55,7 @@ void Handle(Input.Save action)
 With server-side view-models, you don't have to write a single line of "glue code" to update the view in HTML. Any change in the view-model made in C# will instantly be synced to the client using PuppetJs, which in turn automatically renders because of Polymer's data bindings. This saves you from creating single-purpose REST APIs, need for double validation of user input, and more.
 
 <aside class="read-more">
-    <a href="/guides/puppet-web-apps/starcounter-mvvm">Learn about Starcounter's MVVM</a>
+    <a href="/guides/web-apps/starcounter-mvvm">Learn about Starcounter's MVVM</a>
 </aside>
 
 The last step is to modify our `Program.cs` file to create a long running transaction that will allow us to make changes to our database multiple times during our session. We do that by wrapping everything in our `Handle.GET` inside a `Db.Scope`.
