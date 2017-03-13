@@ -5,7 +5,7 @@ We will now turn our application into a simple expense tracker. This will allow 
 With Starcounter you can divide a view-model into several smaller view-models that are called partials. That's exactly what we will do with our application. We will let PersonJson be one view-model and ExpenseJson another. Doing this makes our application more modular and easier to maintain. Let's start by creating the appropriate files.
 
 <aside class="read-more">
-    <a href="/guides/puppet-web-apps/partials">Read more about partials</a>
+    <a href="/guides/web-apps/partials">Read more about partials</a>
 </aside>
 
 1. Add a new Starcounter HTML template with dom-bind in the HelloWorld folder together with `PersonJson.html`. Name it `ExpenseJson.html`.
