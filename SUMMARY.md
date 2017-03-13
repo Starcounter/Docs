@@ -76,7 +76,6 @@
         * [Thin vs fat client](guides/web-apps/thin-vs-fat-client/README.md)
         * [Puppet](guides/web-apps/puppet/README.md)
         * [Client-side stack](guides/web-apps/client-side-stack/README.md)
-        * [Creating a browser page](guides/web-apps/creating-a-browser-page/README.md)
         * [Sessions](guides/web-apps/sessions/README.md)
         * [Multiple pages](guides/web-apps/multiple-pages/README.md)
         * [HTML Views](guides/web-apps/html-views/README.md)
