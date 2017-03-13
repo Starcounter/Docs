@@ -10,4 +10,4 @@ This is the official documentation for Starcounter. It is divided into five main
 
 On the left you can choose to read the documentation for different versions of Starcounter as they correspond to the release channels.
 
-There are also a plethora of sample apps available at the [Sample apps](https://starcounter.io/sample-apps/) page.
+There are also a plethora of sample apps available in the [StarcounterApps](https://github.com/Starcounterapps) repository.
