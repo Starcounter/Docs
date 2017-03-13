@@ -121,6 +121,7 @@
         * [Run Starcounter in production](guides/working-with-starcounter/run-starcounter-in-production/README.md)
         * [Weaver](guides/working-with-starcounter/weaver/README.md)
         * [Investigating app crashes](guides/working-with-starcounter/investigating-app-crashes/README.md)
+        * [Visual Studio Extension](guides/working-with-starcounter/visual-studio-extension/README.md)
 * [Cookbook](cookbook/README.md)
     * [Accessing methods in nested view-models](cookbook/accessing-methods-in-nested-view-models/README.md)
     * [Attach a request to long running transactions](cookbook/attach-a-request-to-long-running-transactions/README.md)
