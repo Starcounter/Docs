@@ -2,17 +2,19 @@
 
 This page gives an explaination of partial HTML views and view-models, or, in other words, nested pages.
 
-## Partial HTML View
+## HTML View Definition
 
-A Partial HTML View is a valid HTML document that contains at least one `<template>` tag and can be loaded with the [`<imported-template>`](https://github.com/Juicy/imported-template) web component. The `<template>` tag is cached on the client and stamped out as many times as needed.
+An HTML view definition is a valid HTML document that contains at least one `<template>` tag and can be loaded with the [`<starcounter-include>`](https://github.com/Starcounter/starcounter-include) web component. The `<template>` tag is cached on the client and stamped out as many times as needed.
 
-The requirements and behaviors for partial HTML views originate from the [HTML Imports](http://www.w3.org/TR/html-imports/) and [HTML Template](http://www.w3.org/TR/html-templates/) specifications. The most interesting aspects are:
+The requirements and behaviors for HTML view definition originate from the [HTML Imports](http://www.w3.org/TR/html-imports/) and [HTML Template](http://www.w3.org/TR/html-templates/) specifications. The most interesting aspects are:
 
 * The document should be a valid HTML document and can contain anything that the browser allows
 * The document may include dependencies such as stylesheets, HTML imports, scripts, etc.
 * The content outside of the `<template>` tag is requested and executed once per session on partial load time
 * The content inside the `<template>` is stamped out with the `<template>` itself every time the response is bound to a tree in the view-model
-* Every node from the `<template>` will be stamped with an attached model property. Custom elements, template binding frameworks, or JavaScript scripts can use this data to populate the view
+* Every node from the `<template>` will be stamped with an attached `model` property. Custom elements, template binding frameworks, or JavaScript scripts can use this data to populate the view
+
+A partial HTML view is a view that is nested as a part of a bigger view. See the section "Adding the Blending Point" below for more information.
 
 ## Partial View-Model
 
