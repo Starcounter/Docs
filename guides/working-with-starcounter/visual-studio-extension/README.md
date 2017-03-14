@@ -100,6 +100,6 @@ namespace MyApp
 
 ## Starting Applications From Visual Studio
 
-With the Visual Studio Extension, apps can be started directly from the development environment. This is done the same way any other application would be started from Visual Studio, by clicking the `Start` butoon or <kbd>f5</kbd>.
+With the Visual Studio Extension, apps can be started directly from the development environment. This is done the same way any other application would be started from Visual Studio, by clicking the `Start` button or <kbd>f5</kbd>.
 
-Further instructions on this can be found in [Starting and Stopping Apps](/guides/working-with-starcounter/starting-and-stopping-apps/). There it is also described how it is possible to set particular arguments on application start from `Debug` -> `MyApp Properties` -> `Debug`.
+Further instructions on starting applications in Visual Studio can be found in [Starting and Stopping Apps](/guides/working-with-starcounter/starting-and-stopping-apps/). There it is also described how it is possible to set particular arguments on application start from `Debug` -> `MyApp Properties` -> `Debug`.
