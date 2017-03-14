@@ -1,14 +1,37 @@
-# Avoiding CSS conflicts (BEM naming convention)
+# Avoiding CSS conflicts
 
-A complex web app is composed out of HTML responses from multiple apps. This means that the merged HTML, CSS and JavaScript runs in the global namespace.
+Complex web apps are composed of HTML responses from multiple apps. This means that the merged HTML, CSS and JavaScript runs in the global namespace.
 
-How to make sure that your CSS does not have side effects in other apps?
+With a global namespace, there's always the risk of CSS conflicts and leaks that cause side effects in other apps. We recommend using the Block Element Modifier (BEM) methodology to avoid these side effects.
 
-## Current best practices way: BEM
+## BEM
 
-The primary way right now to avoid CSS conflicts is to use a naming convention that works in every web browser. The naming convention that Starcounter advises is called BEM (Block Element Modifier).
+Due to limited browser support for technical solutions to CSS conflicts, the primary way right now to avoid CSS conflicts is to use a naming convention. BEM is one of these naming conventions. 
 
 The basic principle in BEM is to **only use classes in your stylesheets**.
+
+These classes should be named as combinations of Blocks, Elements, and Modifiers. 
+
+A **Block** represents a logical area of your app's UI. For example:
+
+- a menu
+- a login form
+- a search form
+
+An **Element** is a fragment of the Block that performs a particular function. For example:
+
+- a menu item
+- a password input in the login form
+- a search button
+
+An Element only makes sense in the context of its Block. It cannot appear outside of the Block.
+
+**Modifiers** represent variations of Blocks and Elements. For example:
+
+- an expanded menu
+- an active menu item
+- a password input with an invalid value
+- a disabled search button
 
 Possible combinations of Blocks, Elements and Modifiers are the following:
 
@@ -33,118 +56,84 @@ When applied to an HTML structure, the above CSS class names are used in the fol
 </div>
 ```
 
-A **Block** represents a logical area of your app's UI. For example:
+Note here that **everything at the root level is a Block**. A Block can have multiple Element and Modifier sections and every Element and Modifer has to belong to a Block.
 
-- a menu
-- a login form
-- a search form
+Consider the [SignIn app](https://github.com/starcounterapps/signin):
 
-An **Element** is a fragment of the Block that performs a particular function. For example:
+![BEM example](../../../assets/BEM-example.PNG)
 
-- a menu item
-- a password input in the login form
-- a search button
+Here, the Block is marked in red and the Element sections in blue. 
 
-An Element only makes sense in the context of its Block. It cannot appear outside of the Block.
-
-**Modifiers** represent variations of Blocks and Elements. For example:
-
-- an expanded menu
-- an active menu item
-- a password input with an invalid value
-- a disabled search button
-
-Considering a sample "Chatter" app that has a menu, the BEM class names for that menu could be the following:
+From this, these BEM classes can be derived:
 
 ```css
-.chatter-menu {}
-.chatter-menu__item {}
-.chatter-menu__item--active {}
-.chatter-menu--expanded {}
+.signin-form {}
+.signin-form--expanded {}
+.signin-form__username-input {}
+.signin-form__remember-me {}
+.singin-form__remember-me--checked {}
 ```
 
 ## BEM in Starcounter apps
 
-We advise the following rules to be applied when using BEM selectors in Starcoutner apps.
+We recommend the following rules when using BEM selectors in Starcounter apps.
 
-### 1. Use just BEM
+* __Only use BEM class selectors in your stylesheets__. Do not use element selectors, id selectors, or inline styles for the purpose of styling.
 
-Only use BEM class selectors in your stylesheets. Do not use element selectors, or id selectors for the purpose of styling.
+* __Give meaningful names__ to the Block, Element and Modifier sections. For example, `.chatter-avatar` is much more descriptive than `.chatter-img`.
 
-Do not use inline styles.
+* __Prefix Block sections with the app name__ to isolate the classes from BEM classes in other apps. For example, the class name for a menu block in the "Chatter" app should be `.chatter-menu`.
 
-### 2. Give meaningful names
+* __Use lowercase class names__. `.Chatter-Menu` is wrong, `.chatter-menu` is right.
 
-Try to give meaningful names to your Blocks, Elements and Modifiers. For example, `.chatter-avatar` tells you much more about the purpose of a Block than `.chatter-img`.
+* __Separate words with a hyphen__ when there are multiple words in a Block, Element or Modifier section. For example: `.chatter-chat-message__message-text`.
 
-### 3. Block should be prefixed with the app name
+* __Element sections should be defined after a double underscore__ as in `.block__element`.
 
-To isolate BEM used in your apps from BEM used in the other apps, the Block should be prefixed with the app name. For example, the class name for a menu block in the "Chatter" app should be `.chatter-menu`.
+* __Modifier should be defined after a double hyphen__. There are only "boolean" style modifiers. For example: `.chatter-menu__item--active`. This is called ["Harry Roberts' style" modifiers](https://en.bem.info/method/naming-convention/).
 
-### 4. Use lowercase names, separate words with hyphen
+* __Block and Element must be in the same HTML template__. Otherwise, implicit couplings are created between templates which might break when the partial mapping changes. If you want to define `.chatter-menu` in a parent partial and the menu items in a nested partials, these menu items will become new blocks (`.chatter-menu-item`, not `.chatter-menu__item`).
 
-We advise to always use lowercase.
+* __Modifier classes should extend base classes__.
 
-When you have to use multiple words in Block, Element or Modifier section, separate them with a hyphen (`-`), for example: `.chatter-chat-message__message-text`.
+ When you set a `.chatter-menu__item--active` class on an element, it should not be needed to add the `.chatter-menu__item` base class.
 
-### 5. Element should be defined after double underscore
+ In your stylesheet, the definition for the base class should include all the modifiers, like this:
 
-Double underscore (`__`) separates the Block part from the Element part in the class name.
-
-### 6. Modifier should be defined after double hyphen
-
-Double hyphen (`--`) separates the Block or Element part from the Modifier part in the class name. There are only "boolean" style modifiers.
-
-For example: `.chatter-menu__item--active`
-
-This is called ["Harry Roberts' style" modifiers](https://en.bem.info/method/naming-convention/) on BEM.info.
-
-### 7. Block and Element must be in the same HTML template
-
-It is not correct to use an Element in a HTML template, without the Block declared in the same template. Otherwise you create a implicit coupling of these two templates, which might break when the partial mapping changes.
-
-If you want to define `.chatter-menu` in a parent partial and the menu items in a nested partials, these menu items will become new blocks (`.chatter-menu-item`, not `.chatter-menu__item`).
-
-### 8. Modifier classes should extend base classes
-
-When you set a `.chatter-menu__item--active` class on an element, it should not be needed to add the `.chatter-menu__item` base class.
-
-In your stylesheet, the definition for the base class should include all the modifiers, like this:
-
-```css
+ ```css
 .chatter-menu__item,
 .chatter-menu__item--active {
     font-size: 11px;
 }
 
-.chatter-menu__item--active {
+ .chatter-menu__item--active {
     font-weight: bold;
 }
 ```
 
-### 9. Mixing BEM with Bootstrap
+* __Mixing BEM with Bootstrap__
 
-You might have noticed that Starcounter sample apps use Bootstrap CSS framework to achieve common look and feel.
+ Starcounter sample apps use the CSS framework Bootstrap to create a unified look and feel.
 
-Even though Bootstrap does not follow BEM, it is totally fine to mix Bootstrap and BEM in a single project, because there is no collision. In fact, by just looking at the CSS class name, you can immediately tell if that class name is shared with other apps (Bootstrap) or is it private to this particular app (BEM).
+ Even though Bootstrap does not follow BEM, there are no issues with mixing Bootstrap and BEM in a single project because there are no collisions. In fact, by just looking at the CSS class name, you can immediately tell if that class name is shared with other apps (Bootstrap) or if it's private to this particular app (BEM).
 
-It is **not** fine to override Bootstrap classes in your app's stylesheet. The only proper way to extend style is to with a BEM selector, for example:
+ It is **not** fine to override Bootstrap classes in your app's stylesheet. The only proper way to extend style is to with a BEM selector, for example:
 
-{% raw %}
-```html
-<ul class="chatter-autocomplete">
+ {% raw %}
+ ```html
+ <ul class="chatter-autocomplete">
     <template is="dom-repeat" items="{{model.FoundAttachment}}">
         <li class="chatter-autocomplete__item">
             <button type="button" class="btn btn-sm btn-link chatter-autocomplete__choose" onmousedown="++this.value;" value="{{item.Choose$::click}}">{{item.NameAndType}}</button>
         </li>
     </template>
-</ul>
-```
-{% endraw %}
+ </ul>
+ ```
+ {% endraw %}
 
-For reference, the available Bootstrap CSS class names can be found in [bootstrap.css](https://github.com/Starcounter/Starcounter/blob/develop/src/BuildSystem/ClientFiles/StaticFiles/sys/bootswatch/paper/bootstrap.css).
+ For reference, the available Bootstrap CSS class names can be found in [bootstrap.css](https://github.com/Starcounter/Starcounter/blob/develop/src/BuildSystem/ClientFiles/StaticFiles/sys/bootswatch/paper/bootstrap.css).
 
-## Why we advise BEM
+## The reasons for choosing BEM
 
 We have found BEM to be excellent mix of simplicity and effectiveness to deal with CSS in micro apps, for a number of reasons outlined below.
 
