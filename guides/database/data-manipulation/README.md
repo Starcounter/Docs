@@ -20,7 +20,7 @@ public class Person
 To create a new instance of this class, the syntax `new Person()` would be used, like this:
 
 ```cs
-var person = new Person()
+new Person()
 {
     FirstName = "John",
     LastName = "Doe"
@@ -70,6 +70,12 @@ Db.SlowSQL("DELETE FROM Person");
 Here, `person.Delete()` will just delete that single object while `DELETE FROM Person` will delete all objects belonging to the `Person` class. 
 
 It's worth keeping in mind that using `DELETE FROM` might create a massive transaction that can hit the size limit for transactions as explained in the [Kernel Q&A](guides/working-with-starcounter/kernel-q-and-a/). The reason for this is that `DELETE FROM` only creates one transaction which scales with the number of columns to delete. To work around this limit, create a loop that deletes each object using the `Delete` method and commit the changes in smaller chunks. The performance loss for this is small since `DELETE FROM` is implemented in a similar fashion except that it does not break up the transaction into smaller transactions.
+
+It's also possible to limit the `DELETE FROM` query by adding a condition. For example, with the `Person` class above, one can use the following query:
+
+```sql
+Db.SlowSQL("DELETE FROM Person WHERE FirstName = 'John'");
+```
 
 **Note**: To delete database objects that are bound to the view-model, the view-model object should be deleted before the database object is deleted.
 
