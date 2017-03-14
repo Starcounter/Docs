@@ -42,7 +42,7 @@ person.LastName = "Doe";
 To update the `LastName` of all the `Person` objects in the database, they would be looped through and updated, like so:
 
 ```cs
-var people = Db.SQL<Person>("SELECT p FROM Person p);
+var people = Db.SQL<Person>("SELECT p FROM Person p");
 foreach (var person in people)
 {
     person.LastName = person.LastName.ToUpper();
