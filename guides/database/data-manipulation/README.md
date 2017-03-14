@@ -1,49 +1,82 @@
 # Data manipulation
 
-There are three data manipulation statements in SQL92: <code>INSERT</code>, <code>UPDATE</code> and <code>DELETE</code>. None of these statements are supported in Starcounter SQL. Objects are instead created, updated, and deleted directly in the programming code.
+There are three data manipulation statements in SQL92: `INSERT`, `UPDATE` and `DELETE`. `INSERT`and `UPDATE` are not supported in Starcounter SQL while `DELETE` is available through `Db.SlowSQL`. Objects are instead created, updated, and deleted directly in the programming code.
 
-The same way a database object is created with the native program code operator `new`, a database object can be updated using the native program code assign operator `=`.
+All modifications have to be wrapped in a transaction. These modifications are visible to other transaction after the changes have been commited.
 
-A database object is deleted by calling the method `Delete()` on the database object.
+## Create Database Objects
 
-All modifications are directly reflected in the database for the current transaction, and when the current transaction is committed the modifications are saved and visible to other transactions.
+Database objects are created with the native program code operator `new`. For example, consider the following database class:
 
-<div class="code-name code-title">Create a database class</div>
 ```cs
 [Database]
-public class Employee
+public class Person
 {
     public String FirstName;
     public String LastName;
-    public Department Department;
-    public Employee Manager;
 }
 ```
 
-<div class="code-name code-title">Create, update, delete object</div>
-```cs
-Db.Transact(() =>
-{
-    // Creating database object.
-    Employee emp = new Employee();
-    // Updating database object.
-    emp.FirstName = "John";
-    emp.LastName = "Smith";
-    // Deleting database object.
-    emp.Delete();
-});
-```
-The following example shows how to update the `LastName` of all
-`Employee` objects to upper case.
+To create a new instance of this class, the syntax `new Person()` would be used, like this:
 
-<div class="code-name code-title">Update properties in loop</div>
 ```cs
-Db.Transact(() =>
-{ 
-    string query = "SELECT e FROM Employee e";
-    foreach (Employee emp in Db.SQL<Employee>(query))
-    {
-        emp.LastName = emp.LastName.ToUpper();
-    }
-});
+new Person()
+{
+    FirstName = "John",
+    LastName = "Doe"
+};
 ```
+
+## Update Database Objects
+
+A database object can be updated using the native program code assign operator `=`.
+
+For example, instead of instantiating an object like in the example above, it's possible to create the object and then update its properties and fields:
+
+```cs
+var person = new Person();
+person.FirstName = "John";
+person.LastName = "Doe";
+```
+
+To update the `LastName` of all the `Person` objects in the database, they would be looped through and updated, like so:
+
+```cs
+var people = Db.SQL<Person>("SELECT p FROM Person p");
+foreach (var person in people)
+{
+    person.LastName = person.LastName.ToUpper();
+}
+```
+
+## Delete Database Objects
+
+There are two ways to delete database objects in Starcounter:
+
+1. Using the `Delete` method on a specific object
+2. Using `DELETE FROM` in `Db.SlowSQL`
+
+Essentially, `Delete` is used for single objects and `DELETE FROM` is used for many objects. 
+
+In code, they look like this:
+
+```cs
+person = new Person();
+person.Delete();
+
+Db.SlowSQL("DELETE FROM Person");
+```
+
+Here, `person.Delete()` will just delete that single object while `DELETE FROM Person` will delete all objects belonging to the `Person` class. 
+
+It's worth keeping in mind that using `DELETE FROM` might create a massive transaction that can hit the size limit for transactions as explained in the [Kernel Q&A](guides/working-with-starcounter/kernel-q-and-a/). The reason for this is that `DELETE FROM` only creates one transaction which scales with the number of columns to delete. To work around this limit, create a loop that deletes each object using the `Delete` method and commit the changes in smaller chunks. The performance loss for this is small since `DELETE FROM` is implemented in a similar fashion except that it does not break up the transaction into smaller transactions.
+
+It's also possible to limit the `DELETE FROM` query by adding a condition. For example, with the `Person` class above, one can use the following query:
+
+```sql
+Db.SlowSQL("DELETE FROM Person WHERE FirstName = 'John'");
+```
+
+**Note**: To delete database objects that are bound to the view-model, the view-model object should be deleted before the database object is deleted.
+
+
