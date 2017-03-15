@@ -9,7 +9,7 @@ We start by simply adding the `FullName` property to our JSON.
 <div class="code-name">PersonJson.json</a></div>
 
 ```json
-"Save$": 0,
+"SaveTrigger$": 0,
 "FullName": ""
 ```
 

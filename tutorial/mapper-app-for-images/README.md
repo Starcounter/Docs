@@ -18,12 +18,11 @@ Now we can start getting some code in there. As mentioned earlier, we simply cop
 UriMapping.OntologyMap<HelloWorld.Expense>("/HelloWorld/partial/expense/{?}");
 
 StarcounterEnvironment.RunWithinApplication("Images", () => {
-Handle.GET("/images/partials/concept-expense/{?}", (string objectId) => {
-    return Self.GET("/images/partials/concept/" + objectId);
-});
+    Handle.GET("/images/partials/concept-expense/{?}", (string objectId) => {
+        return Self.GET("/images/partials/concept/" + objectId);
+    });
 
-     UriMapping.OntologyMap<HelloWorld.Expense>("/images/partials/concept-expense/{?}");
-     });
+    UriMapping.OntologyMap<HelloWorld.Expense>("/images/partials/concept-expense/{?}");
 });
 ```
 {% endraw %}
