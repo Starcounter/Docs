@@ -129,7 +129,7 @@ Handle.GET("/postponed", (Request req) =>
 
 Once the Node call is finished, user should check for status code of the HTTP response (returned Response object should never be null).
 
-The code below demonstrates the redirection of root HTTP URI "/" to startup HTML page "http://www.mywebsite.com/index.html":
+The code below demonstrates the redirection of root HTTP URI "/" to startup HTML page `http://www.mywebsite.com/index.html`:
 
 ```cs
 // Redirecting root to index.html.

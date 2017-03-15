@@ -13,7 +13,7 @@ Multiple apps running in the same database will share data out of the box in two
 
 The easiest way to get started on sharing data between apps is to use the same data model.
 
-Starcounter comes preinstalled with a data model called `Simplified.dll`. If you load it as a reference in your app, you can use the data of our [Developer Samples](https://github.com/StarcounterSamples). We are accepting pull requests to [Simplified](https://github.com/StarcounterSamples/Simplified), if you would like to propose extending this data model.
+Starcounter comes preinstalled with a data model called `Simplified.dll`. If you load it as a reference in your app, you can use the data of our [Developer Samples](https://github.com/Starcounterapps). We are accepting pull requests to [Simplified](https://github.com/Starcounterapps/Simplified), if you would like to propose extending this data model.
 
 If you have a separate data model that you would like to share between multiple apps, you can do this by mimicking how Simplified works. Just create the data model in a separate project and reference to it. All of you apps will load it as a DLL.
 

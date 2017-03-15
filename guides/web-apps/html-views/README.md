@@ -35,7 +35,7 @@ A partial can be accessed in two different ways:
 
 #### Examples
 
-These examples use [Web Component](/guides/puppet-web-apps/introduction-to-web-components) features and work best in Google Chrome. Other browsers are supported using [polyfills](http://webcomponents.org/polyfills/).
+These examples use [Web Component](/guides/web-apps/introduction-to-web-components) features and work best in Google Chrome. Other browsers are supported using [polyfills](http://webcomponents.org/polyfills/).
 
 ##### Creating the Handler
 
