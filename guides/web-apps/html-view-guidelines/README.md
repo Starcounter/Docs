@@ -201,23 +201,22 @@ Regarding styling, there are two ways to make the application easier to visually
         <label slot="People/first-name-label" class="control-label">First name:</label>
         <input slot="People/first-name-control" type="text" value="{{model.FirstName$::change}}" placeholder="First name" class="form-control" />
     </template>
-    <template is="starcounter-composition">
+    <template is="declarative-shadow-dom">
         <style>
         @import url("/people/css/style.css"); 
         </style>
 
         <div class="people-field">
             <div class="people-field__label">
-                <content select="[slot='People/first-name-label']"></content>
+                <slot name="People/first-name-label"></slot>
             </div>
             <div class="people-field__control">
-                <content select="[slot='People/first-name-control']"></content>
+                <slot name="People/first-name-control"></slot>
             </div>
          </div>
     </template>
 </template>
 ```
-
 
 {% endraw %}
 
