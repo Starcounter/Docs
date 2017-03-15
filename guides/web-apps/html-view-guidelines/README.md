@@ -191,6 +191,34 @@ Regarding styling, there are two ways to make the application easier to visually
 
 2. Keep styling that will affect the layout inside the `declarative-shadow-dom`.
 
+3. To avoid writing the same Shadow DOM CSS on different pages, it can be imported with the CSS `import` rule. The syntax for this is `<style>@import url("/yourapp/css/style.css");</style>`. In the example above it would be done this way:
+
+```html
+<link rel="import" href="/sys/puppet-redirect/puppet-redirect.html" />
+
+<template>
+    <template is="dom-bind">
+        <label slot="People/first-name-label" class="control-label">First name:</label>
+        <input slot="People/first-name-control" type="text" value="{{model.FirstName$::change}}" placeholder="First name" class="form-control" />
+    </template>
+    <template is="starcounter-composition">
+        <style>
+        @import url("/people/css/style.css"); 
+        </style>
+
+        <div class="people-field">
+            <div class="people-field__label">
+                <content select="[slot='People/first-name-label']"></content>
+            </div>
+            <div class="people-field__control">
+                <content select="[slot='People/first-name-control']"></content>
+            </div>
+         </div>
+    </template>
+</template>
+```
+
+
 {% endraw %}
 
 ### Additional Resources
