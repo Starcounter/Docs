@@ -59,7 +59,7 @@ Great! Now we just need to stack these templates inside the `Person` view. We ca
         <starcounter-include partial="{{item}}"></starcounter-include>
     </div>
 </template>
-<button value="{{model.AddNewExpense$::click}}" onmousedown="++this.value">Add new expense</button>
+<button value="{{model.AddNewExpenseTrigger$::click}}" onmousedown="++this.value">Add new expense</button>
 <hr>
 <h2>Current Balance: {{model.CurrentBalance}}</h2>
 ```
@@ -67,23 +67,23 @@ Great! Now we just need to stack these templates inside the `Person` view. We ca
 
 `starcounter-include` is an insertion point for another template. In this case it's representing the template in ExpenseJson so that we can keep our code separate.
 
-As you can see above, we are using AddNewExpense, which we haven't defined yet. Let's go and fix that now.
+As you can see above, we are using `AddNewExpenseTrigger$`, which we haven't defined yet. Let's go and fix that now.
 
 <div class="code-name">PersonJson.json</div>
 ```json
 "FullName": "",
 "Expenses": [{}],
-"AddNewExpense$": 0,
+"AddNewExpenseTrigger$": 0,
 "CurrentBalance": 0
 ```
 
 `Expenses` is a list of the expenses of a Person and `CurrentBalance` will be the sum of of all these expenses.
 
-`AddNewExpense$` is a trigger property that allows us to add a new `Expenses` template to the view. We can implement its handler now.
+`AddNewExpenseTrigger$` is a trigger property that allows us to add a new `Expenses` template to the view. We can implement its handler now.
 
 <div class="code-name">PersonJson.json.cs</div>
 ```cs
-void  Handle(Input.AddNewExpense action)
+void  Handle(Input.AddNewExpenseTrigger action)
 {
     var expense = new Expense()
     {

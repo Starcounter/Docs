@@ -10,44 +10,44 @@ We start by adding our needed trigger properties for our future buttons to the `
 
 ```json
 "CurrentBalance": 0,
-"Cancel$": 0,
-"DeleteAll$": 0
+"CancelTrigger$": 0,
+"DeleteAllTrigger$": 0
 ```
 
 No surprises here.
 
-Now, let's add the buttons that will increment these values in the same way that our `Save` button does now.
+Now, let's add the buttons that will increment these values in the same way that our save button does now.
 
 <div class="code-name">PersonJson.html</div>
 
 {% raw %}
 ```html
-<button value="{{model.Save$::click}}" onmousedown="++this.value">Save</button>
-<button value="{{model.Cancel$::click}}" onmousedown="++this.value">Cancel</button>
+<button value="{{model.SaveTrigger$::click}}" onmousedown="++this.value">Save</button>
+<button value="{{model.CancelTrigger$::click}}" onmousedown="++this.value">Cancel</button>
 .
 .
 <h2>Current Balance: {{model.CurrentBalance}}</h2>
-<button value="{{model.DeleteAll$::click}}" onmousedown="++this.value">Delete all expenses</button>
+<button value="{{model.DeleteAllTrigger$::click}}" onmousedown="++this.value">Delete all expenses</button>
 ```
 {% endraw %}
 
 
-We now expect the values `DeleteAll$` and `Cancel$` to be incremented on click.
+We now expect the values `DeleteAllTrigger$` and `CancelTrigger$` to be incremented on click.
 
 The next step is to build handlers to react accordingly. We will also do that similar to the way we did with the `Save` button.
 
 <div class="code-name">Person.json.cs</div>
 ```cs
-void Handle(Input.Cancel action)
+void Handle(Input.CancelTrigger action)
 {
     Transaction.Rollback();
     RefreshExpenses(this.Data.Spendings);
 }
 
-void Handle(Input.AddNewExpense action)
+void Handle(Input.AddNewExpenseTrigger action)
 .
 .
-void Handle(Input.DeleteAll action)
+void Handle(Input.DeleteAllTrigger action)
 {
     Db.SlowSQL("DELETE FROM Expense WHERE Spender = ?", this.Data);
     this.Expenses.Clear();
@@ -63,9 +63,9 @@ void Handle(Input.DeleteAll action)
 partial class PersonJson : Json, IBound<Person>
 ```
 
-The `DeleteAll` handler deletes all the expenses for the current `Person` in the database and clears the `Expenses` property in its JSON file.
+The `DeleteAllTrigger` handler deletes all the expenses for the current `Person` in the database and clears the `Expenses` property in its JSON file.
 
-`RefreshExpenses` in the `Cancel` handler is a method that updates the `Expenses` of the `Person`. It should look like this:
+`RefreshExpenses` in the `CancelTrigger` handler is a method that updates the `Expenses` of the `Person`. It should look like this:
 
 <div class="code-name">PersonJson.json.cs</div>
 ```cs

@@ -68,7 +68,7 @@ partial class PersonJson : Json, IBound<Spender>
 
 <div class="code-name">PersonJson.json.cs</div>
 ```cs
-void Handle(Input.AddNewExpense action)
+void Handle(Input.AddNewExpenseTrigger action)
 {
   var expense = new Expense()
   {
