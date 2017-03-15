@@ -13,7 +13,7 @@ Send a `GET` request with a header `Content-Type: application/json` to `http://l
 ```
 $ curl -X GET -H "Content-Type: application/json" http://localhost:8080/invoicedemo
 
-{"_ver#c$":0, "_ver#s":0, "Html":"/InvoiceDemo/InvoicePage.html", "InvoiceNo":0, "Name$":"", "Total":0.0, "Items":[{"Description$":"", "Quantity$":1, "Price$":0.0, "Total":0.0}], "AddRow$":0, "Save$":0, "Cancel$":0}
+{"_ver#c$":0, "_ver#s":0, "Html":"/InvoiceDemo/InvoicePage.html", "InvoiceNo":0, "Name$":"", "Total":0.0, "Items":[{"Description$":"", "Quantity$":1, "Price$":0.0, "Total":0.0}], "AddRowTrigger$":0, "SaveTrigger$":0, "CancelTrigger$":0}
 ```
 
 
