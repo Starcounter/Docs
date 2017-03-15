@@ -39,7 +39,7 @@ The `model.Menu` contains merged responses from all handlers mapped to `/sc/mapp
 UriMapping.Map("/Products/menu", UriMapping.MappingUriPrefix + "/menu");
 ```
 
-Read more about mapping here: [Mixing apps](/guides/mapping-and-blending/mapping-and-blending).
+Read more about mapping here: [Mixing apps](/guides/mapping-and-blending/).
 
 #### UI blending with layout editor
 

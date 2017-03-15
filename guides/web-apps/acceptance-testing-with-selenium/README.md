@@ -69,7 +69,7 @@ Install-Package NUnit.Runners -Version 3.2.0
 
 Make sure you have Selenium IDE extension installed in Firefox. The instructions are here: [http://www.seleniumhq.org/projects/ide/](http://www.seleniumhq.org/projects/ide/).
 
-Make sure that the project that you want to test is already running. For me it means, that Launcher is started and accessible at [http://localhost:8080/launcher](http://localhost:8080/launcher).
+Make sure that the project that you want to test is already running. For me it means, that Launcher is started and accessible at `http://localhost:8080/launcher`.
 
 To record the first test, go to Firefox, and click on the Selenium IDE icon.
 
@@ -126,7 +126,7 @@ Open your <code>Properties</code> in the <code>Tests</code> project. Go to <code
 
 ### Edit the tests to run in multiple projects
 
-Now, add this small file to your test project. Call it `WebDriverFactory.cs`. This is a helper class that makes it easier to test multiple browsers. The source code is available [here](https://github.com/StarcounterSamples/KitchenSink/blob/master/test/KitchenSink.Tests/WebDriverFactory.cs):
+Now, add this small file to your test project. Call it `WebDriverFactory.cs`. This is a helper class that makes it easier to test multiple browsers. The source code is available [here](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Utilities/WebDriverManager.cs):
 
 ```cs
 using OpenQA.Selenium;
@@ -233,7 +233,7 @@ It is a good practice to always wait:
 - wait for an input field to be present, before you type in that input field
 - wait for a button to be present, before you click on that button
 
-The following code sample from KitchenSink's [TextPageTest.cs](https://github.com/StarcounterSamples/KitchenSink/blob/master/test/KitchenSink.Tests/Tests/TextPageTest.cs) shows how to:
+The following code sample from KitchenSink's [TextPageTest.cs](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextPageTest.cs) shows how to:
 
 1. wait for presence of an input field before typing in it
 2. wait for the asynchronous response from the server with derivative result
