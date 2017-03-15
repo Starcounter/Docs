@@ -41,7 +41,7 @@ document.querySelector("puppet-client").network.changeState(url);
 When the user submits the form, a relevant HTTP handler tries to authenticate the user. In case of successful authentication, an auth token is generated and stored in the database:
 
 <div class="code-name">
-<a href="https://github.com/StarcounterPrefabs/Simplified/blob/master/Ring3/User/SystemUser.Static.cs" target="_blank">Simplified/blob/master/Ring3/User/SystemUser.Static.cs</a></div>
+<a href="https://github.com/StarcounterApps/Simplified/blob/master/Ring3/User/SystemUser.Static.cs" target="_blank">Simplified/blob/master/Ring3/User/SystemUser.Static.cs</a></div>
 
 ```cs
 SystemUser systemUser = Db.SQL&lt;SystemUser&gt;("SELECT o FROM Simplified.Ring3.SystemUser o WHERE o.Username = ?", Username).First;

@@ -48,7 +48,7 @@ partial class Foo : Json
 Properties of the view-model have to be bound to (in dynamic JSON) Common Language Runtime or (in static JSON) code-behind file. In <a href="/guides/typed-json/json-data-bindings">JSON data binding</a> we explain data bindings in-depth, and how to avoid manual value transfer into the view-model.
 
 If JSON object is static it is beneficial to denote a specific type that is used as data-object. Otherwise, opposite to dynamic JSON objects, faulty static properties will result in compilation error instead of runtime. Moreover, it allows binding data properties to the correct types without manual involvement.
-<a href="/guides/typed-json/json-data-binding">There are two ways of doing that:</a>
+<a href="/guides/typed-json/json-data-bindings">There are two ways of doing that:</a>
 
 1. Set a metadata inside the view-model
 2. Use the <code>IBound interface</code> to tag the code-behind class
