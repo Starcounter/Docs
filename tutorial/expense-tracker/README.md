@@ -2,10 +2,10 @@
 
 We will now turn our application into a simple expense tracker. This will allow us to practice using multiple object instances and relations.
 
-With Starcounter you can divide a view-model into several smaller view-models that are called partials. That's exactly what we will do with our application. We will let PersonJson be one view-model and ExpenseJson another. Doing this makes our application more modular and easier to maintain. Let's start by creating the appropriate files.
+with Starcounter, views and view-models can be broken up into parts and nested together. This allows for increased composability and modularity. In this case, the two main concepts in this app, Person and Expense, will be built with separate view-models and views and then nested together to create a coherent whole. Let's start by creating the appropriate files.
 
 <aside class="read-more">
-    <a href="/guides/web-apps/html-views">Read more about partials</a>
+    <a href="/guides/web-apps/html-views">Read more about views and view-models in Starcounter</a>
 </aside>
 
 1. Add a new Starcounter HTML template with dom-bind in the HelloWorld folder together with `PersonJson.html`. Name it `ExpenseJson.html`.
@@ -24,7 +24,7 @@ In `ExpenseJson.json`, add the properties `Description`, `Amount`, and `Html`. `
 ```
 Now we have enough information to create the view for the expenses, so let's do that.
 
-To create a list of the expenses we will use the power of Polymer. Our first step is to create a template for the `Description` and `Amount`.
+To create a list of the expenses we will use the power of Polymer. Our first step is to create an HTML view definition for `Description` and `Amount`.
 
 <div class="code-name">ExpenseJson.html</div>
 
@@ -39,7 +39,7 @@ To create a list of the expenses we will use the power of Polymer. Our first ste
 ```
 {% endraw %}
 
-Great! Now we just need to stack these templates inside the `Person` view. We can do that easily using dom-repeat. While we are on it, we will also modify the headline and add a button to add new expenses.
+Great! Now we just need to stack these views inside the `Person` view. We can do that easily using `dom-repeat`. While we are on it, we will also modify the headline and add a button to add new expenses.
 
 <aside class="read-more">
     <a href="https://www.polymer-project.org/1.0/docs/devguide/templates">Read more about dom-repeat</a>
@@ -132,7 +132,7 @@ public decimal CurrentBalance => Db.SQL<decimal>("SELECT SUM(e.Amount) FROM Hell
 
 `Spendings` is all the expenses of one Person.
 
-<code>CurrentBalance</code> is the sum of all those expenses.
+`CurrentBalance` is the sum of all those expenses.
 
 These two are calculated every time they are used by searching through the database so that they are always up to date.
 
