@@ -112,6 +112,7 @@
         * [Starting and stopping apps](guides/working-with-starcounter/starting-and-stopping-apps/README.md)
         * [Administrator Web UI](guides/working-with-starcounter/administrator-web-ui/README.md)
         * [Staradmin CLI](guides/working-with-starcounter/staradmin-cli/README.md)
+        * [Working in Visual Studio](guides/working-with-starcounter/working-in-visual-studio/README.md)
         * [Error log](guides/working-with-starcounter/error-log/README.md)
         * [Testing HTTP requests](guides/working-with-starcounter/testing-http-requests/README.md)
         * [Using HTTPS on NGINX](guides/working-with-starcounter/using-https-on-nginx/README.md)
@@ -125,7 +126,7 @@
         * [Unload/Reload](guides/working-with-starcounter/unload-reload/README.md)
         * [Kernel Q&A](guides/working-with-starcounter/kernel-q-and-a/README.md)
         * [Log Retention](guides/working-with-starcounter/log-retention/README.md)
-        * [Visual Studio Extension](guides/working-with-starcounter/visual-studio-extension/README.md)
+		
 * [Cookbook](cookbook/README.md)
     * [Accessing methods in nested view-models](cookbook/accessing-methods-in-nested-view-models/README.md)
     * [Attach a request to long running transactions](cookbook/attach-a-request-to-long-running-transactions/README.md)
