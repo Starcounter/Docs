@@ -14,7 +14,7 @@ There are currently two project templates and three item templates.
 
 **Project templates**:
 
-The project templates are used to scaffold projects that target Starcounter. When instantiated, the project will have some default Starcounter-specific *assembly references* set up and include some build hooks that will aid in building. For more information on the specifics, see section [[Create a Starcounter application using standard templates]] later in this text.
+The project templates are used to scaffold projects that target Starcounter. When instantiated, the project will have some default Starcounter-specific *assembly references* set up and include some build hooks that will aid in building. For more information on the specifics, see section about [creating applications using standard templates](Create-a-Starcounter-application-using-standard-templates) later in this text.
 
 Project templates include:
 
