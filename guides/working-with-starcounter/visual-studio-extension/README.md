@@ -1,6 +1,6 @@
 # Working in Visual Studio
 
-Developing Starcounter applications is straight-forward and not tied to any certain development environment. Applications targeting .NET are normally built using Visual Studio, but would work using just `msbuild` or even the C# compiler too.
+Developing Starcounter applications is straightforward and not tied to any certain development environment. Applications targeting .NET are normally built using Visual Studio, but would work using just `msbuild` or even the C# compiler too.
 
 In Visual Studio, applications can be built using a [Starcounter Visual Studio extension](https://marketplace.visualstudio.com/items?itemName=Starcounter.StarcounterforVisualStudio), or just using standard Visual Studio templates such as the C# "Console Application" project template.
 
@@ -14,7 +14,7 @@ There are currently two project templates and three item templates.
 
 **Project templates**:
 
-The project templates are used to scaffold projects that target Starcounter. When instantiated, the project will have some default Starcounter-specific *assembly references* set up and include some build hooks that will aid in building. For more information
+The project templates are used to scaffold projects that target Starcounter. When instantiated, the project will have some default Starcounter-specific *assembly references* set up and include some build hooks that will aid in building. For more information on the specifics, see section [[Create a Starcounter application using standard templates]] later in this text.
 
 Project templates include:
 
@@ -150,5 +150,5 @@ Using the standard C# "Console Application" project, we can turn that into a pro
 Without the extension, you can't start the application project simply from within Visual Studio. Luckily, it's easily done using tooling being part of Starcounter.
 
 1. Open a command line prompt.
-2. CD to the directory of your build application.
+2. CD to the directory of your built application.
 3. Run `star Hello.exe`.
