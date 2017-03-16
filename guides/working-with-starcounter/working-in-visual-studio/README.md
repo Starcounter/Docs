@@ -4,17 +4,17 @@ Developing Starcounter applications is straightforward and not tied to any certa
 
 In Visual Studio, applications can be built using a [Starcounter Visual Studio extension](https://marketplace.visualstudio.com/items?itemName=Starcounter.StarcounterforVisualStudio), or just using standard Visual Studio templates such as the C# "Console Application" project template.
 
-# Using the Visual Studio extension
+## Using the Visual Studio extension
 
 Starcounter provides a Visual Studio extension to simplify the development of Starcounter applications. It provide templates to build on and the ability to start applications from Visual Studio.
 
-## Templates
+### Templates
 
 There are currently two project templates and three item templates.
 
 **Project templates**:
 
-The project templates are used to scaffold projects that target Starcounter. When instantiated, the project will have some default Starcounter-specific *assembly references* set up and include some build hooks that will aid in building. For more information on the specifics, see section about [creating applications using standard templates](Create-a-Starcounter-application-using-standard-templates) later in this text.
+The project templates are used to scaffold projects that target Starcounter. When instantiated, the project will have some default Starcounter-specific *assembly references* set up and include some build hooks that will aid in building. For more information on the specifics, see section about [creating applications using standard templates](#create-a-starcounter-application-using-standard-templates) later in this text.
 
 Project templates include:
 
@@ -27,7 +27,7 @@ Project templates include:
 * Starcounter Typed JSON
 * Starcounter Typed JSON with code-behind
 
-### Starcounter Application Template
+#### Starcounter Application Template
 
 The Starcounter application template is the starting point to creating applications with Starcounter. It contains four references: `Starcounter`, `Starcounter.Internal`, `Starcounter.Logging`, and `Starcounter.XSON`. Additionally, it comes with a boilerplate `Program.cs` file that looks like this:
 
@@ -47,7 +47,7 @@ namespace MyApp
 }
 ```
 
-### Starcounter Class Library
+#### Starcounter Class Library
 
 The Starcounter class library template is the starting point for creating a shared data model to use across applications. For example, the [Simplified](https://github.com/StarcounterApps/Simplified) DLL that is used to provide a shared data model to the Starcounter [sample apps](https://github.com/StarcounterApps) is built with this template. It contains the same references as the Starcounter application template. This is how the boilerplate `Program.cs` file looks:
 
@@ -66,7 +66,7 @@ namespace MyClassLibrary
 }
 ```
 
-### Starcounter HTML template with dom-bind
+#### Starcounter HTML template with dom-bind
 
 This item templates gives a starting point for creating HTML view definitions with Polymer. 
 
@@ -82,7 +82,7 @@ It contains the following code:
 </template>
 ```
 
-### Starcounter Typed JSON
+#### Starcounter Typed JSON
 
 This template is the starting point for creating a view-model definition using JSON-by-example. It is simply an empty `.json` file containing an empty JSON object:
 
@@ -91,7 +91,7 @@ This template is the starting point for creating a view-model definition using J
 }
 ```
 
-### Starcounter Typed JSON with code-behind
+#### Starcounter Typed JSON with code-behind
 
 This template is the same as the Starcounter Typed JSON file, except that it also provides a code-behind file. Thus, two files are created with this template, `.json` and `.json.cs`. 
 
@@ -108,18 +108,18 @@ namespace MyApp
 }
 ```
 
-## Starting Applications From Visual Studio
+### Starting Applications From Visual Studio
 
 With the Visual Studio Extension, apps can be started directly from the development environment. This is done the same way any other application would be started from Visual Studio, by clicking the `Start` button or <kbd>f5</kbd>.
 
 Further instructions on starting applications in Visual Studio can be found in [Starting and Stopping Apps](/guides/working-with-starcounter/starting-and-stopping-apps/). There it is also described how it is possible to set particular arguments on application start from `Debug` -> `MyApp Properties` -> `Debug`.
 
-# Using only standard Visual Studio
+## Using only standard Visual Studio
 As was established in the introduction, the Visual Studio extension (or even Visual Studio) is not a requirement for building and running Starcounter applications. You could very well create applications using just a text editor and msbuild, or even the compiler.
 
 In this section, we'll see how to work with applications using just standard Visual Studio.
 
-## Create a Starcounter application using standard templates
+### Create a Starcounter application using standard templates
 Using the standard C# "Console Application" project, we can turn that into a proper Starcounter application with these simple steps:
 
 1. Create the project, name it for example "Hello".
