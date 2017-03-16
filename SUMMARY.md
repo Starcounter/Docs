@@ -124,6 +124,7 @@
         * [Migrating from 2.2 to 2.3+](guides/working-with-starcounter/migrating-from-2.2-to-2.3+/README.md)
         * [Unload/Reload](guides/working-with-starcounter/unload-reload/README.md)
         * [Kernel Q&A](guides/working-with-starcounter/kernel-q-and-a/README.md)
+        * [Log Retention](guides/working-with-starcounter/log-retention/README.md)
         * [Visual Studio Extension](guides/working-with-starcounter/visual-studio-extension/README.md)
 * [Cookbook](cookbook/README.md)
     * [Accessing methods in nested view-models](cookbook/accessing-methods-in-nested-view-models/README.md)
