@@ -70,13 +70,6 @@
           }
       }
 
-<<<<<<< HEAD
-    /* When the user clicks on the button,
-    toggle between hiding and showing the dropdown content */
-    function toggleDropdown() {
-        document.getElementById("menu-dropdown").classList.toggle("show");
-    }
-=======
       shouldSetAsSelectedVersion = function(option) {
           var isLoadedPage = window.location.href.indexOf(option.innerHTML) != -1;
           var isElementType = option.nodeType == 1;
@@ -95,7 +88,6 @@
           closeMenuDropdownOnOutsideClick(event);
           closeSearchDropdownOnOutsideClick(event);
       }
->>>>>>> RC
 
       closeMenuDropdownOnOutsideClick = function(event) {
           if (shouldCloseDropdownMenu(event)) {
