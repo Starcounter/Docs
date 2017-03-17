@@ -78,7 +78,7 @@ public List<string> Branches
     get { return new List<string>{ "develop", "master" } };
 }
 
-public IEnumerable People  
+public IEnumerable<Person> Friends
 {
     get { return Db.SQl<Person>("SELECT p FROM Person p") };
 }
@@ -92,4 +92,8 @@ public List<Person> People { get; }
 public IEnumerable Animals;
 ```
 
-Keep in mind that the allowed collections will not become database columns, they will instead become code properties that can be accessed in SQL queries. 
+These cannot be queried for with SQL, though, they can still be accessed from C# after they have been retrieved from the database. Imagine that a `Person` class has the property `Friends` friends above, then `Friends` can be accessed like so:
+```cs
+var person = Db.SQL<Person>("SELECT p FROM Person p").First;
+IEnumerable<Person> friends = person.Friends;
+```
