@@ -34,7 +34,7 @@ To merge the changes, merge to the branch that the checkout was done from. So if
 
 ```git
 git checkout 2.1.177
-git merge fix-typo
+git merge --no-ff --no-commit fix-typo
 ```
 
 When the changes have been merged into the oldest applicable branch, the changes should be merged in a cascading fashion to all the newer branches. With the current branches, it looks like this:
