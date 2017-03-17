@@ -61,9 +61,12 @@ When these changes are pushed, GitBook will sync, build, and upload them to the 
 
 The branches that are uploaded to GitBook are:
 
-1. Every Release: 2.1.177, 2.2.1834, and 2.2.1.3234
-2. Develop
-3. RC
+* Every release:
+    * 2.1.177
+    * 2.2.1834
+    * 2.2.1.3234
+* RC
+* Develop
 
 ### Using the Gitbook editor
 
