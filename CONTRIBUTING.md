@@ -34,8 +34,10 @@ To merge the changes, merge to the branch that the checkout was done from. So if
 
 ```git
 git checkout 2.1.177
-git merge fix-typo
+git merge --no-ff --no-commit fix-typo
 ```
+
+When asked for the commit message for the merge, please reference the issues that are relevant to the merge. For example, "merging fixed typo, as requested in #15". 
 
 When the changes have been merged into the oldest applicable branch, the changes should be merged in a cascading fashion to all the newer branches. With the current branches, it looks like this:
 
@@ -61,9 +63,12 @@ When these changes are pushed, GitBook will sync, build, and upload them to the 
 
 The branches that are uploaded to GitBook are:
 
-1. Every Release: 2.1.177, 2.2.1834, and 2.2.1.3234
-2. Develop
-3. RC
+* Every release:
+    * 2.1.177
+    * 2.2.1834
+    * 2.2.1.3234
+* RC
+* Develop
 
 ### Using the Gitbook editor
 
