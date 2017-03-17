@@ -37,6 +37,8 @@ git checkout 2.1.177
 git merge --no-ff --no-commit fix-typo
 ```
 
+When asked for the commit message for the merge, please reference the issues that are relevant to the merge. For example, "merging fixed typo, as requested in #15". 
+
 When the changes have been merged into the oldest applicable branch, the changes should be merged in a cascading fashion to all the newer branches. With the current branches, it looks like this:
 
 ```
