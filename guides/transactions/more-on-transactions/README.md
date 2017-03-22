@@ -221,6 +221,11 @@ return HandlerStatus.Handled;
 
 Worth to note that if handler issues several write transactions, then it's always reasonable to use Db.TransactAsync() and then wait for all Transactions at once with Task.WaitForAll(), TaskFactory.ContinueWhenAll() or similar. Otherwise, the latency of such handler would extremely degrade.
 
+Under the hood, `Db.Transact` is implemented in terms of `Db.TransactAsync` functions. `Db.TransactAsync` returns a `Task` object that is marked completed on flushing transaction log for this transaction. The `Db.Transact` family is a thin wrapper around `Db.TransactAsync` that effectively just calls `Db.TransactAsync` and synchronously waits for returned Task. Thus, `Db.Transact` is a blocking call that waits for IO on write transactions.
+```cs
+System.Threading.Tasks.Task TransactAsync(Action action, ...);
+```  
+
 ## Db.TransactAsync and async/await
 
 With Db.TransactAsync API it's tempting to employ async/await in the user app. Syntactically it's possible, although it's not that useful due to several shortcomings:
