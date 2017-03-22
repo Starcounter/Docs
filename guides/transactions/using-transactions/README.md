@@ -1,6 +1,6 @@
 # Using Transactions
 
-Transactions in Starcounter are implemented with `Db.Transact`, `Db.TransactAsync`, and `Db.Scope`. This page will describe how to use these in a variety of ways.
+Transactions in Starcounter are implemented with `Db.Transact`, `Db.TransactAsync`, and `Db.Scope`. This page will describe how to use `Db.Transact` and `Db.TransactAsync`. `Db.Scope` is covered on the page [Long Running Transactions](../long-running-transactions).
 
 ## `Db.Transact`
 
