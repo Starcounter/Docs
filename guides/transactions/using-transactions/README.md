@@ -54,43 +54,32 @@ With Db.TransactAsync API it's tempting to employ async/await in the user app. S
 
 ## Nested transactions
 
-Code within nested transaction scopes will be run within the same transaction,
-and the transaction is comitted when the outermost transaction scope ends.
-Consider the example code below. When executing the method <code>PaymentOfSalaries</code>
-there will be nested transaction scopes since <code>PaymentOfSalaries</code> has one
-transaction scope and that method calls <code>Payment</code> which has another transaction scope.
-Thus when executing <code>PaymentOfSalaries</code> all calls of <code>Payment</code> will
-be executed within the same transaction as <code>PaymentOfSalaries</code>.
+When a transaction is run within another transaction, the changes will be commited when the outermost transaction scope ends. Consider a situation like this: 
 
 ```cs
-public class Administration
+public void MakePayment(Account payerAccount, Account receiverAccount, Decimal amount)
 {
-    Company company;
-    ...
-
-    public void Payment(Account from, Account to, Decimal amount)
+    Db.Transact(() => // Inner transaction
     {
-        Db.Transact(() =>
-        {
-            from.Balance = from.Balance - amount;
-            to.Balance = to.Balance + amount;
-        };
-    }
+        payerAccount.Balance -= amount;
+        receiverAccount.Balance += amount;
+    };
+}
 
-    public void PaymentOfSalaries()
+public void PaySalaries()
+{
+    Db.Transact(() => // Outer transaction
     {
-        Db.Transact(() =>
+        QueryResultRows<Employee> employees = Db.SQL<Employee>("SELECT e FROM Employee e");
+        foreach(var employee in employees)
         {
-            QueryResultRows<Employee> result = Db.SQL<Employee>("SELECT e FROM Employee e");
-            foreach(Employee emp in result)
-            {
-                Payment(company.Account, emp.Account, emp.Salary);
-            }
-        };
-    }
-    ...
-}  
+            MakePayment(company.Account, employee.Account, employee.Salary);
+        }
+    };
+}
 ```
+
+When executing `PaySalarlies`, it creates an outer transaction scope. No changes will be commited to the database until the scope ends. Thus, all the transactions created by `MakePayment` will be commited at the same time. This is done to protect the atomicity of the outer transaction in `PaySalaries`. 
 
 ## A more complete example
 
