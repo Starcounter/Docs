@@ -6,13 +6,6 @@ Starcounter is fully [ACID](http://en.wikipedia.org/wiki/ACID) compliant and con
 
 This works even if the database is in the terabytes. This means that nobody sees what you are doing while you are in your own transactional scope. You can even use SQL to query your database snapshot within the transaction while outside transactions will not be able to see your changes until they are done.
 
-For your convenience there are some overloads of the `Db.Transact` function that allows you to specify delegates that have input and output parameters.
-
-```cs
-Db.Transact(Action action, ...);
-TResult Db.Transact<TResult>(Func<TResult> func, ...);
-```  
-
 ### The Db.TransactAsync function
 Under the hood `Db.Transact` is implemented in terms of `Db.TransactAsync` functions. `Db.TransactAsync` returns Task object, that is marked completed on flushing transaction log for this transaction. `Db.Transact` family is a thin wrapper around `Db.TransactAsync`, that effectively just calls Db.TransactAsync() and synchronously waits for returned Task. Thus Db.Transact() is a blocking call that waits for IO on write transactions. Take a look at the corresponding section at [More on transactions](more-on-transactions/) for reasoning and possible performance implications.
 

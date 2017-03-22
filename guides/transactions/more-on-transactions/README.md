@@ -52,6 +52,13 @@ Db.Transact(() =>
 });
 ```
 
+For your convenience there are some overloads of the `Db.Transact` function that allows you to specify delegates that have input and output parameters.
+
+```cs
+Db.Transact(Action action, ...);
+TResult Db.Transact<TResult>(Func<TResult> func, ...);
+```  
+
 ## Nested transactions
 
 Code within nested transaction scopes will be run within the same transaction,
