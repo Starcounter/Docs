@@ -70,23 +70,23 @@ public class Administration
 
     public void Payment(Account from, Account to, Decimal amount)
     {
-        Db.Transact(delegate()
+        Db.Transact(() =>
         {
             from.Balance = from.Balance - amount;
             to.Balance = to.Balance + amount;
-        });
+        };
     }
 
     public void PaymentOfSalaries()
     {
-        Db.Transact(delegate()
+        Db.Transact(() =>
         {
             QueryResultRows<Employee> result = Db.SQL<Employee>("SELECT e FROM Employee e");
             foreach(Employee emp in result)
             {
                 Payment(company.Account, emp.Account, emp.Salary);
             }
-        });
+        };
     }
     ...
 }  
@@ -119,7 +119,7 @@ public class MoneyTransfer
 
   public static void MoveMoney(Account fromAccount, Account toAccount, decimal amount)
   {
-      Db.Transact( delegate
+      Db.Transact(() =>
       {
          MoneyTransfer a = new MoneyTransfer();
          a.FromAccount = fromAccount;
@@ -127,7 +127,7 @@ public class MoneyTransfer
          a.Amount = amount;
          fromAccount.Amount -= amount;
          toAccount.Amount += amount;
-     });
+     };
   }
 }
 ```
@@ -159,7 +159,7 @@ public class MoneyTransfer
 
   public static void MoveMoney(Account fromAccount, Account toAccount, decimal amount)
   {
-      Db.Transact(delegate
+      Db.Transact(() =>
       {
          MoneyTransfer a = new MoneyTransfer();
          a.FromAccount = fromAccount;
@@ -167,17 +167,17 @@ public class MoneyTransfer
          a.Amount = amount;
          fromAccount.Amount -= amount;
          toAccount.Amount += amount;
-      });
+      };
   }
 
   public static void HelloScope(decimal amount)  
   {
-     Db.Transact(delegate
+     Db.Transact(() =>
      {
         MoveMoney( GetAccount("Client A"), GetAccount("Client D"), 100 );
         MoveMoney( GetAccount("Client B"), GetAccount("Client D"), 100 );
         MoveMoney( GetAccount("Client C"), GetAccount("Client D"), 100 );
-     }
+     };
   }
 ```
 
@@ -205,8 +205,8 @@ return new Response(...);
 Do:
 ```cs
 Db.TransactAsync(...).ContinueWith(
-    ()=>Scheduling.ScheduleTask(
-      () =>request.SendResponse(new Response(...))
+    () => Scheduling.ScheduleTask(
+      () => request.SendResponse(new Response(...))
     )
 );
 return HandlerStatus.Handled;
@@ -219,5 +219,5 @@ Worth to note that if handler issues several write transactions, then it's alway
 With Db.TransactAsync API it's tempting to employ async/await in the user app. Syntactically it's possible, although it's not that useful due to several shortcomings:
 
 1. Using async/await is not possible in a handler body as Handler API doesn't support async handlers.
-2. No special measures have been taken to force after-await code to run on a Starcounter thread, so manual ```Scheduling.ScheduleTask()``` might be required (see [Running background jobs](../running-background-jobs) for detals).
-3. async/await should be used with caution as they may inadvertently increase the latency. Say if user code runs several transactions sequentially, putting await in front of every ```Db.TransactAsync()``` will accumulate all individual latencies. Right stategy in this case is to make a list of tasks and the await all of them at once.
+2. No special measures have been taken to force after-await code to run on a Starcounter thread, so manual `Scheduling.ScheduleTask()` might be required (see [Running background jobs](../running-background-jobs) for details).
+3. async/await should be used with caution as they may inadvertently increase the latency. Say if user code runs several transactions sequentially, putting await in front of every `Db.TransactAsync()` will accumulate all individual latencies. Right stategy in this case is to make a list of tasks and the await all of them at once.

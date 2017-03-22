@@ -1,8 +1,8 @@
 # Commit hooks
 
-Commit hook is a logic flow control pattern similar to [trigger](https://en.wikipedia.org/wiki/Trigger) in relational databases. It enables to hook the [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) events per objects of particular class. For cases when an object is being created (with a ```new``` operator), updated (by writing to a field) and deleted (when the ```.Delete()``` is called, and after the committed delete), additional event handlers of code might be added for execution.
+Commit hook is a logic flow control pattern similar to [trigger](https://en.wikipedia.org/wiki/Trigger) in relational databases. It enables to hook the [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) events per objects of particular class. For cases when an object is being created (with a `new` operator), updated (by writing to a field) and deleted (when the `.Delete()` is called, and after the committed delete), additional event handlers of code might be added for execution.
 
-The app ```TestHooks``` shows a full set of use cases for commit hooks.
+The app `TestHooks` shows a full set of use cases for commit hooks.
 
 {% raw %}
 ```cs
@@ -23,7 +23,8 @@ namespace TestHooks
       public int Stock;
    }
 
-   class Program {
+   class Program 
+   {
       static void Main()
       {
          Hook<Hooked>.BeforeDelete += (s, obj) =>
@@ -116,12 +117,12 @@ __Why there are separate pre-delete (`BeforeDelete`) and post-delete (`CommitDel
 
 __In general, in situations where you can choose, we recommend to avoid using commit hooks__. They introduce non-linear flows in the logic, hence producing more complicated and less maintainable code. Commit hooks is a powerful tool that should only be used in situations where benefits of using them overweight the drawbacks. One popular example is separate logging of changes in objects of selected classes.
 
-__Can I do DB operations inside commit hooks?__ The answer is "Yes", since all commit hooks relate to write operations (create/update/delete), thus there must always be a transaction spanning these operations, and all event handlers are run inside this transaction. For example, in `TestHooks` we create an instance of a class `YetAnotherClass` inside `CommitInsert`, but do not introduce a transaction scope around this line. The reason being for it is that there is already a transaction from ```Main``` which spans this call.
+__Can I do DB operations inside commit hooks?__ The answer is "Yes", since all commit hooks relate to write operations (create/update/delete), thus there must always be a transaction spanning these operations, and all event handlers are run inside this transaction. For example, in `TestHooks` we create an instance of a class `YetAnotherClass` inside `CommitInsert`, but do not introduce a transaction scope around this line. The reason being for it is that there is already a transaction from `Main` which spans this call.
 
 __Notes.__
 
 1. It is currently not possible to detach commit hook event handlers.
 
-2. CRUD operations introduced inside a hook are not triggering additional hooks. For instance, in ```TestHooks``` the insert hook for ```YetAnotherClass``` is never invoked, because the only place for it triggered is in ```CommitInsert```, which is itself a commit hook.
+2. CRUD operations introduced inside a hook are not triggering additional hooks. For instance, in `TestHooks` the insert hook for `YetAnotherClass` is never invoked, because the only place for it triggered is in `CommitInsert`, which is itself a commit hook.
 
 3. It is recommended to avoid sync tasks in commit hooks. Instead, wrap the tasks in `Session.ScheduleTask` or `Scheduling.ScheduleTask`. In essence, when doing anything more than updating database objects, an asynchronous task should be scheduled for it. Otherwise, unexpected behavior might occur, such as `Self.GET` calls returning `null`. 
