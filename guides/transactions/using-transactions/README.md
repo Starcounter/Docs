@@ -25,6 +25,33 @@ Db.Transact(Action action, ...);
 TResult Db.Transact<TResult>(Func<TResult> func, ...);
 ```  
 
+Since `Db.Transact` is synchronous, there might be cases where it becomes a performance bottleneck. Starcounter deals with this by automatically scaling the number of working threads to continue processing requests even if some handlers are blocked. The maximum number of working threads is the number of CPU cores multiplied by 254, so with four cores, there would be a maximum of 1016 working threads. When all these threads are occupied, the next `Db.Transact` call in line will have to wait until a thread is freed. This can be circumvented by using [`Db.TransactAsync`](#dbtransactasync).
+
+Worth noting is that `Db.Transact` is actually `Db.TransactAsync` but with a thin wrapper that synchronously waits for the returned `Task` object. 
+
+## `Db.TransactAsync`
+
+`Db.TransactAsync` is the asynchronous counterpart of `Db.Transact`. It allows developers to have more complicated application designs and higher throughput. It returns a `Task` object that is marked as completed when flushing the transaction log for this transaction.
+
+It is declared the same way as `Db.Transact`:
+
+```cs
+Db.TransactAsync(() => 
+{
+    // The code to be run in the transaction
+})
+```
+
+It's worth nothing that if a handler issues several write transactions, then it's reasonable to use `Db.TransactAsync` and then wait for all transactions at once with `Task.WaitForAll` or `TaskFactory.ContinueWhenAll`. Otherwise, the latency of such handler would extremely degrade.
+
+### Limitations
+
+With Db.TransactAsync API it's tempting to employ async/await in the user app. Syntactically it's possible, although it's not that useful due to several shortcomings:
+
+1. Using async/await is not possible in a handler body as Handler API doesn't support async handlers.
+2. No special measures have been taken to force after-await code to run on Starcounter threads, so manual `Scheduling.ScheduleTask()` might be required (see [Running background jobs](../running-background-jobs) for details).
+3. async/await should be used with caution as they may inadvertently increase the latency. Say if user code runs several transactions sequentially, putting await in front of every `Db.TransactAsync` will accumulate all the individual latencies. The right stategy in this case is to make a list of tasks and then await all of them at once.
+
 ## Nested transactions
 
 Code within nested transaction scopes will be run within the same transaction,
@@ -150,37 +177,3 @@ public class MoneyTransfer
 ```
 
 At the end of the MoveMoney function, the transaction scope ends. Should we commit? If we do, we have ensured the atomicity of MoveMoney, but we have violated the atomicity of HelloScope(). In hello scope, we have been instructed that all three money transfers are atomic. It is a contract we need to abide if in order to be ACID compliant. Either everything in the scope has happened, or nothing. Before we are finished, we must not show any changes to any viewer outside of the transaction. What if we commit the changes at the end of HelloScope() where the parent transaction scope ends? In this case, we have honored both contracts. Both transactions are ACID. So transaction scope is a declaration of atomicity, not an instruction to commit. Actually it would be possible to leave out the possibility of nested transaction scopes, but then you would have to have two MoveMoney() functions or provide some parameter to instruct it to commit or not to commit. By using transaction scopes however, you can make encapsulated transactions that can be used inside any other transaction without compromising their atomicity.
-
-## Synchronous vs Asynchronous transactions
-As was mentioned, Db.Transact performs blocking wait on IO and has non-blocking counterpart - Db.TransactAsync. The reason for this is to let application code means to know when transaction is secured and its safe for the application to cause any side-effects based on that fact. Blocking call to Db.Transact could be a problem depending on application design, throughput and latency requirements. In certain scenarios it's not that critical - Starcounter can automatically scale the number of working threads, so it will continue processing requests despite some handlers are blocked. Number of threads are limited by ```number_of_cpu*254```. If achieved throughput is not sufficient then handlers are to be redesigned to use Db.TransactAsync() instead of Db.Transact().
-
-Instead:
-```cs
-Db.Transact(...);
-return new Response(...);
-```
-
-Do:
-```cs
-Db.TransactAsync(...).ContinueWith(
-    () => Scheduling.ScheduleTask(
-      () => request.SendResponse(new Response(...))
-    )
-);
-return HandlerStatus.Handled;
-```
-
-Worth to note that if handler issues several write transactions, then it's always reasonable to use Db.TransactAsync() and then wait for all Transactions at once with Task.WaitForAll(), TaskFactory.ContinueWhenAll() or similar. Otherwise, the latency of such handler would extremely degrade.
-
-Under the hood, `Db.Transact` is implemented in terms of `Db.TransactAsync` functions. `Db.TransactAsync` returns a `Task` object that is marked completed on flushing transaction log for this transaction. The `Db.Transact` family is a thin wrapper around `Db.TransactAsync` that effectively just calls `Db.TransactAsync` and synchronously waits for returned Task. Thus, `Db.Transact` is a blocking call that waits for IO on write transactions.
-```cs
-System.Threading.Tasks.Task TransactAsync(Action action, ...);
-```  
-
-## Db.TransactAsync and async/await
-
-With Db.TransactAsync API it's tempting to employ async/await in the user app. Syntactically it's possible, although it's not that useful due to several shortcomings:
-
-1. Using async/await is not possible in a handler body as Handler API doesn't support async handlers.
-2. No special measures have been taken to force after-await code to run on a Starcounter thread, so manual `Scheduling.ScheduleTask()` might be required (see [Running background jobs](../running-background-jobs) for details).
-3. async/await should be used with caution as they may inadvertently increase the latency. Say if user code runs several transactions sequentially, putting await in front of every `Db.TransactAsync()` will accumulate all individual latencies. Right stategy in this case is to make a list of tasks and the await all of them at once.
