@@ -1,4 +1,4 @@
-# More on transactions
+# Using Transactions
 
 Creating an enterprise database management system would be easy if it was not for high concurrency. This means that a lot of users are reading and writing simultaneously while the system should guarantee atomicity, consistency, durability and isolation (ACID). This would be easy enough if you could simply use locking, but dealing with millions of users in this way works poorly. This is an area were Starcounter has its roots. It provides a lock free ACID engine that is based on transactional RAM and highly concurrent scheduling and memory management.
 

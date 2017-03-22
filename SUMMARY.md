@@ -57,7 +57,7 @@
         * [Query for Database Tables](guides/SQL/query-for-database-tables/README.md)
         * [SQL isolation between applications](guides/SQL/sql-isolation-between-applications/README.md)
     * [Transactions](guides/transactions/README.md)
-        * [More on transactions](guides/transactions/more-on-transactions/README.md)
+        * [Using Transactions](guides/transactions/using-transactions/README.md)
         * [Long running transactions](guides/transactions/long-running-transactions/README.md)
         * [Running background jobs](guides/transactions/running-background-jobs/README.md)
         * [Commit hooks](guides/transactions/commit-hooks/README.md)
