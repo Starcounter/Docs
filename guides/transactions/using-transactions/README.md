@@ -79,42 +79,7 @@ public void PaySalaries()
 }
 ```
 
-When executing `PaySalarlies`, it creates an outer transaction scope. No changes will be commited to the database until the scope ends. Thus, all the transactions created by `MakePayment` will be commited at the same time. This is done to protect the atomicity of the outer transaction in `PaySalaries`. 
-
-## A more complete example
-
-In Starcounter, you declare transaction scopes. A transaction scope surrounds its code and declares that the database operations within the scope should be atomic and isolated. The following example shows how to declare transaction scope:
-
-```cs
-using Starcounter;
-
-[Database]
-public class Account
-{
-   public string AccountId;
-   public decimal Amount;
-}
-
-public class MoneyTransfer
-{
-  public Account FromAccount;
-  public Account ToAccount;
-  public decimal Amount;
-
-  public static void MoveMoney(Account fromAccount, Account toAccount, decimal amount)
-  {
-      Db.Transact(() =>
-      {
-         MoneyTransfer a = new MoneyTransfer();
-         a.FromAccount = fromAccount;
-         a.ToAccount = toAccount;
-         a.Amount = amount;
-         fromAccount.Amount -= amount;
-         toAccount.Amount += amount;
-     };
-  }
-}
-```
+When executing `PaySalaries`, it creates an outer transaction scope. No changes will be commited to the database until the scope ends. Thus, all the transactions created by `MakePayment` will be commited at the same time. This is done to protect the atomicity of the outer transaction in `PaySalaries`. 
 
 ## Transaction scopes
 
