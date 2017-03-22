@@ -52,6 +52,14 @@ With Db.TransactAsync API it's tempting to employ async/await in the user app. S
 2. No special measures have been taken to force after-await code to run on Starcounter threads, so manual `Scheduling.ScheduleTask()` might be required (see [Running background jobs](../running-background-jobs) for details).
 3. async/await should be used with caution as they may inadvertently increase the latency. Say if user code runs several transactions sequentially, putting await in front of every `Db.TransactAsync` will accumulate all the individual latencies. The right stategy in this case is to make a list of tasks and then await all of them at once.
 
+## `Db.Transact` and `Db.TransactAsync` Usage
+
+`Db.Transact` and `Db.TransactAsync` should be used when changes are to be commited instantly, in comparison to [`Db.Scope`](../long-running-transactions) where changes wait until they are manually commited. Due to this, if there's a need to rollback changes, `Db.Scope` should be used over `Db.Transact` or `Db.TransactAsync`. Also, keep in mind that `Db.Scope` does not handle conflicts, thus, if conflicts are likely, `Db.Transact` or `Db.TransactAsync` is better suited for the job.
+
+It is also recommended that the code in `Db.Transact` and `Db.TransactAsync` can be executed in less than approximately two seconds. The reason for this is that the longer the transaction is, the more likely it is that there will be conflicts. Thus, long transactions might be required to run several times which can be expensive. The solution is to simply break the transaction into several smaller transactions. 
+
+Since `Db.Transact` and `Db.TransactAsync` might run several times, it is also important that they do not have any side effects, such as HTTP calls or writes to a file.  
+
 ## Nested transactions
 
 When a transaction is run within another transaction, the changes will be commited when the outermost transaction scope ends. Consider a situation like this: 
