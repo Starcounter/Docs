@@ -37,6 +37,16 @@ Starcounter uses transaction logs (a.k.a. redo logs) to ensure that transactions
 * A field that is required to contain a unique value contains a non unique value
 * There was an unhandled error during the transaction
 
+## Transaction concurrency
+When many users write to the database at the same time, the database engine must ensure that the data keeps consistent using atomicity and isolation. I.e. if an account reads 100 and you want to update it to 110 and another transaction is simultaneously reading a 100 and wants to update it to 120. Should the result be 110, 120 or 130? In order to resolve this the transaction must be able to resolve conflicts. The easiest way to do this is to use locking. However, if you want your database engine to serve large numbers of users and transactions, locking is slow and expensive and can lead to [deadlocks](http://en.wikipedia.org/wiki/Deadlock). Locking is efficient when you almost expect a conflict, i.e. when the probability is high that you will have a conflict. The slow nature of locking is that it always consumes time, even if there is no conflict. Another word for locking is 'pessimistic concurrency control'. A more efficient way of providing concurrency is to use 'optimistic concurrency control'. As the name implies, you don't expect a conflict, but you will still handle it correctly. The concurrency control in Starcounter is **optimistic concurrency control**.
+
+## Optimistic transaction concurrency
+
+Optimistic concurrency control makes an assumption that conflicts between transactions are unlikely. The database can therefore allow transactions to execute without locking the modified objects. If a conflict occurs Starcounter will restart the transaction until the transaction is successfully commited, or a maximum of 100 times. For long-running transactions, the developer has to implement the retry functionality him- or herself. 
+
+## Pessimistic transaction concurrency
+Pessimistic concurrency control locks objects when executing the transaction. This concurrency control often gives very negative performance hits.
+
 {% import "../../macros.html" as macros %}
 
 {{ macros.tocGenerator(page.title, summary.parts[0].articles[3].articles[2].articles) }}

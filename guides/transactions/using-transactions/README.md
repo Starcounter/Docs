@@ -68,11 +68,6 @@ public class Administration
 }  
 ```
 
-## Conflicts
-
-In case of a transaction conflict, the method <code>Db.Transact(<var>Action</var>)</code>
-will automatically restart the transaction. The maximum times a transaction will be restarted is a 100 times.
-
 ## A more complete example
 
 In Starcounter, you declare transaction scopes. A transaction scope surrounds its code and declares that the database operations within the scope should be atomic and isolated. The following example shows how to declare transaction scope:
@@ -158,16 +153,6 @@ public class MoneyTransfer
 ```
 
 At the end of the MoveMoney function, the transaction scope ends. Should we commit? If we do, we have ensured the atomicity of MoveMoney, but we have violated the atomicity of HelloScope(). In hello scope, we have been instructed that all three money transfers are atomic. It is a contract we need to abide if in order to be ACID compliant. Either everything in the scope has happened, or nothing. Before we are finished, we must not show any changes to any viewer outside of the transaction. What if we commit the changes at the end of HelloScope() where the parent transaction scope ends? In this case, we have honored both contracts. Both transactions are ACID. So transaction scope is a declaration of atomicity, not an instruction to commit. Actually it would be possible to leave out the possibility of nested transaction scopes, but then you would have to have two MoveMoney() functions or provide some parameter to instruct it to commit or not to commit. By using transaction scopes however, you can make encapsulated transactions that can be used inside any other transaction without compromising their atomicity.
-
-## Transaction concurrency
-When many users write to the database at the same time, the database engine must ensure that the data keeps consistent using atomicity and isolation. I.e. if an account reads 100 and you want to update it to 110 and another transaction is simultaneously reading a 100 and wants to update it to 120. Should the result be 110, 120 or 130? In order to resolve this the transaction must be able to resolve conflicts. The easiest way to do this is to use locking. However, if you want your database engine to serve large numbers of users and transactions, locking is slow and expensive and can lead to [deadlocks](http://en.wikipedia.org/wiki/Deadlock). Locking is efficient when you almost expect a conflict, i.e. when the probability is high that you will have a conflict. The slow nature of locking is that it always consumes time, even if there is no conflict. Another word for locking is 'pessimistic concurrency control'. A more efficient way of providing concurrency is to use 'optimistic concurrency control'. As the name implies, you don't expect a conflict, but you will still handle it correctly. The concurrency control in Starcounter is **optimistic concurrency control**.
-
-## Optimistic transaction concurrency
-
-Optimistic concurrency control makes an assumption that conflicts between transactions are unlikely. The database can therefore allow transactions to execute without locking the modified objects. If a conflict occurs Starcounter will retry the changes numerous times, if you are not using long-running transactions in which case you need to implement the retry functionality yourself
-
-## Pessimistic transaction concurrency
-Pessimistic concurrency control locks objects when executing the transaction. This concurrency control often gives very negative performance hits.
 
 ## Synchronous vs Asynchronous transactions
 As was mentioned, Db.Transact performs blocking wait on IO and has non-blocking counterpart - Db.TransactAsync. The reason for this is to let application code means to know when transaction is secured and its safe for the application to cause any side-effects based on that fact. Blocking call to Db.Transact could be a problem depending on application design, throughput and latency requirements. In certain scenarios it's not that critical - Starcounter can automatically scale the number of working threads, so it will continue processing requests despite some handlers are blocked. Number of threads are limited by ```number_of_cpu*254```. If achieved throughput is not sufficient then handlers are to be redesigned to use Db.TransactAsync() instead of Db.Transact().
