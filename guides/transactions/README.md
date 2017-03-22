@@ -6,49 +6,6 @@ Starcounter is fully [ACID](http://en.wikipedia.org/wiki/ACID) compliant and con
 
 This works even if the database is in the terabytes. This means that nobody sees what you are doing while you are in your own transactional scope. You can even use SQL to query your database snapshot within the transaction while outside transactions will not be able to see your changes until they are done.
 
-### The Db.Transact function
-You define transactional scope using the `Db.Transact` function. The scoped transaction is placed in a delegate.
-
-```cs
-using Starcounter;
-
-class Hello
-{
-   static void Main()
-   {
-      Db.Transact(() =>
-      {
-         var albert = new Person()
-         {
-           FirstName = "Albert",
-           LastName = "Einstein"
-         };
-
-         new Quote()
-         {
-           Person = albert,  
-           Text = "Make things as simple as possible, but not simpler"
-         };
-      });
-   }
-}
-
-[Database]
-public class Person
-{
-   public string FirstName;
-   public string LastName;
-   public string FullName { get { return FirstName + " " + LastName; } }
-}
-
-[Database]
-public class Quote
-{
-   public Person Person;
-   public string Text;
-}
-```
-
 For your convenience there are some overloads of the `Db.Transact` function that allows you to specify delegates that have input and output parameters.
 
 ```cs
