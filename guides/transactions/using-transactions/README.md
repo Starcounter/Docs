@@ -1,12 +1,11 @@
 # Using Transactions
 
-## The basics
+Transactions in Starcounter are implemented with `Db.Transact`, `Db.TransactAsync`, and `Db.Scope`. This page will describe how to use these in a variety of ways.
 
-Write access to the database can only be done within the scope of a transaction.
-You get a transaction scope by calling the method <code>Transact</code> of the
-static class <code>Db</code> (namespace <code>Starcounter</code>).
-To the method <code>Transact</code> you pass a delegate with the code that
-should be run within the transaction.
+## `Db.Transact`
+
+`Db.Transact` is the simplest way to create a transaction in Starcounter. It declares a transactional scope as described on the [previous page](/guides/transactions) and is run synchronously.
+The argument passed to the `Db.Transact` method is a delegate containing the code to be run within the transaction. In code, it looks like this:
 
 ```cs
 Db.Transact(() =>
