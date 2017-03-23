@@ -32,7 +32,7 @@ Close the layout editor with <kbd>ctrl</kbd> + <kbd>E</kbd> should now see the f
 
 Well done! You have now created one of the most advanced "Hello World" applications and learned how to use Starcounter to build fast and modular applications. 
 
-If you get any errors, you can check your code against the [source code](https://github.com/StarcounterSamples/HelloWorld/commit/409e59f043987339359c513bf5888d76702e87e7).
+If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/c85ff3123a80476fd65c35f9e949b79118e984d8).
 
 <section class="hero"><strong>Disclaimer</strong>
 The APIs used in this step are experimental. We consider blending of different application's user interfaces to be an essential feature. We are working hard to develop exceptional blending that might require the steps outlined here to be changed. Feel free to follow our <a href="http://starcounter.io/blog/">blog</a> to get information about these changes and more.</section>
