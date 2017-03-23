@@ -22,41 +22,11 @@ By allowing the business objects to live inside a transactional scope, the form 
 
 ### Assigning JSON to a transaction
 
-A server-side JSON object can be associated with a transaction. This is an important concept in Starcounter view-models.
-
 Let's assume that you are composing an email in a mail program. You are entering a recipient that is not yet in your contact database. You would then create a new EmailAddress object and assign it to your email.
-
-```cs
-partial class MailPage : Json, IBound<Mail>
-{
-  void Handle(Input.To action)
-  {
-    var emailAddress = Db.SQL<EmailAddress>("SELECT e FROM EmailAddress e WHERE Address = ?", action.value).First;
-    if (emailAddress == null)
-    {
-      emailAddress = new EmailAddress() 
-      { 
-        Address = action.value 
-      };
-      Data.To = emailAddress;
-    }
-  }
-
-  void Handle(Input.SaveTrigger action)
-  {
-    Transaction.Commit();
-  }
-
-  void Handle(Input.CancelTrigger action)
-  {
-    Transaction.Rollback();
-  }
-}
-```
 
 If the user elects to cancel the email, the EmailAddress should not be saved. If the user elects to send/save the email, the email address should be saved. But the EmailAddress is directly edited in the email form. How does Starcounter know that it should only be saved if the user saves the email?
 
-The way this is done in Starcounter is to assign a transaction to the view-model. In this way, changes that pertains to the actions performed in the scope of the form editing can be kept together as a single transaction. A new transaction is created calling `Db.Scope` that takes a delegate to be executed as parameter. The transaction will then be attached to the view-model when the (view-model) object is instantiated.
+A new transaction is created calling `Db.Scope` that takes a delegate to be executed as parameter. The transaction will then be attached to the view-model when the (view-model) object is instantiated.
 
 ```cs
 Handle.GET("/email-client/new-email", () =>
@@ -163,3 +133,31 @@ Handle.GET("/email-client/new-email", () =>
 ```
 
 ## Handling Long-Running Transactions in View-Models
+
+```cs
+partial class MailPage : Json, IBound<Mail>
+{
+  void Handle(Input.To action)
+  {
+    var emailAddress = Db.SQL<EmailAddress>("SELECT e FROM EmailAddress e WHERE Address = ?", action.value).First;
+    if (emailAddress == null)
+    {
+      emailAddress = new EmailAddress() 
+      { 
+        Address = action.value 
+      };
+      Data.To = emailAddress;
+    }
+  }
+
+  void Handle(Input.SaveTrigger action)
+  {
+    Transaction.Commit();
+  }
+
+  void Handle(Input.CancelTrigger action)
+  {
+    Transaction.Rollback();
+  }
+}
+```
