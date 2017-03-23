@@ -12,6 +12,14 @@ This document is divided into two parts:
 
 ## Create and Attach
 
+### The Reason For Attaching View-Models to Transactions
+
+A very important reason for associating view-models with transactions is that it allows you to put business logic in the database objects rather than in some code inside the form or some code that gets called when you save the form.
+
+Let's say, for example, that the discount of an order changes when you change the quantity of any of its order items. The more you buy, the cheaper it gets. You would want this business logic should be visible to the order form presented to the user when he uses the mouse and keyboard to edit the order. To honor the DRY principle (don't repeat yourself) you should not have to repeat any business logic already in the domain model (i.e. database object). And if you put the code on the discount in the form, you would not handle the separation-of-concern very nicely as the rule is probably not connected with a certain piece of user interface or even a single specific application, but rather a generic business rule that should keep it's integrity no matter how many editors and different clients and application servers you throw at it.
+
+By allowing the business objects to live inside a transactional scope, the form can view the world as if the changes are there while the outside world does not yet see them. When the form is saved, the transaction is committed or if the form is not saved, the transaction is simply aborted.
+
 ### Assigning JSON to a transaction
 
 A server-side JSON object can be associated with a transaction. This is an important concept in Starcounter view-models.
@@ -153,13 +161,5 @@ Handle.GET("/email-client/new-email", () =>
   return masterPage;
 });
 ```
-
-### Why is this important
-
-A very important reason for associating view-models with transactions is that it allows you to put domain logic (aka. business logic) in the domain objects (aka database objects) rather than in some code inside the form or some code that gets called when you save the form.
-
-Let's say, for example, that the discount of an order changes when you change the quantity of any of its order items. The more you buy, the cheaper it gets. You would want this business logic should be visible to the order form presented to the user when he uses the mouse and keyboard to edit the order. To honour the DRY principle (don't repeat yourself) you should not have to repeat any business logic already in the domain model (i.e. database object). And if you put the code on the discount in the form, you would not handle the separation-of-concern very nicely as the rule is probably not connected with a certain piece of user interface or even a single specific application, but rather a generic business rule that should keep it's integrity no matter how many editors and different clients and application servers you throw at it.
-
-By allowing the business objects to live inside a transactional scope, the form can view the world as if the changes are there while the outside world does not yet see them. When the form is saved, the transaction is committed or if the form is not saved, the transaction is simply aborted.
 
 ## Handling Long-Running Transactions in View-Models
