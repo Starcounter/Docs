@@ -1,6 +1,6 @@
 # Transactions
 
-Starcounter uses transactions to ensure [ACID](http://en.wikipedia.org/wiki/ACID) compliance. This page describes how it works in theory while the pages [Using Transactions](/using-transactions) and [Long Running Transactions](/long-running-transactions) describes how to apply it in applications.
+Starcounter uses transactions to ensure [ACID](http://en.wikipedia.org/wiki/ACID) compliance. This page describes how it works in theory while the pages [Using Transactions](using-transactions) and [Long Running Transactions](long-running-transactions) describes how to apply it in applications.
 
 ## Achieving ACID Compliance
 
