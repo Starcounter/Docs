@@ -134,10 +134,33 @@ Handle.GET("/email-client/new-email", () =>
 
 ## Handling Long-Running Transactions in View-Models
 
+When inside a view-model that's attached to a long-running transaction, it's possible to commit and rollback changes.
+
+The syntax for these are `Transaction.Commit()` and `Transaction.Rollback()`.
+
+`Transaction.Commit()` commits changes to the database which means that they will become visible for other transactions.
+
+`Transaction.Rollback()` rolls back the state of the view-model. For example, with a commit that's immidiately followed by a rollback, no changes will be rolled back. Consider this scenario instead:
+
+```cs
+void Handle(Input.CreateEmailTrigger action) 
+{
+  Transaction.Commit();
+  new Email()
+  {
+    Address = this.Address
+  };
+  Transaction.Rollback();
+}
+```
+In this scenario, the new `Email` that's created would be rolled back and the state of the view-model would return to the previous commit.
+
+Most sample apps uses `Commit` and `Rollback` to allow the user to save or cancel change like in the following example:
+
 ```cs
 partial class MailPage : Json, IBound<Mail>
 {
-  void Handle(Input.To action)
+  void Handle(Input.RecipientAddress action)
   {
     var emailAddress = Db.SQL<EmailAddress>("SELECT e FROM EmailAddress e WHERE Address = ?", action.value).First;
     if (emailAddress == null)
@@ -146,7 +169,7 @@ partial class MailPage : Json, IBound<Mail>
       { 
         Address = action.value 
       };
-      Data.To = emailAddress;
+      Data.RecipientAddress = emailAddress;
     }
   }
 
@@ -161,3 +184,5 @@ partial class MailPage : Json, IBound<Mail>
   }
 }
 ```
+
+An example of this can also be found at [step 6](../../tutorial/cancel-and-delete) of the tutorial.
