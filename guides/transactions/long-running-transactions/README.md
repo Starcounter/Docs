@@ -15,24 +15,27 @@ Let's assume that you are composing an email in a mail program. You are entering
 ```cs
 partial class MailPage : Json, IBound<Mail>
 {
-  void Handle(Input.To input)
+  void Handle(Input.To action)
   {
-    EmailAddress a = Db.SQL<EmailAddress>("SELECT e FROM EmailAddress e WHERE Address=?", input.value).First;
-    if (a == null)
+    var emailAddress = Db.SQL<EmailAddress>("SELECT e FROM EmailAddress e WHERE Address = ?", action.value).First;
+    if (emailAddress == null)
     {
-      a = new EmailAddress() { Address = input.value };
-      Data.To = a;
+      emailAddress = new EmailAddress() 
+      { 
+        Address = action.value 
+      };
+      Data.To = emailAddress;
     }
   }
 
-  void Handle(Input.SaveTrigger input)
+  void Handle(Input.SaveTrigger action)
   {
-    this.Transaction.Commit();
+    Transaction.Commit();
   }
 
-  void Handle(Input.CancelTrigger input)
+  void Handle(Input.CancelTrigger action)
   {
-    this.Transaction.Rollback();
+    Transaction.Rollback();
   }
 }
 ```
@@ -42,25 +45,17 @@ If the user elects to cancel the email, the EmailAddress should not be saved. If
 The way this is done in Starcounter is to assign a transaction to the view-model. In this way, changes that pertains to the actions performed in the scope of the form editing can be kept together as a single transaction. A new transaction is created calling `Db.Scope` that takes a delegate to be executed as parameter. The transaction will then be attached to the view-model when the (view-model) object is instantiated.
 
 ```cs
-class Program
+Handle.GET("/email-client/new-email", () =>
 {
-  static void Main()
+  return Db.Scope(() => 
   {
-    Handle.GET("/new-email", () =>
+    var emailPage = new EmailPage()
     {
-      MailPage p = null;
-      Db.Scope(() => 
-      {
-        p = new MailPage()
-        {
-          Html = "email.html",
-          Data = new Email()
-        };
-      });
-      return p;
-    });
-  }
-}
+      Data = new Email()
+    }
+    return emailPage;
+  })
+});
 ```
 
 When Starcounter executes the `Handle` function or when it otherwise operates on the object set in the `Data` property, it will first set the current transaction scope to the transaction set in the `Transaction` property in the view-model or its nearest parent view-model.
@@ -72,111 +67,85 @@ Inside your form, the changes are all there and the information appears updated 
 Sometimes a transaction is already attached on another part of the view-model. To reuse it it needs to be scoped before the new page is created.
 
 ```cs
-class Program
+Handle.GET("/email-client/new-email", () =>
 {
-  static void Main()
+  var masterPage = Self.GET<MasterPage>("/email-client");
+  masterPage.Transaction.Scope(() =>
   {
-    Handle.GET("/new-email", () =>
+    masterPage.CurrentPage = new MailPage()
     {
-      Master m = Self.GET<Master>("/Master");
-      m.Transaction.Scope(() =>
-      {
-        m.FocusedPage = new MailPage()
-        {
-          Html = "email.html",
-          Data = new Email()
-        };
-      });
-      return m;
-    });
-  }
-}
+      Data = new Email()
+    };
+  });
+  return masterPage;
+});
 ```
 
 ## Attaching a transaction to an existing json-object
 
 If the part of the view-model that the transaction should be attached to is already instantiated, for example a default value for a property of type Json, the transaction can be attached manually.
 
-Lets assume that in the previous example, the `FocusedPage` property was already instantiated.
+Lets assume that in the previous example, the `CurrentPage` property was already instantiated.
 
 ```cs
-class Program
+Handle.GET("/email-client/new-email", () =>
 {
-  static void Main()
+  var masterPage = Self.GET<MasterPage>("/email-client");
+  masterPage.Transaction.Scope(() =>
   {
-    Handle.GET("/new-email", () =>
-    {
-      Master m = Self.GET<Master>("/Master");
-      m.Transaction.Scope(() =>
-      {
-        m.FocusedPage.AttachCurrentTransaction();
-      });
-      return m;
-    });
-  }
-}
+    masterPage.CurrentPage.AttachCurrentTransaction();
+  });
+  return masterPage;
+});
 ```
 
 #### Sharing transactions
 
 A transaction can be attached and used on more than one instance in the view-model. When a transaction is scoped, all subsequent calls inside the scope will use the same transaction.
 
-In this example the call to the second handler with uri `/email/{emailId}` will use the transaction created in the first handler.
+In this example the call to the second handler with uri `/email-client/email/{emailId}` will use the transaction created in the first handler.
 
 ```cs
-class Program
+Handle.GET("/email-client/new-email", () =>
 {
-  static void Main()
+  var masterPage = Self.GET<MasterPage>("/email-client");
+  Db.Scope(() =>
   {
-    Handle.GET("/new-email", () =>
-    {
-      Master m = Self.GET<Master>("/Master");
-      Db.Scope(() =>
-      {
-        Email email = new Email();
-        MailPage page = Self.GET<MailPage>("/email/" + email.GetObjectID());
-        m.FocusedPage = page;
-      });
-      return m;
-    });
+    var email = new Email();
+    var mailPage = Self.GET<MailPage>("/email-client/email/" + email.GetObjectID());
+    masterPage.CurrentPage = page;
+  });
+  return masterPage;
+});
 
-    Handle.GET("/email/{?}", (string emailId) =>
-    {
-      return new MailPage()
-      {
-        Html = "email.html",
-        Data = Db.SQL<Email>("SELECT e FROM Email e WHERE ObjectId=?", emailId).First
-      };
-    });
-  }
-}
+Handle.GET("/email-client/email/{?}", (string emailId) =>
+{
+  Email email = Db.SQL<Email>("SELECT e FROM Email e WHERE ObjectId=?", emailId).First;
+  return new MailPage()
+  {
+    Data = email
+  };
+});
 ```
 
-Scopes are nested, so if in the example the second rest-handler, `Handle.Get("/email/{?}", ...)` would also declare a scope it will still use the same transaction as created by the caller, `GET("/new-email", ...)`.
+Scopes are nested, so if in the example the second rest-handler, `Handle.Get("/email-client/email/{?}", ...)` would also declare a scope it will still use the same transaction as created by the caller, `GET("/email-client/new-email", ...)`.
 
 ## Making sure a new transaction is created
 
 If, for some reason, that it's vital that a new transaction always is created it is possible to manually create and scope a transaction.
 
 ```cs
-class Program
+Handle.GET("/email-client/new-email", () =>
 {
-  static void Main()
+  var masterPage = Self.GET<MasterPage>("/email-client");
+  var transaction = new Transaction(false, false);
+  transaction.Scope(() =>
   {
-    Handle.GET("/new-email", () =>
-    {
-      Master m = Self.GET<Master>("/Master");
-      Transaction t = new Transaction(false, false);
-      t.Scope(() =>
-      {
-        Email email = new Email();
-        MailPage page = Self.GET<MailPage>("/email/" + email.GetObjectID());
-        m.FocusedPage = page;
-      });
-      return m;
-    });
-  }
-}
+    var email = new Email();
+    masterPage.CurrentPage = Self.GET<MailPage>("/email-client/email/" + email.GetObjectID());
+  });
+  return masterPage;
+});
 ```
 
 ## Why is this important
