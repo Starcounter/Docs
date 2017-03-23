@@ -104,8 +104,6 @@
       shouldCloseDropdownMenu = function(event) {
           var clickedOutsideDropdownButton = !event.target.matches('.dropbtn');
           var smallMenuIsOpen = window.outerWidth < 1060; 
-          console.log(clickedOutsideDropdownButton);
-          console.log(smallMenuIsOpen);
           return clickedOutsideDropdownButton && smallMenuIsOpen;
       }
 
