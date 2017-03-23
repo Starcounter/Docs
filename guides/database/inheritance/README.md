@@ -42,10 +42,3 @@ Returns ```[{ Name:"Goldman, Carl", Gender:"Male" }]```
 SELECT C FROM CorporateCustomer C WHERE Name LIKE 'Goldman%'
 ```
 Returns ```[{ Name:"Goldman Sachs", VatNumber:"1234" } ]```
-
-As a side note, you can use the GetType() function to get only instances of a exact class
-
-```sql
-SELECT C FROM Customer C WHERE Name LIKE 'Goldman%' AND GetType() == typeof(Customer)
-```
-Returns ```[ ]```
