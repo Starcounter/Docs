@@ -1,6 +1,6 @@
 # Mapper App for Images
 
-To display our images, we will use a prefabricated application called "Images" that we can get from the Starcounter App Warehouse. This application will be on the same shared screen as the application we've built. To accomplish this, we will do something called mapping. Fortunately, the Images [README.md](https://github.com/starcounterprefabs/images) provides us with a mapping sample that we can use in our code.
+To display our images, we will use a prefabricated application called "Images" that we can get from the Starcounter App Warehouse. This application will be on the same shared screen as the application we've built. To accomplish this, we will do something called [mapping](/guides/mapping-and-blending/sharing-screen/). Fortunately, the Images [README.md](https://github.com/starcounterprefabs/images) provides us with a mapping sample that we can use in our code.
 
 To implement this we need to do some setup.
 
@@ -27,17 +27,13 @@ StarcounterEnvironment.RunWithinApplication("Images", () => {
 ```
 {% endraw %}
 
-<aside class="read-more">
-   <a href="/guides/mapping-and-blending/ontology-mapping">Learn about ontology mapping</a>
-</aside>
-
 To get the applications up and running correctly, start them in this order:
 
 1. HelloWorld
 2. Images
 3. HelloWorldMapper
 
-It is advisable to first start HelloWorld, then go to [`http://localhost:8181/#/databases/default/appstore`](http://localhost:8181/#/databases/default/appstore), find Images under Starcounter Prefabs Store and click `Download`. It will then be possible to go to `http://localhost:8181/#/databases/default` and simply press `Start`. At last, start HelloWorldMapper from Visual Studio or the command line.
+It is advisable to first start HelloWorld, then go to `http://localhost:8181/#/databases/default/appstore`, find Images under Starcounter Prefabs Store and click `Download`. It will then be possible to go to `http://localhost:8181/#/databases/default` and simply press `Start`. At last, start HelloWorldMapper from Visual Studio or the command line.
 
 Open up <code>HelloWorld</code> in the <code>Starcounter Administrator</code> and you should see a screen that looks like this after you have added your images:
 
