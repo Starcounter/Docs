@@ -6,7 +6,13 @@ When creating long-running transactions, it could contain objects that might be 
 
 A long-running transaction can be used on any scheduled thread, however, it cannot be used from more than one thread at a time. If two or more threads call `transaction.Scope(Action)`at the same time, an exception will be thrown.
 
-## Assigning JSON to a transaction
+This document is divided into two parts:
+1. [Creating and attaching long-running transactions](#create-and-attach)
+2. [Dealing with already attached long-running transactions in view-models](#handling-long-running-transactions-in-view-models)
+
+## Create and Attach
+
+### Assigning JSON to a transaction
 
 A server-side JSON object can be associated with a transaction. This is an important concept in Starcounter view-models.
 
@@ -62,7 +68,7 @@ When Starcounter executes the `Handle` function or when it otherwise operates on
 
 Inside your form, the changes are all there and the information appears updated on the user screen. For the outside world, no unsaved changes are visible to disturb the consistency of your database.
 
-## Using an existing transaction
+### Using an existing transaction
 
 Sometimes a transaction is already attached on another part of the view-model. To reuse it it needs to be scoped before the new page is created.
 
@@ -81,7 +87,7 @@ Handle.GET("/email-client/new-email", () =>
 });
 ```
 
-## Attaching a transaction to an existing json-object
+### Attaching a transaction to an existing json-object
 
 If the part of the view-model that the transaction should be attached to is already instantiated, for example a default value for a property of type Json, the transaction can be attached manually.
 
@@ -99,7 +105,7 @@ Handle.GET("/email-client/new-email", () =>
 });
 ```
 
-#### Sharing transactions
+### Sharing transactions
 
 A transaction can be attached and used on more than one instance in the view-model. When a transaction is scoped, all subsequent calls inside the scope will use the same transaction.
 
@@ -130,7 +136,7 @@ Handle.GET("/email-client/email/{?}", (string emailId) =>
 
 Scopes are nested, so if in the example the second rest-handler, `Handle.Get("/email-client/email/{?}", ...)` would also declare a scope it will still use the same transaction as created by the caller, `GET("/email-client/new-email", ...)`.
 
-## Making sure a new transaction is created
+### Making sure a new transaction is created
 
 If, for some reason, that it's vital that a new transaction always is created it is possible to manually create and scope a transaction.
 
@@ -148,10 +154,12 @@ Handle.GET("/email-client/new-email", () =>
 });
 ```
 
-## Why is this important
+### Why is this important
 
 A very important reason for associating view-models with transactions is that it allows you to put domain logic (aka. business logic) in the domain objects (aka database objects) rather than in some code inside the form or some code that gets called when you save the form.
 
 Let's say, for example, that the discount of an order changes when you change the quantity of any of its order items. The more you buy, the cheaper it gets. You would want this business logic should be visible to the order form presented to the user when he uses the mouse and keyboard to edit the order. To honour the DRY principle (don't repeat yourself) you should not have to repeat any business logic already in the domain model (i.e. database object). And if you put the code on the discount in the form, you would not handle the separation-of-concern very nicely as the rule is probably not connected with a certain piece of user interface or even a single specific application, but rather a generic business rule that should keep it's integrity no matter how many editors and different clients and application servers you throw at it.
 
 By allowing the business objects to live inside a transactional scope, the form can view the world as if the changes are there while the outside world does not yet see them. When the form is saved, the transaction is committed or if the form is not saved, the transaction is simply aborted.
+
+## Handling Long-Running Transactions in View-Models
