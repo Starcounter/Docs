@@ -154,4 +154,4 @@ Before we run the program, do a quick swing into `ExpenseJson.json.cs` to make s
 
 With every keystroke, the UI is updated almost instantly from the database. Starcounter's in-memory database makes this possible. There's no delay, everything simply happens at the moment the user interacts with the view.
 
-If you get any errors, you can check your code against the [source code](https://github.com/StarcounterSamples/HelloWorld/commit/9c0dc841b5afaa9e4e8672e32977e90f4b4250af).
+If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/13a2a3c3af5e630c4dac791f1731fa567be277fd).

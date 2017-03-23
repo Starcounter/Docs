@@ -65,4 +65,4 @@ The database should now contain one row with two data entries which can be found
 
 ![Result gif](/assets/part1resized.gif)
 
-If you get any errors, you can check your code against the [source code](https://github.com/StarcounterSamples/HelloWorld/commit/0969f620acb4e8009445fbcd0c4e1d715601a4b9).
+If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/8a6623aeff0c3eef8d0cdc8609ee0c6f77d6467c).
