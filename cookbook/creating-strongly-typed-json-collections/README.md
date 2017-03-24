@@ -25,7 +25,7 @@ namespace TypedJSONCollectionSample
 }
 ```
 
-To start creating this collections, add a new `Starcounter Typed JSON with code-behind` template. In this example, it'll be named "PersonCollection".
+To start creating a collection, add a new item using the `Starcounter Typed JSON with code-behind` template. In this example, it'll be named "PersonCollection".
 
 To allow this JSON to contain a collection of other objects, the JSON-by-example has to look something like this:
 
