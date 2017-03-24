@@ -4,9 +4,11 @@ Starcounter SQL follows the established standard SQL92 (ANSI INCITS 135-1992, R1
 
 ## Calling SQL
 
-You can write SQL queries synchronously integrated with your programming code using a static method `Db.SQL`. See [Querying using SQL](/guides/database/querying-using-sql).
+There are currently two main ways of using Starcounter SQL:
+1. Writing the queries in the programming code with `Db.SQL` as described in [Querying using SQL](/guides/database/querying-using-sql).
+2. Executing queries in the interactive SQL browser of the [Starcounter Administrator](/guides/working-with-starcounter/administrator-web-ui).
 
-You can execute queries in the interactive SQL browser of [Starcounter Administrator](/guides/working-with-starcounter/administrator-web-ui).
+Keep in mind that these do not act identically. For performance reasons, [literals](literals) and `DELETE FROM` queries, as described [here](/guides/database/data-manipulation/#delete-database-objects) cannot be used in the programming code with `Db.SQL` while it is available in the Administrator. Because of this, when using the examples in this documentation, remember to replace literals with [variables](/guides/database/variables/) in the programming code.
 
 ## Object extensions to SQL
 
