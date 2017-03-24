@@ -132,4 +132,6 @@
     * [Attach a request to long running transactions](cookbook/attach-a-request-to-long-running-transactions/README.md)
     * [Cookie-based authentication](cookbook/cookie-based-authentication/README.md)
     * [Timestamp on Object Creation](cookbook/timestamp-on-object-creation/README.md)
+    * [Creating Strongly Typed JSON Collections](cookbook/creating-strongly-typed-json-collections/README.md)
+    
 * [Glossary](glossary/README.md)
