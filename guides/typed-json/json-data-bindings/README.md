@@ -317,8 +317,3 @@ static PersonPage()
 }
 ```
 Now, the code will compile successfully because it is explicitly described that the `Age` property will not be bound. This is further described in the section "Opt-out of Bindings".
-
-### Rules when bindings are created
-1. If a code-behind file exists, a property is searched for there.
-2. If a property was not found in the code-behind or no code-behind exists, a property in the data object is searched for.
-3. If no property was found in steps 1 and 2 and the binding is set to `Auto`, the property will be unbound. If binding was set to `Bound` an exception will be raised.
