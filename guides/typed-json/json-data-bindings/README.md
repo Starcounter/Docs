@@ -1,15 +1,8 @@
-# JSON data binding
-
-<b style="color: red;">Note:</b> the dollar sign (`$`) in the JSON definition has been deprecated.
-
-There are two exceptions:
-
-- It is still and will be used to mark editable properties.
-- Due to technical restrictions it is the only way to use the `Reuse` keyword.
+# JSON Data Bindings
 
 Properties declared in JSON (the view-model) can be bound to either a property in the code-behind file or a CLR object that exposes one or more public properties. Properties that are bound will read and write the values directly to the underlying object with no need to manually transfer the values to the view-model.
 
-## Rules when bindings are created
+## Rules When Bindings are Created
 1. If a code-behind file exists, a property is searched for there.
 2. If a property was not found in the code-behind or no code-behind exists, a property in the data object is searched for.
 3. If no property was found in steps 1 and 2 and the binding is set to `Auto`, the property will be unbound. If binding was set to `Bound` an exception will be raised.
@@ -51,7 +44,7 @@ public class Program
   }
 }
 ```
-Here, the property `Name` in the JSON `PersonJson` will be bound to the property `Name` in the database object `Person`  
+Here, the property `Name` in the JSON `PersonJson` will be bound to the property `Name` in the database object `Person`.  
 
 Assuming there is one person in the database with the name "Christian", the resulting JSON from the request will be:
 
@@ -107,7 +100,7 @@ The JSON code-behind class has to implement `IBound<T>` to set custom data type.
 public partial class PersonJson : Json, IBound<MyNamespace.Person>
 ```
 
-**Note:** the empty JSON objects like `{ }` do not have code-behind classes therefore it is not possible to declare custom data type.
+**Note:** empty JSON objects do not have code-behind classes so it is not possible to declare a custom data type for them.
 
 ### JSON property binding
 
@@ -199,7 +192,7 @@ The following restrictions applies though:
 - Due to restrictions in available type information when generating code for TypedJSON, this feature only works for properties that are declared on the same class. It does not work for properties declared in an inherited class.
 - How it works underneath is that generating an accessor-property for getting and setting the JSON-property is suppressed when a property in code-behind already exists. This means that to access the JSON-property directly, either the template needs to be used, or the name (`json.GetValue(json.Template.Name)`, `json["Name"]`).
 
-In the following example `FullName` in json will be automatically bound to the property `FullName` in code-behind:
+In the following example, the JSON `FullName` property will automatically get bound to the property `FullName` in the code-behind:
 
 ```js
 {
@@ -219,8 +212,6 @@ public class PersonJson : Json, IBound<Person>
 }
 ```
 
-
-
 ### Opt-out of binding
 
 In some cases we want to make sure that a specific property is not bound. This can be achieved by either setting the value of `Bind` to `null` or specifying the property `BindingStrategy` on the specific template as `BindingStrategy.Unbound`
@@ -238,7 +229,7 @@ PersonJson.DefaultTemplate.Street.BindingStrategy = BindingStrategy.Unbound;
 
 #### Reuse the same JSON object
 
-##### ListPage.json
+<div class="code-name">ListPage.json</div>
 
 ```json
 {
@@ -246,7 +237,7 @@ PersonJson.DefaultTemplate.Street.BindingStrategy = BindingStrategy.Unbound;
 }
 ```
 
-##### ListPage.json.cs
+<div class="code-name">ListPage.json.cs</div>
 
 ```cs
 using AppNamespace;
@@ -260,15 +251,15 @@ partial class ListPage : Json
 }
 ```
 
-##### DetailsPage.json
+<div class="code-name">DetailsPage.json</div>
 
-```
+```json
 {
     "Entity": {}
 }
 ```
 
-##### DetailsPage.json.cs
+<div class="code-name">DetailsPage.json.cs</div>
 
 ```cs
 using AppNamespace;
@@ -323,4 +314,5 @@ static PersonPage()
     DefaultTemplate.Age.Bind = null;
 }
 ```
+
 Now, the code will compile successfully because it is explicitly described that the `Age` property will not be bound. This is further described in the section "Opt-out of Bindings".
