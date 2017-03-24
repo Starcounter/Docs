@@ -1,12 +1,5 @@
 # JSON data binding
 
-<b style="color: red;">Note:</b> the dollar sign (`$`) in the JSON definition has been deprecated.
-
-There are two exceptions:
-
-- It is still and will be used to mark editable properties.
-- Due to technical restrictions it is the only way to use the `Reuse` keyword.
-
 Properties declared in JSON (the view-model) can be bound to either a property in the code-behind file or a CLR object that exposes one or more public properties. Properties that are bound will read and write the values directly to the underlying object with no need to manually transfer the values to the view-model.
 
 ## Rules when bindings are created
@@ -324,24 +317,6 @@ static PersonPage()
 }
 ```
 Now, the code will compile successfully because it is explicitly described that the `Age` property will not be bound. This is further described in the section "Opt-out of Bindings".
-
-```json
-{
-    "Entity": {
-        "$": { "Reuse": "AppNamespace.EntityJson.cs" }
-    }
-}
-```
-
-**Note:** in case of `Reuse` you cannot specify custom code-behind class.
-
-```cs
-[ListPage_json.Items]
-partial class ListPageItem : Json
-{
-    //This is wrong since the EntityJson.cs class already exists.
-}
-```
 
 ### Rules when bindings are created
 1. If a code-behind file exists, a property is searched for there.
