@@ -23,20 +23,22 @@ The following is a list of the tokens in JSON and the equivalence in C#:
 
 To specify that a member in Json-by-example should be of type `Double` is done in the code-behind file.
 
-*Foo.json*
-```javascript
+<div class="code-name">Foo.json</div>
+
+```js
 {
   "Value": 2E3 // will be parsed as decimal by default.
 }
 ```
 
-*Foo.json.cs*
-```csharp
+<div class="code-name">Foo.json.cs</div>
+
+```cs
 partial class Foo : Json
 {
     static void Foo()
     {
-    	  // Value should be of type double, not decimal.
+    	// Value should be of type double, not decimal.
         DefaultTemplate.Value.InstanceType = typeof(double);
     }
 }
@@ -44,13 +46,13 @@ partial class Foo : Json
 
 ## JSON properties
 
-Properties of the view-model have to be bound to (in dynamic JSON) Common Language Runtime or (in static JSON) code-behind file. In <a href="/guides/typed-json/json-data-bindings">JSON data binding</a> we explain data bindings in-depth, and how to avoid manual value transfer into the view-model.
+Properties of the view-model have to be bound to (in dynamic JSON) Common Language Runtime or (in static JSON) code-behind file. In the section [JSON data binding](/guides/typed-json/json-data-bindings), data bindings are explained in-depth, and how to avoid manual value transfer into the view-model.
 
-If JSON object is static it is beneficial to denote a specific type that is used as data-object. Otherwise, opposite to dynamic JSON objects, faulty static properties will result in compilation error instead of runtime. Moreover, it allows binding data properties to the correct types without manual involvement.
-<a href="/guides/typed-json/json-data-bindings">There are two ways of doing that:</a>
+If a JSON object is static, it is beneficial to denote a specific type that is used as data-object. Otherwise, opposite to dynamic JSON objects, faulty static properties will result in compilation error instead of runtime. Moreover, it allows binding data properties to the correct types without manual involvement.
 
+There are two ways of doing that:
 1. Set a metadata inside the view-model
-2. Use the <code>IBound interface</code> to tag the code-behind class
+2. Use the `IBound` interface to tag the code-behind class
 
 {% import "../../macros.html" as macros %}
 
