@@ -1,5 +1,7 @@
 # Literals
 
+**Disclaimer**: For performance reasons, it is strongly discouraged to use literals in code. Instead, use [variables](/guides/database/variables).
+
 A boolean literal can have one of the two values <em>true</em> and <em>false</em>, which are represented by the two reserved words `TRUE` and `FALSE`. See example below.
 
 ```sql
@@ -52,5 +54,3 @@ Since Starcounter SQL supports object references, you also need a way to represe
 ```sql
 SELECT e FROM Employee e WHERE e = OBJECT 123
 ```
-
-<strong>Performance note</strong>: In code, for performance reasons, are not allowed to use literals. Instead you should use [variables](/guides/database/variables) and parameters with values.
