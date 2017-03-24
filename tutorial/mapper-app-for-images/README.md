@@ -1,6 +1,6 @@
 # Mapper App for Images
 
-To display our images, we will use a prefabricated application called "Images" that we can get from the Starcounter App Warehouse. This application will be on the same shared screen as the application we've built. To accomplish this, we will do something called mapping. Fortunately, the Images [README.md](https://github.com/starcounterprefabs/images) provides us with a mapping sample that we can use in our code.
+To display our images, we will use a prefabricated application called "Images" that we can get from the Starcounter App Warehouse. This application will be on the same shared screen as the application we've built. To accomplish this, we will do something called [mapping](/guides/mapping-and-blending/sharing-screen/). Fortunately, the Images [README.md](https://github.com/starcounterprefabs/images) provides us with a mapping sample that we can use in our code.
 
 To implement this we need to do some setup.
 
@@ -18,19 +18,14 @@ Now we can start getting some code in there. As mentioned earlier, we simply cop
 UriMapping.OntologyMap<HelloWorld.Expense>("/HelloWorld/partial/expense/{?}");
 
 StarcounterEnvironment.RunWithinApplication("Images", () => {
-Handle.GET("/images/partials/concept-expense/{?}", (string objectId) => {
-    return Self.GET("/images/partials/concept/" + objectId);
-});
+    Handle.GET("/images/partials/concept-expense/{?}", (string objectId) => {
+        return Self.GET("/images/partials/concept/" + objectId);
+    });
 
-     UriMapping.OntologyMap<HelloWorld.Expense>("/images/partials/concept-expense/{?}");
-     });
+    UriMapping.OntologyMap<HelloWorld.Expense>("/images/partials/concept-expense/{?}");
 });
 ```
 {% endraw %}
-
-<aside class="read-more">
-   <a href="/guides/mapping-and-blending/ontology-mapping">Learn about ontology mapping</a>
-</aside>
 
 To get the applications up and running correctly, start them in this order:
 
@@ -38,7 +33,7 @@ To get the applications up and running correctly, start them in this order:
 2. Images
 3. HelloWorldMapper
 
-It is advisable to first start HelloWorld, then go to [`http://localhost:8181/#/databases/default/appstore`](http://localhost:8181/#/databases/default/appstore), find Images under Starcounter Prefabs Store and click `Download`. It will then be possible to go to `http://localhost:8181/#/databases/default` and simply press `Start`. At last, start HelloWorldMapper from Visual Studio or the command line.
+It is advisable to first start HelloWorld, then go to `http://localhost:8181/#/databases/default/appstore`, find Images under Starcounter Prefabs Store and click `Download`. It will then be possible to go to `http://localhost:8181/#/databases/default` and simply press `Start`. At last, start HelloWorldMapper from Visual Studio or the command line.
 
 Open up <code>HelloWorld</code> in the <code>Starcounter Administrator</code> and you should see a screen that looks like this after you have added your images:
 
@@ -46,7 +41,7 @@ Open up <code>HelloWorld</code> in the <code>Starcounter Administrator</code> an
 
 That's cool, but we have to do some work to make them look nice together. Let's fix that in the last step!
 
-If you get any errors, you can check your code against the [source code](https://github.com/StarcounterSamples/HelloWorld/commit/ddfd8721b857c063ddbc897a1be7edb91f8cbb25).
+If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/f7111c3a8bd02f9d8ad9506d2ec79f43e4eb634c).
 
 <section class="hero"><strong>Disclaimer</strong>
 The APIs used in this step are experimental. We consider blending of different application's user interfaces to be an essential feature. We are working hard to develop exceptional blending that might require the steps outlined here to be changed. Feel free to follow our <a href="http://starcounter.io/blog/">blog</a> to get information about these changes and more.</section>

@@ -26,6 +26,6 @@ For example a file saved as `wwwroot/myapp/style.css` will be exposed by the sta
 
 In contrast to the above, all the files that are NOT unique to your app (shared libraries, Custom Elements HTML Imports, Bower components) should be placed under `wwwroot/sys`. This allows apps to be sufficient yet allow for resource sharing.
 
-For example, there might be two applications that use `<link rel="import" href="/sys/paper-input/paper-input.html">`. Both of the apps host the static resource [http://localhost:8080/sys/paper-input/paper-input.html](http://localhost:8080/sys/paper-input/paper-input.html). When requesting this URL, you are served by the last app that was started. Because the URLs are the same, there is no conflict of two Web Components loaded simultaneously. More about that in [Using Web Components](/guides/puppet-web-apps/using-web-components).
+For example, there might be two applications that use `<link rel="import" href="/sys/paper-input/paper-input.html">`. Both of the apps host the static resource `http://localhost:8080/sys/paper-input/paper-input.html`. When requesting this URL, you are served by the last app that was started. Because the URLs are the same, there is no conflict of two Web Components loaded simultaneously. More about that in [Using Web Components](/guides/web-apps/using-web-components).
 
 The next pages explain what's the benefit of all that - data sharing and screen sharing.

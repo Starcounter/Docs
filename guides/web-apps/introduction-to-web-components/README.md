@@ -30,7 +30,7 @@ This is only a fraction of what would be required in traditional frameworks, suc
 
 Starcounter let's you create JSON view-models that expose the current application state. To render it in the UI, it is the simplest to use a client-side framework that provides two-way data binding between HTML and JSON.
 
-The `<template>` tag that was added to HTML5 as part of the Web Components spec family. It allows to define reusable chunks of HTML that work with any framework that supports this new web standard. Because it is now an established standard, we decided to use it to power [partials](/guides/puppet-web-apps/partials).
+The `<template>` tag that was added to HTML5 as part of the Web Components spec family. It allows to define reusable chunks of HTML that work with any framework that supports this new web standard. Because it is now an established standard, we decided to use it to power [partials](/guides/web-apps/html-views).
 
 ## Custom Elements and Shadow DOM
 
@@ -46,4 +46,4 @@ Thousands of open sourced Custom Elements can be found on [customelements.io](ht
 
 Last but not least, the HTML Imports spec is the part of Web Components family that defines how to obtain fragments of code using a `<link>` tag. As can be seen on the above snippet, this is how a definition of a Custom Element is loaded.
 
-In addition to loading Custom Elements, Starcounter takes benefit from HTML Imports to compose complex apps using small templates known as  [partials](/guides/puppet-web-apps/partials/), but you don't need to care much about that because it is done behind the scenes.
+In addition to loading Custom Elements, Starcounter takes benefit from HTML Imports to compose complex apps using small templates known as  [partials](/guides/web-apps/html-views/), but you don't need to care much about that because it is done behind the scenes.

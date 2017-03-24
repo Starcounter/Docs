@@ -135,7 +135,7 @@ It is **not** fine to override Bootstrap classes in your app's stylesheet. The o
 <ul class="chatter-autocomplete">
     <template is="dom-repeat" items="{{model.FoundAttachment}}">
         <li class="chatter-autocomplete__item">
-            <button type="button" class="btn btn-sm btn-link chatter-autocomplete__choose" onmousedown="++this.value;" value="{{item.Choose$::click}}">{{item.NameAndType}}</button>
+            <button type="button" class="btn btn-sm btn-link chatter-autocomplete__choose" onmousedown="++this.value;" value="{{item.ChooseTrigger$::click}}">{{item.NameAndType}}</button>
         </li>
     </template>
 </ul>
