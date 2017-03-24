@@ -8,9 +8,9 @@ The advantages of JSON-by-example over regular C# classes are mainly:
 * They can express trees of objects and arrays
 * Default values can easily be specified
 
-To create a Typed JSON class, choose <code>New item</code> in Visual Studio and then choose <code>Starcounter Typed JSON</code> and name it **PersonMsg**.
+To create a Typed JSON class, choose <code>New item</code> in Visual Studio and then choose <code>Starcounter Typed JSON</code> and name it **PersonMessage**.
 
-<div class="code-name">PersonMsg.json</div>
+<div class="code-name">PersonMessage.json</div>
 
 ```json
 {
@@ -29,25 +29,17 @@ The above example will act as partial nested C# classes supporting intelligence 
 <div class="code-name">Program.cs</div>
 
 ```cs
-using Starcounter;
-
-class Hello
+Handle.GET("/hello", () =>
 {
-   static void Main()
-   {
-      Handle.GET("/hello", () =>
-      {
-         var json = new PersonMsg()
-         {
-            FirstName = "Albert",
-            LastName = "Einstein"
-         };
-         json.Quotes.Add().Text = "Makes things as simple as possible but not simpler.";
-         json.Quotes.Add().Text = "The only real valuable thing is intuition.";
-         return json;
-      });         
-   }
-}
+    var json = new PersonMessage()
+    {
+        FirstName = "Albert",
+        LastName = "Einstein"
+    };
+    json.Quotes.Add().Text = "Makes things as simple as possible but not simpler.";
+    json.Quotes.Add().Text = "The only real valuable thing is intuition.";
+    return json;
+});         
 ```
 
 ## Read-only and writable values

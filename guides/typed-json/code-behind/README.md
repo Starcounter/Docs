@@ -43,19 +43,14 @@ You might observe changes to this property using a Code-behind method `Handle`:
 <div class="code-name">PersonViewModel.json.cs</div>
 
 ```cs
-using Starcounter;
-
-namespace MyApp
+partial class PersonViewModel : Json
 {
-    partial class PersonViewModel : Json
+    void Handle(Input.FirstName action)
     {
-        void Handle(Input.FirstName input)
+        if (action.Value == "Albert")
         {
-            if (input.Value == "Albert")
-            {
-                Message = "You are not allowed to enter Albert. There can be only one.";
-                input.Cancel();
-            }
+            Message = "You are not allowed to enter Albert. There can be only one.";
+            action.Cancel();
         }
     }
 }
@@ -90,32 +85,28 @@ JSON-by-example might contain a nested object. For example:
 You can provide code-behind for the root level and `Name`-level as two separate partial classes. For example:
 
 ```cs
-using Starcounter;
-
-namespace Nara {
-    partial class PersonViewModel : Json
+partial class PersonViewModel : Json
+{
+    void Handle(Input.FullName action)
     {
-        void Handle(Input.FullName input)
+        var words = action.Value.Split(' ');
+        this.Name.FirstName = words[0];
+        this.Name.LastName = words[1];
+    }
+
+    [PersonViewModel_json.Name]
+    partial class PersonViewModelName : Json
+    {
+        void Handle(Input.FirstName action)
         {
-            var words = input.Value.Split(' ');
-            this.Name.FirstName = words[0];
-            this.Name.LastName = words[1];
+            var parent = (PersonViewModel)this.Parent;
+            parent.FullName = action.Value + " " + this.LastName;
         }
 
-        [PersonViewModel_json.Name]
-        partial class PersonViewModelName : Json
+        void Handle(Input.LastName action)
         {
-            void Handle(Input.FirstName input)
-            {
-                var parent = (PersonViewModel)this.Parent;
-                parent.FullName = input.Value + " " + this.LastName;
-            }
-
-            void Handle(Input.LastName input)
-            {
-                var parent = (PersonViewModel)this.Parent;
-                parent.FullName = this.FirstName + " " + input.Value;
-            }
+            var parent = (PersonViewModel)this.Parent;
+            parent.FullName = this.FirstName + " " + action.Value;
         }
     }
 }
