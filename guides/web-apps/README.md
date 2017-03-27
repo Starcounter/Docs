@@ -1,8 +1,13 @@
-# Puppet web apps
+# Web Apps
 
-This chapter discusses the implementation of a MVVM architecture for web apps, in which the server controls the application using server-side view-models.
+Starcounter apps are small, individually functional web apps that can easily interoperate with other Starcounter apps. There are a couple of traits that belongs to these apps:
 
-The UI can be presented to the user using a web standards-based, thin client library called [PuppetJs](/guides/web-apps/puppet).
+1. They [do one thing and do it well](https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well)
+2. They can run simultaneously with other apps.
+3. They can share data with other apps.
+4. They can share screen with other apps.
+
+In this section it is described how to build these apps while the section [Mapping and Blending](../mapping-and-blending) describes how to make them interoperate.
 
 {% import "../../macros.html" as macros %}
 
