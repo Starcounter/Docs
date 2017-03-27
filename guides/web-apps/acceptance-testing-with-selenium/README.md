@@ -96,84 +96,10 @@ Open your <code>Properties</code> in the <code>Tests</code> project. Go to <code
 
 ### Use BaseTest class to run tests in multiple browsers
 
-BaseTest is a helper class that makes it easier to test multiple browsers. The source code is available [here](https://github.com/StarcounterSamples/KitchenSink/blob/develope/test/KitchenSink.Tests/Test/BaseTest.cs):
+BaseTest is a helper class that makes it easier to test multiple browsers. The source code is available:
 
-```cs
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using KitchenSink.Tests.Utilities;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-
-namespace KitchenSink.Tests.Test
-{
-    public class BaseTest
-    {
-        public IWebDriver Driver;
-        private readonly Config.Browser _browser;
-        private readonly string _browsersTc = TestContext.Parameters["Browsers"];
-        private List<string> _browsersToRun = new List<string>();
-
-        public BaseTest(Config.Browser browser)
-        {
-            _browser = browser;
-        }
-
-        [OneTimeSetUp]
-        public void TestFixtureSetUp()
-        {
-            if (_browsersTc != null)
-            {
-                _browsersToRun = _browsersTc.Split(',').ToList();
-            }
-            else
-            {
-                _browsersToRun.Add("Chrome");
-                _browsersToRun.Add("Firefox");
-                //_browsersToRun.Add("Edge");
-            }
-
-            if (_browsersToRun.Contains(Config.BrowserDictionary[_browser]))
-                Driver = WebDriverManager.StartDriver(_browser, Config.Timeout, Config.RemoteWebDriverUri);
-            else
-            {
-                Assert.Ignore(Config.BrowserDictionary[_browser] + " is on browsers ignore list");
-            }
-        }
-
-        [OneTimeTearDown]
-        public void TestFixtureTearDown()
-        {
-            Driver?.Quit();
-        }
-
-        protected TResult WaitUntil<TResult>(Func<IWebDriver, TResult> condition)
-        {
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-            return wait.Until(condition);
-        }
-
-        public bool WaitForText(IWebElement elementName, string text, int seconds)
-        {
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(seconds));
-            return wait.Until(ExpectedConditions.TextToBePresentInElement(elementName, text));
-        }
-    }
-}
-```
-
-Constructor for every test class should be like this:
-
-```cs
-        private CheckboxPage _checkboxPage;
-        private MainPage _mainPage;
-
-        public CheckboxPageTest(Config.Browser browser) : base(browser)
-        {
-        }
-```
+- BaseTest helper class [here](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/BaseTest.cs)
+- Using of BaseTest class [here] (https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionBoolean/CheckboxPageTest.cs)
 
 When you rebuild the test project now, you should see each test for every browser.
 
@@ -192,51 +118,49 @@ It is a good practice to always wait:
 - wait for a text element to be present, before you check the content of that element
 ```cs
 public bool WaitForText(IWebElement elementName, string text, int seconds)
-        {
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(seconds));
-            return wait.Until(ExpectedConditions.TextToBePresentInElement(elementName, text));
-        }
+{
+	WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(seconds));
+	return wait.Until(ExpectedConditions.TextToBePresentInElement(elementName, text));
+}
 ```
 - wait for a button to be present, before you click on that button
 ```cs
 public IWebElement WaitForElementToBeClickable(IWebElement elementName, int seconds)
-        {
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(seconds));
-            return wait.Until(ExpectedConditions.ElementToBeClickable(elementName));
-        }
+{
+	WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(seconds));
+	return wait.Until(ExpectedConditions.ElementToBeClickable(elementName));
+}
 ```
-The following code sample from KitchenSink's [TextPageTest.cs](https://github.com/StarcounterSamples/KitchenSink/blob/master/test/KitchenSink.Tests/Tests/TextPageTest.cs) shows how to:
+The following code sample from KitchenSink's [TextPageTest.cs](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextPageTest.cs) shows how to:
 
-1. wait for presence of an input field before typing in it
+1. wait for presence of an input field before typing in it and wait for text to be present in input
 ```cs
 [Test]
-        public void PasswordPage_PasswordTooShort()
-        {
-            const string originalLabel = "Password must be at least 6 chars long";
-            const string password = "123";
+public void PasswordPage_PasswordTooShort()
+{
+	const string originalLabel = "Password must be at least 6 chars long";
+	const string password = "123";
 
-            WaitUntil(x => _passwordPage.PasswordInput.Displayed);
-            _passwordPage.ClearPassword();
-            _passwordPage.FillPassword(password);
-            Assert.IsTrue(WaitForText(_passwordPage.PaswordInputInfoLabel, originalLabel, 5));
-        }
+	WaitUntil(x => _passwordPage.PasswordInput.Displayed);
+	_passwordPage.ClearPassword();
+	_passwordPage.FillPassword(password);
+	Assert.IsTrue(WaitForText(_passwordPage.PaswordInputInfoLabel, originalLabel, 5));
+}
 ```
-2. wait for the asynchronous response from the server with derivative result
+2. helper method (ClickOn()) that click on element when it is clickable (using WaitForElementToBeClickable() helper method)
 
 ```cs
-[Test]
-        public void PasswordPage_ChangingPasswordToGoodThenToShort()
-        {
-            const string password = "123456";
+public IWebElement WaitForElementToBeClickable(IWebElement elementName, int seconds)
+{
+	WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(seconds));
+	return wait.Until(ExpectedConditions.ElementToBeClickable(elementName));
+}
 
-            WaitUntil(x => _passwordPage.PasswordInput.Displayed);
-            _passwordPage.ClearPassword();
-            _passwordPage.FillPassword(password);
-            Assert.IsTrue(WaitForText(_passwordPage.PaswordInputInfoLabel, "Good password!", 5));
-            _passwordPage.ClearPassword();
-            _passwordPage.FillPassword("123");
-            Assert.IsTrue(WaitForText(_passwordPage.PaswordInputInfoLabel, "Password must be at least 6 chars long", 5));
-        }
+public void ClickOn(IWebElement elementName, int seconds = 10)
+{
+	IWebElement element = WaitForElementToBeClickable(elementName, seconds);
+	element.Click();
+}
 ```
 
 
@@ -244,6 +168,6 @@ The following code sample from KitchenSink's [TextPageTest.cs](https://github.co
 
 Some of the Starcounter's sample apps come with acceptance test suite. We run tests every night to make sure that we keep the good quality.
 
-The [KitchenSink](https://github.com/StarcounterSamples/KitchenSink) sample app includes a Selenium test case for every UI pattern that is presented in that app. You can learn from the test project (in the `test` directory), how to achieve Selenium testing of particular actions, such as button clicks, page changing, typing in forms, etc.
+The [KitchenSink](https://github.com/StarcounterApps/KitchenSink) sample app includes a Selenium test case for every UI pattern that is presented in that app. You can learn from the test project (in the `test` directory), how to achieve Selenium testing of particular actions, such as button clicks, page changing, typing in forms, etc.
 
-The [Launcher](https://github.com/StarcounterPrefabs/Launcher) prefab app includes Selenium test of using Launcher with two mock applications (called "Launcher_AcceptanceHelperOne" and "Launcher_AcceptanceHelperTwo"). The test include executing JavaScript code on a page to scroll a DIV element and then checking the scroll position.
+The [Launcher](https://github.com/StarcounterApps/Launcher) prefab app includes Selenium test of using Launcher with two mock applications (called "Launcher_AcceptanceHelperOne" and "Launcher_AcceptanceHelperTwo"). The test include executing JavaScript code on a page to scroll a DIV element and then checking the scroll position.
