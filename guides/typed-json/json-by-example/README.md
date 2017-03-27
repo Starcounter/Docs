@@ -12,13 +12,14 @@ The advantages of JSON-by-example over regular C# classes are mainly:
 
 To create a Typed JSON class, choose `New item` in Visual Studio and then select `Starcounter Typed JSON`. The created file contains an empty JSON object. 
 
-The simplest possible JSON-by-example looks something like this:
+One of the simplest JSON-by-example files look like this:
 
 <div class="code-name">Person.json</div>
 
 ```json
 {
-    "Name": ""
+    "FirstName": "",
+    "LastName": ""
 }
 ```
 
@@ -32,37 +33,44 @@ It is incredibly simple to set the default value in JSON-by-example. Building on
 
 ```json 
 {
-    "Name": "Steven"
+    "FirstName": "Steven", 
+    "LastName": "Smith"
 }
 ```
 
-By doing this, the JSON returned when creating a new `Person` object will be `{"Name": "Steven"}`:
+By doing this, the JSON returned when creating a new `Person` object will be `{"FirstName":"Steven","LastName":"Smith"}`:
 
 <div class="code-name">Program.cs</div>
 
 ```cs
 Handle.GET("/GetPerson", () =>
 {
-    return new Person(); // {"Name": "Steven"}
+    return new Person(); // {"FirstName":"Steven","LastName":"Smith"}
 });
-```
-
-<div class="code-name">PersonMessage.json</div>
-
-```json
-{
-   "FirstName": "",
-   "LastName": "",
-   "Quotes": [ ]
-}
 ```
 
 ### Instantiating JSON-by-example
 
+Since JSON-by-example is turned into C# classes, instantiation works the same way as other C# objects.
+
+With the JSON-by-example file above, it would be instantiated this way:
+
+```cs
+new Person()
+{
+    First = "Steven",
+    LastName = "Smith"
+}
+```
+
+The resulting JSON will look like this: `{"FirstName":"Steven","LastName":"Smith"}`.
+
+#### Adding Values to Arrays
+
 <div class="code-name">Program.cs</div>
 
 ```cs
-Handle.GET("/hello", () =>
+Handle.GET("/Hello", () =>
 {
     var json = new PersonMessage()
     {
