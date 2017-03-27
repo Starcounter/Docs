@@ -71,7 +71,7 @@ Build your test project. If it builds correctly, you should see this:
 
 ![Seleninium result screenshot](/assets/2016-04-01-13_34_52-Launcher-Microsoft-Visual-Studio.png)
 
-Now, the only thing left to do is to run that test! In the Test Explorer, click on the "Run All" button. In the following seconds, put your hands up from your mouse and keyboard, because Selenium will take control of your system and perform the test. If it works well, you should see your tests passing.
+Now, the only thing left to do is to run that test! In the Test Explorer, click on the "Run All" button. If it works well, you should see your tests passing.
 
 ![test explorer](/assets/2016-04-01-13_40_22-Launcher-Microsoft-Visual-Studio.png)
 
@@ -100,6 +100,8 @@ BaseTest is a helper class that makes it easier to test multiple browsers. The s
 
 ```cs
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using KitchenSink.Tests.Utilities;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -111,6 +113,8 @@ namespace KitchenSink.Tests.Test
     {
         public IWebDriver Driver;
         private readonly Config.Browser _browser;
+        private readonly string _browsersTc = TestContext.Parameters["Browsers"];
+        private List<string> _browsersToRun = new List<string>();
 
         public BaseTest(Config.Browser browser)
         {
@@ -120,19 +124,41 @@ namespace KitchenSink.Tests.Test
         [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
-            Driver = WebDriverManager.StartDriver(_browser, Config.Timeout, Config.RemoteWebDriverUri);
+            if (_browsersTc != null)
+            {
+                _browsersToRun = _browsersTc.Split(',').ToList();
+            }
+            else
+            {
+                _browsersToRun.Add("Chrome");
+                _browsersToRun.Add("Firefox");
+                //_browsersToRun.Add("Edge");
+            }
+
+            if (_browsersToRun.Contains(Config.BrowserDictionary[_browser]))
+                Driver = WebDriverManager.StartDriver(_browser, Config.Timeout, Config.RemoteWebDriverUri);
+            else
+            {
+                Assert.Ignore(Config.BrowserDictionary[_browser] + " is on browsers ignore list");
+            }
         }
 
         [OneTimeTearDown]
         public void TestFixtureTearDown()
         {
-            Driver.Quit();
+            Driver?.Quit();
         }
 
         protected TResult WaitUntil<TResult>(Func<IWebDriver, TResult> condition)
         {
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(30));
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
             return wait.Until(condition);
+        }
+
+        public bool WaitForText(IWebElement elementName, string text, int seconds)
+        {
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(seconds));
+            return wait.Until(ExpectedConditions.TextToBePresentInElement(elementName, text));
         }
     }
 }
@@ -164,34 +190,53 @@ There is one common pitfall when writing Selenium tests. The test is executed wi
 It is a good practice to always wait:
 
 - wait for a text element to be present, before you check the content of that element
-- wait for an input field to be present, before you type in that input field
+```cs
+public bool WaitForText(IWebElement elementName, string text, int seconds)
+        {
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(seconds));
+            return wait.Until(ExpectedConditions.TextToBePresentInElement(elementName, text));
+        }
+```
 - wait for a button to be present, before you click on that button
-
+```cs
+public IWebElement WaitForElementToBeClickable(IWebElement elementName, int seconds)
+        {
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(seconds));
+            return wait.Until(ExpectedConditions.ElementToBeClickable(elementName));
+        }
+```
 The following code sample from KitchenSink's [TextPageTest.cs](https://github.com/StarcounterSamples/KitchenSink/blob/master/test/KitchenSink.Tests/Tests/TextPageTest.cs) shows how to:
 
 1. wait for presence of an input field before typing in it
+```cs
+[Test]
+        public void PasswordPage_PasswordTooShort()
+        {
+            const string originalLabel = "Password must be at least 6 chars long";
+            const string password = "123";
+
+            WaitUntil(x => _passwordPage.PasswordInput.Displayed);
+            _passwordPage.ClearPassword();
+            _passwordPage.FillPassword(password);
+            Assert.IsTrue(WaitForText(_passwordPage.PaswordInputInfoLabel, originalLabel, 5));
+        }
+```
 2. wait for the asynchronous response from the server with derivative result
 
 ```cs
 [Test]
-public void TextPropagationOnUnfocus()
-{
-    driver.Navigate().GoToUrl(baseURL + "/Text");
-    WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-    IWebElement element = wait.Until(_driver => _driver.FindElement(By.XPath("(//input)[1]")));
+        public void PasswordPage_ChangingPasswordToGoodThenToShort()
+        {
+            const string password = "123456";
 
-    var label = driver.FindElement(By.XPath("(//label[@class='control-label'])[1]"));
-    var originalText = label.Text;
-    driver.FindElement(By.XPath("(//input)[1]")).Clear();
-    driver.FindElement(By.XPath("(//input)[1]")).SendKeys("Marcin");
-    driver.FindElement(By.XPath("//body")).Click();
-
-    wait.Until((x) =>
-    {
-        return !label.Text.Equals(originalText);
-    });
-    Assert.AreEqual("Hi, Marcin!", driver.FindElement(By.XPath("(//label[@class='control-label'])[1]")).Text);
-}
+            WaitUntil(x => _passwordPage.PasswordInput.Displayed);
+            _passwordPage.ClearPassword();
+            _passwordPage.FillPassword(password);
+            Assert.IsTrue(WaitForText(_passwordPage.PaswordInputInfoLabel, "Good password!", 5));
+            _passwordPage.ClearPassword();
+            _passwordPage.FillPassword("123");
+            Assert.IsTrue(WaitForText(_passwordPage.PaswordInputInfoLabel, "Password must be at least 6 chars long", 5));
+        }
 ```
 
 
