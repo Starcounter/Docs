@@ -99,7 +99,7 @@ Open your <code>Properties</code> in the <code>Tests</code> project. Go to <code
 BaseTest is a helper class that makes it easier to test multiple browsers. The source code is available:
 
 - BaseTest helper class [here](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/BaseTest.cs)
-- Using of BaseTest class [here] (https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionBoolean/CheckboxPageTest.cs)
+- Using of BaseTest class [here](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionBoolean/CheckboxPageTest.cs)
 
 When you rebuild the test project now, you should see each test for every browser.
 
