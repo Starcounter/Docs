@@ -8,21 +8,17 @@ The advantages of JSON-by-example over regular C# classes are mainly:
 * They can express trees of objects and arrays
 * Default values can easily be specified
 
-To create a Typed JSON class, choose <code>New item</code> in Visual Studio and then choose <code>Starcounter Typed JSON</code> and name it **PersonMessage**.
+To create a Typed JSON class, choose `New item` in Visual Studio and then choose `Starcounter Typed JSON`. In this example, the file will be named `PersonMessage`.
 
 <div class="code-name">PersonMessage.json</div>
 
 ```json
 {
-   "FirstName": "Jocke",
-   "LastName": "Wester",
-   "Quotes": [
-        { "Text": "This is an example" }
-   ]
+   "FirstName": "",
+   "LastName": "",
+   "Quotes": [ ]
 }
 ```
-
-JSON-by-example does not require that property names are inside double quotes (they still get serialized and deserialized using double quoted properties).
 
 The above example will act as partial nested C# classes supporting intelligence and type safe compilation.
 
@@ -36,10 +32,16 @@ Handle.GET("/hello", () =>
         FirstName = "Albert",
         LastName = "Einstein"
     };
-    json.Quotes.Add().Text = "Makes things as simple as possible but not simpler.";
-    json.Quotes.Add().Text = "The only real valuable thing is intuition.";
+    json.Quotes.Add().StringValue = "Makes things as simple as possible but not simpler.";
+    json.Quotes.Add().StringValue = "The only real valuable thing is intuition.";
     return json;
 });         
+```
+
+The JSON returned from the above handler look like this:
+
+```json
+{"FirstName":"Albert","LastName":"Einstein","Quotes":["Makes things as simple as possible but not simpler.","The only real valuable thing is intuition."]}
 ```
 
 ## Read-only and writable values
