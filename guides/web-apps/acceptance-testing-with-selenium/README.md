@@ -178,6 +178,7 @@ public void PasswordPage_PasswordTooShort()
 }
 ```
 Using:
+
 This part of code wait for input to be displayed
 ```cs
 WaitUntil(x => _passwordPage.PasswordInput.Displayed);
