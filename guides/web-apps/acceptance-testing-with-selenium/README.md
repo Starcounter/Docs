@@ -65,7 +65,7 @@ Install-Package NUnit3TestAdapter
 
 ## Run your first test
 
-Clone KitchenSink project from StarcounterSamples repository.
+Clone KitchenSink repo from the StarcounterApps organisation on GitHub.
 
 Build your test project. If it builds correctly, you should see this:
 
@@ -115,7 +115,7 @@ There is one common pitfall when writing Selenium tests. The test is executed wi
 
 It is a good practice to always wait:
 
-- wait for a text element to be present, before you check the content of that element
+- Wait for a text element to be present before you check the content of that element
 ```cs
 public bool WaitForText(IWebElement elementName, string text, int seconds)
 {
@@ -123,17 +123,47 @@ public bool WaitForText(IWebElement elementName, string text, int seconds)
 	return wait.Until(ExpectedConditions.TextToBePresentInElement(elementName, text));
 }
 ```
-- wait for a button to be present, before you click on that button
+Using:
+```cs
+[Test]
+public void ButtonPage_RegularButton()
+{
+	WaitUntil(x => _radiolistPage.InfoLabel.Displayed);
+	Assert.IsTrue(WaitForText(_radiolistPage.InfoLabel, "Dogs", 5));
+
+	_radiolistPage.SelectRadio("Cats");
+	Assert.IsTrue(WaitForText(_radiolistPage.InfoLabel, "Cats", 5));
+
+	_radiolistPage.SelectRadio("Dogs");
+	Assert.IsTrue(WaitForText(_radiolistPage.InfoLabel, "Dogs", 5));
+}
+```
+- Wait for a button to be present before you click on that button
 ```cs
 public IWebElement WaitForElementToBeClickable(IWebElement elementName, int seconds)
 {
 	WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(seconds));
 	return wait.Until(ExpectedConditions.ElementToBeClickable(elementName));
 }
+public void ClickOn(IWebElement elementName, int seconds = 10)
+{
+	IWebElement element = WaitForElementToBeClickable(elementName, seconds);
+	element.Click();
+}
 ```
-The following code sample from KitchenSink's [TextPageTest.cs](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextPageTest.cs) shows how to:
+Using:
+```cs
+public void ClickButtonInlineScript()
+{
+	ClickOn(ButtonInlineScript);
+}
 
-1. wait for presence of an input field before typing in it and wait for text to be present in input
+public void ClickButtonFunction()
+{
+	ClickOn(ButtonFunction);
+}
+```
+- Wait for presence of an input field before typing in it and wait for text to be present in label
 ```cs
 [Test]
 public void PasswordPage_PasswordTooShort()
@@ -147,21 +177,16 @@ public void PasswordPage_PasswordTooShort()
 	Assert.IsTrue(WaitForText(_passwordPage.PaswordInputInfoLabel, originalLabel, 5));
 }
 ```
-2. helper method (ClickOn()) that click on element when it is clickable (using WaitForElementToBeClickable() helper method)
-
+Using:
+This part of code wait for input to be displayed
 ```cs
-public IWebElement WaitForElementToBeClickable(IWebElement elementName, int seconds)
-{
-	WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(seconds));
-	return wait.Until(ExpectedConditions.ElementToBeClickable(elementName));
-}
-
-public void ClickOn(IWebElement elementName, int seconds = 10)
-{
-	IWebElement element = WaitForElementToBeClickable(elementName, seconds);
-	element.Click();
-}
+WaitUntil(x => _passwordPage.PasswordInput.Displayed);
 ```
+This part of code wait for maximum 5 seconds for text to be displayed in label
+```cs
+Assert.IsTrue(WaitForText(_passwordPage.PaswordInputInfoLabel, originalLabel, 5));
+```
+
 
 
 ## Sample test suites
