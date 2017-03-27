@@ -4,11 +4,48 @@ Starcounter lets you define JSON schemas by providing a sample instance of the J
 
 The advantages of JSON-by-example over regular C# classes are mainly:
 
-* They can double directly as a JSON mockup (for instance in a web browser expecting such a JSON object).
+* They can double directly as a JSON mockup to send where that is expected, such as in a web browser
 * They can express trees of objects and arrays
 * Default values can easily be specified
 
-To create a Typed JSON class, choose `New item` in Visual Studio and then choose `Starcounter Typed JSON`. In this example, the file will be named `PersonMessage`.
+## Create JSON-by-example
+
+To create a Typed JSON class, choose `New item` in Visual Studio and then select `Starcounter Typed JSON`. The created file contains an empty JSON object. 
+
+The simplest possible JSON-by-example looks something like this:
+
+<div class="code-name">Person.json</div>
+
+```json
+{
+    "Name": ""
+}
+```
+
+Here, the value is set to an empty string as a way to set the type of `Name` to string. It is also possible to set a default value instead.
+
+### Default Values
+
+It is incredibly simple to set the default value in JSON-by-example. Building on the previous code example, it might look like this:
+
+<div class="code-name">Person.json</div>
+
+```json 
+{
+    "Name": "Steven"
+}
+```
+
+By doing this, the JSON returned when creating a new `Person` object will be `{"Name": "Steven"}`:
+
+<div class="code-name">Program.cs</div>
+
+```cs
+Handle.GET("/GetPerson", () =>
+{
+    return new Person(); // {"Name": "Steven"}
+});
+```
 
 <div class="code-name">PersonMessage.json</div>
 
@@ -20,7 +57,7 @@ To create a Typed JSON class, choose `New item` in Visual Studio and then choose
 }
 ```
 
-The above example will act as partial nested C# classes supporting intelligence and type safe compilation.
+### Instantiating JSON-by-example
 
 <div class="code-name">Program.cs</div>
 
@@ -38,19 +75,17 @@ Handle.GET("/hello", () =>
 });         
 ```
 
-The JSON returned from the above handler look like this:
+The JSON returned from the above handler looks like this:
 
 ```json
 {"FirstName":"Albert","LastName":"Einstein","Quotes":["Makes things as simple as possible but not simpler.","The only real valuable thing is intuition."]}
 ```
 
-## Read-only and writable values
+## Writable JSON Values
 
 By default, all the values declared in JSON-by-example are read-only for the client. Any client-side change to a read-only property will result in an error.
 
 To mark a specific value as writable by the client, add a dollar sign (`$`) at the end of the property name, e.g.:
-
-<div class="code-name">PersonView.json</div>
 
 ```json
 {
