@@ -117,20 +117,26 @@ It is a good practice to always wait:
 
 - Wait for a text element to be present before you check the content of that element
 
-Example can be find [here](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextareaPageTest.cs). 
+Example can be find [here](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextareaPageTest.cs) 
+
 Please take a look at TextareaPage_WriteToTextArea() test and line #37. 
+
 Method WaitForText() is use to wait for text in "TextareaInfoLabel" for maximum 5 second. Then assert is true and test pass.
 
 - Wait for a button to be present before you click on that button
 
 Example can be find [here](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionNumber/ButtonPageTest.cs)
+
 As you can see in line #35 in ButtonPage_RegularButton() test we use one of the helper method called WaitUntil. 
+
 As parameter we use Displayed property for the button. The test will wait until ButtonInlineScript is displayed. Default maximum wait time is 10 second.
 
 - Wait for presence of an input field before typing in it and wait for text to be present in label
 
 Example can be find [here](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextPageTest.cs)
+
 In line #31 in TextPage_TextPropagationOnUnfocus() test we use WaitUntil helper method again to wait for input to be displayed. 
+
 In line #34 WaitForText() is used to wait for text in label for maximum 5 second.
 
 
