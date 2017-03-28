@@ -116,77 +116,22 @@ There is one common pitfall when writing Selenium tests. The test is executed wi
 It is a good practice to always wait:
 
 - Wait for a text element to be present before you check the content of that element
-```cs
-public bool WaitForText(IWebElement elementName, string text, int seconds)
-{
-	WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(seconds));
-	return wait.Until(ExpectedConditions.TextToBePresentInElement(elementName, text));
-}
-```
-Using:
-```cs
-[Test]
-public void ButtonPage_RegularButton()
-{
-	WaitUntil(x => _radiolistPage.InfoLabel.Displayed);
-	Assert.IsTrue(WaitForText(_radiolistPage.InfoLabel, "Dogs", 5));
 
-	_radiolistPage.SelectRadio("Cats");
-	Assert.IsTrue(WaitForText(_radiolistPage.InfoLabel, "Cats", 5));
+Example can be find [here](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextareaPageTest.cs). 
+Please take a look at TextareaPage_WriteToTextArea() test and line #37. 
+Method WaitForText() is use to wait for text in "TextareaInfoLabel" for maximum 5 second. Then assert is true and test pass.
 
-	_radiolistPage.SelectRadio("Dogs");
-	Assert.IsTrue(WaitForText(_radiolistPage.InfoLabel, "Dogs", 5));
-}
-```
 - Wait for a button to be present before you click on that button
-```cs
-public IWebElement WaitForElementToBeClickable(IWebElement elementName, int seconds)
-{
-	WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(seconds));
-	return wait.Until(ExpectedConditions.ElementToBeClickable(elementName));
-}
-public void ClickOn(IWebElement elementName, int seconds = 10)
-{
-	IWebElement element = WaitForElementToBeClickable(elementName, seconds);
-	element.Click();
-}
-```
-Using:
-```cs
-public void ClickButtonInlineScript()
-{
-	ClickOn(ButtonInlineScript);
-}
 
-public void ClickButtonFunction()
-{
-	ClickOn(ButtonFunction);
-}
-```
+Example can be find [here](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionNumber/ButtonPageTest.cs)
+As you can see in line #35 in ButtonPage_RegularButton() test we use one of the helper method called WaitUntil. 
+As parameter we use Displayed property for the button. The test will wait until ButtonInlineScript is displayed. Default maximum wait time is 10 second.
+
 - Wait for presence of an input field before typing in it and wait for text to be present in label
-```cs
-[Test]
-public void PasswordPage_PasswordTooShort()
-{
-	const string originalLabel = "Password must be at least 6 chars long";
-	const string password = "123";
 
-	WaitUntil(x => _passwordPage.PasswordInput.Displayed);
-	_passwordPage.ClearPassword();
-	_passwordPage.FillPassword(password);
-	Assert.IsTrue(WaitForText(_passwordPage.PaswordInputInfoLabel, originalLabel, 5));
-}
-```
-Using:
-
-This part of code wait for input to be displayed
-```cs
-WaitUntil(x => _passwordPage.PasswordInput.Displayed);
-```
-This part of code wait for maximum 5 seconds for text to be displayed in label
-```cs
-Assert.IsTrue(WaitForText(_passwordPage.PaswordInputInfoLabel, originalLabel, 5));
-```
+Example can be find [here](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextPageTest.cs)
+In line #31 in TextPage_TextPropagationOnUnfocus() test we use WaitUntil helper method again to wait for input to be displayed. 
+In line #34 WaitForText() is used to wait for text in label for maximum 5 second.
 
 
 
