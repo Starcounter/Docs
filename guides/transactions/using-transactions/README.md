@@ -18,12 +18,7 @@ Db.Transact(() =>
 });
 ```
 
-For your convenience there are some overloads of the `Db.Transact` function that allows you to specify delegates that have input and output parameters.
-
-```cs
-Db.Transact(Action action, ...);
-TResult Db.Transact<TResult>(Func<TResult> func, ...);
-```  
+There are a couple of overloads to `Db.Transact` that makes it possible to set additional options and output parameters. These are documented in our [reference documentation](http://reference.starcounter.io/api/Starcounter.Db.html#Starcounter_Db_Transact_System_Action_System_Int32_).
 
 Since `Db.Transact` is synchronous, there might be cases where it becomes a performance bottleneck. Starcounter deals with this by automatically scaling the number of working threads to continue processing requests even if some handlers are blocked. The maximum number of working threads is the number of CPU cores multiplied by 254, so with four cores, there would be a maximum of 1016 working threads. When all these threads are occupied, the next `Db.Transact` call in line will have to wait until a thread is freed. This can be circumvented by using [`Db.TransactAsync`](#dbtransactasync).
 
