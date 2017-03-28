@@ -6,44 +6,6 @@ There are three ways to create Typed JSON objects in Starcounter:
 2. dynamic (in C# code, defined using dynamic properties)
 3. dynamic (in C# code, defined using string as constructor parameter)
 
-## Supported datatypes
-
-Typed JSON follows the specification of JSON, which means that objects, arrays and single values are all allowed. One difference is that when working with the C#-object and numbers we have the possibility to specify a more exact type. So what in JSON is `Number` we split up in `Int64`, `Double` and `Decimal`.
-
-The following is a list of the tokens in JSON and the equivalence in C#:
-
-| JSON | C# |
-|----------------|---------|
-| `{ }` | Object |
-| `[ ]` | Array |
-| `"value"` | String |
-| `123` | Int64 |
-| `true`/`false` | Boolean |
-| `1.234` and `2E3` | Decimal |
-
-To specify that a member in Json-by-example should be of type `Double` is done in the code-behind file.
-
-<div class="code-name">Foo.json</div>
-
-```js
-{
-  "Value": 2E3 // will be parsed as decimal by default.
-}
-```
-
-<div class="code-name">Foo.json.cs</div>
-
-```cs
-partial class Foo : Json
-{
-    static void Foo()
-    {
-    	// Value should be of type double, not decimal.
-        DefaultTemplate.Value.InstanceType = typeof(double);
-    }
-}
-```
-
 ## JSON properties
 
 Properties of the view-model have to be bound to (in dynamic JSON) Common Language Runtime or (in static JSON) code-behind file. In the section [JSON data binding](/guides/typed-json/json-data-bindings), data bindings are explained in-depth, and how to avoid manual value transfer into the view-model.
