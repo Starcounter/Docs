@@ -1,10 +1,12 @@
 # JSON-by-example
 
-Starcounter lets you define JSON schemas by providing a sample instance of the JSON. From this example, Starcounter infers partial nested classes that can be extended using C#. The values of the primitive properties are used as default values.  
+To define the Typed JSON objects, JSON-by-example is used. 
 
-The advantages of JSON-by-example over regular C# classes are mainly:
+JSON-by-example works by providing a sample instance of JSON that is transpiled into Typed JSON classes. 
 
-* They can double directly as a JSON mockup to send where that is expected, such as in a web browser
+Using JSON-by-example is useful for a number of reasons:
+
+* They can double directly as JSON mockups
 * They can express trees of objects and arrays
 * Default values can easily be specified
 
