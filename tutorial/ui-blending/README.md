@@ -10,6 +10,8 @@ Open <code>HelloWorld</code> in the Starcounter Administrator and press <kbd>Ctr
 
 What this does is that it uses htmlmerger, a class within Starcounter, to merge the files <code>ExpenseJson.html</code> and <code>ConceptPage.html</code> in HelloWorld and Images respectively.
 
+[This can also be done with cURL.](/guides/web-apps/import-html-composition/)
+
 Now, when we have described what files to merge we also want to describe how they should be merged. We do that in the input field below with the following code:
 ```html
 <content select="[slot='HelloWorld/description']"></content>
@@ -23,10 +25,6 @@ Now, when we have described what files to merge we also want to describe how the
 ```
 
 This code describes that we don't want to display the label for the images and that we adjust the width and height of them. It also orders the different elements in the way we want. Feel free to play around with these and see how it changes the layout on your page. 
-
-<aside class="read-more">
-   <a href="http://starcounter.io/guides/web/import-html-compositions/">Read about alternative HTML composition</a>
-</aside>
 
 Close the layout editor with <kbd>ctrl</kbd> + <kbd>E</kbd> should now see the following page:
 

@@ -1,6 +1,6 @@
 # Create a Real Time UI
 
-To create a user interface (UI) we need to add a view-model and a corresponding view. The view-model will act as a representation of the view and as a midpoint between the view and the database.
+To create a user interface (UI) we need to add a [view-model](/guides/web-apps/starcounter-mvvm/#tier-2---the-view-model) and a corresponding [view](/guides/web-apps/html-views/). The view-model will act as a representation of the view and as a midpoint between the view and the database.
 
 Let's create our file structure that contains our view (HTML) and view-model (JSON). If you follow these steps you will have the right files to build the UI:
 
@@ -15,9 +15,10 @@ Now that we have a solid file structure we can continue by creating our view.
 
 Our view will be, for now, a simple interface displaying the `FirstName` and `LastName` of our `Person` instance.
 
-To accomplish this we will use the `label` and `strong`> tags. It's not essential that you use exactly these elements. `p`, `span`, and many others would work just as well. To make Polymer's template engine work, we also have to import it into our file with the `rel="import"`.
+To accomplish this we will use the `label` and `strong` tags. It's not essential that you use exactly these elements. `p`, `span`, and many others would work just as well. To make Polymer's template engine work, we also have to import it into our file with the `rel="import"`.
 
 <div class="code-name">PersonJson.html</div><div class="code-name code-title">Create view</div>
+
 {% raw %}
 ```html
 <link rel="import" href="/sys/polymer/polymer.html"/>
@@ -36,18 +37,10 @@ To accomplish this we will use the `label` and `strong`> tags. It's not essentia
 </template>
 ```
 
-The double curly bracket syntax is a way of denoting two-way bindings in Polymer. `model` represents our JSON file, so `{{model.FirstName}}` is the `FirstName` value in `PersonJson.json`.
+The double curly bracket syntax is a way of denoting [two-way bindings](https://www.polymer-project.org/1.0/docs/devguide/data-binding) in Polymer. `model` represents our JSON file, so `{{model.FirstName}}` is the `FirstName` value in `PersonJson.json`.
 {% endraw %}
 
-<aside class="read-more">
-    <a href="https://www.polymer-project.org/1.0/docs/devguide/data-binding">Learn about Polymer bindings</a>
-</aside>
-
-In the JSON file, create three properties called `Html`, `FirstName`, and `LastName`. The values of these properties will be the values that are bound to the Polymer bindings that we just created _and_ the database. It is therefore crucial, for this example, that you name these keys the same as the properties that we have in our Person class, otherwise they will not bind properly.
-
-<aside class="read-more">
-    <a href="/guides/typed-json/json-data-bindings">Learn more about JSON bindings</a>
-</aside>
+In the JSON file, create three properties called `Html`, `FirstName`, and `LastName`. The values of these properties will be the values that are bound to the Polymer bindings that we just created _and_ [bound to the database](/guides/typed-json/json-data-bindings). It is therefore crucial, for this example, that you name these keys the same as the properties that we have in our Person class, otherwise they will not bind properly.
 
 <div class="code-name">PersonJson.json</div><div class="code-name code-title">Set JSON</div>
 
@@ -70,11 +63,8 @@ partial class PersonJson : Json
 
 Go to `Program.cs` and type in the following code inside the `Main()` method. This code adds the correct information to our previously empty JSON file and creates a new [session](/guides/web-apps/sessions).
 
-<aside class="read-more">
-    <a href="/guides/web-apps/">Read more about sessions, HTML Views and more</a>
-</aside>
-
 <div class="code-name">Program.cs</div><div class="code-name code-title">Bind JSON</div>
+
 ```cs
 Application.Current.Use(new HtmlFromJsonProvider());
 Application.Current.Use(new PartialToStandaloneHtmlProvider());
@@ -89,17 +79,17 @@ Handle.GET("/HelloWorld", () =>
 
     if (Session.Current == null)
     {
-        Session.Current = new Session(SessionOptions.PatchVersioning);
+        Session.Current = new Session();
     }
     json.Session = Session.Current;
     return json;
 });
 ```
-`Application.Current.Use(new HtmlFromJsonProvider())` looks in your JSON file for the `Html` property and sends that document to your web browser.
+[`Application.Current.Use(new HtmlFromJsonProvider())`](/guides/network/middleware/#htmlfromjsonprovider) looks in your JSON file for the `Html` property and sends that document to your web browser.
 
-`Application.Current.Use(new PartialToStandaloneHtmlProvider());` sends the necessary files to inititate our [WebSocket](/guides/network/websocket) connection.
+[`Application.Current.Use(new PartialToStandaloneHtmlProvider())`](/guides/network/middleware/#partialtostandalonehtmlprovider) sends the necessary files to inititate our [WebSocket](/guides/network/websocket) connection.
 
-We have now established a model-view-view-model (MVVM) binding that's real time. The JSON, which is our view-model, is bound to the model (database) with no latency; our view, the HTML, is in turn bound to the JSON, which is synced in real time using WebSocket and HTTP. Polymer helps us display this instantaneously to the user.
+We have now established a [model-view-view-model](/guides/web-apps/starcounter-mvvm/) (MVVM) binding that's real time. The JSON, which is our view-model, is bound to the model (database) with no latency; our view, the HTML, is in turn bound to the JSON, which is synced in real time using WebSocket and HTTP. Polymer helps us display this instantaneously to the user.
 
 <section class="see-yourself">Start the application with <kbd>F5</kbd> and go to <code>http://localhost:8080/HelloWorld</code> in your web browser. You should see the name of your `Person` appear.</section>
 

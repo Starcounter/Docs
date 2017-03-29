@@ -122,7 +122,7 @@ Application.Current.Use((Request req) =>
     {
         if (Session.Current == null)
         {
-            Session.Current = new Session(SessionOptions.PatchVersioning);
+            Session.Current = new Session();
         }
 
         SystemUserSession session = SystemUser.SignInSystemUser(cookie.Value);

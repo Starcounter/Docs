@@ -8,7 +8,7 @@ Operations related to other statements of DML can be performed through C# API, s
 
 ## INSERT, UPDATE and DELETE
 
-There are three data manipulation statements in SQL92: INSERT, UPDATE and DELETE. None of these statements are supported in Starcounter SQL. Instead you create, update and delete objects directly in your programming code. See [Data Manipulation](/guides/database/data-manipulation) for more information.
+There are three data manipulation statements in SQL92: INSERT, UPDATE and DELETE. `INSERT` and `UPDATE` are not supported in Starcounter SQL while `DELETE` is partially supported. Instead you create, update and delete objects directly in your programming code. See [Data Manipulation](/guides/database/data-manipulation) for more information.
 
 ## Subqueries
 

@@ -2,11 +2,7 @@
 
 We will now turn our application into a simple expense tracker. This will allow us to practice using multiple object instances and relations.
 
-with Starcounter, views and view-models can be broken up into parts and nested together. This allows for increased composability and modularity. In this case, the two main concepts in this app, Person and Expense, will be built with separate view-models and views and then nested together to create a coherent whole. Let's start by creating the appropriate files.
-
-<aside class="read-more">
-    <a href="/guides/web-apps/html-views">Read more about views and view-models in Starcounter</a>
-</aside>
+with Starcounter, views and view-models can be broken up into parts and [nested together](/guides/web-apps/html-views/#using-partials). This allows for increased composability and modularity. In this case, the two main concepts in this app, Person and Expense, will be built with separate view-models and views and then nested together to create a coherent whole. Let's start by creating the appropriate files.
 
 1. Add a new Starcounter HTML template with dom-bind in the HelloWorld folder together with `PersonJson.html`. Name it `ExpenseJson.html`.
 2. Add a new Starcounter Typed JSON with Code-behind file to the HelloWorld project together with `PersonJson.json` and `PersonJson.json.cs`. Name it `ExpenseJson.json`.
@@ -39,11 +35,7 @@ To create a list of the expenses we will use the power of Polymer. Our first ste
 ```
 {% endraw %}
 
-Great! Now we just need to stack these views inside the `Person` view. We can do that easily using `dom-repeat`. While we are on it, we will also modify the headline and add a button to add new expenses.
-
-<aside class="read-more">
-    <a href="https://www.polymer-project.org/1.0/docs/devguide/templates">Read more about dom-repeat</a>
-</aside>
+Great! Now we just need to stack these views inside the `Person` view. We can do that easily using [`dom-repeat`](https://www.polymer-project.org/1.0/docs/api/dom-repeat). While we are on it, we will also modify the headline and add a button to add new expenses.
 
 <div class="code-name">PersonJson.html</div>
 
@@ -65,11 +57,12 @@ Great! Now we just need to stack these views inside the `Person` view. We can do
 ```
 {% endraw %}
 
-`starcounter-include` is an insertion point for another template. In this case it's representing the template in ExpenseJson so that we can keep our code separate.
+[`starcounter-include`](https://github.com/Starcounter/starcounter-include) is an insertion point for another template. In this case it's representing the template in ExpenseJson so that we can keep our code separate.
 
 As you can see above, we are using `AddNewExpenseTrigger$`, which we haven't defined yet. Let's go and fix that now.
 
 <div class="code-name">PersonJson.json</div>
+
 ```json
 "FullName": "",
 "Expenses": [{}],
@@ -82,6 +75,7 @@ As you can see above, we are using `AddNewExpenseTrigger$`, which we haven't def
 `AddNewExpenseTrigger$` is a trigger property that allows us to add a new `Expenses` template to the view. We can implement its handler now.
 
 <div class="code-name">PersonJson.json.cs</div>
+
 ```cs
 void  Handle(Input.AddNewExpenseTrigger action)
 {
@@ -96,6 +90,7 @@ void  Handle(Input.AddNewExpenseTrigger action)
 `AddExpense` is a method call to a method that we need to create that will add this newly created `Expense` to our `Person`'s `Expenses` array. It should look like this:
 
 <div class="code-name">PersonJson.json.cs</div>
+
 ```cs
 public void AddExpense(Expense expense)
 {
@@ -109,6 +104,7 @@ This handler essentially creates a new expense instance, sets the current Person
 Right now, this handler will not function because we haven't defined the `Expense` class yet. Let's go to `Program.cs` and do that.
 
 <div class="code-name">Program.cs</div><div class="code-name code-title">Add more fields</div>
+
 ```cs
 [Database]
 public class Expense
@@ -123,6 +119,7 @@ public class Expense
 While we are tinkering with the databases, we should also add Spendings and CurrentBalance to the Person class.
 
 <div class="code-name">Program.cs</div>
+
 ```cs
 public string FirstName;
 public string LastName;
@@ -136,13 +133,10 @@ public decimal CurrentBalance => Db.SQL<decimal>("SELECT SUM(e.Amount) FROM Hell
 
 These two are calculated every time they are used by searching through the database so that they are always up to date.
 
-<aside class="read-more">
-    <a href="/guides/SQL/">Learn more about using SQL in Starcounter</a>
-</aside>
-
 Inside the Program class, you should also add the following GET handler which helps with looking up the expenses.
 
 <div class="code-name">Program.cs</div>
+
 ```cs
 Handle.GET("/HelloWorld/partial/expense/{?}", (string id) =>
 {
