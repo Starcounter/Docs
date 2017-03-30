@@ -79,7 +79,7 @@ Handle.GET("/HelloWorld", () =>
 
     if (Session.Current == null)
     {
-        Session.Current = new Session();
+        Session.Current = new Session(SessionOptions.PatchVersioning);
     }
     json.Session = Session.Current;
     return json;
