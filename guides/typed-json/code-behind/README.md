@@ -1,36 +1,34 @@
 # Code-behind
 
-To provide interactivity in your JSON, you can bind code methods to JSON properties. This is done using `.json.cs` files, which are used as partial definitions for the Typed JSON class.
+To create interactivity for the Typed JSON classes, code-behind classes can be added to extend existing Typed JSON. This is done using `.json.cs` files, which are partial definitions for Typed JSON classes.
 
-To create a Typed JSON class with code-behind, choose `New item` in Visual Studio and then choose `Starcounter Typed JSON with Code-behind`. For example, name it `PersonViewModel`. This creates two files:
+To create a Typed JSON class with code-behind, choose `New item` in Visual Studio and then select `Starcounter Typed JSON with Code-behind`. By creating one of these with the filename "Person", two files will be created:
 
-<div class="code-name">PersonViewModel.json</div>
+<div class="code-name">Person.json</div>
 
 ```json
 {
 }
 ```
 
-<div class="code-name">PersonViewModel.json.cs</div>
+<div class="code-name">Person.json.cs</div>
 
 ```cs
 using Starcounter;
 
 namespace MyApp
 {
-    partial class PersonViewModel : Json
+    partial class Person : Json
     {
     }
 }
 ```
 
-The class name `PersonViewModel` given in C# is arbitrary and can be different than the file name. You use the class name to in other parts of the code, for example to create new instances (`var json = new PersonViewModel()`).
-
 ## Handling input events
 
-Consider that you have a JSON property that can be edited from the client. For example:
+Consider this JSON object with a property that is [writable](/guides/typed-json/json-by-example/#writable-json-values) from the client:
 
-<div class="code-name">PersonViewModel.json</div>
+<div class="code-name">Person.json</div>
 
 ```json
 {
@@ -38,9 +36,9 @@ Consider that you have a JSON property that can be edited from the client. For e
 }
 ```
 
-You might observe changes to this property using a Code-behind method `Handle`:
+To observe changes to this property, the code-behind method `Handle` can be used:
 
-<div class="code-name">PersonViewModel.json.cs</div>
+<div class="code-name">Person.json.cs</div>
 
 ```cs
 partial class PersonViewModel : Json
@@ -66,11 +64,13 @@ The `Input` class is auto generated per each JSON view-model. It provides the fo
 - method `Cancel()` - reject the new value. It prevents the propagation of the new value to JSON as well as to the bound data object
 - property `Cancelled` - boolean, true if the `Cancel()` method was called
 
+To get many more examples of how interactivity is handled, take a look at the [KitchenSink repo](https://github.com/StarcounterApps/KitchenSink) where the most common UI patterns are demonstrated.
+
 ## Refering to nested objects
 
-JSON-by-example might contain a nested object. For example:
+JSON-by-example might contain nested objects. For example:
 
-<div class="code-name">PersonJson.json</div>
+<div class="code-name">Person.json</div>
 
 ```json
 {
@@ -82,10 +82,10 @@ JSON-by-example might contain a nested object. For example:
 }
 ```
 
-You can provide code-behind for the root level and `Name`-level as two separate partial classes. For example:
+Code-behind for the root level and `Name`-level can be provided as two separate partial classes. For example:
 
 ```cs
-partial class PersonViewModel : Json
+partial class Person : Json
 {
     void Handle(Input.FullName action)
     {
@@ -94,26 +94,26 @@ partial class PersonViewModel : Json
         this.Name.LastName = words[1];
     }
 
-    [PersonViewModel_json.Name]
-    partial class PersonViewModelName : Json
+    [Person_json.Name]
+    partial class PersonName : Json
     {
         void Handle(Input.FirstName action)
         {
-            var parent = (PersonViewModel)this.Parent;
-            parent.FullName = action.Value + " " + this.LastName;
+            var person = this.Parent as Person;
+            person.FullName = action.Value + " " + this.LastName;
         }
 
         void Handle(Input.LastName action)
         {
-            var parent = (PersonViewModel)this.Parent;
-            parent.FullName = this.FirstName + " " + action.Value;
+            var person = this.Parent as Person;
+            person.FullName = this.FirstName + " " + action.Value;
         }
     }
 }
 ```
 
-The attribute `[PersonViewModel_json.Name]` is used to hint what is the path in JSON-by-example that the partial class refers to.
+The attribute `[Person_json.Name]` is used to hint what is the path in JSON-by-example that the partial class refers to.
 
-As you might have noticed, accessing a child object from a parent object in code-behind is as simple as providing a path expression: `this.Name.FirstName = words[0]`. The child property (`this.Name`) is of known type (`PersonViewModelName`).
+As you might have noticed, accessing a child object from a parent object in code-behind is as simple as providing a path expression: `this.Name.FirstName = words[0]`. The child property (`this.Name`) is of known type (`PersonName`).
 
-However, accessing a parent from a child requires casting (`var parent = (PersonViewModel)this.Parent`). This is because there might be various parents that employ this particular child. In general, using the `Parent` property is discouraged, because it **breaks the single-direction data flow**. Child should be controlled by the parent and not vice versa.
+However, accessing a parent from a child requires casting (`var person = this.Parent as Person`). This is because there might be various parents that employ this particular child. In general, using the `Parent` property is discouraged, because it **breaks the single-direction data flow**. Child should be controlled by the parent and not vice versa.
