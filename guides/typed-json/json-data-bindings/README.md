@@ -225,6 +225,78 @@ public class PersonPage : Json
 
 The resulting JSON looks like this with the example in the [bindings to database objects section](#binding-to-database-objects): `{"FirstName":"Steve","LastName":"Smith","FullName":"SteveSteve Smith"}`.
 
+#### Binding to a Deep Property
+
+It is also possible to bind to deep properties by providing full path to the property. Here, the property `FriendName` is bound to the deep property `Friend.FirstName`.
+
+<div class="code-name">PersonPage.json</div>
+
+```json
+{
+  "FirstName": "",
+  "FriendName": ""
+}
+```
+
+<div class="code-name">PersonPage.json.cs</div>
+
+```cs
+using Starcounter;
+
+namespace MyApp
+{
+    partial class PersonPage : Json
+    {
+        static PersonPage()
+        {
+            DefaultTemplate.FriendName.Bind = "Friend.FirstName";
+        }
+    }
+}
+```
+
+<div class="code-name">Program.cs</div>
+
+```cs
+using Starcounter;
+
+namespace MyApp
+{
+    [Database]
+    public class Person
+    {
+        public string FirstName;
+        public Person Friend;
+    }
+
+    class Program
+    {
+        static void Main()
+        {
+            Db.Transact(() =>
+            {
+                var friend = new Person() { FirstName = "Bilbo" };
+
+                new Person()
+                {
+                    FirstName = "Steve",
+                    Friend = friend
+                };
+            });
+
+            Handle.GET("/GetPerson", () =>
+            {
+                Person person = Db.SQL<Person>("SELECT P FROM Person P WHERE P.FirstName = ?", "Steve").First;
+                var json = new PersonPage();
+                json.Data = person;
+                return json;
+            });
+        }
+    }
+}
+```
+
+The resulting JSON from this example looks like this: `{"FirstName":"Steve","FriendName":"Bilbo"}`.
 
 ### Setting type of binding for all children
 JSON objects that can contain children (with a template of type `Starcounter.Templates.TObject`) can also specify how the bindings on the children will be treated.
@@ -242,37 +314,6 @@ PersonJson.DefaultTemplate.BindChildren = BindingStrategy.Bound
 The enumerable has the following values: "Auto", "Bound", and "Unbound".
 
 **NOTE:** It is not allowed to set the value for this property to `BindingStrategy.UseParent`. An exception will be raised in this case.
-
-### JSON property binding
-
-All examples in this section use the same `Person` database class.
-
-```cs
-[Database]
-public class Person
-{
-    public string Name { get; set; }
-    public string Surname { get; set; }
-    public Person Father { get; set; }
-}
-```
-
-#### Binding to a deep property
-
-It is also possible to bind to deep properties by providing full path to the property.
-
-```js
-{
-    "Name": "John",
-    "Surname": "Walker",
-    "FatherName": ""
-}
-```
-
-```cs
-DefaultTemplate.FatherName.Bind = "Father.Name";
-```
-
 
 ## Specify Data Type
 
