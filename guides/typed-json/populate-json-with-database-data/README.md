@@ -13,30 +13,9 @@ Consider the following JSON file:
 }
 ```
 
-## Setting the Data property
-
-By setting the `Data` property on the typed JSON object, you will bind each property in the JSON object tree to the properties with the same name in the database object. You can override this by suppling alternative binding using the `Bind` property in JSON document.
-
-<div class="code-name">Program.cs</div>
+The goal is to populate this JSON with data from the database class `Person` that looks like this:
 
 ```cs
-using System.Collections;
-using Starcounter;
-
-class Hello
-{
-   static void Main()
-   {
-      Handle.GET("/hello/{?}", (string name) =>
-      {
-         Person person = Db.SQL<Person>("SELECT P FROM Person P WHERE FirstName=?", name).First;
-         var json = new PersonPage();
-         json.Data = person;
-         return json;
-      });         
-   }
-}
-
 [Database]
 public class Person
 {
@@ -44,3 +23,15 @@ public class Person
    public string LastName;
 }
 ```
+
+To accomplish this, the following code can be used:
+
+```cs
+var person = Db.SQL<Person>("SELECT P FROM Person P").First;
+var json = new PersonPage();
+json.Data = person;    
+```
+
+The `PersonPage` object will now look like this: `{"FirstName":"Steve","LastName":"Smith"}`.
+
+Starcounter recognizes that the properties `PersonPage` and `Person` object have the same name and populates the values in the Typed JSON accordingly.
