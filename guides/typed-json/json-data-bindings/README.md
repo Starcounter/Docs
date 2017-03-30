@@ -1,4 +1,4 @@
-# JSON Data Bindings
+# Data Bindings
 
 Properties declared in Typed JSON can be bound to either a property in the code-behind file or a CLR object that exposes one or more public properties. Properties that are bound will read and write the values directly to the underlying object with no need to manually transfer the values to the view-model.
 
