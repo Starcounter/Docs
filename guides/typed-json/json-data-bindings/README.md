@@ -145,6 +145,42 @@ The same setting as specified on a parent is used, which will be one of the abov
 2. If a property was not found in the code-behind or no code-behind exists, a property in the data object is searched for.
 3. If no property was found in steps 1 and 2 and the binding is set to `Auto`, the property will be unbound. If binding was set to `Bound` an exception will be raised.
 
+## Modify Bindings
+
+There are different ways to modify bindings so that they do not bind the default way.
+
+All binding modifications are done in a static contructor in the code-behind file. Like so:
+
+<div class="code-name">PersonPage.json.cs</div>
+
+```cs
+using Starcounter;
+
+namespace Experiment
+{
+    partial class PersonPage : Json
+    {
+        static PersonPage()
+        {
+            // Modifications go here
+        }
+    }
+}
+```
+
+### Opting Out of Bindings
+
+In some cases we want to make sure that a specific property is not bound. This can be achieved by either setting the value of `Bind` to `null` or specifying the property `BindingStrategy` on the specific template as `BindingStrategy.Unbound`
+
+For example:
+
+```cs
+...
+PersonJson.DefaultTemplate.Street.Bind = null;
+// or same behaviour setting BindingStrategy
+PersonJson.DefaultTemplate.Street.BindingStrategy = BindingStrategy.Unbound;
+...
+```
 
 ### Setting type of binding for all children
 JSON objects that can contain children (with a template of type `Starcounter.Templates.TObject`) can also specify how the bindings on the children will be treated.
@@ -271,21 +307,6 @@ public class PersonJson : Json, IBound<Person>
         get { return string.Format("{0} - {1}", this.Name, this.Surname); }
     }
 }
-```
-
-### Opt-out of binding
-
-In some cases we want to make sure that a specific property is not bound. This can be achieved by either setting the value of `Bind` to `null` or specifying the property `BindingStrategy` on the specific template as `BindingStrategy.Unbound`
-
-Using the same example as the section above but change `Street` to always be unbound would look like this
-
-Code
-```cs
-...
-PersonJson.DefaultTemplate.Street.Bind = null;
-// or same behaviour setting BindingStrategy
-PersonJson.DefaultTemplate.Street.BindingStrategy = BindingStrategy.Unbound;
-...
 ```
 
 ## Specify Data Type
