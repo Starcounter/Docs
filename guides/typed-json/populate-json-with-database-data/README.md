@@ -1,6 +1,8 @@
 # Populate JSON with database data
 
-In an [earlier example](/guides/typed-json/json-by-example/), we populated the JSON object with arbitrary data. A common scenario is that you want to create a JSON object from database data or from some CLR object. This can of course be done by setting one property at the time and iterating over result sets manually. But you can also bind the JSON object to a CLR object.
+As demonstrated [earlier](/guides/typed-json/json-by-example/#default-values), Typed JSON can be can be created with default values that is set in the JSON-by-example. This might be useful in some cases. However, in most applications, it is much more valuable to populate the Typed JSON with database data. The simplest way to do this is by using the `Data` property of the Typed JSON object.
+
+Consider the following JSON file:
 
 <div class="code-name">PersonPage.json</div>
 
