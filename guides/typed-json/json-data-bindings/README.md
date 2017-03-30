@@ -188,7 +188,7 @@ partial class PersonPage : Json
 
 By applying this to the example in the [bindings to database objects section](#binding-to-database-objects), the resulting JSON would be `{"FirstName":"Steve","LastName":"Smith","FullName":""}`. Since the `FullName` property is not bound, it will not contain any value.
 
-#### Binding to Properties With Different Names
+### Binding to Properties With Different Names
 
 If a property should be bound to a property that has a different name than the property in the JSON, a binding value can be set.
 
@@ -206,6 +206,25 @@ public class PersonPage : Json
 ```
 
 The resulting JSON looks like this: `{"FirstName":"Smith","LastName":"Steve","FullName":"Steve Smith"}`. 
+
+### Binding to Custom Properties in Code-Behind
+
+Since it is possible to [bind to properties with different names](#binding-to-properties-with-different-names), it is also possible to bind to custom properties in the code-behind. For example:
+
+```cs
+public class PersonPage : Json
+{
+    static PersonPage()
+    {
+        DefaultTemplate.FullName.Bind = "CustomFullName";
+    }
+
+    public string CustomFullName => FirstName + FirstName + " " + LastName; 
+}
+```
+
+The resulting JSON looks like this with the example in the [bindings to database objects section](#binding-to-database-objects): `{"FirstName":"Steve","LastName":"Smith","FullName":"SteveSteve Smith"}`.
+
 
 ### Setting type of binding for all children
 JSON objects that can contain children (with a template of type `Starcounter.Templates.TObject`) can also specify how the bindings on the children will be treated.
@@ -254,61 +273,6 @@ It is also possible to bind to deep properties by providing full path to the pro
 DefaultTemplate.FatherName.Bind = "Father.Name";
 ```
 
-#### Binding to a custom property in code-behind
-
-Binding to custom properties in code-behind works the same way.
-
-```js
-{
-    "Name": "John",
-    "Surname": "Walker",
-    "FullName": ""
-}
-```
-
-```cs
-public class PersonJson : Json, IBound<Person>
-{
-    static PersonJson()
-    {
-        PersonJson.DefaultTemplate.FullName.Bind = "FullNameBind";
-    }
-
-    public string FullNameBind
-    {
-        get { return string.Format("{0} - {1}", this.Name, this.Surname); }
-    }
-}
-```
-
-**NOTE**:
-
-As a simplification when binding properties to code-behind it is also possible to use the same name of the member declared in Json-by-example and code-behind. Then the custom property in code-behind will be bound automatically (same behaviour as autobinding to a property in a data-object).
-
-The following restrictions applies though:
-
-- Due to restrictions in available type information when generating code for TypedJSON, this feature only works for properties that are declared on the same class. It does not work for properties declared in an inherited class.
-- How it works underneath is that generating an accessor-property for getting and setting the JSON-property is suppressed when a property in code-behind already exists. This means that to access the JSON-property directly, either the template needs to be used, or the name (`json.GetValue(json.Template.Name)`, `json["Name"]`).
-
-In the following example, the JSON `FullName` property will automatically get bound to the property `FullName` in the code-behind:
-
-```js
-{
-    "Name": "John",
-    "Surname": "Walker",
-    "FullName": ""
-}
-```
-
-```cs
-public class PersonJson : Json, IBound<Person>
-{
-    public string FullName
-    {
-        get { return string.Format("{0} - {1}", this.Name, this.Surname); }
-    }
-}
-```
 
 ## Specify Data Type
 
