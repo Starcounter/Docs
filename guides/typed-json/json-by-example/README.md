@@ -2,9 +2,9 @@
 
 To define the Typed JSON objects, JSON-by-example is used. 
 
-JSON-by-example works by providing a sample instance of JSON that is transpiled into Typed JSON classes. 
+JSON-by-example works by providing a sample instance of JSON that is transpiled into Typed JSON classes. For the curious, these classes can be found in the `obj > x64 > Debug` directory of the project with the filename extension `.json.g.cs`.
 
-Using JSON-by-example is useful for a number of reasons:
+JSON-by-example is useful for a number of reasons:
 
 * They can double directly as JSON mockups
 * They can express trees of objects and arrays
@@ -25,11 +25,11 @@ One of the simplest JSON-by-example files look like this:
 }
 ```
 
-Here, the value is set to an empty string as a way to set the type of `Name` to string. It is also possible to set a default value instead.
+Here, the value is set to an empty string to declare the type as a string.
 
 ### Default Values
 
-It is incredibly simple to set the default value in JSON-by-example. Building on the previous code example, it might look like this:
+It is incredibly simple to set default values in JSON-by-example. Building on the previous code example, it might look like this:
 
 <div class="code-name">Person.json</div>
 
