@@ -53,7 +53,7 @@ namespace MyApp
             {
                 Person person = Db.SQL<Person>("SELECT P FROM Person P").First; // Retrieve a database object from the database
                 var json = new PersonPage();
-                json.Data = person;
+                json.Data = person; // Bind the database object to the Typed JSON object
                 return json;
             });
         }
@@ -69,7 +69,7 @@ Starcounter recognizes that the properties in `PersonPage` and `Person` object h
 
 In addition to binding to database objects, Typed JSON properties can also be bound to code-behind properties.
 
-To accomplish what was demonstrated in the [previous example](#binding-to-database-objects) by using code-behind properties instead of database properties, the following code could be used:
+To accomplish what was demonstrated in the [previous example](#binding-to-database-objects) by using code-behind properties instead of database properties, the following code can be used:
 
 <div class="code-name">PersonPage.json</div>
 
