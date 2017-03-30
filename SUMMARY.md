@@ -64,7 +64,6 @@
     * [Typed JSON](guides/typed-json/README.md)
         * [JSON-by-example](guides/typed-json/json-by-example/README.md)
         * [Code-behind](guides/typed-json/code-behind/README.md)
-        * [Populate JSON with database data](guides/typed-json/populate-json-with-database-data/README.md)
         * [Data Bindings](guides/typed-json/json-data-bindings/README.md)
         * [Callback methods of Starcounter JS](guides/typed-json/callback-methods-of-starcounter-js/README.md)
         * [Responding with JSON](guides/typed-json/responding-with-json/README.md)

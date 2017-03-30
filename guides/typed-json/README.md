@@ -4,7 +4,7 @@
 
 Typed JSON is how the view-model is built in Starcounter. It is essentially C# classes that are easilty serialized to JSON.
 
-It is defined with something called [JSON-by-example](/guides/typed-json/json-by-example), extended with [Code-Behind](/guides/typed-json/code-behind), and [populated](/guides/typed-json/populate-json-with-database-data) and [bound]((/guides/typed-json/json-data-bindings) to database data. 
+It is defined with something called [JSON-by-example](/guides/typed-json/json-by-example), extended with [Code-Behind](/guides/typed-json/code-behind), and [bound]((/guides/typed-json/json-data-bindings) to database data. 
 
 ## Content
 
@@ -12,7 +12,7 @@ In this section, it will be described how to use Typed JSON.
 
 * [JSON-by-example](/guides/typed-json/json-by-example) and [Code-Behind](/guides/typed-json/code-behind) describes how to define the Typed JSON and extend it to allow for interactivity.
 
-* [Populate JSON With Database Data](/guides/typed-json/populate-json-with-database-data) and [JSON Data Bindings](/guides/typed-json/json-data-bindings) explains how to initially add database data to the Typed JSON objects and then bind Typed JSON objects to database classes.
+* [JSON Data Bindings](/guides/typed-json/json-data-bindings) explains how to initially add database data to the Typed JSON objects and then bind Typed JSON objects to database classes.
 
 * [Callback Methods of Starcounter JS](/guides/typed-json/callback-methods-of-starcounter-js) describes the use of callback methods for certain actions on the Typed JSON objects.
 
