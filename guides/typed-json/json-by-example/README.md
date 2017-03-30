@@ -16,7 +16,7 @@ To create a Typed JSON class, choose `New item` in Visual Studio and then select
 
 One of the simplest JSON-by-example files look like this:
 
-<div class="code-name">Person.json</div>
+<div class="code-name">PersonPage.json</div>
 
 ```json
 {
@@ -31,7 +31,7 @@ Here, the value is set to an empty string to declare the type as a string.
 
 It is incredibly simple to set default values in JSON-by-example. Building on the previous code example, it might look like this:
 
-<div class="code-name">Person.json</div>
+<div class="code-name">PersonPage.json</div>
 
 ```json 
 {
@@ -40,14 +40,14 @@ It is incredibly simple to set default values in JSON-by-example. Building on th
 }
 ```
 
-By doing this, the JSON returned when creating a new `Person` object will be `{"FirstName":"Steven","LastName":"Smith"}`:
+By doing this, the JSON returned when creating a new `PersonPage` object will be `{"FirstName":"Steven","LastName":"Smith"}`:
 
 <div class="code-name">Program.cs</div>
 
 ```cs
 Handle.GET("/GetPerson", () =>
 {
-    return new Person(); // {"FirstName":"Steven","LastName":"Smith"}
+    return new PersonPage(); // {"FirstName":"Steven","LastName":"Smith"}
 });
 ```
 
