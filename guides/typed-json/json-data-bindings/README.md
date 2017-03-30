@@ -298,20 +298,24 @@ namespace MyApp
 
 The resulting JSON from this example looks like this: `{"FirstName":"Steve","FriendName":"Bilbo"}`.
 
-### Setting type of binding for all children
-JSON objects that can contain children (with a template of type `Starcounter.Templates.TObject`) can also specify how the bindings on the children will be treated.
+### Setting Type of Binding for Children
+Typed JSON objects that contain children can specify how the type of bindings on its children. 
 
 By setting the property `BindChildren`, each child that don't specify it's own binding, i.e. use the `Parent` option will have the binding decided by the parent.
 
-Setting the value in code-behind from `BindingStrategy` enumerable:
+Setting the value in the code-behind from the `BindingStrategy` enum:
 
 ```cs
-...
-PersonJson.DefaultTemplate.BindChildren = BindingStrategy.Bound
-...
+partial class PersonPage : Json
+{
+    static PersonPage()
+    {
+        DefaultTemplate.BindChildren = BindingStrategy.Bound;
+    }
+}
 ```
 
-The enumerable has the following values: "Auto", "Bound", and "Unbound".
+The enum has the following values: "Auto", "Bound", and "Unbound".
 
 **NOTE:** It is not allowed to set the value for this property to `BindingStrategy.UseParent`. An exception will be raised in this case.
 
@@ -377,7 +381,7 @@ static PersonPage()
 Now, the code will compile successfully because it is explicitly described that the `Age` property will not be bound. This is further described in the section "Opt-out of Bindings".
 
 
-#### Reuse the same JSON object
+## Reuse the same JSON object
 
 <div class="code-name">ListPage.json</div>
 
