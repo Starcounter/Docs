@@ -2,9 +2,9 @@
 
 ## Summary
 
-Typed JSON is the way to build the view-model in Starcounter. It consists of C# classes that can be serialized into JSON objects.  
+Typed JSON is how the view-model is built in Starcounter. It is essentially C# classes that are easilty serialized to JSON.
 
-This means that the developer can interact with the view-model the same way as any other C# class. 
+It is defined with something called [JSON-by-example](/guides/typed-json/json-by-example), extended with [Code-Behind](/guides/typed-json/code-behind), and [populated](/guides/typed-json/populate-json-with-database-data) and [bound]((/guides/typed-json/json-data-bindings) to database data. 
 
 ## Content
 
