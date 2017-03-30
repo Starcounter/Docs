@@ -156,7 +156,7 @@ All binding modifications are done in a static contructor in the code-behind fil
 ```cs
 using Starcounter;
 
-namespace Experiment
+namespace MyApp
 {
     partial class PersonPage : Json
     {
@@ -170,17 +170,28 @@ namespace Experiment
 
 ### Opting Out of Bindings
 
-In some cases we want to make sure that a specific property is not bound. This can be achieved by either setting the value of `Bind` to `null` or specifying the property `BindingStrategy` on the specific template as `BindingStrategy.Unbound`
+In some cases we want to make sure that a specific property is not bound. This can be achieved by setting the value of `Bind` to `null`;
 
 For example:
 
+<div class="code-name">PersonPage.json.cs</div>
+
 ```cs
-...
-PersonJson.DefaultTemplate.Street.Bind = null;
-// or same behaviour setting BindingStrategy
-PersonJson.DefaultTemplate.Street.BindingStrategy = BindingStrategy.Unbound;
-...
+using Starcounter;
+
+namespace MyApp
+{
+    partial class PersonPage : Json
+    {
+        static PersonPage()
+        {
+            DefaultTemplate.FullName.Bind = null;
+        }
+    }
+}
 ```
+
+By applying this to the [example above](#binding-to-database-objects), the resulting JSON would be `{"FirstName":"Steve","LastName":"Smith","FullName":""}`. Since the `FullName` property is not bound, it will not contain any value.
 
 ### Setting type of binding for all children
 JSON objects that can contain children (with a template of type `Starcounter.Templates.TObject`) can also specify how the bindings on the children will be treated.
