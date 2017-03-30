@@ -97,9 +97,25 @@ To mark a specific value as writable by the client, add a dollar sign (`$`) at t
 
 ```json
 {
-   "Html": "",
    "FirstName$": "",
-   "LastName$": "",
-   "Message": ""
+   "LastName$": ""
 }
 ```
+
+### Trigger Properties
+
+A common use of writable JSON values is trigger properties. These properties carry no specific meaning, they are simply there to notify the [code-behind](/guides/typed-json/code-behind/) that a change has happened. Here's an example of a trigger property:
+
+```json
+{
+    "FirstName": "",
+    "LastName": "",
+    "SaveTrigger$": 0
+}
+```
+
+The value of this trigger would be incremented from the client which allows the code-behind to react accordingly.
+
+## The HTML property
+
+In all the [sample apps](https://github.com/StarcounterApps/), there is an "Html" property in every, or almost every, `.json` file. The value of this property contains the path to the corresponding HTML view which means that the middleware [HtmlFromJsonProvider](/guides/network/middleware/#htmlfromjsonprovider) can locate this HTML view and send it to the client. This allows the developer to only return a Typed JSON object from a handler and still return the corresponding view as well. 
