@@ -177,21 +177,35 @@ For example:
 <div class="code-name">PersonPage.json.cs</div>
 
 ```cs
-using Starcounter;
-
-namespace MyApp
+partial class PersonPage : Json
 {
-    partial class PersonPage : Json
+    static PersonPage()
     {
-        static PersonPage()
-        {
-            DefaultTemplate.FullName.Bind = null;
-        }
+        DefaultTemplate.FullName.Bind = null;
     }
 }
 ```
 
-By applying this to the [example above](#binding-to-database-objects), the resulting JSON would be `{"FirstName":"Steve","LastName":"Smith","FullName":""}`. Since the `FullName` property is not bound, it will not contain any value.
+By applying this to the example in the [bindings to database objects section](#binding-to-database-objects), the resulting JSON would be `{"FirstName":"Steve","LastName":"Smith","FullName":""}`. Since the `FullName` property is not bound, it will not contain any value.
+
+#### Binding to Properties With Different Names
+
+If a property should be bound to a property that has a different name than the property in the JSON, a binding value can be set.
+
+For example, to bind `FirstName` to `LastName` in the example in the [bindings to database objects section](#binding-to-database-objects) and vice versa, the following code can be used:
+
+```cs
+public class PersonPage : Json
+{
+    static PersonPage()
+    {
+        DefaultTemplate.FirstName.Bind = "LastName";
+        DefaultTemplate.LastName.Bind = "FirstName";
+    }
+}
+```
+
+The resulting JSON looks like this: `{"FirstName":"Smith","LastName":"Steve","FullName":"Steve Smith"}`. 
 
 ### Setting type of binding for all children
 JSON objects that can contain children (with a template of type `Starcounter.Templates.TObject`) can also specify how the bindings on the children will be treated.
@@ -221,30 +235,6 @@ public class Person
     public string Name { get; set; }
     public string Surname { get; set; }
     public Person Father { get; set; }
-}
-```
-
-#### Binding to a different property
-
-If a property should be bound to a property that has a different name than the property in the JSON, a binding value can be set.
-
-```js
-{
-  "Name": "John",
-  "Surname": "Walker",
-  "FirstName": "",
-  "LastName": ""
-}
-```
-
-```cs
-public class PersonJson : Json, IBound<Person>
-{
-    static PersonJson()
-    {
-        PersonJson.DefaultTemplate.FirstName.Bind = "Name";
-        PersonJson.DefaultTemplate.LastName.Bind = "Surname";
-    }
 }
 ```
 
