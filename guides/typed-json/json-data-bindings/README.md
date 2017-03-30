@@ -163,21 +163,6 @@ The enumerable has the following values: "Auto", "Bound", and "Unbound".
 
 **NOTE:** It is not allowed to set the value for this property to `BindingStrategy.UseParent`. An exception will be raised in this case.
 
-### Specify data type
-
-Denoting a specific type that is used as data-object is optional but comes with some benefits.
-
-If the JSON object is static, that is all properties are known compile-time, you will get an error during compilation if bound properties are invalid, instead of getting a runtime error on first use. The Data property itself will also be typed to the correct type which means that you don't need to cast the data-object when using it.
-
-The JSON code-behind class has to implement `IBound<T>` to set custom data type.
-
-```cs
-[PersonJson_json]
-public partial class PersonJson : Json, IBound<MyNamespace.Person>
-```
-
-**Note:** empty JSON objects do not have code-behind classes so it is not possible to declare a custom data type for them.
-
 ### JSON property binding
 
 All examples in this section use the same `Person` database class.
@@ -303,6 +288,68 @@ PersonJson.DefaultTemplate.Street.BindingStrategy = BindingStrategy.Unbound;
 ...
 ```
 
+## Specify Data Type
+
+Denoting a specific type that is used as data-object is optional but comes with some benefits.
+
+If the JSON object is static, that is all properties are known compile-time, you will get an error during compilation if bound properties are invalid, instead of getting a runtime error on first use. The Data property itself will also be typed to the correct type which means that you don't need to cast the data-object when using it.
+
+### IBound
+
+The JSON code-behind class has to implement `IBound<T>` to set custom data type.
+
+```cs
+[PersonJson_json]
+public partial class PersonJson : Json, IBound<MyNamespace.Person>
+```
+
+**Note:** empty JSON objects do not have code-behind classes so it is not possible to declare a custom data type for them.
+
+
+### IExplicitBound
+`IExplicitBound` is an improved implementation of `IBound`. They are used the exact same way, though `IExplicitBound` allows more control over the bindings.
+
+When using `IExplicitBound`, properties in JSON-by-example are expected to be bound. This allows the pinpointing of failed bindings which otherwise could go unnoticed. If the JSON-by-example looks like this:
+
+```json
+{
+  "Name": "",
+  "Age": 0,
+  "Address": ""
+}
+```
+
+And the database class looks like this:
+
+```cs
+public class Person
+{
+  public string Name;
+  public long Age;
+  public string Address;
+}
+```
+
+If the code-behind includes `IExplicitBound` like this:
+
+```cs
+public class PersonPage : Json, IExplicitBound<Person>
+```
+
+Then it will compile successfully.
+If `public long Age` was removed, then the following error would be displayed: `'Person' does not contain a definition for 'Age'`. The reason for this is that `IExplicitBound` would look for a database field corresponding to `Age` and fail.
+
+Since `IExplicitBound` expects all values to be bound to _something_, properties that are not intended to be bound have to be explicitly unbound. As noted above, it will not compile without this. A static constructor can be used in order to explicitly unbind these properties. This is how it would look:
+
+```cs
+static PersonPage()
+{
+    DefaultTemplate.Age.Bind = null;
+}
+```
+Now, the code will compile successfully because it is explicitly described that the `Age` property will not be bound. This is further described in the section "Opt-out of Bindings".
+
+
 #### Reuse the same JSON object
 
 <div class="code-name">ListPage.json</div>
@@ -348,46 +395,3 @@ partial class DetailsPage : Json
   }
 }
 ```
-
-### IExplicitBound
-`IExplicitBound` is an improved implementation of `IBound`. They are used the exact same way, though `IExplicitBound` allows more control over the bindings.
-
-When using `IExplicitBound`, properties in JSON-by-example are expected to be bound. This allows the pinpointing of failed bindings which otherwise could go unnoticed. If the JSON-by-example looks like this:
-
-```json
-{
-  "Name": "",
-  "Age": 0,
-  "Address": ""
-}
-```
-
-And the database class looks like this:
-
-```cs
-public class Person
-{
-  public string Name;
-  public long Age;
-  public string Address;
-}
-```
-
-If the code-behind includes `IExplicitBound` like this:
-
-```cs
-public class PersonPage : Json, IExplicitBound<Person>
-```
-
-Then it will compile successfully.
-If `public long Age` was removed, then the following error would be displayed: `'Person' does not contain a definition for 'Age'`. The reason for this is that `IExplicitBound` would look for a database field corresponding to `Age` and fail.
-
-Since `IExplicitBound` expects all values to be bound to _something_, properties that are not intended to be bound have to be explicitly unbound. As noted above, it will not compile without this. A static constructor can be used in order to explicitly unbind these properties. This is how it would look:
-
-```cs
-static PersonPage()
-{
-    DefaultTemplate.Age.Bind = null;
-}
-```
-Now, the code will compile successfully because it is explicitly described that the `Age` property will not be bound. This is further described in the section "Opt-out of Bindings".
