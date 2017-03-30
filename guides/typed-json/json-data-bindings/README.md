@@ -1,58 +1,127 @@
 # JSON Data Bindings
 
-Properties declared in JSON (the view-model) can be bound to either a property in the code-behind file or a CLR object that exposes one or more public properties. Properties that are bound will read and write the values directly to the underlying object with no need to manually transfer the values to the view-model.
+Properties declared in Typed JSON can be bound to either a property in the code-behind file or a CLR object that exposes one or more public properties. Properties that are bound will read and write the values directly to the underlying object with no need to manually transfer the values to the view-model.
 
-## Rules When Bindings are Created
-1. If a code-behind file exists, a property is searched for there.
-2. If a property was not found in the code-behind or no code-behind exists, a property in the data object is searched for.
-3. If no property was found in steps 1 and 2 and the binding is set to `Auto`, the property will be unbound. If binding was set to `Bound` an exception will be raised.
+## Default Bindings
 
-### Default behaviour
+### Binding to Database Objects
 
-By default each property will try to bind to a property in code-behind or a data object. If the binding fail, for example a property with the same name does not exist or no data object is specified, the property will be treated as unbound.
+To bind a Typed JSON object to a database object, the `Data` property is used. 
 
-In the following example the binding will succeed since the property `Name` exists in the database object:
+Consider the following JSON file:
 
-<div class="code-name">PersonJson.json</div>
+<div class="code-name">PersonPage.json</div>
 
-```javascript
+```json
 {
-    "Name": "John"
+   "FirstName": "",
+   "LastName": "",
+}
+```
+
+To bind the Typed JSON object `PersonPage` defined above to a database class `Person`, the following code can be used:
+
+<div class="code-name">Program.cs</div> 
+
+```cs
+using Starcounter;
+
+namespace MyApp
+{
+    [Database]
+    public class Person
+    {
+        public string FirstName;
+        public string LastName;
+        public string FullName => FirstName + " " + LastName;
+    }
+
+    class Program
+    {
+        static void Main()
+        {
+            Db.Transact(() => // Add a new Person instance to the database
+            {
+                new Person()
+                {
+                    FirstName = "Steve",
+                    LastName = "Smith"
+                };
+            });
+
+            Handle.GET("/GetPerson", () =>
+            {
+                Person person = Db.SQL<Person>("SELECT P FROM Person P").First; // Retrieve a database object from the database
+                var json = new PersonPage();
+                json.Data = person;
+                return json;
+            });
+        }
+    }
+}
+```
+
+The `PersonPage` object will now look like this: `{"FirstName":"Steve","LastName":"Smith","FullName":"Steve Smith"}`.
+
+Starcounter recognizes that the properties in `PersonPage` and `Person` object have the same name and populates the values in the Typed JSON accordingly. This is the default way that bindings are created.
+
+### Binding to Code-Behind Properties
+
+In addition to binding to database objects, Typed JSON properties can also be bound to code-behind properties.
+
+To accomplish what was demonstrated in the [previous example](#binding-to-database-objects) by using code-behind properties instead of database properties, the following code could be used:
+
+<div class="code-name">PersonPage.json</div>
+
+```json
+{
+   "FirstName": "",
+   "LastName": "",
+   "FullName": ""
+}
+```
+
+<div class="code-name">PersonPage.json.cs</div>
+
+```cs
+using Starcounter;
+
+namespace MyApp
+{
+    partial class PersonPage : Json
+    {
+        public string FirstName = "Steven";
+        public string LastName = "Smith";
+        public string FullName => FirstName + " " + LastName;
+    }
 }
 ```
 
 <div class="code-name">Program.cs</div>
 
 ```cs
-[Database]
-public class Person
-{
-	public string Name;
-}
+using Starcounter;
 
-public class Program
+namespace MyApp
 {
-  public static void Main()
-  {
-    Handle.GET("/person/any", () =>
+    class Program
     {
-      return new PersonJson()
-      {
-        Data = Db.SQL<Person>("SELECT p FROM Person p").First;
-      });
+        static void Main()
+        {
+            Handle.GET("/GetPerson", () =>
+            {
+                return new PersonPage(); // {"FirstName":"Steven","LastName":"Smith","FullName":"Steven Smith"}
+            });
+        }
     }
-  }
 }
 ```
-Here, the property `Name` in the JSON `PersonJson` will be bound to the property `Name` in the database object `Person`.  
 
-Assuming there is one person in the database with the name "Christian", the resulting JSON from the request will be:
+### Mixing Database and Code-Behind Bindings
 
-```javascript
-{ "Name": "Christian" }
-```
+When mixing database and code-behind bindings, the code-behind bindings take presidence. This means that if there is a database property and code-behind property with the same name, the code-behind property will be the one that's used. 
 
-### Different type of bindings
+## Different type of bindings
 
 There are different settings that can be specified on each property or JSON object. Auto, Bound, Unbound or Parent.
 
@@ -69,6 +138,13 @@ An unbound JSON property will store the value in the JSON.
 
 **Parent**
 The same setting as specified on a parent is used, which will be one of the above (auto, bound, unbound).
+
+
+## Rules When Bindings are Created
+1. If a code-behind file exists, a property is searched for there.
+2. If a property was not found in the code-behind or no code-behind exists, a property in the data object is searched for.
+3. If no property was found in steps 1 and 2 and the binding is set to `Auto`, the property will be unbound. If binding was set to `Bound` an exception will be raised.
+
 
 ### Setting type of binding for all children
 JSON objects that can contain children (with a template of type `Starcounter.Templates.TObject`) can also specify how the bindings on the children will be treated.
