@@ -112,7 +112,7 @@ There are essentially two things that are done here:
 
 As an alternative to the `BeforeDelete` commit hook, you can use the Starcounter method `OnDelete`.
 
-`OnDelete` works similar to the `OnData` and `HasChanged` callback methods that are explained <a href="/guides/typed-json/callback-methods-of-starcounter-js">here</a>. It executes some code every time an instance of that class is deleted. To accomplish this you have to make use of the `IEntity` interface.
+`OnDelete` works similar to the `OnData` and `HasChanged` callback methods that are explained <a href="/guides/typed-json/callback-methods">here</a>. It executes some code every time an instance of that class is deleted. To accomplish this you have to make use of the `IEntity` interface.
 
 This is how it would look in code:
 ```cs

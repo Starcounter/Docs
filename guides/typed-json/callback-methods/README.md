@@ -1,4 +1,4 @@
-# Callback methods of Starcounter JS
+# Callback Methods
 
 Typically there are two kind of events, happening in typed JSON files.
 There might be events coming from the client side and events, happening on the server side of the app.

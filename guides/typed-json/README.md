@@ -14,7 +14,7 @@ In this section, it will be described how to use Typed JSON.
 
 * [JSON Data Bindings](/guides/typed-json/json-data-bindings) explains how to initially add database data to the Typed JSON objects and then bind Typed JSON objects to database classes.
 
-* [Callback Methods of Starcounter JS](/guides/typed-json/callback-methods-of-starcounter-js) describes the use of callback methods for certain actions on the Typed JSON objects.
+* [Callback Methods](/guides/typed-json/callback-methods) describes the use of callback methods for certain actions on the Typed JSON objects.
 
 * [Responding With JSON](/guides/typed-json/responding-with-json) and [Accepting JSON in Requests](/guides/typed-json/accepting-JSON-in-requests) describes how to send and receive Typed JSON objects with HTTP.
 

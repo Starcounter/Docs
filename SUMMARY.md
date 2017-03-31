@@ -65,7 +65,7 @@
         * [JSON-by-example](guides/typed-json/json-by-example/README.md)
         * [Code-behind](guides/typed-json/code-behind/README.md)
         * [Data Bindings](guides/typed-json/json-data-bindings/README.md)
-        * [Callback methods of Starcounter JS](guides/typed-json/callback-methods-of-starcounter-js/README.md)
+        * [Callback Methods](guides/typed-json/callback-methods/README.md)
         * [Responding with JSON](guides/typed-json/responding-with-json/README.md)
         * [Accepting JSON in Requests](guides/typed-json/accepting-json-in-requests/README.md)
         * [Primitive Arrays and Single Value Types](guides/typed-json/primitive-arrays-and-single-value-types/README.md)
