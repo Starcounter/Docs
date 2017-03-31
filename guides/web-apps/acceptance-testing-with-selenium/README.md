@@ -119,19 +119,19 @@ It is a good practice to always wait:
 
 	- An **example** can be found [here](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextareaPageTest.cs)	
 	- Please take a look at [TextareaPage_WriteToTextArea()](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextareaPageTest.cs#L29) test and [line 37](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextareaPageTest.cs#L37).	
-	- Method WaitForText() is use to wait for text in "TextareaInfoLabel" for maximum 5 second. Then assert is true and test pass.
+	- Method `WaitForText()` is use to wait for text in `TextareaInfoLabel` for maximum 5 second. Then assert is true and test pass.
 
 - Wait for a button to be present before you click on that button
 
 	- An **example** can be found [here](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionNumber/ButtonPageTest.cs)	
-	- As you can see in [line 35](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionNumber/ButtonPageTest.cs#L35) in [ButtonPage_RegularButton()](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionNumber/ButtonPageTest.cs) test we use one of the helper method called WaitUntil.	
-	- As parameter we use Displayed property for the button. The test will wait until ButtonInlineScript is displayed. Default maximum wait time is 10 second.
+	- As you can see in [line 35](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionNumber/ButtonPageTest.cs#L35) in [ButtonPage_RegularButton()](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionNumber/ButtonPageTest.cs) test we use one of the helper method called `WaitUntil`.	
+	- As parameter we use `Displayed` property for the button. The test will wait until `ButtonInlineScript` is displayed. Default maximum wait time is 10 second.
 
 - Wait for presence of an input field before typing in it and wait for text to be present in label
 
 	- An **example** can be found [here](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextPageTest.cs)
-	- In [line 31](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextPageTest.cs#L31) in [TextPage_TextPropagationOnUnfocus()](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextPageTest.cs) test we use WaitUntil helper method again to wait for input to be displayed.	
-	- In [line 34](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextPageTest.cs#L34) WaitForText() is used to wait for text in label for maximum 5 second.
+	- In [line 31](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextPageTest.cs#L31) in [TextPage_TextPropagationOnUnfocus()](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextPageTest.cs) test we use `WaitUntil` helper method again to wait for input to be displayed.	
+	- In [line 34](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextPageTest.cs#L34) `WaitForText()` is used to wait for text in label for maximum 5 second.
 
 
 
