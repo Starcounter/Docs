@@ -6,13 +6,13 @@ JSON-by-example works by providing a sample instance of JSON that is transpiled 
 
 JSON-by-example is useful for a number of reasons:
 
-* They can double directly as JSON mockups
-* They can express trees of objects and arrays
+* It can double directly as JSON mockups
+* It can express trees of objects and arrays
 * Default values can easily be specified
 
 ## Create JSON-by-example
 
-To create a Typed JSON class, choose `New item` in Visual Studio and then select `Starcounter Typed JSON`. The created file contains an empty JSON object. 
+To create a Typed JSON class, choose `New item`, or use <key>Ctrl + Shift + A</key> in Visual Studio and then select `Starcounter -> Starcounter Typed JSON`. The created file contains an empty JSON object which is the JSON-by-example. 
 
 One of the simplest JSON-by-example files look like this:
 
@@ -26,6 +26,15 @@ One of the simplest JSON-by-example files look like this:
 ```
 
 Here, the value is set to an empty string to declare the type as a string.
+
+An instance of the Typed JSON created from this JSON-by-example is created the same an instance would be created for any other class: `new PersonPage()`.
+
+The value of the properties in the Typed JSON object can be accessed in the ordinary way:
+
+```cs
+var personPage = new PersonPage();
+string name = personPage.FirstName; // Contains the value "", an empty string
+```
 
 ### Default Values
 
