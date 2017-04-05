@@ -37,7 +37,7 @@ You can learn more about NUnit at their [website (nunit.org)](http://nunit.org/i
 
 It is recommended to keep the testing project in the same solution as the tested project. Note that they are two different projects.
 
-In the following example, we will add acceptance tests to Launcher. Let's create a new test project in Visual Studio, by clicking <kbd>Add New Project</kbd> → <kbd>Visual C#</kbd> → <kbd>Test</kbd> → <kbd>Unit Test Project</kbd>.
+In the following example, we will add acceptance tests to Launcher. Let's create a new test project in Visual Studio, by clicking <kbd>Add New Project</kbd> → <kbd>Visual C#</kbd> → <kbd>Test</kbd> → <kbd>Unit Test Project</kbd>.
 
 Call the new project "Launcher.AcceptanceTest". We will use `Launcher\test\` as the project location.
 
@@ -47,7 +47,7 @@ Call the new project "Launcher.AcceptanceTest". We will use `Launcher\test\` as 
 
 Open the newly created test project. Now, we need to install a bunch of libraries mentioned above.
 
-Open the package manager (<kbd>Tools</kbd> → <kbd>NuGet Packet Manager</kbd> → <kbd>Packet Manager Console</kbd>).
+Open the package manager (<kbd>Tools</kbd> → <kbd>NuGet Packet Manager</kbd> → <kbd>Packet Manager Console</kbd>).
 
 **Important:** In the console, choose your test project from the "Default project" dropdown.
 
@@ -58,50 +58,20 @@ Run the following commands in the console to install the required dependencies:
 ```
 Install-Package Selenium.WebDriver
 Install-Package Selenium.Support
-Install-Package NUnit -Version 2.6.4
-Install-Package NUnitTestAdapter
-Install-Package NUnit.Runners -Version 3.2.0
+Install-Package NUnit -Version 3.*
+Install-Package NUnit.ConsoleRunner -Version 3.*
+Install-Package NUnit3TestAdapter
 ```
-
-## Record your first test
-
-"Record" the test? Yes, you read this right! While you can also write the test code manually using Selenium's domain-specific language, it is way more effective to record it directly from a Firefox extension.
-
-Make sure you have Selenium IDE extension installed in Firefox. The instructions are here: [http://www.seleniumhq.org/projects/ide/](http://www.seleniumhq.org/projects/ide/).
-
-Make sure that the project that you want to test is already running. For me it means, that Launcher is started and accessible at `http://localhost:8080/launcher`.
-
-To record the first test, go to Firefox, and click on the Selenium IDE icon.
-
-![record first test location](/assets/2016-04-01-13_24_19-Mozilla-Firefox.png)
-
-When the Selenium IDE opens, it automatically starts recording.
-
-![selenium IDE](/assets/2016-04-01-13_25_24-Mozilla-Firefox.png)
-
-Now, you need to focus your main Firefox window again. Type in the URL of your app, press ENTER and wait until the page loads.
-
-When the page is loaded, right click anywhere on the page. In the context menu, select <kbd>Show All Available Commands</kbd> → <kbd>waitForTitle</kbd>. This records an action of waiting for a page title to appear in the window title bar. This will make a good first test to see if your app loads correctly.
-
-Now go back to Selenium IDE and press the red circle to stop recording. The recorded output should look like this:
-
-![start recording](/assets/2016-04-01-13_29_20-Launcher.png)
-
-Now, you can save this recording as a `.cs` file. In Selenium IDE, click <kbd>File</kbd> → <kbd>Export Test Case As…</kbd> → <kbd>C# / Nunit / WebDriver</kbd>.
-
-In the file dialog, go to your test project directory and save the file as `PageLoads.cs`
 
 ## Run your first test
 
-Now, import the recorded file to your project in Visual Studio. Right click on the project directory, select <kbd>Add</kbd> → <kbd>Existing item…</kbd> and pick the file `PageLoads.cs`. Open the file.
-
-Still in Visual Studio, open the Test Explorer window pane, by clicking on <kbd>Test</kbd> → <kbd>Windows</kbd> → <kbd>Test Explorer</kbd>.
+Clone KitchenSink repo from the StarcounterApps organisation on GitHub.
 
 Build your test project. If it builds correctly, you should see this:
 
 ![Seleninium result screenshot](/assets/2016-04-01-13_34_52-Launcher-Microsoft-Visual-Studio.png)
 
-Now, the only thing left to do is to run that test! In the Test Explorer, click on the "Run All" button. In the following seconds, put your hands up from your mouse and keyboard, because Selenium will take control of your system and perform the test. If it works well, you should see your tests passing.
+Now, the only thing left to do is to run that test! In the Test Explorer, click on the "Run All" button. If it works well, you should see your tests passing.
 
 ![test explorer](/assets/2016-04-01-13_40_22-Launcher-Microsoft-Visual-Studio.png)
 
@@ -114,114 +84,30 @@ We don't want to test only Firefox. Because of that, you should use Selenium Rem
 To make this happen, you will need to install some additional software.
 
 - Download and install Java, required by Selenium Standalone Server
-- Create a directory `C:\selenium`
+- Create a directory `C:\Selenium`
 - Download the following files from [Selenium Downloads](http://docs.seleniumhq.org/download/):
-  - Selenium Standalone Server (`selenium-server-standalone-3.0.0-beta3.jar`)
+  - Selenium Standalone Server (`selenium-server-standalone-3.*.jar`)
   - Gecko Driver (`geckodriver.exe`)
   - Microsoft Edge Driver (`MicrosoftWebDriver.exe`)
   - Google Chrome Driver (`chromedriver.exe`)
-- Put the `jar` file as well as 3 `exe` files directly in `C:\selenium`
+- Put the `jar` file as well as 3 `exe` files directly in `C:\Selenium`
 
-Open your <code>Properties</code> in the <code>Tests</code> project. Go to <code>Reference Paths</code>, enter C:\selenium and click Add Folder.
+Open your <code>Properties</code> in the <code>Tests</code> project. Go to <code>Reference Paths</code>, enter C:\Selenium and click Add Folder.
 
-### Edit the tests to run in multiple projects
+### Use BaseTest class to run tests in multiple browsers
 
-Now, add this small file to your test project. Call it `WebDriverFactory.cs`. This is a helper class that makes it easier to test multiple browsers. The source code is available [here](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Utilities/WebDriverManager.cs):
+BaseTest is a helper class that makes it easier to test multiple browsers. The source code is available:
 
-```cs
-using OpenQA.Selenium;
-using OpenQA.Selenium.IE;
-using OpenQA.Selenium.Remote;
-using System;
+- BaseTest helper class [here](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/BaseTest.cs)
+- Using of BaseTest class [here](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionBoolean/CheckboxPageTest.cs)
 
-class WebDriverFactory
-{
-    private static Uri remoteWebDriverUri = new Uri("http://127.0.0.1:4444/wd/hub");
-
-    public static IWebDriver Create(string browser)
-    {
-        DesiredCapabilities capabilities;
-        IWebDriver driver;
-
-        switch (browser)
-        {
-            case "chrome":
-                capabilities = DesiredCapabilities.Chrome();
-                driver = new RemoteWebDriver(remoteWebDriverUri, capabilities);
-                break;
-            case "internet explorer":
-                InternetExplorerOptions options = new InternetExplorerOptions();
-                options.IgnoreZoomLevel = true;
-                capabilities = (DesiredCapabilities)options.ToCapabilities();
-                driver = new RemoteWebDriver(remoteWebDriverUri, capabilities, TimeSpan.FromSeconds(10));
-                break;
-            case "edge":
-                capabilities = DesiredCapabilities.Edge();
-                driver = new RemoteWebDriver(remoteWebDriverUri, capabilities);
-                break;
-            default:
-                capabilities = DesiredCapabilities.Firefox();
-                driver = new RemoteWebDriver(remoteWebDriverUri, capabilities);
-                break;
-        }
-        return driver;
-    }
-}
-```
-
-Now, we need to adapt the test file to make use of it.
-
-In the file you created in the previous step (`PageLoads.cs`), locate the following line:
-
-```cs
-driver = new FirefoxDriver();
-```
-
-Change it to:
-
-```cs
-driver = WebDriverFactory.Create(this.browser);
-```
-
-Now, what is `this.browser`? This is a fixture parameter that carries the name of the browser used to execute the test.
-
-What this means is that you need to change every instance of :
-
-```cs
-[TestFixture]
-```
-
-To be:
-
-```cs
-[TestFixture("firefox")]
-[TestFixture("chrome")]
-[TestFixture("edge")]
-```
-
-Finally, add this constructor somewhere on top of the class. It stores the fixture parameter in the `this.browser` variable:
-
-
-```cs
-private string browser;
-
-public PageLoads(string browser)
-{
-    this.browser = browser;
-}
-```
-
-When you rebuild the test project now, you should see 3 tests in the Test Explorer, each test for every browser.
+When you rebuild the test project now, you should see each test for every browser.
 
 The final setup looks like this:
 
 ![visual studio selenium screenshot](/assets/2016-04-01-13_51_26-Launcher-Microsoft-Visual-Studio.png)
 
-Before you can execute the tests, start Selenium Server Standalone by calling `java -jar selenium-server-standalone-3.0.0-beta3.jar`.
-
-Now, press "Run All" and relax. This will take a while as the system runs your test in three different browsers!
-
-![test explorer screenshot](/assets/2016-04-01-15_38_44-Launcher-Microsoft-Visual-Studio.png)
+Before you can execute the tests, start Selenium Server Standalone by calling `java -jar selenium-server-standalone-3.*.jar`.
 
 ## Wait for asynchronous content
 
@@ -229,42 +115,35 @@ There is one common pitfall when writing Selenium tests. The test is executed wi
 
 It is a good practice to always wait:
 
-- wait for a text element to be present, before you check the content of that element
-- wait for an input field to be present, before you type in that input field
-- wait for a button to be present, before you click on that button
+- Wait for a text element to be present before you check the content of that element
 
-The following code sample from KitchenSink's [TextPageTest.cs](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextPageTest.cs) shows how to:
+	- An example can be found in the method `TextareaPage_WriteToTextArea` in KitchenSink 
+	Tests (see [TextareaPageTest.cs lines 28-38](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextareaPageTest.cs#L28-L38)). The method `WaitForText()` is used to 
+	compare the text value of `TextareaInfoLabel` asynchronously. The assertion passes if the 
+	text is found within 5 seconds, otherwise it fails.
 
-1. wait for presence of an input field before typing in it
-2. wait for the asynchronous response from the server with derivative result
+- Wait for a button to be present before you click on that button
 
-```cs
-[Test]
-public void TextPropagationOnUnfocus()
-{
-    driver.Navigate().GoToUrl(baseURL + "/Text");
-    WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-    IWebElement element = wait.Until(_driver => _driver.FindElement(By.XPath("(//input)[1]")));
+	- An example can be found in the method `ButtonPage_RegularButton` in the KitchenSink 
+	tests (see [ButtonPageTest.cs lines 29-46](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionNumber/ButtonPageTest.cs#L29-L46)). The method `WaitUntil()` is used to 
+	asynchronously check the state of the `Displayed` property of a button. It halts the test 
+	for a default maximum time of 10 seconds. If the button is not displayed within that 
+	time, it throws an exception.
 
-    var label = driver.FindElement(By.XPath("(//label[@class='control-label'])[1]"));
-    var originalText = label.Text;
-    driver.FindElement(By.XPath("(//input)[1]")).Clear();
-    driver.FindElement(By.XPath("(//input)[1]")).SendKeys("Marcin");
-    driver.FindElement(By.XPath("//body")).Click();
+- Wait for presence of an input field before typing in it and wait for text to be present in label
 
-    wait.Until((x) =>
-    {
-        return !label.Text.Equals(originalText);
-    });
-    Assert.AreEqual("Hi, Marcin!", driver.FindElement(By.XPath("(//label[@class='control-label'])[1]")).Text);
-}
-```
+	- An example can be found in the method `TextPage_TextPropagationOnUnfocus` in the 
+	KitchenSink tests (see [TextPageTest.cs lines 28-38](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextPageTest.cs#L28-L38)). This test mixes the other examples 
+	presented above. The method `WaitUntil()` is used here to asynchronously wait for the 
+	input to be `Displayed`. Notice that the following response check is also done 
+	asynchrously using `WaitForText`.
+
 
 
 ## Sample test suites
 
 Some of the Starcounter's sample apps come with acceptance test suite. We run tests every night to make sure that we keep the good quality.
 
-The [KitchenSink](https://github.com/StarcounterSamples/KitchenSink) sample app includes a Selenium test case for every UI pattern that is presented in that app. You can learn from the test project (in the `test` directory), how to achieve Selenium testing of particular actions, such as button clicks, page changing, typing in forms, etc.
+The [KitchenSink](https://github.com/StarcounterApps/KitchenSink) sample app includes a Selenium test case for every UI pattern that is presented in that app. You can learn from the test project (in the `test` directory), how to achieve Selenium testing of particular actions, such as button clicks, page changing, typing in forms, etc.
 
-The [Launcher](https://github.com/StarcounterPrefabs/Launcher) prefab app includes Selenium test of using Launcher with two mock applications (called "Launcher_AcceptanceHelperOne" and "Launcher_AcceptanceHelperTwo"). The test include executing JavaScript code on a page to scroll a DIV element and then checking the scroll position.
+The [Launcher](https://github.com/StarcounterApps/Launcher) prefab app includes Selenium test of using Launcher with two mock applications (called "Launcher_AcceptanceHelperOne" and "Launcher_AcceptanceHelperTwo"). The test include executing JavaScript code on a page to scroll a DIV element and then checking the scroll position.
