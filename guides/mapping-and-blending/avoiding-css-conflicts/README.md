@@ -69,9 +69,9 @@ From this, these BEM classes can be derived:
 ```css
 .signin-form {}
 .signin-form--expanded {}
-.signin-form__username-input {}
-.signin-form__remember-me {}
-.singin-form__remember-me--checked {}
+.signin-form__text-input {}
+.signin-form__labeled-checkbox {}
+.singin-form__labeled-checkbox--checked {}
 ```
 
 ## BEM in Starcounter apps
