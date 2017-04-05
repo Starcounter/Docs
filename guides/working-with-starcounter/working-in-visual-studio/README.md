@@ -6,11 +6,11 @@ In Visual Studio, applications can be built using a [Starcounter Visual Studio e
 
 ## Using the Visual Studio extension
 
-Starcounter provides a Visual Studio extension to simplify the development of Starcounter applications. It provide templates to build on and the ability to start applications from Visual Studio.
+Starcounter provides a Visual Studio extension to simplify the development of Starcounter applications. It provide templates to build on and the ability to start applications from Visual Studio. The extension can either be installed during the installation process of Starcounter by choosing that as an option, or by manually downloading and installing it from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Starcounter.StarcounterforVisualStudio).
 
 ### Templates
 
-There are currently two project templates and three item templates.
+There are currently two project templates and three item templates included in the extension.
 
 **Project templates**:
 
