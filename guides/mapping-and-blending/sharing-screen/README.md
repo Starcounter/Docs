@@ -43,7 +43,7 @@ Attach the result of this request to the view-model of your app. This becomes th
 ```cs
 Handle.GET("/products/product/{?}", (string objectId) =>
 {
-    StandalonePage master = (StandalonePage)Self.GET("/Products/standalone");
+    StandalonePage master = Self.GET<StandalonePage>("/Products/standalone");
 
     master.CurrentPage = Db.Scope<Json>(() =>
     {

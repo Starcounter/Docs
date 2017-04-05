@@ -23,7 +23,7 @@ When the request handler for `"/people/persons/{?}"` catches the request after t
 ```cs
 Handle.GET<string>("/people/persons/{?}", (string id) =>
 {
-    var master = (StandalonePage)Self.GET("/people/standalone");
+    var master = Self.GET<StandalonePage>("/people/standalone");
 
     Action runPartialInScope = () =>
     {
