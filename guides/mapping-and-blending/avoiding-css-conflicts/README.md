@@ -82,6 +82,8 @@ We recommend the following rules when using BEM selectors in Starcounter apps.
 
 * __Give meaningful names__ to the Block, Element and Modifier sections. For example, `.chatter-avatar` is much more descriptive than `.chatter-img`.
 
+* __Use resusable names__ to the Block, Element, and Modifier sections. As seen in the example above, `.signin-form__text-input` is preferred over `.signin-form__firstname-input` since `text-input` is more resusable than `firstname-input`. 
+
 * __Prefix Block sections with the app name__ to isolate the classes from BEM classes in other apps. For example, the class name for a menu block in the "Chatter" app should be `.chatter-menu`.
 
 * __Use lowercase class names__. `.Chatter-Menu` is wrong, `.chatter-menu` is right.
