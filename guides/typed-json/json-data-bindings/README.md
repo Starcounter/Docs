@@ -51,9 +51,13 @@ namespace MyApp
 
             Handle.GET("/GetPerson", () =>
             {
-                Person person = Db.SQL<Person>("SELECT P FROM Person P").First; // Retrieve a database object from the database
-                var json = new PersonPage();
-                json.Data = person; // Bind the database object to the Typed JSON object
+                var person = Db.SQL<Person>("SELECT P FROM Person P").First; // Retrieve a database object from the database
+
+                var json = new PersonPage() 
+                {
+                    Data = person // Bind the database object to the Typed JSON object
+                };
+
                 return json;
             });
         }
@@ -186,13 +190,15 @@ partial class PersonPage : Json
 }
 ```
 
+Setting the `Bind` property to `null` in this case ensures that the Typed JSON property `FullName` is not bound to any database, or code-behind, property.
+
 By applying this to the example in the [bindings to database objects section](#binding-to-database-objects), the resulting JSON would be `{"FirstName":"Steve","LastName":"Smith","FullName":""}`. Since the `FullName` property is not bound, it will not contain any value.
 
 ### Binding to Properties With Different Names
 
 If a property should be bound to a property that has a different name than the property in the JSON, a binding value can be set.
 
-For example, to bind `FirstName` to `LastName` in the example in the [bindings to database objects section](#binding-to-database-objects) and vice versa, the following code can be used:
+For example, to bind the Typed JSON property `FirstName` to the database property `LastName` in the example in the [bindings to database objects section](#binding-to-database-objects) and vice versa to essentially switch the names around, the following code can be used:
 
 ```cs
 public class PersonPage : Json

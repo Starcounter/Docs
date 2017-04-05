@@ -90,7 +90,7 @@ To specify that a member in Json-by-example should be of type `Double` is done i
 ```cs
 partial class Foo : Json
 {
-    static void Foo()
+    static Foo()
     {
     	// Value should be of type double, not decimal.
         DefaultTemplate.Value.InstanceType = typeof(double);
