@@ -8,4 +8,4 @@ Starcounter apps can make `Self` requests, which can be used for internal signal
 
 {% import "../../macros.html" as macros %}
 
-{{ macros.tocGenerator(page.title, summary.parts[0].articles[3].articles[6].articles) }}
+{{ macros.tocGenerator(page.title, summary.parts[0].articles[3].articles[5].articles) }}
