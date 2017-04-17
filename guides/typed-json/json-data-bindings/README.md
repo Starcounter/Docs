@@ -79,8 +79,8 @@ To accomplish what was demonstrated in the [previous example](#binding-to-databa
 
 ```json
 {
-   "FirstName": "",
-   "LastName": "",
+   "FirstName": "Steven",
+   "LastName": "Smith",
    "FullName": ""
 }
 ```
@@ -94,8 +94,6 @@ namespace MyApp
 {
     partial class PersonPage : Json
     {
-        public string FirstName = "Steven";
-        public string LastName = "Smith";
         public string FullName => FirstName + " " + LastName;
     }
 }
