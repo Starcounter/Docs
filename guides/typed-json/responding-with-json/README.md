@@ -1,71 +1,105 @@
 # Responding with JSON
 
-Typed JSON objects are serialized automatically to `application/json` format when returned from request a handler.
+Typed JSON objects are serialized automatically to the `application/json` format when returned from a handler.
 
-<div class="code-name">PersonJson.json</div>
+<div class="code-name">PersonPage.json</div>
 
 ```json
 {
-    "FirstName": "Jocke",
-    "LastName": "Wester"
+    "FirstName": "Bilbo",
+    "LastName": "Baggins"
 }
 ```
 
-<div class="code-name">Hello.cs</div>
+<div class="code-name">Program.cs</div>
 
 ```cs
 using Starcounter;
 
-class Hello
+namespace MyApp
 {
-    static void Main()
+    class Program
     {
-        Handle.GET("/hello", () =>
+        static void Main()
         {
-            var json = new PersonJson();
-            return json;
-        });         
+            Handle.GET("/GetPerson", () =>
+            {
+                return new PersonPage(); // {"FirstName":"Bilbo","LastName":"Baggins"}
+            });
+        }
     }
 }
 ```
+
+## Setting Status Code and Description
 
 The default HTTP status code for responses is 200 OK.
 
-To achieve a different HTTP status code, define it explicitly in a `Response` object:
+To change this, two methods are provided to the `Handle` class: `SetOutgoingStatusCode` and `SetOutgoingStatusDescription`.
 
-<div class="code-name">ErrorJson.json</div>
+In code, they look like this:
 
-```json
-{
-    "ErrorDescription": ""
-}
-```
-
-<div class="code-name">Hello.cs</div>
+<div class="code-name">Program.cs</div>
 
 ```cs
 using Starcounter;
 
-class Hello
+namespace MyApp
 {
-    static void Main()
+    class Program
     {
-        Handle.GET("/hello", () =>
+        static void Main()
         {
-            var json = new ErrorJson()
+            Handle.GET("/NotFound", () => 
             {
-              ErrorDescription = "Hello not found"
-            };
-
-            return new Response()
-            {
-                StatusCode = 404,
-                StatusDescription = "Not Found"
-                Body = json
-            };
-        });         
+                Handle.SetOutgoingStatusCode(404);
+                Handle.SetOutgoingStatusDescription("Not Found");
+                return "";
+            });
+        }
     }
 }
 ```
 
-> Browse the guide to find more information about [JSON](/guides/typed-json/) and [Response](/guides/network/handling-http-requests)
+It is also possible to change the status code and description by creating a `Response` object: 
+
+<div class="code-name">PersonPage.json</div>
+
+```json
+{
+    "FirstName": "Gandalf",
+    "LastName": "Gray",
+    "Quote": "You shall not pass!" 
+}
+```
+
+<div class="code-name">Program.cs</div>
+
+```cs
+using Starcounter;
+
+namespace MyApp
+{
+    class Program
+    {
+        static void Main()
+        {
+            Handle.GET("/GetPerson", () =>
+            {
+                var json = new PersonPage();
+
+                var response = new Response()
+                {
+                    StatusCode = 403,
+                    StatusDescription = "Forbidden",
+                    Body = json.ToJson()
+                };
+
+                return response; // Body: {"FirstName":"Gandalf","LastName":"Gray","Quote":"You shall not pass!"}
+            });
+        }
+    }
+}
+```
+
+Note that the JSON needs to be explicitly parsed to a string using `ToJson` when attaching a Typed JSON object to the body of a `Response`.

@@ -1,5 +1,7 @@
 # Typed JSON Internals
 
+<section class="hero">This page contains material that should be considered advanced or non-essential and will not be used in the absolute majority of Starcounter applications.</section>
+
 Typed Json is a way to manipulate and work with json-documents in an object oriented manner, with considerations for performance and ease of use. It is fully compatible with the standard json specification (http://www.json.org/) and can be converted to and from different representations, for example to and from json as a utf8 string.
 
 ### Templates and instances
