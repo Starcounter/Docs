@@ -1,68 +1,130 @@
 # JSON-by-example
 
-Starcounter lets you define JSON schemas by providing a sample instance of the JSON. From this example, Starcounter infers partial nested classes that can be extended using C#. The values of the primitive properties are used as default values.  
+To define the Typed JSON objects, JSON-by-example is used. 
 
-The advantages of JSON-by-example over regular C# classes are mainly:
+JSON-by-example works by providing a sample instance of JSON that is transpiled into Typed JSON classes. For the curious, these classes can be found in the `obj > x64 > Debug` or `obj > x64 > Release` directory of the project with the filename extension `.json.g.cs`.
 
-* They can double directly as a JSON mockup (for instance in a web browser expecting such a JSON object).
-* They can express trees of objects and arrays
+JSON-by-example is useful for a number of reasons:
+
+* It can double directly as JSON mockups
+* It can express trees of objects and arrays
 * Default values can easily be specified
 
-To create a Typed JSON class, choose <code>New item</code> in Visual Studio and then choose <code>Starcounter Typed JSON</code> and name it **PersonMsg**.
+## Create JSON-by-example
 
-<div class="code-name">PersonMsg.json</div>
+To create a Typed JSON class, choose `New item`, or use <key>Ctrl + Shift + A</key> in Visual Studio and then select `Starcounter -> Starcounter Typed JSON`. The created file contains an empty JSON object which is the JSON-by-example. 
+
+One of the simplest JSON-by-example files look like this:
+
+<div class="code-name">PersonPage.json</div>
 
 ```json
 {
-   "FirstName": "Jocke",
-   "LastName": "Wester",
-   "Quotes": [
-        { "Text": "This is an example" }
-   ]
+    "FirstName": "",
+    "LastName": ""
 }
 ```
 
-JSON-by-example does not require that property names are inside double quotes (they still get serialized and deserialized using double quoted properties).
+Here, the value is set to an empty string to declare the type as a string.
 
-The above example will act as partial nested C# classes supporting intelligence and type safe compilation.
+An instance of the Typed JSON created from this JSON-by-example is created the same an instance would be created for any other class: `new PersonPage()`.
+
+The value of the properties in the Typed JSON object can be accessed in the ordinary way:
+
+```cs
+var personPage = new PersonPage();
+string name = personPage.FirstName; // Contains the value "", an empty string
+```
+
+### Default Values
+
+It is incredibly simple to set default values in JSON-by-example. Building on the previous code example, it might look like this:
+
+<div class="code-name">PersonPage.json</div>
+
+```json 
+{
+    "FirstName": "Steven", 
+    "LastName": "Smith"
+}
+```
+
+By doing this, the JSON returned when creating a new `PersonPage` object will be `{"FirstName":"Steven","LastName":"Smith"}`:
 
 <div class="code-name">Program.cs</div>
 
 ```cs
-using Starcounter;
-
-class Hello
+Handle.GET("/GetPerson", () =>
 {
-   static void Main()
-   {
-      Handle.GET("/hello", () =>
-      {
-         var json = new PersonMsg()
-         {
-            FirstName = "Albert",
-            LastName = "Einstein"
-         };
-         json.Quotes.Add().Text = "Makes things as simple as possible but not simpler.";
-         json.Quotes.Add().Text = "The only real valuable thing is intuition.";
-         return json;
-      });         
-   }
+    return new PersonPage(); // {"FirstName":"Steven","LastName":"Smith"}
+});
+```
+
+## Supported datatypes
+
+Typed JSON follows the specification of JSON, which means that objects, arrays and single values are all allowed. One difference is that when working with the C#-object and numbers we have the possibility to specify a more exact type. So what in JSON is `Number` we split up in `Int64`, `Double` and `Decimal`.
+
+The following is a list of the tokens in JSON and the equivalence in C#:
+
+| JSON | C# |
+|----------------|---------|
+| `{ }` | Object |
+| `[ ]` | Array |
+| `"value"` | String |
+| `123` | Int64 |
+| `true`/`false` | Boolean |
+| `1.234` and `2E3` | Decimal |
+
+To specify that a member in Json-by-example should be of type `Double` is done in the code-behind file.
+
+<div class="code-name">Foo.json</div>
+
+```js
+{
+  "Value": 2E3 // will be parsed as decimal by default.
 }
 ```
 
-## Read-only and writable values
+<div class="code-name">Foo.json.cs</div>
+
+```cs
+partial class Foo : Json
+{
+    static Foo()
+    {
+    	// Value should be of type double, not decimal.
+        DefaultTemplate.Value.InstanceType = typeof(double);
+    }
+}
+```
+
+## Writable JSON Values
 
 By default, all the values declared in JSON-by-example are read-only for the client. Any client-side change to a read-only property will result in an error.
 
 To mark a specific value as writable by the client, add a dollar sign (`$`) at the end of the property name, e.g.:
 
-<div class="code-name">PersonView.json</div>
+```json
+{
+   "FirstName$": "",
+   "LastName$": ""
+}
+```
+
+### Trigger Properties
+
+A common use of writable JSON values is trigger properties. These properties carry no specific meaning, they are simply there to notify the [code-behind](/guides/typed-json/code-behind/) that a change has happened. Here's an example of a trigger property:
 
 ```json
 {
-   "Html": "",
-   "FirstName$": "",
-   "LastName$": "",
-   "Message": ""
+    "FirstName": "",
+    "LastName": "",
+    "SaveTrigger$": 0
 }
 ```
+
+The value of this trigger would be incremented from the client which allows the code-behind to react accordingly.
+
+## The HTML property
+
+In all the [sample apps](https://github.com/StarcounterApps/), there is an "Html" property in every, or almost every, `.json` file. The value of this property contains the path to the corresponding HTML view which means that the middleware [HtmlFromJsonProvider](/guides/network/middleware/#htmlfromjsonprovider) can locate this HTML view and send it to the client. This allows the developer to only return a Typed JSON object from a handler and still return the corresponding view as well. 
