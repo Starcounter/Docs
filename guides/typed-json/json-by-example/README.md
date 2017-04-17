@@ -2,7 +2,7 @@
 
 To define the Typed JSON objects, JSON-by-example is used. 
 
-JSON-by-example works by providing a sample instance of JSON that is transpiled into Typed JSON classes. For the curious, these classes can be found in the `obj > x64 > Debug` directory of the project with the filename extension `.json.g.cs`.
+JSON-by-example works by providing a sample instance of JSON that is transpiled into Typed JSON classes. For the curious, these classes can be found in the `obj > x64 > Debug` or `obj > x64 > Release` directory of the project with the filename extension `.json.g.cs`.
 
 JSON-by-example is useful for a number of reasons:
 
