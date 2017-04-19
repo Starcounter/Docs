@@ -1,5 +1,13 @@
 # Handling HTTP requests
 
+There are two ways of doing routing in Starcounter:
+
+1. With the built-in `Handle` API
+1. With the routing API found in the Authorization library
+
+In most cases, it's recommended to use the API in the [Authorization library](https://github.com/Starcounter/authorization#routing-middleware-and-context---concepts) because of its superior ease of use. Although, there might be some cases where the `Handle` API is needed.
+This page describes the built-in `Handle` API
+
 ## Catching incoming requests
 
 Incoming HTTP 1.0/1.1 requests are caught using the static `Handle` class.
