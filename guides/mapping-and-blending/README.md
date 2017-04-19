@@ -2,20 +2,6 @@
 
 With Starcounter, it is super easy to build a single app. But the true value of your app is unleashed when it runs simultaneously with other apps. Multiple simple apps can be used to build complex solutions fast.
 
-## What is an app?
-
-A Starcounter app adheres the following principles:
-
-1. Does one thing and does it well.
-
-2. Can run simultaneously with other apps.
-
-3. Can share data with other apps.
-
-4. Can share screen with other apps.
-
-On the following pages we will examine how to put these principles to practice.
-
 ## Running multiple apps
 
 As you start the apps, they are weaved to the database. At this point:
@@ -40,4 +26,4 @@ Starcounter implements 2 distinct mapping APIs:
 
 {% import "../../macros.html" as macros %}
 
-{{ macros.tocGenerator(page.title, summary.parts[0].articles[2].articles[7].articles) }}
+{{ macros.tocGenerator(page.title, summary.parts[0].articles[3].articles[6].articles) }}

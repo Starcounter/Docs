@@ -2,10 +2,10 @@
 
 We will now turn our application into a simple expense tracker. This will allow us to practice using multiple object instances and relations.
 
-With Starcounter you can divide a view-model into several smaller view-models that are called partials. That's exactly what we will do with our application. We will let PersonJson be one view-model and ExpenseJson another. Doing this makes our application more modular and easier to maintain. Let's start by creating the appropriate files.
+with Starcounter, views and view-models can be broken up into parts and nested together. This allows for increased composability and modularity. In this case, the two main concepts in this app, Person and Expense, will be built with separate view-models and views and then nested together to create a coherent whole. Let's start by creating the appropriate files.
 
 <aside class="read-more">
-    <a href="/guides/puppet-web-apps/partials">Read more about partials</a>
+    <a href="/guides/web-apps/html-views">Read more about views and view-models in Starcounter</a>
 </aside>
 
 1. Add a new Starcounter HTML template with dom-bind in the HelloWorld folder together with `PersonJson.html`. Name it `ExpenseJson.html`.
@@ -24,7 +24,7 @@ In `ExpenseJson.json`, add the properties `Description`, `Amount`, and `Html`. `
 ```
 Now we have enough information to create the view for the expenses, so let's do that.
 
-To create a list of the expenses we will use the power of Polymer. Our first step is to create a template for the `Description` and `Amount`.
+To create a list of the expenses we will use the power of Polymer. Our first step is to create an HTML view definition for `Description` and `Amount`.
 
 <div class="code-name">ExpenseJson.html</div>
 
@@ -39,7 +39,7 @@ To create a list of the expenses we will use the power of Polymer. Our first ste
 ```
 {% endraw %}
 
-Great! Now we just need to stack these templates inside the `Person` view. We can do that easily using dom-repeat. While we are on it, we will also modify the headline and add a button to add new expenses.
+Great! Now we just need to stack these views inside the `Person` view. We can do that easily using `dom-repeat`. While we are on it, we will also modify the headline and add a button to add new expenses.
 
 <aside class="read-more">
     <a href="https://www.polymer-project.org/1.0/docs/devguide/templates">Read more about dom-repeat</a>
@@ -59,7 +59,7 @@ Great! Now we just need to stack these templates inside the `Person` view. We ca
         <starcounter-include partial="{{item}}"></starcounter-include>
     </div>
 </template>
-<button value="{{model.AddNewExpense$::click}}" onmousedown="++this.value">Add new expense</button>
+<button value="{{model.AddNewExpenseTrigger$::click}}" onmousedown="++this.value">Add new expense</button>
 <hr>
 <h2>Current Balance: {{model.CurrentBalance}}</h2>
 ```
@@ -67,23 +67,23 @@ Great! Now we just need to stack these templates inside the `Person` view. We ca
 
 `starcounter-include` is an insertion point for another template. In this case it's representing the template in ExpenseJson so that we can keep our code separate.
 
-As you can see above, we are using AddNewExpense, which we haven't defined yet. Let's go and fix that now.
+As you can see above, we are using `AddNewExpenseTrigger$`, which we haven't defined yet. Let's go and fix that now.
 
 <div class="code-name">PersonJson.json</div>
 ```json
 "FullName": "",
 "Expenses": [{}],
-"AddNewExpense$": 0,
+"AddNewExpenseTrigger$": 0,
 "CurrentBalance": 0
 ```
 
 `Expenses` is a list of the expenses of a Person and `CurrentBalance` will be the sum of of all these expenses.
 
-`AddNewExpense$` is a trigger property that allows us to add a new `Expenses` template to the view. We can implement its handler now.
+`AddNewExpenseTrigger$` is a trigger property that allows us to add a new `Expenses` template to the view. We can implement its handler now.
 
 <div class="code-name">PersonJson.json.cs</div>
 ```cs
-void  Handle(Input.AddNewExpense action)
+void  Handle(Input.AddNewExpenseTrigger action)
 {
     var expense = new Expense()
     {
@@ -132,7 +132,7 @@ public decimal CurrentBalance => Db.SQL<decimal>("SELECT SUM(e.Amount) FROM Hell
 
 `Spendings` is all the expenses of one Person.
 
-<code>CurrentBalance</code> is the sum of all those expenses.
+`CurrentBalance` is the sum of all those expenses.
 
 These two are calculated every time they are used by searching through the database so that they are always up to date.
 
@@ -160,4 +160,4 @@ Before we run the program, do a quick swing into `ExpenseJson.json.cs` to make s
 
 With every keystroke, the UI is updated almost instantly from the database. Starcounter's in-memory database makes this possible. There's no delay, everything simply happens at the moment the user interacts with the view.
 
-If you get any errors, you can check your code against the [source code](https://github.com/StarcounterSamples/HelloWorld/commit/9c0dc841b5afaa9e4e8672e32977e90f4b4250af).
+If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/13a2a3c3af5e630c4dac791f1731fa567be277fd).

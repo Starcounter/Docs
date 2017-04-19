@@ -28,7 +28,7 @@ If in the database there is my app running and it happens to also have a URL han
 
 ![Product details screenshot](/assets/Screenshot-2015-11-17-22.51.15.png)
 
-Our [developer samples](http://github.com/StarcounterSamples) use this in multiple places. One of our favourite examples is how products display images, when [Products](https://github.com/StarcounterSamples/Products) app shares the screen with [Images](https://github.com/StarcounterSamples/Images) app.
+Our [developer samples](http://github.com/StarcounterApps) use this in multiple places. One of our favourite examples is how products display images, when [Products](https://github.com/StarcounterSamples/Products) app shares the screen with [Images](https://github.com/StarcounterSamples/Images) app.
 
 _Screenshow shows Products app sharing screen with the Images app_
 
@@ -43,7 +43,7 @@ Attach the result of this request to the view-model of your app. This becomes th
 ```cs
 Handle.GET("/products/product/{?}", (string objectId) =>
 {
-    StandalonePage master = (StandalonePage)Self.GET("/Products/standalone");
+    StandalonePage master = Self.GET<StandalonePage>("/Products/standalone");
 
     master.CurrentPage = Db.Scope<Json>(() =>
     {

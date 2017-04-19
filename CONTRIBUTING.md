@@ -1,16 +1,78 @@
 # Contribution Instructions
 
-## General instructions
+## Creating issues
 
-Changes to this repo are conducted the same way we would make changes to a repo containing code. That means:
+There are a few things to keep in mind when creating issues here:
+
+1. There are almost no bad issues, they can be created for typos, glitches, ambiguity, questions, and more. 
+2. Please link to the relevant page when creating the issue
+
+## Contributing to the Documentation
+
+Changes to this repo are conducted the same way we would make changes to a repo containing code. In broad strokes, that means:
 
 1. Clone the repo to your local machine
-2. Create a new branch if the changes need to be reviewed
+2. Create a new branch
 3. Make changes using the text editor of your choice
 4. Commit with a descriptive message
-5. Push to the remote branch
+5. Push the branch
+6. Create a pull request (optional)
+7. Merge into one of the branches
+8. Merge changes to all other relevant branches
 
-If you wish to see a preview of your markdown you can use the [GitBook Editor](https://www.gitbook.com/editor). This editor has good integration with git and is easy to use. Although, to use the GitBook Editor you have to go to `File` -> `Preferences..` -> `Git` and uncheck the box `Automatically generate commit message from changes` in order to write your own commit messages. It's worth knowing that GitBook does not apply CSS styles, for that you have to follow the instructions below.
+When creating a new branch, do so from the oldest applicable branch. For example, if the change applies to all branches, then the new branch should be created from the oldest branch, which is 2.1.177. If it applies to all versions after 2.2, then the branch should be created from 2.2.1834, and so on. In git, it will look something like this:
+
+```git
+git checkout 2.1.177
+git checkout -b fix-typo
+git add .
+git commit -m "Description of the changes"
+git push -u origin fix-typo
+```
+
+To merge the changes, merge to the branch that the checkout was done from. So if the checkout was done from 2.1.177, as shown above, the following commands should be executed:
+
+```git
+git checkout 2.1.177
+git merge --no-ff --no-commit fix-typo
+```
+
+When asked for the commit message for the merge, please reference the issues that are relevant to the merge. For example, "merging fixed typo, as requested in #15". 
+
+When the changes have been merged into the oldest applicable branch, the changes should be merged in a cascading fashion to all the newer branches. With the current branches, it looks like this:
+
+```
+git checkout 2.2.1834
+git merge 2.1.177
+git push
+
+git checkout 2.2.1.3234
+git merge 2.2.1834
+git push
+
+git checkout RC
+git merge 2.2.1.3234
+git push
+
+git checkout Develop
+git merge RC
+git push
+```
+
+When these changes are pushed, GitBook will sync, build, and upload them to the [Docs](https://docs.starcounter.io/).
+
+The branches that are uploaded to GitBook are:
+
+* Every release:
+    * 2.1.177
+    * 2.2.1834
+    * 2.2.1.3234
+* RC
+* Develop
+
+### Using the Gitbook editor
+
+If you wish to see a preview of the markdown, the [GitBook Editor](https://www.gitbook.com/editor) can be used. This editor has good integration with git and is relatively easy to learn. Although, to use the GitBook Editor you have to go to `File` -> `Preferences..` -> `Git` and uncheck the box `Automatically generate commit message from changes` in order to write your own commit messages. It's worth knowing that GitBook does not apply CSS styles, for that you have to follow the instructions below.
 
 ### Checking changes locally
 
@@ -20,46 +82,8 @@ You're encouraged to check for yourself how the changes look before pushing it t
 2. the first time, run `gitbook install` to install the plugins
 3. run `gitbook serve` and go to `localhost:4000` to see how the changes will look when they're live
 
-### Choosing the right branch
-
-The different branches in this repo correspond to the different versions of Starcounter. Thus, it's important to push to the right branches after having made changes.
-
-The branches are the following:
-
-1. Every Release: 2.1.177, 2.2.1834, and 2.2.1.3234
-2. Develop
-3. RC
-
-If you make a change that only pertains to the current `Develop` version, then that change should only be pushed to the `Develop` branch. If the change is relevant to 2.2.1.3234, then push to that branch and then cherry-pick the commit to `RC` and `Develop`. This is according to the release channels described [here](https://github.com/Starcounter/RebelsLounge/issues/60).
-
-### Deciding if a review is neccessary
-
-Here are some cases where a review is appropriate:
-
-* Creating a completely new page
-* Significantly changing the content of an existing page
-* Making refactoring changes spanning over several pages
-
-Some cases when a review is not neccessary:
-
-* Fixing typos
-* Refactoring within one page
-
-When choosing who will review the page, please consider who are most familiar with the content. If you're changing a page that was initially written by someone else, then the initial author should be assigned as the reviewer.
-
-[@Mackiovello](https://github.com/Mackiovello) is glad to help out reviewing if there is an already heavy workload on the reviewer or if there's a need for proofreading.
-
-## Editing already existing pages
-
-To edit an already existing page you simply follow the steps the "General Instructions" above. The two things you should keep in mind before making a change is:
-
-1. Should my changes be reviewed?
-2. What branches are my changes relevant to?
-
-If the changes are significant enough to justify a review, then create a new branch, make a pull request, and assign someone to review.
-
 ## Adding a new page
 
 1. Read the instructions above
-2. Create a folder with the same name as the page in the right folder. For example, if you want to add a page pertaining to SQL in Starcounter, then you should add a folder containing a `README.md` file to in guides/SQL folder. All the content in the new page should be in the `README` file. 
+2. Create a folder with the same name as the page in the right folder. For example, if you want to add a page pertaining to SQL in Starcounter, then you should add a folder containing a `README.md` file to in guides/SQL folder. All the content in the new page should be in the `README` file
 3. Add your page to `SUMMARY.md` by making it a bullet point under the appropriate section by writing `[Your Page Headline](your-page-headline/README.md)`

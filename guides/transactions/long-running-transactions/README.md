@@ -23,12 +23,12 @@ partial class MailPage : Json, IBound<Mail>
     }
   }
 
-  void Handle(Input.Save input)
+  void Handle(Input.SaveTrigger input)
   {
     this.Transaction.Commit();
   }
 
-  void Handle(Input.Cancel input)
+  void Handle(Input.CancelTrigger input)
   {
     this.Transaction.Rollback();
   }
@@ -47,7 +47,8 @@ class Program
     Handle.GET("/new-email", () =>
     {
       MailPage p = null;
-      Db.Scope(() => {
+      Db.Scope(() => 
+      {
         p = new MailPage()
         {
           Html = "email.html",

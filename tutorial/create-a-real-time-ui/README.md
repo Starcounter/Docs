@@ -68,10 +68,10 @@ Before we move on, quickly make sure that your partial class in `PersonJson.json
 partial class PersonJson : Json
 ```
 
-Go to `Program.cs` and type in the following code inside the `Main()` method. This code adds the correct information to our previously empty JSON file and creates a new [session](/guides/puppet-web-apps/sessions).
+Go to `Program.cs` and type in the following code inside the `Main()` method. This code adds the correct information to our previously empty JSON file and creates a new [session](/guides/web-apps/sessions).
 
 <aside class="read-more">
-    <a href="/guides/puppet-web-apps/">Read more about sessions, partials and more</a>
+    <a href="/guides/web-apps/">Read more about sessions, HTML Views and more</a>
 </aside>
 
 <div class="code-name">Program.cs</div><div class="code-name code-title">Bind JSON</div>
@@ -107,4 +107,4 @@ We have now established a model-view-view-model (MVVM) binding that's real time.
 
 It's impossible for us to see the immediate changes as there is no way for the user to change the info. Let us fix that by adding some interactivity!  
 
-If you get any errors, you can check your code against the [source code](https://github.com/StarcounterSamples/HelloWorld/commit/b957ae3d1ce6516c654059dfc448cf499102fa3e).
+If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/a24e8275816a4eb3d7dff4d315938a41feee64ce).

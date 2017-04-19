@@ -1,6 +1,6 @@
 # First Interactive UI
 
-In order to make our UI interactive, we first have to make the data in the view-model editable. In JSON we do this by adding a `$` at the end of our property. That allows us to edit these JSON values from the view. In addition to adding `$` to our already existing properties, we will add the property `"Save$"` which will act as a trigger between the view and the code-behind.
+In order to make our UI interactive, we first have to make the data in the view-model editable. In JSON we do this by adding a `$` at the end of our property. That allows us to edit these JSON values from the view. In addition to adding `$` to our already existing properties, we will add the property `SaveTrigger$` which will act as a trigger between the view and the code-behind.
 
 <aside class="read-more">
     <a href="/guides/typed-json/json-by-example">Learn more about JSON in Starcounter</a>
@@ -13,7 +13,7 @@ In order to make our UI interactive, we first have to make the data in the view-
   "Html": "/HelloWorld/PersonJson.html",
   "FirstName$": "",
   "LastName$": "",
-  "Save$": 0
+  "SaveTrigger$": 0
 }
 ```
 
@@ -31,31 +31,31 @@ Next, we have to add some elements to our view. We will start by changing our pr
     <label>Last name:</label>
     <input value="{{model.LastName$::input}}">
 </fieldset>
-<button value="{{model.Save$::click}}" onmousedown="++this.value">Save</button>
+<button value="{{model.SaveTrigger$::click}}" onmousedown="++this.value">Save</button>
 ```
 {% endraw %}
 
 The `::input` declaration sets up an event listener. It updates the JSON as you type in the HTML `input` element.
 
-`onmousedown="++this.value"` increments the `Save$` value in our JSON. That change can then be registered in our code-behind and trigger a handler.
+`onmousedown="++this.value"` increments the `SaveTrigger$` value in our JSON. That change can then be registered in our code-behind and trigger a handler.
 
 Let's write that handler!
 
 <div class="code-name">PersonJson.json.cs</div>
 ```cs
-void Handle(Input.Save action)
+void Handle(Input.SaveTrigger action)
 {
     Transaction.Commit();
 }
 ```
-`Input.Save action` makes the method run when a change is detected in the Save value. Note that we do not need to use a `$` here like in the JSON. The rule is that we use `$` for the view, and view-model, but not in anything we write in C#.
+`Input.SaveTrigger action` makes the method run when a change is detected in the SaveTrigger value. Note that we do not need to use a `$` here like in the JSON. The rule is that we use `$` for the view, and view-model, but not in anything we write in C#.
 
 `Transaction.Commit()` simply commits the input to the database so that the data is accessible from other sessions.
 
 With server-side view-models, you don't have to write a single line of "glue code" to update the view in HTML. Any change in the view-model made in C# will instantly be synced to the client using PuppetJs, which in turn automatically renders because of Polymer's data bindings. This saves you from creating single-purpose REST APIs, need for double validation of user input, and more.
 
 <aside class="read-more">
-    <a href="/guides/puppet-web-apps/starcounter-mvvm">Learn about Starcounter's MVVM</a>
+    <a href="/guides/web-apps/starcounter-mvvm">Learn about Starcounter's MVVM</a>
 </aside>
 
 The last step is to modify our `Program.cs` file to create a long running transaction that will allow us to make changes to our database multiple times during our session. We do that by wrapping everything in our `Handle.GET` inside a `Db.Scope`.
@@ -95,4 +95,4 @@ If you are an especially curious person, you can try to change the name and then
 
 Neat! Right? The next step is to display the name change in real time and let the code-behind calculate the full name.
 
-If you get any errors, you can check your code against the [source code](https://github.com/StarcounterSamples/HelloWorld/commit/3a6ccfff12daa109a1afad335565493a8fd2fc9a).
+If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/8ba1bc8e78ffdb0957a9c4e7bc141a716af59cb9).

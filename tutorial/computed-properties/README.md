@@ -9,7 +9,7 @@ We start by simply adding the `FullName` property to our JSON.
 <div class="code-name">PersonJson.json</a></div>
 
 ```json
-"Save$": 0,
+"SaveTrigger$": 0,
 "FullName": ""
 ```
 
@@ -45,4 +45,4 @@ That was all for this part. Check out what you have achieved and we will move on
 
 Our next step is to practice working on multiple object instances and relations by turning our app into a simple expense tracker.
 
-If you get any errors, you can check your code against the [source code](https://github.com/StarcounterSamples/HelloWorld/commit/30a201c8f04432aadf5bde433ca71f2642aba629).
+If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/efac770b351608e4170037b6fa9bc7f642cd5863).
