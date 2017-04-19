@@ -107,7 +107,6 @@
         * [Blending](guides/mapping-and-blending/blending/README.md)
         * [Avoiding URI conflicts](guides/mapping-and-blending/avoiding-uri-conflicts/README.md)
         * [Avoiding CSS conflicts](guides/mapping-and-blending/avoiding-css-conflicts/README.md)
-    * [Routing](guides/routing/README.md)
     * [Working with Starcounter](guides/working-with-starcounter/README.md)
         * [Release channels in Starcounter](guides/working-with-starcounter/release-channels-in-starcounter/README.md)
         * [Starting and stopping apps](guides/working-with-starcounter/starting-and-stopping-apps/README.md)
