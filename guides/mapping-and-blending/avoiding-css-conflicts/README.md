@@ -1,4 +1,4 @@
-modifier# Avoiding CSS conflicts
+# Avoiding CSS conflicts
 
 When your system is composed of HTML responses from multiple apps, there's always a risk of naming conflicts and cascading side effects in your CSS. A solution to this is to use a convention that isolates styles coming from different apps.
 
