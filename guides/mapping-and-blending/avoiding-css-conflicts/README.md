@@ -132,6 +132,4 @@ We recommend the following rules when using BEM selectors in Starcounter apps.
 
 There might be a web standard in future that solves the problem of defining stylesheet for only a part of an HTML document.
 
-[CSS Scoping](https://drafts.csswg.org/css-scoping/) proposal adds a new `scoped` attribute to the `<style>` element. When a stylesheet is provided inside of a `<style scoped>` element, it will only be applied to the current parent element and its children.
-
-So far, this proposal was not approved by Google and Microsoft. [Caniuse.com](http://caniuse.com/#feat=style-scoped) says that the only web browser that implements it as of 2016 is Mozilla Firefox.
+[CSS Scoping](https://drafts.csswg.org/css-scoping/) proposal adds a new `scoped` attribute to the `<style>` element. When a stylesheet is provided inside of a `<style scoped>` element, it will only be applied to the current parent element and its children. Currently only Firefox implements it (see: [caniuse.com](http://caniuse.com/#feat=style-scoped)).
