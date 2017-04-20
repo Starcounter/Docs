@@ -6,15 +6,13 @@ We recommend BEM, a well-known convention that solves this problem.
 
 ## What is BEM?
 
-In BEM naming convention, you **only use classes** in your stylesheets. 
-
-There are three kinds of classes at your disposal: Blocks, Elements, and Modifiers.
+In BEM naming convention, you **only use classes** in your stylesheets.  There are three kinds of classes at your disposal: Blocks, Elements, and Modifiers.
 
 A **Block** is a basic class that represents a logical area of your app's UI (*a menu, login form, a search form*).
 
-An **Element** is a smaller fragment of a Block that performs a particular function (*a link in the menu, a password input in the login form, a search icon*).
+An **Element** is a smaller fragment of a Block that performs a particular function (*a link in the menu, a password input in the login form, a search icon*). The Element part of a class starts after `__`.
 
-A **Modifier** is a variation of a Block or of an Element (*an expanded menu, an active menu item, a password input with an invalid value, a disabled search button*).
+A **Modifier** is a variation of a Block or of an Element (*an expanded menu, an active menu item, a password input with an invalid value, a disabled search button*). The Modifier part of a class starts after `--`.
 
 Possible combinations of Blocks, Elements and Modifiers are the following:
 
@@ -71,15 +69,11 @@ We recommend the following rules when using BEM selectors in Starcounter apps.
 
 * __Use resusable names__ for the Block, Element, and Modifier sections. As seen in the example above, `.signin-form__text-input` is preferred over `.signin-form__firstname-input` since `text-input` is more resusable than `firstname-input`.
 
-* __Prefix Block sections with the app name__ to isolate the classes from BEM classes in other apps. For example, the class name for a menu block in the "Chatter" app should be `.chatter-menu`.
+* __Prefix Block sections with the app name__ to isolate your classes from other apps. For example, the class for a menu block in the "Chatter" app should be `.chatter-menu`.
 
-* __Use lowercase class names__. `.Chatter-Menu` is wrong, `.chatter-menu` is right.
+* __Use lowercase classes__. `.Chatter-Menu` is wrong, `.chatter-menu` is right.
 
 * __Separate words with a hyphen__ when there are multiple words in a Block, Element or Modifier section. For example: `.chatter-chat-message__message-text`.
-
-* __Element sections should be defined after a double underscore__ as in `.block__element`.
-
-* __Modifier should be defined after a double hyphen__. There are only "boolean" style modifiers. For example: `.chatter-menu__item--active`. This is called ["Harry Roberts' style" modifiers](https://en.bem.info/method/naming-convention/).
 
 * __Block and Element must be in the same HTML template__. Otherwise, implicit couplings are created between templates which might break when the partial mapping changes. If you want to define `.chatter-menu` in a parent partial and the menu items in a nested partials, these menu items will become new blocks (`.chatter-menu-item`, not `.chatter-menu__item`).
 
@@ -108,7 +102,7 @@ We recommend the following rules when using BEM selectors in Starcounter apps.
 
  Starcounter sample apps use the CSS framework Bootstrap to create a unified look and feel.
 
- Even though Bootstrap does not follow BEM, there are no issues with mixing Bootstrap and BEM in a single project because there are no collisions. In fact, by just looking at the CSS class name, you can immediately tell if that class name is shared with other apps (Bootstrap) or if it's private to this particular app (BEM).
+ Even though Bootstrap does not follow BEM, there are no issues with mixing Bootstrap and BEM in a single project because there are no collisions. In fact, by just looking at the class, you can immediately tell if that class is shared with other apps (Bootstrap) or if it's private to this particular app (BEM).
 
  It is **not** fine to override Bootstrap classes in your app's stylesheet. The only proper way to extend style is to with a BEM selector, for example:
 
@@ -124,33 +118,7 @@ We recommend the following rules when using BEM selectors in Starcounter apps.
  ```
  {% endraw %}
 
- For reference, the available Bootstrap CSS class names can be found in [bootstrap.css](https://github.com/Starcounter/Starcounter/blob/develop/src/BuildSystem/ClientFiles/StaticFiles/sys/bootswatch/paper/bootstrap.css).
-
-## The reasons for choosing BEM
-
-We have found BEM to be excellent mix of simplicity and effectiveness to deal with CSS in micro apps, for a number of reasons outlined below.
-
-* __Prevents your styles from affecting other apps__
-
- Using your Starcounter app name as the prefix in the Block part of the BEM selector makes sure that the stylesheet will affect only your app.
-
-* __Prevents accidental styling of nested elements__
-
- Adding a `chatter-menu__item` class to a `<li>` element in a menu makes sure that the style is applied only at that specific level, and will not affect nested `<li>` elements.
-
- You might think you are in good control of such cases. The reality shows that when multiple people work on a project, it becomes unclear when it is desired to apply the style to nested elements and when it is an unwanted side effect.
-
-* __Encapsulates code for reuse__
-
-BEM encourages to define logical parts of the UI that are easily movable within the project.
-
-When you look at the source code, it is immediately obvious what are the HTML elements needed for that logical part and what is the CSS code that styles them.
-
-* __Applicable to projects of any size__
-
-BEM was designed to make it easier to work on big projects. Yet, even a smallest web app might use CSS that needs to be easily understandable by the team and work without side effects.
-
-By using BEM, you identify that a CSS class definition comes from your app and is used only there.
+ For reference, the available Bootstrap classes can be found in [bootstrap.css](https://github.com/Starcounter/Starcounter/blob/develop/src/BuildSystem/ClientFiles/StaticFiles/sys/bootswatch/paper/bootstrap.css).
 
 ## Further reading
 
