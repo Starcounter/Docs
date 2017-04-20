@@ -56,8 +56,10 @@ From this, these BEM classes can be derived:
 .signin-form--expanded {}
 .signin-form__text-input {}
 .signin-form__labeled-checkbox {}
-.singin-form__labeled-checkbox--checked {}
+.signin-form__labeled-checkbox--checked {}
 ```
+
+Check out the source code of [People](https://github.com/StarcounterApps/People) or [KitchenSink](https://github.com/StarcounterApps/KitchenSink). These sample apps show how to apply BEM in practice.
 
 ## BEM in Starcounter apps
 
@@ -149,10 +151,6 @@ When you look at the source code, it is immediately obvious what are the HTML el
 BEM was designed to make it easier to work on big projects. Yet, even a smallest web app might use CSS that needs to be easily understandable by the team and work without side effects.
 
 By using BEM, you identify that a CSS class definition comes from your app and is used only there.
-
-## Sample apps
-
-Check out the source code of [KitchenSink](https://github.com/StarcounterSamples/KitchenSink). This sample app that shows how to apply BEM in practice.
 
 ## Further reading
 
