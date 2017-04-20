@@ -14,7 +14,7 @@ A **Block** is a basic class that represents a logical area of your app's UI (*a
 
 An **Element** is a smaller fragment of a Block that performs a particular function (*a link in the menu, a password input in the login form, a search icon*).
 
-A **Modifiers** is a variation of a Block or of an Element (*an expanded menu, an active menu item, a password input with an invalid value, a disabled search button*).
+A **Modifier** is a variation of a Block or of an Element (*an expanded menu, an active menu item, a password input with an invalid value, a disabled search button*).
 
 Possible combinations of Blocks, Elements and Modifiers are the following:
 
@@ -130,23 +130,23 @@ We recommend the following rules when using BEM selectors in Starcounter apps.
 
 We have found BEM to be excellent mix of simplicity and effectiveness to deal with CSS in micro apps, for a number of reasons outlined below.
 
-### Prevents your styles from affecting other apps
+* __Prevents your styles from affecting other apps__
 
-Using your Starcounter app name as the prefix in the Block part of the BEM selector makes sure that the stylesheet will affect only your app.
+ Using your Starcounter app name as the prefix in the Block part of the BEM selector makes sure that the stylesheet will affect only your app.
 
-### Prevents accidental styling of nested elements
+* __Prevents accidental styling of nested elements__
 
-Adding a `chatter-menu__item` class to a `<li>` element in a menu makes sure that the style is applied only at that specific level, and will not affect nested `<li>` elements.
+ Adding a `chatter-menu__item` class to a `<li>` element in a menu makes sure that the style is applied only at that specific level, and will not affect nested `<li>` elements.
 
-You might think you are in good control of such cases. The reality shows that when multiple people work on a project, it becomes unclear when it is desired to apply the style to nested elements and when it is an unwanted side effect.
+ You might think you are in good control of such cases. The reality shows that when multiple people work on a project, it becomes unclear when it is desired to apply the style to nested elements and when it is an unwanted side effect.
 
-### Encapsulates code for reuse
+* __Encapsulates code for reuse__
 
 BEM encourages to define logical parts of the UI that are easily movable within the project.
 
 When you look at the source code, it is immediately obvious what are the HTML elements needed for that logical part and what is the CSS code that styles them.
 
-### Applicable to projects of any size
+* __Applicable to projects of any size__
 
 BEM was designed to make it easier to work on big projects. Yet, even a smallest web app might use CSS that needs to be easily understandable by the team and work without side effects.
 
