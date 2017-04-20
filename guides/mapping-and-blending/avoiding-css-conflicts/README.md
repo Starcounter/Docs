@@ -1,4 +1,4 @@
-# Avoiding CSS conflicts
+modifier# Avoiding CSS conflicts
 
 When your system is composed of HTML responses from multiple apps, there's always a risk of naming conflicts and cascading side effects in your CSS. A solution to this is to use a convention that isolates styles coming from different apps.
 
@@ -6,15 +6,15 @@ We recommend BEM, a well-known convention that solves this problem.
 
 ## What is BEM?
 
-In BEM naming convention, you **only use classes** in your stylesheets.  There are three kinds of classes at your disposal: Blocks, Elements, and Modifiers.
+In BEM naming convention, you **only use classes** in your stylesheets.  There are three kinds of classes at your disposal: blocks, elements, and modifiers.
 
-A **Block** is a basic class that represents a logical area of your app's UI (*a menu, login form, a search form*).
+A **block** is a basic class that represents a logical area of your app's UI (*a menu, login form, a search form*).
 
-An **Element** is a smaller fragment of a Block that performs a particular function (*a link in the menu, a password input in the login form, a search icon*). The Element part of a class starts after `__`.
+An **element** is a smaller fragment of a block that performs a particular function (*a link in the menu, a password input in the login form, a search icon*). The element part of a class starts after `__`.
 
-A **Modifier** is a variation of a Block or of an Element (*an expanded menu, an active menu item, a password input with an invalid value, a disabled search button*). The Modifier part of a class starts after `--`.
+A **modifier** is a variation of a block or of an element (*an expanded menu, an active menu item, a password input with an invalid value, a disabled search button*). The modifier part of a class starts after `--`.
 
-Possible combinations of Blocks, Elements and Modifiers are the following:
+Possible combinations of blocks, elements and modifiers are the following:
 
 ```css
 .block {}
@@ -37,7 +37,7 @@ When applied to an HTML structure, the above CSS class names are used in the fol
 </div>
 ```
 
-Note here that **everything at the root level must be a Block**. A Block can have multiple Element and Modifier sections and every Element and Modifer has to belong to a Block.
+Note here that **everything at the root level must be a block**. A block can have multiple element and modifier sections and every element and modifier has to belong to a block.
 
 ## Example
 
@@ -45,7 +45,7 @@ Consider the [SignIn app](https://github.com/starcounterapps/signin):
 
 ![BEM example](../../../assets/BEM-example.PNG)
 
-Here, the Block is marked in red and the Element sections in blue.
+Here, the block is marked in red and the element sections in blue.
 
 From this, these BEM classes can be derived:
 
@@ -65,17 +65,17 @@ We recommend the following rules when using BEM selectors in Starcounter apps.
 
 * __Only use BEM class selectors in your stylesheets__. Do not use element selectors, id selectors, or inline styles for the purpose of styling.
 
-* __Give meaningful names__ to the Block, Element and Modifier sections. For example, `.chatter-avatar` is much more descriptive than `.chatter-img`.
+* __Give meaningful names__ to the block, element and modifier sections. For example, `.chatter-avatar` is much more descriptive than `.chatter-img`.
 
-* __Use resusable names__ for the Block, Element, and Modifier sections. As seen in the example above, `.signin-form__text-input` is preferred over `.signin-form__firstname-input` since `text-input` is more resusable than `firstname-input`.
+* __Use resusable names__ for the block, element, and modifier sections. As seen in the example above, `.signin-form__text-input` is preferred over `.signin-form__firstname-input` since `text-input` is more resusable than `firstname-input`.
 
-* __Prefix Block sections with the app name__ to isolate your classes from other apps. For example, the class for a menu block in the "Chatter" app should be `.chatter-menu`.
+* __Prefix block sections with the app name__ to isolate your classes from other apps. For example, the class for a menu block in the "Chatter" app should be `.chatter-menu`.
 
 * __Use lowercase classes__. `.Chatter-Menu` is wrong, `.chatter-menu` is right.
 
-* __Separate words with a hyphen__ when there are multiple words in a Block, Element or Modifier section. For example: `.chatter-chat-message__message-text`.
+* __Separate words with a hyphen__ when there are multiple words in a block, element or modifier section. For example: `.chatter-chat-message__message-text`.
 
-* __Block and Element must be in the same HTML template__. Otherwise, implicit couplings are created between templates which might break when the partial mapping changes. If you want to define `.chatter-menu` in a parent partial and the menu items in a nested partials, these menu items will become new blocks (`.chatter-menu-item`, not `.chatter-menu__item`).
+* __Block and element must be in the same HTML template__. Otherwise, implicit couplings are created between templates which might break when the partial mapping changes. If you want to define `.chatter-menu` in a parent partial and the menu items in a nested partials, these menu items will become new blocks (`.chatter-menu-item`, not `.chatter-menu__item`).
 
 * __Modifier classes should extend base classes__.
 
@@ -94,9 +94,9 @@ We recommend the following rules when using BEM selectors in Starcounter apps.
 }
 ```
 
-* __Never nest Blocks inside Blocks and Elements inside Elements.__
+* __Never nest blocks inside blocks and elements inside elements.__
 
- If there’s need for more nesting, it means there’s too much complexity and the elements should be stripped down into smaller Blocks.
+ If there’s need for more nesting, it means there’s too much complexity and the elements should be stripped down into smaller blocks.
 
 * __Mixing BEM with Bootstrap__
 
