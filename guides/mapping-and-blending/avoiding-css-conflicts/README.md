@@ -1,37 +1,20 @@
 # Avoiding CSS conflicts
 
-Complex web apps are composed of HTML responses from multiple apps. This means that the merged HTML, CSS and JavaScript runs in the global namespace.
+When your system is composed of HTML responses from multiple apps, there's always a risk of naming conflicts and cascading side effects in your CSS. A solution to this is to use a convention that isolates styles coming from different apps.
 
-With a global namespace, there's always the risk of CSS conflicts and leaks that cause side effects in other apps. We recommend using the Block Element Modifier (BEM) methodology to avoid these side effects.
+We recommend BEM, a well-known convention that solves this problem.
 
-## BEM
+## What is BEM?
 
-Due to limited browser support for technical solutions to CSS conflicts, the primary way right now to avoid CSS conflicts is to use a naming convention. BEM is one of these naming conventions. 
+In BEM naming convention, you **only use classes** in your stylesheets. 
 
-The basic principle in BEM is to **only use classes in your stylesheets**.
+There are three kinds of classes at your disposal: Blocks, Elements, and Modifiers.
 
-These classes should be named as combinations of Blocks, Elements, and Modifiers. 
+A **Block** is a basic class that represents a logical area of your app's UI (*a menu, login form, a search form*).
 
-A **Block** represents a logical area of your app's UI. For example:
+An **Element** is a smaller fragment of a Block that performs a particular function (*a link in the menu, a password input in the login form, a search icon*).
 
-- a menu
-- a login form
-- a search form
-
-An **Element** is a fragment of the Block that performs a particular function. For example:
-
-- a menu item
-- a password input in the login form
-- a search button
-
-An Element only makes sense in the context of its Block. It cannot appear outside of the Block.
-
-**Modifiers** represent variations of Blocks and Elements. For example:
-
-- an expanded menu
-- an active menu item
-- a password input with an invalid value
-- a disabled search button
+A **Modifiers** is a variation of a Block or of an Element (*an expanded menu, an active menu item, a password input with an invalid value, a disabled search button*).
 
 Possible combinations of Blocks, Elements and Modifiers are the following:
 
@@ -56,13 +39,15 @@ When applied to an HTML structure, the above CSS class names are used in the fol
 </div>
 ```
 
-Note here that **everything at the root level is a Block**. A Block can have multiple Element and Modifier sections and every Element and Modifer has to belong to a Block.
+Note here that **everything at the root level must be a Block**. A Block can have multiple Element and Modifier sections and every Element and Modifer has to belong to a Block.
+
+## Example
 
 Consider the [SignIn app](https://github.com/starcounterapps/signin):
 
 ![BEM example](../../../assets/BEM-example.PNG)
 
-Here, the Block is marked in red and the Element sections in blue. 
+Here, the Block is marked in red and the Element sections in blue.
 
 From this, these BEM classes can be derived:
 
@@ -82,7 +67,7 @@ We recommend the following rules when using BEM selectors in Starcounter apps.
 
 * __Give meaningful names__ to the Block, Element and Modifier sections. For example, `.chatter-avatar` is much more descriptive than `.chatter-img`.
 
-* __Use resusable names__ for the Block, Element, and Modifier sections. As seen in the example above, `.signin-form__text-input` is preferred over `.signin-form__firstname-input` since `text-input` is more resusable than `firstname-input`. 
+* __Use resusable names__ for the Block, Element, and Modifier sections. As seen in the example above, `.signin-form__text-input` is preferred over `.signin-form__firstname-input` since `text-input` is more resusable than `firstname-input`.
 
 * __Prefix Block sections with the app name__ to isolate the classes from BEM classes in other apps. For example, the class name for a menu block in the "Chatter" app should be `.chatter-menu`.
 
@@ -112,6 +97,10 @@ We recommend the following rules when using BEM selectors in Starcounter apps.
     font-weight: bold;
 }
 ```
+
+* __Never nest Blocks inside Blocks and Elements inside Elements.__
+
+ If there’s need for more nesting, it means there’s too much complexity and the elements should be stripped down into smaller Blocks.
 
 * __Mixing BEM with Bootstrap__
 
