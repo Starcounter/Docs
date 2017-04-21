@@ -6,21 +6,21 @@ We recommend BEM, a well-known convention that solves this problem.
 
 ## What is BEM?
 
-In BEM naming convention, you **only use classes** in your stylesheets.  There are three kinds of classes at your disposal: blocks, elements, and modifiers.
+In the BEM naming convention, you **only use classes** in your stylesheets.  There are three kinds of classes at your disposal: blocks, elements, and modifiers.
 
 A **block** is a basic class that represents a logical area of your app's UI (*a menu, login form, a search form*).
 
-An **element** is a smaller fragment of a block that performs a particular function (*a link in the menu, a password input in the login form, a search icon*). The element part of a class starts after `__`.
+An **element** is a part of a block that performs a particular function (*a link in the menu, a password input in the login form, a search icon*).
 
-A **modifier** is a variation of a block or of an element (*an expanded menu, an active menu item, a password input with an invalid value, a disabled search button*). The modifier part of a class starts after `--`.
+A **modifier** is a variation of a block or of an element (*an expanded menu, an active menu item, a password input with an invalid value, a disabled search button*).
 
 Possible combinations of blocks, elements and modifiers are the following:
 
 ```css
 .block {}
-.block__element {}
-.block--modifier {}
-.block__element--modifier {}
+.block__element {} /*The element part starts after __*/
+.block--modifier {} /*The modifier part starts after --*/
+.block__element--modifier {} /*Both blocks and elements can have modifiers*/ 
 ```
 
 When applied to an HTML structure, the above CSS class names are used in the following way:
@@ -118,7 +118,7 @@ We recommend the following rules when using BEM selectors in Starcounter apps.
  ```
  {% endraw %}
 
- For reference, the available Bootstrap classes can be found in [bootstrap.css](https://github.com/Starcounter/Starcounter/blob/develop/src/BuildSystem/ClientFiles/StaticFiles/sys/bootswatch/paper/bootstrap.css).
+ For reference, the available Bootstrap classes can be found in [bootstrap.css](https://github.com/twbs/bootstrap/blob/v3.3.7/dist/css/bootstrap.css).
 
 ## Further reading
 
@@ -127,9 +127,3 @@ We recommend the following rules when using BEM selectors in Starcounter apps.
 - [BEM-like Naming (cssguidelin.es)](http://cssguidelin.es/#bem-like-naming)
 - [MindBEMding – getting your head ’round BEM syntax (csswizardry.com)](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)
 - [An Introduction to the BEM Methodology (tutsplus.com)](http://webdesign.tutsplus.com/articles/an-introduction-to-the-bem-methodology--cms-19403)
-
-## Future standards way: CSS Scoping
-
-There might be a web standard in future that solves the problem of defining stylesheet for only a part of an HTML document.
-
-[CSS Scoping](https://drafts.csswg.org/css-scoping/) proposal adds a new `scoped` attribute to the `<style>` element. When a stylesheet is provided inside of a `<style scoped>` element, it will only be applied to the current parent element and its children. Currently only Firefox implements it (see: [caniuse.com](http://caniuse.com/#feat=style-scoped)).
