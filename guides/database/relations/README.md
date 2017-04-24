@@ -1,6 +1,6 @@
 # Relations
 
-Starcounter is a database that offers relational access, graph access, object oriented access and document access all rolled into one. We feel that core of the database builds well on the [theories of Dr.Codd](https://www.seas.upenn.edu/~zives/03f/cis550/codd.pdf). We have chosen to premiere implicit primary keys and foreign keys as object references.
+Starcounter is a database that offers relational access, graph access, object oriented access, and document access all rolled into one. We feel that core of the database builds well on the [theories of Dr.Codd](https://www.seas.upenn.edu/~zives/03f/cis550/codd.pdf). We have chosen to premiere implicit primary keys and foreign keys as object references.
 
 You can make a traditional SQL query like this (given that you have a PersonId property):
 
@@ -20,11 +20,11 @@ SELECT FistName, LastName, Text FROM Person, Quote WHERE Quote.Person = Person
 
 ## One-to-many relations
 
-In a relational database you implement a one-to-many relation between two entities/tables using a primary key of the first entity/table and a foreign key of the second entity/table. In object oriented programming code, you typically implement a one-to-many relation with a collection of object references in the first entity/class and an object reference in the second entity/class.
+In a relational database you implement a one-to-many relation between two tables using a primary key of the first table and a foreign key of the second table. In object oriented programming code, you typically implement a one-to-many relation with a collection of object references in the first class and an object reference in the second class.
 
-Using Starcounter we recommend that you model a one-to-many relation as in a relational database, i.e. an object reference in the second entity/class, but also add a property (or method) in the first entity/class that returns a collection of object references. In this way you both support the relational model and the typical object oriented implementation at the same time.
+Using Starcounter we recommend that you model a one-to-many relation as in a relational database, i.e. an object reference in the second entity/class, but also add a property (or method) in the first class that returns a collection of object references. In this way you both support the relational model and the typical object oriented implementation at the same time.
 
-In the code example below there is a one-to-many relation between the entities/classes `Department` and `Employee` regarding employment. This one-to-many relation is stored in the object references `Department` in the entity/class `Employee`.
+In the code example below there is a one-to-many relation between the entities/classes `Department` and `Employee` regarding employment. This one-to-many relation is stored in the object references `Department` in the class `Employee`.
 
 ```cs
 [Database]
@@ -45,7 +45,7 @@ public class Employee
 }
 ```
 
-In the code above, all instances of the `Employee` class has a reference (`Department`) to the department where they are employed, and all instances of the `Department` class has a collection (`Employees`) of all employees of that particular department. However, within a `Department` object the collection is not stored internally in any data structure, but instead is represented by an SQL query.
+In the code above, all instances of the `Employee` class has a `Department` reference to the department where they are employed and all instances of the `Department` class has a `Employees` collection of all employees of that particular department. However, within a `Department` object the collection is not stored internally in any data structure but instead is represented by an SQL query.
 
 ## Many-to-many relations
 
