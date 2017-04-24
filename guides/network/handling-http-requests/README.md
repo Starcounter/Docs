@@ -17,7 +17,7 @@ class Hello
 }
 ```
 
-You can register new handlers at any time, so there is no need to do it in the `Main()` function.
+You can register new handlers at any time, so there is no need to do it in the `Main()` method.
 
 ## Catching the common HTTP verbs (methods)
 
@@ -100,7 +100,7 @@ class Hello
 }
 ```
 
-To access certain request HTTP headers, use `Headers[String]` accessor on Request object (same as for Response object):
+To access certain request HTTP headers, use `Headers[String]` accessor on a `Request` object (same as for the `Response` object):
 ```cs
 String mySuperHeader = req.Headers["MySuperHeader"];
 String allRequestCookies = req.Headers["Set-Cookie"];
@@ -111,9 +111,9 @@ Request cookies are accessible from `Cookies` as a list of strings "name=value" 
 List<String> allRequestCookies = req.Cookies;
 ```
 
-To obtain client IP address use `GetClientIpAddress()` on Request object.
+To obtain client IP address use `GetClientIpAddress()` on the `Request` object.
 
-To know to which application the request belongs (useful when working with request filters) use `HandlerAppName` property.
+Use the `HandlerAppName` property to find out which application the request belongs to. This might be useful when working with request filters.
 
 ## Notable handler options
 
@@ -126,7 +126,7 @@ When creating (using `Handle.` interface) and calling handlers (using `Self.` in
 * `SubstituteHandler`: specifies a delegate to be called to replace call for existing handler or to provide a call when handler does not exist.
 * `SelfOnly`: registered handler is going to be accessible only inside codehost using `Self` interface. `SelfOnly` handlers are not registered in gateway, in comparison with normal handlers.
 
-<strong>Examples</strong>:
+**Examples**:
 
 Registering handler that skips middleware filters and is being called directly externally:
 ```cs
@@ -184,7 +184,7 @@ Handle.GET("/exc3", (Request req) =>
 });
 ```
 
-Handler `/exc3` constructs and throws an instance of `ResponseException` exception. Handler `/exc2` catches the exception, modifies some data and re-throws the exception. Eventually the `ResponseException` is caught by outer system handler and `ResponseObject` is automatically sent on the original `Request req`. Note that `ResponseException` mechanisms are working only within one user application (they are simple C# exceptions).
+Handler `/exc3` constructs and throws an instance of `ResponseException` exception. Handler `/exc2` catches the exception, modifies some data and re-throws the exception. Eventually, the `ResponseException` is caught by outer system handler and `ResponseObject` is automatically sent on the original `Request req`. Note that `ResponseException` mechanisms are working only within one user application (they are simple C# exceptions).
 
 User can attach an arbitrary user object to `ResponseException` by either constructor or `UserObject` property.
 
