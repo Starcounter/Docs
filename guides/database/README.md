@@ -10,7 +10,7 @@ Starcounter is a database that offers relational access, graph access, object or
 Each class marked with the `[Database]` attribute or inheriting a class marked with the `[Database]` attribute are available to the [SQL query language](/guides/database/querying-using-sql). There is no [ORM](https://en.wikipedia.org/wiki/Object-relational_mapping) mapping needed as classes and tables are one and the same in Starcounter.
 
 ## Relations
-Using object references in your code instead of foreign keys, it is easier than ever to create [relations](/guides/database/relations) between objects. There are patters for creating [one-to-many](/guides/database/one-to-many-relations) and [many-to-many](/guides/database/many-to-many-relations) relations.
+Using object references in your code instead of foreign keys, it is easier than ever to create [relations](/guides/database/relations) between objects.
 
 ## Inheritance
 Starcounter allows any database object to [inherit from any other database object](/guides/database/inheritance).
