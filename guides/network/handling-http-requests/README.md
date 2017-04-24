@@ -5,16 +5,10 @@
 Incoming HTTP 1.0/1.1 requests are caught using the static `Handle` class.
 
 ```cs
-class Hello
+Handle.GET("/hello", () =>
 {
-   static void Main()
-   {
-      Handle.GET("/hello", () =>
-      {
-         return "Hello World";
-      });
-   }
-}
+    return "Hello World";
+});
 ```
 
 You can register new handlers at any time, so there is no need to do it in the `Main()` method.
@@ -24,26 +18,20 @@ You can register new handlers at any time, so there is no need to do it in the `
 The basic HTTP methods `GET`, `POST`, `PUT`, `DELETE` and `PATCH` can be caught by convenient methods with the same name in the `Handle` class.
 
 ```cs
-class Hello
+Handle.GET("/hello", () =>
 {
-   static void Main()
-   {
-      Handle.GET("/hello", () =>
-      {
-         return "Hello World";
-      });
+    return "Hello World";
+});
 
-      Handle.POST("/hello", () =>
-      {
-         return 500;
-      });
+Handle.POST("/hello", () =>
+{
+    return 500;
+});
 
-      Handle.DELETE("/hello", () =>
-      {
-         return 500;
-      });
-   }
-}
+Handle.DELETE("/hello", () =>
+{
+    return 500;
+});
 ```
 
 ## Catching other verbs (methods)
@@ -51,61 +39,45 @@ class Hello
 Using the `CUSTOM` method in `Handle`, you can register other HTTP methods (verbs) or even catch all methods and URIs.
 
 ```cs
-class Hello
+Handle.CUSTOM("REPORT /hello/{?}", (String p1) =>
 {
-   static void Main()
-   {
-      Handle.CUSTOM("REPORT /hello/{?}", (String p1) =>
-      {
-         return 500;
-      });
+    return 500;
+});
 
-      Handle.CUSTOM("{?} /hello/{?}", (String method, String p1) =>
-      {
-         return p1;
-      });
+Handle.CUSTOM("{?} /hello/{?}", (String method, String p1) =>
+{
+    return p1;
+});
 
-      Handle.CUSTOM("OPTIONS", "/hello/{?}", (String p1) =>
-      {
-         return p1;
-      });
+Handle.CUSTOM("OPTIONS", "/hello/{?}", (String p1) =>
+{
+    return p1;
+});
 
-      Handle.CUSTOM("{?}", (String methodAndUri) =>
-      {
-         return "Catched: " + methodAndUri;
-      });
-   }
-}
+Handle.CUSTOM("{?}", (String methodAndUri) =>
+{
+    return "Catched: " + methodAndUri;
+});
 ```
 
 ## Accepting parameters in requests
 
-When matching incoming requests, some parts of the URI may contain dynamic data. This is handled by Starcounter by allowing you to define parameters in your handlers. This is done by marking the dynamic part of the URI template with curly braces. The simplest use of the curly brace syntax is a single question mark <code>{?}</code>. This indicates that there is a fragment of dynamic data in the URI. The type of the data is determined by the code delegate that follows.
+When matching incoming requests, some parts of the URI may contain dynamic data. This is handled by Starcounter by allowing you to define parameters in your handlers. This is done by marking the dynamic part of the URI template with curly braces. The simplest use of the curly brace syntax is a single question mark `{?}`. This indicates that there is a fragment of dynamic data in the URI. The type of the data is determined by the code delegate that follows.
 
 ```cs
-using Starcounter;
-
-class Hello {
-   static void Main() {
-      Handle.GET("/hello/{?}", (string name) => {         
-         return "<!DOCTYPE html><title>Hello</title>Hello " + name;
-      });
-   }
-}
+Handle.GET("/hello/{?}", (string name) => 
+{         
+    return "<!DOCTYPE html><title>Hello</title>Hello " + name;
+});
 ```
 
-In the above example, the delegate accepts <code>string name</code>. This means that the parameter will be parsed as a string, for example: `/hello/albert`, `/hello/anna`. If you want to accept an integer parameters, simply change the lambda parameter type.
+In the above example, the delegate accepts `string name`. This means that the parameter will be parsed as a string, for example: `/hello/albert`, `/hello/anna`. If you want to accept an integer parameters, simply change the lambda parameter type.
 
 ```cs
-using Starcounter;
-
-class Hello {
-   static void Main() {
-      Handle.GET("/squared?{?}", (int x) => {         
-         return "<!DOCTYPE html><title>Hello</title>" + x + " squared equals " + x*x;
-      });
-   }
-}
+Handle.GET("/squared?{?}", (int x) => 
+{         
+    return "<!DOCTYPE html><title>Hello</title>" + x + " squared equals " + x*x;
+});
 ```
 
 The accepted URIs would be, for example: `/squared?123`, `/squared?-4321`
@@ -113,15 +85,10 @@ The accepted URIs would be, for example: `/squared?123`, `/squared?-4321`
 To accept multiple dynamic fragments, simply add more curly braces. For each dynamic parameter there should be a parameter in the delegate. They are enumerated from left to right, so be careful to put the parameters in the right order.
 
 ```cs
-using Starcounter;
-
-class Hello {
-   static void Main() {
-      Handle.GET("/{?}/{?}", (string list, int item) => {         
-         return "<!DOCTYPE html><title>Hello</title>List is " + list + " and item is " + item;
-      });
-   }
-}
+Handle.GET("/{?}/{?}", (string list, int item) => 
+{         
+    return "<!DOCTYPE html><title>Hello</title>List is " + list + " and item is " + item;
+});
 ```
 
 The accepted URIs would be, for example: `/serialnumbers/4534123`, `/itemid/34321`
@@ -131,21 +98,15 @@ The accepted URIs would be, for example: `/serialnumbers/4534123`, `/itemid/3432
 Together with the enumerated parameters, you can also declare a `Request` parameter. It encapsulates the entire request.
 
 ```cs
-class Hello
+Handle.GET("/hello", (Request request) =>
 {
-   static void Main()
-   {
-      Handle.GET("/hello", (Request request) =>
-      {
-         return 500;
-      });
+    return 500;
+});
 
-      Handle.GET("/persons/{?}", (string name, Request request) =>
-      {
-         return 500;
-      });
-   }
-}
+Handle.GET("/persons/{?}", (string name, Request request) =>
+{
+    return 500;
+});
 ```
 
 To access certain request HTTP headers, use `Headers[String]` accessor on a `Request` object (same as for the `Response` object):
@@ -177,6 +138,7 @@ When creating (using `Handle.` interface) and calling handlers (using `Self.` in
 **Examples**:
 
 Registering handler that skips middleware filters and is being called directly externally:
+
 ```cs
 Handle.POST("/myhandler", (Request request) =>
 {
@@ -185,6 +147,7 @@ Handle.POST("/myhandler", (Request request) =>
 ```
 
 Calling URI handler "/MyPostHandler" on handlers level `ApplicationLevel`:
+
 ```cs
 Self.POST("/MyPostHandler", null, null, null, 0, new HandlerOptions()
 {
