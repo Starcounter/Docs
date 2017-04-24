@@ -31,8 +31,6 @@
         * [Datatypes](guides/database/datatypes/README.md)
         * [Query processing errors](guides/database/query-processing-errors/README.md)
         * [Relations](guides/database/relations/README.md)
-        * [One-to-many relations](guides/database/one-to-many-relations/README.md)
-        * [Many-to-many relations](guides/database/many-to-many-relations/README.md)
         * [Inheritance](guides/database/inheritance/README.md)
         * [Database configuration](guides/database/database-configuration/README.md)
         * [Comparing database objects](guides/database/comparing-database-objects/README.md)
