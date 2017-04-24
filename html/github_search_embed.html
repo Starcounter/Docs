@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+  <title>GitHub Search</title>
+  <style>
+  label {
+    display: block;
+    font-family: sans-serif;
+    font-size: 12px;
+    color: #aaa;
+    margin: 0 0 10px 0;
+    position: absolute;
+    top: 10px;
+    left: 8px;
+    white-space: nowrap;
+  }
+
+  input[type=text] {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #777;
+    font-size: 20px;
+    padding: 24px 5px 8px 5px;
+  }
+
+  button {
+    position: absolute;
+    right: 10px;
+    top: 14px;
+    font-size: 22px;
+  }
+
+  body {
+    margin: 0;
+  }
+  </style>
+</head>
+<body>
+<form target="_blank" action="https://github.com/search" method="GET">
+  <label>user:Starcounter user:StarcounterApps user:Juicy user:Starcounter-Jack user:Palindrom user:Smorgasbord-Development</label>
+  <input type="hidden" name="type" value="Issues">
+  <input type="hidden" name="utf8" value="%E2%9C%93">
+  <input type="text" id="query" name="q" placeholder="Issue search">
+  <button>Go</button>
+</form>
+<script>
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    var query = getParameterByName("query", window.top.location.href);
+    if (query) {
+      document.querySelector("#query").value = query;
+    }
+
+    document.querySelector('form').onsubmit = function() {
+      var prefix = document.querySelector('label').textContent;
+      var oldval = document.querySelector('input#query').value;
+      document.querySelector('input#query').value = oldval + " " + prefix;
+      setTimeout(function() {
+        document.querySelector('input#query').value = oldval;
+    }, 100);
+    }
+}, false);
+</script>
+</body>
+</html>

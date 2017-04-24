@@ -135,3 +135,4 @@
     * [Creating Strongly Typed JSON Collections](cookbook/creating-strongly-typed-json-collections/README.md)
     
 * [Glossary](glossary/README.md)
+* [Advanced Search](search/README.md)
