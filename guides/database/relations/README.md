@@ -22,7 +22,7 @@ SELECT FistName, LastName, Text FROM Person, Quote WHERE Quote.Person = Person
 
 In a relational database you implement a one-to-many relation between two tables using a primary key of the first table and a foreign key of the second table. In object oriented programming code, you typically implement a one-to-many relation with a collection of object references in the first class and an object reference in the second class.
 
-Using Starcounter we recommend that you model a one-to-many relation as in a relational database, i.e. an object reference in the second entity/class, but also add a property (or method) in the first class that returns a collection of object references. In this way you both support the relational model and the typical object oriented implementation at the same time.
+Using Starcounter we recommend that you model a one-to-many relation as in a relational database, i.e. an object reference in the second class, but also add a property (or method) in the first class that returns a collection of object references. In this way you both support the relational model and the typical object oriented implementation at the same time.
 
 In the code example below there is a one-to-many relation between the entities/classes `Department` and `Employee` regarding employment. This one-to-many relation is stored in the object references `Department` in the class `Employee`.
 
@@ -30,7 +30,6 @@ In the code example below there is a one-to-many relation between the entities/c
 [Database]
 public class Department
 {
-  ...
   public IEnumerable Employees
   {
     get { return Db.SQL<Employee>("select e from Employee e where e.Department = ?", this); }
@@ -40,7 +39,6 @@ public class Department
 [Database]
 public class Employee
 {
-  ...
   public Department Department;
 }
 ```
@@ -49,17 +47,16 @@ In the code above, all instances of the `Employee` class has a `Department` refe
 
 ## Many-to-many relations
 
-In a relational database you implement a many-to-many relation between two entities/tables as two one-to-many relations to an associative entity/table. In object oriented programming code, you typically implement a many-to-many relation between two entities/classes as one collection of object references in each of the two entities/classes.
+In a relational database you implement a many-to-many relation between two tables as two one-to-many relations to an associative table. In object oriented programming code, you typically implement a many-to-many relation between two classes as one collection of object references in each of the two classes.
 
-Using Starcounter we recommend that you model a many-to-many relation as in a relational database, i.e. introducing a new associative entity/class, but also add properties (or methods) that returns collections of object references in the two original entities/classes. In this way you both support the relational model and the typical object oriented implementation at the same time.
+Using Starcounter we recommend that you model a many-to-many relation as in a relational database, i.e. introducing a new associative class, but also add properties (or methods) that returns collections of object references in the two original classes. In this way you both support the relational model and the typical object oriented implementation at the same time.
 
-In the code example below there is a many-to-many relation between the entities/classes `Person` and `Company` regarding shares of the company. To represent this many-to-many relation we introduce the associative entity/class `Shares`.
+In the code example below there is a many-to-many relation between the classes `Person` and `Company` regarding shares of the company. To represent this many-to-many relation we introduce the associative class `Shares`.
 
 ```cs
 [Database]
 public class Person
 {
-  ...
   public IEnumerable EquityPortfolio
   {
     get { return Db.SQL<Shares>("select s.Equity from Shares s where s.Owner = ?", this);}
@@ -69,13 +66,9 @@ public class Person
 [Database]
 public class Company
 {
-  ...
   public IEnumerable ShareHolders
   {
-    get
-    {
-      return Db.SQL<Shares>("select s.Owner from Shares s where s.Equity = ?", this);
-    }
+    get { return Db.SQL<Shares>("select s.Owner from Shares s where s.Equity = ?", this); }
   }
 }
 
@@ -85,7 +78,6 @@ public class Shares
   public Person Owner;
   public Company Equity;
   public Int64 Quantity;
-  ...
 }
 ```
 
