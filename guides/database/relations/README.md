@@ -24,7 +24,7 @@ In a relational database you implement a one-to-many relation between two entiti
 
 Using Starcounter we recommend that you model a one-to-many relation as in a relational database, i.e. an object reference in the second entity/class, but also add a property (or method) in the first entity/class that returns a collection of object references. In this way you both support the relational model and the typical object oriented implementation at the same time.
 
-In the code example below there is a one-to-many relation between the entities/classes <code>Department</code> and <code>Employee</code> regarding employment. This one-to-many relation is stored in the object references <code>Department</code> in the entity/class <code>Employee</code>.
+In the code example below there is a one-to-many relation between the entities/classes `Department` and `Employee` regarding employment. This one-to-many relation is stored in the object references `Department` in the entity/class `Employee`.
 
 ```cs
 [Database]
@@ -45,7 +45,7 @@ public class Employee
 }
 ```
 
-In the code above, all instances of the <code>Employee</code> class has a reference (<code>Department</code>) to the department where they are employed, and all instances of the <code>Department</code> class has a collection (<code>Employees</code>) of all employees of that particular department. However, within a <code>Department</code> object the collection is not stored internally in any data structure, but instead is represented by an SQL query.
+In the code above, all instances of the `Employee` class has a reference (`Department`) to the department where they are employed, and all instances of the `Department` class has a collection (`Employees`) of all employees of that particular department. However, within a `Department` object the collection is not stored internally in any data structure, but instead is represented by an SQL query.
 
 ## Many-to-many relations
 
@@ -53,7 +53,7 @@ In a relational database you implement a many-to-many relation between two entit
 
 Using Starcounter we recommend that you model a many-to-many relation as in a relational database, i.e. introducing a new associative entity/class, but also add properties (or methods) that returns collections of object references in the two original entities/classes. In this way you both support the relational model and the typical object oriented implementation at the same time.
 
-In the code example below there is a many-to-many relation between the entities/classes <code>Person</code> and <code>Company</code> regarding shares of the company. To represent this many-to-many relation we introduce the associative entity/class <code>Shares</code>.
+In the code example below there is a many-to-many relation between the entities/classes `Person` and `Company` regarding shares of the company. To represent this many-to-many relation we introduce the associative entity/class `Shares`.
 
 ```cs
 [Database]
@@ -89,4 +89,4 @@ public class Shares
 }
 ```
 
-In the code above, all instances of the class <code>Shares</code> has one reference to the person who owns the shares and one reference to the company of which the shares are issued. All instances of the <code>Person</code> class have a collection of all companies (<code>EquityPortfolio</code>) of which the person has shares, and all instances of the <code>Company</code> class have a collection of all persons (<code>ShareHolders</code>) which are shareholders of the company.
+In the code above, all instances of the class `Shares` has one reference to the person who owns the shares and one reference to the company of which the shares are issued. All instances of the `Person` class have a collection of all companies (`EquityPortfolio`) of which the person has shares, and all instances of the `Company` class have a collection of all persons (`ShareHolders`) which are shareholders of the company.
