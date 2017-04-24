@@ -34,32 +34,6 @@ Handle.DELETE("/hello", () =>
 });
 ```
 
-## Catching other verbs (methods)
-
-Using the `CUSTOM` method in `Handle`, you can register other HTTP methods (verbs) or even catch all methods and URIs.
-
-```cs
-Handle.CUSTOM("REPORT /hello/{?}", (String p1) =>
-{
-    return 500;
-});
-
-Handle.CUSTOM("{?} /hello/{?}", (String method, String p1) =>
-{
-    return p1;
-});
-
-Handle.CUSTOM("OPTIONS", "/hello/{?}", (String p1) =>
-{
-    return p1;
-});
-
-Handle.CUSTOM("{?}", (String methodAndUri) =>
-{
-    return "Catched: " + methodAndUri;
-});
-```
-
 ## Accepting parameters in requests
 
 When matching incoming requests, some parts of the URI may contain dynamic data. This is handled by Starcounter by allowing you to define parameters in your handlers. This is done by marking the dynamic part of the URI template with curly braces. The simplest use of the curly brace syntax is a single question mark `{?}`. This indicates that there is a fragment of dynamic data in the URI. The type of the data is determined by the code delegate that follows.
@@ -92,6 +66,33 @@ Handle.GET("/{?}/{?}", (string list, int item) =>
 ```
 
 The accepted URIs would be, for example: `/serialnumbers/4534123`, `/itemid/34321`
+
+
+## Catching other verbs (methods)
+
+Using the `CUSTOM` method in `Handle`, you can register other HTTP methods (verbs) or even catch all methods and URIs.
+
+```cs
+Handle.CUSTOM("REPORT /hello/{?}", (String p1) =>
+{
+    return 500;
+});
+
+Handle.CUSTOM("{?} /hello/{?}", (String method, String p1) =>
+{
+    return p1;
+});
+
+Handle.CUSTOM("OPTIONS", "/hello/{?}", (String p1) =>
+{
+    return p1;
+});
+
+Handle.CUSTOM("{?}", (String methodAndUri) =>
+{
+    return "Catched: " + methodAndUri;
+});
+```
 
 ## Dealing with the `Request` object
 
