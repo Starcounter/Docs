@@ -78,6 +78,54 @@ class Hello
 }
 ```
 
+## Accepting parameters in requests
+
+When matching incoming requests, some parts of the URI may contain dynamic data. This is handled by Starcounter by allowing you to define parameters in your handlers. This is done by marking the dynamic part of the URI template with curly braces. The simplest use of the curly brace syntax is a single question mark <code>{?}</code>. This indicates that there is a fragment of dynamic data in the URI. The type of the data is determined by the code delegate that follows.
+
+```cs
+using Starcounter;
+
+class Hello {
+   static void Main() {
+      Handle.GET("/hello/{?}", (string name) => {         
+         return "<!DOCTYPE html><title>Hello</title>Hello " + name;
+      });
+   }
+}
+```
+
+In the above example, the delegate accepts <code>string name</code>. This means that the parameter will be parsed as a string, for example: `/hello/albert`, `/hello/anna`. If you want to accept an integer parameters, simply change the lambda parameter type.
+
+```cs
+using Starcounter;
+
+class Hello {
+   static void Main() {
+      Handle.GET("/squared?{?}", (int x) => {         
+         return "<!DOCTYPE html><title>Hello</title>" + x + " squared equals " + x*x;
+      });
+   }
+}
+```
+
+The accepted URIs would be, for example: `/squared?123`, `/squared?-4321`
+
+To accept multiple dynamic fragments, simply add more curly braces. For each dynamic parameter there should be a parameter in the delegate. They are enumerated from left to right, so be careful to put the parameters in the right order.
+
+```cs
+using Starcounter;
+
+class Hello {
+   static void Main() {
+      Handle.GET("/{?}/{?}", (string list, int item) => {         
+         return "<!DOCTYPE html><title>Hello</title>List is " + list + " and item is " + item;
+      });
+   }
+}
+```
+
+The accepted URIs would be, for example: `/serialnumbers/4534123`, `/itemid/34321`
+
 ## Dealing with the `Request` object
 
 Together with the enumerated parameters, you can also declare a `Request` parameter. It encapsulates the entire request.
