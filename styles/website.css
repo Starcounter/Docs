@@ -47,28 +47,24 @@ pre::after {
 }
 
 /* styling for article ToC on the bottom of each section page */
-.part-box {
+.markdown-section .toc {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-content: space-around;
-  border-color: #f47e0c;
-  border-style: dotted;
-  border-width: 8px;
-  border-radius: 30px;
   font-family: 'Montserrat', Arial, Helvetica, sans-serif;
   margin-top: 20px;
 }
 
-.toc-text {
+.markdown-section .toc__text {
   color: black;
   margin-left: 15px;
   font-size: 20px;
   text-align: center;
 }
 
-.toc-headline {
+.markdown-section .toc__headline {
   margin-top: 0.5em !important;
   color: #f47e0c;
   text-align: center;
@@ -267,7 +263,7 @@ kbd {
 }
 
 @media (max-width: 700px) {
-  .toc-text {
+  .toc__text {
     font-size: larger !important;
     line-height: normal !important;
     margin-left: 1em !important;
