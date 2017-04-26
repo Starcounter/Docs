@@ -1,12 +1,14 @@
 {% macro tocGenerator(pageTitle, articles) %}
   <div class="toc">
-    <h2 class="toc__headline">Articles in the {{ pageTitle }} section</h2>
+    <h2>Articles in the {{ pageTitle }} section:</h2>
+    <ul>
     {% for article in articles %}
       {% if article.depth == 3 %}
-        <a href="../../{{ article.path }}"><p class="toc__text">{{ article.title }}</p></a>
+        <li><a href="../../{{ article.path }}">{{ article.title }}</a></li>
       {% elif article.depth == 2 %}
-        <a href="../{{ article.path }}"><p class="toc__text">{{ article.title }}</p></a>
+        <li><a href="../{{ article.path }}">{{ article.title }}</a></li>
       {% endif %}
     {% endfor %}
+    </ul>
   </div>
 {% endmacro %}

@@ -46,29 +46,8 @@ pre::after {
     display: none;
 }
 
-/* styling for article ToC on the bottom of each section page */
-.markdown-section .toc {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: space-around;
-  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-  margin-top: 20px;
-}
-
-.markdown-section .toc__text {
+.page-inner .markdown-section .toc a {
   color: black;
-  margin-left: 15px;
-  font-size: 20px;
-  text-align: center;
-}
-
-.markdown-section .toc__headline {
-  margin-top: 0.5em !important;
-  color: #f47e0c;
-  text-align: center;
-  width: 100%;
 }
 
 .code-name + pre code {
