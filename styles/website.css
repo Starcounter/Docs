@@ -46,6 +46,7 @@ pre::after {
     display: none;
 }
 
+.page-inner .markdown-section .guide-articles a,
 .page-inner .markdown-section .toc a {
   color: black;
 }
