@@ -84,7 +84,7 @@ A partial HTML view may look something like this:
 <!--
     Everything from this template will be stamped into the parent page's DOM,
     and <script>s will be executed for every instance of this partial.
-    All child nodes will receive a `.model` property with JSON view model,
+    All child nodes will receive a `.model` property with JSON view-model,
     which is automatically bound to the server-side.
 -->
 <template>
