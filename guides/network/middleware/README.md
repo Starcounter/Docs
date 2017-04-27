@@ -8,9 +8,9 @@ Middleware is code that affects the *request pipeline*. Essentially, it enables 
 
 These can help with a range of issues, such as security, logging, wrapping, request modification, and more.
 
-An example of this is the [Launcher](https://github.com/StarcounterPrefabs/Launcher) which uses request filters to wrap responses from other applications into its own response.
+An example of this is the [Launcher](https://github.com/starcounterapps/launcher) which uses request filters to wrap responses from other applications into its own response.
 
-All middleware is registered with the `Application.Current.Use` API which has three overloads corresponding to the different types of middleware listed above. This registration is usually done at the entry point of the application and can look something like this:
+All middleware is registered with the `Application.Current.Use` API which has three overloads corresponding to the different types of middleware listed above. The registration is usually done at the entry point of the application and can look something like this:
 
 ```cs
 static void Main()
@@ -52,7 +52,7 @@ Application.Current.Use((Request request) =>
 });
 ```
 
-When there is an incoming request, this request filter checks if the URI contains the string "spam", and returns a `Response` object if that's the case which means that the request will be blocked without reaching the handler. Otherwise, it returns `null`, which allows the request to move on to the next request filter if there are more of them or go to the handler if there was only one request filter.
+When there is an incoming request, this request filter checks if the URI contains the string "spam", and returns a `Response` object if that's the case. This means that the request will be blocked without reaching the handler. Otherwise, it returns `null` and allows the request to move on to the next request filter or go to the handler if there was only one request filter.
 
 ### Skip request filters
 
@@ -66,7 +66,7 @@ This only affects request filters and not response filters.
 
 ## Response filters
 
-Response filters do the opposite of request filters; they make alterations to outgoing responses. They work similarly to request filters by being executed one by one until one returns a non-null response, the main difference is that response filters are called after the handler has been called while request filters are called before. Response filters can either create entirely new responses and return those, or simply modify the response coming from the handler.
+Response filters do the opposite of request filters; they make alterations to outgoing responses. They work similarly to request filters by being executed one by one until one returns a non-null response. The main difference is that response filters are called after the handler has been called while request filters are called before. Response filters can either create entirely new responses and return those, or simply modify the response coming from the handler.
 
 ![Middleware response example](../../../assets/middleware-response.PNG)
 
@@ -117,7 +117,7 @@ Application.Current.Use((Request request, Response response) =>
 });
 ```
 
-Here, the response filter makes it possible to return a descriptive `404` page by checking the outgoing responses for the `404` status code and in that case return a response containing an HTML page.
+Here, the response filter makes it possible to return a descriptive `404` page by checking the outgoing responses for the `404` status code and return a response containing the "not found" HTML page.
 
 ### Response and request filter interaction
 
@@ -166,6 +166,7 @@ When a request is sent to the `/Test` handler, it will be intercepted by the req
 Both request and response filters catch requests to handlers in other applications that are running simultaneously.
 
 Consider the following request filter:
+
 ```cs
 Application.Current.Use((Request request) =>
 {
@@ -219,8 +220,8 @@ class Blocker : IMiddleware
     }
 }
 
-class Program {
-
+class Program 
+{
     static void Main()
     {
         Application.Current.Use(new Blocker());
@@ -256,6 +257,7 @@ It is also worth nothing that these classes do not have to contain request or re
 {% endraw %}
 
 <div class="code-name">Person.json</div>
+
 ```cs
 {
   "Html": "/person.html",
@@ -265,8 +267,10 @@ It is also worth nothing that these classes do not have to contain request or re
 ```
 
 <div class="code-name">Program.cs</div>
+
 ```cs
-void Main() {
+void Main() 
+{
   Application.Current.Use(new HtmlFromJsonProvider());
 
   Handle.GET("/person", () =>
