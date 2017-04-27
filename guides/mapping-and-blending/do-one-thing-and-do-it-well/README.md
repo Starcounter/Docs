@@ -14,9 +14,9 @@ When your app is super easy to integrate with other apps (that share data on a s
 
 An app is an application small enough yet functional enough to deliver its function, standalone or in interplay with other apps. Apps don't know of each other and interoperate out of the box to create new solutions. The smallest apps, sometimes referred to as micro-apps, might not be that useful running on their own, but they still can.
 
-The logic runs entirely on the server. Server side code (clean C#) is used to express the business logic and application logic through the data model and the view model.
+The logic runs entirely on the server. Server side code (clean C#) is used to express the business logic and application logic through the data model and the view-model.
 
-There is no client-side logic, yet the apps feel responsive and lightweight thanks to Puppet. The client side templates (clean HTML, CSS, minimum JavaScript) to reflect the view model in a web browser.
+There is no client-side logic, yet the apps feel responsive and lightweight thanks to Puppet. The client side templates (clean HTML, CSS, minimum JavaScript) to reflect the view-model in a web browser.
 
 All apps are represented by an icon and a title and can be installed and uninstalled.
 
