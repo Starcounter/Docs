@@ -1,6 +1,6 @@
-# Creating HTTP responses
+# Creating HTTP Responses
 
-When you respond to a request (i.e. when you return from your delegate registered with `Handle.GET()`,`Handle.POST()` etc), you should return a `Response` object.
+When responding to a request from a handler such as `Handle.GET`, a `Response` object should be returned.
 
 The `Response` class has many implicit cast operators to make this convenient.
 
@@ -12,38 +12,40 @@ The `Response` class has many implicit cast operators to make this convenient.
 
 ## Returning a Response object
 
-When you create a Response object, you have the choice of setting the body to a `byte[]`, a `string`.
+When creating a `Response` object, you have the choice of setting the body to a `byte[]`, a `string`.
 
 ```cs
-GET("/hello", () =>
+Handle.GET("/hello", () =>
 {
     new Response()
     {
-        ContentType="text/plain",
-        Body="Hello World"
+        ContentType = "text/plain",
+        Body = "Hello World"
     };
 });
 ```
 
 ## Returning a JSON object
 
-If you return an instance of the `Json` class, the mime type will be `application/json` and the body will contain a JSON string.
+When returning an instance of the `Json` class, the mime type will `application/json` and the body will contain a JSON string.
+
 ```cs
-GET("/hello", () =>
+Handle.GET("/hello", () =>
 {
     return new PersonData()
     {
-        FirstName="Joachim",
-        LastName="Wester"
+        FirstName = "Joachim",
+        LastName = "Wester"
     };
 });
 ```
 
 ## Returning a string
 
-If you return a string, the returned mime type depends on the `Accept` header of the request. If the request prioritizes `text/html` or `application\json`, the HTTP response will use this type accordingly. If no Accept header was provided, the mime-type ```text/plain``` will be used.
+When returning a string, the returned mime type depends on the `Accept` header of the request. If the request prioritizes `text/html` or `application\json`, the HTTP response will use this type accordingly. If no Accept header was provided, the mime-type `text/plain` will be used.
+
 ```cs
-GET("/hello", () => "Hello World" );
+Handle.GET("/hello", () => "Hello World" );
 ```
 
 ## Returning a Status Code and Status Description
@@ -61,15 +63,16 @@ GET("/hello", () =>
 });
 ```
 
-If integer is returned from delegate that will result in automatic response with `StatusCode` equals to the integer and default status description.
+If an integer is returned from a delegate that will result in automatic response with a `StatusCode` equal to the integer and default status description.
 
 ## Returning null
 
-When null is returned from the handler its equal to returning 404 `Not found` status code.
+When null is returned from the handler, it's equal to returning the 404 `Not found` status code.
 
 ## Serving static resources
 
 To resolve a static resource, there is a method `Handle.ResolveStaticResource` which takes a resource URI and incoming request and returns a response representing this resource. Response however can be a 404, so to return a "nice" 404 page user has to do the following code, for example:
+
 ```cs
 Response resp = Handle.ResolveStaticResource(req.Uri, req);
 
@@ -79,11 +82,12 @@ if (404 == resp.StatusCode)
 }
 return resp;
 ```
-When codehost starts, Starcounter adds a static resource resolver on default user port (GET handler on URI "/{?}"). To register your own static resource resolver on default user port, you should supply `HandlerOptions.ReplaceExistingHandler` when registering such handler.
+
+When the codehost starts, Starcounter adds a static resource resolver on the default user port (GET handler on URI "/{?}"). To register a static resource resolver on the default user port, `HandlerOptions.ReplaceExistingHandler` should be supplied when registering a handler.
 
 ## Delayed or explicitly handled responses
 
-Sometimes the `Response` object can not be returned immediately in the handler. One reason could be accessing third party resources, or doing long-running job. By returning `HandlerStatus.Handled` in the handler user indicates that response will be later or already returned by some other means.
+Sometimes, the `Response` object cannot be returned immediately in the handler. One reason could be the access of third party resources or doing long-running jobs. By returning `HandlerStatus.Handled` in the handler, the user indicates that the response will be returned later or that it already has been returned another way.
 
 For example:
 
@@ -101,7 +105,7 @@ Handle.GET("/postponed", (Request req) =>
 });
 ```
 
-Please refer to [External HTTP calls and Node usage](/guides/network/external-http-calls) article for more information.
+Please refer to the [External HTTP calls and Node usage](/guides/network/external-http-calls) article for more information.
 
 ## Summary of adjustable Response fields
 
@@ -131,12 +135,12 @@ Handle.GET(8080, "/shutdown", (Request req) =>
 });
 ```
 
-Setting arbitrary HTTP headers on `Responce` object is straight forward using `Headers` property:
+Setting arbitrary HTTP headers on a `Responce` object is straightforward using the `Headers` property:
 
 ```cs
-Handle.GET("/response1", () =>
+Handle.GET("/response", () =>
 {
-    Response r = new Response()
+    var response = new Response()
     {
         StatusCode = 404,
         StatusDescription = "Not Found",
@@ -146,10 +150,10 @@ Handle.GET("/response1", () =>
         Body = "response1"
     };
 
-    r.Headers["MyHeader"] = "MyHeaderData";
-    r.Headers["Location"] = "/newlocation";
+    response.Headers["MyHeader"] = "MyHeaderData";
+    response.Headers["Location"] = "/newlocation";
 
-    return r;
+    return response;
 });
 ```
 
@@ -157,14 +161,14 @@ Remarks:
 
 * `StatusCode` default value is 200
 * `StatusDescription` default value is _"OK"_
-* To access certain HTTP headers, use `Headers` accessor on `Response` object (same as for `Request`):
+* To access certain HTTP headers, use the `Headers` accessor on the `Response` or `Request` object:
 
 ```cs
-Response resp;
+Response response;
 ...
-if ("SC" == resp.Headers["Server"])
+if ("SC" == response.Headers["Server"])
 {
-  return resp.Headers["Accept-Ranges"];  
+  return response.Headers["Accept-Ranges"];  
 }
 ```
 
@@ -187,26 +191,27 @@ Handle.GET("/hello", () =>
 
 ## Returning a streamed body
 
-When you create a Response object, you have the choice of setting the body to a `byte[]`, a `string` or a `Stream`.
-As Starcounter schedules threads in a highly optimized way, it is recommended that you allow Starcounter to handle streaming. This is done by assigning you `stream` to the Response object and then returning the response, relying on Starcounter to read the stream and send the network traffic on its own accord. Streamed object should allow getting length of the stream in bytes (`Length` property).
+When creating the `Response` object, the body can be set to a `byte[]`, `string`, or `Stream`.
+As Starcounter schedules threads in a optimized way, it is recommended to allow Starcounter to handle streaming. This is done by assigning the `stream` to the `Response` object and then returning the response, relying on Starcounter to read the stream and send the network traffic on its own accord. Streamed object should allow getting length of the stream in bytes (`Length` property).
 
 ```cs
-GET("/movie", () =>
+Handle.GET("/movie", () =>
 {
    FileStream stream = File.Open("bigfile.mpg", FileMode.Open, FileAccess.Read, FileShare.Read));
-   Response r = new Response()
+   var response = new Response()
    {
     	StreamedBody = stream,
     	ContentType = "application/octet-stream"
    };
-   return r;
+   return response;
 });
 ```
-Note that the stream object is automatically closed when the stream data is sent completely or if the connection is dropped.
+
+Note that the `stream` object is automatically closed when the stream data is sent completely or if the connection is dropped.
 
 ## Setting properties on outgoing response
 
-Sometimes being deep in call hierarchy of `Self.GET` its necessary to be able to set properties not on the current response, but directly on corresponding (but not yet available) outgoing response, like headers, status code and message, cookies. To achieve that, the following static methods are available on class `Handle`:
+Sometimes, when deep in the call hierarchy of `Self.GET`, it's necessary to be able to set properties not on the current response, but directly on corresponding, not yet available, outgoing responses, like headers, status codes, messages, and cookies. To achieve that, the following static methods are available from the class `Handle`:
 
 ```cs
 void AddOutgoingCookie(String cookieName, String cookieValue);
