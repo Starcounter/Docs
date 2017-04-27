@@ -11,9 +11,9 @@ In its most basic form, Typed JSON consists of two parts, a template and an inst
 
 | Template class | .Net type | Json type | Comment
 | -------------- | --------- | --------- | --------
-| TObject        | Json | object | A single json-object of type Json or subclass
-| TObjArr        | Arr&lt;Json&gt; | array | An array of json-objects. Arr is a subclass of Json
-| TArray&lt;T&gt; | Arr&lt;T&gt; | array | An array of T, where T is Json or subclass
+| TObject        | Json | object | A single JSON object of type `Json` or subclass
+| TObjArr        | Arr&lt;Json&gt; | array | An array of JSON-objects. Arr is a subclass of Json
+| TArray&lt;T&gt; | Arr&lt;T&gt; | array | An array of T, where T is `Json` or subclass
 | TBool          | Bool      | true, false | Value
 | TDecimal       | Decimal   | Number | Value
 | TDouble        | Double    | Number | Value
@@ -27,7 +27,7 @@ The templates also controls setting and getting values on the JSON instance. Eac
 The following delegates exists on each template. They are not always instantiated though, for example if databinding is not used the delegate for bound value will be null.
 
 **Unbound value (UnboundGetter, UnboundSetter)**
-Used internally. Gets and sets values stored on JSON. For basic jsonobjects the values will be stored in a .Net list directly on the instance.
+Used internally. Gets and sets values stored on JSON. For basic JSON objects the values will be stored in a .Net list directly on the instance.
 
 **Bound value (BoundGetter, BoundSetter)**
 Used internally. Gets and sets values directly on the dataobject when databinding is used (databinding will be covered later)
@@ -73,4 +73,4 @@ In the last line we convert the Typed JSON to a string-representation of the Typ
 `{"FullName":"John Doe","Age":33}`
 
 ### Next
-It's important to understand this basic structure of templates and instances. All other features for Typed JSON, that will be described in later texts use this core implementation. For example Dynamic Typed JSON will create the templates automatically when needed and JSON-by-example will parse a jsonfile and convert it to templates.
+It's important to understand this basic structure of templates and instances. All other features for Typed JSON, that will be described in later texts use this core implementation. For example Dynamic Typed JSON will create the templates automatically when needed and JSON-by-example will parse a JSON file and convert it to templates.

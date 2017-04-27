@@ -32,8 +32,8 @@ Here are some examples of creating a new session.
 Json m = new Json();
 Session s = new Session();
 
-// The json and the session can then be connected by either setting the `Data` property on the
-// session or setting the `Session` property on json. Both will have the exact same outcome.
+// The JSON and the session can then be connected by either setting the `Data` property on the
+// session or setting the `Session` property on JSON. Both will have the exact same outcome.
 
 s.Data = m;
 // OR
