@@ -65,9 +65,9 @@ Handle.GET("/email-client/new-email", () =>
 });
 ```
 
-### Attaching a transaction to an existing json-object
+### Attaching a transaction to an existing JSON object
 
-If the part of the view-model that the transaction should be attached to is already instantiated, for example a default value for a property of type Json, the transaction can be attached manually.
+If the part of the view-model that the transaction should be attached to is already instantiated, for example a default value for a property of type `Json`, the transaction can be attached manually.
 
 Lets assume that in the previous example, the `CurrentPage` property was already instantiated.
 

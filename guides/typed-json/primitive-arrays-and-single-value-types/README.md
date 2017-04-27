@@ -32,7 +32,7 @@ If these methods are called on a TypedJSON instance that either is not an array 
 
 <h4>Example 1, single primitive value</h4>
 
-In the following example we create a JSON-by-example file containing of a single string value, then we create a new instance, checks that the type is string, print the default value, sets another value and print that one and finally prints the whole Typed JSON-object as json.
+In the following example we create a JSON-by-example file containing of a single string value, then we create a new instance, checks that the type is string, print the default value, sets another value and print that one and finally prints the whole Typed JSON-object as JSON.
 
 <div class="code-name">SingleValueJson.json</div>
 
