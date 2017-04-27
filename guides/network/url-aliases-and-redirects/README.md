@@ -21,7 +21,7 @@ Starcounter gateway has support for aliases which is described in Network Gatewa
 
 ## Redirect
 
-A HTTP redirect is a server response that guides the client to access the resource using a different URL. It is achieved by an appropriate HTTP status code and value of the `Location` header.
+An HTTP redirect is a server response that guides the client to access the resource using a different URL. It is achieved by an appropriate HTTP status code and value of the `Location` header.
 
 For web apps, the URL displayed in the browser address bar gets changed to the destination value.
 
@@ -82,9 +82,9 @@ In the example above we have declared two URI aliases:
 
 ## API for URI aliasing
 
-Starcounter allows adding/modifying/listing/deleting URI aliases using the following REST API (should be called on system port (by default 8181)):
+Starcounter allows adding, modifying, listing, and deleting URI aliases using the following REST API (should be called on system port (by default 8181)):
 
-* Adding/modifying specific URI alias is done using `PUT /sc/alias`. The URI alias info should be in HTTP body with the following format:
+* Adding and modifying a specific URI alias is done using `PUT /sc/alias`. The URI alias info should be in HTTP body with the following format:
 
 ```json
 {
@@ -103,25 +103,25 @@ for example, `{"HttpMethod":"GET","FromUri":"/","ToUri":"/launcher","Port":8080}
 {  
   "Items":[  
     {  
-      "HttpMethod":"GET",
-      "FromUri":"/",
-      "ToUri":"/launcher",
-      "Port":8080
+      "HttpMethod": "GET",
+      "FromUri": "/",
+      "ToUri": "/launcher",
+      "Port": 8080
     },
     {  
-      "HttpMethod":"GET",
-      "FromUri":"/myapp",
-      "ToUri":"/myappalias",
-      "Port":8080
+      "HttpMethod": "GET",
+      "FromUri": "/myapp",
+      "ToUri": "/myappalias",
+      "Port": 8080
     }
   ]
 }
 ```
 
 Retrieving info about specific URI alias is done using `GET /sc/alias/{?}/{?}/{?}` where parameters are `string httpMethod, long dbport, string fromUri`.
-For example, "http://127.0.0.1:8181/sc/alias/GET/8080//SomeFromUri"
+For example, `http://127.0.0.1:8181/sc/alias/GET/8080//SomeFromUri`
 
 Deleting specific URI alias is done using `DELETE /sc/alias/{?}/{?}/{?}` where parameters are `string httpMethod, long dbport, string fromUri`.
-For example, "http://127.0.0.1:8181/sc/alias/GET/8080//SomeFromUri"
+For example, `http://127.0.0.1:8181/sc/alias/GET/8080//SomeFromUri`
 
 *NOTE*: In comparison with redirects, URI aliasing API adds entries to network gateway configuration and preserved upon gateway/code-host restart.
