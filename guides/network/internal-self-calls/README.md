@@ -19,7 +19,7 @@ Json json = Self.GET<Json>("/MyApp/MyJsonObject/13235");
 
 Here, an object of type `Json` is expected to be in the `Body`.
 
-A specific Json type can also be used:
+A specific JSON type can also be used:
 
 ```cs
 Master master = Self.GET<Master>("/emails");

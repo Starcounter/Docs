@@ -187,7 +187,7 @@ public class PersonJson : Json, IBound<Person>
 
 **NOTE**:
 
-As a simplification when binding properties to code-behind it is also possible to use the same name of the member declared in Json-by-example and code-behind. Then the custom property in code-behind will be bound automatically (same behaviour as autobinding to a property in a data-object).
+As a simplification when binding properties to code-behind it is also possible to use the same name of the member declared in JSON-by-example and code-behind. Then the custom property in code-behind will be bound automatically (same behaviour as autobinding to a property in a data-object).
 
 The following restrictions applies though:
 
