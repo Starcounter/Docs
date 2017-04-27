@@ -67,7 +67,7 @@ namespace StarcounterApplication3
     }
 }
 ```
-In the last line we convert the typedjson to a string-representation of the typedjson object. The output will be:
+In the last line we convert the Typed JSON to a string-representation of the Typed JSON object. The output will be:
 `{"FullName":"John Doe","Age":33}`
 
 ### Next
