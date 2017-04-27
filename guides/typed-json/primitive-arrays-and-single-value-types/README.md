@@ -2,7 +2,7 @@
 
 <section class="hero">This page contains material that should be considered advanced or non-essential and will not be used in the absolute majority of Starcounter applications.</section>
 
-It is allowed to specify JSON-by-example that contains of a single primitive value, object or array. In C# all of these are handled in the same way. A TypedJson instance is created and values/properties are read and written in the same way both for single values and complex objects and arrays.
+It is allowed to specify JSON-by-example that contains of a single primitive value, object or array. In C# all of these are handled in the same way. A Typed JSON instance is created and values/properties are read and written in the same way both for single values and complex objects and arrays.
 
 **NOTE:** Starting from Starcounter version 2.4.0.995 a number of properties for working with single value json have been obsoleted in favour of using extensionmethods. The extension can be found in namespace `Starcounter.Advanced.XSON`. For a list of obsoleted properties see the last section on this page.
 
@@ -32,7 +32,7 @@ If these methods are called on a TypedJSON instance that either is not an array 
 
 <h4>Example 1, single primitive value</h4>
 
-In the following example we create a JSON-by-example file containing of a single string value, then we create a new instance, checks that the type is string, print the default value, sets another value and print that one and finally prints the whole typedjson-object as json.
+In the following example we create a JSON-by-example file containing of a single string value, then we create a new instance, checks that the type is string, print the default value, sets another value and print that one and finally prints the whole Typed JSON-object as json.
 
 <div class="code-name">SingleValueJson.json</div>
 

@@ -305,7 +305,12 @@ The resulting JSON from this example looks like this: `{"FirstName":"Steve","Fri
 ### Setting Type of Binding for Children
 Typed JSON objects that contain children can specify how the type of bindings on its children. 
 
+<<<<<<< HEAD
 By setting the property `BindChildren`, each child that don't specify it's own binding, i.e. use the `Parent` option will have the binding decided by the parent.
+=======
+- Due to restrictions in available type information when generating code for Typed JSON, this feature only works for properties that are declared on the same class. It does not work for properties declared in an inherited class.
+- How it works underneath is that generating an accessor-property for getting and setting the JSON-property is suppressed when a property in code-behind already exists. This means that to access the JSON-property directly, either the template needs to be used, or the name (`json.GetValue(json.Template.Name)`, `json["Name"]`).
+>>>>>>> 2.2.1.3234
 
 Setting the value in the code-behind from the `BindingStrategy` enum:
 
