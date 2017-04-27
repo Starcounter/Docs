@@ -19,11 +19,11 @@ Handle.GET("/hello", () =>
 });
 ```
 
-You can register new handlers at any time, so there is no need to do it in the `Main()` method.
+Handlers can be registered anywhere and at any time. Though, in most cases, they are registered in the `Main` method
 
 ## Catching the common HTTP verbs (methods)
 
-The basic HTTP methods `GET`, `POST`, `PUT`, `DELETE` and `PATCH` can be caught by convenient methods with the same name in the `Handle` class.
+The basic HTTP methods `GET`, `POST`, `PUT`, `DELETE` and `PATCH` can be caught by methods with the same name in the `Handle` class.
 
 ```cs
 Handle.GET("/hello", () =>
@@ -44,7 +44,7 @@ Handle.DELETE("/hello", () =>
 
 ## Accepting parameters in requests
 
-When matching incoming requests, some parts of the URI may contain dynamic data. This is handled by Starcounter by allowing you to define parameters in your handlers. This is done by marking the dynamic part of the URI template with curly braces. The simplest use of the curly brace syntax is a single question mark `{?}`. This indicates that there is a fragment of dynamic data in the URI. The type of the data is determined by the code delegate that follows.
+When matching incoming requests, some parts of the URI may contain dynamic data. This is handled by Starcounter by allowing you to define parameters in handlers. This is done by marking the dynamic part of the URI template with curly braces. The simplest use of the curly brace syntax is a single question mark `{?}`. This indicates that there is a fragment of dynamic data in the URI. The type of the data is determined by the code delegate that follows.
 
 ```cs
 Handle.GET("/hello/{?}", (string name) => 
@@ -53,7 +53,7 @@ Handle.GET("/hello/{?}", (string name) =>
 });
 ```
 
-In the above example, the delegate accepts `string name`. This means that the parameter will be parsed as a string, for example: `/hello/albert`, `/hello/anna`. If you want to accept an integer parameters, simply change the lambda parameter type.
+In the above example, the delegate accepts `string name`. This means that the parameter will be parsed as a string, for example: `/hello/albert`, `/hello/anna`. To accept an integer parameter, simply change the lambda parameter type.
 
 ```cs
 Handle.GET("/squared?{?}", (int x) => 
@@ -78,7 +78,7 @@ The accepted URIs would be, for example: `/serialnumbers/4534123`, `/itemid/3432
 
 ## Catching other verbs (methods)
 
-Using the `CUSTOM` method in `Handle`, you can register other HTTP methods (verbs) or even catch all methods and URIs.
+The `CUSTOM` method in the `Handle` class makes it possible to register other HTTP methods or even catch all methods and URIs.
 
 ```cs
 Handle.CUSTOM("REPORT /hello/{?}", (String p1) =>
@@ -104,7 +104,7 @@ Handle.CUSTOM("{?}", (String methodAndUri) =>
 
 ## Dealing with the `Request` object
 
-Together with the enumerated parameters, you can also declare a `Request` parameter. It encapsulates the entire request.
+A `Request` parameter can be declared together with the enumerated parameters. It encapsulates the entire request.
 
 ```cs
 Handle.GET("/hello", (Request request) =>
@@ -119,12 +119,14 @@ Handle.GET("/persons/{?}", (string name, Request request) =>
 ```
 
 To access certain request HTTP headers, use `Headers[String]` accessor on a `Request` object (same as for the `Response` object):
+
 ```cs
 String mySuperHeader = req.Headers["MySuperHeader"];
 String allRequestCookies = req.Headers["Set-Cookie"];
 ```
 
 Request cookies are accessible from `Cookies` as a list of strings "name=value" (same as for Response object):
+
 ```cs
 List<String> allRequestCookies = req.Cookies;
 ```
@@ -146,7 +148,7 @@ When creating (using `Handle.` interface) and calling handlers (using `Self.` in
 
 **Examples**:
 
-Registering handler that skips middleware filters and is being called directly externally:
+Registering a handler that skips middleware filters and is being called directly externally:
 
 ```cs
 Handle.POST("/myhandler", (Request request) =>
@@ -155,7 +157,7 @@ Handle.POST("/myhandler", (Request request) =>
 }, new HandlerOptions() { SkipMiddlewareFilters = true });
 ```
 
-Calling URI handler "/MyPostHandler" on handlers level `ApplicationLevel`:
+Calling the URI handler `/MyPostHandler` on handlers level `ApplicationLevel`:
 
 ```cs
 Self.POST("/MyPostHandler", null, null, null, 0, new HandlerOptions()
