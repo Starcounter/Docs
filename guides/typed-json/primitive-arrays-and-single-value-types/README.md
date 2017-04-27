@@ -4,7 +4,7 @@
 
 It is allowed to specify JSON-by-example that contains of a single primitive value, object or array. In C# all of these are handled in the same way. A Typed JSON instance is created and values/properties are read and written in the same way both for single values and complex objects and arrays.
 
-For setting and getting single values a set of predefined properties exists, both to handle the value and to check what type a Typed JSON-instance is. If a value that does not correspond to the type of Json is used an exception will be raised. For example trying to read <code>DecimalValue</code> on  a jsonobject that holds a string will not work.
+For setting and getting single values a set of predefined properties exists, both to handle the value and to check what type a Typed JSON-instance is. If a value that does not correspond to the type of JSON is used an exception will be raised. For example trying to read <code>DecimalValue</code> on  a jsonobject that holds a string will not work.
 
 The following properties are used to get and set primitive values: <code>BooleanValue</code>, <code>DecimalValue</code>, <code>DoubleValue</code>, <code>IntegerValue</code>, <code>StringValue</code>
 
@@ -12,7 +12,7 @@ There are also properties to check in an efficient way what type a Json-instance
 
 <h4>Example 1, single primitive value</h4>
 
-In the following example we create a JSON-by-example file containing of a single string value, then we create a new instance, checks that the type is string, print the default value, sets another value and print that one and finally prints the whole Typed JSON-object as json.
+In the following example we create a JSON-by-example file containing of a single string value, then we create a new instance, checks that the type is string, print the default value, sets another value and print that one and finally prints the whole Typed JSON-object as JSON.
 
 <div class="code-name">SingleValueJson.json</div>
 
