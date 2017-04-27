@@ -133,6 +133,7 @@ When creating (using `Handle.` interface) and calling handlers (using `Self.` in
 
 * `SkipRequestFilters`: used to declare a handler for which request (previously middleware) filters will not be applied.
 * `ReplaceExistingHandler`: replace an existing handler if it was registered.
+* `HandlerLevel`: level on which the handlers should be registered or called.
 * `SkipHandlersPolicy`: If database flag "EnforceURINamespaces" is set to True, all application handlers are required to start with application name. In this case `SkipHandlersPolicy` flag allows to register any URI handler.
 * `SubstituteHandler`: specifies a delegate to be called to replace call for existing handler or to provide a call when handler does not exist.
 * `SelfOnly`: registered handler is going to be accessible only inside codehost using `Self` interface. `SelfOnly` handlers are not registered in gateway, in comparison with normal handlers.
@@ -147,6 +148,16 @@ Handle.POST("/myhandler", (Request request) =>
 	return 204;
 }, new HandlerOptions() { SkipMiddlewareFilters = true });
 ```
+
+Calling the URI handler `/MyPostHandler` on handlers level `ApplicationLevel`:
+
+```cs
+Self.POST("/MyPostHandler", null, null, null, 0, new HandlerOptions()
+{
+	HandlerLevel = HandlerOptions.HandlerLevels.ApplicationLevel
+});
+```
+
 
 ## Exception propagation within same application
 
