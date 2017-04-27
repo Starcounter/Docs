@@ -242,14 +242,6 @@ kbd {
   }
 }
 
-@media (max-width: 700px) {
-  .toc__text {
-    font-size: larger !important;
-    line-height: normal !important;
-    margin-left: 1em !important;
-  }
-}
-
 /* Hide large menu buttons and display the dropdown button with moderately small screens */
 
 @media (max-width: 1040px) {
