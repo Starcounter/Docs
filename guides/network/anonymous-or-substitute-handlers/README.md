@@ -1,6 +1,6 @@
-# Anonymous or substitute handlers
+# Anonymous or Substitute Handlers
 
-Sometimes it is required to get a partial without declaring a handler. This is when anonymous handlers became handy.
+Sometimes, it is required to get a partial without declaring a handler. This is when anonymous handlers became handy.
 
 ```cs
 model.Partial = Self.GET("/custom-url", () =>
@@ -17,7 +17,7 @@ The `model.Partial` will contain the returned `new Page()` and all the responses
 #### Things to know about anonymous handlers
 
 - The anonymous handlers should never be used for direct calls to handlers defined in other apps. Follow the practice that the apps should not be aware of each other.
-- An app many have only one response per URL, that is why anonymous handlers can't be combined with declared ones.
+- An app can only have one response per URL, that is why anonymous handlers can't be combined with declared ones.
 - The `Html` property is not required, it may be blank if the calling app does not have any response.
 - The anonymous handler response should be of type `Starcounter.Page` otherwise it won't be possible to merge with other responses.
 
@@ -25,13 +25,12 @@ The `model.Partial` will contain the returned `new Page()` and all the responses
 
 #### Shared UI sections
 
-The most common case is the [Launcher](https://github.com/StarcounterPrefabs/Launcher) app. The Launcher defines different UI sections and populates them with anonymous `Self.GET` requests.
+The most common case is the [Launcher](https://github.com/starcounterapps/launcher). The Launcher defines different UI sections and populates them with anonymous `Self.GET` requests.
 
 ```cs
 //UriMapping.MappingUriPrefix - a constant, equals to "/sc/mapping"
 model.Menu = Self.GET(UriMapping.MappingUriPrefix + "/menu", () => new Page());
 ```
-
 
 The `model.Menu` contains merged responses from all handlers mapped to `/sc/mapping/menu`. The mapping would look like this:
 
