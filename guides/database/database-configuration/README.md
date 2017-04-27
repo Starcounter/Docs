@@ -13,13 +13,13 @@ Here are the most important database configuration options with their default va
 1. Should edition libraries be loaded in databases:
 `LoadEditionLibraries: true`
 
-2. Should Json responses be wrapped in application name:
+2. Should JSON responses be wrapped in application name:
 `WrapJsonInNamespaces: true`
 
 3. Should applications be forced to register handlers starting with application name prefix:
 `EnforceURINamespaces: false`
 
-4. Should Json responses from multiple applications be merged:
+4. Should JSON responses from multiple applications be merged:
 `MergeJsonSiblings: true`
 
 5. Should URI mapping (UriMapping.Map) be enabled:
