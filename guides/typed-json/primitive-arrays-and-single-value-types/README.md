@@ -4,14 +4,14 @@
 
 It is allowed to specify JSON-by-example that contains of a single primitive value, object or array. In C# all of these are handled in the same way. A Typed JSON instance is created and values/properties are read and written in the same way both for single values and complex objects and arrays.
 
-**NOTE:** Starting from Starcounter version 2.4.0.995 a number of properties for working with single value json have been obsoleted in favour of using extensionmethods. The extension can be found in namespace `Starcounter.Advanced.XSON`. For a list of obsoleted properties see the last section on this page.
+**NOTE:** Starting from Starcounter version 2.4.0.995 a number of properties for working with single value json have been obsoleted in favour of using extension methods. The extension can be found in namespace `Starcounter.Advanced.XSON`. For a list of obsoleted properties see the last section on this page.
 
 #### TypedJSON with single value
 Each value that can be used as a single value json (`Boolean`, `Integer`, `Decimal`, `Double` and `String`) has corresponding methods for getting, setting and check type in the extension class.
 
 If a method is called on a json that is not of the correct type, for example trying to get a string value from a json that holds an integer, an exception will be thrown.
 
-| Value | Extensionmethods |
+| Value | Extension methods |
 | ----- | ---------------- |
 | Boolean | GetBooleanValue(), SetBooleanValue(value), IsBoolean() |
 | Integer | GetIntegerValue(), SetIntegerValue(value), IsInteger() |
