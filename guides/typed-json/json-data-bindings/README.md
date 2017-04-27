@@ -191,7 +191,7 @@ As a simplification when binding properties to code-behind it is also possible t
 
 The following restrictions applies though:
 
-- Due to restrictions in available type information when generating code for TypedJSON, this feature only works for properties that are declared on the same class. It does not work for properties declared in an inherited class.
+- Due to restrictions in available type information when generating code for Typed JSON, this feature only works for properties that are declared on the same class. It does not work for properties declared in an inherited class.
 - How it works underneath is that generating an accessor-property for getting and setting the JSON-property is suppressed when a property in code-behind already exists. This means that to access the JSON-property directly, either the template needs to be used, or the name (`json.GetValue(json.Template.Name)`, `json["Name"]`).
 
 In the following example `FullName` in json will be automatically bound to the property `FullName` in code-behind:

@@ -28,7 +28,7 @@ Handle.GET("/author", () =>
 
 In Starcounter, JSON is a first-class citizen. As such, we provide built-in types that makes serving and accepting JSON simpler for the app developer.
 
-Most notably, <a href="/guides/typed-json/typed-json">TypedJSON </a>allow you to define C# objects based on arbitrary JSON data, normally provided as a string. One variant of this allow classes to be defined by an example JSON. We call this, unsurprisingly, <a href="/guides/typed-json/json-by-example">JSON-by-example</a>.
+Most notably, <a href="/guides/typed-json/typed-json">Typed JSON </a>allow you to define C# objects based on arbitrary JSON data, normally provided as a string. One variant of this allow classes to be defined by an example JSON. We call this, unsurprisingly, <a href="/guides/typed-json/json-by-example">JSON-by-example</a>.
 
 With that, by defining this:
 
@@ -225,7 +225,7 @@ In the above snippet, the provider acts on the resource if it's of type <code>Js
 
 To wrap this text up, we'll take a look on a practical use case where all the above come together.
 
-In MVVM, a<em> view model</em> lives between a <em>view </em>and a <em>model</em>. In Starcounter, we promote a simple yet powerful pattern to define HTML views, driven by an underlying view model, defined in JSON. The advantages of this approach are several, but out of scope for this text. You can read more about the details <a href="/guides/web-apps/starcounter-mvvm">here</a>.
+In MVVM, a<em> view-model</em> lives between a <em>view </em>and a <em>model</em>. In Starcounter, we promote a simple yet powerful pattern to define HTML views, driven by an underlying view-model, defined in JSON. The advantages of this approach are several, but out of scope for this text. You can read more about the details <a href="/guides/web-apps/starcounter-mvvm">here</a>.
 
 The basic pattern of this is very close to where we ended up in the last section, where you saw how an individual handler returned a typed JSON object, and a middleware MIME provider was registered to read a HTML URI from any JSON object, returning a corresponding HTML view. What we didn't show earlier is how we utilize this pattern as the foundation for a template-driven MVVM engine.
 
