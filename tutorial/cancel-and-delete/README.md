@@ -37,6 +37,7 @@ We now expect the values `DeleteAllTrigger$` and `CancelTrigger$` to be incremen
 The next step is to build handlers to react accordingly. We will also do that similar to the way we did with the `Save` button.
 
 <div class="code-name">Person.json.cs</div>
+
 ```cs
 void Handle(Input.CancelTrigger action)
 {
@@ -59,6 +60,7 @@ void Handle(Input.DeleteAllTrigger action)
 `this.Data.Spendings` is every `Expense` of the current `Person`. With the code we currently have, this will not work. To fix it we simply add the `IBound<Person>` to the `PersonJson` partial class. This creates a binding between the view-model and `Person` database class which allows us to use its property `Spendings`.
 
 <div class="code-name">PersonJson.json.cs</div>
+
 ```cs
 partial class PersonJson : Json, IBound<Person>
 ```
@@ -68,6 +70,7 @@ The `DeleteAllTrigger` handler deletes all the expenses for the current `Person`
 `RefreshExpenses` in the `CancelTrigger` handler is a method that updates the `Expenses` of the `Person`. It should look like this:
 
 <div class="code-name">PersonJson.json.cs</div>
+
 ```cs
 public void RefreshExpenses(IEnumerable<Expense> expenses)
 {
@@ -81,6 +84,7 @@ public void RefreshExpenses(IEnumerable<Expense> expenses)
 This method should also be called in the initial `GET` request to make sure that the expenses are loaded in properly and displayed after refreshing the page. This is how it should be implemented to protect against potential `null` errors:
 
 <div class="code-name">Program.cs</div>
+
 ```cs
 if (person.Spendings != null)
 {
@@ -92,4 +96,4 @@ You can now run your application again and rollback any mistakes you make or del
 
 ![part 6 gif](/assets/resizedpart6.gif)
 
-If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/16426932bdaf9d1501fd57de9aa8b25190d25426).
+If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/7491b94014938bd9a1a0af6591bd754fc3e3b1e1).

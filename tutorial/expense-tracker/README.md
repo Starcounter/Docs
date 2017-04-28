@@ -82,6 +82,7 @@ As you can see above, we are using `AddNewExpenseTrigger$`, which we haven't def
 `AddNewExpenseTrigger$` is a trigger property that allows us to add a new `Expenses` template to the view. We can implement its handler now.
 
 <div class="code-name">PersonJson.json.cs</div>
+
 ```cs
 void  Handle(Input.AddNewExpenseTrigger action)
 {
@@ -96,6 +97,7 @@ void  Handle(Input.AddNewExpenseTrigger action)
 `AddExpense` is a method call to a method that we need to create that will add this newly created `Expense` to our `Person`'s `Expenses` array. It should look like this:
 
 <div class="code-name">PersonJson.json.cs</div>
+
 ```cs
 public void AddExpense(Expense expense)
 {
@@ -123,6 +125,7 @@ public class Expense
 While we are tinkering with the databases, we should also add Spendings and CurrentBalance to the Person class.
 
 <div class="code-name">Program.cs</div>
+
 ```cs
 public string FirstName;
 public string LastName;
@@ -143,6 +146,7 @@ These two are calculated every time they are used by searching through the datab
 Inside the Program class, you should also add the following GET handler which helps with looking up the expenses.
 
 <div class="code-name">Program.cs</div>
+
 ```cs
 Handle.GET("/HelloWorld/partial/expense/{?}", (string id) =>
 {
@@ -160,4 +164,4 @@ Before we run the program, do a quick swing into `ExpenseJson.json.cs` to make s
 
 With every keystroke, the UI is updated almost instantly from the database. Starcounter's in-memory database makes this possible. There's no delay, everything simply happens at the moment the user interacts with the view.
 
-If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/13a2a3c3af5e630c4dac791f1731fa567be277fd).
+If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/b382363636c865dce8f1beb3c886e738cc630a08).
