@@ -96,4 +96,4 @@ You can now run your application again and rollback any mistakes you make or del
 
 ![part 6 gif](/assets/resizedpart6.gif)
 
-If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/50a75f74ef13086c0c0c359e35204343c3985668).
+If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/7491b94014938bd9a1a0af6591bd754fc3e3b1e1).
