@@ -4,23 +4,23 @@ This is where we tie everything together and get our final application.
 
 First, download the `CompositionEditor` and `CompositionProvider` from the App Warehouse, the same way we did with the Images app in the previous step. 
 
-You can now, if you haven't already, fire up the applications <code>HelloWorld</code>, <code>HelloWorldMapper</code>, <code>Images</code>, `CompositionEditor`, and `CompositionProvider`.
+You can now, if you haven't already, fire up the applications `HelloWorld`, `HelloWorldMapper`, `Images`, `CompositionEditor`, and `CompositionProvider`.
 
-Open <code>HelloWorld</code> in the Starcounter Administrator and press <kbd>Ctrl</kbd> + <kbd>E</kbd>. Double click on the "css selector for partial to edit" input field and choose the alternative <code>[partial-id="/sc/htmlmerger?HelloWorld=/HelloWorld/ExpenseJson.html&Images=/Images/viewmodels/ConceptPage.html"]</code>.
+Open `HelloWorld` in the Starcounter Administrator and press <kbd>Ctrl</kbd> + <kbd>E</kbd>. Double click on the "css selector for partial to edit" input field and choose the alternative `[partial-id="/sc/htmlmerger?HelloWorld=/HelloWorld/ExpenseJson.html&Images=/Images/viewmodels/ConceptPage.html"]`.
 
-What this does is that it uses htmlmerger, a class within Starcounter, to merge the files <code>ExpenseJson.html</code> and <code>ConceptPage.html</code> in HelloWorld and Images respectively.
+What this does is that it uses htmlmerger, a class within Starcounter, to merge the files `ExpenseJson.html` and `ConceptPage.html` in HelloWorld and Images respectively.
 
 [This can also be done with cURL.](/guides/web-apps/import-html-composition/)
 
 Now, when we have described what files to merge we also want to describe how they should be merged. We do that in the input field below with the following code:
 ```html
-<content select="[slot='HelloWorld/description']"></content>
-<content select="[slot='HelloWorld/amount']"></content>
+<slot name='HelloWorld/description'></slot>
+<slot name='HelloWorld/amount'></slot>
 <div style="display: none">
-    <content select="[slot='Images/label']"></content>
+    <slot name='Images/label'></slot>
 </div>
 <div style="width: 200px; height: 200px">
-    <content select="[slot='Images/control']"></content>
+    <slot name='Images/control'></slot>
 </div>
 ```
 
