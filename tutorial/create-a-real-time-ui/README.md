@@ -75,6 +75,7 @@ Go to `Program.cs` and type in the following code inside the `Main()` method. Th
 </aside>
 
 <div class="code-name">Program.cs</div><div class="code-name code-title">Bind JSON</div>
+
 ```cs
 Application.Current.Use(new HtmlFromJsonProvider());
 Application.Current.Use(new PartialToStandaloneHtmlProvider());
@@ -107,4 +108,4 @@ We have now established a model-view-view-model (MVVM) binding that's real time.
 
 It's impossible for us to see the immediate changes as there is no way for the user to change the info. Let us fix that by adding some interactivity!  
 
-If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/a24e8275816a4eb3d7dff4d315938a41feee64ce).
+If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/9bc0f676fe1f986965aa2cf01c2f290759166d35).

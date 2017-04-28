@@ -45,7 +45,7 @@ Open up <code>HelloWorld</code> in the <code>Starcounter Administrator</code> an
 
 That's cool, but we have to do some work to make them look nice together. Let's fix that in the last step!
 
-If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/f7111c3a8bd02f9d8ad9506d2ec79f43e4eb634c).
+If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/7f76bb6d754596c1b9610c81cfe9f1c851394366).
 
 <section class="hero"><strong>Disclaimer</strong>
 The APIs used in this step are experimental. We consider blending of different application's user interfaces to be an essential feature. We are working hard to develop exceptional blending that might require the steps outlined here to be changed. Feel free to follow our <a href="http://starcounter.io/blog/">blog</a> to get information about these changes and more.</section>
