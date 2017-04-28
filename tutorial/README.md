@@ -15,7 +15,7 @@ In order to get through this tutorial, you will need to fulfill the [system requ
 
 Since the author is a mere mortal, there might be mistakes in the code or text. If you experience that something doesn't work as intended, you can look at the source code that can be found [here](https://github.com/StarcounterSamples/HelloWorld). Each commit in this repository represents one step in the tutorial. For further explanations of the concepts discussed, you can take a look at the [guide section](/guides/).
 
-There's also a video edition of this tutorial available on our [youtube channel](https://www.youtube.com/watch?v=HyRoctAmYdU&list=PLzBy_ulksMjDppM_aNr4DedQDwYd4PL9Q) if that's your preferred format.
+There's also a video edition of this tutorial available on our [youtube channel](https://www.youtube.com/watch?v=HyRoctAmYdU&list=PLzBy_ulksMjDppM_aNr4DedQDwYd4PL9Q) if that's your preferred format. Keep in mind that the video edition was made on version 2.2.1.3234 and is not continuously updated.
 
 Are you ready?
 
