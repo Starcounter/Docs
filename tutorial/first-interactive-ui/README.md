@@ -42,6 +42,7 @@ The `::input` declaration sets up an event listener. It updates the JSON as you 
 Let's write that handler!
 
 <div class="code-name">PersonJson.json.cs</div>
+
 ```cs
 void Handle(Input.SaveTrigger action)
 {
@@ -65,6 +66,7 @@ The last step is to modify our `Program.cs` file to create a long running transa
 </aside>
 
 <div class="code-name">Program.cs</div><div class="code-name code-title">Add Db.Scope</div>
+
 ```cs
 Handle.GET("/HelloWorld", () =>
 {
@@ -95,4 +97,4 @@ If you are an especially curious person, you can try to change the name and then
 
 Neat! Right? The next step is to display the name change in real time and let the code-behind calculate the full name.
 
-If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/8ba1bc8e78ffdb0957a9c4e7bc141a716af59cb9).
+If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/3b7fa02a5920d9013ff994697e809d4878bc3f73).
