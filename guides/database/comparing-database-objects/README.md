@@ -14,22 +14,22 @@ var products = Db.SQL<Product>("SELECT p FROM Product p WHERE p.Customer.ObjectN
 
 ## Comparison between instances
 
-Two instances of database class can be compared either by the `Object.Equals` method or by the `ObjectNo` value. The `Object.Equals` method is the preferable way.
+Two instances of a database class can be compared either with the `Object.Equals` method or with the `ObjectNo` value. The `Object.Equals` method is the preferable way.
 
 **Note:** the equals `==` operator and the `Object.ReferenceEquals` method will always return `false`.
 
 ```cs
-var p1 = new Product();
-var p2 = new Product();
-var anotherP1 = DbHelper.FromID(p1.GetObjectNo());
+var firstProduct = new Product();
+var secondProduct = new Product();
+var anotherFirstProduct = DbHelper.FromID(p1.GetObjectNo());
 bool equals;
 
-equals = p1.Equals(p2); // false
-equals = p1.GetObjectNo() == p2.GetObjectNo(); // false
+equals = firstProduct.Equals(secondProduct); // false
+equals = firstProduct.GetObjectNo() == secondProduct.GetObjectNo(); // false
 
-equals = p1.Equals(anotherP1); // true
-equals = p1.GetObjectNo() == anotherP1.GetObjectNo(); // true
+equals = firstProduct.Equals(anotherFirstProduct); // true
+equals = firstProduct.GetObjectNo() == anotherFirstProduct.GetObjectNo(); // true
 
-equals = p1 == anotherP1; // false
-equals = object.ReferenceEquals(p1, anotherP1); // false
+equals = firstProduct == anotherFirstProduct; // false
+equals = object.ReferenceEquals(firstProduct, anotherFirstProduct); // false
 ```
