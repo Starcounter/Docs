@@ -45,4 +45,4 @@ That was all for this part. Check out what you have achieved and we will move on
 
 Our next step is to practice working on multiple object instances and relations by turning our app into a simple expense tracker.
 
-If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/8fbb55ac360ceaaeade17faacc94991b5ec7861b).
+If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/502f3dbe9b1e76095aa2ec85ae49b5209c72da3f).

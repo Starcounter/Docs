@@ -97,4 +97,4 @@ We have now established a [model-view-view-model](/guides/web-apps/starcounter-m
 
 It's impossible for us to see the immediate changes as there is no way for the user to change the info. Let us fix that by adding some interactivity!  
 
-If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/5510c565ed08c4210de92c47e8c103579f147c55).
+If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/9bc0f676fe1f986965aa2cf01c2f290759166d35).
