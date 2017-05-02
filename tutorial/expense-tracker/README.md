@@ -39,17 +39,10 @@ To create a list of the expenses we will use the power of Polymer. Our first ste
 ```
 {% endraw %}
 
-<<<<<<< HEAD
-Great! Now we just need to stack these views inside the `Person` view. We can do that easily using [`dom-repeat`](https://www.polymer-project.org/1.0/docs/api/dom-repeat). While we are on it, we will also modify the headline and add a button to add new expenses.
-=======
+
 ## Include the Expense View in the Person View
 
-Great! Now we just need to stack these views inside the `Person` view. We can do that easily using `dom-repeat`. While we are on it, we will also modify the headline and add a button to add new expenses.
-
-<aside class="read-more">
-    <a href="https://www.polymer-project.org/1.0/docs/devguide/templates">Read more about dom-repeat</a>
-</aside>
->>>>>>> 2.2.1.3234
+Great! Now we just need to stack these views inside the `Person` view. We can do that easily using [`dom-repeat`](https://www.polymer-project.org/1.0/docs/api/dom-repeat). While we are on it, we will also modify the headline and add a button to add new expenses.
 
 <div class="code-name">PersonJson.html</div>
 
