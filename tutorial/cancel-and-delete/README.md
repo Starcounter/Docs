@@ -4,6 +4,8 @@ You have probably noticed that in the current app you can only add new expenses.
 
 In this part, we will add a cancel and delete button which allows the user to either cancel a change that has not been committed or delete all the expenses of a person.
 
+## Adding Trigger Properties
+
 We start by adding our needed trigger properties for our future buttons to the `PersonJson.json`.
 
 <div class="code-name">PersonJson.json</div>
@@ -15,6 +17,8 @@ We start by adding our needed trigger properties for our future buttons to the `
 ```
 
 No surprises here.
+
+## Add Buttons to the View
 
 Now, let's add the buttons that will increment these values in the same way that our save button does now.
 
@@ -33,6 +37,8 @@ Now, let's add the buttons that will increment these values in the same way that
 
 
 We now expect the values `DeleteAllTrigger$` and `CancelTrigger$` to be incremented on click.
+
+## Create Event Handlers
 
 The next step is to build handlers to react accordingly. We will also do that similar to the way we did with the `Save` button.
 
@@ -67,6 +73,8 @@ partial class PersonJson : Json, IBound<Person>
 
 The `DeleteAllTrigger` handler deletes all the expenses for the current `Person` in the database and clears the `Expenses` property in its JSON file.
 
+## Refresh the Expenses
+
 `RefreshExpenses` in the `CancelTrigger` handler is a method that updates the `Expenses` of the `Person`. It should look like this:
 
 <div class="code-name">PersonJson.json.cs</div>
@@ -91,6 +99,8 @@ if (person.Spendings != null)
     json.RefreshExpenses(person.Spendings);
 }
 ```
+
+## Result
 
 You can now run your application again and rollback any mistakes you make or delete all expenses.
 
