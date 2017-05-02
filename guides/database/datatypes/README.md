@@ -33,27 +33,27 @@ All signed integers, `Int64`, `Int32`, `Int16` and `SByte` are represented as `I
 
 If you want to store `null` values for datatypes that essentially are value types, you can instead use the corresponding nullable datatypes:
 
-* `Nullable<Boolean>`,
-* `Nullable<Byte>`,
-* `Nullable<DateTime>`,
-* `Nullable<Decimal>`,
-* `Nullable<Double>`,
-* `Nullable<Int16>`,
-* `Nullable<Int32>`,
-* `Nullable<Int64>`,
-* `Nullable<SByte>`,
-* `Nullable<Single>`,
-* `Nullable<UInt16>`,
-* `Nullable<UInt32>`,
-* `Nullable<UInt64>`.
+* `Nullable<Boolean>`
+* `Nullable<Byte>`
+* `Nullable<DateTime>`
+* `Nullable<Decimal>`
+* `Nullable<Double>`
+* `Nullable<Int16>`
+* `Nullable<Int32>`
+* `Nullable<Int64>`
+* `Nullable<SByte>`
+* `Nullable<Single>`
+* `Nullable<UInt16>`
+* `Nullable<UInt32>`
+* `Nullable<UInt64>`
 
 ## Arithmetic operations
 
 The datatype of the result of an [arithmetic operation](/guides/SQL/data-operators/) is one of the following:
 
-1. `Double` (representing approximate numeric values) [highest precedence],
-2. `Decimal` (representing exact numeric values),
-3. `Int64` (representing signed integers),
+1. `Double` (representing approximate numeric values) [highest precedence]
+2. `Decimal` (representing exact numeric values)
+3. `Int64` (representing signed integers)
 4. `UInt64` (representing unsigned integers - the natural numbers) [lowest precedence]
 
 In general the datatype of the result of an arithmetic operation is the datatype with the highest precedence of the datatypes of the operands.
