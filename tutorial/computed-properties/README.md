@@ -4,6 +4,8 @@ Starcounter allows you to use computed properties in your data model. Computing 
 
 Let us compute the `FullName` of a person from their `FirstName` and `LastName` and display it without any delay!
 
+## Preparing the View-Model
+
 We start by simply adding the `FullName` property to our JSON.
 
 <div class="code-name">PersonJson.json</a></div>
@@ -14,6 +16,8 @@ We start by simply adding the `FullName` property to our JSON.
 ```
 
 Notice that we don't need to make `FullName` editable because we will modify it from the code-behind and not the view.
+
+## Compute in Code-Behind
 
 We now calculate the `FullName` by simply concatenating `FirstName` and `LastName`.
 
@@ -27,6 +31,8 @@ class PersonJson : Json
 
 It´s that easy.
 
+## Add Property to the View
+
 All that remains is to add `FullName` to the view. We do that using a Polymer binding to the JSON property `FullName`.
 
 <div class="code-name">PersonJson.html</div>
@@ -37,11 +43,9 @@ All that remains is to add `FullName` to the view. We do that using a Polymer bi
 ```
 {% endraw %}
 
-That was all for this part. Check out what you have achieved and we will move on to the next step.
+## Result
 
-<section class="see-yourself">
-    <div>Try to type a new name into the input fields. Can you count how long it takes to update the view? I bet you cannot!</div>
-</section>
+Try to type a new name into the input fields. Can you count how long it takes to update the view? I bet you cannot!
 
 ![part 4 gif](/assets/part4resized.gif)
 

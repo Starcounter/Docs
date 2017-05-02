@@ -11,6 +11,8 @@ with Starcounter, views and view-models can be broken up into parts and nested t
 1. Add a new Starcounter HTML template with dom-bind in the HelloWorld folder together with `PersonJson.html`. Name it `ExpenseJson.html`.
 2. Add a new Starcounter Typed JSON with Code-behind file to the HelloWorld project together with `PersonJson.json` and `PersonJson.json.cs`. Name it `ExpenseJson.json`.
 
+## Define the Expense View-Model
+
 In `ExpenseJson.json`, add the properties `Description`, `Amount`, and `Html`. `Description` and `Amount` will need to be editable.
 
 <div class="code-name">ExpenseJson.json</div>
@@ -23,6 +25,8 @@ In `ExpenseJson.json`, add the properties `Description`, `Amount`, and `Html`. `
 }
 ```
 Now we have enough information to create the view for the expenses, so let's do that.
+
+## Define the Expense View
 
 To create a list of the expenses we will use the power of Polymer. Our first step is to create an HTML view definition for `Description` and `Amount`.
 
@@ -38,6 +42,8 @@ To create a list of the expenses we will use the power of Polymer. Our first ste
 </template>
 ```
 {% endraw %}
+
+## Include the Expense View in the Person View
 
 Great! Now we just need to stack these views inside the `Person` view. We can do that easily using `dom-repeat`. While we are on it, we will also modify the headline and add a button to add new expenses.
 
@@ -67,6 +73,8 @@ Great! Now we just need to stack these views inside the `Person` view. We can do
 
 `starcounter-include` is an insertion point for another template. In this case it's representing the template in ExpenseJson so that we can keep our code separate.
 
+## Extend the Person View-Model
+
 As you can see above, we are using `AddNewExpenseTrigger$`, which we haven't defined yet. Let's go and fix that now.
 
 <div class="code-name">PersonJson.json</div>
@@ -81,6 +89,8 @@ As you can see above, we are using `AddNewExpenseTrigger$`, which we haven't def
 `Expenses` is a list of the expenses of a Person and `CurrentBalance` will be the sum of of all these expenses.
 
 `AddNewExpenseTrigger$` is a trigger property that allows us to add a new `Expenses` template to the view. We can implement its handler now.
+
+## Create New Expenses
 
 <div class="code-name">PersonJson.json.cs</div>
 
@@ -109,6 +119,8 @@ public void AddExpense(Expense expense)
 
 This handler essentially creates a new expense instance, sets the current Person as the Spender, and adds that expense to that person's array of expenses.
 
+## Defining the Expense Database Class
+
 Right now, this handler will not function because we haven't defined the `Expense` class yet. Let's go to `Program.cs` and do that.
 
 <div class="code-name">Program.cs</div><div class="code-name code-title">Add more fields</div>
@@ -123,6 +135,8 @@ public class Expense
 }
 ```
 `public Person Spender` binds every `Expense` to a `Person`. Without it we would have to look in every `Person` to find who has a certain `Expense`.
+
+## Extending the Person Class
 
 While we are tinkering with the databases, we should also add Spendings and CurrentBalance to the Person class.
 
@@ -145,6 +159,8 @@ These two are calculated every time they are used by searching through the datab
     <a href="/guides/SQL/">Learn more about using SQL in Starcounter</a>
 </aside>
 
+## Defining the Expense Lookup Handler
+
 Inside the Program class, you should also add the following GET handler which helps with looking up the expenses.
 
 <div class="code-name">Program.cs</div>
@@ -160,7 +176,9 @@ Handle.GET("/HelloWorld/partial/expense/{?}", (string id) =>
 
 Before we run the program, do a quick swing into `ExpenseJson.json.cs` to make sure the partial class is named ExpenseJson.
 
-<section class="see-yourself">Run the program and try to add expenses, change their cost, and see the current balance change in real time.</section>
+## Result
+
+Run the program and try to add expenses, change their cost, and see the current balance change in real time.
 
 ![part 5 gif](/assets/Part5resized.gif)
 

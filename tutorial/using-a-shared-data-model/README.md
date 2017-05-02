@@ -4,6 +4,8 @@ In the previous steps, we've used a data model declared using `[Database]` class
 
 Starcounter has a unique ability to allow multiple apps to work on the same data. We do this by putting the data model into a separate project and loading it as a Dynamic-link Library (DLL) in all apps where it is applicable.
 
+## Adding the Data Model
+
 Starcounter comes with a built-in data model called "Simplified". Using it or inheriting from it allows you to integrate your apps with our sample and prefab apps, without extensive data mapping.
 
 1. Go to `Solution Explorer -> HelloWorld -> References -> Add Reference... -> Extensions`, find `Simplified.Data.Model` and check the checkbox next to it.
@@ -19,6 +21,8 @@ using Starcounter;
 using Simplified.Ring1;
 using Simplified.Ring2;
 ```
+
+## Inherit from the Shared Data Model
 
 Now that we have these in our file, we can start referencing them. First, we want our classes `Expense` and `Person` to inherit from the classes `Something` and `Person` which are inside `Simplified`.
 
@@ -37,6 +41,8 @@ public class Expense : Something
   // Expense fields
 }
 ```
+
+## Update Existing References
 
 Notice here that we change the name of what was previously our `Person` to be `Spender` because the class we inherit from has the same name as our initial class. Due of this, we will need to change all our references of `Person` to be `Spender` instead.
 
@@ -85,6 +91,8 @@ void Handle(Input.AddNewExpenseTrigger action)
 }
 ```
 
+## Delete Excessive Properties
+
 Great! The only thing remaining to fully implement our simplified data model is to delete the overlapping properties we have. These properties are `FirstName` and `LastName` in `Spender`, and `Description` in `Expense`.
 
 When you're done, your classes should look like this:
@@ -106,6 +114,9 @@ public class Expense : Something
     public decimal Amount;
 }
 ```
+
+## Result
+
 Look at that! From seven different properties down to four. That's a significant simplification without reducing the functionality of our application.
 
 Since this changes the data model, it might be necessary to clear the database for it to work. That can be done at `http://localhost:8181/#/databases` by clicking `delete` below the database tab.
