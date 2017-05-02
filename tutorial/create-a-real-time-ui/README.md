@@ -58,9 +58,9 @@ In the JSON file, create three properties called `Html`, `FirstName`, and `LastN
 }
 ```
 
-## Establish the Handler
+## Create the HTTP Handler
 
-Go to `Program.cs` and type in the following code inside the `Main()` method. This code adds the correct information to our previously empty JSON file and creates a new [session](/guides/web-apps/sessions).
+Go to `Program.cs` and type in the following code inside the `Main()` method.
 
 <div class="code-name">Program.cs</div><div class="code-name code-title">Bind JSON</div>
 
@@ -84,9 +84,14 @@ Handle.GET("/HelloWorld", () =>
     return json;
 });
 ```
-[`Application.Current.Use(new HtmlFromJsonProvider())`](/guides/network/middleware/#htmlfromjsonprovider) looks in the JSON file for the `Html` property and sends the document found at that path to the web browser.
 
-[`Application.Current.Use(new PartialToStandaloneHtmlProvider());`](/guides/network/middleware/#partialtostandalonehtmlprovider) wraps the HTML template to form a complete HTML document.
+The handler `/HelloWorld` binds a `Person` database object to the view-model and attaches a [session](/guides/web-apps/sessions) to be able to have real-time synching using [WebSocket](/guides/network/websocket/). It then returns that view-model.
+
+[`Application.Current.Use(new HtmlFromJsonProvider())`](/guides/network/middleware/#htmlfromjsonprovider) intercepts the view-model, looks for the `Html` property and sends the document found at that path to the web browser.
+
+[`Application.Current.Use(new PartialToStandaloneHtmlProvider());`](/guides/network/middleware/#partialtostandalonehtmlprovider) wraps the HTML template coming from `HtmlFromJsonProvider` to form a complete HTML document.
+
+With this structure, a complete HTML document can be sent to the client, even if the only thing that's returned from the handler is a simple JSON tree. 
 
 ## Result
 
