@@ -178,7 +178,7 @@ Before we run the program, do a quick swing into `ExpenseJson.json.cs` to make s
 
 ## Result
 
-<section class="see-yourself">Run the program and try to add expenses, change their cost, and see the current balance change in real time.</section>
+Run the program and try to add expenses, change their cost, and see the current balance change in real time.
 
 ![part 5 gif](/assets/Part5resized.gif)
 

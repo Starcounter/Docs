@@ -100,9 +100,7 @@ Handle.GET("/HelloWorld", () =>
 
 ## Result
 
-We now have a program where we can change our view-model in real time and then commit our changes to the database at our will.
-
-<section class="see-yourself">Start the application with <kbd>F5</kbd> and go to <code>http://localhost:8080/HelloWorld</code> in your web browser. You should see two input boxes with their respective label and a button below.</section>
+We now have a program where we can change our view-model in real time and then commit our changes to the database at our will. To see how it looks, start the application with <kbd>F5</kbd> and go to `http://localhost:8080/HelloWorld` in your web browser. You should see two input boxes with their respective label and a button below.
 
 If you are an especially curious person, you can try to change the name and then take a look at the database again with SQL. Here's how it should work:
 

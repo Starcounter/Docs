@@ -45,11 +45,7 @@ All that remains is to add `FullName` to the view. We do that using a Polymer bi
 
 ## Result
 
-That was all for this part. Check out what you have achieved and we will move on to the next step.
-
-<section class="see-yourself">
-    <div>Try to type a new name into the input fields. Can you count how long it takes to update the view? I bet you cannot!</div>
-</section>
+Try to type a new name into the input fields. Can you count how long it takes to update the view? I bet you cannot!
 
 ![part 4 gif](/assets/part4resized.gif)
 
