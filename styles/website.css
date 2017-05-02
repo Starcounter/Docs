@@ -22,33 +22,9 @@ pre::after {
     display: none;
 }
 
-/* styling for article ToC on the bottom of each section page */
-.part-box {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: space-around;
-  border-color: #f47e0c;
-  border-style: dotted;
-  border-width: 8px;
-  border-radius: 30px;
-  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-  margin-top: 20px;
-}
-
-.toc-text {
+.page-inner .markdown-section .guide-articles a,
+.page-inner .markdown-section .toc a {
   color: black;
-  margin-left: 15px;
-  font-size: 20px;
-  text-align: center;
-}
-
-.toc-headline {
-  margin-top: 0.5em !important;
-  color: #f47e0c;
-  text-align: center;
-  width: 100%;
 }
 
 .code-name + pre code {
@@ -239,14 +215,6 @@ kbd {
   }
   .report-errors-link {
     display: none;
-  }
-}
-
-@media (max-width: 700px) {
-  .toc-text {
-    font-size: larger !important;
-    line-height: normal !important;
-    margin-left: 1em !important;
   }
 }
 
@@ -450,4 +418,28 @@ a .js-toolbar-action {
 .report-errors-link a:hover {
   color: black;
   border-bottom: 3px solid #f47e0c
+}
+
+.guide-articles {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.guide-articles section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    .guide-articles section {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .guide-articles section {
+        width: 33.333%;
+    }
 }
