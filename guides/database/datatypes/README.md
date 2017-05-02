@@ -6,32 +6,33 @@ This page describes the expected datatypes of the `Db.SQL` query results for the
 
 Your object properties and fields may have the following datatypes (`DbTypeCode`):
 
-* `Binary`,  
-* `Boolean`,  
-* `Byte`,  
-* `DateTime`,  
-* `Decimal`,  
-* `Double`,  
-* `Int16`,  
-* `Int32`,  
-* `Int64`,  
-* `object` (reference to a database object),  
-* `SByte`,  
-* `Single`,  
-* `String`,  
-* `UInt16`,  
-* `UInt32`,  
-* `UInt64`. 
+* `Binary`
+* `Boolean`
+* `Byte`
+* `DateTime` 
+* `Decimal`
+* `Double`
+* `Int16`
+* `Int32`
+* `Int64`
+* `object`
+* `SByte`
+* `Single`
+* `String`
+* `UInt16`
+* `UInt32`
+* `UInt64`
 
 The datatypes `Boolean`, `Byte`, `DateTime`, `Decimal`, `Double`, `Int16`, `Int32`, `Int64`, `SByte`, `Single`, `String`, `UInt16`, `UInt32`, `UInt64` correspond to the .NET datatypes with the same names.
 
-The datatype `object` represents a reference to a database object, i.e. an instance of a class, directly or by inheritance having the`Database` attribute set.
+The datatype `object` represents a reference to a database object, i.e. an instance of a class, directly or by inheritance having the `Database` attribute set.
 
 The datatype `Binary` is for representing binary data up to 8 kB. Note that in Starcounter there is also another binary datatype `LargeBinary` for storing larger binary data. However, `LargeBinary` cannot be indexed and is not supported in Starcounter SQL.
 
+All signed integers, `Int64`, `Int32`, `Int16` and `SByte` are represented as `Int64` internally in Starcounter SQL. The unsigned integers, `UInt64`, `UInt32`, `UInt16` and `Byte` are represented as `UInt64`. The approximate numerical types `Single` and `Double` are represented as `Double`. `DateTime` is represented as an `Int64` of the number of .Net ticks from `DateTime.MinValue.Ticks`.
+
 If you want to store `null` values for datatypes that essentially are value types, you can instead use the corresponding nullable datatypes:
 
-[](* `Nullable<Binary>`,)
 * `Nullable<Boolean>`,
 * `Nullable<Byte>`,
 * `Nullable<DateTime>`,
@@ -45,12 +46,6 @@ If you want to store `null` values for datatypes that essentially are value type
 * `Nullable<UInt16>`,
 * `Nullable<UInt32>`,
 * `Nullable<UInt64>`.
-
-[](Internally, in Starcounter SQL, all signed integers `Int64`, `Int32`,
-`Int16`, `SByte` are represented as `Int64`, all unsigned integers
-`UInt64`, `UInt32`, `UInt16`, `Byte` are
-represented as `UInt64`, and all approximate numerical types `Single`,
-`Double` are represented as `Double`.)
 
 ## Arithmetic operations
 
