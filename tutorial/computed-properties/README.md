@@ -16,6 +16,7 @@ We start by simply adding the `FullName` property to our JSON.
 Notice that we don't need to make `FullName` editable because we will modify it from the code-behind and not the view.
 
 We now calculate the `FullName` by simply concatenating `FirstName` and `LastName`.
+
 <div class="code-name">PersonJson.json.cs</div>
 
 ```cs
@@ -39,7 +40,8 @@ All that remains is to add `FullName` to the view. We do that using a Polymer bi
 That was all for this part. Check out what you have achieved and we will move on to the next step.
 
 <section class="see-yourself">
-<div>Try to type a new name into the input fields. Can you count how long it takes to update the view? I bet you cannot!</div></section>
+    <div>Try to type a new name into the input fields. Can you count how long it takes to update the view? I bet you cannot!</div>
+</section>
 
 ![part 4 gif](/assets/part4resized.gif)
 

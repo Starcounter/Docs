@@ -18,6 +18,7 @@ Our view will be, for now, a simple interface displaying the `FirstName` and `La
 To accomplish this we will use the `label` and `strong`> tags. It's not essential that you use exactly these elements. `p`, `span`, and many others would work just as well. To make Polymer's template engine work, we also have to import it into our file with the `rel="import"`.
 
 <div class="code-name">PersonJson.html</div><div class="code-name code-title">Create view</div>
+
 {% raw %}
 ```html
 <link rel="import" href="/sys/polymer/polymer.html"/>
