@@ -12,13 +12,13 @@ What this does is that it uses htmlmerger, a class within Starcounter, to merge 
 
 Now, when we have described what files to merge we also want to describe how they should be merged. We do that in the input field below with the following code:
 ```html
-<slot name='HelloWorld/description'></slot>
-<slot name='HelloWorld/amount'></slot>
+<slot name="helloworld/description"></slot>
+<slot name="helloworld/amount"></slot>
 <div style="display: none">
-    <slot name='Images/label'></slot>
+    <slot name="images/label"></slot>
 </div>
 <div style="width: 200px; height: 200px">
-    <slot name='Images/control'></slot>
+    <slot name="images/control"></slot>
 </div>
 ```
 
