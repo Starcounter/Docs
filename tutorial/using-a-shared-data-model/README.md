@@ -6,7 +6,7 @@ Starcounter has a unique ability to allow multiple apps to [work on the same dat
 
 Starcounter comes with a built-in data model called ["Simplified"](https://github.com/StarcounterApps/Simplified). Using it or inheriting from it allows you to integrate your apps with our sample apps, without extensive data mapping.
 
-1. Go to <code>Solution Explorer -> HelloWorld -> References -> Add Reference... -> Extensions</code>, find <code>Simplified.Data.Model</code> and check the checkbox next to it.
+1. Go to `Solution Explorer -> HelloWorld -> References -> Add Reference... -> Extensions`, find `Simplified.Data.Model` and check the checkbox next to it.
 2. Open `References -> Simplified.Data.Model` in the Solution Explorer, right-click and click on `properties`. Find the property `Copy Local` and change it to `False`.
 
 The Simplified data model has six different "Rings", we will use the first two of these. We include them at the start of our `Program.cs` file.
