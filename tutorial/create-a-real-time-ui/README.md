@@ -41,20 +41,12 @@ To accomplish this we will use the `label` and `strong` tags. It's not essential
 </template>
 ```
 
-The double curly bracket syntax is a way of denoting two-way bindings in Polymer. `model` represents our JSON file, so `{{model.FirstName}}` is the `FirstName` value in `PersonJson.json`.
+The double curly bracket syntax is a way of denoting [two-way bindings in Polymer](https://www.polymer-project.org/1.0/docs/devguide/data-binding). `model` represents our JSON file, so `{{model.FirstName}}` is the `FirstName` value in `PersonJson.json`.
 {% endraw %}
-
-<aside class="read-more">
-    <a href="https://www.polymer-project.org/1.0/docs/devguide/data-binding">Learn about Polymer bindings</a>
-</aside>
 
 ## Define the View-Model
 
-In the JSON file, create three properties called `Html`, `FirstName`, and `LastName`. The values of these properties will be the values that are bound to the Polymer bindings that we just created _and_ the database. It is therefore crucial, for this example, that you name these keys the same as the properties that we have in our Person class, otherwise they will not bind properly.
-
-<aside class="read-more">
-    <a href="/guides/typed-json/json-data-bindings">Learn more about JSON bindings</a>
-</aside>
+In the JSON file, create three properties called `Html`, `FirstName`, and `LastName`. The values of these properties will be the values that are bound to the Polymer bindings that we just created _and_ the database. It is therefore crucial, for this example, that you name these keys the same as the properties that we have in our Person class, otherwise they will not bind properly. Learn more about JSON binding in the [docs](/guides/typed-json/json-data-bindings).
 
 <div class="code-name">PersonJson.json</div><div class="code-name code-title">Set JSON</div>
 
@@ -64,15 +56,6 @@ In the JSON file, create three properties called `Html`, `FirstName`, and `LastN
   "FirstName": "",
   "LastName": ""
 }
-```
-
-
-Before we move on, quickly make sure that your partial class in `PersonJson.json.cs` is called PersonJson.
-
-<div class="code-name">PersonJson.json.cs</div>
-
-```cs
-partial class PersonJson : Json
 ```
 
 ## Establish the Handler
