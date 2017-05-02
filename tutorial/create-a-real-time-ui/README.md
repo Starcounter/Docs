@@ -2,6 +2,8 @@
 
 To create a user interface (UI) we need to add a view-model and a corresponding view. The view-model will act as a representation of the view and as a midpoint between the view and the database.
 
+## Setup the File Structure
+
 Let's create our file structure that contains our view (HTML) and view-model (JSON). If you follow these steps you will have the right files to build the UI:
 
 1. In the Solution Explorer in Visual Studio, right click on the project file named `HelloWorld` and add a folder with the name `wwwroot`.
@@ -12,6 +14,8 @@ Let's create our file structure that contains our view (HTML) and view-model (JS
 ![file structure](/assets/file-structure.PNG)
 
 Now that we have a solid file structure we can continue by creating our view.
+
+## Define the View
 
 Our view will be, for now, a simple interface displaying the `FirstName` and `LastName` of our `Person` instance.
 
@@ -44,6 +48,8 @@ The double curly bracket syntax is a way of denoting two-way bindings in Polymer
     <a href="https://www.polymer-project.org/1.0/docs/devguide/data-binding">Learn about Polymer bindings</a>
 </aside>
 
+## Define the View-Model
+
 In the JSON file, create three properties called `Html`, `FirstName`, and `LastName`. The values of these properties will be the values that are bound to the Polymer bindings that we just created _and_ the database. It is therefore crucial, for this example, that you name these keys the same as the properties that we have in our Person class, otherwise they will not bind properly.
 
 <aside class="read-more">
@@ -68,6 +74,8 @@ Before we move on, quickly make sure that your partial class in `PersonJson.json
 ```cs
 partial class PersonJson : Json
 ```
+
+## Establish the Handler
 
 Go to `Program.cs` and type in the following code inside the `Main()` method. This code adds the correct information to our previously empty JSON file and creates a new [session](/guides/web-apps/sessions).
 
@@ -100,6 +108,8 @@ Handle.GET("/HelloWorld", () =>
 `Application.Current.Use(new HtmlFromJsonProvider())` looks in your JSON file for the `Html` property and sends that document to your web browser.
 
 `Application.Current.Use(new PartialToStandaloneHtmlProvider());` sends the necessary files to inititate our [WebSocket](/guides/network/websocket) connection.
+
+## Result
 
 We have now established a model-view-view-model (MVVM) binding that's real time. The JSON, which is our view-model, is bound to the model (database) with no latency; our view, the HTML, is in turn bound to the JSON, which is synced in real time using WebSocket and HTTP. Polymer helps us display this instantaneously to the user.
 
