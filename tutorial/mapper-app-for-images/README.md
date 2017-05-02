@@ -4,12 +4,12 @@ To display our images, we will use a prefabricated application called "Images" t
 
 To implement this we need to do some setup.
 
-1. Create a new project and call it <code>HelloWorldMapper</code>.
-2. Add <code>Simplified.Data.Model</code> to this project the same way we did with the <code>HelloWorld</code> project.
-3. Create a reference to the <code>HelloWorld</code>. You can find this in the <code>Projects</code> tab of the <code>Reference Manager</code>.
-4. Change the <code>Copy Local</code> property to False for the <code>Simplified.Data.Model</code>.
+1. Create a new project and call it `HelloWorldMapper`.
+2. Add `Simplified.Data.Model` to this project the same way we did with the `HelloWorld` project.
+3. Create a reference to the `HelloWorld`. You can find this in the `Projects` tab of the `Reference Manager`.
+4. Change the `Copy Local` property to False for the `Simplified.Data.Model`.
 
-Now we can start getting some code in there. As mentioned earlier, we simply copy the mapping code from [here](https://github.com/StarcounterPrefabs/Images/blob/master/README.md) into the <code>Main</code> method of <code>Program.cs</code> in <code>HelloWorldMapper</code> and do some small adjustments. In addition, you have to add <code>using Starcounter.Internal</code> to the beginning of the same file in order to use <code>StarcounterEnvironment.RunWithinApplication</code>.
+Now we can start getting some code in there. As mentioned earlier, we simply copy the mapping code from [here](https://github.com/StarcounterPrefabs/Images/blob/master/README.md) into the `Main` method of `Program.cs` in `HelloWorldMapper` and do some small adjustments. In addition, you have to add `using Starcounter.Internal` to the beginning of the same file in order to use `StarcounterEnvironment.RunWithinApplication`.
 
 <div class="code-name">Program.cs</div>
 
@@ -35,7 +35,7 @@ To get the applications up and running correctly, start them in this order:
 
 It is advisable to first start HelloWorld, then go to `http://localhost:8181/#/databases/default/appstore`, find Images under Starcounter Prefabs Store and click `Download`. It will then be possible to go to `http://localhost:8181/#/databases/default` and simply press `Start`. At last, start HelloWorldMapper from Visual Studio or the command line.
 
-Open up <code>HelloWorld</code> in the <code>Starcounter Administrator</code> and you should see a screen that looks like this after you have added your images:
+Open up `HelloWorld` in the `Starcounter Administrator` and you should see a screen that looks like this after you have added your images:
 
 ![part 8 GIF](/assets/part8-resize.gif)
 

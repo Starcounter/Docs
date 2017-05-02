@@ -4,7 +4,15 @@ Welcome to the first part of our Hello World tutorial!
 
 We will start by creating a Starcounter application in Visual Studio by going to `New Project -> Templates -> Visual C# -> Starcounter -> Starcounter Application`. We will name the application `HelloWorld`.
 
+<<<<<<< HEAD
 Establish a new class called `Person` with the [`[Database]` attribute](/guides/database/creating-database-classes) inside the `HelloWorld` namespace. This attribute tag will make all instances of the class persistent. Add the fields `FirstName` and `LastName` to this class. Your code should now look like this:
+=======
+Establish a new class called `Person` with the attribute `[Database]` inside the `HelloWorld` namespace. This attribute tag will make all instances of the class persistent. Add the fields `FirstName` and `LastName` to this class. Your code should now look like this:
+
+<aside class="read-more">
+    <a href="/guides/database/creating-database-classes">Read about the  [Database] attribute</a>
+</aside>
+>>>>>>> 2.2.1.3234
 
 <div class="code-name">Program.cs</div><div class="code-name code-title">Define database</div>
 
