@@ -2,15 +2,16 @@
 
 Welcome to the first part of our Hello World tutorial!
 
-We will start by creating a Starcounter application in Visual Studio by going to <code>New Project -> Templates -> Visual C# -> Starcounter -> Starcounter Application</code>. We will name the application <code>HelloWorld</code>.
+We will start by creating a Starcounter application in Visual Studio by going to `New Project -> Templates -> Visual C# -> Starcounter -> Starcounter Application`. We will name the application `HelloWorld`.
 
-Establish a new class called <code>Person</code> with the attribute <code>[Database]</code> inside the <code>HelloWorld</code> namespace. This attribute tag will make all instances of the class persistent. Add the fields <code>FirstName</code> and <code>LastName</code> to this class. Your code should now look like this:
+Establish a new class called `Person` with the attribute `[Database]` inside the `HelloWorld` namespace. This attribute tag will make all instances of the class persistent. Add the fields `FirstName` and `LastName` to this class. Your code should now look like this:
 
 <aside class="read-more">
     <a href="/guides/database/creating-database-classes">Read about the  [Database] attribute</a>
 </aside>
 
 <div class="code-name">Program.cs</div><div class="code-name code-title">Define database</div>
+
 ```cs
 using Starcounter;
 
@@ -32,13 +33,14 @@ namespace HelloWorld
     }
 }
 ```
-Add your first instance to the database by defining a new person, its properties, and wrapping it in a <code>Db.Transact()</code> which will keep this person in the database.
+Add your first instance to the database by defining a new person, its properties, and wrapping it in a `Db.Transact()` which will keep this person in the database.
 
 <aside class="read-more">
     <a href="/guides/transactions/">Read more about transactions in Starcounter</a>
 </aside>
 
 <div class="code-name">Program.cs</div><div class="code-name code-title">Add instance</div>
+
 ```cs
     class Program
     {
@@ -60,7 +62,7 @@ Add your first instance to the database by defining a new person, its properties
     }
 ```
 
-The if statement here checks if you already have a <code>Person</code> in the database by accessing the <code>First</code> result that we get from the query. If that is the case, you do not need to create a new one. Without it, we would create a new instance of <code>Person</code> every time we run the program, which we do not intend to do.
+The if statement here checks if you already have a `Person` in the database by accessing the `First` result that we get from the query. If that is the case, you do not need to create a new one. Without it, we would create a new instance of `Person` every time we run the program, which we do not intend to do.
 
 Start your program with Starcounter by clicking <kbd>F5</kbd> in Visual Studio. You can find the Starcounter Administrator and access your database by going to localhost:8181 in your web browser.
 

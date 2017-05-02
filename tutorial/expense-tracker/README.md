@@ -70,6 +70,7 @@ Great! Now we just need to stack these views inside the `Person` view. We can do
 As you can see above, we are using `AddNewExpenseTrigger$`, which we haven't defined yet. Let's go and fix that now.
 
 <div class="code-name">PersonJson.json</div>
+
 ```json
 "FullName": "",
 "Expenses": [{}],
@@ -111,6 +112,7 @@ This handler essentially creates a new expense instance, sets the current Person
 Right now, this handler will not function because we haven't defined the `Expense` class yet. Let's go to `Program.cs` and do that.
 
 <div class="code-name">Program.cs</div><div class="code-name code-title">Add more fields</div>
+
 ```cs
 [Database]
 public class Expense
