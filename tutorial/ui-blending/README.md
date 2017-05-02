@@ -2,9 +2,13 @@
 
 This is where we tie everything together and get our final application.
 
+## Setup
+
 First, download the `CompositionEditor` and `CompositionProvider` from the App Warehouse, the same way we did with the Images app in the previous step. 
 
 You can now, if you haven't already, fire up the applications `HelloWorld`, `HelloWorldMapper`, `Images`, `CompositionEditor`, and `CompositionProvider`.
+
+## Blend the HTML
 
 Open `HelloWorld` in the Starcounter Administrator and press <kbd>Ctrl</kbd> + <kbd>E</kbd>. Double click on the "css selector for partial to edit" input field and choose the alternative `[partial-id="/sc/htmlmerger?HelloWorld=/HelloWorld/ExpenseJson.html&Images=/Images/viewmodels/ConceptPage.html"]`.
 
@@ -27,6 +31,8 @@ This code describes that we don't want to display the label for the images and t
 <aside class="read-more">
    <a href="http://starcounter.io/guides/web/import-html-compositions/">Read about alternative HTML composition</a>
 </aside>
+
+## Result
 
 Close the layout editor with <kbd>ctrl</kbd> + <kbd>E</kbd> should now see the following page:
 
