@@ -4,13 +4,11 @@ Welcome to the first part of our Hello World tutorial!
 
 We will start by creating a Starcounter application in Visual Studio by going to `New Project -> Templates -> Visual C# -> Starcounter -> Starcounter Application`. We will name the application `HelloWorld`.
 
-## Defining the Database Class
+## Add a Persistent Class
 
-Establish a new class called `Person` with the attribute `[Database]` inside the `HelloWorld` namespace. This attribute tag will make all instances of the class persistent. Add the fields `FirstName` and `LastName` to this class. Your code should now look like this:
+Create a new class called `Person` with the attribute [`[Database]`](/guides/database/creating-database-classes) in the `Program.cs` file. This attribute tag will make all instances of the class persistent. 
 
-<aside class="read-more">
-    <a href="/guides/database/creating-database-classes">Read about the  [Database] attribute</a>
-</aside>
+Add the fields `FirstName` and `LastName` to this class. Your code should now look like this:
 
 <div class="code-name">Program.cs</div><div class="code-name code-title">Define database</div>
 
@@ -36,42 +34,38 @@ namespace HelloWorld
 }
 ```
 
-## Add an Instance to the Database
+## Add an Instance to the Class
 
-Add your first instance to the database by defining a new person, its properties, and wrapping it in a `Db.Transact()` which will keep this person in the database.
-
-<aside class="read-more">
-    <a href="/guides/transactions/">Read more about transactions in Starcounter</a>
-</aside>
+Add a first instance to the class by defining a new person, its properties, and wrapping it in a `Db.Transact()`. Using a transaction allows us to access database objects and makes the changes inside the transaction atomic and isolated. Read more about this in the [transaction section](/guides/transactions/) of the documentation. 
 
 <div class="code-name">Program.cs</div><div class="code-name code-title">Add instance</div>
 
 ```cs
-    class Program
+class Program
+{
+    static void Main()
     {
-        static void Main()
+        Db.Transact(() =>
         {
-            Db.Transact(() =>
+            var anyone = Db.SQL<Person>("SELECT p FROM Person p").First;
+            if (anyone == null)
             {
-                var anyone = Db.SQL<Person>("SELECT p FROM Person p").First;
-                if (anyone == null)
+                new Person
                 {
-                    new Person
-                    {
-                        FirstName = "John",
-                        LastName = "Doe"
-                    };
-                }
-            });
-        }
+                    FirstName = "John",
+                    LastName = "Doe"
+                };
+            }
+        });
     }
+}
 ```
 
 The if statement here checks if you already have a `Person` in the database by accessing the `First` result that we get from the query. If that is the case, you do not need to create a new one. Without it, we would create a new instance of `Person` every time we run the program, which we do not intend to do.
 
 ## Result
 
-Start your program with Starcounter by clicking <kbd>F5</kbd> in Visual Studio. To see for yourself, open the administrator at `localhost:8181/#/databases/default/sql` and enter `SELECT * FROM HelloWorld.Person`. This will display all the instances of the `Person` class.
+Start your program with Starcounter by clicking <kbd>F5</kbd> in Visual Studio. To see for yourself, open the administrator at `localhost:8181/#/databases/default/sql` and enter `SELECT * FROM HelloWorld.Person`. This will display all the instances, represented as rows, of the `Person` class.
 
 ![Result gif](/assets/part1resized.gif)
 
