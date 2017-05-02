@@ -420,8 +420,8 @@ kbd {
 }
 
 .page-inner {
-  max-width: none;
-  margin: 0 110px 0 110px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .book-body {
