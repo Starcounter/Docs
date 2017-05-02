@@ -1,5 +1,7 @@
 # First Interactive UI
 
+## Writable View-Model
+
 In order to make our UI interactive, we first have to make the data in the view-model editable. In JSON we do this by adding a `$` at the end of our property. That allows us to edit these JSON values from the view. In addition to adding `$` to our already existing properties, we will add the property `SaveTrigger$` which will act as a trigger between the view and the code-behind.
 
 <aside class="read-more">
@@ -16,6 +18,8 @@ In order to make our UI interactive, we first have to make the data in the view-
   "SaveTrigger$": 0
 }
 ```
+
+## Creating Interactive Elements
 
 Next, we have to add some elements to our view. We will start by changing our previously static fields into input fields and adding a button which will allow us to confirm that input.
 
@@ -37,9 +41,13 @@ Next, we have to add some elements to our view. We will start by changing our pr
 
 The `::input` declaration sets up an event listener. It updates the JSON as you type in the HTML `input` element.
 
-`onmousedown="++this.value"` increments the `SaveTrigger$` value in our JSON. That change can then be registered in our code-behind and trigger a handler.
+`onmousedown="++this.value"` increments the `SaveTrigger$` value in our JSON.
 
-Let's write that handler!
+## Handling Changes in the Code-Behind
+
+To act on the change in the view-model that is triggered from the view, an event handler can be registered in the code-behind.
+
+In this case, where the goal is to save, the following code can be used:
 
 <div class="code-name">PersonJson.json.cs</div>
 
@@ -58,6 +66,8 @@ With server-side view-models, you don't have to write a single line of "glue cod
 <aside class="read-more">
     <a href="/guides/web-apps/starcounter-mvvm">Learn about Starcounter's MVVM</a>
 </aside>
+
+## Creating a Long-Running Transaction
 
 The last step is to modify our `Program.cs` file to create a long running transaction that will allow us to make changes to our database multiple times during our session. We do that by wrapping everything in our `Handle.GET` inside a `Db.Scope`.
 
@@ -87,6 +97,9 @@ Handle.GET("/HelloWorld", () =>
     });
 });
 ```
+
+## Result
+
 We now have a program where we can change our view-model in real time and then commit our changes to the database at our will.
 
 <section class="see-yourself">Start the application with <kbd>F5</kbd> and go to <code>http://localhost:8080/HelloWorld</code> in your web browser. You should see two input boxes with their respective label and a button below.</section>
