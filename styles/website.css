@@ -443,3 +443,27 @@ a .js-toolbar-action {
   color: black;
   border-bottom: 3px solid #f47e0c
 }
+
+.guide-articles {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.guide-articles section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    .guide-articles section {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .guide-articles section {
+        width: 33.333%;
+    }
+}

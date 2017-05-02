@@ -6,32 +6,6 @@ Use the navigation on the left to learn how to use Starcounter's interfaces for 
 
 To learn the fundamentals of Starcounter, read the articles listed below with a <i>&#9733;</i> next to it.
 
-<style>
-    .guide-articles {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-
-    .guide-articles section {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
-
-    @media screen and (min-width: 768px) {
-        .guide-articles section {
-            width: 50%;
-        }
-    }
-
-    @media screen and (min-width: 1024px) {
-        .guide-articles section {
-            width: 33.333%;
-        }
-    }
-</style>
-
 {% set recommended_reading = [
         "database",
         "typed json",
