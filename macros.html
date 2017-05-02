@@ -1,4 +1,4 @@
-{% macro tocGenerator(pageTitle, articles) %}
+{% macro tocGenerator(pageTitle, articles, featured_subpages) %}
   <div class="part-box">
     <h2 class="toc-headline">Articles in the {{ pageTitle }} section</h2>
     {% for article in articles %}
@@ -6,6 +6,28 @@
         <a href="../../{{ article.path }}"><p class="toc-text">{{ article.title }}</p></a>
       {% elif article.depth == 2 %}
         <a href="../{{ article.path }}"><p class="toc-text">{{ article.title }}</p></a>
+      {% endif %}
+
+      {% set has_subpages = false %}
+      {% for subpage in article.articles %}
+        {% if featured_subpages.indexOf(subpage.path) != -1 %}
+          {% if has_subpages == false %}
+            {% set has_subpages = true %}
+            <p class="toc-text toc-subpage toc-subpage--first">(</p>
+          {% else %}
+            <p class="toc-text toc-subpage">•</p>
+          {% endif %}
+
+          {% if subpage.depth == 3 %}
+            <a href="../../{{ subpage.path }}"><p class="toc-text toc-subpage">{{ subpage.title }}</p></a>
+          {% elif subpage.depth == 2 %}
+            <a href="../{{ subpage.path }}"><p class="toc-text toc-subpage">{{ subpage.title }}</p></a>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+      {% if has_subpages == true %}
+        {% set has_subpages = false %}
+        <p class="toc-text toc-subpage toc-subpage--last">)</p>
       {% endif %}
     {% endfor %}
   </div>

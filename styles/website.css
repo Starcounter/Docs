@@ -75,6 +75,20 @@ pre::after {
   width: 100%;
 }
 
+.toc-text.toc-subpage {
+  font-size: 90%;
+  margin-top: 0.4em;
+  margin-left: 4px;
+}
+
+.toc-text.toc-subpage--first {
+  margin-right: -4px;
+}
+
+.toc-text.toc-subpage--last {
+  margin-right: 1px;
+}
+
 .code-name + pre code {
     border-radius: 0 3px 3px 3px;
 }
@@ -456,8 +470,8 @@ a .js-toolbar-action {
 }
 
 .report-errors-link {
-  position: fixed; 
-  bottom: 20px; 
+  position: fixed;
+  bottom: 20px;
   right: 20px;
   padding: 2px;
   color: black;
