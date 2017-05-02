@@ -186,3 +186,20 @@ partial class MailPage : Json, IBound<Mail>
 ```
 
 An example of this can also be found at [step 6](../../tutorial/cancel-and-delete) of the tutorial.
+
+## Exceptions
+
+### ScErrIteratorClosed (SCERR4139)
+
+This exception is thrown when an iterator is closed before it is done. An iterator will close if a long-running transaction is commited, rolled back, or cancelled inside the iteration.
+
+This is the simplest way to close the iteration and throw the exception if we assume that this code is in a long-running transaction:
+
+```cs
+foreach (var person in Db.SQL("SELECT p FROM Person p"))
+{
+    Transaction.Commit();
+} 
+```
+
+Due to this, it is recommended not to execute code with side effects during the iteration since it might cause it to be closed. This is especially important when the developer does not have full control over the side effects, such as when making `Self.GET` calls that might have responses from other apps.
