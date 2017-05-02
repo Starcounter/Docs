@@ -2,18 +2,50 @@
 
 Use the navigation on the left to learn how to use Starcounter's interfaces for databases, view-models and networking in your apps. We have made sure that you will feel at home by using APIs that are similar to those you already know.
 
-## Essential Reading
+## Essential reading
 
-Here's a recommended reading list for those that want to learn the most fundamental features of Starcounter:
+To learn the fundamentals of Starcounter, read the articles listed below with a <i>&#9733;</i> next to it.
 
-| Database  | View-Model | Development | Web  |
-|---|---|---|---|---|
-| [Database](database)  |  [Typed JSON](typed-json) | [Working in Visual Studio](working-with-starcounter/working-in-visual-studio)  | [Starcounter MVVM](web-apps/starcounter-mvvm)  |  
-|  [Creating Database Classes](database/creating-database-classes) | [JSON-by-example](typed-json/json-by-example)  |  [Administrator Web UI](working-with-starcounter/administrator-web-ui) |  [Client-Side Stack](web-apps/client-side-stack) |
-| [Data Manipulation](database/data-manipulation)  | [Code-Behind](typed-json/code-behind)  |  [Starting and Stopping Apps](working-with-starcounter/starting-and-stopping-apps) | [HTML Views](web-apps/html-views)  | 
-| [SQL](SQL)  |  [JSON Data Bindings](typed-json/json-data-bindings) |  [Mapping and Blending](mapping-and-blending) |  [Handling HTTP Requests](network/handling-http-requests) | 
-| [Transactions](transactions)  |   | | [Creating HTTP Responses](network/creating-http-responses)  |
-|  [Using Transactions](transactions/using-transactions) | 
-{% import "../macros.html" as macros %}
+{% set recommended_reading = [
+        "database",
+        "typed json",
+        "working in visual studio",
+        "starcounter mvvm",
+        "creating database classes",
+        "json-by-example",
+        "administrator web ui",
+        "client-side stack",
+        "data manipulation",
+        "code-behind",
+        "starting and stopping apps",
+        "html views",
+        "sql",
+        "json data bindings",
+        "mapping and blending",
+        "handling http requests",
+        "transactions",
+        "creating http responses",
+        "using transactions"
+    ]
+%}
 
-{{ macros.tocGenerator(page.title, summary.parts[0].articles[3].articles) }}
+<h2>Articles in the guides:</h2>
+
+<div class="guide-articles">
+    {% for section in summary.parts[0].articles[3].articles %}
+        <section>
+        {% if recommended_reading.indexOf(section.title.toLowerCase()) != -1 %}
+            <h3><a href="../{{ section.path }}">{{ section.title }}&#9733;</a></h3>
+        {% else %}
+            <h3><a href="../{{ section.path }}">{{ section.title }}</a></h3>
+        {% endif %}
+            {% for article in section.articles %}
+                {% if recommended_reading.indexOf(article.title.toLowerCase()) != -1 %}
+                    <a href="../../{{ article.path }}">{{ article.title }}&#9733;</a>
+                {% else %}
+                    <a href="../../{{ article.path }}">{{ article.title }}</a>
+                {% endif %}
+            {% endfor %}
+        </section>
+    {% endfor %}
+</div>
