@@ -1,16 +1,8 @@
 # First Interactive UI
 
-<<<<<<< HEAD
-In order to make our UI interactive, we first have to make the data in the view-model editable. In JSON we do this by adding a `$` at the end of our property. That allows us to edit these JSON values from the view. In addition to adding `$` to our already existing properties, we will add the property `SaveTrigger$` which will act as a trigger between the view and the [code-behind](/guides/typed-json/code-behind/).
-=======
 ## Writable View-Model
 
-In order to make our UI interactive, we first have to make the data in the view-model editable. In JSON we do this by adding a `$` at the end of our property. That allows us to edit these JSON values from the view. In addition to adding `$` to our already existing properties, we will add the property `SaveTrigger$` which will act as a trigger between the view and the code-behind.
-
-<aside class="read-more">
-    <a href="/guides/typed-json/json-by-example">Learn more about JSON in Starcounter</a>
-</aside>
->>>>>>> 2.2.1.3234
+In order to make our UI interactive, we first have to make the data in the view-model editable. In JSON we do this by adding a `$` at the end of our property. That allows us to edit these JSON values from the view. In addition to adding `$` to our already existing properties, we will add the property `SaveTrigger$` which will act as a trigger between the view and the [code-behind](/guides/typed-json/code-behind/).
 
 <div class="code-name">PersonJson.json</div>
 
@@ -45,13 +37,9 @@ Next, we have to add some elements to our view. We will start by changing our pr
 
 The `::input` declaration sets up an event listener. It updates the JSON as you type in the HTML `input` element.
 
-<<<<<<< HEAD
 `onmousedown="++this.value"` increments the `SaveTrigger$` value in our JSON. That change can then be registered in our code-behind and [trigger a handler](/guides/typed-json/code-behind/#handling-input-events).
-=======
-`onmousedown="++this.value"` increments the `SaveTrigger$` value in our JSON.
 
 ## Handling Changes in the Code-Behind
->>>>>>> 2.2.1.3234
 
 To act on the change in the view-model that is triggered from the view, an event handler can be registered in the code-behind.
 
