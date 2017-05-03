@@ -1,5 +1,10 @@
 # First Interactive UI
 
+The initial UI will allow us to change the name of a person and save those changes to the database. This requires a couple of things:
+1. The database should be able to commit changes to the database at any time
+2. The view-model needs to be writable from the view
+3. The view has to allow input and bind the input to the view-model
+
 ## Writable View-Model
 
 In order to make our UI interactive, we first have to make the data in the view-model editable. In JSON we do this by adding a `$` at the end of our property. That allows us to edit these JSON values from the view. In addition to adding `$` to our already existing properties, we will add the property `SaveTrigger$` which will act as a trigger between the view and the code-behind.
