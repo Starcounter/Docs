@@ -37,7 +37,6 @@ namespace HelloWorld
 ## Add an Instance to the Class
 
 Add a first instance to the class by defining a new person, its properties, and wrapping it in a [`Db.Transact()`](/guides/transactions/using-transactions/#dbtransact). Using a transaction allows us to access database objects and makes the changes inside the transaction atomic and isolated. Read more about this in the [transaction section](/guides/transactions/) of the documentation. 
->>>>>>> 2.2.1.3234
 
 <div class="code-name">Program.cs</div><div class="code-name code-title">Add instance</div>
 
