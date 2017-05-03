@@ -68,7 +68,7 @@ Handle.GET("/HelloWorld", () =>
 
 The view will initially be a simple interface displaying the `FirstName` and `LastName` of a `Person` instance.
 
-Since the middleware wraps the HTML to create a complete HTML document, we only need to define an HTML fragment wrapped in the `template` element that is part of [Web Components](https://docs.starcounter.io/guides/web-apps/introduction-to-web-components/).
+Since the middleware wraps the HTML to create a complete HTML document, we only need to define an HTML fragment wrapped in the `template` element.
 
 To create a two-way binding between the view and the view model, we choose to use Polymer. There are three parts needed to make the bindings work:
 1. Import Polymer
@@ -100,7 +100,7 @@ This is how it looks in code:
 
 ## Result
 
-We have established a real-time model-view-view-model (MVVM) binding. The JSON, which is our view-model, is bound to the model (database) with no latency; our view, the HTML, is in turn bound to the JSON, which is synced in real time using WebSocket and HTTP. Polymer helps us display this instantaneously to the user.
+Now, we have established a real-time model-view-view-model (MVVM) binding. The JSON, which is our view-model, is bound to the model (database) with no latency; our view, the HTML, is in turn bound to the JSON, which is synced in real time using WebSocket and HTTP. Polymer helps us display this instantaneously to the user.
 
 Check out how it looks by starting the application with <kbd>F5</kbd> and go to `http://localhost:8080/HelloWorld` in your web browser.
 ![Screenshot part 2](/assets/part2.png)
