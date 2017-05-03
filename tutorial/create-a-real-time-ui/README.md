@@ -1,23 +1,23 @@
 # Create a Real Time UI
 
-To create a user interface (UI) we need to add a view-model and a corresponding view. The view-model will act as a representation of the view and as a midpoint between the view and the database.
+To create a user interface (UI), we establish a [MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) pattern by adding a view-model and a corresponding view. The view-model will act as a representation of the view and as a midpoint between the view and the database.
 
 ## Setup the File Structure
 
-Let's create our file structure that contains our view (HTML) and view-model (JSON). If you follow these steps you will have the right files to build the UI:
+Let's create the file structure to contain a view and a view-model. These steps should be followed to create the structure:
 
 1. In the Solution Explorer in Visual Studio, right click on the project file named `HelloWorld` and add a folder with the name `wwwroot`.
-2. Inside this folder, you create another folder with the name `HelloWorld` the same name as the project.
-3. Add an HTML file into this folder by right-clicking and then choosing `Add -> New Item... -> Starcounter -> Starcounter HTML template with dom-bind`. Name this file `PersonJson.html`.
-4. Add a JSON file into the root of your project. You can add this by going to `Add -> New Item... -> Starcounter -> Starcounter Typed JSON with Code-behind`. This will create a `.json` and `.json.cs` file. Both of these should have the name PersonJson.
+2. Inside this folder, create another folder with the name `HelloWorld`, the same name as the project.
+3. Add an HTML file, which will be the view, into this folder by right-clicking and then choosing `Add -> New Item... -> Starcounter -> Starcounter HTML template with dom-bind`. Name this file `PersonJson.html`.
+4. Add a JSON file, which will be the view-model, into the root of the project. This can be added by going to `Add -> New Item... -> Starcounter -> Starcounter Typed JSON with Code-behind`. Doing this creates a `json` and `json.cs` file. Both of these should have the name PersonJson.
 
 ![file structure](/assets/file-structure.PNG)
 
-Now that we have a solid file structure we can continue by creating our view.
+With a solid file strucutre, we can continue by creating the view.
 
 ## Define the View
 
-Our view will be, for now, a simple interface displaying the `FirstName` and `LastName` of our `Person` instance.
+The view will initially be a simple interface displaying the `FirstName` and `LastName` of a `Person` instance.
 
 To accomplish this we will use the `label` and `strong` tags. It's not essential that you use exactly these elements. `p`, `span`, and many others would work just as well. To make Polymer's template engine work, we also have to import it into our file with the `rel="import"`.
 
