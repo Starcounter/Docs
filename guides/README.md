@@ -41,9 +41,9 @@ To learn the fundamentals of Starcounter, read the articles listed below with a 
         {% endif %}
             {% for article in section.articles %}
                 {% if recommended_reading.indexOf(article.title.toLowerCase()) != -1 %}
-                    <a href="../../{{ article.path }}">{{ article.title }}&#9733;</a>
+                    <a href="../{{ article.path | urlize(9, true) | safe}}">{{ article.title }}&#9733;</a>
                 {% else %}
-                    <a href="../../{{ article.path }}">{{ article.title }}</a>
+                    <a href="../{{ article.path | urlize(9, true) | safe}}">{{ article.title }}</a>
                 {% endif %}
             {% endfor %}
         </section>
