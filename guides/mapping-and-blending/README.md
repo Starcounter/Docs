@@ -10,19 +10,13 @@ As you start the apps, they are weaved to the database. At this point:
 - the apps’ dynamic HTTP handlers are exposed at the same port,
 - the apps’ static HTTP resources are exposed at the same port
 
-## Mapping
-
-Mapping is how you make the apps share the data on a shared screen.
-
-Starcounter implements 2 distinct mapping APIs:
-
-- [UriMapping.Map](/guides/mapping-and-blending/uri-mapping). Allows a single request (`Self.GET`) to trigger responses from multiple apps. The common key for the requests is an arbitrary URI (string), used as a key for all of the mapped URIs. This is used to build UI regions like menu, user sign in, launchpad icons.
-
-- [UriMapping.OntologyMap](/guides/mapping-and-blending/ontology-mapping). Allows a single request (`Self.GET`) to trigger responses from multiple apps. The common key for requests is the fully qualified name of a database table (string). This is used to compose a view for a specific type/object (like person form, map for address, etc.).
-
 ## Blending
 
-[Blending](/guides/mapping-and-blending/blending) is a feature of a Launcher app that allows to rearrange the rendering of the HTML response. It is the client-side feature that makes the result of `UriMapping.Map` and `UriMapping.OntologyMap` appear like a single app, even though it is composed from separate micro apps.
+Blending is the way how you make the apps share the data on a shared screen. There is a server and client side blending.
+
+On the server there is a [Blender.MapUri](/blending/README.md) which allows a single request (`Self.GET`) to trigger responses from multiple apps. The common key for the requests is an arbitrary string token, used as a key for all of the mapped URIs. This is used to build UI regions like menu, user sign in, launchpad icons.
+
+On the client side there is a feature of a Launcher app that allows to rearrange the rendering of the HTML response. It makes the result of `Blender.MapUri` appear like a single app, even though it is composed from separate micro apps.
 
 {% import "../../macros.html" as macros %}
 

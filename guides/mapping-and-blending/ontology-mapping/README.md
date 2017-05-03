@@ -1,3 +1,6 @@
+
+# Ontology mapping is a legacy concept/code. Please use [Blending](../blending/README.md).
+
 # Ontology mapping
 
 The main purpose of ontology mapping is to provide a mechanism to combine work produced by several independent applications without direct interaction between those applications. Certain URI handlers can be associated with concepts in the ontology hierarchy (class inheritance), for example, a handler from People application "/people/partials/persons/{?}" represents a certain person.

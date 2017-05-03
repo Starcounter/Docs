@@ -1,5 +1,5 @@
 
-# URI mapping is a legacy concept/code. Please use [Blending](guides/mapping-and-blending/blending/README.md).
+# URI mapping is a legacy concept/code. Please use [Blending](../blending/README.md).
 
 # URI mapping
 
