@@ -1,3 +1,6 @@
+
+# URI mapping is a legacy concept/code. Please use [Blending](guides/mapping-and-blending/blending/README.md).
+
 # URI mapping
 
 Starcounter applications are isolated, meaning that they don't know about each other's presence, registered handlers, database classes and so on. However when composing several applications together, one would like to display each application's elements on the shared screen, for example, in menu section or in search results. URI mapping allows mapping application handlers onto common URIs. Let's take an example where two applications, People and Products would like to display their elements in the Menu section of the wrapping (or also known as Launcher) application:
