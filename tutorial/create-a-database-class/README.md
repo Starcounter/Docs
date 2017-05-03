@@ -65,7 +65,7 @@ The if statement here checks if you already have a `Person` in the database by a
 
 ## Result
 
-Start your program with Starcounter by clicking <kbd>F5</kbd> in Visual Studio. To see for yourself, open the administrator at `localhost:8181/#/databases/default/sql` and enter `SELECT * FROM HelloWorld.Person`. This will display all the instances, represented as rows, of the `Person` class.
+Start your program with Starcounter by clicking <kbd>F5</kbd> in Visual Studio. To see for yourself, open the administrator at `localhost:8181/#/databases/default/sql` and enter `SELECT * FROM HelloWorld.Person`. This will display all the instances, represented as rows, of the `Person` class. Note that these instances are persistent. You can restart the application, or even the computer, and the instances will still be there.
 
 ![Result gif](/assets/part1resized.gif)
 
