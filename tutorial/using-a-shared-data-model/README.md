@@ -26,7 +26,7 @@ using Simplified.Ring2;
 
 Now that we have these in our file, we can start referencing them. First, we want our classes `Expense` and `Person` to inherit from the classes `Something` and `Person` which are inside `Simplified`.
 
-<div class="code-name">Program.cs</div><div class="code-name code-title">Add inheritence</div>
+<div class="code-name">Program.cs</div>
 
 ```cs
 [Database]
@@ -74,20 +74,13 @@ return Db.Scope(() =>
 <div class="code-name">PersonJson.json.cs</div>
 
 ```cs
-partial class PersonJson : Json, IBound<Spender>
-```
-
-<div class="code-name">PersonJson.json.cs</div>
-
-```cs
-void Handle(Input.AddNewExpenseTrigger action)
+void Handle(Input.NewExpenseTrigger action)
 {
-  var expense = new Expense()
+  new Expense()
   {
-      Spender = (Spender) this.Data,
+      Spender = this.Data as Spender,
       Amount = 1
   };
-  AddExpense(expense);
 }
 ```
 
@@ -103,7 +96,7 @@ When you're done, your classes should look like this:
 [Database]
 public class Spender : Person
 {
-    public QueryResultRows<Expense> Spendings => Db.SQL<Expense>("SELECT e FROM Expense e WHERE e.Spender = ?", this);
+    public QueryResultRows<Expense> Expenses => Db.SQL<Expense>("SELECT e FROM Expense e WHERE e.Spender = ?", this);
     public decimal CurrentBalance => Db.SQL<decimal>("SELECT SUM(e.Amount) FROM Expense e WHERE e.Spender = ?", this).First;
 }
 
