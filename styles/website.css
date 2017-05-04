@@ -363,11 +363,6 @@ kbd {
   margin-top:50px;
 }
 
-.page-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
 .book-body {
   margin-top: 50px;
 }
@@ -442,4 +437,11 @@ a .js-toolbar-action {
     .guide-articles section {
         width: 33.333%;
     }
+}
+
+@media (min-width: 1600px) {
+  .page-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
 }
