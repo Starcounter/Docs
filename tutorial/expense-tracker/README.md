@@ -1,6 +1,6 @@
 # Expense Tracker
 
-We will now turn our application into a simple expense tracker. This will allow us to practice using multiple object instances and relations.
+We will now turn our application into a simple expense tracker.
 
 With Starcounter, views and view-models can be broken up into parts and nested. This allows for increased composability and modularity. In this case, the two main concepts in this app, `Person` and `Expense`, will be built with separate view-models and views and then nested to create a coherent whole. Let's start by creating the appropriate files.
 
@@ -206,7 +206,7 @@ This button should be added below the list of expenses.
 
 ### Implement the Handler
 
-To act on the trigger, we'll create a handler in the code-behind. Since the view-model is bound to the `Person` objects that holds a reference to a collection of `Expense` objects, we only need to add an `Expense` object to the database, and it will immidiately be synched to the view-model and placed in the view.
+To act on the trigger, we'll create a handler in the code-behind. Since the view-model is bound to the `Person` object that holds a reference to a collection of `Expense` objects, we only need to add an `Expense` object to the database and it will immidiately be synched to the view-model and placed in the view.
 
 <div class="code-name">PersonJson.json.cs</div>
 
