@@ -1,7 +1,7 @@
 # Making Apps Blendable
 
 ### Introduction
-In Starcounter, applications should be built to handle one task, and handle that task really well. This leads to a situation where the developer would like to use several simple but powerful applications to build a more flexible application with many different functionalities. As you may know, the way to accomplish this in Starcounter is using mapping and blending. Here, the process of making applications easily blendable will be explained. The reason to do this is that it makes it easier for the author of an application to __visually integrate applications from other developers without breaking the functionality of the application__.
+In Starcounter, applications should be built to handle one task, and handle that task really well. This leads to a situation where the developer would like to use several simple but powerful applications to build a more flexible application with many different functionalities. As you may know, the way to accomplish this in Starcounter is using blending. Here, the process of making applications easily blendable will be explained. The reason to do this is that it makes it easier for the author of an application to __visually integrate applications from other developers without breaking the functionality of the application__.
 
 The writing here is partly built upon the concepts explained in the blog post <a href="https://starcounter.io/layout-compositions-html-partials/">Layout Composition for HTML Partials</a>. Reading that post will make it easier to understand the practices explained here.
 

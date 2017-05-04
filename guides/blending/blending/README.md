@@ -1,4 +1,6 @@
-# Introduction
+# Blending
+
+## Introduction
 
 Blending is used to visually combine partial responses from several apps. JSON/HTML responses are merged. The actual JSON merging is done during serialization process, HTML partials are requested by the browser through special HTML-merging URI. The client (e.g. browser) then displays combined partials from several apps. Blending is done outside apps and should not affect how apps are functioning (apps should neither depend on, nor expext blending). Only GET handlers that return JSON are blended, not any response handlers. Apps should not know/assume neither about blender presence, nor other apps presense.
 
@@ -22,7 +24,6 @@ static void MapUri<T>(String uri)
 static void MapUri<T1, T2, T3>(String uri)
 static void MapUri(String uri, Type[] types)
 ```
-
 
 ## Dynamic addition and removal
 
@@ -78,6 +79,7 @@ In the first example above, handler "/twoparams1/{?}/{?}" should not trigger ble
 In the second example above, handler "/noparam1" can trigger other handlers on the same token, but can't be triggered by them.
 
 ## Same handler - different tokens
+
 It is allowed to add blending for the same handler but on different tokens.
 ```cs
 Blender.MapUri("/app1/{?}", token1);
@@ -91,7 +93,7 @@ Blender.MapUri("/app4/{?}", token2);
 Here handler "/app1/{?}" participates in blending with `token1` and `token2` handlers.
 
 
-# Client side blending
+## Client side blending
 
 A launcher can implement *blending*. It is a feature of rearranging the rendering of the HTML response.
 

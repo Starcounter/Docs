@@ -187,7 +187,7 @@ Here, the elements are distributed in the way that the view will look when no bl
 
 Regarding styling, there are two ways to make the application easier to visually integrate with other apps:
 
-1. Prefix the all class names with the name of the app. As outlined in [Avoiding CSS Conflicts](https://docs.starcounter.io/guides/mapping-and-blending/avoiding-css-conflicts/), the class should be prefixed with the name of the app to avoid CSS conflicts with classes from other apps.
+1. Prefix the all class names with the name of the app. As outlined in [Avoiding CSS Conflicts](https://docs.starcounter.io/guides/blending/avoiding-css-conflicts/), the class should be prefixed with the name of the app to avoid CSS conflicts with classes from other apps.
 
 2. Keep styling that will affect the layout inside the `declarative-shadow-dom`.
 
