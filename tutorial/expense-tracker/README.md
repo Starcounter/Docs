@@ -65,7 +65,7 @@ Great! Now we just need to stack these views inside the `Person` view. We can do
         <starcounter-include partial="{{item}}"></starcounter-include>
     </div>
 </template>
-<button value="{{model.AddNewExpenseTrigger$::click}}" onmousedown="++this.value">Add new expense</button>
+<button value="{{model.NewExpenseTrigger$::click}}" onmousedown="++this.value">Add new expense</button>
 <hr>
 <h2>Current Balance: {{model.CurrentBalance}}</h2>
 ```
@@ -75,49 +75,35 @@ Great! Now we just need to stack these views inside the `Person` view. We can do
 
 ## Extend the Person View-Model
 
-As you can see above, we are using `AddNewExpenseTrigger$`, which we haven't defined yet. Let's go and fix that now.
+As you can see above, we are using `NewExpenseTrigger$`, which we haven't defined yet. Let's go and fix that now.
 
 <div class="code-name">PersonJson.json</div>
 
 ```json
 "FullName": "",
 "Expenses": [{}],
-"AddNewExpenseTrigger$": 0,
+"NewExpenseTrigger$": 0,
 "CurrentBalance": 0
 ```
 
 `Expenses` is a list of the expenses of a Person and `CurrentBalance` will be the sum of of all these expenses.
 
-`AddNewExpenseTrigger$` is a trigger property that allows us to add a new `Expenses` template to the view. We can implement its handler now.
+`NewExpenseTrigger$` is a trigger property that allows us to add a new `Expenses` template to the view. We can implement its handler now.
 
 ## Create New Expenses
 
 <div class="code-name">PersonJson.json.cs</div>
 
 ```cs
-void  Handle(Input.AddNewExpenseTrigger action)
+void  Handle(Input.NewExpenseTrigger action)
 {
     var expense = new Expense()
     {
-        Spender = (Person) this.Data,
+        Spender = this.Data as Person,
         Amount = 1
     };
-    AddExpense(expense);
 }
 ```
-`AddExpense` is a method call to a method that we need to create that will add this newly created `Expense` to our `Person`'s `Expenses` array. It should look like this:
-
-<div class="code-name">PersonJson.json.cs</div>
-
-```cs
-public void AddExpense(Expense expense)
-{
-    var expenseJson = Self.GET("/HelloWorld/partial/expense/" + expense.GetObjectID());
-    this.Expenses.Add(expenseJson);
-}
-```
-
-This handler essentially creates a new expense instance, sets the current Person as the Spender, and adds that expense to that person's array of expenses.
 
 ## Defining the Expense Database Class
 
@@ -145,11 +131,11 @@ While we are tinkering with the databases, we should also add Spendings and Curr
 ```cs
 public string FirstName;
 public string LastName;
-public QueryResultRows<Expense> Spendings => Db.SQL<Expense>("SELECT e FROM HelloWorld.Expense e WHERE e.Spender = ?", this);
+public QueryResultRows<Expense> Expenses => Db.SQL<Expense>("SELECT e FROM HelloWorld.Expense e WHERE e.Spender = ?", this);
 public decimal CurrentBalance => Db.SQL<decimal>("SELECT SUM(e.Amount) FROM HelloWorld.Expense e WHERE e.Spender = ?", this).First;
 ```
 
-`Spendings` is all the expenses of one Person.
+`Expenses` is all the expenses of one Person.
 
 `CurrentBalance` is the sum of all those expenses.
 
@@ -159,22 +145,6 @@ These two are calculated every time they are used by searching through the datab
     <a href="/guides/SQL/">Learn more about using SQL in Starcounter</a>
 </aside>
 
-## Defining the Expense Lookup Handler
-
-Inside the Program class, you should also add the following GET handler which helps with looking up the expenses.
-
-<div class="code-name">Program.cs</div>
-
-```cs
-Handle.GET("/HelloWorld/partial/expense/{?}", (string id) =>
-{
-    var json = new ExpenseJson();
-    json.Data = DbHelper.FromID(DbHelper.Base64DecodeObjectID(id));
-    return json;
-});
-```
-
-Before we run the program, do a quick swing into `ExpenseJson.json.cs` to make sure the partial class is named ExpenseJson.
 
 ## Result
 
