@@ -125,4 +125,4 @@ If you run the application now, you shouldn't see any visual difference compared
 
 Now, let us make our application prettier by adding some images.
 
-If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/57070572f8a2ca7d04d430061eb4c542a1197b3e).
+If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/7f178d639f395068ee6614c3e47600407ee320a7).
