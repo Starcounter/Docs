@@ -1,6 +1,6 @@
 # Cancel and Delete
 
-You have probably noticed that in the current app you can only add new expenses. That means that the database and the list of expenses will continue to grow endlessly. We can't accept that.
+You have probably noticed that in the current app you can only add new expenses. That means that the database and the list of expenses will continue to grow endlessly.
 
 In this part, we will add a cancel and delete button which allows the user to either cancel a change that has not been committed or delete all the expenses of a person.
 
@@ -48,12 +48,8 @@ The next step is to build handlers to react accordingly. We will also do that si
 void Handle(Input.CancelTrigger action)
 {
     Transaction.Rollback();
-    RefreshExpenses(this.Data.Spendings);
 }
 
-void Handle(Input.AddNewExpenseTrigger action)
-.
-.
 void Handle(Input.DeleteAllTrigger action)
 {
     Db.SlowSQL("DELETE FROM Expense WHERE Spender = ?", this.Data);
@@ -72,33 +68,6 @@ partial class PersonJson : Json, IBound<Person>
 ```
 
 The `DeleteAllTrigger` handler deletes all the expenses for the current `Person` in the database and clears the `Expenses` property in its JSON file.
-
-## Refresh the Expenses
-
-`RefreshExpenses` in the `CancelTrigger` handler is a method that updates the `Expenses` of the `Person`. It should look like this:
-
-<div class="code-name">PersonJson.json.cs</div>
-
-```cs
-public void RefreshExpenses(IEnumerable<Expense> expenses)
-{
-    this.Expenses.Clear();
-    foreach (Expense expense in expenses)
-    {
-        AddExpense(expense);
-    }
-}
-```
-This method should also be called in the initial `GET` request to make sure that the expenses are loaded in properly and displayed after refreshing the page. This is how it should be implemented to protect against potential `null` errors:
-
-<div class="code-name">Program.cs</div>
-
-```cs
-if (person.Spendings != null)
-{
-    json.RefreshExpenses(person.Spendings);
-}
-```
 
 ## Result
 
