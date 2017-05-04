@@ -93,22 +93,34 @@ public class Person
 }
 ```
 
-### Extend the Person View-Model
+### Extending the View-Model
 
-As you can see above, we are using `NewExpenseTrigger$`, which we haven't defined yet. Let's go and fix that now.
+With the fields `Expenses` and `CurrentBalance` in place, we can bind them to the view-model in order to use them in the view.
 
 <div class="code-name">PersonJson.json</div>
 
 ```json
-"FullName": "",
-"Expenses": [{}],
-"NewExpenseTrigger$": 0,
-"CurrentBalance": 0
+{
+  "Html": "/HelloWorld/PersonJson.html",
+  "FirstName$": "",
+  "LastName$": "",
+  "SaveTrigger$": 0,
+  "FullName": "",
+  "Expenses": [{}],
+  "CurrentBalance": 0
+}
 ```
 
-`Expenses` is a list of the expenses of a Person and `CurrentBalance` will be the sum of of all these expenses.
+When binding the view-model with fields of database classes, the types have to be specified. `Expenses` is defined as an array of objects, that is not quite enough. We also need to set what type of object it should contain. This can be done in the code-behind for `PersonJson` by creating a constructor that specifies the type to be `ExpenseJson`. This is how it looks in code:  
 
-`NewExpenseTrigger$` is a trigger property that allows us to add a new `Expenses` template to the view. We can implement its handler now.
+<div class="code-name">PersonJson.json.cs</div>
+
+```cs
+static PersonJson()
+{
+    DefaultTemplate.Expenses.ElementType.InstanceType = typeof(ExpenseJson);
+}
+```
 
 ### Nesting the View
 
@@ -141,6 +153,12 @@ Great! Now we just need to stack these views inside the `Person` view. We can do
 `starcounter-include` is an insertion point for another template. In this case it's representing the template in ExpenseJson so that we can keep our code separate.
 
 ## Create New Expenses
+
+### Add Trigger
+
+### Add Button
+
+### Implement Handler
 
 <div class="code-name">PersonJson.json.cs</div>
 
