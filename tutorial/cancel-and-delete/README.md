@@ -1,8 +1,13 @@
 # Cancel and Delete
 
-You have probably noticed that in the current app you can only add new expenses. That means that the database and the list of expenses will continue to grow endlessly. We can't accept that.
+You have probably noticed that in the current app you can only add new expenses. That means that the database and the list of expenses will continue to grow endlessly.
 
 In this part, we will add a cancel and delete button which allows the user to either cancel a change that has not been committed or delete all the expenses of a person.
+
+Similar to how the "Add new expense" button was implemented, the process to add this functionality requires three steps:
+1. Add trigger properties
+2. Add elements to increment the trigger properties
+3. Add event handlers
 
 ## Adding Trigger Properties
 
@@ -11,36 +16,43 @@ We start by adding our needed trigger properties for our future buttons to the `
 <div class="code-name">PersonJson.json</div>
 
 ```json
-"CurrentBalance": 0,
-"CancelTrigger$": 0,
-"DeleteAllTrigger$": 0
+{
+  "Html": "/HelloWorld/PersonJson.html",
+  "FirstName$": "",
+  "LastName$": "",
+  "SaveTrigger$": 0,
+  "FullName": "",
+  "Expenses": [{}],
+  "NewExpenseTrigger$": 0,
+  "CurrentBalance": 0,
+  "CancelTrigger$": 0,
+  "DeleteAllTrigger$": 0
+}
 ```
-
-No surprises here.
 
 ## Add Buttons to the View
 
-Now, let's add the buttons that will increment these values in the same way that our save button does now.
-
-<div class="code-name">PersonJson.html</div>
+Now, let's add the buttons that will increment these values in the same way that our save and new expense button does now.
 
 {% raw %}
+
+Delete button:
 ```html
-<button value="{{model.SaveTrigger$::click}}" onmousedown="++this.value">Save</button>
-<button value="{{model.CancelTrigger$::click}}" onmousedown="++this.value">Cancel</button>
-.
-.
-<h2>Current Balance: {{model.CurrentBalance}}</h2>
 <button value="{{model.DeleteAllTrigger$::click}}" onmousedown="++this.value">Delete all expenses</button>
 ```
+
+Cancel button:
+```html
+<button value="{{model.CancelTrigger$::click}}" onmousedown="++this.value">Cancel</button>
+```
+
+We'll place the delete button at the bottom of the page and the cancel button next to the save button.
+
 {% endraw %}
-
-
-We now expect the values `DeleteAllTrigger$` and `CancelTrigger$` to be incremented on click.
 
 ## Create Event Handlers
 
-The next step is to build handlers to react accordingly. We will also do that similar to the way we did with the `Save` button.
+The next step is to build handlers to react accordingly. We will also do that similar to the way we did with the other buttons.
 
 <div class="code-name">Person.json.cs</div>
 
@@ -48,12 +60,8 @@ The next step is to build handlers to react accordingly. We will also do that si
 void Handle(Input.CancelTrigger action)
 {
     Transaction.Rollback();
-    RefreshExpenses(this.Data.Spendings);
 }
 
-void Handle(Input.AddNewExpenseTrigger action)
-.
-.
 void Handle(Input.DeleteAllTrigger action)
 {
     Db.SlowSQL("DELETE FROM Expense WHERE Spender = ?", this.Data);
@@ -63,42 +71,7 @@ void Handle(Input.DeleteAllTrigger action)
 
 `Transaction.Rollback()` simply rolls back the state of your application to where you last ran a `Transaction.Commit()`.
 
-`this.Data.Spendings` is every `Expense` of the current `Person`. With the code we currently have, this will not work. To fix it we simply add the `IBound<Person>` to the `PersonJson` partial class. This creates a binding between the view-model and `Person` database class which allows us to use its property `Spendings`.
-
-<div class="code-name">PersonJson.json.cs</div>
-
-```cs
-partial class PersonJson : Json, IBound<Person>
-```
-
-The `DeleteAllTrigger` handler deletes all the expenses for the current `Person` in the database and clears the `Expenses` property in its JSON file.
-
-## Refresh the Expenses
-
-`RefreshExpenses` in the `CancelTrigger` handler is a method that updates the `Expenses` of the `Person`. It should look like this:
-
-<div class="code-name">PersonJson.json.cs</div>
-
-```cs
-public void RefreshExpenses(IEnumerable<Expense> expenses)
-{
-    this.Expenses.Clear();
-    foreach (Expense expense in expenses)
-    {
-        AddExpense(expense);
-    }
-}
-```
-This method should also be called in the initial `GET` request to make sure that the expenses are loaded in properly and displayed after refreshing the page. This is how it should be implemented to protect against potential `null` errors:
-
-<div class="code-name">Program.cs</div>
-
-```cs
-if (person.Spendings != null)
-{
-    json.RefreshExpenses(person.Spendings);
-}
-```
+The `DeleteAllTrigger` handler deletes all the expenses for the current `Person` in the database and clears the `Expenses` property in the view-model
 
 ## Result
 
