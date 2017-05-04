@@ -153,9 +153,7 @@ In addition to this, we'll also want to display the current balance and change t
         <hr>
 
         <template is="dom-repeat" items="{{model.Expenses}}">
-            <div>
-                <starcounter-include partial="{{item}}"></starcounter-include>
-            </div>
+            <starcounter-include partial="{{item}}"></starcounter-include>
         </template>
 
         <hr>

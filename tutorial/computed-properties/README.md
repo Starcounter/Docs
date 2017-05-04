@@ -20,7 +20,7 @@ To synchronize the computed property between view and code-behind, simply add th
 }
 ```
 
-Notice that we don't have to make `FullName` editable because we will modify it from the code-behind and not the view.
+Notice that we don't have to make `FullName` writable because we will modify it from the code-behind and not the view.
 
 ## Compute in Code-Behind
 
