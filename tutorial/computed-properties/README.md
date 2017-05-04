@@ -1,54 +1,83 @@
 # Computed Properties
 
-Starcounter allows you to use computed properties in your data model. Computing values on the fly is often as fast as accessing cached data and brings additional benefits. It allows you to save memory and always be sure that you get the current value.
+Starcounter makes it easy to use computed properties in the data model. Computing values on the fly is often as fast as accessing cached data and brings additional benefits. It allows you to save memory and always be sure that you get the current value.
 
-Let us compute the `FullName` of a person from their `FirstName` and `LastName` and display it without any delay!
+Let us compute the `FullName` of a person from their `FirstName` and `LastName` and display it with minimal delay.
 
 ## Preparing the View-Model
 
-We start by simply adding the `FullName` property to our JSON.
+To synchronize the computed property between view and code-behind, simply add the `FullName` property to the view-model.
 
 <div class="code-name">PersonJson.json</a></div>
 
 ```json
-"SaveTrigger$": 0,
-"FullName": ""
+{
+  "Html": "/HelloWorld/PersonJson.html",
+  "FirstName$": "",
+  "LastName$": "",
+  "SaveTrigger$": 0,
+  "FullName": ""
+}
 ```
 
-Notice that we don't need to make `FullName` editable because we will modify it from the code-behind and not the view.
+Notice that we don't have to make `FullName` editable because we will modify it from the code-behind and not the view.
 
 ## Compute in Code-Behind
 
-We now calculate the `FullName` by simply concatenating `FirstName` and `LastName`.
+There are two ways to implement computed properties, in the code-behind or in the database class. For this tutorial, it'll be done in the code-behind.
+
+The `FullName` property can be calculated by simply concatenating `FirstName` and `LastName`.
 
 <div class="code-name">PersonJson.json.cs</div>
 
 ```cs
-class PersonJson : Json
+partial class PersonJson : Json
 {
     public string FullName => FirstName + " " + LastName;
+
+    void Handle(Input.SaveTrigger action)
+    {
+        Transaction.Commit();
+    }
+}
 ```
 
-It´s that easy.
+This property will now be bound to the property with the same name in the view-model and always be up to date.
 
-## Add Property to the View
+## Display the Computed Property
 
-All that remains is to add `FullName` to the view. We do that using a Polymer binding to the JSON property `FullName`.
+To display this computed property, we just have to add it to to the view. This is done the same way as earlier; by using a Polymer binding:
 
 <div class="code-name">PersonJson.html</div>
 
 {% raw %}
 ```html
-<h1>Hey, {{model.FullName}}!</h1>
+<template>
+    <template is="dom-bind">
+        <h1>Hey, {{model.FullName}}!</h1>
+
+        <fieldset>
+            <label>First name:</label>
+            <input value="{{model.FirstName$::input}}">
+        </fieldset>
+
+        <fieldset>
+            <label>Last name:</label>
+            <input value="{{model.LastName$::input}}">
+        </fieldset>
+
+        <button value="{{model.SaveTrigger$::click}}" onmousedown="++this.value">Save</button>
+    </template>
+</template>
 ```
 {% endraw %}
 
 ## Result
 
-Try to type a new name into the input fields. Can you count how long it takes to update the view? I bet you cannot!
+Start the application and see how the computed property is calculated keystroke by keystroke and displayed instantly:
 
 ![part 4 gif](/assets/part4resized.gif)
 
-Our next step is to practice working on multiple object instances and relations by turning our app into a simple expense tracker.
+the next step is to practice working on multiple object instances and relations by turning the app into a simple expense tracker.
 
 If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/502f3dbe9b1e76095aa2ec85ae49b5209c72da3f).
