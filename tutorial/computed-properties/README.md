@@ -80,4 +80,4 @@ Start the application and see how the computed property is calculated keystroke 
 
 The next step is to practice working on multiple object instances and relations by turning the app into a simple expense tracker.
 
-If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/502f3dbe9b1e76095aa2ec85ae49b5209c72da3f).
+If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/3f3bf799371b3df1be058a40aa2f88f85f1343d6).
