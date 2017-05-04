@@ -124,54 +124,104 @@ static PersonJson()
 
 ### Nesting the View
 
-Great! Now we just need to stack these views inside the `Person` view. We can do that easily using `dom-repeat`. While we are on it, we will also modify the headline and add a button to add new expenses.
+With the expenses in the view-model, they are easy to include in the view. We simply need to loop over and stamp them out on the page. This can be done with the custom HTML template element `dom-repeat`. It is essentially equivalent to a C# `foreach` loop. 
 
-<aside class="read-more">
-    <a href="https://www.polymer-project.org/1.0/docs/devguide/templates">Read more about dom-repeat</a>
-</aside>
+The elements that it should loop over are the expenses. For each expense it should stamp out the view for that particular expense. `starcounter-include` is a custom element that helps with that by acting as an insertion point.
+
+In addition to this, we'll also want to display the current balance and change the headline to reflect the actual purpose of the page:
 
 <div class="code-name">PersonJson.html</div>
 
 {% raw %}
 ```html
-<h1>{{model.FullName}}'s expense list</h1>
-.
-.
-.
-<hr>
-<template is="dom-repeat" items="{{model.Expenses}}">
-    <div>
-        <starcounter-include partial="{{item}}"></starcounter-include>
-    </div>
+<template>
+    <template is="dom-bind">
+        <h1>{{model.FullName}}'s expense list</h1>
+
+        <fieldset>
+            <label>First name:</label>
+            <input value="{{model.FirstName$::input}}">
+        </fieldset>
+
+        <fieldset>
+            <label>Last name:</label>
+            <input value="{{model.LastName$::input}}">
+        </fieldset>
+
+        <button value="{{model.SaveTrigger$::click}}" onmousedown="++this.value">Save</button>
+
+        <hr>
+
+        <template is="dom-repeat" items="{{model.Expenses}}">
+            <div>
+                <starcounter-include partial="{{item}}"></starcounter-include>
+            </div>
+        </template>
+
+        <hr>
+
+        <h2>Current Balance: {{model.CurrentBalance}}</h2>
+    </template>
 </template>
-<button value="{{model.NewExpenseTrigger$::click}}" onmousedown="++this.value">Add new expense</button>
-<hr>
-<h2>Current Balance: {{model.CurrentBalance}}</h2>
 ```
 {% endraw %}
 
-`starcounter-include` is an insertion point for another template. In this case it's representing the template in ExpenseJson so that we can keep our code separate.
-
 ## Create New Expenses
 
-### Add Trigger
+If you start the application now, you will not see any expenses because no expenses have been added to the database yet. Implementing the functionality to add new expenses is quite simple. Three things are needed:
+1. A trigger in the view-model to signal when to add an expense
+2. A button to activate the trigger
+3. A handler to add the new expense
+
+### Add Trigger Property
+
+The trigger property will look almost identical to the save trigger:
+
+<div class="code-name">PersonJson.json</div>
+
+```json
+{
+  "Html": "/HelloWorld/PersonJson.html",
+  "FirstName$": "",
+  "LastName$": "",
+  "SaveTrigger$": 0,
+  "FullName": "",
+  "Expenses": [{}],
+  "NewExpenseTrigger$": 0,
+  "CurrentBalance": 0
+}
+```
 
 ### Add Button
 
-### Implement Handler
+The button to create new expenses simply have to increment the trigger we just defined. It should look like this:
+
+{% raw %}
+```html
+<button value="{{model.NewExpenseTrigger$::click}}" onmousedown="++this.value">Add new expense</button>
+```
+{% endraw %}
+
+This button should be added below the list of expenses.
+
+### Implement the Handler
+
+To act on the trigger, we'll create a handler in the code-behind. Since the view-model is bound to the `Person` objects that holds a reference to a collection of `Expense` objects, we only need to add an `Expense` object to the database, and it will immidiately be synched to the view-model and placed in the view.
 
 <div class="code-name">PersonJson.json.cs</div>
 
 ```cs
-void  Handle(Input.AddNewExpenseTrigger action)
+void Handle(Input.NewExpenseTrigger action)
 {
-    var expense = new Expense()
+    new Expense()
     {
         Spender = this.Data as Person,
         Amount = 1
     };
 }
 ```
+
+`This.Data` is the current database object, which in this case is the `Person` that added a new expense.
 
 ## Result
 
