@@ -104,7 +104,7 @@ Slot names are added as attributes to the elements like so: `<button slot="MyApp
 
 ### Guideline 4: Create the Presentation in `declarative-shadow-dom`
 
-As outlined in guideline 1, the presentation of the HTML view should be included within the `<template is="declarative-shadow-dom">`.
+As outlined in guideline 1, the presentation of the HTML view should be included within the `<template is="declarative-shadow-dom">`. There is one exception to this, if the default presentation of the content equals the targeted look, no `declarative-shadow-dom` is needed. Slots should be provided no matter what.
 
 The following syntax is used to distribute the content in the Shadow DOM: `<slot name="AppName/ElementName"></slot>`.
 
