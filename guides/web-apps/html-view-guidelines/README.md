@@ -102,7 +102,7 @@ Slot names are added as attributes to the elements like so: `<button slot="MyApp
 
 ### Guideline 4: Create the Presentation in `starcounter-composition`
 
-As outlined in guideline 1, the presentation of the HTML view should be included within the `<template is="starcounter-composition">`.
+As outlined in guideline 1, the presentation of the HTML view should be included within the `<template is="starcounter-composition">`. There is one exception to this, if the default presentation of the content equals the targeted look, no `starcounter-composition` is needed. Slots should be provided no matter what.
 
 The following syntax is used to distribute the content in the Shadow DOM: `<content select="[slot='AppName/ElementName']"></content>`.
 
