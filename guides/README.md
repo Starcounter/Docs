@@ -21,7 +21,7 @@ To learn the fundamentals of Starcounter, read the articles listed below with a 
         "html views",
         "sql",
         "json data bindings",
-        "mapping and blending",
+        "blending",
         "handling http requests",
         "transactions",
         "creating http responses",
