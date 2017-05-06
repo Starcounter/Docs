@@ -53,13 +53,13 @@ A typical menu item response looks like:
 </template>
 ```
 
-You can put your app's response there by mapping a HTTP GET request handler to this URI using <a href="/guides/mapping-and-blending/uri-mapping">UriMapping.Map</a>.
+You can put your app's response there by mapping a HTTP GET request handler to this URI using <a href="/guides/blending/uri-mapping">UriMapping.Map</a>.
 
 <h4>User icons area</h4>
 
 The icons in Launcher's top right hand side of the screen are composed from the responses to <code>/sc/mapping/user</code>.
 
-You can put your app's response there by mapping a HTTP GET request handler to this URI using <a href="/guides/mapping-and-blending/uri-mapping">UriMapping.Map</a>.
+You can put your app's response there by mapping a HTTP GET request handler to this URI using <a href="/guides/blending/uri-mapping">UriMapping.Map</a>.
 
 <a href="https://github.com/StarcounterSamples/SignIn" target="_blank">SignIn</a> application uses this section to show login popup and details of signed in user.
 
@@ -67,17 +67,17 @@ You can put your app's response there by mapping a HTTP GET request handler to t
 
 The in the top right corner of Launcher there is a cog icon that brings the Settings page. Clicking on it displays all partials mapped to <code>/sc/mapping/settings</code>.
 
-You can put your app's response there by mapping a HTTP GET request handler to this URI using <a href="/guides/mapping-and-blending/uri-mapping">UriMapping.Map</a>.
+You can put your app's response there by mapping a HTTP GET request handler to this URI using <a href="/guides/blending/uri-mapping">UriMapping.Map</a>.
 
 <h4>Search</h4>
 
 Whatever you type to Launcher's edit field results in a HTTP GET request to <code>/sc/mapping/search?query=?</code>.
 
-You may present search results by mapping a HTTP GET request handler to this URI using <a href="/guides/mapping-and-blending/uri-mapping">UriMapping.Map</a>.
+You may present search results by mapping a HTTP GET request handler to this URI using <a href="/guides/blending/uri-mapping">UriMapping.Map</a>.
 
 <h4>Blending/Layout editor</h4>
 
-A Launcher can implement <a href="/guides/mapping-and-blending/blending">Blending</a> through layout editor. It allows to rearrange the rendering of the HTML response.
+A Launcher can implement <a href="/guides/blending/blending">Blending</a> through layout editor. It allows to rearrange the rendering of the HTML response.
 
 <h4>Debugging</h4>
 
