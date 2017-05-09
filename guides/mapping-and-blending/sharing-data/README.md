@@ -1,22 +1,15 @@
-# Sharing data
+# Sharing Data
 
-There is no benefit of running multiple apps simultaneously, if they are siloed.
+In order to make apps share data out of the box, a common data model is used.
 
-How can I share data between apps without any serialization, microservices, REST, etc?
+## Creating a Common Data Model
 
-Multiple apps running in the same database will share data out of the box in two cases:
+One of the templates provided with the Visual Studio extension can be used to create a starting point for a common data model. The template is called "Starcounter Class Library" and can be found under `Add New Project -> Visual C# -> Starcounter -> Starcounter Class Library`. 
 
-- they use the same data model
-- they are mapped to a common data model
+The database classes that will be shared across different apps can be added into this project.
 
-## Sharing data through using the same data model
+To include this common data model in an application, add it as a reference. For it to properly work, the "Copy Local" property has to be set to false. This can be done in the "Properties" tab of the reference.
 
-The easiest way to get started on sharing data between apps is to use the same data model.
+## The Simplified Data Model
 
-Starcounter comes preinstalled with a data model called `Simplified.dll`. If you load it as a reference in your app, you can use the data of our [Developer Samples](https://github.com/Starcounterapps). We are accepting pull requests to [Simplified](https://github.com/Starcounterapps/Simplified), if you would like to propose extending this data model.
-
-If you have a separate data model that you would like to share between multiple apps, you can do this by mimicking how Simplified works. Just create the data model in a separate project and reference to it. All of you apps will load it as a DLL.
-
-## Sharing data through database mapping
-
-Starcounter is running a pilot database mapping program with selected partners. This allows to share data through mapping to a common data model, rather than sharing the same data model. Please contact us for details.
+All the Starcounter [sample apps](https://github.com/Starcounterapps) use a preinstalled data model called "Simplified". This allows all these apps to share data. To utilize this data model and share data with the sample apps, load the data model into an app by referencing it and setting "Copy Local" to false.
