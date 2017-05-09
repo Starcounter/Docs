@@ -96,7 +96,6 @@
         * [TCP Sockets](guides/network/tcp-sockets/README.md)
         * [UDP Sockets](guides/network/udp-sockets/README.md)
     * [Mapping and Blending](guides/mapping-and-blending/README.md)
-        * [Do one thing and do it well](guides/mapping-and-blending/do-one-thing-and-do-it-well/README.md)
         * [Sharing data](guides/mapping-and-blending/sharing-data/README.md)
         * [Sharing screen](guides/mapping-and-blending/sharing-screen/README.md)
         * [URI mapping](guides/mapping-and-blending/uri-mapping/README.md)
