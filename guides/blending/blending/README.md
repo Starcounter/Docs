@@ -8,6 +8,7 @@ Blending is based on token: either a string or a class. Handlers blended on the 
 
 Blending is represented by a class `Blender` in Starcounter namespace. There is a blender API to do dynamic (during the lifetime of application) addition and removal of blended handlers. During chained calls of all blended handlers, same handler can only be called once.
 
+Note that from Starcounter 2.3.1, the `Blender` API replaces the previous `OntologyMap` and `UriMapping` API's. 
 
 ## Blending token
 
