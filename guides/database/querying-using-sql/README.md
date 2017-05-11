@@ -4,7 +4,7 @@ There is no [ORM](http://en.wikipedia.org/wiki/Object-relational_mapping) mappin
 
 SQL queries are executed using the <code>Db.SQL</code> function. The function returns `Starcounter.QueryResultRows<T> : IEnumerable<T>`. To get the first object in the enumeration, you can use the property <code>First</code>. In addition to traditional SQL, Starcounter allows you to select objects in addition to primitive types such as strings and numbers. Also it allows you to use C# style path expressions such as <code>person.FullName</code>.
 
-When writing queries by using `Db.SQL`, keep in mind that there are [certain reserved words](../sql/reserved-words) that should be escaped. That is done by surrounding the reserved word in quotation marks.
+When writing queries by using `Db.SQL`, keep in mind that there are [certain reserved words](/guides/SQL/reserved-words) that should be escaped. That is done by surrounding the reserved word in quotation marks.
 
 See more about SQL in [Guides: SQL](/guides/SQL/).
 
