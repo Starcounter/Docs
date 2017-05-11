@@ -20,7 +20,7 @@ public class CorporateCustomer : Customer
 }
 ```
 
-The `Database` attribute is inherited from base- to subclasses. Hence, any class that directly or indirectly inherits a class with the `Database` attribute implicitly becomes a database class too. In the above example, both ```PrivateCustomer``` and ```CorporateCustomer``` become database classes due to them inheriting ```Customer```.
+The `Database` attribute is inherited from base- to subclasses. Hence, any class that directly or indirectly inherits a class with the `Database` attribute implicitly becomes a database class too. In the above example, both `PrivateCustomer` and `CorporateCustomer` become database classes due to them inheriting `Customer`.
 
 The table `Customer` will contain all `PrivateCustomers` and all `CorporateCustomers`. So if there are a private customer called "Goldman, Carl" and a corporate customer called "Goldman Sachs", the result of `SELECT C FROM Customer c` will contain both of them.
 
