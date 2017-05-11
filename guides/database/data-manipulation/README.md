@@ -1,10 +1,6 @@
 # Data manipulation
 
-<<<<<<< HEAD
 There are three data manipulation statements in SQL92: `INSERT`, `UPDATE` and `DELETE`. `INSERT`and `UPDATE` are not supported in Starcounter SQL while `DELETE` is available through `Db.SlowSQL`. Objects are instead created, updated, and deleted directly in the programming code.
-=======
-There are three data manipulation statements in SQL92: `INSERT`, `UPDATE` and `DELETE`. None of these statements are supported in Starcounter SQL. Objects are instead created, updated, and deleted directly in the programming code.
->>>>>>> 2.2.1.3234
 
 All modifications have to be wrapped in a transaction. These modifications are visible to other transaction after the changes have been commited.
 
@@ -21,11 +17,8 @@ public class Person
 }
 ```
 
-<<<<<<< HEAD
 To create a new instance of this class, the syntax `new Person()` would be used, like this:
 
-=======
->>>>>>> 2.2.1.3234
 ```cs
 new Person()
 {
@@ -46,11 +39,8 @@ person.FirstName = "John";
 person.LastName = "Doe";
 ```
 
-<<<<<<< HEAD
 To update the `LastName` of all the `Person` objects in the database, they would be looped through and updated, like so:
 
-=======
->>>>>>> 2.2.1.3234
 ```cs
 var people = Db.SQL<Person>("SELECT p FROM Person p");
 foreach (var person in people)
