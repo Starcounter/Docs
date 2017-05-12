@@ -32,11 +32,11 @@ Launcher provides a concept of workspaces. Only the response for the currently d
 
 #### Launchpad
 
-The icons in Launcher's Launchpad are composed from the responses to `/sc/mapping/app-name`.
+The icons in Launcher's Launchpad are composed from the responses to the string token `app-name`.
 
 #### Left menu area
 
-The links in Launcher's left hand side menu are composed from the responses to `/sc/mapping/menu`.
+The links in Launcher's left hand side menu are composed from the responses to the string token `menu`.
 
 A typical menu item response looks like:
 
@@ -51,27 +51,27 @@ A typical menu item response looks like:
 </template>
 ```
 
-You can put your app's response there by mapping a HTTP GET request handler to this URI using [UriMapping.Map](/guides/blending/uri-mapping).
+You can put your app's response there by mapping a HTTP GET request handler to this URI using [Blender.MapUri](/guides/blending/blending).
 
 #### User icons area
 
-The icons in Launcher's top right hand side of the screen are composed from the responses to `/sc/mapping/user`.
+The icons in Launcher's top right hand side of the screen are composed from the responses to the string token `user`.
 
-You can put your app's response there by mapping a HTTP GET request handler to this URI using [UriMapping.Map](/guides/blending/uri-mapping).
+You can put your app's response there by mapping a HTTP GET request handler to this URI using [Blender.MapUri](/guides/blending/blending).
 
 [SignIn](https://github.com/StarcounterApps/SignIn) application uses this section to show login popup and details of signed in user.
 
 #### Settings area
 
-The in the top right corner of Launcher there is a cog icon that brings the Settings page. Clicking on it displays all partials mapped to `/sc/mapping/settings`.
+The in the top right corner of Launcher there is a cog icon that brings the Settings page. Clicking on it displays all partials mapped to the string token `settings`.
 
-You can put your app's response there by mapping a HTTP GET request handler to this URI using [UriMapping.Map](/guides/blending/uri-mapping).
+You can put your app's response there by mapping a HTTP GET request handler to this URI using [Blender.MapUri](/guides/blending/blending).
 
 #### Search
 
-Whatever you type to Launcher's edit field results in a HTTP GET request to `/sc/mapping/search?query=?`.
+Whatever you type to Launcher's edit field results in a HTTP GET request to the string token `search`.
 
-You may present search results by mapping a HTTP GET request handler to this URI using [UriMapping.Map](/guides/blending/uri-mapping).
+You may present search results by mapping a HTTP GET request handler to this URI using [Blender.MapUri](/guides/blending/blending).
 
 #### Blending/Layout editor
 
