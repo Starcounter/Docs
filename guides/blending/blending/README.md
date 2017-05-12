@@ -1,5 +1,7 @@
 # Blending
 
+<section class="hero">From Starcounter 2.3.1/2.4, the Blender API described here replaces the previous OntologyMap and UriMapping API's.</section>
+
 ## Introduction
 
 Blending is used to visually combine partial responses from several apps. JSON/HTML responses are merged. The actual JSON merging is done during serialization process, HTML partials are requested by the browser through special HTML-merging URI. The client (e.g. browser) then displays combined partials from several apps. Blending is done outside apps and should not affect how apps are functioning (apps should neither depend on, nor expext blending). Only GET handlers that return JSON are blended, not any response handlers. Apps should not know/assume neither about blender presence, nor other apps presense.
@@ -7,8 +9,6 @@ Blending is used to visually combine partial responses from several apps. JSON/H
 Blending is based on token: either a string or a class. Handlers blended on the same token will be called on internal `Self.GET` calls or external URI that matches one of the handlers.
 
 Blending is represented by a class `Blender` in Starcounter namespace. There is a blender API to do dynamic (during the lifetime of application) addition and removal of blended handlers. During chained calls of all blended handlers, same handler can only be called once.
-
-Note that from Starcounter 2.3.1, the `Blender` API replaces the previous `OntologyMap` and `UriMapping` API's. 
 
 ## Blending token
 
