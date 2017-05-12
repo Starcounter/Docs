@@ -31,10 +31,6 @@ StarcounterEnvironment.RunWithinApplication("Images", () => {
 ```
 {% endraw %}
 
-<aside class="read-more">
-   <a href="/guides/mapping-and-blending/ontology-mapping">Learn about ontology mapping</a>
-</aside>
-
 ## Run the Applications
 
 To get the applications up and running correctly, start them in this order:
