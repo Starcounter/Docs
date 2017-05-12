@@ -102,8 +102,6 @@
         * [Blending](guides/blending/blending/README.md)
         * [Avoiding URI conflicts](guides/blending/avoiding-uri-conflicts/README.md)
         * [Avoiding CSS conflicts](guides/blending/avoiding-css-conflicts/README.md)
-        * [URI mapping](guides/blending/uri-mapping/README.md)
-        * [Ontology mapping](guides/blending/ontology-mapping/README.md)
     * [Working with Starcounter](guides/working-with-starcounter/README.md)
         * [Release channels in Starcounter](guides/working-with-starcounter/release-channels-in-starcounter/README.md)
         * [Starting and stopping apps](guides/working-with-starcounter/starting-and-stopping-apps/README.md)
