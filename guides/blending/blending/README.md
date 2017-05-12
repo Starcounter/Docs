@@ -1,6 +1,6 @@
 # Blending
 
-<section class="hero">From Starcounter 2.3.1/2.4, the Blender API described here replaces the previous OntologyMap and UriMapping API's.</section>
+<section class="hero">From Starcounter 2.3.1/2.4, the Blender API described here replaces the previous OntologyMap and UriMapping API's. To view the old API's, go to an earlier version of the documentation with the drop down on the left side of the screen</section>
 
 ## Introduction
 
