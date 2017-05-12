@@ -9,7 +9,6 @@ What it does specifically:
 <li>initialize a Puppet connnection</li>
 <li>load a global stylesheet</li>
 <li>provide features to switch between apps</li>
-<li>includes <a href="https://github.com/StarcounterSamples/starcounter-debug-aid" target="_blank">starcounter-debug-aid</a> for debugging</li>
 </ul>
 
 <a href="https://github.com/StarcounterSamples/Launcher">Launcher project</a> is free for forking and modifying. You can create your own Launcher that does the same but looks differently. Or looks differently and acts differently!
@@ -74,11 +73,3 @@ You can put your app's response there by mapping a HTTP GET request handler to t
 Whatever you type to Launcher's edit field results in a HTTP GET request to <code>/sc/mapping/search?query=?</code>.
 
 You may present search results by mapping a HTTP GET request handler to this URI using <a href="/guides/mapping-and-blending/uri-mapping">UriMapping.Map</a>.
-
-<h4>Blending/Layout editor</h4>
-
-A Launcher can implement <a href="/guides/mapping-and-blending/blending">Blending</a> through layout editor. It allows to rearrange the rendering of the HTML response.
-
-<h4>Debugging</h4>
-
-Press CTRL+&#96; to open up Starcounter Debug Aid.
