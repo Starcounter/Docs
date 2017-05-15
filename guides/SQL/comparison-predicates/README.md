@@ -17,7 +17,7 @@ The comparison predicates "less than" (`x < y`), "greater than" (`x > y`), "less
 SELECT e FROM Employee e WHERE e.LastName >= 'Smith'
 ```
 
-Since a <code>DateTime</code> value represents a timestamp it is often necessary to compare it with a <code>DateTime</code> range. The query below returns all employees with a <code>HireDate</code> between <code>'2006-11-01 00:00:00.000'</code> and <code>'2006-11-01 23:59:59.999'</code>.
+Since a `DateTime` value represents a timestamp it is often necessary to compare it with a `DateTime` range. The query below returns all employees with a `HireDate` between `'2006-11-01 00:00:00.000'` and `'2006-11-01 23:59:59.999'`.
 
 ```sql
 SELECT e.FirstName, e.HireDate FROM Employee e
@@ -30,13 +30,13 @@ The comparison predicates "is null" (`x IS NULL`) and "is not null" (`x IS NOT N
 SELECT e FROM Employee e WHERE e.Manager IS NULL
 ```
 
-The comparison predicate "like" (<code><var>x</var> LIKE <var>y</var> [ESCAPE <var>z</var>]</code>) is implemented for the data type <code>String</code>. In the specified pattern (`y`) the underscore character (<code>'_'</code>) match any single character in the string, and the percent character (`'%'`) match any sequence (possibly empty) of characters in the string. See for example query below.
+The comparison predicate "like" (`x LIKE y [ESCAPE z]`) is implemented for the data type `String`. In the specified pattern (`y`) the underscore character (`'_'`) match any single character in the string, and the percent character (`'%'`) match any sequence (possibly empty) of characters in the string. See for example query below.
 
 ```sql
 SELECT e FROM Employee e WHERE e.FirstName LIKE 'B_b%'
 ```
 
-The optional third argument to the <code>LIKE</code> predicate is an "escape character", for use when a percent or underscore character is required in the pattern without its special meaning. This is exemplified in query below.
+The optional third argument to the `LIKE` predicate is an "escape character", for use when a percent or underscore character is required in the pattern without its special meaning. This is exemplified in query below.
 
 ```sql
 SELECT s FROM Share s WHERE s.Unit LIKE '\%' ESCAPE '\\'
@@ -82,9 +82,3 @@ Here, the `IS` operator can be used to determine inheritance in the data model. 
 SELECT p FROM Person p WHERE p IS Teenager
 ```
 It returns the `Child` and `Teenager` instances "Johnny" and "Elsa" because they can both be cast as `Teenager`.
-
-<!--
-<p><strong>The current implementation of <code>LIKE</code> is not
-optimized and in general the optimizer cannot make use of indexes on
-<code>LIKE</code> conditions. Therefore they should be used very restrictively.</strong></p>
--->
