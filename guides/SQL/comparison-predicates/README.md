@@ -24,7 +24,7 @@ SELECT e.FirstName, e.HireDate FROM Employee e
   WHERE e.HireDate >= DATE '2006-11-01' AND e.HireDate < DATE '2006-11-02'
 ```
 
-The comparison predicates "is null" (`x IS NULL`) and "is not null" (`x</var> IS NOT NULL`>) are implemented for all data types. See for example query below.
+The comparison predicates "is null" (`x IS NULL`) and "is not null" (`x IS NOT NULL`>) are implemented for all data types. See for example query below.
 
 ```sql
 SELECT e FROM Employee e WHERE e.Manager IS NULL
