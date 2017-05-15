@@ -1,6 +1,6 @@
 # Fetch
 
-You can limit the number of rows in the returned result set of a query by using the <code>FETCH</code> clause as in example below.
+The number of returned results can be limited using the `FETCH` clause. An example can be seen below:
 
 ```sql
 SELECT e.LastName, e.FirstName
@@ -8,7 +8,7 @@ SELECT e.LastName, e.FirstName
   FETCH FIRST 5 ROWS ONLY
 ```
 
-The only reserved word you need to use is the word <code>FETCH</code> as in the example below; the other reserved words are optional.
+The only mandatory reserved word is the word `FETCH` as in the example below; the other reserved words are optional.
 
 ```sql
 SELECT e.LastName, e.FirstName
@@ -16,7 +16,7 @@ SELECT e.LastName, e.FirstName
   FETCH 5
 ```
 
-The <code>FETCH</code> clause should be after the main part of the query possibly including an <nobr><code>ORDER BY</code></nobr> clause but before an <code>OPTION</code> clause including hints, see example below.
+The `FETCH` clause should be after the main part of the query possibly including an `ORDER BY` clause but before an `OPTION` clause including hints, see example below.
 
 ```sql
 SELECT e.LastName, e.FirstName
@@ -26,7 +26,7 @@ SELECT e.LastName, e.FirstName
   OPTION INDEX (e MyIndexOnFirstName)
 ```
 
-The `OFFSET` clause can be used to skip a number of rows before beginning to fetch the rows. This is may be to apply patterns like result pagination. `OFFSET 0` is the same as omitting the `OFFSET` clause.
+The `OFFSET` clause can be used to skip a number of rows before beginning to fetch the rows. This can be used to apply patterns like result pagination. `OFFSET 0` is the same as omitting the `OFFSET` clause.
 
 ```sql
 SELECT e.LastName, e.FirstName
