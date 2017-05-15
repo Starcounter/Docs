@@ -23,4 +23,4 @@ This is done for multiple reasons:
 * Failure/restart of the Codehost process does not affect the Database.
 * Developers can iterate application versions and update those without Database process restart (only Codehost is restarted and being reconnected to Database);
 * Database is isolated from networking process therefore it is impossible to affect the Database directly through Gateway.
-* In future each application will have their own Codehost processes to ensure app independence and overall system stability.
+* In the future, each application will have their own Codehost processes to ensure app independence and overall system stability.
