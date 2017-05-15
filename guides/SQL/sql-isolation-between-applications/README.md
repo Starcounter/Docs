@@ -1,4 +1,4 @@
-# SQL isolation between applications
+# SQL Isolation Between Applications
 
 Applications running in the same code-host are isolated on different levels:
 
@@ -8,7 +8,7 @@ Applications running in the same code-host are isolated on different levels:
 
 The principle for SQL isolation is that database classes of one application should not be visible to database classes of another application running in the same code-host.
 
-## Isolation example
+## Isolation Example
 
 For example, first application defines database class `App1Class` in its namespace:
 ```cs
@@ -56,7 +56,7 @@ var x = Db.SQL("SELECT c FROM App2Class c").First;
 
 Classes defined in private application references (for example, private libraries) are only accessible within the application that references them.
 
-## Shared library
+## Shared Library
 
 If first and second application are referencing the same library, for example "SharedDll", then both applications have access to classes and objects from this shared library, regardless which application created those objects:
 
@@ -81,7 +81,7 @@ var x2 = Db.SQL("SELECT c FROM SharedDll.SharedDllClass c").First;
 
 Usage of shared libraries is a way for several applications to share the same class definitions. If you have several applications that are required to use same classes, you will need to create a shared library and move all common class definitions there. In rare cases whenever this is not possible and you still need to have several applications accessing each other classes, you can reference other applications from you "main" application, so only one application is started.
 
-## SQL queries in Administrator
+## SQL Queries in the Administrator
 
 Currently Starcounter Administrator only supports SQL queries with fully namespaced class names. In the above example only the following queries are legitimate:
 ```cs
