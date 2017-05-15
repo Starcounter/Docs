@@ -17,7 +17,7 @@ This is how it will look when you are done:
 
 ## Requirements
 
-In order to get through this tutorial, you will need to fulfill the [system requirements](http://starcounter.io/download/) which includes having Visual Studio and the [latest stable release](http://downloads.starcounter.com/download) of Starcounter installed. Note that the tutorial is made for the current release version of Starcounter, no matter what version of the documentation you're using.
+In order to get through this tutorial, you will need to fulfill the [system requirements](http://starcounter.io/download/) which includes having Visual Studio 2015 or 2017 (not VS Code) and the [latest stable release](http://downloads.starcounter.com/download) of Starcounter installed. Note that the tutorial is made for the current release version of Starcounter, no matter what version of the documentation you're using.
 
 ## Extra Resources
 
