@@ -16,9 +16,6 @@
     * [Computed Properties](tutorial/computed-properties/README.md)
     * [Expense Tracker](tutorial/expense-tracker/README.md)
     * [Cancel and Delete](tutorial/cancel-and-delete/README.md)
-    * [Using a Shared Data Model](tutorial/using-a-shared-data-model/README.md)
-    * [Mapper App for Images](tutorial/mapper-app-for-images/README.md)
-    * [UI Blending](tutorial/ui-blending/README.md)
     * [The Next Step](tutorial/the-next-step/README.md)
 
 * [Guides](guides/README.md)
