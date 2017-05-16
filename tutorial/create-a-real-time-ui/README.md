@@ -13,7 +13,7 @@ Let's create the file structure to contain a view and a view-model. These steps 
 
 ![file structure](/assets/file-structure.PNG)
 
-With a solid file strucutre, we can continue by creating the view-model.
+With a solid file structure, we can continue by creating the view-model.
 
 ## Define the View-Model
 
