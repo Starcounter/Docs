@@ -2,7 +2,7 @@
 
 Starcounter supports long-running transactions. A long-running transaction, as its name indicates, spans over a longer period of time. To create a long-running transaction, use `Db.Scope(Action)` or `(new Transaction(...)).Scope(Action)` and attach it to a view-model.
 
-When creating long-running transactions, it could contain objects that might be modified by other transactions during the transaction's lifetime. This is because the isolation level for long-running transactions is lower and it will therefore not detect conflicts. This is different from the behavior of `Db.Transact` and `Db.TransactAsync`, as described in the [Using Transactions page](using-transactions/#dbtransact-and-dbtransactasync-usage). 
+When creating long-running transactions, it could contain objects that might be modified by other transactions during the transaction's lifetime. This is because the isolation level for long-running transactions is lower and it will therefore not detect conflicts. This is different from the behavior of `Db.Transact` and `Db.TransactAsync`, as described in the [Using Transactions page](../using-transactions/#dbtransact-and-dbtransactasync-usage). 
 
 A long-running transaction can be used on any scheduled thread, however, it cannot be used from more than one thread at a time. If two or more threads call `transaction.Scope(Action)`at the same time, an exception will be thrown.
 
