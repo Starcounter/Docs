@@ -1,6 +1,6 @@
 # Hello World - Tutorial
 
-In this "Hello World" tutorial you will learn how to use the essential features of Starcounter by building an expense tracker complete with a database, interactive UI, real-time syncing, and seamless integration with other applications.
+In this "Hello World" tutorial you will learn how to use the essential features of Starcounter by building an expense tracker complete with a database, interactive UI and real-time syncing.
 
 ## Content
 
@@ -8,12 +8,11 @@ In the first two steps, you will create the simplest possible application that b
 
 In the four following steps, you will create an expense tracker by establishing a UI and building functionality that allows CRUD operations on the database.
 
-The last three steps consist of making the expense tracker integrate with other applications in a seamless fashion.
-
 ## Final Result
 
 This is how it will look when you are done:
-![Hello World Intro GIF](/assets/hello-world-intro-gif.gif)
+
+![Hello World Intro GIF](/assets/resizedpart6.gif)
 
 ## Requirements
 
