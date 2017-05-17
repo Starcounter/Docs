@@ -20,7 +20,7 @@ This will be loaded twice and then lead to a Polymer error:
 
 It is a good practice to avoid double loading of external libraries. Hence, you need to use the same URL pattern as other apps. The recommended way is to use the pattern: `/sys/<dependency-name>/<dependency-files>`.
 
-Starcounter has system folder called `StaticFiles` and located in the installation folder: `C:\Program Files\Starcounter\ClientFiles\StaticFiles`. There you can find `sys` folder, which includes some common components such as Polymer and PuppetJs. You can also look at the code example [here](/guides/network/middleware/#partialtostandalonehtmlprovider) to see what client side libraries are included in that directory by default.
+Starcounter has system folder called `StaticFiles` and located in the installation folder: `C:\Program Files\Starcounter\ClientFiles\StaticFiles`. There you can find `sys` folder, which includes some common components such as Polymer and PuppetJs. You can also look at the code example under `PartialToStandaloneHtmlProvider` on the [middleware page](/guides/network/middleware/) to see what client side libraries are included in that directory by default.
 
 The benefit of this is that you can rely on having a specific version of Starcounter to include a specific version of Polymer, PuppetJs, etc.
 
