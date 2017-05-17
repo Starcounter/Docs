@@ -132,10 +132,10 @@ Consider the following HTML view definition:
         </style>
         <div class="people-field">
             <div class="people-field__label">
-                <label slot="People/first-name-label" class="control-label">First name:</label>
+                <label slot="people/first-name-label" class="control-label">First name:</label>
             </div>
             <div class="people-field__control">
-                <input slot="People/first-name-control" type="text" value="{{model.FirstName$::change}}" placeholder="First name" class="form-control" />
+                <input slot="people/first-name-control" type="text" value="{{model.FirstName$::change}}" placeholder="First name" class="form-control" />
             </div>
          </div>
     </template>
@@ -149,8 +149,8 @@ To add `declarative-shadow-dom` to this HTML view, something like this can be do
 
 <template>
     <template is="dom-bind">
-        <label slot="People/first-name-label" class="control-label">First name:</label>
-        <input slot="People/first-name-control" type="text" value="{{model.FirstName$::change}}" placeholder="First name" class="form-control" />
+        <label slot="people/first-name-label" class="control-label">First name:</label>
+        <input slot="people/first-name-control" type="text" value="{{model.FirstName$::change}}" placeholder="First name" class="form-control" />
     </template>
     <template is="declarative-shadow-dom">
         <style>
