@@ -7,8 +7,8 @@ When creating long-running transactions, it could contain objects that might be 
 A long-running transaction can be used on any scheduled thread, however, it cannot be used from more than one thread at a time. If two or more threads call `transaction.Scope(Action)`at the same time, an exception will be thrown.
 
 This document is divided into two parts:
-1. [Creating and attaching long-running transactions](#create-and-attach)
-2. [Dealing with already attached long-running transactions in view-models](#handling-long-running-transactions-in-view-models)
+1. Creating and attaching long-running transactions
+2. Dealing with already attached long-running transactions in view-models
 
 ## Create and Attach
 
