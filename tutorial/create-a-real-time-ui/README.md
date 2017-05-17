@@ -6,10 +6,10 @@ To create a user interface (UI), we establish a [MVVM](https://en.wikipedia.org/
 
 Let's create the file structure to contain a view and a view-model. These steps should be followed to create the structure:
 
-1. In the Solution Explorer in Visual Studio, right click on the project file named `HelloWorld` and add a folder with the name `wwwroot`.
+1. In the Solution Explorer in Visual Studio, add a folder with the name `wwwroot` in the `HelloWorld` project.
 2. Inside this folder, create another folder with the name `HelloWorld`, the same name as the project.
-3. Add an HTML file, which will be the view, into this folder by right-clicking and then choosing `Add -> New Item... -> Starcounter -> Starcounter HTML template with dom-bind`. Name this file `PersonJson.html`.
-4. Add a JSON file, which will be the view-model, into the root of the project. This can be added by going to `Add -> New Item... -> Starcounter -> Starcounter Typed JSON with Code-behind`. Doing this creates a `json` and `json.cs` file. Both of these should have the name PersonJson.
+3. Add an HTML file into this folder by right-clicking and then choosing `Add -> New Item... -> Starcounter -> Starcounter HTML template with dom-bind`. Name this file `PersonJson.html`.
+4. Add a JSON file, which will be the view-model, into the root of the project. This can be added by going to `Add -> New Item... -> Starcounter -> Starcounter Typed JSON with Code-behind`. By doing this, you create a `json` and `json.cs` file. Both of these should have the name PersonJson.
 
 ![file structure](/assets/file-structure.PNG)
 
