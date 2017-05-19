@@ -71,4 +71,4 @@ Start your program with Starcounter by clicking <kbd>F5</kbd> in Visual Studio. 
 
 For the next step, we'll add a UI which will help us to display the data in the browser.
 
-If you get any errors, the code can be checked against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/7603d26601a34f23fc6cda7eb6251026581f9505).
+If you get any errors, check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/7603d26601a34f23fc6cda7eb6251026581f9505).
