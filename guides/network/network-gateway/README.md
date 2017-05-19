@@ -10,19 +10,31 @@ Detailed network gateway configuration and statistics can be retrieved using `GE
 
 Network gateway is configured in `scnetworkgateway.xml`, which is located in your server installation directory. Here are some notable configuration options:
 
-* **WorkersNumber**: the number of gateway worker threads. Normally this value should be 1-2. On high loads, this value can be increased.
+### Notable Configuration Options
 
-* **MaxConnectionsPerWorker**: the maximum number of connection per each gateway worker. Connections are equally distributed between workers.
+#### WorkersNumber
 
-* **MaximumReceiveContentLength**: the maximum size of incoming HTTP body/content, in bytes. Requests with bigger bodies are rejected with `413 Request Entity Too Large` and closure of TCP connection.
+Is the number of gateway worker threads. Normally this value should be 1-2. On high loads, this value can be increased.
 
-* **InactiveConnectionTimeout**: the inactive HTTP connections life time in seconds. Inactive connections are those on which send/receive are not performed.
+#### MaxConnectionsPerWorker
+
+Is the maximum number of connection per each gateway worker. Connections are equally distributed between workers.
+
+#### MaximumReceiveContentLength 
+
+Is the maximum size of incoming HTTP body/content, in bytes. Requests with bigger bodies are rejected with `413 Request Entity Too Large` and closure of TCP connection.
+
+The value of `MaximumReceiveContentLength` can be found in runtime with `NetworkGateway.Deserealize().MaximumReceiveContentLength`. For this to work, `using Starcounter.Internal` has to be included as well. 
+
+#### InactiveConnectionTimeout 
+
+Is the inactive HTTP connections life time in seconds. Inactive connections are those on which send/receive are not performed.
 
 ## Big size uploads
 
 Since the network gateway supports limited size uploads, the user has to write a custom big-data uploader for both HTTP and WebSocket protocols.
 
-## Reverse proxy functionality
+## Reverse Proxy Functionality
 
 Starcounter gateway provides basic reverse proxy functionality based on HTTP Host header in requests. Reverse proxies are defined in `ReverseProxies` section of gateway configuration. Here is an example of reverse proxy that redirects all incoming HTTP requests on port 80, with Host header equals "www.example1.sc", to service on localhost and port 8080:
 ```
