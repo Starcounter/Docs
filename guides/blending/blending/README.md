@@ -4,31 +4,33 @@
 
 ## Introduction
 
-Blending is used to visually combine partial responses from several apps. JSON/HTML responses are merged. The actual JSON merging is done during serialization process, HTML partials are requested by the browser through special HTML-merging URI. The client (e.g. browser) then displays combined partials from several apps. Blending is done outside apps and should not affect how apps are functioning (apps should neither depend on, nor expext blending). Only GET handlers that return JSON are blended, not any response handlers. Apps should not know/assume neither about blender presence, nor other apps presense.
+Blending visually combines partial responses from different apps. It merges JSON/HTML responses. The JSON merging happens during the serialization process. The browser requests HTML partials through a special HTML-merging URI, it then displays combined partials from the different apps. Blending happens outside of apps and should not affect how they are functioning, essentially, apps should neither depend on, nor expect, blending. Blending applies to the JSON that GET handlers return. Apps should not know/assume neither about blender presence, nor other apps presense.
 
-Blending is based on token: either a string or a class. Handlers blended on the same token will be called on internal `Self.GET` calls or external URI that matches one of the handlers.
+Blending uses tokens. These tokens are either strings or classes. Handlers blended on the same token are called on internal `Self.GET` calls or external URI that matches one of the handlers.
 
-Blending is represented by a class `Blender` in Starcounter namespace. There is a blender API to do dynamic (during the lifetime of application) addition and removal of blended handlers. During chained calls of all blended handlers, same handler can only be called once.
+The class `Blender` in the Starcounter namespace does the blending. The blender API does dynamic addition and removal of blended handlers during the lifetime of the app. Handlers are called once, even during chained calls of all the blended handlers.
 
 ## Blending token
 
-Both a string and class (or several classes) can be used as a blending token. First parameter is always a mapped handler URI, then token, if its defined as a string.
+The first parameter is always a mapped handler URI. If the token is a string, it's defined as the second parameter. If it's one or more classes, they are defined in the template or as a `Type` array parameter.
+
 ```cs
 Blender.MapUri("/Products/settings", "settings");
 Blender.MapUri<Product>("/Products/partials/product/{?}");
 Blender.MapUri("/Products/menu", "menu");
 ```
 
-Arbitrary amount of classes are allowed as a blending token (up to 3 in template, more in array of class `Type`). Here are the `MapUri` signature examples (same exist for removing handler from blender): 
+An arbitrary number of classes are allowed as a blending token (up to 3 in template, more in array of class `Type`). Here are the `MapUri` signature examples (same exist for removing handler from blender): 
+
 ```cs
-static void MapUri<T>(String uri)
-static void MapUri<T1, T2, T3>(String uri)
-static void MapUri(String uri, Type[] types)
+static void MapUri<T>(String uri);
+static void MapUri<T1, T2, T3>(String uri);
+static void MapUri(String uri, Type[] types);
 ```
 
 ## Dynamic addition and removal
 
-It is possible to get a list of handlers and tokens that are currently in Blender and then remove some of them or add new ones.
+It is possible to get a list of handlers and tokens that are in Blender and then remove some of them or add new ones.
 ```cs
 Blender.UnmapUri("/app4/{?}", token2);
 ...
@@ -62,13 +64,13 @@ Blender.MapUri("/twoparams1/{?}/{?}", token,
 });
 ```
 
-In the example above, converter simply passes handler parameters to token parameters, as is. There are signatures of `Blender.MapUri` with no converters, which means that parameters are simply passed through, like above.
+In the example above, converter passes handler parameters to token parameters, as is. There are signatures of `Blender.MapUri` with no converters, which means that parameters are simply passed through, like above.
 
-Often its needed to trigger blending on a specific URI only. To achieve this, first converter should return non-null string array only on certain parameters.
+Often it's needed to trigger blending on a specific URI. To achieve this, first converter should return non-null string array on certain parameters.
 
 ## Direction of calls when blending
 
-Blender allows to specify the direction in which blended handlers would be called. This is needed to trigger blending only in certain direction: from handler or to handler. The direction is determined by the value that corresponding converter is returning: `null` converter or `null` string array returned in converter blocks the direction of the call. In case of zero parameters, there is a special `Blender.MapUri` override with corresponding boolean parameters to determine the allowed call directions.
+Blender allows to specify the direction in which blended handlers would be called. This is needed to trigger blending in a certain direction: from handler or to handler. The direction is determined by the value that corresponding converter is returning: `null` converter or `null` string array returned in converter blocks the direction of the call. In case of zero parameters, there is a special `Blender.MapUri` override with corresponding boolean parameters to determine the allowed call directions.
 
 ```cs
 Blender.MapUri("/twoparams1/{?}/{?}", myToken, null, (String[] to) => {
@@ -100,6 +102,6 @@ A launcher can implement *blending*. It is a feature of rearranging the renderin
 
 By default, the merged HTML response from multiple applications comes with the application starting order. Where the output of a first application finishes, the output of a second application begins. This is far from the desired situation.
 
-Normally, you want to achieve a particular rendering order. You can use CSS for that. There is myriad ways: absolute positioning, flexbox and CSS Grid Layout. All of these solutions require applying arbitrary CSS on top of the running app, which is not very flexible.
+Normally, you want to achieve a particular rendering order. You can use CSS for that. There are a myriad of ways: absolute positioning, flexbox and CSS Grid Layout. These solutions require applying arbitrary CSS on top of the running app, which is not flexible.
 
 To replace this tedious process, a Launcher might implement a layout editor. Our reference Launcher has a layout editor that can be invoked by pressing CTRL+E or the paint icon. It's a generator for CSS Grid Layout with a shim that uses HTML `<table>` and Shadow DOM.
