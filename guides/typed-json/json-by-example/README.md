@@ -1,14 +1,14 @@
 # JSON-by-example
 
-To define the Typed JSON objects, JSON-by-example is used. 
+JSON-by-example defines Typed JSON objects.
 
-JSON-by-example works by providing a sample instance of JSON that is transpiled into Typed JSON classes. For the curious, these classes can be found in the `obj > x64 > Debug` or `obj > x64 > Release` directory of the project with the filename extension `.json.g.cs`.
+It works by providing a sample instance of JSON that transpiles into Typed JSON classes. You can find these generated classes in the `obj > x64 > Debug` or `obj > x64 > Release` directory of the project with the filename extension `json.g.cs`.
 
-JSON-by-example is useful for a number of reasons:
+JSON-by-example is useful for these reasons:
 
 * It can double directly as JSON mockups
 * It can express trees of objects and arrays
-* Default values can easily be specified
+* It's easy to specify default values
 
 ## Create JSON-by-example
 
@@ -25,11 +25,11 @@ One of the simplest JSON-by-example files look like this:
 }
 ```
 
-Here, the value is set to an empty string to declare the type as a string.
+Here, we set the value to an empty string to declare the type.
 
-An instance of the Typed JSON created from this JSON-by-example is created the same an instance would be created for any other class: `new PersonPage()`.
+You create an instance of the generated Typed JSON with a normal constructor call: `new PersonPage()`.
 
-The value of the properties in the Typed JSON object can be accessed in the ordinary way:
+Accesing the properties of Typed JSON is the same as with any C# object:
 
 ```cs
 var personPage = new PersonPage();
@@ -38,7 +38,7 @@ string name = personPage.FirstName; // Contains the value "", an empty string
 
 ### Default Values
 
-It is incredibly simple to set default values in JSON-by-example. Building on the previous code example, it might look like this:
+It's simple to set default values in JSON-by-example. Building on the previous code example, it might look like this:
 
 <div class="code-name">PersonPage.json</div>
 
@@ -62,7 +62,7 @@ Handle.GET("/GetPerson", () =>
 
 ## Supported datatypes
 
-Typed JSON follows the specification of JSON, which means that objects, arrays and single values are all allowed. One difference is that when working with the C#-object and numbers we have the possibility to specify a more exact type. So what in JSON is `Number` we split up in `Int64`, `Double` and `Decimal`.
+Typed JSON follows the specification of JSON, which means that objects, arrays and single values are all allowed. One difference is that when working with the C#-object and numbers we have the possibility to specify a more exact type. What in JSON is `Number`, splits up in `Int64`, `Double` and `Decimal`.
 
 The following is a list of the tokens in JSON and the equivalence in C#:
 
@@ -75,13 +75,13 @@ The following is a list of the tokens in JSON and the equivalence in C#:
 | `true`/`false` | Boolean |
 | `1.234` and `2E3` | Decimal |
 
-To specify that a member in Json-by-example should be of type `Double` is done in the code-behind file.
+To specify the type of a member in JSON-by-example, define it in the code-behind:
 
 <div class="code-name">Foo.json</div>
 
 ```js
 {
-  "Value": 2E3 // will be parsed as decimal by default.
+  "Value": 2E3 // will parse as decimal by default.
 }
 ```
 
@@ -113,7 +113,7 @@ To mark a specific value as writable by the client, add a dollar sign (`$`) at t
 
 ### Trigger Properties
 
-A common use of writable JSON values is trigger properties. These properties carry no specific meaning, they are simply there to notify the [code-behind](/guides/typed-json/code-behind/) that a change has happened. Here's an example of a trigger property:
+Trigger properties is a common use for writable JSON properties. They notify the code-behind that a change has happened. Here's an example of a trigger property:
 
 ```json
 {
@@ -123,8 +123,8 @@ A common use of writable JSON values is trigger properties. These properties car
 }
 ```
 
-The value of this trigger would be incremented from the client which allows the code-behind to react accordingly.
+An incrementation in `SaveTrigger$`
 
 ## The HTML property
 
-In all the [sample apps](https://github.com/StarcounterApps/), there is an "Html" property in every, or almost every, `.json` file. The value of this property contains the path to the corresponding HTML view which means that the middleware [HtmlFromJsonProvider](/guides/network/middleware/#htmlfromjsonprovider) can locate this HTML view and send it to the client. This allows the developer to only return a Typed JSON object from a handler and still return the corresponding view as well. 
+In all the [sample apps](https://github.com/StarcounterApps/), there is an "Html" property in every, or almost every, `.json` file. The value of this property contains the path to the corresponding HTML view which means that the middleware [HtmlFromJsonProvider](/guides/network/middleware/#htmlfromjsonprovider) can locate this HTML view and send it to the client. This allows the developer to return a Typed JSON object from a handler and still return the corresponding view as well. 
