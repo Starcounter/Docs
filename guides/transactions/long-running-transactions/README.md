@@ -26,7 +26,7 @@ Let's assume that you are composing an email in a mail program. You are entering
 
 If the user elects to cancel the email, the EmailAddress should not be saved. If the user elects to send/save the email, the email address should be saved. But the EmailAddress is directly edited in the email form. How does Starcounter know that it should only be saved if the user saves the email?
 
-A new transaction is created calling `Db.Scope` that takes a delegate to be executed as parameter. The transaction will then be attached to the view-model when the (view-model) object is instantiated.
+A new transaction is created calling `Db.Scope` that takes a delegate to be executed as parameter. The transaction will then attach to the view-model when the (view-model) object is instantiated.
 
 ```cs
 Handle.GET("/email-client/new-email", () =>
@@ -48,7 +48,7 @@ Inside your form, the changes are all there and the information appears updated 
 
 ### Using an existing transaction
 
-Sometimes a transaction is already attached on another part of the view-model. To reuse it it needs to be scoped before the new page is created.
+Sometimes a transaction is already attached on another part of the view-model. To reuse it, it needs to be scoped before the new page is created.
 
 ```cs
 Handle.GET("/email-client/new-email", () =>
@@ -67,7 +67,7 @@ Handle.GET("/email-client/new-email", () =>
 
 ### Attaching a transaction to an existing JSON object
 
-If the part of the view-model that the transaction should be attached to is already instantiated, for example a default value for a property of type `Json`, the transaction can be attached manually.
+If the part of the view-model that the transaction should attach to is already instantiated, for example a default value for a property of type `Json`, the transaction can attach manually.
 
 Lets assume that in the previous example, the `CurrentPage` property was already instantiated.
 
@@ -85,7 +85,7 @@ Handle.GET("/email-client/new-email", () =>
 
 ### Sharing transactions
 
-A transaction can be attached and used on more than one instance in the view-model. When a transaction is scoped, all subsequent calls inside the scope will use the same transaction.
+A transaction can attach and be used on more than one instance in the view-model. When a transaction has a scope, all calls inside the scope will use the same transaction.
 
 In this example the call to the second handler with uri `/email-client/email/{emailId}` will use the transaction created in the first handler.
 
@@ -114,9 +114,9 @@ Handle.GET("/email-client/email/{?}", (string emailId) =>
 
 Scopes are nested, so if in the example the second rest-handler, `Handle.Get("/email-client/email/{?}", ...)` would also declare a scope it will still use the same transaction as created by the caller, `GET("/email-client/new-email", ...)`.
 
-### Making sure a new transaction is created
+### Making Sure to Create a New Transaction
 
-If, for some reason, that it's vital that a new transaction always is created it is possible to manually create and scope a transaction.
+To always create a new transaction, manually create and scope it:
 
 ```cs
 Handle.GET("/email-client/new-email", () =>
@@ -140,7 +140,7 @@ The syntax for these are `Transaction.Commit()` and `Transaction.Rollback()`.
 
 `Transaction.Commit()` commits changes to the database which means that they will become visible for other transactions.
 
-`Transaction.Rollback()` rolls back the state of the view-model. For example, with a commit that's immidiately followed by a rollback, no changes will be rolled back. Consider this scenario instead:
+`Transaction.Rollback()` rolls back the state of the view-model. For example, with a commit that's immidiately followed by a rollback, no changes will roll back. Consider this scenario instead:
 
 ```cs
 void Handle(Input.CreateEmailTrigger action) 
@@ -153,7 +153,7 @@ void Handle(Input.CreateEmailTrigger action)
   Transaction.Rollback();
 }
 ```
-In this scenario, the new `Email` that's created would be rolled back and the state of the view-model would return to the previous commit.
+In this scenario, the new `Email` that's created would roll back and the state of the view-model would return to the previous commit.
 
 Most sample apps uses `Commit` and `Rollback` to allow the user to save or cancel change like in the following example:
 
@@ -185,13 +185,13 @@ partial class MailPage : Json, IBound<Mail>
 }
 ```
 
-An example of this can also be found at [step 6](../../tutorial/cancel-and-delete) of the tutorial.
+You can find an example of this in [step 6](../../tutorial/cancel-and-delete) of the tutorial.
 
 ## Exceptions
 
 ### ScErrIteratorClosed (SCERR4139)
 
-This exception is thrown when an iterator is closed before it is done. An iterator will close if a long-running transaction is commited, rolled back, or cancelled inside the iteration.
+Starcounter throws this exception when an iterator closes before finishing. An iterator will close if a long-running transaction commits, rolls back, or cancels while iterating.
 
 This is the simplest way to close the iteration and throw the exception if we assume that this code is in a long-running transaction:
 
@@ -202,4 +202,4 @@ foreach (var person in Db.SQL("SELECT p FROM Person p"))
 } 
 ```
 
-Due to this, it is recommended not to execute code with side effects during the iteration since it might cause it to be closed. This is especially important when the developer does not have full control over the side effects, such as when making `Self.GET` calls that might have responses from other apps.
+Due to this, we recommend not to execute code with side effects during the iteration since it might cause it to close. This is important when the developer does not have full control over the side effects, such as when making `Self.GET` calls that might have responses from other apps.

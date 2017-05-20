@@ -23,7 +23,7 @@ void ScheduleTask(
 where:
 * `Action action`: procedure to execute on scheduler.
 * `Boolean waitForCompletion = false`: optional flag to wait for the `action` to complete synchronously.
-* `Byte schedulerId = StarcounterEnvironment.InvalidSchedulerId`: optional parameter to select the scheduler, on which the `action` is going to run. This parameter is for advanced usage only.
+* `Byte schedulerId = StarcounterEnvironment.InvalidSchedulerId`: optional parameter to select the scheduler, on which the `action` is going to run. This parameter is for advanced usage.
 
 To determine if current thread is on scheduler call `StarcounterEnvironment.IsOnScheduler()`. To determine the amount of schedulers in your database call `StarcounterEnvironment.SchedulerCount`. To get current scheduler id call `StarcounterEnvironment.CurrentSchedulerId` (in case if calling thread is not on Starcounter scheduler the value `StarcounterEnvironment.InvalidSchedulerId` is returned).
 
@@ -105,7 +105,7 @@ namespace StarcounterApplication4
 				}, false);
 
 				System.Threading.Thread.Sleep(1000);
-				arEvent.WaitOne(); // Wait until current job is finished
+				arEvent.WaitOne(); // Wait for the current job to finish
 			}
 		}
 	}
@@ -121,6 +121,6 @@ foreverThread.Start();
 
 > 20150928T084607 Warning sc://chrhol-pc/personal Starcounter.Server - User code process takes longer than expected to exit. (, PID=1271188, Database=default)
 
-And then finally
+And then, finally:
 
 > 20150928T084622 Error sc://chrhol-pc/personal Starcounter.Server - ScErrCodeHostProcessNotExited (SCERR10018): When asked to shut down, the user code process agreed to shut down, but the process didn't exit gracefully in time. Killing it.. (, PID=1271188, Database=default)\r\nVersion: 2.0.0.0.\r\nHelp page: https://github.com/Starcounter/Starcounter/wiki/SCERR10018.
