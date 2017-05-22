@@ -35,7 +35,7 @@ When allowing external HTTP requests, it might be useful to pre-process or filte
 
 ![Middleware example](../../../assets/Middleware-example.PNG)
 
-An example of this can be an extremely basic spam filter:
+An example of this can be an basic spam filter:
 
 ```cs
 Application.Current.Use((Request request) =>
@@ -66,7 +66,7 @@ This only affects request filters and not response filters.
 
 ## Response filters
 
-Response filters do the opposite of request filters; they make alterations to outgoing responses. They work similarly to request filters by being executed one by one until one returns a non-null response. The main difference is that response filters are called after the handler has been called while request filters are called before. Response filters can either create entirely new responses and return those, or simply modify the response coming from the handler.
+Response filters do the opposite of request filters; they make alterations to outgoing responses. They work similarly to request filters by being executed one by one until one returns a non-null response. The main difference is that response filters are called after the handler has been called while request filters are called before. Response filters can either create entirely new responses and return those, or modify the response coming from the handler.
 
 ![Middleware response example](../../../assets/middleware-response.PNG)
 
@@ -97,9 +97,9 @@ Application.Current.Use((Request request, Response response) =>
 });
 ```
 
-In this case, the next response filter would never be called since a response is always returned. That is important to keep in mind when building response filters.
+In this case, the next response filter is never called since a response is always returned. That is important to keep in mind when building response filters.
 
-In the examples above, the response filter checks for information in the request. It is also possible to check for information in the response, such as in this example:
+In the examples above, the response filter checks for information in the request. It's also possible to check for information in the response, such as in this example:
 
 ```cs
 Application.Current.Use((Request request, Response response) =>
@@ -159,7 +159,7 @@ static void Main()
 }
 ```
 
-When a request is sent to the `/Test` handler, it will be intercepted by the request filter that creates a new `Response` object. This response is in turn intercepted by the response filter which creates yet another `Response` object which will be the one received by the client. So when this code is run, "THIS IS FROM THE RESPONSE FILTER" will be displayed.
+When sending a request to the `/Test` handler, the request filter will intercept it and create a `Response` object. This response is then intercepted by the response filter that creates another `Response` object which will be the one received by the client. When this code runs, "THIS IS FROM THE RESPONSE FILTER" displays.
 
 ### Middleware interaction with other applications
 
@@ -179,9 +179,9 @@ Application.Current.Use((Request request) =>
 });
 ```
 
-By having this request filter in one application, all requests, to all applications, will be met by the `404` response.
+By having this request filter in one application, all requests, to all applications, will hit the `404` response.
 
-This can be remedied by adding an `if` statement like this:
+Adding this `if` statement fixes it:
 
 ```cs
 Application.Current.Use((Request request) =>
@@ -201,9 +201,9 @@ Application.Current.Use((Request request) =>
 
 ## Middleware classes
 
-In addition to request and response filters, `Application.Current.Use` allow for custom middleware classes that can be exposed and used by all applications. These custom middleware classes implement the `IMiddleware` interface.
+`Application.Current.Use` also allows for exposing custom middleware classes. These middleware classes implement the `IMiddleware` interface.
 
-Here's an example of an application using a custom middleware class:
+Here's an application using a middleware class:
 ```cs
 class Blocker : IMiddleware
 {
@@ -228,17 +228,17 @@ class Program
 
         Handle.GET("/blocked", () =>
         {
-            return "I'll never be called :( ";
+            return "No one will call me :( ";
         });
     }
 }
 ```
 
-In this case, a custom middleware class is created using the `IMiddleware` interface. The middleware created in this case is a request filter that simply returns an unhelpful response no matter what the incoming request is.
+Here, we use the `IMiddleware` interface to create a custom middleware class. The middleware created is a request filter that returns an unhelpful response no matter what the incoming request is.
 
-By using middleware classes, it is possible to achieve a higher level of abstraction by hiding the implementation of the middleware.
+Middleware classes makes it possible to hide the implementation of middleware.
 
-It is also worth nothing that these classes do not have to contain request or response filters. Although, that would be the most common usage of middleware classes.
+It's also worth nothing that these classes do not have to contain request or response filters. Although, that would be the most common usage of middleware classes.
 
 ### HtmlFromJsonProvider
 
@@ -280,25 +280,25 @@ void Main()
 }
 ```
 
-When a call for `/person` is made, this is what will happen:
+When there is a call to`/person`, this is what will happen:
 
-1. The JSON object `Person` will be returned by the handler
-2. The `HtmlFromJsonProvider` will intercept the object
-3. It will look in the JSON file for the `Html` property and find `/person.html`
-4. It will return the HTML found at that path
+1. The handler returns The JSON object `Person`
+2. The `HtmlFromJsonProvider` intercepts the object
+3. It looks in the JSON file for the `Html` property and finds `/person.html`
+4. It returns the HTML found at that path
 
-If the HTML at the path would be a complete HTML document, this would be sufficient. Though, because the HTML provided in this example is a HTML template, it is necessary to add another layer of middleware to convert the template to a full HTML document that can be rendered by the browser. That's where `PartialToStandaloneHtmlProvider` enters the picture.
+If the HTML at the path would be a complete HTML document, this would be enough. Though, because the HTML provided in this example is a HTML template, it's necessary to add another layer of middleware to convert the template to an HTML document that the browser can render. That's what `PartialToStandaloneHtmlProvider` does.
 
 ### PartialToStandaloneHtmlProvider
 
-This middleware class checks if the HTML is a full document, or essentially if it starts with a `<!DOCTYPE html>`. If it is not a full HTML document, it wraps the existing HTML inside the body of an HTML document that contains the following:
+This middleware class checks if the HTML is a full document, or essentially if it starts with a `<!DOCTYPE html>`. If it's not a full HTML document, it wraps the existing HTML inside the body of an HTML document that contains the following:
 
 1. A `puppet-client` element to create a WebSocket connection
 2. Import links to the Starcounter custom elements `starcounter-include` and `starcounter-debug-aid`
 3. Import links to the outside libraries Polymer and Bootstrap
 4. The session URL which makes it possible for PuppetJs to request the relevant JSON in a future request
 
-It is possible to override this default HTML by passing a string containing HTML as a parameter. Here's an example of that:
+It's possible to override this default HTML by passing a string containing HTML as a parameter. Here's an example of that:
 
 {% raw %}
 ```cs
@@ -331,9 +331,9 @@ Application.Current.Use(new PartialToStandaloneHtmlProvider(html))
 ```
 {% endraw %}
 
-Since `PartialToStandaloneHtmlProvider` wraps the actual response from the handler, it will also have the HTTP status code that was returned.
+Since `PartialToStandaloneHtmlProvider` wraps the actual response from the handler, it will have the HTTP status code of the response.
 
-When building Starcounter applications the way that is advised, the two above middleware classes should always be provided in order to send HTML that can be parsed to the client.
+When building Starcounter applications the recommended way, use the two middleware classes mentioned above to send complete HTML documents to the client even if the handler returns Typed JSON classes.
 
 This is how it should look:
 
