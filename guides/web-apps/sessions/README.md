@@ -1,23 +1,5 @@
 # Sessions
 
-When you are running multiple apps, the first app to handle the request gets to create the session. When running a launcher, it's always the launcher that creates the session.
-
-To just use a session that was created by launcher, do:
-
-```cs
-Handle.GET("/myapp/master", () =>
-{
-  var master = new MasterPage();
-  master.Session = Session.Current;
-  return master;
-});
-
-```
-
-We are working on including an implicit standalone mode directly in Starcounter, so you will never have to write the below code to create session explicitly, unless you want to.
-
----
-
 Sessions are used to retain the client state in your application. A session is represented by an instance of a `Session` class. Session is created on current Starcounter scheduler and should be operated only on that scheduler. That's why one should never store session objects statically (same as one shouldn't store SQL enumerators statically) or use session objects in multithreaded/asynchronous programming. In order to save session and utilize it later please use `Session.SessionId` described below.
 
 Sessions and JSON objects can be connected: on JSON object session can be accessed using `Session` property, and on `Session` object, JSON object can be accessed through `Data` property.
