@@ -238,7 +238,7 @@ Here, we use the `IMiddleware` interface to create a custom middleware class. Th
 
 Middleware classes makes it possible to hide the implementation of middleware.
 
-It's also worth nothing that these classes do not have to contain request or response filters. Although, that would be the most common usage of middleware classes.
+These classes do not have to contain request or response filters. Although, that is the common way of using middleware classes.
 
 ### HtmlFromJsonProvider
 
