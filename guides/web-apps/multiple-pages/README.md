@@ -6,7 +6,7 @@ This is solved in single page applications (SPA) using [`history.pushState`](htt
 
 ## Example
 
-Let's assume that we have an email application. On the left is a list of all emails and on the right is a single focused email. You can use an URL to navigate to any particular email (i.e. `www.mysampleapp.com/emails/123`). In this way, each particular email works as a separate web page. However, when you step between the emails in the list on the left, you don't want the browser to load a completely new page. This would make the email application slow and any DOM that is outside of the email page (i.e. the page inside the main page) would be reset.
+Let's assume that we have an email application. On the left is a list of all emails and on the right is a single focused email. You can use an URL to navigate to any particular email (i.e. `www.mysampleapp.com/mails/123`). In this way, each particular email works as a separate web page. However, when you step between the emails in the list on the left, you don't want the browser to load a completely new page. This would make the email application slow and any DOM that is outside of the email page (i.e. the page inside the main page) would be reset.
 
 In Starcounter, you can create master pages and sub pages that are handled on the browser side. In this way, the part of the master page that does not change between pages is actually the *same* DOM when you move in-between pages. The JavaScript instance is the same and any ongoing animations work fluently. Above all, performance is stellar.
 
@@ -166,17 +166,17 @@ namespace MultiplePagesDemo
 ```
 {% endraw %}
 
-Let's assume that the user first visits the URL `www.mysampleapp.com/emails` using a browser. The handler registered using `Handle.GET("/emails",...)` will be called and the html page master.html will be returned. If the user then clicks on a specific email, he will hit the handler for `www.mysampleapp.com/emails/123`. But as the master page is already cached, the browser will not leave the current page. Instead it will update the existing page by changing the content (the DOM) of its sub page named `Focused`.
+Let's assume that the user first visits the URL `www.mysampleapp.com/mails` using a browser. The handler registered using `Handle.GET("/mails",...)` will be called and the html page master.html will be returned. If the user then clicks on a specific email, he will hit the handler for `www.mysampleapp.com/mails/123`. But as the master page is already cached, the browser will not leave the current page. Instead it will update the existing page by changing the content (the DOM) of its sub page named `Focused`.
 
 ### The best of both worlds
 
-In the above example, the user could bookmark `www.mysampleapp.com/emails/123` and visit some other day or from another browser. The master page would not be present as the current content of the browsers and the call to `Self.GET("/emails")` would instead run the code that creates a new Master page.
+In the above example, the user could bookmark `www.mysampleapp.com/mails/123` and visit some other day or from another browser. The master page would not be present as the current content of the browsers and the call to `Self.GET("/mails")` would instead run the code that creates a new Master page.
 
 ### What is happening behind the scenes
 
 Normally, when you visit a new page in a browser, the current page is dropped and a new page is parsed. This is built in to the browser and cannot be changed. So how does a SPA page load a new sub page?
 
-The answer is that it uses the JavaScript XHR support. Starcounter provides an implementation of loading partial data using the standard JSON-Patch format. So when you visit `www.mysampleapp.com/emails/123` from the browser address bar, the call will get the entire page and when you visit the same url in an existing session, a GET will be sent using the `Accept: application/json-patch+json` header via the JavaScript XHR and only the data needed to morph the current page into the new page is sent.
+The answer is that it uses the JavaScript XHR support. Starcounter provides an implementation of loading partial data using the standard JSON-Patch format. So when you visit `www.mysampleapp.com/mails/123` from the browser address bar, the call will get the entire page and when you visit the same url in an existing session, a GET will be sent using the `Accept: application/json-patch+json` header via the JavaScript XHR and only the data needed to morph the current page into the new page is sent.
 
 You can read more on how the JSON-Patch protocol is used over at [PuppetJs spec](https://github.com/PuppetJs/PuppetJs/wiki/Server-communication).
 
