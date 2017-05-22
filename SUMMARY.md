@@ -95,7 +95,6 @@
     * [Blending](guides/blending/README.md)
         * [Sharing data](guides/blending/sharing-data/README.md)
         * [Sharing screen](guides/blending/sharing-screen/README.md)
-        * [Launcher](guides/blending/launcher/README.md)
         * [Blending](guides/blending/blending/README.md)
         * [Avoiding URI conflicts](guides/blending/avoiding-uri-conflicts/README.md)
         * [Avoiding CSS conflicts](guides/blending/avoiding-css-conflicts/README.md)
