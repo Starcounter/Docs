@@ -97,7 +97,6 @@
         * [Sharing screen](guides/mapping-and-blending/sharing-screen/README.md)
         * [URI mapping](guides/mapping-and-blending/uri-mapping/README.md)
         * [Ontology mapping](guides/mapping-and-blending/ontology-mapping/README.md)
-        * [Launcher](guides/mapping-and-blending/launcher/README.md)
         * [Blending](guides/mapping-and-blending/blending/README.md)
         * [Avoiding URI conflicts](guides/mapping-and-blending/avoiding-uri-conflicts/README.md)
         * [Avoiding CSS conflicts](guides/mapping-and-blending/avoiding-css-conflicts/README.md)
