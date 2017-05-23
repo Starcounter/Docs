@@ -130,6 +130,8 @@ The second, `Handle.GET("/multiplepagesdemo/mails/{?}"...`, returns a MailsPage 
 
 ### View
 
+{% raw %}
+
 <div class="code-name">Focused.html</div>
 
 ```html
@@ -183,6 +185,8 @@ The `Focused.html` referenced by `Focused.json` simply displays the title and co
     </template>
 </template>
 ```
+
+{% endraw %}
 
 `MailsPage.html` contains the full page to display. It lists all the mails as linked text. The most important part is the [`<starcounter-include partial=...`](https://docs.starcounter.io/guides/web-apps/html-views/) which loads the Focused element of `MailsPage.json` with its own html file.
 
