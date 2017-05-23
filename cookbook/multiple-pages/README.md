@@ -30,7 +30,7 @@ In Starcounter, you can create master pages and sub pages that are handled on th
 }
 ```
 
-The Mails element is used to display a list with links to their corresponding email. The Focused element is filled with a single `Focused.json`.
+The `Mails` element is used to display a list with links to their corresponding email. The `Focused` element is filled with a single `Focused.json`.
 
 <div class="code-name">Focused.json</div>
 
@@ -43,7 +43,7 @@ The Mails element is used to display a list with links to their corresponding em
 
 ```
 
-The `Focused.json` has its own Html file which will be inserted into the MailsPage in a SPA manner.
+The `Focused.json` has its own Html file which will be inserted into the `MailsPage` in a SPA manner.
 
 ### Application code
 
@@ -101,7 +101,8 @@ namespace MultiplePagesDemo
 
             Db.Transact(() =>
             {
-                if (Db.SQL<long>("SELECT COUNT(m) FROM multiplepagesdemo.mail m").First == 0)
+                bool emptyMailbox = Db.SQL<long>("SELECT COUNT(m) FROM multiplepagesdemo.mail m").First == 0;
+                if (emptyMailbox)
                 {
                     new Mail()
                     {
@@ -183,7 +184,7 @@ The `Focused.html` referenced by `Focused.json` simply displays the title and co
 </template>
 ```
 
-[MailsPage.html] contains the full page to display. It lists all the mails as linked text. The most important part is the [`<starcounter-include partial=...`](https://docs.starcounter.io/guides/web-apps/html-views/) which loads the Focused element of `MailsPage.json` with its own html file.
+`MailsPage.html` contains the full page to display. It lists all the mails as linked text. The most important part is the [`<starcounter-include partial=...`](https://docs.starcounter.io/guides/web-apps/html-views/) which loads the Focused element of `MailsPage.json` with its own html file.
 
 ## How it works
 
