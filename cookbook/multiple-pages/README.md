@@ -8,7 +8,7 @@ This is solved in single page applications (SPA) using [`history.pushState`](htt
 
 Let's assume that we have an email application. On the left is a list of all emails and on the right is a single focused email. You can use an URL to navigate to any particular email (i.e. `/MultiplePagesDemo/emails/123`). In this way, each particular email works as a separate web page. However, when you step between the emails in the list on the left, you don't want the browser to load a completely new page. This would make the email application slow and any DOM that is outside of the email page (i.e. the page inside the main page) would be reset.
 
-[//]: # (TODO: Include demo gif here.)
+![Multiple pages in action](/assets/multiplepages.gif)
 
 In Starcounter, you can create master pages and sub pages that are handled on the browser side. In this way, the part of the master page that does not change between pages is actually the *same* DOM when you move in-between pages. The JavaScript instance is the same and any ongoing animations work fluently. Above all, performance is stellar.
 
