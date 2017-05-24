@@ -71,7 +71,6 @@
         * [Puppet](guides/web-apps/puppet/README.md)
         * [Client-side stack](guides/web-apps/client-side-stack/README.md)
         * [Sessions](guides/web-apps/sessions/README.md)
-        * [Multiple pages](guides/web-apps/multiple-pages/README.md)
         * [HTML Views](guides/web-apps/html-views/README.md)
         * [HTML View Guidelines](guides/web-apps/html-view-guidelines/README.md)
         * [Introduction to Web Components](guides/web-apps/introduction-to-web-components/README.md)
@@ -124,6 +123,6 @@
     * [Cookie-based authentication](cookbook/cookie-based-authentication/README.md)
     * [Timestamp on Object Creation](cookbook/timestamp-on-object-creation/README.md)
     * [Creating Strongly Typed JSON Collections](cookbook/creating-strongly-typed-json-collections/README.md)
-    
+    * [Multiple pages](cookbook/multiple-pages/README.md)
 * [Glossary](glossary/README.md)
 * [Advanced Search](search/README.md)
