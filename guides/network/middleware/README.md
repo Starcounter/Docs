@@ -93,7 +93,7 @@ Application.Current.Use((Request request, Response response) =>
     {
         response.Headers["MyHeaderName"] = "MyHeaderValue";
     }
-    return return;
+    return response;
 });
 ```
 
