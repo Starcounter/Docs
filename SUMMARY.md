@@ -118,5 +118,4 @@
     * [Cookie-based authentication](cookbook/cookie-based-authentication/README.md)
     * [Timestamp on Object Creation](cookbook/timestamp-on-object-creation/README.md)
     * [Multiple pages](cookbook/multiple-pages/README.md)
-* [Glossary](glossary/README.md)
 * [Advanced Search](search/README.md)
