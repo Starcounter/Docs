@@ -38,6 +38,10 @@ Here are the most important database configuration options with their default va
 
 ## Runtime changes
 
+<aside class="notice">
+NOTE: Runtime changes for database configuration are deprecated and will be removed in the next version of Starcounter
+</aside>
+
 When codehost is running one can manipulate the above flags at runtime using a REST API. All should be called on system port (`8181` by default).
 
 Getter for flags: `GET /sc/[DatabaseName]/GetFlag/[FlagName]`. For example:
