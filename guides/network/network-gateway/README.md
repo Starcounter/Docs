@@ -26,9 +26,7 @@ Is the maximum size of incoming HTTP body/content, in bytes. Requests with bigge
 
 The value of `MaximumReceiveContentLength` can be found in runtime with `NetworkGateway.Deserealize().MaximumReceiveContentLength`. For this to work, `using Starcounter.Internal` has to be included as well. 
 
-<aside class="notice">
-NOTE: `NetworkGateway.Deserealize()` is deprecated and will be removed in the next version of Starcounter
-</aside>
+##### NOTE: `NetworkGateway.Deserealize()` is deprecated and will be removed in the next version of Starcounter
 
 #### InactiveConnectionTimeout 
 
