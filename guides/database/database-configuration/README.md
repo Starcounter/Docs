@@ -25,8 +25,12 @@ Here are the most important database configuration options with their default va
 5. Should URI mapping (UriMapping.Map) be enabled:
 `UriMappingEnabled: true`
 
+##### NOTE: `UriMappingEnabled` flag is deprecated and will be removed in the next versions of Starcounter.
+
 6. Should URI ontology mapping (UriMapping.OntologyMap) be enabled:
 `OntologyMappingEnabled: true`
+
+##### NOTE: `OntologyMappingEnabled` flag is deprecated and will be removed in the next versions of Starcounter.
 
 7. Should the request filters be enabled (previously middleware filters):
 `RequestFiltersEnabled: true`
@@ -38,7 +42,7 @@ Here are the most important database configuration options with their default va
 
 ## Runtime changes
 
-##### NOTE: Runtime changes for database configuration are deprecated and will be removed in the next version of Starcounter
+##### NOTE: Runtime changes for database configuration are deprecated and will be removed in the next versions of Starcounter.
 
 When codehost is running one can manipulate the above flags at runtime using a REST API. All should be called on system port (`8181` by default).
 
