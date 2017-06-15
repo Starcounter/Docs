@@ -8,7 +8,7 @@ Detailed network gateway configuration and statistics can be retrieved using `GE
 
 ## Configuration
 
-Network gateway is configured in scnetworkgateway.xml, which is located in the server repository (e.g User/Documents/Starcounter/Personal). Here are some notable configuration options:
+Network gateway is configured in `scnetworkgateway.xml`, which is located in the server repository (e.g User/Documents/Starcounter/Personal). Here are some notable configuration options:
 
 ### Notable Configuration Options
 
