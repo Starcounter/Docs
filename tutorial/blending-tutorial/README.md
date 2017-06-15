@@ -34,7 +34,7 @@ The result of this tutorial is a medical system for pets that allows us to get a
 
 ## Source Code
 
-The sourcecode can be found in the [BlendingTutorial](https://github.com/StarcounterApps/BlendingTutorial) repository on GitHub. Every commit represents one step in the tutorial:
+The source code can be found in the [BlendingTutorial](https://github.com/StarcounterApps/BlendingTutorial) repository on GitHub. Every commit represents one step in the tutorial:
 
 * Create two simple apps
 * Adapt to declarative shadow dom
