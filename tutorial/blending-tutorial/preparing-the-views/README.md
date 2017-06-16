@@ -19,7 +19,7 @@ Declarative Shadow DOM helps us define this.
 
 The [guides](/guides/web-apps/html-view-guidelines) describes how to use Declarative Shadow DOM. For our purposes it's enough to know that we should separate content and presentation and that root level elements should be given a `slot` attribute.
 
-## Attaching Elements to Slots
+## Adapting Views to Declarative Shadow DOM
 
 When blending elements from different views, the elements on the root appear as `slot` elements in [CompositionEditor](https://github.com/starcounter/compositionEditor), the tool we use to rearange elements. These elements have names. By default, their names look like `<slot name="MyApp/0"></slot>`, where the `0` represents the index of the element in its view. 
 
@@ -192,5 +192,125 @@ This view is a simple list. Since the elements in the list should not be rearran
     </template>
 </template>
 ```
+
+### Adapting Complex views
+
+The views in the previous section only needed explicit slots since all their rearrangeable elements were on the root level. Most of the time, that's not the case.
+
+#### PetDetails
+
+Consider this file:
+
+<div class="code-name">PetDetails.html</div>
+
+```html
+<template>
+    <template is="dom-bind">
+        <div class="pet-list-wrapper">
+            <div class="pet-list-wrapper__row">
+                <h3>{{model.Name}}</h3>
+                <h4>{{model.Age}} years old {{model.Animal}}</h4>
+            </div>
+            <div class="pet-list-wrapper__row">
+                <p>Owner: {{model.OwnerName}}</p>
+                <p>Weight: {{model.Weight}} kg</p>
+            </div>
+            <a href="/PetList">Back to list</a>
+        </div>
+    </template>
+</template>
+```
+
+Since there is only one root element, the layout of this view can't be edited. We want to be able to edit the layout of this view to include information from MedicalRecordProvider. To do this, we have to separate the content and the layout. 
+
+This will not be covered in length here since it's already covered in the blog post [How to Apply New Shadow DOM Layouts to Existing HTML Templates](https://starcounter.io/making-apps-blendable/). When those instructions are applied to this view, it should look like this:
+
+<div class="code-name">PetDetails.html</div>
+
+```html
+<template>
+    <template is="dom-bind">
+        <h3 slot="petlist/details-name">{{model.Name}}</h3>
+        <h4 slot="petlist/details-age-and-animal">{{model.Age}} years old {{model.Animal}}</h4>
+        <p slot="petlist/details-owner-name">Owner: {{model.OwnerName}}</p>
+        <p slot="petlist/details-weight">Weight: {{model.Weight}} kg</p>
+        <a slot="petlist/details-list-link" href="/PetList">Back to list</a>
+    </template>
+    <template is="declarative-shadow-dom">
+        <style>
+            @import '/PetList/style.css';
+        </style>
+        <div class="pet-list-wrapper">
+            <div class="pet-list-wrapper__row">
+                <slot name="petlist/details-name"></slot>
+                <slot name="petlist/details-age-and-animal"></slot>
+            </div>
+            <div class="pet-list-wrapper__row">
+                <slot name="petlist/details-owner-name"></slot>
+                <slot name="petlist/details-weight"></slot>
+            </div>
+            <slot name="petlist/details-list-link"></slot>
+        </div>
+    </template>
+</template>
+```
+
+The code inside the `declarative-shadow-dom` template will be the exact code that will show up in the editor as the default layout. 
+
+#### MasterPage (MedicalRecordProvider)
+
+<div class="code-name">MasterPage</div>
+
+```html
+<link rel="import" href="/sys/polymer/polymer.html">
+
+<template>
+    <style>
+        .mrp-wrapper {
+            width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 1px 3px #ccc;
+            padding: 20px;
+        }
+    </style>
+    <template is="dom-bind">
+        <div class="mrp-wrapper">
+            <starcounter-include partial="{{model.RecordsList}}"></starcounter-include>
+            <starcounter-include partial="{{model.RecordsSummary}}"></starcounter-include>
+        </div>
+    </template>
+</template>
+```
+
+As above, apply the steps in the [blog post](https://starcounter.io/making-apps-blendable/) and the result looks like this:
+
+```html
+<link rel="import" href="/sys/polymer/polymer.html">
+
+<template>
+    <template is="dom-bind">
+        <starcounter-include slot="medicalrecordprovider/master-records-list" partial="{{model.RecordsList}}"></starcounter-include>
+        <starcounter-include slot="medicalrecordprovider/master-records-summary" partial="{{model.RecordsSummary}}"></starcounter-include>
+    </template>
+    <template is="declarative-shadow-dom">
+        <style>
+            .mrp-wrapper {
+                width: 900px;
+                margin: 0 auto;
+                box-shadow: 0 1px 3px #ccc;
+                padding: 20px;
+            }
+        </style>
+        <div class="mrp-wrapper">
+            <slot name="medicalrecordprovider/master-records-list"></slot>
+            <slot name="medicalrecordprovider/master-records-summary"></slot>
+        </div>
+    </template>
+</template>
+```
+
+## Summary
+
+These changes makes it possible to combine views from multiple apps and arrange the elements so that the views look as if they were from one app. Without this change only the root level element would be possible to move and we would be stuck with a structure where views from different apps would have to be stacked on top of each other. 
 
 {% endraw %}
