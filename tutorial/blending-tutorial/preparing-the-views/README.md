@@ -21,7 +21,7 @@ The [guides](/guides/web-apps/html-view-guidelines) describes how to use Declara
 
 ## Attaching Elements to Slots
 
-When we blend elements from different views, the elements appear as `slot` elements in the blending tool. These elements have names. By default, their names look like `<slot name="MyApp/0"></slot>`, where the `0` represents the index of the element in its view. 
+When blending elements from different views, the elements on the root appear as `slot` elements in [CompositionEditor](https://github.com/starcounter/compositionEditor), the tool we use to rearange elements. These elements have names. By default, their names look like `<slot name="MyApp/0"></slot>`, where the `0` represents the index of the element in its view. 
 
 By explicitly attaching elements to slots, we can give them meaningful names.  
 
@@ -31,8 +31,98 @@ The only files we will touch in this step are in the `src/[app-name]/wwwroot/[ap
 
 ![Views marked in file strucutre](/assets/FileStrucutreBlending.PNG)
 
-We will start out with these three files as they only require slots to blend properly:
+We will start out with these three files as they are the simplest ones to adapt:
 
 * `RecordsList.html`
 * `PetListPage.html` 
 * `RecordSummary.html`
+
+#### RecordsList.html
+
+`RecordsList.html` is a view with a headline and a table. The code looks like this:
+
+{% raw %}
+
+```html
+<link rel="import" href="/sys/polymer/polymer.html">
+
+<template>
+    <template is="dom-bind">
+        <h2>Examinations</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Clinic</th>
+                    <th>Patient</th>
+                    <th>Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template is="dom-repeat" items="{{model.Records}}" as="record">
+                    <tr>
+                        <td>{{record.Date}}</td>
+                        <td>{{record.Clinic}}</td>
+                        <td>{{record.Patient.Name}}</td>
+                        <td>{{record.NoteFromExaminer}}</td>
+                    </tr> 
+                </template>
+            </tbody>
+        </table>
+    </template>
+</template>
+```
+
+The only elements that are possible to rearrange are the ones on the **root level**. In this case, they are the `h2` and `table`. If we would wrap these two elements in another element, such as a `div`, they would always be arranged with the `h2` first, immidiately followed by the `table`, without the ability to rearrange. 
+
+To see how it looks in the editor, follow these steps:
+
+* Build and run MedicalRecordProvider, either through Visual Studio or by using `build.bat` and `run.bat`
+
+* Run CompositionEditor and CompositionProvider
+    1. Go to `http://localhost:8181/#/databases/default/appstore`
+    2. Find CompositionEditor and CompositionProvider
+    3. If you can't find them, uncheck the box "Show Compatible" at the top of the page
+    4. Download the latest version of CompositionEditor and CompositionProvider
+    5. Go to `http://localhost:8181/#/databases/default`
+    6. Click "Start" for both of them
+    7. It should look like this:
+
+    ![Right apps running](/assets/AppsRunningCorrectly.PNG)
+
+* Find the current layout
+    1. Go to `http://localhost:8080/MedicalRecordProvider`
+    2. Click `Ctrl + E`
+    3. Click the textfield in the top of the editor and choose `[partial-id="/sc/htmlmerger?MedicalRecordProvider=/MedicalRecordProvider/views/RecordsList.html"]`
+    4. It should look like this:
+
+    ![Correct Layout](/assets/CorrectLayout.PNG)
+
+As you can see, these are the elements:
+
+```html
+<slot name="MedicalRecordProvider/0"></slot>
+<slot name="MedicalRecordProvider/1"></slot>
+```
+
+`<slot name="MedicalRecordProvider/0"></slot>` is the `h2` element and `<slot name="MedicalRecordProvider/1"></slot>` is the `table` element.
+
+With more elements, this becomes harder to manage. Because of that, we assign explicit slot names.
+
+This is how we would assign explicit slot names in this view:
+
+```html
+<h2 slot="medicalrecordprovider/records-list-headline">Examinations</h2>
+<table slot="medicalrecordprovider/records-list-table" class="table">...</table>
+```
+
+The elements in the editor will now look like this:
+
+```html
+<slot name="medicalrecordprovider/records-list-headline"></slot>
+<slot name="medicalrecordprovider/records-list-table"></slot>
+```
+
+For this view, that's all we have to do. 
+
+{% endraw %}
