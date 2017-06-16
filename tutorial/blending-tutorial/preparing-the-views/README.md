@@ -37,11 +37,11 @@ We will start out with these three files as they are the simplest ones to adapt:
 * `PetListPage.html` 
 * `RecordSummary.html`
 
-#### RecordsList.html
-
-`RecordsList.html` is a view with a headline and a table. The code looks like this:
+#### RecordsList
 
 {% raw %}
+
+<div class="code-name">RecordsList.html</div>
 
 ```html
 <link rel="import" href="/sys/polymer/polymer.html">
@@ -124,5 +124,81 @@ The elements in the editor will now look like this:
 ```
 
 For this view, that's all we have to do. 
+
+#### RecordSummary
+
+<div class="code-name">RecordSummary.html</div>
+
+```html
+<link rel="import" href="/sys/polymer/polymer.html">
+
+<template>
+    <template is="dom-bind">
+        <h3>Summary</h3>
+        <p>Number of examinations: {{model.NumberOfExaminations}}</p>
+        <p>Percentage of routine visits: {{model.PercentageOfRoutineVisits}}</p>
+        <p>Most visited clinic: {{model.MostVisitedClinic}}</p>
+        <p>Latest Examination: {{model.LatestExamination}}</p>
+    </template>
+</template>
+```
+
+As with `RecordList`, `RecordSummary` only needs explicit slot names since all its rearrangeable elements are on the root level. The result looks like this:
+
+<div class="code-name">RecordSummary.html</div>
+
+```html
+<link rel="import" href="/sys/polymer/polymer.html">
+
+<template>
+    <template is="dom-bind">
+        <h3 slot="medicalrecordprovider/summary-headline">Summary</h3>
+        <p slot="medicalrecordprovider/summary-examination-number">Number of examinations: {{model.NumberOfExaminations}}</p>
+        <p slot="medicalrecordprovider/summary-percentage">Percentage of routine visits: {{model.PercentageOfRoutineVisits}}</p>
+        <p slot="medicalrecordprovider/summary-most-visited">Most visited clinic: {{model.MostVisitedClinic}}</p>
+        <p slot="medicalrecordprovider/summary-latest">Latest Examination: {{model.LatestExamination}}</p>
+    </template>
+</template>
+```
+
+#### PetListPage
+
+<div class="code-name">PetListPage.html</div>
+
+```html
+<link rel="import" href="/sys/polymer/polymer.html">
+
+<template>
+    <template is="dom-bind">
+        <template is="dom-repeat" items="{{model.Pets}}" as="pet">
+            <div class="pet-list-wrapper">
+               <h4>{{pet.Name}} - {{pet.Animal}}</h4>
+               <a href$="/PetList/Details?name={{pet.Name}}">View details</a>
+            </div>
+        </template>
+    </template>
+</template>
+```
+
+This view is a simple list. Since the elements in the list should not be rearranged, we will wrap it in a div with a slot attribute:
+
+<div class="code-name">PetListPage.html</div>
+
+```html
+<link rel="import" href="/sys/polymer/polymer.html">
+
+<template>
+    <template is="dom-bind">
+        <div slot="pet-list/list">
+            <template is="dom-repeat" items="{{model.Pets}}" as="pet">
+                <div slot="pet-list/list-item" class="pet-list-wrapper">
+                   <h4>{{pet.Name}} - {{pet.Animal}}</h4>
+                   <a href$="/PetList/Details?name={{pet.Name}}">View details</a>
+                </div>
+            </template>
+        </div>
+    </template>
+</template>
+```
 
 {% endraw %}
