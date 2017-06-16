@@ -1,7 +1,5 @@
 # Blending Tutorial Introduction
 
-Welcome to the blending tutorial!
-
 Blending is the process of making different apps look and work as one.
 
 This tutorial will teach you how to blend two independent apps.
@@ -18,17 +16,17 @@ To build the apps, you need to have Visual Studio 2015 or 2017 installed. The co
 
 The two apps that we will blend are PetList and MedicalRecordProvider. 
 
-PetList is an app displaying a list of pets and makes it possible to view the details of each pet.
+PetList is an app displaying a list of pets and the details of each pet.
 
 ![Pet list](/assets/PetList.gif)
 
-MedicalRecordProvider contains a list of medical examinations and a summary for those examinations. The content in the list can be filtered by name like this: `http://localhost:8080/MedicalRecordProvider?name=fluffy`.
+MedicalRecordProvider is a list of medical examinations and a summary for those examinations. You can filter the content in the list like this: `http://localhost:8080/MedicalRecordProvider?name=fluffy`.
 
 ![Medical record provider](/assets/MedicalRecordProvider.gif)
 
 ## Result
 
-The result of this tutorial is a medical system for pets that allows us to get a list of pets, see the summary of their medical records and also view the details of each pet's medical record.
+The result of combining these two apps with blending is a medical system for pets that allows us to get a list of pets, see the summary of their medical records and also view the details of each pet's medical record.
 
 ![Pet Med System Result](/assets/ResultPetMedSystem.gif)
 
