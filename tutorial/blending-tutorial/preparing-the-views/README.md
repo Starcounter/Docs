@@ -31,6 +31,8 @@ The only files we will touch in this step are in the `src/[app-name]/wwwroot/[ap
 
 ![Views marked in file strucutre](/assets/FileStrucutreBlending.PNG)
 
+### Adapting Simple Views
+
 We will start out with these three files as they are the simplest ones to adapt:
 
 * `RecordsList.html`
@@ -44,8 +46,6 @@ We will start out with these three files as they are the simplest ones to adapt:
 <div class="code-name">RecordsList.html</div>
 
 ```html
-<link rel="import" href="/sys/polymer/polymer.html">
-
 <template>
     <template is="dom-bind">
         <h2>Examinations</h2>
@@ -130,8 +130,6 @@ For this view, that's all we have to do.
 <div class="code-name">RecordSummary.html</div>
 
 ```html
-<link rel="import" href="/sys/polymer/polymer.html">
-
 <template>
     <template is="dom-bind">
         <h3>Summary</h3>
@@ -148,8 +146,6 @@ As with `RecordList`, `RecordSummary` only needs explicit slot names since all i
 <div class="code-name">RecordSummary.html</div>
 
 ```html
-<link rel="import" href="/sys/polymer/polymer.html">
-
 <template>
     <template is="dom-bind">
         <h3 slot="medicalrecordprovider/summary-headline">Summary</h3>
@@ -166,8 +162,6 @@ As with `RecordList`, `RecordSummary` only needs explicit slot names since all i
 <div class="code-name">PetListPage.html</div>
 
 ```html
-<link rel="import" href="/sys/polymer/polymer.html">
-
 <template>
     <template is="dom-bind">
         <template is="dom-repeat" items="{{model.Pets}}" as="pet">
@@ -185,8 +179,6 @@ This view is a simple list. Since the elements in the list should not be rearran
 <div class="code-name">PetListPage.html</div>
 
 ```html
-<link rel="import" href="/sys/polymer/polymer.html">
-
 <template>
     <template is="dom-bind">
         <div slot="pet-list/list">
