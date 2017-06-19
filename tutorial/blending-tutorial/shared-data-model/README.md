@@ -249,6 +249,8 @@ staradmin delete db default
 staradmin new db default
 ```
 
+In order to build you also have to clean the solution by right clicking on the solution and choosing `Clean Solution`.  
+
 ## Summary
 
 Now with the views adapted to Declarative Shadow DOM and a shared data model, we can get started with the actual blending.
