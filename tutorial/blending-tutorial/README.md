@@ -56,6 +56,6 @@ build.bat
 run.bat
 ```
 
-In git bash, use `./build.bat` and `/run.bat` instead. 
+In git bash, use `./build.bat` and `./run.bat` instead. 
 
 They should now be available at `localhost:8080/PetList` and `localhost:8080/MedicalRecordProvider`. 
