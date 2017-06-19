@@ -46,7 +46,7 @@ The first step is to create two simple apps. To do this, clone the [BlendingTuto
 
 ```git
 git clone https://github.com/StarcounterApps/BlendingTutorial.git
-git checkout ed05d5c01250b1e2db8e13073cd4c17527d7d000
+git checkout 0516ecbe4147e56f1abae226c8e478bac8e9ea1b
 ```
 
 Build and run the apps by executing the `build.bat` and `run.bat` scripts. 
