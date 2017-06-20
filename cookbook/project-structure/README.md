@@ -1,4 +1,4 @@
-# Project structure
+# Proposed Project Structure
 
 The Starcounter app project structure is inspired by [the structure of ASP.NET 5 projects](http://gunnarpeipman.com/2014/10/asp-net-5-new-structure-of-solutions-and-projects/). The difference is that ASP.NET has `Controllers`, `Models`, `Scripts`, and `Views` while Starcounter has `Api` handlers, JSON + HTML `viewmodels` and `database` classes.
 
