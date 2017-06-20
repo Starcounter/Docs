@@ -2,6 +2,8 @@
 
 * [Introduction](README.md)
 
+* [Getting Started](getting-started/README.md)
+
 * [Starcounter](starcounter/README.md)
     * [Collapsing the Stack](starcounter/collapsing-the-stack/README.md)
         * [Complexity and Scalability Tradeoff](starcounter/collapsing-the-stack/complexity-and-scalability-tradeoff/README.md)
