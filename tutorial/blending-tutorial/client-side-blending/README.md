@@ -114,4 +114,4 @@ We want the list headline and table to be below the pet details but above the li
 
 With this, we have taken two apps that did not previous know of each other and made them work as one.
 
-![Final result](/assets/MedicalRecordProvider.gif)
+![Final result](/assets/ResultPetMedSystem.gif)
