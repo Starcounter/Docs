@@ -8,8 +8,6 @@ For configurations regarding the network gateway, check the [Network Gateway](/g
 
 ## Configuration options
 
-**NOTE: The `UriMappingEnabled` and `OntologyMappingEnabled` flags are deprecated and will be removed in a later version of Starcounter.**
-
 Here are the most important database configuration options with their default values:
 
 1. Should edition libraries be loaded in databases:
@@ -24,34 +22,10 @@ Here are the most important database configuration options with their default va
 4. Should JSON responses from multiple applications be merged:
 `MergeJsonSiblings: true`
 
-5. Should URI mapping (UriMapping.Map) be enabled:
-`UriMappingEnabled: true`
-
-6. Should URI ontology mapping (UriMapping.OntologyMap) be enabled:
-`OntologyMappingEnabled: true`
-
-7. Should the request filters be enabled (previously middleware filters):
+5. Should the request filters be enabled (previously middleware filters):
 `RequestFiltersEnabled: true`
 
-8. Should static files HTTP responses have a special header `X-File-Path` that contains a full path to the actual file on the server (default value is `False`). This HTTP header is often useful for debugging purposes, but should be disabled in production:
+6. Should static files HTTP responses have a special header `X-File-Path` that contains a full path to the actual file on the server (default value is `False`). This HTTP header is often useful for debugging purposes, but should be disabled in production:
 `XFilePathHeader: true`
 
-9. The HTTP port bound to the database: `DefaultUserHttpPort: 8080`
-
-## Runtime changes
-
-##### NOTE: Runtime changes for database configuration are deprecated and will be removed in the next versions of Starcounter.
-
-When codehost is running one can manipulate the above flags at runtime using a REST API. All should be called on system port (`8181` by default).
-
-Getter for flags: `GET /sc/[DatabaseName]/GetFlag/[FlagName]`. For example:
-
-```
-http://localhost:8181/sc/default/GetFlag/WrapJsonInNamespaces
-```
-
-Setter for flags: `GET /sc/[DatabaseName]/SetFlag/[FlagName]/[BooleanValue]`. For example:
-
-```
-http://localhost:8181/sc/default/SetFlag/WrapJsonInNamespaces/True
-```
+7. The HTTP port bound to the database: `DefaultUserHttpPort: 8080`
