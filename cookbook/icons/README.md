@@ -79,8 +79,7 @@ Now, the above SVG and its paths can be styled using CSS in the `starcounter-com
         // TODO: Re-evaluate the need once webcomponents.js#V1 is shipped.
         // see https://github.com/StarcounterPrefabs/Launcher/pull/266#issuecomment-273434475
         if (window.ShadowDOMPolyfill) {
-            var script = document._currentScript || document.currentScript;
-            var template = script.previousElementSibling;
+            var template = document.currentScript.previousElementSibling;
             template.parentNode.classList.add('compositioneditor-shadowcss-fix');
         }
     })();
