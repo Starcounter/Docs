@@ -34,7 +34,7 @@ public class Hooks
     {
         Hook<Order>.BeforeDelete += (sender, entity) =>
         {
-            Db.SlowSQL("DELETE FROM OrderItem oi WHERE oi.\"Order\" = ?", entity);
+            Db.SQL("DELETE FROM OrderItem oi WHERE oi.\"Order\" = ?", entity);
         };
 
         Hook<OrderItem>.CommitInsert += (sender, entity) =>
@@ -97,7 +97,7 @@ public class Program {
         // The OrderItem entries will be deleted by the BeforeDelete commit hook on the Order class.
         Db.Transact(() =>
         {
-            Db.SlowSQL("DELETE FROM \"Order\"");
+            Db.SQL("DELETE FROM \"Order\"");
         });
     }
 }
