@@ -25,4 +25,4 @@ When many users write to the database at the same time, the database engine must
 
 {% import "../../macros.html" as macros %}
 
-{{ macros.tocGenerator(page.title, summary.parts[0].articles[3].articles[2].articles) }}
+{{ macros.tocGenerator(page.title, summary.parts[0].articles[4].articles[2].articles) }}

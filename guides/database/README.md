@@ -17,4 +17,4 @@ Starcounter allows any database object to [inherit from any other database objec
 
 {% import "../../macros.html" as macros %}
 
-{{ macros.tocGenerator(page.title, summary.parts[0].articles[3].articles[0].articles) }}
+{{ macros.tocGenerator(page.title, summary.parts[0].articles[4].articles[0].articles) }}
