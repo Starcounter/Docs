@@ -35,7 +35,7 @@ public class Quote
 }
 ```
 
-## Preventing fields from becoming database columns
+## Preventing Fields From Becoming Database Columns
 Using the `Transient` attribute, it's possible to exclude fields and auto-implemented properties of a database class from becoming database columns. A field or auto-implemented property with this attribute will remain as a regular .NET field/property and its value will be stored on the CLR heap and be garbage collected along with the object it belongs to. Starcounter ignores these fields and properties which means that they are not available using SQL.
 
 ```cs
@@ -51,5 +51,49 @@ public class Person
     public int ProcessSessionID { get; set; }
     [Transient]
     public int ProcessSessionNumber { get; set; }
+}
+```
+
+## Deserializing to Database Classes
+
+When deserializing to a database class, the deserialization should be wrapped in a transaction since it creates a new database object:
+
+```cs
+using Starcounter;
+
+namespace DeserializeDemo
+{
+    [Database]
+    public class Person
+    {   
+        public string Name { get; set; }
+    }
+
+    class Program
+    {
+        static void Main()
+        {
+            DeserializePerson(@"{""Name"": ""Gimli""}");
+        }
+
+        public static void DeserializePerson(string json)
+        {
+            Db.Transact(() =>
+            {
+                Newtonsoft.Json.JsonConvert.DeserializeObject<Person>(json);
+            });
+        }
+    }
+}
+```
+
+## Casting From Non-Database Class
+
+It's not possible to cast from a non-database class to a database class. Instead, database object creation should be done with the `new` operator. For example, this is not possible:
+
+```cs
+public void UpdatePerson(ExternalApiModel data) 
+{
+    (data.ExternalApiPerson as Person).Name = "John";
 }
 ```
