@@ -47,4 +47,4 @@ Returns `[{ Name:"Goldman Sachs", VatNumber:"1234" } ]`
 
 A database class cannot inherit from a class that's not a database class. This will throw an error when the application is weaved. 
 
-It's also not possible to caste a non-database class to a database class. 
+It's also not possible to cast a non-database class to a database class. 
