@@ -19,7 +19,7 @@
         * [Cancel and Delete](tutorial/hello-world/cancel-and-delete/README.md)
         * [The Next Step](tutorial/hello-world/the-next-step/README.md)
     * [Blending](tutorial/blending-tutorial/README.md)
-        * [Declarative Shadow DOM](tutorial/blending-tutorial/preparing-the-views/README.md)
+        * [Preparing the Views](tutorial/blending-tutorial/preparing-the-views/README.md)
         * [Shared Data Model](tutorial/blending-tutorial/shared-data-model/README.md)
         * [Server-Side Blending](tutorial/blending-tutorial/server-side-blending/README.md)
         * [Client-Side Blending](tutorial/blending-tutorial/client-side-blending/README.md)

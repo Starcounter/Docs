@@ -1,4 +1,4 @@
-# Declarative Shadow DOM
+# Preparing the Views
 
 When blending, we combine view-models and views from different apps. Combining view-models is easy:
 
