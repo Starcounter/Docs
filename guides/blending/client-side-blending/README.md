@@ -24,6 +24,19 @@ The editor highlights the area that is changed and displays the changes in real 
 
 ### 2. Tying to Specific Responses
 
+Every composition is tied to an identification. All identifications for the compositions in a page can be found by double clicking on the top input field in the CompositionEditor. They look like this:
+
+```
+[partial-id="/sc/htmlmerger?PetList=/PetList/views/PetListPage.html&MedicalRecordProvider=/MedicalRecordProvider/views/RecordSummary.html"]
+[partial-id="/PetList/views/MasterPage.html"]
+```
+
+The first one is the indentification for the merged response of `PetListPage.html` from PetList and `RecordSummary.html` from MedicalRecordProvider. Keys of merged responses are always prefixed with `/sc/htmlmerger`.
+
+The second is the composition for `MasterPage.html` from PetList. It has not been merged.
+
+Starcounter automatically creates these identifications.    
+
 ### 3. Storing Compositions
 
 ### 4. Applying Compositions
