@@ -47,8 +47,8 @@ class Hello
 [Database]
 public class Person
 {
-   public string FirstName;
-   public string LastName;
+   public string FirstName { get; set; }
+   public string LastName { get; set; }
    public string FullName { get { return FirstName + " " + LastName; } }
    public IEnumerable Quotes
    {
@@ -59,7 +59,7 @@ public class Person
 [Database]
 public class Quote
 {
-   public Person Person;
-   public string Text;
+   public Person Person { get; set; }
+   public string Text { get; set; }
 }
 ```

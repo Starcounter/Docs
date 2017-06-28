@@ -107,15 +107,15 @@ using Starcounter;
 [Database]
 public class Account
 {
-   public string AccountId;
-   public decimal Amount;
+   public string AccountId { get; set; }
+   public decimal Amount { get; set; }
 }
 
 public class MoneyTransfer
 {
-  public Account FromAccount;
-  public Account ToAccount;
-  public decimal Amount;
+  public Account FromAccount { get; set; }
+  public Account ToAccount { get; set; }
+  public decimal Amount { get; set; }
 
   public static void MoveMoney(Account fromAccount, Account toAccount, decimal amount)
   {
