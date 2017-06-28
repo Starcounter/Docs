@@ -23,7 +23,9 @@ Your object properties and fields may have the following datatypes (`DbTypeCode`
 * `UInt32`
 * `UInt64`
 
-The datatypes `Boolean`, `Byte`, `DateTime`, `Decimal`, `Double`, `Int16`, `Int32`, `Int64`, `SByte`, `Single`, `String`, `UInt16`, `UInt32`, `UInt64` correspond to the .NET datatypes with the same names.
+The datatypes `Boolean`, `Byte`, `DateTime`, `Double`, `Int16`, `Int32`, `Int64`, `SByte`, `Single`, `String`, `UInt16`, `UInt32`, `UInt64` correspond to the .NET datatypes with the same names.
+
+The datatype `Decimal` is stored as a 64-bit integer and is limited to six decimals. Trying to set the `Decimal` datatype to a more precise value throws `ScErrCLRDecToX6DecRangeError (SCERR4246)`. In those cases, `Double` can be used if data loss is acceptable.
 
 The datatype `object` represents a reference to a database object, i.e. an instance of a class, directly or by inheritance having the `Database` attribute set.
 
