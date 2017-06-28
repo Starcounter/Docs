@@ -29,7 +29,7 @@ In the following example the binding will succeed since the property `Name` exis
 [Database]
 public class Person
 {
-	public string Name;
+	public string Name { get; set; }
 }
 
 public class Program

@@ -58,8 +58,8 @@ namespace MultiplePagesDemo
     [Database]
     public class Mail
     {
-        public string Title;
-        public string Content;
+        public string Title { get; set; }
+        public string Content { get; set; }
         public string Url => "/MultiplePagesDemo/mails/" + this.GetObjectID();
     }
 

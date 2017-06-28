@@ -8,7 +8,7 @@ In code, it would look something like this:
 [Database]
 public abstract class BaseOfAllOtherClasses 
 {
-    public DateTime Inserted;
+    public DateTime Inserted { get; set; }
 
     public BaseOfAllOtherClasses() 
     {

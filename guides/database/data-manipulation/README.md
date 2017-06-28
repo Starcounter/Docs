@@ -4,7 +4,7 @@ There are three data manipulation statements in SQL92: `INSERT`, `UPDATE` and `D
 
 The same way a database object is created with the native program code operator `new`, a database object can be updated using the native program code assign operator `=`.
 
-A database object is deleted by calling the method `Delete()` on the database object.
+A database object is deleted by calling the `Delete` method on the database object.
 
 All modifications are directly reflected in the database for the current transaction, and when the current transaction is committed the modifications are saved and visible to other transactions.
 
@@ -12,23 +12,21 @@ All modifications are directly reflected in the database for the current transac
 [Database]
 public class Employee
 {
-    public String FirstName;
-    public String LastName;
-    public Department Department;
-    public Employee Manager;
+    public String FirstName { get; set; }
+    public String LastName { get; set; }
+    public Department Department { get; set; }
+    public Employee Manager { get; set; }
 }
 ```
 
 ```cs
 Db.Transact(() =>
 {
-    // Creating database object.
-    Employee emp = new Employee();
-    // Updating database object.
-    emp.FirstName = "John";
-    emp.LastName = "Smith";
-    // Deleting database object.
-    emp.Delete();
+    Employee emp = new Employee(); // Create database object.
+    
+    emp.FirstName = "John"; // Update database object.
+    
+    emp.Delete(); // Delete database object.
 });
 ```
 The following example shows how to update the `LastName` of all
