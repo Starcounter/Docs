@@ -17,7 +17,7 @@ namespace Querying
     [Database]
     public class Person
     {
-        public string Name;
+        public string Name { get; set; }
     }
 
     class Program

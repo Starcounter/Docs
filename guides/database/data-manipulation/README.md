@@ -12,8 +12,9 @@ Database objects are created with the native program code operator `new`. For ex
 [Database]
 public class Person
 {
-    public String FirstName;
-    public String LastName;
+
+    public String FirstName { get; set; }
+    public String LastName { get; set; }
 }
 ```
 
@@ -31,7 +32,7 @@ new Person()
 
 A database object can be updated using the native program code assign operator `=`.
 
-For example, instead of instantiating an object like in the example above, it's possible to create the object and then update its properties and fields:
+For example, instead of instantiating an object like in the example above, it's possible to create the object and then update its properties:
 
 ```cs
 var person = new Person();
