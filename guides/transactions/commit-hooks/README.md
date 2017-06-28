@@ -14,13 +14,13 @@ namespace TestHooks
    [Database]
    public class Hooked
    {
-      public string state;
+      public string state { get; set; }
    }
 
    [Database]
    public class YetAnotherClass
    {
-      public int Stock;
+      public int Stock { get; set; }
    }
 
    class Program {

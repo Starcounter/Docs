@@ -32,13 +32,13 @@ Now that we have these in our file, we can start referencing them. First, we wan
 [Database]
 public class Spender : Person
 {
-  // Spender fields
+  // Spender properties
 }
 
 [Database]
 public class Expense : Something
 {
-  // Expense fields
+  // Expense properties
 }
 ```
 
@@ -96,15 +96,17 @@ When you're done, your classes should look like this:
 [Database]
 public class Spender : Person
 {
-    public QueryResultRows<Expense> Expenses => Db.SQL<Expense>("SELECT e FROM Expense e WHERE e.Spender = ?", this);
-    public decimal CurrentBalance => Db.SQL<decimal>("SELECT SUM(e.Amount) FROM Expense e WHERE e.Spender = ?", this).First;
+    public QueryResultRows<Expense> Expenses => 
+        Db.SQL<Expense>("SELECT e FROM Expense e WHERE e.Spender = ?", this);
+    public decimal CurrentBalance =>
+        Db.SQL<decimal>("SELECT SUM(e.Amount) FROM Expense e WHERE e.Spender = ?", this).First;
 }
 
 [Database]
 public class Expense : Something
 {
-    public Spender Spender;
-    public decimal Amount;
+    public Spender Spender { get; set; }
+    public decimal Amount { get; set; }
 }
 ```
 
