@@ -61,7 +61,7 @@ namespace MyClassLibrary
     [Database]
     public class Entity1
     {
-        public string Field1;
+        public string Field1 { get; set; }
     }
 }
 ```

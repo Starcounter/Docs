@@ -108,7 +108,7 @@ The current version do not support derived indexes. You need to define index on 
 [Database]
 public class LegalEntity
 {
-   public string Name;
+   public string Name { get; set; }
 }
 
 public class Company : LegalEntity

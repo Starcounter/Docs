@@ -31,8 +31,8 @@ namespace MyApp
     [Database]
     public class Person
     {
-        public string FirstName;
-        public string LastName;
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string FullName => FirstName + " " + LastName;
     }
 
@@ -269,8 +269,8 @@ namespace MyApp
     [Database]
     public class Person
     {
-        public string FirstName;
-        public Person Friend;
+        public string FirstName { get; set; }
+        public Person Friend { get; set; }
     }
 
     class Program
@@ -359,9 +359,9 @@ And the database class looks like this:
 ```cs
 public class Person
 {
-  public string Name;
-  public long Age;
-  public string Address;
+  public string Name { get; set; }
+  public long Age { get; set; }
+  public string Address { get; set; }
 }
 ```
 
@@ -372,7 +372,7 @@ public class PersonPage : Json, IExplicitBound<Person>
 ```
 
 Then it will compile successfully.
-If `public long Age` was removed, then the following error would be displayed: `'Person' does not contain a definition for 'Age'`. The reason for this is that `IExplicitBound` would look for a database field corresponding to `Age` and fail.
+If `public long Age` was removed, then the following error would be displayed: `'Person' does not contain a definition for 'Age'`. The reason for this is that `IExplicitBound` would look for a database property corresponding to `Age` and fail.
 
 Since `IExplicitBound` expects all values to be bound to _something_, properties that are not intended to be bound have to be explicitly unbound. As noted above, it will not compile without this. A static constructor can be used in order to explicitly unbind these properties. This is how it would look:
 

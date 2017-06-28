@@ -20,7 +20,7 @@ namespace App1
     [Database]
     public class App1Class
     {
-        public string App1ClassField;
+        public string App1ClassField { get; set; }
     }
 }
 ```
@@ -35,7 +35,7 @@ namespace App2
     [Database]
     public class App2Class
     {
-        public string App2ClassField;
+        public string App2ClassField { get; set; }
     }
 }
 ```
@@ -73,7 +73,7 @@ namespace SharedDll
     [Database]
     public class SharedDllClass
     {
-        public string SharedDllClassField;
+        public string SharedDllClassField { get; set; }
     }
 }
 ```

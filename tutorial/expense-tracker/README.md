@@ -28,9 +28,9 @@ This is how it looks in code:
 [Database]
 public class Expense
 {
-    public Person Spender;
-    public string Description;
-    public decimal Amount;
+    public Person Spender { get; set; }
+    public string Description { get; set; }
+    public decimal Amount { get; set; }
 }
 ```
 

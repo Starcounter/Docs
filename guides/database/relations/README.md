@@ -12,16 +12,14 @@ In the code example below there is a one-to-many relation between the entities/c
 [Database]
 public class Department
 {
-  public IEnumerable Employees
-  {
-    get { return Db.SQL<Employee>("select e from Employee e where e.Department = ?", this); }
-  }
+  public IEnumerable Employees => 
+    Db.SQL<Employee>("select e from Employee e where e.Department = ?", this);
 }
 
 [Database]
 public class Employee
 {
-  public Department Department;
+  public Department Department { get; set; }
 }
 ```
 
@@ -39,27 +37,23 @@ In the code example below there is a many-to-many relation between the classes `
 [Database]
 public class Person
 {
-  public IEnumerable EquityPortfolio
-  {
-    get { return Db.SQL<Shares>("select s.Equity from Shares s where s.Owner = ?", this);}
-  }
+  public IEnumerable EquityPortfolio => 
+    Db.SQL<Shares>("select s.Equity from Shares s where s.Owner = ?", this);
 }
 
 [Database]
 public class Company
 {
-  public IEnumerable ShareHolders
-  {
-    get { return Db.SQL<Shares>("select s.Owner from Shares s where s.Equity = ?", this); }
-  }
+  public IEnumerable ShareHolders => 
+    Db.SQL<Shares>("select s.Owner from Shares s where s.Equity = ?", this);
 }
 
 [Database]
 public class Shares
 {
-  public Person Owner;
-  public Company Equity;
-  public Int64 Quantity;
+  public Person Owner { get; set; }
+  public Company Equity { get; set; }
+  public Int64 Quantity { get; set; }
 }
 ```
 
