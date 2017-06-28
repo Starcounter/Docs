@@ -33,7 +33,7 @@ If we have the following database schema where we want to change "Teenager" to "
 [Database]
 public class Person
 {
-    public string FirstName;
+    public string FirstName { get; set; }
 }
 
 public class Teenager : Person { }
@@ -78,7 +78,7 @@ Renaming columns is relatively easy in DB Browser. Consider the case where the g
 [Database]
 public class Person
 {
-    public string FirstName;
+    public string FirstName { get; set; }
 }
 
 public class Teenager : Person { }
@@ -103,7 +103,7 @@ To modify the database schema in the application, simply change it according to 
 [Database]
 public class Person
 {
-    public string FirstName;
+    public string FirstName { get; set; }
 }
 
 public class Teenager : Person { }
@@ -116,7 +116,7 @@ To this:
 [Database]
 public class Person
 {
-    public string FirstName;
+    public string FirstName { get; set; }
 }
 
 public class Teen : Person { }
