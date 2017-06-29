@@ -2,47 +2,121 @@
 
 When merging responses from different apps with [server-side blending](server-side-blending), the views are stacked on top of each other. In most cases, that's not what we want. Instead, we would like to compose elements in the views to make the result look like one page. That's what client-side blending does:
 
-![Blending comparison](/assets/BlendingComparison2.png)
+![Blending comparison](/assets/SimpleBlendingDemo.PNG)
 
-## Composing Views
- 
-To solve this, we could edit the source code of the apps involved. This is impractical, and in some cases even impossible. The main reason is that the apps in a system, or application suite, are often created by different developers and it's not always possible to get access to their source code. A secondary reason is versatility. If an app is modified to work well with your application suite, it might not work well with other application suites.
+In the example above, there are two apps, PetList and MedicalRecord. By default, they are stacked on top of each other. This makes it seem like they are not connected, when they actually are. With client-side blending, we can move the table of examinations into the card from the PetList app and make it look like one coherent concept. In essence, we are **changing the layout but not the content** to combine apps that were not explicitly built to share screen. This is done without touching the source code of the individual apps.
 
-Client-side blending lets you layout of blended apps without touching the source code. It does this by swapping the default composition of HTML that's sent to the client with an alternative composition. 
+This ability of modifying the layout of views coming from different apps is crucial, especially when working with many apps. Without it, there would just be a stack of views with no meaningful layout.  
 
-### 1. Defining Alternative Compositions
+## Layout and Content Separation
 
-Alternative compositions are defined in the browser when the apps are running with the [CompositionEditor](https://github.com/StarcounterApps/CompositionProvider). It looks like this:
+Client-side blending works by replacing or modifying the default layout. For this to work, content and layout has to be separated. [Shadow DOM](https://www.html5rocks.com/en/tutorials/webcomponents/shadowdom/) handles this separation - the content is in light DOM and the layout is in Shadow DOM. 
 
-![Composition editor](/assets/CompositionEditor.gif)
-
-The editor highlights the area that is changed and displays the changes in real time. There's no need to write the HTML from scratch, instead, the alternative composition is created from the default composition. 
-
-### 2. Tying to Specific Responses
-
-Every composition is tied to an identifier. All identifiers for compositions in a page can be found by double clicking on the top input field in the CompositionEditor. They look like this:
-
+The structure of this separation looks like this:
+```html
+<template>
+    <h1 slot="myapp/main-heading">My heading</h1>
+    <button slot="myapp/left-button">Go left</button>
+    <button slot="myapp/right-button">Go right</button>
+    <template is="declarative-shadow-dom">
+        <style>
+            .myapp-direction-controls {
+                display: flex;
+                justify-content: center;
+            }
+        </style>
+        <slot name="myapp/main-heading"></slot>
+        <div class="myapp-direction-controls">
+            <slot name="myapp/left-button"></slot>
+            <slot name="myapp/right-button"></slot>
+        </div>
+    </template>
+</template>
 ```
-[partial-id="/sc/htmlmerger?PetList=/PetList/views/PetListPage.html&MedicalRecordProvider=/MedicalRecordProvider/views/RecordSummary.html"]
-[partial-id="/PetList/views/MasterPage.html"]
+
+Here, the content of the view is defined on the root level and the layout is defined inside the `declarative-shadow-dom`. With client-side blending, the code in the `declarative-shadow-dom` can be modified or replaced.
+
+## Composing Layouts
+
+With the example at top from MedicalProvider and PetList we have two layouts that we would like to blend:
+
+<div class="code-name">PetList layout</div>
+
+```html 
+<style>
+    @import '/PetList/style.css';
+</style>
+<div class="pet-list-wrapper">
+    <div class="pet-list-wrapper__row">
+        <slot name="petlist/details-name"></slot>
+        <slot name="petlist/details-age-and-animal"></slot>
+    </div>
+    <div class="pet-list-wrapper__row">
+        <slot name="petlist/details-owner-name"></slot>
+        <slot name="petlist/details-weight"></slot>
+    </div>
+    <slot name="petlist/details-list-link"></slot>
+</div>
 ```
 
-The first one is the indentification for the merged response of `PetListPage.html` from PetList and `RecordSummary.html` from MedicalRecordProvider. Keys of merged responses are always prefixed with `/sc/htmlmerger`.
+<div class="code-name">MedicalProvider layout</div>
 
-The second is the composition for `MasterPage.html` from PetList. It has not been merged.
+```html
+<slot name="medicalrecord/records-list-headline"></slot>
+<slot name="medicalrecord/records-list-table"></slot>
+```
 
-Starcounter automatically creates these identifiers.    
+When these two layouts are merged with server-side blending, the resulting layout looks like this:
 
-### 3. Storing Compositions
+```html
+<style>
+    @import '/PetList/style.css';
+</style>
+<div class="pet-list-wrapper">
+    <div class="pet-list-wrapper__row">
+        <slot name="petlist/details-name"></slot>
+        <slot name="petlist/details-age-and-animal"></slot>
+    </div>
+    <div class="pet-list-wrapper__row">
+        <slot name="petlist/details-owner-name"></slot>
+        <slot name="petlist/details-weight"></slot>
+    </div>
+    <slot name="petlist/details-list-link"></slot>
+</div>
+<slot name="medicalrecord/records-list-headline"></slot>
+<slot name="medicalrecord/records-list-table"></slot>
+```
 
-Saved compositions from the CompositionEditor end up in the database. The specific class is `HTMLComposition`. Thus, it can be queried: `SELECT * FROM Starcounter.HTMLComposition`. 
+The layout from MedicalRecord is appended at the end of the PetList wrapper. To blend it, we will move the MedicalRecord table and headline into the `div class="pet-list-wrapper"` and expand the width of the wrapper to fit the table:
 
-The class has two properties, `Key` and `Value`. `Key` is the identification mentioned previously and `Value` is the HTML. 
+```html
+<style>
+    @import '/PetList/style.css';
+    .pet-list-wrapper {
+        max-width: 750px;
+    }
+</style>
+<div class="pet-list-wrapper">
+    <div class="pet-list-wrapper__row">
+        <slot name="petlist/details-name"></slot>
+        <slot name="petlist/details-age-and-animal"></slot>
+    </div>
+    <div class="pet-list-wrapper__row">
+        <slot name="petlist/details-owner-name"></slot>
+        <slot name="petlist/details-weight"></slot>
+    </div>
+    <slot name="medicalrecord/records-list-headline"></slot>
+    <slot name="medicalrecord/records-list-table"></slot>
+    <slot name="petlist/details-list-link"></slot>
+</div>
+```
 
-### 4. Serving Compositions
+We have now produced the result shown in the image above; the view from the MedicalRecord app has been neatly integrated with the view from PetList.
 
-[CompositionProvider](https://github.com/starcounterapps/compositionprovider) is an app that provides compositions when responses are merged. It does this by checking if there are any compositions in the database that match the identification of the merged response and serves the composition if that's the case. Otherwise, the default composition is served.
+## Creating Layouts
 
-## Summary
+The tool for creating these layouts is the [CompositionEditor](https://github.com/starcounterapps/CompositionEditor). 
 
-With this, apps that use server-side blending can be changed without touching the source code and the changes will be applied every time that combination of apps is used.
+## Providing Layouts
+
+Layouts are provided by the [CompositionProvider](https://github.com/starcounterapps/compositionprovider) when the responses are merged. 
