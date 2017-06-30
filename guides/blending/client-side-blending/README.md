@@ -4,7 +4,7 @@ When merging responses from different apps with [server-side blending](server-si
 
 ![Blending comparison](/assets/SimpleBlendingDemo.PNG)
 
-In the example above, there are two apps, PetList and MedicalRecord. By default, they are stacked on top of each other. This makes it seem like they are not connected, when they actually are. With client-side blending, we can move the table of examinations into the card from the PetList app and make it look like one coherent concept. In essence, we are **changing the layout but not the content** to combine apps that were not explicitly built to share screen. This is done without touching the source code of the individual apps.
+In the example above, there are two apps, PetList and MedicalRecord. By default, they are stacked on top of each other. This makes it seem like they are not related, when they actually are. With client-side blending, we can move the table of examinations into the card from the PetList app and make it look like one coherent concept. In essence, we are **changing the layout but not the content** to combine apps that were not explicitly built to share screen. This is done without touching the source code of the individual apps.
 
 This ability of modifying the layout of views coming from different apps is crucial, especially when working with many apps. Without it, there would just be a stack of views with no meaningful layout.  
 
@@ -34,11 +34,13 @@ The structure of this separation looks like this:
 </template>
 ```
 
-Here, the content of the view is defined on the root level and the layout is defined inside the `declarative-shadow-dom`. With client-side blending, the code in the `declarative-shadow-dom` can be modified or replaced.
+Here, the content of the view is defined on the root level and the layout is defined inside the `declarative-shadow-dom`. With client-side blending, the layout defined in the `declarative-shadow-dom` can be modified or replaced.
+
+The [slot](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot) elements are insertion points for the content into the layout.  
 
 ## Composing Layouts
 
-With the example at top from MedicalProvider and PetList we have two layouts that we would like to blend:
+With the MedicalProvider and PetList example we have two layouts that we would like to blend:
 
 <div class="code-name">PetList layout</div>
 
