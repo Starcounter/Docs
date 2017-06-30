@@ -138,3 +138,9 @@ Layouts are saved in the database and can be queried for with `SELECT * FROM Sta
 Layouts are provided by the [CompositionProvider](https://github.com/starcounterapps/compositionprovider), another Starcounter app. When responses are merged, it looks if there's a layout in the database with the same identifier and serves it, otherwise, the default layout is served. 
 
 Because of this, the CompositionProvider has to be running when client-side blending should be used. 
+
+## Read More
+
+* [Layout compositions for HTML partials](https://starcounter.io/layout-compositions-html-partials/) - Blog October 2016
+
+* [Html Views Blending Guidelines](https://docs.starcounter.io/guides/web-apps/html-view-guidelines/) - Docs
