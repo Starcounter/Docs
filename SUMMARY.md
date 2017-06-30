@@ -27,7 +27,7 @@
         * [Object identity and object references](guides/database/object-identity-and-object-references/README.md)
         * [Querying using SQL](guides/database/querying-using-sql/README.md)
         * [Variables](guides/database/variables/README.md)
-        * [Datatypes](guides/database/datatypes/README.md)
+        * [Data Types](guides/database/datatypes/README.md)
         * [Query processing errors](guides/database/query-processing-errors/README.md)
         * [Relations](guides/database/relations/README.md)
         * [Inheritance](guides/database/inheritance/README.md)
