@@ -117,8 +117,24 @@ We have now produced the result shown in the image above; the view from the Medi
 
 ## Creating Layouts
 
-The tool for creating these layouts is the [CompositionEditor](https://github.com/starcounterapps/CompositionEditor). 
+The tool for creating these layouts is the [CompositionEditor](https://github.com/starcounterapps/CompositionEditor). It's a Starcounter app that can be opened att any page with `Ctrl + E`. There are two main concepts in the CompositionEditor - the identifier and layout. 
+
+![Composition editor](/assets/CompositionEditor.png)
+
+The identifier is created each time a composition is merged with server-side blending. For example, the identifier for the PetList and MedicalProvider example looks like this:
+
+```
+[partial-id="/sc/htmlmerger?PetList=/PetList/views/PetDetails.html&MedicalRecordProvider=/MedicalRecordProvider/views/RecordsList.html"]
+```
+
+The `/sc/htmlmerger` is a prefix that is added every time a view contains views that come from more than one response. In the identifier above, it's the merged views of `PetDetails.html` and `RecordsList.html`. 
+
+The layout changes made in the editor are displayed in real time.
+
+Layouts are saved in the database and can be queried for with `SELECT * FROM Starcounter.HTMLComposition`. 
 
 ## Providing Layouts
 
-Layouts are provided by the [CompositionProvider](https://github.com/starcounterapps/compositionprovider) when the responses are merged. 
+Layouts are provided by the [CompositionProvider](https://github.com/starcounterapps/compositionprovider), another Starcounter app. When responses are merged, it looks if there's a layout in the database with the same identifier and serves it, otherwise, the default layout is served. 
+
+Because of this, the CompositionProvider has to be running when client-side blending should be used. 
