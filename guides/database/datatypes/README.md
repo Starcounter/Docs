@@ -25,11 +25,11 @@ Your object properties and fields may have the following datatypes (`DbTypeCode`
 
 The datatypes `Boolean`, `Byte`, `DateTime`, `Double`, `Int16`, `Int32`, `Int64`, `SByte`, `Single`, `String`, `UInt16`, `UInt32`, `UInt64` correspond to the .NET datatypes with the same names.
 
-The datatype `Decimal` is stored as a 64-bit integer and is limited to six decimals. Trying to set the `Decimal` datatype to a more precise value throws `ScErrCLRDecToX6DecRangeError (SCERR4246)`. In those cases, `Double` can be used if data loss is acceptable.
+The datatype `Decimal` is stored as a 64-bit integer and has a precision of six decimals and a range between `4398046511104.999999` amd `-4398046511103.999999`. Trying to set the `Decimal` datatype to a more precise value or to a value outside of the range throws `ScErrCLRDecToX6DecRangeError (SCERR4246)`. In those cases, `Double` can be used if data loss is acceptable.
 
 The datatype `object` represents a reference to a database object, i.e. an instance of a class, directly or by inheritance having the `Database` attribute set.
 
-The datatype `Binary` is for representing binary data up to 8 kB. Note that in Starcounter there is also another binary datatype `LargeBinary` for storing larger binary data. However, `LargeBinary` cannot be indexed and is not supported in Starcounter SQL.
+The datatype `Binary` is for representing binary data up to 8 kB. In Starcounter there is also another binary datatype `LargeBinary` for storing larger binary data. However, `LargeBinary` cannot be indexed and is not supported in Starcounter SQL.
 
 All signed integers, `Int64`, `Int32`, `Int16` and `SByte` are represented as `Int64` internally in Starcounter SQL. The unsigned integers, `UInt64`, `UInt32`, `UInt16` and `Byte` are represented as `UInt64`. The approximate numerical types `Single` and `Double` are represented as `Double`. `DateTime` is represented as an `Int64` of the number of .Net ticks from `DateTime.MinValue.Ticks`.
 
