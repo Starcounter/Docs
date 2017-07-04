@@ -52,9 +52,14 @@ git pull
 git merge 2.2.1834
 git push
 
-git checkout RC 
+git checkout 2.3.0.6350 
 git pull
 git merge 2.2.1.3234
+git push
+
+git checkout RC 
+git pull
+git merge 2.3.0.6350
 git push
 
 git checkout Develop 
