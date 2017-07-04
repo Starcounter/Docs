@@ -30,14 +30,15 @@ The extension contains a set of methods to make it simpler to add a new instance
 
 If these methods are called on a TypedJSON instance that either is not an array or cannot hold the specific value, an exception will be thrown.
 
-<h4>Example 1, single primitive value</h4>
+#### Example 1, single primitive value
 
 In the following example we create a JSON-by-example file containing of a single string value, then we create a new instance, checks that the type is string, print the default value, sets another value and print that one and finally prints the whole Typed JSON-object as JSON.
 
 <div class="code-name">SingleValueJson.json</div>
 
-<pre><code class="javascript">"Default"
-</code></pre>
+```js
+"Default"
+```
 
 <div class="code-name">Program.cs</div>
 
@@ -57,22 +58,24 @@ public static void Main()
 
 Running this example (project called SingleValueTest) will print the following to the console:
 
-<pre><code>&gt; star.exe SingleValueTest.exe
-SingleValueTest -&gt; default (started, default port 8080, admin 8181)
+```
+> star.exe SingleValueTest.exe
+SingleValueTest ->; default (started, default port 8080, admin 8181)
 Json is string: true
 Value is: Default
 Value is: Changed
 ToJSon: "Changed"
-</code></pre>
+```
 
-<h4>Example 2, single array with integers</h4>
+#### Example 2, single array with integers
 
 A single array containing integers. We add two items and print.
 
 <div class="code-name">SingleArrayJson.json</div>
 
-<pre><code class="javascript">[ 99 ]
-</code></pre>
+```js
+[ 99 ]
+```
 
 <div class="code-name">Program.cs</div>
 
@@ -99,21 +102,23 @@ public static void Main()
 
 Running this example (project called SingleArrayTest) will print the following to the console:
 
-<pre><code>&gt; star.exe SingleArrayTest.exe
-SingleArrayTest -&gt; default (started, default port 8080, admin 8181)
+```
+> star.exe SingleArrayTest.exe
+SingleArrayTest -> default (started, default port 8080, admin 8181)
 1
 2
 ToJSon: [1,2]
-</code></pre>
+```
 
-<h4>Example 3, array for any type of json</h4>
+#### Example 3, array for any type of json
 
 An array that can contain any type of json. Both single value and more complex jsonobjects.
 
 <div class="code-name">AnyArrayJson.json</div>
 
-<pre><code class="javascript">[ ]
-</code></pre>
+```js
+[ ]
+```
 
 <div class="code-name">Program.cs</div>
 
@@ -138,13 +143,14 @@ public static void Main()
 
 Running this example (project called AnyArrayTest) will print the following to the console:
 
-<pre><code>&gt; star.exe AnyArrayTest.exe
-AnyArrayTest -&gt; default (started, default port 8080, admin 8181)
+```
+> star.exe AnyArrayTest.exe
+AnyArrayTest -> default (started, default port 8080, admin 8181)
 19
 "Test"
 true
 ToJSon: [19,"Test",true]
-</code></pre>
+```
 
 
 #### Obsoleted properties in class Json
