@@ -13,4 +13,4 @@ In this section it is described how to build these apps while the section [Blend
 
 {% import "../../macros.html" as macros %}
 
-{{ macros.tocGenerator(page.title, summary.parts[0].articles[3].articles[4].articles) }}
+{{ macros.tocGenerator(page.title, summary.parts[0].articles[4].articles[4].articles) }}

@@ -9,7 +9,7 @@ For example, the simplest transformation might look something like this:
 [Database]
 public class Person
 {
-  public string Name;
+  public string Name { get; set; }
 }
 ```
 

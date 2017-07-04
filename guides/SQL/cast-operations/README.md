@@ -8,13 +8,13 @@ Assume <code>Employee</code> is a subtype of <code>Person</code>, the property <
 [Database]
 public class Person
 {
-  public Person Father;
+  public Person Father { get; set; }
 }
 
 [Database]
 public class Employee : Person
 {
-  public Employee Manager;
+  public Employee Manager { get; set; }
 }
 ```
 

@@ -8,21 +8,21 @@ Starcounter does not, in the status quo, have complete support for referential i
 
 These commit hooks should be implemented in a separate class and then registered when the application is started. Here's an example of that:
 
-Let's say you have two DB classes: parent <code>Order</code> and child <code>OrderItem</code>:
+Let's say you have two DB classes: parent `Order` and child `OrderItem`:
 ```cs
 [Database]
 public class Order
 {
-    public string Customer;
-    public DateTime Date;
+    public string Customer { get; set; }
+    public DateTime Date { get; set; }
 }
 
 [Database]
 public class OrderItem
 {
-    public Order Order;
-    public string Product;
-    public int Quantity;
+    public Order Order { get; set; }
+    public string Product { get; set; }
+    public int Quantity { get; set; }
 }
 ```
 
@@ -34,7 +34,7 @@ public class Hooks
     {
         Hook<Order>.BeforeDelete += (sender, entity) =>
         {
-            Db.SlowSQL("DELETE FROM OrderItem oi WHERE oi.\"Order\" = ?", entity);
+            Db.SQL("DELETE FROM OrderItem oi WHERE oi.\"Order\" = ?", entity);
         };
 
         Hook<OrderItem>.CommitInsert += (sender, entity) =>
@@ -59,8 +59,10 @@ public class Hooks
 In this code, we register the hooks by simply using `Hooks hooks = new Hooks();` and `hooks.Register();`.
 
 ```cs
-public class Program {
-    public void Main() {
+public class Program 
+{
+    public void Main() 
+    {
         Hooks hooks = new Hooks();
 
         hooks.Register();
@@ -97,7 +99,7 @@ public class Program {
         // The OrderItem entries will be deleted by the BeforeDelete commit hook on the Order class.
         Db.Transact(() =>
         {
-            Db.SlowSQL("DELETE FROM \"Order\"");
+            Db.SQL("DELETE FROM \"Order\"");
         });
     }
 }

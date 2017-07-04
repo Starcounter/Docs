@@ -75,8 +75,8 @@ There is a variation of `Session.ScheduleTask` that takes care of sessions group
 [Database]
 public class SavedSession
 {
-   public string SessionId;
-   public string GroupName;
+   public string SessionId { get; set; }
+   public string GroupName { get; set; }
 }
 
 Session.ScheduleTask(Db.SQL<SavedSession>("SELECT s FROM GroupedSession s WHERE s.GroupName = ?", myGroupName).Select(x => x.SessionId).ToList(), (Session s, String sessionId) =>

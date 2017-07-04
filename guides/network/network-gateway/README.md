@@ -8,7 +8,7 @@ Detailed network gateway configuration and statistics can be retrieved using `GE
 
 ## Configuration
 
-Network gateway is configured in `scnetworkgateway.xml`, which is located in your server installation directory. Here are some notable configuration options:
+Network gateway is configured in `scnetworkgateway.xml`, which is located in the server repository (e.g User/Documents/Starcounter/Personal). Here are some notable configuration options:
 
 ### Notable Configuration Options
 
@@ -25,6 +25,8 @@ Is the maximum number of connection per each gateway worker. Connections are equ
 Is the maximum size of incoming HTTP body/content, in bytes. Requests with bigger bodies are rejected with `413 Request Entity Too Large` and closure of TCP connection.
 
 The value of `MaximumReceiveContentLength` can be found in runtime with `NetworkGateway.Deserealize().MaximumReceiveContentLength`. For this to work, `using Starcounter.Internal` has to be included as well. 
+
+##### NOTE: `NetworkGateway.Deserealize()` is deprecated and will be removed in the next versions of Starcounter.
 
 #### InactiveConnectionTimeout 
 
