@@ -6,17 +6,17 @@ Starcounter allows any database object to inherit from any other database object
 [Database]
 public class Customer
 {
-   public string Name;
+   public string Name { get; set; }
 }
 
 public class PrivateCustomer : Customer
 {
-   public string Gender;
+   public string Gender { get; set; }
 }
 
 public class CorporateCustomer : Customer
 {
-   public string VatNumber;
+   public string VatNumber { get; set; }
 }
 ```
 

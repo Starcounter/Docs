@@ -42,19 +42,14 @@ When asked for the commit message for the merge, please reference the issues tha
 When the changes have been merged into the oldest applicable branch, the changes should be merged in a cascading fashion to all the newer branches. With the current branches, it looks like this:
 
 ```
-git checkout 2.2.1834 
+git checkout 2.3.0.6350 
 git pull
-git merge 2.1.177
-git push
-
-git checkout 2.2.1.3234 
-git pull
-git merge 2.2.1834
+git merge 2.2.1.3234
 git push
 
 git checkout RC 
 git pull
-git merge 2.2.1.3234
+git merge 2.3.0.6350
 git push
 
 git checkout Develop 
@@ -67,10 +62,8 @@ When these changes are pushed, GitBook will sync, build, and upload them to the 
 
 The branches that are uploaded to GitBook are:
 
-* Every release:
-    * 2.1.177
-    * 2.2.1834
-    * 2.2.1.3234
+* 2.2.1.3234
+* 2.3.0.6350
 * RC
 * Develop
 

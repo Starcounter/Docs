@@ -28,9 +28,9 @@ This is how it looks in code:
 [Database]
 public class Expense
 {
-    public Person Spender;
-    public string Description;
-    public decimal Amount;
+    public Person Spender { get; set; }
+    public string Description { get; set; }
+    public decimal Amount { get; set; }
 }
 ```
 
@@ -76,7 +76,7 @@ Now that the concept of an expense is defined, it should be connected to the con
 
 ### Extending the Person Class
 
-To link each `Person` object with its `Expense` objects, we'll utilize the fact that each `Expense` has the field `Spender`. Thus, a SQL query can be made to find all the `Expense` objects where the `Spender` is the current `Person`. In addition to containing a reference to all its `Expense` objects, it might be useful for the `Person` class to contain a field for the aggregated `Amount` of the `Expense` objects it has. This can also be accomplished with a SQL query.
+To link each `Person` object with its `Expense` objects, we'll utilize the fact that each `Expense` has the property `Spender`. Thus, a SQL query can be made to find all the `Expense` objects where the `Spender` is the current `Person`. In addition to containing a reference to all its `Expense` objects, it might be useful for the `Person` class to contain a propery for the aggregated `Amount` of the `Expense` objects it has. This can also be accomplished with a SQL query.
 
 In code, it looks like this:
 
@@ -86,16 +86,18 @@ In code, it looks like this:
 [Database]
 public class Person
 {
-    public string FirstName;
-    public string LastName;
-    public QueryResultRows<Expense> Expenses => Db.SQL<Expense>("SELECT e FROM Expense e WHERE e.Spender = ?", this);
-    public decimal CurrentBalance => Db.SQL<decimal>("SELECT SUM(e.Amount) FROM Expense e WHERE e.Spender = ?", this).First;
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public QueryResultRows<Expense> Expenses => 
+        Db.SQL<Expense>("SELECT e FROM Expense e WHERE e.Spender = ?", this);
+    public decimal CurrentBalance => 
+        Db.SQL<decimal>("SELECT SUM(e.Amount) FROM Expense e WHERE e.Spender = ?", this).First;
 }
 ```
 
 ### Extending the View-Model
 
-With the fields `Expenses` and `CurrentBalance` in place, we can bind them to the view-model in order to use them in the view.
+With the properties `Expenses` and `CurrentBalance` in place, we can bind them to the view-model in order to use them in the view.
 
 <div class="code-name">PersonJson.json</div>
 
@@ -111,7 +113,7 @@ With the fields `Expenses` and `CurrentBalance` in place, we can bind them to th
 }
 ```
 
-When binding the view-model with fields of database classes, the types have to be specified. `Expenses` is defined as an array of objects, that is not quite enough. We also need to set what type of object it should contain. This can be done in the code-behind for `PersonJson` by creating a constructor that specifies the type to be `ExpenseJson`. This is how it looks in code:  
+When binding the view-model with properties of database classes, the types have to be specified. `Expenses` is defined as an array of objects, that is not quite enough. We also need to set what type of object it should contain. This can be done in the code-behind for `PersonJson` by creating a constructor that specifies the type to be `ExpenseJson`. This is how it looks in code:  
 
 <div class="code-name">PersonJson.json.cs</div>
 

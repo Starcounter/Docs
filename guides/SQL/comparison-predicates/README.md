@@ -50,7 +50,7 @@ The comparison predicate `IS` checks if an object can be cast to a given type. I
 [Database]
 public class Person
 {
-    public string FirstName;
+    public string FirstName { get; set; }
 }
 
 [Database]
