@@ -117,7 +117,7 @@ We have now produced the result shown in the image above; the view from the Medi
 
 ## Creating Layouts
 
-The tool for creating these layouts is the [CompositionEditor](https://github.com/starcounterapps/CompositionEditor). It's a Starcounter app that can be opened at any page with `Ctrl + E`. There are two main concepts in the CompositionEditor - the identifier and layout. 
+The tool for creating these layouts is the [CompositionEditor](https://github.com/starcounterapps/CompositionEditor). It's a Starcounter app that can be opened at any page with `Ctrl + E`. The app in itself is an HTML editor that can edit the Shadow DOM layout. There are two main concepts in the CompositionEditor - the identifier and layout. 
 
 ![Composition editor](/assets/CompositionEditor.png)
 
