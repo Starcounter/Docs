@@ -11,33 +11,33 @@ Current session is determined and set automatically before user handler is calle
 Here are some examples of creating a new session (property `UseSessionCookie` is described below). All examples will produce the same result:
 
 ```cs
-Json m = new Json();
+var json = new Json();
 
 // Creating a new session
 
 Session.Current = new Session()
 {
-    Data = m,
+    Data = json,
     UseSessionCookie = true
 };
 
-// Above is EXACTLY the same as
+// Above is the same as
 
-m.Session = new Session()
+json.Session = new Session()
 {
     UseSessionCookie = true
 };
 
-// Above is EXACTLY the same as
+// Above is the same as
 
-m.Session = new Session()
+json.Session = new Session()
 {
     UseSessionCookie = true,
-    Data = m
+    Data = json
 };
 ```
 
-## Session determination
+## Session Determination
 
 Starcounter Gateway uses one of the following ways to determine the session that should be used for calling user handler.
 
@@ -51,41 +51,39 @@ When using WebSockets protocol, the session is automatically created (unless its
 Session value can be specified as one of URI parameters when defining a handler, for example:
 
 ```cs
-Handle.PATCH(/usesession/{?}, (Session session, Request request) =>
+Handle.GET("/usesession/{?}", (Session session, Request request) =>
 {
-    ...
+    // Implementation
 });
 ```
 
 * Session Cookie:
 
-`Session` object has a property called `UseSessionCookie` indicating that a Web browser's cookie `ScSessionCookie` should be used for transferring the session value. Client's Web browser can store and automatically send the `ScSessionCookie` cookie containing the session.
-NOTE: whenever `UseSessionCookie` is set, the `Location` header that is specified in the first case is not used.
+`Session` object has a property called `UseSessionCookie` indicating that a Web browser's cookie `ScSessionCookie` should be used for transferring the session value. Client's Web browser can store and automatically send the `ScSessionCookie` cookie containing the session. Whenever `UseSessionCookie` is set, the `Location` header that is specified in the first case is not used.
 
-**NOTE:**
 The priorities for session determination are the following (latter has higher priority than previous):
 session on socket, `Referer` header, session cookie, `X-Referer` header, session URI parameter.
 
-## Useful Session properties
+## Useful Session Properties
 
-Session creation time (UTC) can be retrieved by accessing `Created` property.
-Session last active (a receive or send occurred on a session) time (UTC) is fetched by accessing `LastActive` property.
+Session creation time (UTC) can be retrieved from the `Created` property.
+Session last active (a receive or send occurred on a session) time (UTC) is fetched from the `LastActive` property.
 
-## Sessions timeout
+## Sessions Timeout
 
-Inactive sessions (that do not receive or send anything) are automatically timed out and destroyed (`Destroy` method is called). Default sessions timeout (with 1 minute resolution) is set in database config: `DefaultSessionTimeoutMinutes`. Default timeout is 20 minutes. Each session can be assigned an individual timeout, in minutes, by setting `TimeoutMinutes` property.
+Inactive sessions (that do not receive or send anything) are automatically timed out and destroyed. Default sessions timeout (with 1 minute resolution) is set in database config: `DefaultSessionTimeoutMinutes`. Default timeout is 20 minutes. Each session can be assigned an individual timeout, in minutes, by setting `TimeoutMinutes` property.
 
-## Session destruction callback
+## Session Destruction Callback
 
 User can specify an event that should be called whenever session is destroyed. Session destruction can occur, for example, when inactive session is timed out, or when session `Destroy` method is called explicitly. User specified destroy events can be added using `Session.AddDestroyDelegate` on a specific session.
 
 Session can be checked for being active by using `IsAlive` method.
 
-## Operating on multiple sessions
+## Operating on Multiple Sessions
 
-One can store sessions by obtaining session ID string (`Session.SessionId`). Session strings can be grouped using desired principles, for example when one wants to broadcasts different messages on different session groups. When the session represented by the string should be used, one should call `Session.ScheduleTask(String sessionId, Action<Session, String> task, Boolean waitForCompletion = false)`. This procedure takes care of executing action that uses session on the scheduler where the session was originally created. This procedure underneath uses `Scheduling.ScheduleTask` thereby it can be executed from arbitrary .NET thread. If flag `waitForCompletion` is set to try, the action is scheduled and calling thread waits for its completion.
+One can store sessions by obtaining session ID string (`Session.SessionId`). Session strings can be grouped using desired principles, for example when one wants to broadcasts different messages on different session groups. When the session represented by the string should be used, one should call `Session.ScheduleTask(String sessionId, Action<Session, string> task, Boolean waitForCompletion = false)`. This procedure takes care of executing action that uses session on the scheduler where the session was originally created. This procedure underneath uses `Scheduling.ScheduleTask` thereby it can be executed from arbitrary .NET thread. If flag `waitForCompletion` is set to try, the action is scheduled and calling thread waits for its completion.
 
-There is a variation of `Session.ScheduleTask` that takes care of sessions grouped by some principle: `Session.ScheduleTask(IEnumerable<String> sessionIds, Action<Session, String> task)`. Use it if you want to operate on a group of sessions, like in the following chat application example:
+There is a variation of `Session.ScheduleTask` that takes care of sessions grouped by some principle: `Session.ScheduleTask(IEnumerable<String> sessionIds, Action<Session, string> task)`. Use it if you want to operate on a group of sessions, like in the following chat application example:
 
 ```cs
 [Database]
@@ -95,9 +93,9 @@ public class SavedSession
    public string GroupName { get; set; }
 }
 
-Session.ScheduleTask(Db.SQL<SavedSession>("SELECT s FROM GroupedSession s WHERE s.GroupName = ?", myGroupName).Select(x => x.SessionId).ToList(), (Session s, String sessionId) =>
+Session.ScheduleTask(Db.SQL<SavedSession>("SELECT s FROM GroupedSession s WHERE s.GroupName = ?", myGroupName).Select(x => x.SessionId).ToList(), (Session session, string sessionId) =>
 {
-  StandalonePage master = s.Data as StandalonePage;
+  var master = session.Data as MasterPage;
 
   if (master != null && master.CurrentPage is ChatGroupPage)
   {
@@ -110,15 +108,15 @@ Session.ScheduleTask(Db.SQL<SavedSession>("SELECT s FROM GroupedSession s WHERE 
       	page.ChatMessagePages.RemoveAt(0);
       }
     page.ChatMessagePages.Add(Self.GET<Json>("/chatter/partials/chatmessages/" + ChatMessageKey));
-    s.CalculatePatchAndPushOnWebSocket();
+    session.CalculatePatchAndPushOnWebSocket();
     }
   }
 });
 ```
 
-If there is a need to schedule tasks on all active sessions, then `Session.ForAll` should be used (note that it runs on all active sessions and if you only need to update few - use `Session.ScheduleTask`).
+To schedule tasks on all active sessions, then `Session.ForAll` should be used (note that it runs on all active sessions and if you only need to update few - use `Session.ScheduleTask`).
 
-## Sessions and JSON objects
+## Sessions and JSON Objects
 
 Starcounter allows you to keep JSON objects on the server as resources without storing them in the database.
 
@@ -129,9 +127,9 @@ JSON object can be attached to session by assigning `Data` property on `Session`
 
 ```javascript
 {
-   FirstName:"",
-   LastName:"",
-   Message:""
+   FirstName: "",
+   LastName: "",
+   Message: ""
 }
 ```
 
@@ -146,18 +144,18 @@ class Program
   {
     Handle.POST("/persons", () =>
     {
-      var obj = new PersonView();
+      var personView = new PersonView();
 
-      Session.Data = obj;
-      return obj;
+      Session.Data = personView;
+      return personView;
     });
   }
 }
 ```
-When responding to a request, Starcounter will check if Session.Data is null. If not, Starcounter will create a resource with a unique URI to represent a session. In this case, the URI might be ```/__default/D11C498A1A5F64ABD0000010```.
+When responding to a request, Starcounter will check if `Session.Data` is `null`. If not, Starcounter will create a resource with an unique URI to represent a session. In this case, the URI might be `/__default/D11C498A1A5F64ABD0000010`.
 
-## Interacting with a server side JSON objects
+## Interacting With a Server-Side JSON Objects
 
-The newly created JSON object is automatically made available to the client using the GET method. I.e. if the response to the ```PersonView``` object in the example above returns a location such as ```Location: /__default/D11C498A1A5F64ABD0000010```, you can access this resource by doing a ```GET /__default/D11C498A1A5F64ABD0000010```. If the resource have not been accessed for a configurable period of time, it will be removed from the server.
+The newly created JSON object is automatically made available to the client using the GET method. I.e. if the response to the `PersonView` object in the example above returns a location such as `Location: /__default/D11C498A1A5F64ABD0000010`, you can access this resource by doing a `GET /__default/D11C498A1A5F64ABD0000010`. If the resource have not been accessed for a configurable period of time, it will be removed from the server.
 
 More important, however is the built in support for the [HTTP PATCH method](http://tools.ietf.org/html/rfc5789) and [JSON-Patch](http://tools.ietf.org/html/rfc6902). This allows Starcounter to communicate using delta updates rather than sending complete JSON representations of the entire resource.
