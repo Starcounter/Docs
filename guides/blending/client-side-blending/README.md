@@ -131,13 +131,24 @@ The `/sc/htmlmerger` is a prefix that is added every time a view contains views 
 
 The layout changes made in the editor are displayed in real time.
 
-Layouts are saved in the database and can be queried for with `SELECT * FROM Starcounter.HTMLComposition`. 
+Layouts are saved in the database and can be queried for with `SELECT * FROM Starcounter.HTMLComposition`. Thus, CompositionEditor should run during development to define the layout and then not during production.
 
 ## Providing Layouts
 
 Layouts are provided by the [CompositionProvider](https://github.com/starcounterapps/compositionprovider), another Starcounter app. When responses are merged, it looks if there's a layout in the database with the same identifier and serves it, otherwise, the default layout is served. 
 
 Because of this, the CompositionProvider has to be running when client-side blending should be used. 
+
+## Result
+
+The overall result of blending can look something like this where every colored box comes from a different app:
+
+![Blending Example](/assets/multipleApps.png)
+
+## Summary
+
+Client-side blending allows us to compose layouts coming from different apps. It's done by editing the Shadow DOM layout. Thus, the actual content and functionality defined in the light DOM will stay the same. The revised layout is stored in the database and retrieved when responses are merged. All of this is done without touching the source code of the apps.
+
 
 ## Read More
 
