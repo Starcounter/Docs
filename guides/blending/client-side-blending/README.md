@@ -117,7 +117,7 @@ We have now produced the result shown in the image above; the view from the Medi
 
 ## Creating Layouts
 
-The tool for creating these layouts is the [CompositionEditor](https://github.com/starcounterapps/CompositionEditor). It's a Starcounter app that can be opened att any page with `Ctrl + E`. There are two main concepts in the CompositionEditor - the identifier and layout. 
+The tool for creating these layouts is the [CompositionEditor](https://github.com/starcounterapps/CompositionEditor). It's a Starcounter app that can be opened at any page with `Ctrl + E`. There are two main concepts in the CompositionEditor - the identifier and layout. 
 
 ![Composition editor](/assets/CompositionEditor.png)
 
@@ -144,3 +144,5 @@ Because of this, the CompositionProvider has to be running when client-side blen
 * [Layout compositions for HTML partials](https://starcounter.io/layout-compositions-html-partials/) - Blog October 2016
 
 * [Html Views Blending Guidelines](https://docs.starcounter.io/guides/web-apps/html-view-guidelines/) - Docs
+
+* [Shadow DOM v1: Self-Contained Web Components](https://developers.google.com/web/fundamentals/getting-started/primers/shadowdom) - Google Developers
