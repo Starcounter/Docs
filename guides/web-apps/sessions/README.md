@@ -148,3 +148,15 @@ When responding to a request, Starcounter will check if `Session.Data` is `null`
 The newly created JSON object is automatically made available to the client using the GET method. I.e. if the response to the `PersonView` object in the example above returns a location such as `Location: /__default/D11C498A1A5F64ABD0000010`, you can access this resource by doing a `GET /__default/D11C498A1A5F64ABD0000010`. If the resource have not been accessed for a configurable period of time, it will be removed from the server.
 
 More important, however is the built in support for the [HTTP PATCH method](http://tools.ietf.org/html/rfc5789) and [JSON-Patch](http://tools.ietf.org/html/rfc6902). This allows Starcounter to communicate using delta updates rather than sending complete JSON representations of the entire resource.
+
+## Session Options
+
+The `Session` constructor has an overload that takes the enum `SessionOptions`. This enum has five options:
+
+|Option|Explanation|
+|---|---|
+|`Default`| Is the default behavior of `Session`, declaring `new Session(SessionOptions.Default)` is the same as using the default constructor. |
+|`IncludeSchema`| Was added for Starcounter 1.x and does not serve a purpose anymore. Is the same as using the default constructor.  |
+|`PatchVersioning`| Enables operational transformation with Puppet/Palindrom. Thus, `PatchVersioning` is required for communication with Puppet/Palindrom.  |
+|`StrictPatchRejection`| Throws an error instead of rejecting changes in two cases: (1) when an incoming patch tries to access an object or item in an array that is no longer valid and (2) when the client sends a patch with a different format than expected. |
+|`IncludeNamespaces`|Enables namespacing of Typed JSON responses. This is the default behavior and is thus the same as using the default constructor.|
