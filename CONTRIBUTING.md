@@ -60,12 +60,12 @@ git push
 
 When these changes are pushed, GitBook will sync, build, and upload them to the [Docs](https://docs.starcounter.io/).
 
-The branches that are uploaded to GitBook are:
+The branches that are uploaded to GitBook and their corresponding option in the docs are:
 
-* 2.2.1.3234
-* 2.3.0.6350
-* RC
-* Develop
+* 2.2.1.3234 - 2.2
+* 2.3.0.6350 - 2.3.0
+* RC - 2.3.1
+* Develop - 2.4
 
 ### Using the Gitbook editor
 
