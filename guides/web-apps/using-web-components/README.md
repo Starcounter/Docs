@@ -32,7 +32,50 @@ You should not do that automatically, but use Bower to install such dependencies
 
 ### .bowerrc
 
-The `.bowerrc` file contains Bower configuration. It specifies what is the destination directory and what dependencies should be ignored, because they are delivered as part of Starcounter. An example of this can be found in the [KitchenSink app](https://github.com/StarcounterApps/KitchenSink/blob/master/src/KitchenSink/.bowerrc).
+The `.bowerrc` file contains the Bower configuration. It specifies the destination directory and what dependencies should be ignored, because they are delivered with Starcounter. An example of this can be found in the [KitchenSink app](https://github.com/StarcounterApps/KitchenSink/blob/master/src/KitchenSink/.bowerrc).
+
+To find the specific dependencies that are delivered with Starcounter, go to `C:\Program Files\Starcounter\ClientFiles\bower-list.txt`. For Starcounter 2.3.1.6694, it looks like this:
+
+<div class="code-name">bower-list.txt</div>
+
+```
+bower check-new     Checking for new versions of the project dependencies...
+sys#1.0.0 C:\Users\omer\Desktop\shared folder\new SC\level1\src\BuildSystem\ClientFiles
+├─┬ PuppetJs#2.5.0
+│ ├── fast-json-patch#1.1.8 (1.2.2 available)
+│ ├── json-patch-ot#61992acdfd
+│ ├─┬ json-patch-ot-agent#49d5d2cee5
+│ │ └── json-patch-queue#2a579f94db
+│ └── json-patch-queue#2a579f94db
+├── array.observe#0.0.1 extraneous
+├─┬ bootswatch#3.3.7
+│ └── bootstrap not installed
+├── dom-bind-notifier#a43453ceb9
+├─┬ imported-template#1.5.0
+│ └── juicy-html#1.2.0
+├── juicy-redirect#0.4.2 extraneous
+├── object.observe#0.2.6 extraneous
+├── polymer#1.9.1 (2.0.1 available)
+├─┬ puppet-client#3.2.2 (3.3.0 available)
+│ ├── PuppetJs#2.5.0
+│ └─┬ polymer#1.9.1 (latest is 2.0.1)
+│   └── webcomponentsjs#0.7.24 (latest is 1.0.1)
+├── puppet-redirect#0.4.3 (latest is 0.5.0)
+├─┬ starcounter-debug-aid#2.0.10
+│ ├─┬ juicy-jsoneditor#1.1.0 (1.1.1 available)
+│ │ ├── fast-json-patch#1.1.8 incompatible with ~1.0.0 (1.0.1 available, latest is 1.2.2)
+│ │ ├── jsoneditor#5.5.11 (5.7.0 available)
+│ │ └── polymer#1.9.1 (2.0.1 available)
+│ └── polymer#1.9.1 (2.0.1 available)
+├─┬ starcounter-include#2.3.2
+│ ├─┬ imported-template#1.5.0
+│ │ └── juicy-html#1.2.0
+│ └─┬ juicy-composition#0.1.1
+│   ├── translate-shadowdom#0.0.5
+│   └── webcomponentsjs#0.7.24 (latest is 1.0.1)
+└── webcomponentsjs#0.7.24 (latest is 1.0.1)
+
+```
 
 ### bower.json
 
