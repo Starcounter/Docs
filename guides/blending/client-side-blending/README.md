@@ -6,7 +6,9 @@ When merging responses from different apps with [server-side blending](server-si
 
 In the example above, there are two apps, PetList and MedicalRecord. By default, they are stacked on top of each other. This makes it seem like they are not related, when they actually are. With client-side blending, we can move the table of examinations into the card from the PetList app and make it look like one coherent concept. In essence, we are **changing the layout but not the content** to combine apps that were not explicitly built to share screen. This is done without touching the source code of the individual apps.
 
-This ability of modifying the layout of views coming from different apps is crucial, especially when working with many apps. Without it, there would just be a stack of views with no meaningful layout.  
+This ability of modifying the layout of views coming from different apps is crucial, especially when working with many apps. Without it, there would just be a stack of views with no meaningful layout, as shown in this illustration:
+
+![client side blending comparison - abstract](/assets/clientsideblending.PNG)
 
 ## Layout and Content Separation
 
