@@ -29,7 +29,7 @@ The data type `Decimal` is stored as a 64-bit integer and has a precision of six
 
 The data type `object` represents a reference to a database object, i.e. an instance of a class, directly or by inheritance having the `Database` attribute set.
 
-The data type `Binary` is for representing binary data up to 8 kB. In Starcounter there is also another binary data type `LargeBinary` for storing larger binary data. However, `LargeBinary` cannot be indexed and is not supported in Starcounter SQL.
+The data type `Binary` is for representing binary data up to 8 kB.
 
 All signed integers, `Int64`, `Int32`, `Int16` and `SByte` are represented as `Int64` internally in Starcounter SQL. The unsigned integers, `UInt64`, `UInt32`, `UInt16` and `Byte` are represented as `UInt64`. The approximate numerical types `Single` and `Double` are represented as `Double`. `DateTime` is represented as an `Int64` of the number of .Net ticks from `DateTime.MinValue.Ticks`.
 
