@@ -9,9 +9,9 @@ To get a technical background, the article [Layout compositions for HTML partial
 * [Unobtrusive styling and composing 3rd party HTML content](http://starcounter.io/unobtrusive-styling-composing-3rd-party-html-content/)
 * [HTML partials/includes WebComponents-way](http://starcounter.io/html-partialsincludes-webcomponents-way/)
 
-### Guideline 1: Separation of Presentation and Content
+### Guideline 1: Separation of Layout and Content
 
-To make applications look great when running independently while also allowing them to visually blend with other applications, it is beneficial to separate the presentation and the content. This is accomplished using the `<template is="starcounter-composition">` element.
+To make applications look great when running independently while also allowing them to visually blend with other applications, it is beneficial to separate the layout and the content. This is accomplished using the `<template is="starcounter-composition">` element.
 
 The basic boilerplate of a Starcounter HTML view, which is created by adding a `Starcounter HTML template with dom-bind` file in Visual Studio, looks like this:
 
@@ -25,7 +25,7 @@ The basic boilerplate of a Starcounter HTML view, which is created by adding a `
 </template>
 ```
 
-To separate the presentation and content in this file, the element mentioned above, `<template is="starcounter-composition">` should be used. This element should contain the presentation of the HTML view while the `<template is="dom-bind">` should contain the content. Note that this only applies when using Polymer as a templating engine. When using other frameworks, it will not use `dom-bind`, although, the principle of separating the presentation from the content will stay constant. In code, this is how it looks:
+To separate the layout and content in this file, the element mentioned above, `<template is="starcounter-composition">` should be used. This element should contain the layout of the HTML view while the `<template is="dom-bind">` should contain the content. Note that this only applies when using Polymer as a templating engine. When using other frameworks, it will not use `dom-bind`, although, the principle of separating the layout from the content will stay constant. In code, this is how it looks:
 
 ```html
 <link rel="import" href="/sys/polymer/polymer.html">
@@ -35,7 +35,7 @@ To separate the presentation and content in this file, the element mentioned abo
         <!-- content goes here -->
     </template>
     <template is="starcounter-composition">
-        <!-- presentation goes here-->
+        <!-- layout goes here-->
     </template>
 </template>
 ```
@@ -44,7 +44,7 @@ The content are the elements that either contain information for the user, such 
 
 Keep in mind that the only elements that have to be in the `<template is="dom-bind">` are the ones that use Polymer bindings, as denoted with double curly-bracket syntax: `{{model.SomeProperty}}`.
 
-The content of the HTML view is distributed to the presentation using a Shadow DOM concept called slots, as explained in guideline 4.
+The content of the HTML view is distributed to the layout using a Shadow DOM concept called slots, as explained in guideline 4.
 
 ### Guideline 2: Defining the Content
 
@@ -100,9 +100,9 @@ To give clearer semantic meaning to the content of one application when mixing w
 
 Slot names are added as attributes to the elements like so: `<button slot="MyApp/SubmitButton">Submit</button>`.
 
-### Guideline 4: Create the Presentation in `starcounter-composition`
+### Guideline 4: Create the Layout in `starcounter-composition`
 
-As outlined in guideline 1, the presentation of the HTML view should be included within the `<template is="starcounter-composition">`. There is one exception to this, if the default presentation of the content equals the targeted look, no `starcounter-composition` is needed. Slots should be provided no matter what.
+As outlined in guideline 1, the layout of the HTML view should be included within the `<template is="starcounter-composition">`. There is one exception to this, if the default layout of the content equals the targeted look, no `starcounter-composition` is needed. Slots should be provided no matter what.
 
 The following syntax is used to distribute the content in the Shadow DOM: `<content select="[slot='AppName/ElementName']"></content>`.
 
