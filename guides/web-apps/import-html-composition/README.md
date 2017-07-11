@@ -2,16 +2,12 @@
 
 When you want to deploy your custom HTML composition, you have two options:
 
-* Use the GUI in Launcher (explained in the tutorial)
 * Use the REST API for importing HTML compositions
+* Use the [CompositionEditor](https://github.com/starcounterapps/compositioneditor)
 
 ## REST API for importing HTML compositions
 
-The REST API allows importing compositions for sets of blended HTML partials.
-
-### Setup 
-
-To enable the API, run a Starcounter app that calls `Starcounter.HTMLComposition.Register()`. Launcher calls it, so you might as well start Launcher.
+The REST API allows importing compositions for sets of blended HTML partials. The CompositionEditor has to run for this API to work.
 
 ### Importing composition
 
@@ -30,7 +26,7 @@ Place your HTML composition in a file like this one of Hello World:
 </div>
 ```
 
-This code merges the different elements from `Images` and `HelloWorld`. It also resizes the images and hides the image labels to make it align better with the rest of the page. This can obviously be edited by you to create the exact look that you want.
+This code merges the elements from `Images` and `HelloWorld`. It also resizes the images and hides the image labels to make it align better with the rest of the page.
 
 Go to the command prompt where you installed Git Bash, navigate to your `HelloWorld` solution and run:
 
@@ -39,7 +35,7 @@ curl -XPOST --data-binary '@src/HelloWorldMapper/ExpenseJsonComposition.html' 'h
 %26Images%3D%2FImages%2Fviewmodels%2FConceptPage.html&amp;ver='
 ```
 
-If you get a 404 Not Found error, it means that the API was not initialized. See setup instructions on the top of the page.
+If you get a 404 Not Found, it usually means that `HTMLComposition.Register` has not be called. This is solved by running the CompositionEditor or calling `HTMLComposition.Register` in your app.
 
 ### GET and DELETE HTML Compositions
 
@@ -58,21 +54,21 @@ If we decode the command above, we get the following result:
 curl 'http://localhost:8080/sc/partial/composition?key=/sc/htmlmerger?HelloWorld=/HelloWorld/ExpenseJson.html&amp;Images=/Images/viewmodels/ConceptPage.html&amp;ver='
 ``` 
 
-Here we see clearly what it does. There's a key that marks what we will do (htmlmerger) and then it directs to the two files that we will merge. In this case the `ExpenseJson.html` and the `ConceptPage.html` file. From this, you can build your own keys to use in your programs. If you want to know more about how to practically do this, you can take a look in the Launcher provided <a href="https://github.com/StarcounterPrefabs/Launcher">here</a> where we use the graphical interface explained in the Hello World tutorial to compose the HTML of two different applications.
+Here we see clearly what it does. There's a key that marks what we will do (htmlmerger) and then it directs to the two files that we will merge. In this case the `ExpenseJson.html` and the `ConceptPage.html` file. From this, you can build your own keys to use in your programs.
 
 And here's the output:
 
 ![curl output](/assets/getCurl.png)
 
-If the key and/or the version is invalid, then you would get a 404 back. Otherwise, the response status will be 200.
+If the key or the version is invalid, a 404 is returned. Otherwise, the response status is 200.
 
-To delete, we only need to slightly modify the command above by inserting `-X DELETE` before the URI. It should look something like this:
+To delete, insert `-X DELETE` before the URI in the GET call. It look like this:
 
 ```bash
 curl -X DELETE 'http://localhost:8080/sc/partial/composition?key=%2Fsc%2Fhtmlmerger%3FHelloWorld%3D%2FHelloWorld%2FExpenseJson.html
 %26Images%3D%2FImages%2Fviewmodels%2FConceptPage.html&amp;ver='
 ```
 
-This method will always return the status code 204. To delete all your HTML compositions you can simply insert `all` for the key.
+This method always returns the status code 204. To delete all HTML compositions, use `all` for the key.
 
-You can check whether these work as you intend by looking in the database through the Starcounter Administrator where you can access all you HTML compositions by running the SQL command `SELECT i FROM Starcounter.HTMLComposition i`.
+The result of these calls can be validated by querying the database in the Starcounter Administrator with `SELECT * FROM Starcounter.HTMLComposition`.
