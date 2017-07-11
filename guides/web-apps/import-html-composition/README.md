@@ -20,13 +20,13 @@ Place your HTML composition in a file like this one of Hello World:
 <div class="code-name"><a href="https://github.com/StarcounterSamples/HelloWorld/blob/tutorial-20161018/src/HelloWorldMapper/ExpenseJsonComposition.html">ExpenseJsonComposition.html</a></div>
 
 ```html
-<content select="[slot='helloworld/description']"></content>
-<content select="[slot='helloworld/amount']"></content>
+<slot name="helloworld/description"></slot>
+<slot name="helloworld/amount"></slot>
 <div style="display: none">
-  <content select="[slot='images/label']"></content>
+  <slot name="images/label"></slot>
 </div>
 <div style="width: 200px; height: 200px">
-  <content select="[slot='images/control']"></content>
+  <slot name="images/control"></slot>
 </div>
 ```
 
