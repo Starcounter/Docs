@@ -6,9 +6,9 @@
 
 Blending visually combines partial responses from different apps. It merges JSON/HTML responses. The JSON merging happens during the serialization process. The browser requests HTML partials through a special HTML-merging URI, it then displays combined partials from the different apps. Blending happens outside of apps and should not affect how they are functioning, essentially, apps should neither depend on, nor expect, blending. Blending applies to the JSON that GET handlers return. Apps should not know/assume neither about blender presence, nor other apps presense.
 
-Blending uses tokens. These tokens are either strings or classes. Handlers blended on the same token are called on internal `Self.GET` calls or external URI that matches one of the handlers.
+Blending uses tokens. These tokens are either strings or classes. Handlers blended on the same token are called on internal `Self.GET` calls or external URI that matches one of the handlers. Once the blended handler is called, it will not trigger further blending calls mapped to that handler directly, only when a new `Self` call is made.
 
-The class `Blender` in the Starcounter namespace does the blending. The blender API does dynamic addition and removal of blended handlers during the lifetime of the app. Handlers are called once, even during chained calls of all the blended handlers.
+The class `Blender` in the Starcounter namespace does the blending. The blender API does dynamic addition and removal of blended handlers during the lifetime of the app. 
 
 ## Blending token
 
@@ -78,7 +78,7 @@ Blender.MapUri("/twoparams1/{?}/{?}", myToken, null, (String[] to) => {
 });
 Blender.MapUri("/noparam1", token3, true, false);
 ```
-In the first example above, handler "/twoparams1/{?}/{?}" should not trigger blending chain of calls on token `myToken`, but it can be called when blending is triggered by other handlers on the same token.
+In the first example above, handler "/twoparams1/{?}/{?}" should not trigger blending calls on token `myToken`, but it can be called when blending is triggered by other handlers on the same token.
 In the second example above, handler "/noparam1" can trigger other handlers on the same token, but can't be triggered by them.
 
 ## Same handler - different tokens
