@@ -1,6 +1,6 @@
 # Sessions
 
-Sessions are used to retain the client state in your application. A session is represented by an instance of a `Session` class. Session is created on current Starcounter scheduler and should be operated only on that scheduler. That's why one should never store session objects statically (same as one shouldn't store SQL enumerators statically) or use session objects in multithreaded/asynchronous programming. In order to save session and utilize it later please use `Session.SessionId` described below.
+Sessions are used to retain the state in your app. A session is represented by an instance of a `Session` class. 
 
 Sessions and JSON objects can be connected: on JSON object session can be accessed using `Session` property, and on `Session` object, JSON object can be accessed through `Data` property.
 
@@ -56,9 +56,11 @@ Session can be checked for being active by using `IsAlive` method.
 
 ## Operating on Multiple Sessions
 
+Session is created on current Starcounter scheduler and should be operated only on that scheduler. That's why one should never store session objects statically (same as one shouldn't store SQL enumerators statically) or use session objects in multithreaded/asynchronous programming. In order to save session and utilize it later please use `Session.SessionId` described below.
+
 One can store sessions by obtaining session ID string (`Session.SessionId`). Session strings can be grouped using desired principles, for example when one wants to broadcasts different messages on different session groups. When the session represented by the string should be used, one should call `Session.ScheduleTask(String sessionId, Action<Session, string> task, Boolean waitForCompletion = false)`. This procedure takes care of executing action that uses session on the scheduler where the session was originally created. This procedure underneath uses `Scheduling.ScheduleTask` thereby it can be executed from arbitrary .NET thread. If flag `waitForCompletion` is set to try, the action is scheduled and calling thread waits for its completion.
 
-There is a variation of `Session.ScheduleTask` that takes care of sessions grouped by some principle: `Session.ScheduleTask(IEnumerable<String> sessionIds, Action<Session, string> task)`. Use it if you want to operate on a group of sessions, like in the following chat application example:
+There is a variation of `Session.ScheduleTask` that takes care of sessions grouped by some principle: `Session.ScheduleTask(IEnumerable<String> sessionIds, Action<Session, string> task)`. Use it if you want to operate on a group of sessions, like in the following chat app example:
 
 ```cs
 [Database]
