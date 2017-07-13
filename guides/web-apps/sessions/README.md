@@ -35,10 +35,14 @@ json.Session = new Session()
 };
 ```
 
-## Useful Session Properties
+## Session Properties
 
-Session creation time (UTC) can be retrieved from the `Created` property.
-Session last active (a receive or send occurred on a session) time (UTC) is fetched from the `LastActive` property.
+The `Session` constructor has an overload that takes the enum `SessionOptions`. This enum has five options:
+
+|Property|Explanation|
+|---|---|
+|`Created`| Session creation time (UTC). |
+|`LastActive`| Session last active (a receive or send occurred on a session) time (UTC)|
 
 ## Sessions Timeout
 
