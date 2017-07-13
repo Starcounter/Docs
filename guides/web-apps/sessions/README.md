@@ -1,10 +1,20 @@
 # Sessions
 
-Sessions are used to retain the state in your app. A session is represented by an instance of a `Session` class. 
+Sessions are used to retain the state in your app. A session is represented by an instance of a `Session` class. The `Json` tree that represents your apps' view-model must be assigned to a session to allow the client-server synchronization of the view.
 
-Sessions and JSON objects can be connected: on JSON object session can be accessed using `Session` property, and on `Session` object, JSON object can be accessed through `Data` property.
+## Session Instance
 
-New session is created by calling constructor on `Session` class. Current session (can be accessed by calling static `Session.Current` property) is automatically set during lifetime of the user handler execution. Whenever session object is set on JSON object using `Session` property (or JSON object is set on session using `Data` property), the `Session.Current` is automatically being set to that object.
+New session is created by calling the constructor on `Session` class. At this point, the static property `Session.Current` is automatically set to your new session and is available during the lifetime of the user handler execution.
+
+When multiple apps are running, only one of them needs to create the `Session` object, because the session identifies the browser tab, not only your app in that tab. Therefore, you always need to check before creating a new session if `Session.Current` is `null`.
+
+> **Note**: Each browser tab is a separate state of the UI. Therefore, each tab is tied to its own session. This makes it totally different from the session concept in frameworks like ASP.NET or Zend, where a session means all browser tabs created by the same user.
+
+Once you have the session, you want to attach a state to it. In Starcounter, the state is represented by a `Json` instance (also called a view-model). To attach a JSON to a session, set the `Data` property of the session to be your JSON instance. At this point the static property `Session.Current.Data` is automatically set to that JSON instance.
+
+Right now, Starcounter supports assigning only one `Json` from your app to a session. If your app is composed of multiple `Json`s and you need a reference to all of them, you need to reference all of them in a single `Json` that you assign to the Session. In our sample apps, we call that single `Json` **MasterPage**.
+
+As a shorthand, the `session.Data` property and the `json.Session` properties are equivalent, but the `json.Session` property will be deprecated in the future.
 
 Here are some examples of creating a new session (property `UseSessionCookie` is described below). All examples will produce the same result:
 
@@ -104,9 +114,9 @@ JSON object can be attached to session by assigning `Data` property on `Session`
 
 ```javascript
 {
-   FirstName: "",
-   LastName: "",
-   Message: ""
+   FirstName:"",
+   LastName:"",
+   Message:""
 }
 ```
 
