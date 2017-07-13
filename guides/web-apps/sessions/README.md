@@ -125,7 +125,9 @@ class Program
 ```
 When responding to a request, Starcounter will check if `Session.Data` is `null`. If not, Starcounter will create a resource with an unique URI to represent a session. In this case, the URI might be `/__default/D11C498A1A5F64ABD0000010`.
 
-## Session Determination
+## Advanced: Transmission of the session identity
+
+Current session is determined and set automatically before user handler is called.
 
 Starcounter Gateway uses one of the following ways to determine the session that should be used for calling user handler.
 
