@@ -6,8 +6,6 @@ Sessions and JSON objects can be connected: on JSON object session can be access
 
 New session is created by calling constructor on `Session` class. Current session (can be accessed by calling static `Session.Current` property) is automatically set during lifetime of the user handler execution. Whenever session object is set on JSON object using `Session` property (or JSON object is set on session using `Data` property), the `Session.Current` is automatically being set to that object.
 
-Current session is determined and set automatically before user handler is called. Presence of session is determined by one of the ways described below.
-
 Here are some examples of creating a new session (property `UseSessionCookie` is described below). All examples will produce the same result:
 
 ```cs
@@ -36,33 +34,6 @@ json.Session = new Session()
     Data = json
 };
 ```
-
-## Session Determination
-
-Starcounter Gateway uses one of the following ways to determine the session that should be used for calling user handler.
-
-* `Location` + `X-Referer` or `Referer` headers:
-Using HTTP protocol, when creating a new session, the response will contain the `Location` HTTP header with  the value of a newly created session. Client code later can extract this session value from the received `Location` header and use the session in subsequent requests, using either of the specified ways. Often `X-Referer` or `Referer` request headers are used to specify the session value.
-
-* Automatic session creation when using WebSockets:
-When using WebSockets protocol, the session is automatically created (unless its already it was already on the socket). The session is kept for this WebSocket connection until it closes or session is explicitly destroyed. Session can also be changed during lifetime of WebSocket by setting `Session.Current` property.
-
-* Session as handler URI parameter:
-Session value can be specified as one of URI parameters when defining a handler, for example:
-
-```cs
-Handle.GET("/usesession/{?}", (Session session, Request request) =>
-{
-    // Implementation
-});
-```
-
-* Session Cookie:
-
-`Session` object has a property called `UseSessionCookie` indicating that a Web browser's cookie `ScSessionCookie` should be used for transferring the session value. Client's Web browser can store and automatically send the `ScSessionCookie` cookie containing the session. Whenever `UseSessionCookie` is set, the `Location` header that is specified in the first case is not used.
-
-The priorities for session determination are the following (latter has higher priority than previous):
-session on socket, `Referer` header, session cookie, `X-Referer` header, session URI parameter.
 
 ## Useful Session Properties
 
@@ -153,6 +124,33 @@ class Program
 }
 ```
 When responding to a request, Starcounter will check if `Session.Data` is `null`. If not, Starcounter will create a resource with an unique URI to represent a session. In this case, the URI might be `/__default/D11C498A1A5F64ABD0000010`.
+
+## Session Determination
+
+Starcounter Gateway uses one of the following ways to determine the session that should be used for calling user handler.
+
+* `Location` + `X-Referer` or `Referer` headers:
+Using HTTP protocol, when creating a new session, the response will contain the `Location` HTTP header with  the value of a newly created session. Client code later can extract this session value from the received `Location` header and use the session in subsequent requests, using either of the specified ways. Often `X-Referer` or `Referer` request headers are used to specify the session value.
+
+* Automatic session creation when using WebSockets:
+When using WebSockets protocol, the session is automatically created (unless its already it was already on the socket). The session is kept for this WebSocket connection until it closes or session is explicitly destroyed. Session can also be changed during lifetime of WebSocket by setting `Session.Current` property.
+
+* Session as handler URI parameter:
+Session value can be specified as one of URI parameters when defining a handler, for example:
+
+```cs
+Handle.GET("/usesession/{?}", (Session session, Request request) =>
+{
+    // Implementation
+});
+```
+
+* Session Cookie:
+
+`Session` object has a property called `UseSessionCookie` indicating that a Web browser's cookie `ScSessionCookie` should be used for transferring the session value. Client's Web browser can store and automatically send the `ScSessionCookie` cookie containing the session. Whenever `UseSessionCookie` is set, the `Location` header that is specified in the first case is not used.
+
+The priorities for session determination are the following (latter has higher priority than previous):
+session on socket, `Referer` header, session cookie, `X-Referer` header, session URI parameter.
 
 ## Interacting With a Server-Side JSON Objects
 
