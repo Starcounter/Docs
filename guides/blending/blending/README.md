@@ -45,11 +45,26 @@ isInBlender = Blender.IsMapped("/noparam1", token3);
 isInBlender = Blender.IsMapped<MyClass>("/noparam1");
 ```
 
-To get a list of all blended handlers, tokens and all:
+To get a list of all blended handlers in a dictionary (keyed by tokens and URIs respectively):
 ```cs
-static Dictionary<String, Boolean> ListUris();
-static Dictionary<String, Boolean> ListTokens();
-static Dictionary<String, String[]> ListAll();
+static Dictionary<String, List<BlendingInfo>> ListByTokens();
+static Dictionary<String, List<BlendingInfo>> ListByUris();
+```
+
+To get the list of all blended infos for a given URI handler:
+```cs
+List<BlendingInfo> ListForSpecificUri(String uri);
+```
+
+As you might noticed, a special blending information structure is used here: `BlendingInfo`.
+It contains the following methods/properties:
+```cs
+String AppName; // Returns the application name to which the blended handler belongs.
+Boolean IsActive; // Shows if this blending is active.
+String Token; // Returns blending token.
+String Uri; // Returns blended handler URI.
+Boolean IsFromUriConverterOn; // Returns True if the "FromUriConverter" is set/allowed.
+Boolean IsToUriConverterOn; // Returns True if the "ToUriConverter" is set/allowed.
 ```
 
 ## Parameters in handlers for Blending
