@@ -109,3 +109,5 @@ Blender.MapUri("/app4/{?}", token2);
 ```
 
 Here handler "/app1/{?}" participates in blending with `token1` and `token2` handlers.
+
+When an app requests `Self.GET("/app1/xyz")`, both handlers mapped to `token1` and `token2` will be triggered.
