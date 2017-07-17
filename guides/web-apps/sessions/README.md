@@ -8,7 +8,7 @@ New session is created by calling the constructor on `Session` class. At this po
 
 When multiple apps are running, only one of them needs to create the `Session` object, because the session identifies the browser tab, not only your app in that tab. Therefore, you always need to check before creating a new session if `Session.Current` is `null`.
 
-> **Note**: Each browser tab is a separate state of the UI. Therefore, each tab is tied to its own session. This makes it totally different from the session concept in frameworks like ASP.NET or Zend, where a session means all browser tabs created by the same user.
+> **Note**: Each browser tab is a separate state of the UI. Therefore, each tab is tied to its own session. This makes it totally different from the session concept in frameworks like ASP.NET or Zend, where a session stores data from all the browser tabs.
 
 Once you have the session, you want to attach a state to it. In Starcounter, the state is represented by a `Json` instance (also called a view-model). To attach a JSON to a session, set the `Data` property of the session to be your JSON instance. At this point the static property `Session.Current.Data` is automatically set to that JSON instance.
 
@@ -47,7 +47,7 @@ json.Session = new Session()
 
 ## Session Properties
 
-The `Session` constructor has an overload that takes the enum `SessionOptions`. This enum has five options:
+The `Session` object exposes a few useful properties, including:
 
 |Property|Explanation|
 |---|---|
@@ -114,9 +114,9 @@ JSON object can be attached to session by assigning `Data` property on `Session`
 
 ```javascript
 {
-   FirstName:"",
-   LastName:"",
-   Message:""
+   "FirstName": "",
+   "LastName": "",
+   "Message": ""
 }
 ```
 
