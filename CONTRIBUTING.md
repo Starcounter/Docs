@@ -20,20 +20,20 @@ Changes to this repo are conducted the same way we would make changes to a repo 
 7. Merge into one of the branches
 8. Merge changes to all other relevant branches
 
-When creating a new branch, do so from the oldest applicable branch. For example, if the change applies to all branches, then the new branch should be created from the oldest branch, which is 2.1.177. If it applies to all versions after 2.2, then the branch should be created from 2.2.1834, and so on. In git, it will look something like this:
+When creating a new branch, do so from the oldest applicable branch. For example, if the change applies to all branches, then the new branch should be created from the oldest branch, which is 2.2.1.3234. If it applies to all versions after the current release, then the branch should be created from RC, and so on. In git, it will look something like this:
 
 ```git
-git checkout 2.1.177
+git checkout 2.2.1.3234
 git checkout -b fix-typo
 git add .
 git commit -m "Description of the changes"
 git push -u origin fix-typo
 ```
 
-To merge the changes, merge to the branch that the checkout was done from. So if the checkout was done from 2.1.177, as shown above, the following commands should be executed:
+To merge the changes, merge to the branch that the checkout was done from. So if the checkout was done from 2.2.1.3234, as shown above, the following commands should be executed:
 
 ```git
-git checkout 2.1.177
+git checkout 2.2.1.3234
 git merge --no-ff --no-commit fix-typo
 ```
 
