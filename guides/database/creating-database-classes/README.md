@@ -39,7 +39,22 @@ public class Quote
 
 We recommend using auto-implemented properties instead of fields in database classes. This is mainly because Starcounter will only allow auto-implemented properties in future versions to reduce maintenance and make it easier to be cross-platform. For developers this also means that weave-time will be faster and that error messages for edge cases will be clearer.
 
-## Preventing fields from becoming database columns
+## Column Limit
+
+Database classes can have a maximum of 112 columns. Thus, this is not allowed:
+
+```cs
+[Database]
+public class LargeTable
+{
+    public string Column1 { get; set; }
+    public string Column2 { get; set; }
+    // ...
+    public string Column113 { get; set; }
+} 
+```
+
+## Preventing Fields From Becoming Database Columns
 Using the `Transient` attribute, it's possible to exclude fields and auto-implemented properties of a database class from becoming database columns. A field or auto-implemented property with this attribute will remain as a regular .NET field/property and its value will be stored on the CLR heap and be garbage collected along with the object it belongs to. Starcounter ignores these fields and properties which means that they are not available using SQL.
 
 ```cs
