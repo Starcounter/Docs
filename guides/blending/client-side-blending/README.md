@@ -156,6 +156,6 @@ Client-side blending allows us to compose layouts coming from different apps. It
 
 * [Layout compositions for HTML partials](https://starcounter.io/layout-compositions-html-partials/) - Blog October 2016
 
-* [Html Views Blending Guidelines](https://docs.starcounter.io/guides/web-apps/html-view-guidelines/) - Docs
+* [Html Views Blending Guidelines](/guides/web-apps/html-view-guidelines/) - Docs
 
 * [Shadow DOM v1: Self-Contained Web Components](https://developers.google.com/web/fundamentals/getting-started/primers/shadowdom) - Google Developers
