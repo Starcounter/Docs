@@ -41,7 +41,7 @@ We recommend using auto-implemented properties instead of fields in database cla
 
 ## Column Limit
 
-Database classes can have a maximum of 112 columns. Thus, this is not allowed:
+Database classes can have a maximum of 112 columns for performance reasons. Thus, this is not allowed:
 
 ```cs
 [Database]
