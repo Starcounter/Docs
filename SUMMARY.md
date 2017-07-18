@@ -95,6 +95,7 @@
         * [Sharing data](guides/blending/sharing-data/README.md)
         * [Sharing screen](guides/blending/sharing-screen/README.md)
         * [Server-Side Blending](guides/blending/blending/README.md)
+        * [Client-Side Blending](guides/blending/client-side-blending/README.md)
         * [HTML View Blending Guidelines](guides/web-apps/html-view-guidelines/README.md)
         * [Import HTML composition](guides/web-apps/import-html-composition/README.md)
         * [Avoiding URI conflicts](guides/blending/avoiding-uri-conflicts/README.md)
