@@ -96,7 +96,7 @@
         * [UDP Sockets](guides/network/udp-sockets/README.md)
     * [Mapping and Blending](guides/mapping-and-blending/README.md)
         * [Sharing data](guides/mapping-and-blending/sharing-data/README.md)
-        * [Sharing screen](guides/mapping-and-blending/sharing-screen/README.md)
+        <!--* [Sharing screen](guides/mapping-and-blending/sharing-screen/README.md)-->
         * [URI mapping](guides/mapping-and-blending/uri-mapping/README.md)
         * [Ontology mapping](guides/mapping-and-blending/ontology-mapping/README.md)
         * [Blending](guides/mapping-and-blending/blending/README.md)
