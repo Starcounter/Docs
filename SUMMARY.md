@@ -93,7 +93,7 @@
         * [UDP Sockets](guides/network/udp-sockets/README.md)
     * [Blending](guides/blending/README.md)
         * [Sharing data](guides/blending/sharing-data/README.md)
-        * [Sharing screen](guides/blending/sharing-screen/README.md)
+        <!--* [Sharing screen](guides/blending/sharing-screen/README.md)-->
         * [Server-Side Blending](guides/blending/blending/README.md)
         * [Client-Side Blending](guides/blending/client-side-blending/README.md)
         * [HTML View Blending Guidelines](guides/web-apps/html-view-guidelines/README.md)
