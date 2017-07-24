@@ -34,9 +34,11 @@ public void RefreshCustomElements()
 {
     this.CustomElements.Clear();
 
-    foreach (CustomElementRelation row in contactInfoProvider.SelectCustomElementRelations(this.Data))
+    var rows = contactInfoProvider.SelectCustomElementRelations(this.Data);
+
+    foreach (var row in rows)
     {
-        CustomElementRelationPage page = Self.GET<CustomElementRelationPage>("/people/partials/custom-element-relations/" + row.Key);
+        var page = Self.GET<CustomElementRelationPage>("/people/partials/custom-element-relations/" + row.Key);
 
         // This is where we pass a method to our Action delegate
         // Here, the content gets set to "RefreshCustomElements();"
@@ -48,8 +50,7 @@ public void RefreshCustomElements()
         this.CustomElements.Add(page);
     }
     RefreshElementTypes();
-    }
-...
+}
 ```
 
 As can be seen in the code above, our `Action` delegate is given a path.
@@ -62,18 +63,14 @@ After declaring our `Action` delegate, and assigning it content (in this case `t
 ```cs
 void AddNewItem(Input.SelectedType input)
 {
-    string inputValue = input.Value;
-    if (inputValue != null && inputValue != "")
+    if (!string.IsNullOrWhiteSpace(input.Value) && IsAvailable(input.Value))
     {
-        if(CheckAvailability(input.Value))
+        Db.Transact(() =>
         {
-            Db.Transact(delegate
-            {
-                CustomElementRelationType type = new CustomElementRelationType();
-                type.Name = inputValue;
-            });
-            NeedRefresh(); // Calls the Action delegate
-        }
+            var type = new CustomElementRelationType();
+            type.Name = input.Value;
+        });
+        NeedRefresh(); // Calls the Action delegate
     }
 }
 ...
