@@ -39,8 +39,7 @@ In object oriented programming the extent of a class is all object instances of 
 
 ## Performance notes
 
-We want to point out that the current version of Starcounter SQL is not completely
-optimized, which means we give no general guarantees regarding performance. However, for most queries when the right indexes are defined the Starcounter SQL gives you the extreme performance of the Starcounter database.
+The current version of Starcounter SQL is not performance optimized. However, for most queries with the right indexes, Starcounter SQL gives you the extreme performance of the Starcounter database.
 
 {% import "../../macros.html" as macros %}
 
