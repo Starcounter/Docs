@@ -42,7 +42,7 @@ When the user submits the form, a relevant HTTP handler tries to authenticate th
 <a href="https://github.com/StarcounterApps/Simplified/blob/master/Ring3/User/SystemUser.Static.cs" target="_blank">Simplified/blob/master/Ring3/User/SystemUser.Static.cs</a></div>
 
 ```cs
-SystemUser systemUser = Db.SQL<SystemUser>("SELECT o FROM Simplified.Ring3.SystemUser o WHERE o.Username = ?", Username).First;
+var systemUser = Db.SQL<SystemUser>("SELECT o FROM Simplified.Ring3.SystemUser o WHERE o.Username = ?", Username).FirstOrDefault();
 
 if (systemUser == null)
 {
@@ -60,7 +60,7 @@ SystemUserSession userSession = null;
 
 Db.Transact(() =>
 {
-    SystemUserTokenKey token = new SystemUserTokenKey();
+    var token = new SystemUserTokenKey();
 
     token.Created = token.LastUsed = DateTime.UtcNow;
     token.Token = CreateAuthToken(systemUser.Username);
@@ -76,7 +76,7 @@ Auth token is now sent to the user as a cookie in the HTTP response. Future HTTP
 <a href="https://github.com/StarcounterApps/SignIn/blob/master/src/SignIn/Api/MainHandlers.cs" target="_blank">MainHandlers.cs</a></div>
 
 ```cs
-Cookie cookie = new Cookie()
+var cookie = new Cookie()
 {
     Name = AuthCookieName
 };
@@ -112,18 +112,15 @@ If the auth token is correct, the middleware creates a Session object and identi
 <a href="https://github.com/StarcounterApps/SignIn/blob/master/src/SignIn/Api/MainHandlers.cs" target="_blank">MainHandlers.cs</a></div>
 
 ```cs
-Application.Current.Use((Request req) =>
+Application.Current.Use((Request request) =>
 {
     Cookie cookie = GetSignInCookie();
 
     if (cookie != null)
     {
-        if (Session.Current == null)
-        {
-            Session.Current = new Session(SessionOptions.PatchVersioning);
-        }
+        Session.Current = Session.Current ?? new Session(SessionOptions.PatchVersioning);
 
-        SystemUserSession session = SystemUser.SignInSystemUser(cookie.Value);
+        var session = SystemUser.SignInSystemUser(cookie.Value);
 
         if (session != null)
         {
@@ -141,15 +138,8 @@ With this middleware, any app that handles this request will see that the sessio
 <a href="https://github.com/StarcounterPrefabs/UserAdmin/blob/master/src/UserAdmin/Helpers/Helper.cs" target="_blank">UserAdmin/Helpers/Helper.cs</a></div>
 
 ```cs
-SystemUserSession userSession = Db.SQL<SystemUserSession>("SELECT o FROM Simplified.Ring5.SystemUserSession o WHERE o.SessionIdString=?", Session.Current.SessionId).First;
-if (userSession == null)
-{
-    return null;
-}
+var query = "SELECT o FROM Simplified.Ring5.SystemUserSession o WHERE o.SessionIdString = ?";
+var userSession = Db.SQL<SystemUserSession>(query, Session.Current.SessionId).FirstOrDefault();
 
-if (userSession.Token == null) {
-    return null;
-}
-
-return userSession.Token.User;
+return userSession?.Token?.User;
 ```
