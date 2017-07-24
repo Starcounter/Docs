@@ -17,7 +17,7 @@ Starcounter SQL contains some extensions to the SQL92 standard to better deal wi
 
 In traditional SQL you can only refer to tables, columns, rows and fields of values. The concept of an "object" is represented by a row in a table. You refer to an "object" by values on its primary key which are some specified columns.
 
-In Starcounter SQL you can refer to an object itself. For example, in query below the identifier <code>e</code> is an object reference.
+In Starcounter SQL you can refer to an object itself. For example, in query below the identifier `e` is an object reference.
 
 ```sql
 SELECT e FROM Employee e
@@ -29,13 +29,13 @@ In a traditional SQL database, to get data from more than one type of object (ta
 SELECT e.FirstName, d.Name FROM Employee e JOIN Department d ON e.DepartmentId = d.Id
 ```
 
-In Starcounter SQL there is a more convenient way to get the same result by instead using a path expression as in query below. In that way, you can from one type of object (<code>Employee</code>) reach another type of object (<code>Department</code>) by object reference.
+In Starcounter SQL there is a more convenient way to get the same result by instead using a path expression as in query below. In that way, you can from one type of object (`Employee`) reach another type of object (`Department`) by object reference.
 
 ```sql
 SELECT e.FirstName, e.Department.Name FROM Employee e
 ```
 
-In object oriented programming the extent of a class is all object instances of that class. An extent of object instances corresponds to a table of rows in a relational database. Thus, <code>Employee</code> in the example queries above can either be regarded as the extent of the class <code>Employee</code> or as the table <code>Employee</code>.
+In object oriented programming the extent of a class is all object instances of that class. An extent of object instances corresponds to a table of rows in a relational database. Thus, `Employee` in the example queries above can either be regarded as the extent of the class `Employee` or as the table `Employee`.
 
 ## Performance notes
 
