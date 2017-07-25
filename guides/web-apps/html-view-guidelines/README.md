@@ -111,7 +111,7 @@ The following syntax is used to distribute the content in the Shadow DOM: `<slot
 Consider the following HTML view definition:
 
 ```html
-<link rel="import" href="/sys/puppet-redirect/puppet-redirect.html" />
+<link rel="import" href="/sys/palindrom-redirect/palindrom-redirect.html" />
 
 <template>
     <template is="dom-bind">
@@ -145,7 +145,7 @@ Consider the following HTML view definition:
 To add `declarative-shadow-dom` to this HTML view, something like this can be done:
 
 ```html
-<link rel="import" href="/sys/puppet-redirect/puppet-redirect.html" />
+<link rel="import" href="/sys/palindrom-redirect/palindrom-redirect.html" />
 
 <template>
     <template is="dom-bind">
@@ -194,7 +194,7 @@ Regarding styling, there are two ways to make the application easier to visually
 3. To avoid writing the same Shadow DOM CSS on different pages, it can be imported with the CSS `import` rule. The syntax for this is `<style>@import url("/yourapp/css/style.css");</style>`. In the example above it would be done this way:
 
 ```html
-<link rel="import" href="/sys/puppet-redirect/puppet-redirect.html" />
+<link rel="import" href="/sys/palindrom-redirect/palindrom-redirect.html" />
 
 <template>
     <template is="dom-bind">

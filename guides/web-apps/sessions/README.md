@@ -169,6 +169,6 @@ The `Session` constructor has an overload that takes the enum `SessionOptions`. 
 |---|---|
 |`Default`| Is the default behavior of `Session`, declaring `new Session(SessionOptions.Default)` is the same as using the default constructor. |
 |`IncludeSchema`| Was added for Starcounter 1.x and does not serve a purpose anymore. Is the same as using the default constructor.  |
-|`PatchVersioning`| Enables operational transformation with Puppet/Palindrom. Thus, `PatchVersioning` is required for communication with Puppet/Palindrom.  |
+|`PatchVersioning`| Enables operational transformation with Palindrom. Thus, `PatchVersioning` is required for communication with Palindrom.  |
 |`StrictPatchRejection`| Throws an error instead of rejecting changes in two cases: (1) when an incoming patch tries to access an object or item in an array that is no longer valid and (2) when the client sends a patch with a different format than expected. |
 |`IncludeNamespaces`|Enables namespacing of Typed JSON responses. This is the default behavior and is thus the same as using the default constructor.|
