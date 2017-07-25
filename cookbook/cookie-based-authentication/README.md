@@ -31,7 +31,7 @@ This is how the form gets submitted to force using HTTP:
 var password = Sha1.hash(this.password);
 var url = this.url + this.username + "/" + password + "/" + this.rememberMe;
 this.set("password", "");
-document.querySelector("puppet-client").network.changeState(url);
+document.querySelector("palindrom-client").network.changeState(url);
 ```
 
 ## HTTP handler that sets the cookie
