@@ -93,7 +93,7 @@ namespace HelloWorld
 
 `Transaction.Commit()` simply commits the current state of the view-model to the database so that the data is accessible from other transactions.
 
-With server-side view-models like this, you don't have to write a single line of "glue code" to update the view in HTML. Any change in the view-model made in C# will instantly be synced to the client using [PuppetJs](/guides/web-apps/puppet/), which in turn automatically renders because of Polymer's data bindings. This saves you from creating single-purpose REST APIs, need for double validation of user input, and more.
+With server-side view-models like this, you don't have to write a single line of "glue code" to update the view in HTML. Any change in the view-model made in C# will instantly be synced to the client using [Palindrom](/guides/web-apps/palindrom/), which in turn automatically renders because of Polymer's data bindings. This saves you from creating single-purpose REST APIs, need for double validation of user input, and more.
 
 ## Creating Interactive Elements
 
