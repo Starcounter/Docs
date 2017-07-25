@@ -13,14 +13,14 @@ For instance, Web Components allow us to render a list of products and their bar
 {% raw %}
 ```html
 <link rel="import" href="/sys/x-barcode/src/x-barcode.html">
-<link rel="import" href="/sys/puppet-client/puppet-client.html">
+<link rel="import" href="/sys/palindrom-client/palindrom-client.html">
 <template id="root">
   <template is="dom-repeat" items="{{model.Products}}">
     <h1>{{item.Name}}</h1>
     <x-barcode code="{{item.Barcode}}"></x-barcode>
   </template>
 </template>
-<puppet-client ref="root"></puppet-client>
+<palindrom-client ref="root"></palindrom-client>
 ```
 {% endraw %}
 

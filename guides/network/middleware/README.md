@@ -293,7 +293,7 @@ If the HTML at the path would be a complete HTML document, this would be enough.
 
 This middleware class checks if the HTML is a full document, or essentially if it starts with a `<!DOCTYPE html>`. If it's not a full HTML document, it wraps the existing HTML inside the body of an HTML document that contains the following:
 
-1. A `puppet-client` element to create a WebSocket connection
+1. A `palindrom-client` element to create a WebSocket connection
 2. Import links to the Starcounter custom elements `starcounter-include` and `starcounter-debug-aid`
 3. Import links to the outside libraries Polymer and Bootstrap
 4. The session URL which makes it possible for PuppetJs to request the relevant JSON in a future request
@@ -323,7 +323,7 @@ var html = @"<!DOCTYPE html>
     <template is=""dom-bind"" id=""puppet-root"">
         <template is=""imported-template"" content$=""{{{{model.Html}}}}"" model=""{{{{model}}}}""></template>
     </template>
-    <puppet-client ref=""puppet-root"" remote-url=""{1}""></puppet-client>
+    <palindrom-client ref=""puppet-root"" remote-url=""{1}""></palindrom-client>
     <starcounter-debug-aid></starcounter-debug-aid>
 </body>
 </html>";
