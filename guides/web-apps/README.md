@@ -1,4 +1,4 @@
-# Web Apps
+# Blendable Web Apps
 
 Starcounter apps are small, individually functional web apps that can easily interoperate with other Starcounter apps. There are a couple of traits that belongs to these apps:
 
