@@ -1,13 +1,17 @@
 # Administrator Web UI
 
-Administrator is a web based administration tool that comes with Starcounter. After the server is started, Administrator should be accessible by pointing your web browser to [http://localhost:8181](http://localhost:8181).
+Administrator is a web based administration tool that comes with Starcounter. It can be started in three different ways:
+1. Run `staradmin start server`
+2. Run an app
+3. Execute `scservice.exe` - the `Starcounter Personal Server` shortcut that is added to the desktop after installation does this
 
-The default port is `8181`. This can be changed during installation or in the server configuration.
+After starting the Administrator, it's accessible from `localhost:8181`.
+
+The default port of `8181` can be changed during installation or in the server configuration.
 
 ## Database
 
-In Starcounter, your classes are your tables and the class instances are your rows. To revise data object concept in Starcounter please visit [Database](http://localhost:8181/#/databases).
-Using **Databases tool** Administrator can manage one or multiple databases, create new ones and more. It is accessible after starting `Starcounter Personal Administrator.exe` on the link [localhost:8181/#/databases](http://127.0.0.1:8181/#/databases).
+Using **Databases tool** Administrator can manage one or multiple databases, create new ones and more. It's accessible after starting `Starcounter Personal Administrator.exe` on the link [localhost:8181/#/databases](http://127.0.0.1:8181/#/databases).
 
 ### Database home screen
 
