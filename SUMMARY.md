@@ -67,7 +67,7 @@
         * [Accepting JSON in Requests](guides/typed-json/accepting-json-in-requests/README.md)
         * [Primitive Arrays and Single Value Types](guides/typed-json/primitive-arrays-and-single-value-types/README.md)
         * [Typed JSON Internals](guides/typed-json/typed-json-internals/README.md)
-    * [Web apps](guides/web-apps/README.md)
+    * [Blendable Web apps](guides/web-apps/README.md)
         * [Starcounter MVVM](guides/web-apps/starcounter-mvvm/README.md)
         * [Thin vs fat client](guides/web-apps/thin-vs-fat-client/README.md)
         * [Palindrom](guides/web-apps/palindrom/README.md)
