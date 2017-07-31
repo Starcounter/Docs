@@ -9,17 +9,15 @@ After starting the Administrator, it's accessible from `localhost:8181`.
 
 The default port `8181` can be changed during installation or in the server configuration.
 
-## Database Home Screen
+## Handling Databases
 
-It's possible to work with databases from [Web tool](http://127.0.0.1:8181/#/databases) and from Console.
-In web you can see, that Starcounter provides a `default` database in which Applications are operating.
+Databases are handled from `localhost:8181/#/databases`.
 
 ![Database home screen screenshot](/assets/1.png)
 
-When no applications are running default database is uninitialized.
+### Default Database
 
-> You can read more about StarAdmin Command Line Interface [here](/guides/working-with-starcounter/staradmin-cli).
-
+Starcounter creates a default database if an application is started and there is no existing database. Apps in the default database are available at port `8080` be default.
 
 ### Creating and Deleting Databases
 
