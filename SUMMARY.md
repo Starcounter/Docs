@@ -78,7 +78,6 @@
         * [Using Web Components](guides/web-apps/using-web-components/README.md)
         * [Import HTML composition](guides/web-apps/import-html-composition/README.md)
         * [Authorization](guides/palindrom-web-apps/authorization/README.md)
-        * [Acceptance testing with Selenium](guides/web-apps/acceptance-testing-with-selenium/README.md)
     * [Network](guides/network/README.md)
         * [Handling HTTP Requests](guides/network/handling-http-requests/README.md)
         * [Creating HTTP Responses](guides/network/creating-http-responses/README.md)
@@ -94,7 +93,6 @@
         * [UDP Sockets](guides/network/udp-sockets/README.md)
     * [Blending](guides/blending/README.md)
         * [Sharing data](guides/blending/sharing-data/README.md)
-        <!--* [Sharing screen](guides/blending/sharing-screen/README.md)-->
         * [Server-Side Blending](guides/blending/blending/README.md)
         * [Client-Side Blending](guides/blending/client-side-blending/README.md)
         * [HTML View Blending Guidelines](guides/web-apps/html-view-guidelines/README.md)
@@ -130,4 +128,5 @@
     * [Multiple pages](cookbook/multiple-pages/README.md)
     * [Icons](cookbook/icons/README.md)
     * [Proposed Project Structure](cookbook/project-structure/README.md)
+    * [Acceptance testing with Selenium](cookbook/acceptance-testing-with-selenium/README.md)
 * [Advanced Search](search/README.md)
