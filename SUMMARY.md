@@ -68,7 +68,7 @@
         * [Callback methods of Starcounter JS](guides/typed-json/callback-methods-of-starcounter-js/README.md)
         * [Responding with JSON](guides/typed-json/responding-with-json/README.md)
         * [Accepting JSON in Requests](guides/typed-json/accepting-json-in-requests/README.md)
-    * [Web apps](guides/web-apps/README.md)
+    * [Blendable Web Apps](guides/web-apps/README.md)
         * [Starcounter MVVM](guides/web-apps/starcounter-mvvm/README.md)
         * [Thin vs fat client](guides/web-apps/thin-vs-fat-client/README.md)
         * [Palindrom](guides/web-apps/palindrom/README.md)
