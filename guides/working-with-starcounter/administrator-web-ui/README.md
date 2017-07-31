@@ -4,26 +4,6 @@ Administrator is a web based administration tool that comes with Starcounter. Af
 
 The default port is `8181`. This can be changed during installation or in the server configuration.
 
-<!--This page explains the Administrator features:
-
-- Database
-   - Database home screen
-      - Creating and deleting databases
-      - Starting and stopping of a database
-      - Reading app console output
-      - Controlling apps in a database
-   - [SQL browser](#sql-browser)
-      - [Executing SQL queries](#executing-sql-queries)
-      - Examining SQL query plan
-   - [App Warehouse](#appstore)
-      - Downloading and installing apps
-   - Start executable
-   - Database configuration
-- Log
-- Network
-- Server configuration
--->
-
 ## Database
 
 In Starcounter, your classes are your tables and the class instances are your rows. To revise data object concept in Starcounter please visit <a href="http://localhost:8181/#/databases">Database</a>.
