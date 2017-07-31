@@ -7,15 +7,11 @@ Administrator is a web based administration tool that comes with Starcounter. It
 
 After starting the Administrator, it's accessible from `localhost:8181`.
 
-The default port of `8181` can be changed during installation or in the server configuration.
+The default port `8181` can be changed during installation or in the server configuration.
 
-## Database
+## Database Home Screen
 
-Using **Databases tool** Administrator can manage one or multiple databases, create new ones and more. It's accessible after starting `Starcounter Personal Administrator.exe` on the link [localhost:8181/#/databases](http://127.0.0.1:8181/#/databases).
-
-### Database home screen
-
-It is possible to work with databases from [Web tool](http://127.0.0.1:8181/#/databases) and from Console.
+It's possible to work with databases from [Web tool](http://127.0.0.1:8181/#/databases) and from Console.
 In web you can see, that Starcounter provides a `default` database in which Applications are operating.
 
 ![Database home screen screenshot](/assets/1.png)
@@ -25,7 +21,7 @@ When no applications are running default database is uninitialized.
 > You can read more about StarAdmin Command Line Interface [here](/guides/working-with-starcounter/staradmin-cli).
 
 
-#### Creating and deleting databases
+### Creating and Deleting Databases
 
 It is possible to create/delete Starcounter Database trough web Administrator.
 Databases are created as hosts for multiple applications running on them. By default database port is set to `8080`. If you plan to have several databases running in parallel, you need to change port parameter to be different, otherwise there will be a conflict.
@@ -39,7 +35,7 @@ Deleting database can be done by using the same control panel. This operation wi
 You can specify database port in `Advanced` settings.
 You will need to verify the DELETE operation by typing in the DB name.
 
-#### Starting and stopping of a database
+### Starting and Stopping Databases
 
 In Web Administrator interface  you can start and stop existing databases by pressing corresponding buttons.
 
@@ -48,13 +44,13 @@ In Web Administrator interface  you can start and stop existing databases by pre
 Green check icon represents that the database is currently running.
 If you redirect to `Select Database -> DB Name` it is possible as well to do the same operations from dedicated database descriptions. Note, that you can't start more than one database on the same port.
 
-#### Viewing applications' output
+### Viewing Application Output
 
 Navigate to the database by clicking on its name (e.g., default) in the list of databases. Click on the application name in the "Applications" list that are currently started in the database, opens a view that shows the output of the application.
 
 ![application output](/assets/appoutput2.gif)
 
-#### Controlling apps in a database
+### Controlling Apps
 
 On the Database page apps can be Started, Stopped and Deleted.
 
@@ -62,9 +58,9 @@ On the Database page apps can be Started, Stopped and Deleted.
 
 ![database control](/assets/Database.png)
 
-### SQL browser
+## SQL Browser
 
-#### Executing SQL queries
+### Executing SQL Queries
 
 In the SQL browser of a database you can write queries to that database. See [SQL reference](/guides/SQL/) for details on syntax.
 
@@ -86,32 +82,32 @@ The administrator will show the following result:
 
 ![query result](/assets/Screenshot-2015-10-02-17.23.40.png)
 
-#### Examining SQL query plan
+### SQL Query Plan
 
 If you navigate to `Query Plan` after the SQL request compilation, you can see the steps performed to access the output data.
 
 ![examine query plan](/assets/5.png)
 
-### App Warehouse
+## App Warehouse
 
 Apps can be downloaded to a database from the `App Warehouse` tab. Once an app has been downloaded, it can be started and stopped from its database page.
 
 ![app store tab](/assets/AppStoreTab.png)
 
-#### Downloading and installing apps
+### Downloading and Installing Apps
 
 Click the `Download` button to download an app. Downloaded apps can be controlled on the database page.
 
 ![Download and install apps](/assets/Appstore1.png)
 
-### Start executable
+## Starting Executables
 
 You can launch your application on a currently running database by redirecting to [Start Executable](http://127.0.0.1:8181/#/databases/default/executabeStart).
 Specify the path to your `.exe`application in the dedicated field.
 
 ![start executable](/assets/6.png)
 
-### Database configuration
+## Database Configuration
 
 You can access your database settings by redirecting to [Settings Icon](http://127.0.0.1:8181/#/databases/default/settings).
 It is possible to specify database port to have databases running in parallel on one kernel along with Scheduler Count that defines the degree of  parallelization and Chunks (internal setting, shouldn't be modified).
@@ -130,7 +126,7 @@ By accessing [Network](http://127.0.0.1:8181/#/server/network) tab it is possibl
 
 ![Network screenshot](/assets/9.png)
 
-## Server configuration
+## Server Configuration
 
 To access server network settings redirect to [Settings](http://127.0.0.1:8181/#/server/settings).
 For internal system communications and management specify **System port**.
