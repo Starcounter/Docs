@@ -31,12 +31,11 @@ Databases are also deleted in the same view. Deletions have to be verified by en
 
 ### Start and Stop Databases
 
-In Web Administrator interface  you can start and stop existing databases by pressing corresponding buttons.
+Start and stop databases by clicking the "Start" or "Stop" buttons at `localhost:8181/#/databases`:
 
 ![starting and stopping a database](/assets/56.png)
 
-Green check icon represents that the database is currently running.
-If you redirect to `Select Database -> DB Name` it is possible as well to do the same operations from dedicated database descriptions. Note, that you can't start more than one database on the same port.
+Databases with a green checkmark are running.
 
 ### View Application Output
 
