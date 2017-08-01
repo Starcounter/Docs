@@ -1,39 +1,35 @@
 # Requesting a user to authenticate
 
-When your App requires authentication, you should invite the user to login when he tries to access your app features.
-The SignIn App provides a signin form ready to be invoked from other Starcounter apps thanks to the blending approche.
+When your app requires authentication, you should invite the user to login when he tries to access your app features.
+The SignIn app provides a signin form ready to be invoked from other Starcounter apps thanks to the blending approach.
 Here is the pattern for requesting authentication from your app:
 
-When your app, decides that the view cannot be presented without authentication, it redirects to its own "Unauthenticated" view. 
-for exemple: /your-app/partial/unauthenticated?return_uri={?}
+When your app decides that the view cannot be presented without authentication, it redirects to its own "Unauthenticated" view. 
+For exemple: `/your-app/partial/unauthenticated?return_uri={?}`
 
 <div class="code-name">MainHandlers.cs</div>
 
 ```cs
-{
 	if (!IsSignedIn()) {
 		return Self.GET("/your-app/partial/Unauthenticated?return_uri=" + getURL);
 	}
-}
 ```
 
-the `getURL` is the Url requested in the original Get request.
+The `getURL` is the Url requested in the original GET request.
 
 
-And then define a new handler for the "Unauthenticated" partial
+Then define a new handler for the "Unauthenticated" partial.
 
 <div class="code-name">PartialHandlers.cs</div>
 
 ```cs
-{
 	Handle.GET("/your-app/partial/Unauthenticated?return_uri={?}", (string returnUri) => 
 	{
 		return new UnauthenticatedPage();
 	});
-}
 ```
 
-That view is empty, it will only trigger the blending with signin form
+the "Unauthenticated" view is empty, so it will only trigger the blending with signin form.
 
 <div class="code-name">Unauthenticated.json</div>
 
