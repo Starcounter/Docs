@@ -39,45 +39,39 @@ Databases with a green checkmark are running.
 
 ### View Application Output
 
-Navigate to the database by clicking on its name (e.g., default) in the list of databases. Click on the application name in the "Applications" list that are currently started in the database, opens a view that shows the output of the application.
+Go to a database by clicking on its name in the list of databases. Then, click on the application name in the "Applications" list. This will open up a view that displays the output of the application.
 
 ![application output](/assets/appoutput2.gif)
 
 ### Control Apps
 
-On the Database page apps can be Started, Stopped and Deleted.
-
-`Auto-Start` indicates if the app should start along with the database. The `Padlock` icon is used to lock an app from being deleted.
+Apps will start together with the database if "Auto-Start" is clicked. The padlock icon shows if an app can be deleted.
 
 ![database control](/assets/Database.png)
 
 ## SQL Browser
 
-### Executing SQL Queries
+### Execute SQL Queries
 
-In the SQL browser of a database you can write queries to that database. See [SQL reference](/guides/SQL/) for details on syntax.
+The data of a database can be queried in the SQL browser. See [SQL reference](/guides/SQL/) for details on the syntax.
 
-The queries that are supported by the method `Db.SQL` are also supported here with few differences:
+The queries that are supported by the method `Db.SQL` are also supported except that [literals](/guides/SQL/literals) are used in the SQL browser instead of [variables](/guides/database/variables).
 
-- [literals](/guides/SQL/literals) are supported,
-- [variables](/guides/database/variables) are **not** supported.
-- literals of type `Binary` are **not** supported.
+The app that defines that table needs to run in order to query it.
 
-Before running a query an executable that defines the class should be started in the targeted database. Then queries are issued in terms of database classes and properties defined in the executable(s). Classes correspond to tables and properties or fields - to columns in SQL queries.
-
-For example, the class `Person` can be queried using interactive SQL:
+For example, the class `Person` can be queried this way:
 
 ```sql
 SELECT Person.FullName, Text FROM Quote WHERE Person.FirstName = 'Albert'
 ```
 
-The administrator will show the following result:
+This is the result:
 
 ![query result](/assets/Screenshot-2015-10-02-17.23.40.png)
 
 ### SQL Query Plan
 
-If you navigate to `Query Plan` after the SQL request compilation, you can see the steps performed to access the output data.
+If you navigate to "Query Plan" after the SQL request, you can see the steps to access the data.
 
 ![examine query plan](/assets/5.png)
 
@@ -87,7 +81,7 @@ Apps can be downloaded to a database from the `App Warehouse` tab. Once an app h
 
 ![app store tab](/assets/AppStoreTab.png)
 
-### Downloading and Installing Apps
+### Download and Install Apps
 
 Click the `Download` button to download an app. Downloaded apps can be controlled on the database page.
 
@@ -95,34 +89,34 @@ Click the `Download` button to download an app. Downloaded apps can be controlle
 
 ## Starting Executables
 
-You can launch your application on a currently running database by redirecting to [Start Executable](http://127.0.0.1:8181/#/databases/default/executabeStart).
-Specify the path to your `.exe`application in the dedicated field.
+You can launch an application in a database by going to `localhost:8181/#/databases/default/executabeStart`.
+Specify the path to your `.exe` application in the field.
 
 ![start executable](/assets/6.png)
 
 ## Database Configuration
 
-You can access your database settings by redirecting to [Settings Icon](http://127.0.0.1:8181/#/databases/default/settings).
-It is possible to specify database port to have databases running in parallel on one kernel along with Scheduler Count that defines the degree of  parallelization and Chunks (internal setting, shouldn't be modified).
+Access the database settings by going to `localhost:8181/#/databases/default/settings`. The available settings are:
+* Database port - 8080 by default
+* Scheduler count, defines the degree of parallelization - 4 by default
+* Chunks, for advanced users, should not be modified for most databases - 65536 by default
 
 ![database configuration](/assets/7.png)
 
 ## Log
 
-To have a track of activity within your environment redirect to [Log](http://127.0.0.1:8181/#/server/log). You can see debug steps, notices, warnings and errors with explicit descriptions. After sorting log notes by "Source" it is possible to track the behavior of specific component.
+Go to `localhost:8181/#/server/log` to see debug steps, notices, warnings, and errors. Sort the log by "Source" to see the behavior of specific components.
 
 ![Log screenshot](/assets/8.png)
 
 ## Network
 
-By accessing [Network](http://127.0.0.1:8181/#/server/network) tab it is possible to see internal environment, the information about network facilities for Starcounter installation that comes by the means of network gateway.
+Go to `localhost:8181/#/server/network` to see internal environment, the information about network facilities for Starcounter installation that comes with the network gateway.
 
 ![Network screenshot](/assets/9.png)
 
 ## Server Configuration
 
-To access server network settings redirect to [Settings](http://127.0.0.1:8181/#/server/settings).
-For internal system communications and management specify **System port**.
-For outbound operations specify **Gateway port**.
+The system port and gateway port can be changed at `localhost:8181/#/server/settings`.
 
 ![Server configuration](/assets/10.png)
