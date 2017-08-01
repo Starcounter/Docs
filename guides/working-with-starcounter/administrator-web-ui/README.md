@@ -1,155 +1,122 @@
 # Administrator Web UI
 
-Administrator is a web based administration tool that comes with Starcounter. After the server is started, Administrator should be accessible by pointing your web browser to [http://localhost:8181](http://localhost:8181).
+Administrator is a web based administration tool that comes with Starcounter. It can be started in three different ways:
+1. Run `staradmin start server`
+2. Run an app
+3. Execute `scservice.exe` - the `Starcounter Personal Server` shortcut that is added to the desktop after installation does this
 
-The default port is `8181`. This can be changed during installation or in the server configuration.
+After starting the Administrator, it's accessible from `localhost:8181`.
 
-<!--This page explains the Administrator features:
+The default port `8181` can be changed during installation or in the server configuration.
 
-- Database
-   - Database home screen
-      - Creating and deleting databases
-      - Starting and stopping of a database
-      - Reading app console output
-      - Controlling apps in a database
-   - [SQL browser](#sql-browser)
-      - [Executing SQL queries](#executing-sql-queries)
-      - Examining SQL query plan
-   - [App Warehouse](#appstore)
-      - Downloading and installing apps
-   - Start executable
-   - Database configuration
-- Log
-- Network
-- Server configuration
--->
+## Handling Databases
 
-## Database
-
-In Starcounter, your classes are your tables and the class instances are your rows. To revise data object concept in Starcounter please visit <a href="http://localhost:8181/#/databases">Database</a>.
-Using <strong>Databases tool</strong> Administrator can manage one or multiple databases, create new ones and more. It is accessible after starting <code>Starcounter Personal Administrator.exe</code> on the link <a href="http://127.0.0.1:8181/#/databases">localhost:8181/#/databases</a>  
-
-### Database home screen
-
-It is possible to work with databases from <a href="http://127.0.0.1:8181/#/databases">Web tool</a> and from Console.
-In web you can see, that Starcounter provides a <code>default</code> database in which Applications are operating.
+Databases are handled from `localhost:8181/#/databases`.
 
 ![Database home screen screenshot](/assets/1.png)
 
-When no applications are running default database is uninitialized.
+### Default Database
 
-<blockquote>You can read more about StarAdmin Command Line Interface <a href="/guides/working-with-starcounter/staradmin-cli">here</a>.</blockquote>
+Starcounter creates a default database if an application is started and there is no existing database. Apps in the default database are available at port `8080` by default.
 
+### Create and Delete Databases
 
-#### Creating and deleting databases
+It's possible to create and delete databases in the Administrator. To prevent conflicts when running several parallel databases, their ports have to be different. The port can be specified under the "Advanced" options when creating a new database.
 
-It is possible to create/delete Starcounter Database trough web Administrator.
-Databases are created as hosts for multiple applications running on them. By default database port is set to <code>8080</code>. If you plan to have several databases running in parallel, you need to change port parameter to be different, otherwise there will be a conflict.
-
-From Web panel it is easy to create a new Database by pressing <a href="http://127.0.0.1:8181/#/databaseNew">New database</a> in the main menu.  
-If you already work with several databases but experience a need in a new one, follow to <code>Select Database -> New database</code>
+Create new databases at `localhost:8181/#/databases` by pressing "New database".  
 
 ![Creating and deleting databases](/assets/3.png)
 
-Deleting database can be done by using the same control panel. This operation will need verification y typing in a Database name to delete in a popped-up dialog window (case-sensitive).
-You can specify database port in <code>Advanced</code> settings.
-You will need to verify the DELETE operation by typing in the DB name.
+Databases are also deleted in the same view. Deletions have to be verified by entering the name of the database in the pop-up window.
 
-#### Starting and stopping of a database
+### Start and Stop Databases
 
-In Web Administrator interface  you can start and stop existing databases by pressing corresponding buttons.
+Start and stop databases by clicking the "Start" or "Stop" buttons at `localhost:8181/#/databases`:
 
 ![starting and stopping a database](/assets/56.png)
 
-Green check icon represents that the database is currently running.
-If you redirect to <code>Select Database -> DB Name</code> it is possible as well to do the same operations from dedicated database descriptions. Note, that you can't start more than one database on the same port.
+Databases with a green checkmark are running.
 
-#### Viewing applications' output
+### View Application Output
 
-Navigate to the database by clicking on its name (e.g., default) in the list of databases. Click on the application name in the "Applications" list that are currently started in the database, opens a view that shows the output of the application.
+Go to a database by clicking on its name in the list of databases. Then, click on the application name in the "Applications" list. This will open up a view that displays the output of the application.
 
 ![application output](/assets/appoutput2.gif)
 
-#### Controlling apps in a database
+### Control Apps
 
-On the Database page apps can be Started, Stopped and Deleted.
-
-`Auto-Start` indicates if the app should start along with the database. The `Padlock` icon is used to lock an app from being deleted.
+Apps will start together with the database if "Auto-Start" is clicked. The padlock icon shows if an app can be deleted.
 
 ![database control](/assets/Database.png)
 
-### SQL browser
+## SQL Browser
 
-#### Executing SQL queries
+### Execute SQL Queries
 
-In the SQL browser of a database you can write queries to that database. See [SQL reference](/guides/SQL/) for details on syntax.
+The data of a database can be queried in the SQL browser. See [SQL reference](/guides/SQL/) for details on the syntax.
 
-The queries that are supported by the method <code>Db.SQL</code> are also supported here with few differences:
+The queries that are supported by the method `Db.SQL` are also supported except that [literals](/guides/SQL/literals) are used in the SQL browser instead of [variables](/guides/database/variables).
 
-- [literals](/guides/SQL/literals) are supported,
-- [variables](/guides/database/variables) are <strong>not</strong> supported.
-- literals of type <code>Binary</code> are <strong>not</strong> supported.
+The app that defines that table needs to run in order to query it.
 
-Before running a query an executable that defines the class should be started in the targeted database. Then queries are issued in terms of database classes and properties defined in the executable(s). Classes correspond to tables and properties or fields - to columns in SQL queries.
-
-For example, the class `Person` can be queried using interactive SQL:
+For example, the class `Person` can be queried this way:
 
 ```sql
 SELECT Person.FullName, Text FROM Quote WHERE Person.FirstName = 'Albert'
 ```
 
-The administrator will show the following result:
+This is the result:
 
 ![query result](/assets/Screenshot-2015-10-02-17.23.40.png)
 
-#### Examining SQL query plan
+### SQL Query Plan
 
-If you navigate to <code>Query Plan</code> after the SQL request compilation, you can see the steps performed to access the output data.
+If you navigate to "Query Plan" after the SQL request, you can see the steps to access the data.
 
 ![examine query plan](/assets/5.png)
 
-### App Warehouse
+## App Warehouse
 
-Apps can be downloaded to a database from the ```App Warehouse``` tab. Once an app has been downloaded, it can be started and stopped from its database page.
+Apps can be downloaded to a database from the `App Warehouse` tab. Once an app has been downloaded, it can be started and stopped from its database page.
 
 ![app store tab](/assets/AppStoreTab.png)
 
-#### Downloading and installing apps
+### Download and Install Apps
 
-Click the ```Download``` button to download an app. Downloaded apps can be controlled on the database page.
+Click the `Download` button to download an app. Downloaded apps can be controlled on the database page.
 
 ![Download and install apps](/assets/Appstore1.png)
 
-### Start executable
+## Starting Executables
 
-You can launch your application on a currently running database by redirecting to <a href="http://127.0.0.1:8181/#/databases/default/executabeStart">Start Executable</a>.
-Specify the path to your <code>.exe</code>application in the dedicated field.
+You can launch an application in a database by going to `localhost:8181/#/databases/default/executabeStart`.
+Specify the path to your `.exe` application in the field.
 
 ![start executable](/assets/6.png)
 
-### Database configuration
+## Database Configuration
 
-You can access your database settings by redirecting to <a href="http://127.0.0.1:8181/#/databases/default/settings">Settings Icon</a>.
-It is possible to specify database port to have databases running in parallel on one kernel along with Scheduler Count that defines the degree of  parallelization and Chunks (internal setting, shouldn't be modified).
+Access the database settings by going to `localhost:8181/#/databases/default/settings`. The available settings are:
+* Database port - 8080 by default
+* Scheduler count, defines the degree of parallelization - 4 by default
+* Chunks, for advanced users, should not be modified for most databases - 65536 by default
 
 ![database configuration](/assets/7.png)
 
 ## Log
 
-To have a track of activity within your environment redirect to <a href="http://127.0.0.1:8181/#/server/log">Log</a>. You can see debug steps, notices, warnings and errors with explicit descriptions. After sorting log notes by "Source" it is possible to track the behavior of specific component.
+Go to `localhost:8181/#/server/log` to see debug steps, notices, warnings, and errors. Sort the log by "Source" to see the behavior of specific components.
 
 ![Log screenshot](/assets/8.png)
 
 ## Network
 
-By accessing <a href="http://127.0.0.1:8181/#/server/network">Network </a>tab it is possible to see internal environment, the information about network facilities for Starcounter installation that comes by the means of network gateway.
+Go to `localhost:8181/#/server/network` to see internal environment, the information about network facilities for Starcounter installation that comes with the network gateway.
 
 ![Network screenshot](/assets/9.png)
 
-## Server configuration
+## Server Configuration
 
-To access server network settings redirect to <a href="http://127.0.0.1:8181/#/server/settings">Settings</a>.
-For internal system communications and management specify <strong>System port</strong>.
-For outbound operations specify <strong>Gateway port</strong>.
+The system port and gateway port can be changed at `localhost:8181/#/server/settings`.
 
 ![Server configuration](/assets/10.png)
