@@ -17,23 +17,19 @@ Databases are handled from `localhost:8181/#/databases`.
 
 ### Default Database
 
-Starcounter creates a default database if an application is started and there is no existing database. Apps in the default database are available at port `8080` be default.
+Starcounter creates a default database if an application is started and there is no existing database. Apps in the default database are available at port `8080` by default.
 
-### Creating and Deleting Databases
+### Create and Delete Databases
 
-It is possible to create/delete Starcounter Database trough web Administrator.
-Databases are created as hosts for multiple applications running on them. By default database port is set to `8080`. If you plan to have several databases running in parallel, you need to change port parameter to be different, otherwise there will be a conflict.
+It's possible to create and delete databases in the Administrator. To prevent conflicts when running several parallel databases, their ports have to be different. The port can be specified under the "Advanced" options when creating a new database.
 
-From Web panel it is easy to create a new Database by pressing [New database](http://127.0.0.1:8181/#/databaseNew) in the main menu.  
-If you already work with several databases but experience a need in a new one, follow to `Select Database -> New database`
+Create new databases at `localhost:8181/#/databases` by pressing "New database".  
 
 ![Creating and deleting databases](/assets/3.png)
 
-Deleting database can be done by using the same control panel. This operation will need verification y typing in a Database name to delete in a popped-up dialog window (case-sensitive).
-You can specify database port in `Advanced` settings.
-You will need to verify the DELETE operation by typing in the DB name.
+Databases are also deleted in the same view. Deletions have to be verified by entering the name of the database in the pop-up window.
 
-### Starting and Stopping Databases
+### Start and Stop Databases
 
 In Web Administrator interface  you can start and stop existing databases by pressing corresponding buttons.
 
@@ -42,13 +38,13 @@ In Web Administrator interface  you can start and stop existing databases by pre
 Green check icon represents that the database is currently running.
 If you redirect to `Select Database -> DB Name` it is possible as well to do the same operations from dedicated database descriptions. Note, that you can't start more than one database on the same port.
 
-### Viewing Application Output
+### View Application Output
 
 Navigate to the database by clicking on its name (e.g., default) in the list of databases. Click on the application name in the "Applications" list that are currently started in the database, opens a view that shows the output of the application.
 
 ![application output](/assets/appoutput2.gif)
 
-### Controlling Apps
+### Control Apps
 
 On the Database page apps can be Started, Stopped and Deleted.
 
