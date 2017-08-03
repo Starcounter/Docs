@@ -30,6 +30,10 @@ session.Data = json;
 json.Session = session;
 ```
 
+By default communication with jsonpatch and version control of the attached viewmodel are enabled (more information about how versioning works can be found at http://tomalec.github.io/PuppetJs-operational-transformation/why-puppet-ot.html) when creating a new Session.
+
+To disable viewmodel versioning use the constructor that takes a `Session.Flags` parameter with value of set to `Flags.None`, i.e. `new Session(Session.Flags.None);`
+
 ## Session Properties
 
 The `Session` object exposes a few useful properties, including:
@@ -161,14 +165,14 @@ The newly created JSON object is automatically made available to the client usin
 
 More important, however is the built in support for the [HTTP PATCH method](http://tools.ietf.org/html/rfc5789) and [JSON-Patch](http://tools.ietf.org/html/rfc6902). This allows Starcounter to communicate using delta updates rather than sending complete JSON representations of the entire resource.
 
-## Session Options
+## Session Flags
 
-The `Session` constructor has an overload that takes the enum `SessionOptions`. This enum has five options:
+The `Session` constructor has an overload that takes the enum `Session.Flags`. The default flag is `PatchVersioning`. There are five flags:
 
 |Option|Explanation|
 |---|---|
-|`Default`| Is the default behavior of `Session`, declaring `new Session(SessionOptions.Default)` is the same as using the default constructor. |
-|`IncludeSchema`| Was added for Starcounter 1.x and does not serve a purpose anymore. Is the same as using the default constructor.  |
-|`PatchVersioning`| Enables operational transformation with Palindrom. Thus, `PatchVersioning` is required for communication with Palindrom.  |
+|`None`| Overrides the default behavior of `new Session()` so that `PatchVersioning` is not used. |
+|`IncludeSchema`| Was added for Starcounter 1.x and does not serve a purpose anymore. Is the same as `Session.Flags.None`. |
+|`PatchVersioning`| Enables operational transformation with Puppet/Palindrom. Thus, `PatchVersioning` is required for communication with Puppet/Palindrom. Is set by default when declaring `new Session()`. |
 |`StrictPatchRejection`| Throws an error instead of rejecting changes in two cases: (1) when an incoming patch tries to access an object or item in an array that is no longer valid and (2) when the client sends a patch with a different format than expected. |
-|`IncludeNamespaces`|Enables namespacing of Typed JSON responses. This is the default behavior and is thus the same as using the default constructor.|
+|`IncludeNamespaces`| Enables namespacing of Typed JSON responses. Is the same as `Session.Flags.None` since it's the default behavior. |

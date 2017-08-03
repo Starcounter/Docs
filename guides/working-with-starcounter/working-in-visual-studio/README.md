@@ -29,7 +29,7 @@ Project templates include:
 
 #### Starcounter Application Template
 
-The Starcounter application template is the starting point to creating applications with Starcounter. It contains four references: `Starcounter`, `Starcounter.Internal`, `Starcounter.Logging`, and `Starcounter.XSON`. Additionally, it comes with a boilerplate `Program.cs` file that looks like this:
+The Starcounter application template is the starting point to creating applications with Starcounter. It contains four references: `Starcounter`, `Starcounter.Internal`, `Starcounter.Hosting`, and `Starcounter.XSON`. Additionally, it comes with a boilerplate `Program.cs` file that looks like this:
 
 ```cs
 using System;
@@ -124,24 +124,21 @@ Using the standard C# "Console Application" project, we can turn that into a pro
 
 1. Create the project, name it for example "Hello".
 2. Edit the `Hello.csproj`
-    1. Add references to Starcounter assemblies.
-    2. Add an import to the Starcounter .targets file.
+    1. Specify compatibility with "2.4".    
+    2. Add references to Starcounter assemblies.
+    3. Add an import to the Starcounter .targets file.
 
 `Hello.csproj` (snippet showing additions)
 ```xml
+<PropertyGroup>
+  <StarcounterVersionCompatibility>2.4</StarcounterVersionCompatibility>
+</PropertyGroup>
+
 <ItemGroup>
-  <Reference Include="Starcounter, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d2df1e81d0ca3abf">
-    <Private>False</Private>
-  </Reference>
-  <Reference Include="Starcounter.Internal, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d2df1e81d0ca3abf">
-    <Private>False</Private>
-  </Reference>
-  <Reference Include="Starcounter.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d2df1e81d0ca3abf">
-    <Private>False</Private>
-  </Reference>
-  <Reference Include="Starcounter.XSON, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d2df1e81d0ca3abf">
-    <Private>False</Private>
-  </Reference>
+  <Reference Include="Starcounter, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d2df1e81d0ca3abf" />
+  <Reference Include="Starcounter.Internal, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d2df1e81d0ca3abf" />
+  <Reference Include="Starcounter.Hosting, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d2df1e81d0ca3abf" />
+  <Reference Include="Starcounter.XSON, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d2df1e81d0ca3abf" />
 </ItemGroup>
 
 <Import Project="$(StarcounterBin)\Starcounter.MsBuild.targets" />

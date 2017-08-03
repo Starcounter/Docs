@@ -382,4 +382,5 @@ static PersonPage()
     DefaultTemplate.Age.Bind = null;
 }
 ```
+
 Now, the code will compile successfully because it is explicitly described that the `Age` property will not be bound. This is further described in the section "Opt-out of Bindings".
