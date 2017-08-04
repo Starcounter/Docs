@@ -11,7 +11,7 @@ For example: `/your-app/partial/unauthenticated?return_uri={?}`
 
 ```cs
 	if (!IsSignedIn()) {
-		return Self.GET("/your-app/partial/Unauthenticated?return_uri=" + getURL);
+		return Self.GET("/your-app/partial/Unauthenticated?return_uri=" + getURI);
 	}
 ```
 
@@ -29,7 +29,7 @@ Then define a new handler for the "Unauthenticated" partial.
 	});
 ```
 
-The "unauthenticated" view can be empty (no JSON properties). Its only purpose is to map it with a token to the authentication view coming from the Sign In app.
+The "unauthenticated" view can be empty (no JSON properties). Its only purpose is to map it with a token to the authentication view coming from the [SignIn](https://github.com/StarcounterApps/SignIn) app.
 
 <div class="code-name">Unauthenticated.json</div>
 
@@ -63,7 +63,10 @@ It should be mapped to a token `userform-return`, which is understood in other a
 ```
 
 
-If [SignIn](https://github.com/StarcounterApps/SignIn) app is not running, the user will only get a message about not being authenticated 
+If [SignIn](https://github.com/StarcounterApps/SignIn) app is not running, the user will only get a message about not being authenticated.
+
+This message would come from the "Unauthenticated.Html".
+
 ![When signin app is not running](/assets/Authentication-nosignin.png)
 
 
