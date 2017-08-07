@@ -10,9 +10,9 @@ For example: `/your-app/partial/unauthenticated?return_uri={?}`
 <div class="code-name">MainHandlers.cs</div>
 
 ```cs
-	if (!IsSignedIn()) {
-		return Self.GET("/your-app/partial/Unauthenticated?return_uri=" + getURI);
-	}
+if (!IsSignedIn()) {
+	return Self.GET("/your-app/partial/Unauthenticated?return_uri=" + getURI);
+}
 ```
 
 
@@ -23,10 +23,10 @@ Then define a new handler for the "Unauthenticated" partial.
 <div class="code-name">PartialHandlers.cs</div>
 
 ```cs
-	Handle.GET("/your-app/partial/Unauthenticated?return_uri={?}", (string returnUri) => 
-	{
-		return new UnauthenticatedPage();
-	});
+Handle.GET("/your-app/partial/Unauthenticated?return_uri={?}", (string returnUri) => 
+{
+	return new UnauthenticatedPage();
+});
 ```
 
 The "unauthenticated" view can be empty (no JSON properties). Its only purpose is to map it with a token to the authentication view coming from the [SignIn](https://github.com/StarcounterApps/SignIn) app.
