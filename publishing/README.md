@@ -1,6 +1,8 @@
-# Publishing conventions
+# Publishing on the App Warehouse
 
-Your Starcounter app is best enjoyed when it is blendable with other apps. For that it needs to follow some conventions.
+If your app is blendable, it might be used in complex UI systems consisting of multiple apps coming from different vendors.
+
+To make sure that the apps play well together, the App Warehouse enforces several conventions.
 
 These conventions exist for two reasons:
 

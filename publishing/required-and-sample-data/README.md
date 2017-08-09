@@ -13,5 +13,5 @@ If the app requires any data to operate (for example a list of the world's count
 
 If the app offers some nice-to-have sample data, it should offer a button that creates this data:
 
-- in the dismissible welcome message on the main page
+- on the main page, in a welcome message that is dismissible once (not per user)
 - on the [Settings page](../settings-page/)

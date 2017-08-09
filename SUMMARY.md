@@ -99,7 +99,7 @@
         * [Import HTML composition](guides/web-apps/import-html-composition/README.md)
         * [Avoiding URI conflicts](guides/blending/avoiding-uri-conflicts/README.md)
         * [Avoiding CSS conflicts](guides/blending/avoiding-css-conflicts/README.md)
-    * [Publishing in the App Warehouse](guides/publishing/README.md)
+    * [Publishing on the App Warehouse](guides/publishing/README.md)
         * [Mapping file](guides/publishing/mapping-file/README.md)
         * [Entry point URI](guides/publishing/entry-point-uri/README.md)
         * [UI metadata](guides/publishing/ui-metadata/README.md)
@@ -125,7 +125,7 @@
         * [Unload/Reload](guides/working-with-starcounter/unload-reload/README.md)
         * [Kernel Q&A](guides/working-with-starcounter/kernel-q-and-a/README.md)
         * [Log Retention](guides/working-with-starcounter/log-retention/README.md)
-		
+
 * [Cookbook](cookbook/README.md)
     * [Accessing methods in nested view-models](cookbook/accessing-methods-in-nested-view-models/README.md)
     * [Attach a request to long running transactions](cookbook/attach-a-request-to-long-running-transactions/README.md)
