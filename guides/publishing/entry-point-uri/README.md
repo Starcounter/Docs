@@ -9,7 +9,8 @@ If there is no main screen, show a splash screen saying that the app is running.
 Sample `MainHandlers.cs` ([source](https://github.com/StarcounterApps/People/blob/94341b2dc62ad6637808313c367f986a417d349b/src/People/Api/MainHandlers.cs#L32-L35)):
 
 ```cs
-Handle.GET("/people", () => {
+Handle.GET("/people", () =>
+{
     return Self.GET("/people/organizations");
 });
 ```

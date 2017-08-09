@@ -30,7 +30,7 @@ Sample `AppName.json` ([source](https://github.com/StarcounterApps/CssVariablesM
 {
   "name": "CssVariablesManager",
   "description": "CssVariablesManager",
-  "html": "/CssVariablesManager/AppIcon.html"
+  "html": "/cssvariablesmanager/AppIcon.html"
 }
 ```
 
@@ -44,8 +44,11 @@ Sample `AppIcon.html` ([source](https://github.com/StarcounterApps/CssVariablesM
 
 ```html
 <template>
-    <svg slot="CssVariablesManager/app-icon" viewBox="0 0 185 185" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <use xlink:href="/CssVariablesManager/images/cssvariablesmanager.svg#css-file" />
+    <svg slot="cssvariablesmanager/app-icon" viewBox="0 0 185 185" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <use xlink:href="/cssvariablesmanager/images/cssvariablesmanager.svg#css-file" />
     </svg>
+    <template is="declarative-shadow-dom">
+        <slot name="cssvariablesmanager/app-icon"></slot>
+    </template>
 </template>
 ```

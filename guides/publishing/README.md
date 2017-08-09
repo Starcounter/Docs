@@ -6,5 +6,5 @@ To make sure that the apps play well together, the App Warehouse enforces severa
 
 These conventions exist for two reasons:
 
-1. to prevent apps that run in the same database from going in conflict
+1. to prevent conflicts between apps in the same database
 2. to provide a common ground, expectable user experience
