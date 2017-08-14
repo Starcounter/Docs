@@ -1,44 +1,75 @@
 # Data manipulation
 
-There are three data manipulation statements in SQL92: `INSERT`, `UPDATE` and `DELETE`. None of these statements are supported in Starcounter SQL. Objects are instead created, updated, and deleted directly in the programming code.
+There are three data manipulation statements in SQL92: `INSERT`, `UPDATE` and `DELETE`. `INSERT`and `UPDATE` are not supported in Starcounter SQL while `DELETE` is available through `Db.SQL`. Objects are created and updated in the programming code.
 
-The same way a database object is created with the native program code operator `new`, a database object can be updated using the native program code assign operator `=`.
+All modifications have to be wrapped in a transaction. These modifications are visible to other transaction after the changes have been commited.
 
-A database object is deleted by calling the `Delete` method on the database object.
+## Create Database Objects
 
-All modifications are directly reflected in the database for the current transaction, and when the current transaction is committed the modifications are saved and visible to other transactions.
+Database objects are created with the native program code operator `new`. For example, consider the following database class:
 
 ```cs
 [Database]
-public class Employee
+public class Person
 {
+
     public String FirstName { get; set; }
     public String LastName { get; set; }
-    public Department Department { get; set; }
-    public Employee Manager { get; set; }
 }
 ```
 
-```cs
-Db.Transact(() =>
-{
-    Employee emp = new Employee(); // Create database object.
-    
-    emp.FirstName = "John"; // Update database object.
-    
-    emp.Delete(); // Delete database object.
-});
-```
-The following example shows how to update the `LastName` of all
-`Employee` objects to upper case.
+To create a new instance of this class, the syntax `new Person()` would be used, like this:
 
 ```cs
-Db.Transact(() =>
-{ 
-    string query = "SELECT e FROM Employee e";
-    foreach (Employee emp in Db.SQL<Employee>(query))
-    {
-        emp.LastName = emp.LastName.ToUpper();
-    }
-});
+new Person()
+{
+    FirstName = "John",
+    LastName = "Doe"
+};
 ```
+
+## Update Database Objects
+
+A database object can be updated using the native program code assign operator `=`.
+
+For example, instead of instantiating an object like in the example above, it's possible to create the object and then update its properties:
+
+```cs
+var person = new Person();
+person.FirstName = "John";
+person.LastName = "Doe";
+```
+
+To update the `LastName` of all the `Person` objects in the database, they would be looped through and updated, like so:
+
+```cs
+var people = Db.SQL<Person>("SELECT p FROM Person p");
+foreach (var person in people)
+{
+    person.LastName = person.LastName.ToUpper();
+}
+```
+
+## Delete Database Objects
+
+There are two ways to delete database objects:
+
+1. Using the `Delete` method on an object
+2. Using `DELETE FROM`
+
+`Delete` is used for single objects and `DELETE FROM` is used for many objects. 
+
+They look like this:
+
+```cs
+var john = new Person();
+john.Delete();
+
+Db.SQL("DELETE FROM Person");
+```
+
+`person.Delete()` will just delete `john` while `DELETE FROM Person` will delete all objects of the `Person` class. 
+
+**Note**: To delete database objects that are bound to the view-model, the view-model object should be deleted before the database object is deleted.
+
+

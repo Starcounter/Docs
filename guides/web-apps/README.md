@@ -7,7 +7,7 @@ Starcounter apps are small, individually functional web apps that can easily int
 3. They can share data with other apps.
 4. They can share screen with other apps.
 
-In this section it is described how to build these apps while the section [Mapping and Blending](../mapping-and-blending) describes how to make them interoperate.
+In this section it is described how to build these apps while the section [Blending](../blending) describes how to make them interoperate.
 
 **Note:** The code examples in this section are built on modern web technologies that are supported in the current versions of Chrome, Firefox, Safari, Edge, and Opera. Other web browsers are currently not supported. 
 

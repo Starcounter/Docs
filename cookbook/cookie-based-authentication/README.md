@@ -118,7 +118,7 @@ Application.Current.Use((Request request) =>
 
     if (cookie != null)
     {
-        Session.Current = Session.Current ?? new Session(SessionOptions.PatchVersioning);
+        Session.Current = Session.Current ?? new Session();
 
         var session = SystemUser.SignInSystemUser(cookie.Value);
 

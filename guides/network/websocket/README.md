@@ -166,10 +166,10 @@ Sometimes its needed to perform the some "action" on a group of WebSocket connec
 public class WebSocketId
 {
     // WebSocket identifier.
-    public UInt64 Id;
+    public UInt64 Id { get; set; }
 
     // Number of messages sent on this WebSocket.
-    public UInt32 NumBroadcasted;
+    public UInt32 NumBroadcasted { get; set; }
 }
 
 ...

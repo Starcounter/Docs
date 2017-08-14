@@ -26,6 +26,8 @@ Is the maximum size of incoming HTTP body/content, in bytes. Requests with bigge
 
 The value of `MaximumReceiveContentLength` can be found in runtime with `NetworkGateway.Deserealize().MaximumReceiveContentLength`. For this to work, `using Starcounter.Internal` has to be included as well. 
 
+##### NOTE: `NetworkGateway.Deserealize()` is deprecated and will be removed in the next versions of Starcounter.
+
 #### InactiveConnectionTimeout 
 
 Is the inactive HTTP connections life time in seconds. Inactive connections are those on which send/receive are not performed.

@@ -34,7 +34,6 @@ Handle.GET("/HelloWorld", () =>
 });
 ```
 
-
 ## Writable View-Model
 
 To make properties in the view-model writable from the view, a dollar sign it added to the end of it. With this, `"FirstName"` becomes `"FirstName$"` and `"LastName"` becomes `"LastName$"`. The view-model should then look like this:
@@ -51,7 +50,7 @@ To make properties in the view-model writable from the view, a dollar sign it ad
 
 ## Trigger Property
 
-As mentioned earlier, we also want the possibility to save at will. In order to do this, there needs to be some kind of communication between the view and the code-behind. This can be accomplished using a trigger property which is basically an integer that can be changed from the client and handled in the code-behind.
+As mentioned earlier, we also want the possibility to save at will. In order to do this, there needs to be some kind of communication between the view and the [code-behind](/guides/typed-json/code-behind/). This can be accomplished using a trigger property which is basically an integer that can be changed from the client and handled in the code-behind.
 
 This is how it should look:
 

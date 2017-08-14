@@ -1,68 +1,130 @@
 # JSON-by-example
 
-Starcounter lets you define JSON schemas by providing a sample instance of the JSON. From this example, Starcounter infers partial nested classes that can be extended using C#. The values of the primitive properties are used as default values.  
+JSON-by-example defines Typed JSON objects.
 
-The advantages of JSON-by-example over regular C# classes are mainly:
+It works by providing a sample instance of JSON that transpiles into Typed JSON classes. You can find these generated classes in the `obj > x64 > Debug` or `obj > x64 > Release` directory of the project with the filename extension `json.g.cs`.
 
-* They can double directly as a JSON mockup (for instance in a web browser expecting such a JSON object).
-* They can express trees of objects and arrays
-* Default values can easily be specified
+JSON-by-example is useful for these reasons:
 
-To create a Typed JSON class, choose <code>New item</code> in Visual Studio and then choose <code>Starcounter Typed JSON</code> and name it **PersonMsg**.
+* It can double directly as JSON mockups
+* It can express trees of objects and arrays
+* It's easy to specify default values
 
-<div class="code-name">PersonMsg.json</div>
+## Create JSON-by-example
+
+To create a Typed JSON class, choose `New item`, or use <key>Ctrl + Shift + A</key> in Visual Studio and then select `Starcounter -> Starcounter Typed JSON`. The created file contains an empty JSON object which is the JSON-by-example. 
+
+One of the simplest JSON-by-example files look like this:
+
+<div class="code-name">PersonPage.json</div>
 
 ```json
 {
-   "FirstName": "Jocke",
-   "LastName": "Wester",
-   "Quotes": [
-        { "Text": "This is an example" }
-   ]
+    "FirstName": "",
+    "LastName": ""
 }
 ```
 
-JSON-by-example does not require that property names are inside double quotes (they still get serialized and deserialized using double quoted properties).
+Here, we set the value to an empty string to declare the type.
 
-The above example will act as partial nested C# classes supporting intelligence and type safe compilation.
+You create an instance of the generated Typed JSON with a normal constructor call: `new PersonPage()`.
+
+Accesing the properties of Typed JSON is the same as with any C# object:
+
+```cs
+var personPage = new PersonPage();
+string name = personPage.FirstName; // Contains the value "", an empty string
+```
+
+### Default Values
+
+It's simple to set default values in JSON-by-example. Building on the previous code example, it might look like this:
+
+<div class="code-name">PersonPage.json</div>
+
+```json 
+{
+    "FirstName": "Steven", 
+    "LastName": "Smith"
+}
+```
+
+By doing this, the JSON returned when creating a new `PersonPage` object will be `{"FirstName":"Steven","LastName":"Smith"}`:
 
 <div class="code-name">Program.cs</div>
 
 ```cs
-using Starcounter;
-
-class Hello
+Handle.GET("/GetPerson", () =>
 {
-   static void Main()
-   {
-      Handle.GET("/hello", () =>
-      {
-         var json = new PersonMsg()
-         {
-            FirstName = "Albert",
-            LastName = "Einstein"
-         };
-         json.Quotes.Add().Text = "Makes things as simple as possible but not simpler.";
-         json.Quotes.Add().Text = "The only real valuable thing is intuition.";
-         return json;
-      });         
-   }
+    return new PersonPage(); // {"FirstName":"Steven","LastName":"Smith"}
+});
+```
+
+## Supported datatypes
+
+Typed JSON follows the specification of JSON, which means that objects, arrays and single values are all allowed. One difference is that when working with the C#-object and numbers we have the possibility to specify a more exact type. What in JSON is `Number`, splits up in `Int64`, `Double` and `Decimal`.
+
+The following is a list of the tokens in JSON and the equivalence in C#:
+
+| JSON | C# |
+|----------------|---------|
+| `{ }` | Object |
+| `[ ]` | Array |
+| `"value"` | String |
+| `123` | Int64 |
+| `true`/`false` | Boolean |
+| `1.234` and `2E3` | Decimal |
+
+To specify the type of a member in JSON-by-example, define it in the code-behind:
+
+<div class="code-name">Foo.json</div>
+
+```js
+{
+  "Value": 2E3 // will parse as decimal by default.
 }
 ```
 
-## Read-only and writable values
+<div class="code-name">Foo.json.cs</div>
+
+```cs
+partial class Foo : Json
+{
+    static Foo()
+    {
+    	// Value should be of type double, not decimal.
+        DefaultTemplate.Value.InstanceType = typeof(double);
+    }
+}
+```
+
+## Writable JSON Values
 
 By default, all the values declared in JSON-by-example are read-only for the client. Any client-side change to a read-only property will result in an error.
 
 To mark a specific value as writable by the client, add a dollar sign (`$`) at the end of the property name, e.g.:
 
-<div class="code-name">PersonView.json</div>
+```json
+{
+   "FirstName$": "",
+   "LastName$": ""
+}
+```
+
+### Trigger Properties
+
+Trigger properties is a common use for writable JSON properties. They notify the code-behind that a change has happened. Here's an example of a trigger property:
 
 ```json
 {
-   "Html": "",
-   "FirstName$": "",
-   "LastName$": "",
-   "Message": ""
+    "FirstName": "",
+    "LastName": "",
+    "SaveTrigger$": 0
 }
 ```
+
+An incrementation in `SaveTrigger$`
+
+## The HTML property
+
+In all the [sample apps](https://github.com/StarcounterApps/), there is an "Html" property in every, or almost every, `.json` file. The value of this property contains the path to the corresponding HTML view which means that the middleware [HtmlFromJsonProvider](/guides/network/middleware/#htmlfromjsonprovider) can locate this HTML view and send it to the client. This allows the developer to return a Typed JSON object from a handler and still return the corresponding view as well. 

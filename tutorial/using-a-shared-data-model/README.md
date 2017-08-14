@@ -2,7 +2,7 @@
 
 In the previous steps, we've used a data model declared using `[Database]` classes directly in `Program.cs`. That's practical for prototyping but doesn't get us very far in terms of code and data reuse.
 
-Starcounter has a unique ability to allow multiple apps to work on the same data. We do this by putting the data model into a separate project and loading it as a Dynamic-link Library (DLL) in all apps where it is applicable.
+Starcounter has a unique ability to allow multiple apps to [work on the same data](/guides/blending/sharing-data/). We do this by putting the data model into a separate project and loading it as a Dynamic-link Library (DLL) in all apps where it is applicable.
 
 ## Adding the Data Model
 

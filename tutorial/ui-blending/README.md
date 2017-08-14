@@ -14,6 +14,8 @@ Open `HelloWorld` in the Starcounter Administrator and press <kbd>Ctrl</kbd> + <
 
 What this does is that it uses htmlmerger, a class within Starcounter, to merge the files `ExpenseJson.html` and `ConceptPage.html` in HelloWorld and Images respectively.
 
+[This can also be done with cURL.](/guides/web-apps/import-html-composition/)
+
 Now, when we have described what files to merge we also want to describe how they should be merged. We do that in the input field below with the following code:
 ```html
 <slot name="helloworld/description"></slot>

@@ -1,15 +1,15 @@
 # Create a Real Time UI
 
-To create a user interface (UI), we establish a [MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) pattern by adding a view-model and a corresponding view. The view-model will act as a representation of the view and as a midpoint between the view and the database.
+To create a user interface (UI), we establish a [MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) pattern by adding a [view-model](/guides/web-apps/starcounter-mvvm/#tier-2---the-view-model) and a corresponding [view](/guides/web-apps/html-views/). The view-model will act as a representation of the view and as a midpoint between the view and the database.
 
 ## Setup the File Structure
 
-Let's create the file structure to contain a view and a view-model. These steps should be followed to create the structure:
+Let's create the file structure to contain a view and a view-model. Follow these steps to create the structure:
 
 1. In the Solution Explorer in Visual Studio, add a folder with the name `wwwroot` in the `HelloWorld` project.
 2. Inside this folder, create another folder with the name `HelloWorld`, the same name as the project.
 3. Add an HTML file into this folder by right-clicking and then choosing `Add -> New Item... -> Starcounter -> Starcounter HTML template with dom-bind`. Name this file `PersonJson.html`.
-4. Add a JSON file, which will be the view-model, into the root of the project. This can be added by going to `Add -> New Item... -> Starcounter -> Starcounter Typed JSON with Code-behind`. By doing this, you create a `json` and `json.cs` file. Both of these should have the name PersonJson.
+4. Add a JSON file, which will be the view-model, into the root of the project by going to `Add -> New Item... -> Starcounter -> Starcounter Typed JSON with Code-behind`. By doing this, you create a `json` and `json.cs` file. Both of these should have the name PersonJson.
 
 ![file structure](/assets/file-structure.PNG)
 

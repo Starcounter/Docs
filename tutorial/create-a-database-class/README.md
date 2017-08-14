@@ -36,7 +36,7 @@ namespace HelloWorld
 
 ## Add an Instance to the Class
 
-Add a first instance to the class by defining a new person, its properties, and wrapping it in a `Db.Transact()`. Using a transaction allows us to access database objects and makes the changes inside the transaction atomic and isolated. Read more about this in the [transaction section](/guides/transactions/) of the documentation. 
+Add a first instance to the class by defining a new person, its properties, and wrapping it in a [`Db.Transact()`](/guides/transactions/using-transactions/#dbtransact). Using a transaction allows us to access database objects and makes the changes inside the transaction atomic and isolated. Read more about this in the [transaction section](/guides/transactions/) of the documentation. 
 
 <div class="code-name">Program.cs</div><div class="code-name code-title">Add instance</div>
 
@@ -71,4 +71,4 @@ Start your program with Starcounter by clicking <kbd>F5</kbd> in Visual Studio. 
 
 For the next step, we'll add a UI which will help us to display the data in the browser.
 
-If you get any errors, the code can be checked against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/7603d26601a34f23fc6cda7eb6251026581f9505).
+If you get any errors, check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/7603d26601a34f23fc6cda7eb6251026581f9505).

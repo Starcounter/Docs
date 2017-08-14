@@ -1,62 +1,27 @@
 # Transactions
 
-The secret to the speed of Starcounter lies in the fact that all database objects _live_ in the database all the time rather than being moved to and from the database.
+Starcounter uses transactions to ensure [ACID](http://en.wikipedia.org/wiki/ACID) compliance. This page describes how it works in theory while the pages [Using Transactions](using-transactions) and [Long Running Transactions](long-running-transactions) describes how to apply it in applications.
 
-Starcounter is fully [ACID](http://en.wikipedia.org/wiki/ACID) compliant and consequently transactions are consistent, isolated and atomic. But if our database objects are in the database at all times, how do we prevent other users and transactions to see our unfinished changes?  Starcounter solves this using transactional memory, such that each transaction sees its private snapshot of the database. This means that code inside and outside a transaction scope will potentially read a different value for the same property.
+## Achieving ACID Compliance
 
-This works even if the database is in the terabytes. This means that nobody sees what you are doing while you are in your own transactional scope. You can even use SQL to query your database snapshot within the transaction while outside transactions will not be able to see your changes until they are done.
+### Atomicity
 
-### The Db.Transact function
-You define transactional scope using the `Db.Transact` function. The scoped transaction is placed in a delegate.
+As defined on [Wikipedia](https://en.wikipedia.org/wiki/Atomicity_%28database_systems%29), an atomic transaction "is an indivisible and irreducible series of database operations such that either all occur, or nothing occurs." Starcounter ensures atomicity by wrapping changes of one transaction within a transaction scope. The changes commit simultaneously at the end of the scope. If something interrupts the transaction before the end of the scope is reached, none of the changes will commit to the database.   
 
-```cs
-using Starcounter;
+### Consistency
 
-class Hello
-{
-   static void Main()
-   {
-      Db.Transact(() =>
-      {
-         var albert = new Person()
-         {
-           FirstName = "Albert",
-           LastName = "Einstein"
-         };
+A consistent DBMS ensures that all the data written to the database follow the defined contraints of the database. In Starcounter, this is solved by raising exceptions when an "illegal" action is carried out within a transaction, such as commiting non-unique values to a field that requires unique values. The exception will in turn make the transaction roll back so that none of the changes are applied. 
 
-         new Quote()
-         {
-           Person = albert,  
-           Text = "Make things as simple as possible, but not simpler"
-         };
-      });
-   }
-}
+### Isolation
 
-[Database]
-public class Person
-{
-   public string FirstName;
-   public string LastName;
-   public string FullName { get { return FirstName + " " + LastName; } }
-}
+To make transaction isolated, Starcounter uses [snapshot isolation](https://en.wikipedia.org/wiki/Snapshot_isolation). This means that when a transaction initializes, it takes a snapshot of the database and stores it in a transactional memory. This means that every transaction sees its own snapshot of the database. For example, a SQL query that executes before a transaction commits will not be able to see the changes made by the transaction because the changes are isolated to that transaction's snapshot of the database. This works no matter how large the database is.
 
-[Database]
-public class Quote
-{
-   public Person Person;
-   public string Text;
-}
-```
+### Durability
 
-For your convenience there are some overloads of the `Db.Transact` function that allows you to specify delegates that have input and output parameters.
+Durability ensures that commited transactions will survive permanently. Starcounter solves this by writing transactions to a transaction log after commits. Find more information about this at the [log retention](/guides/working-with-starcounter/log-retention) page.
 
-```cs
-Db.Transact(Action action, ...);
-Db.Transact<T>(Action<T> action, T arg, ...);
-TResult Db.Transact<TResult>(Func<TResult> func, ...);
-TResult Db.Transact<T, TResult>(Func<T, TResult> func, T arg, ...);
-```  
+## Concurrency Control
+When many users write to the database at the same time, the database engine must ensure that the data keeps consistent using atomicity and isolation. For example, if an account reads 100 and you want to update it to 110 and another transaction is simultaneously reading a 100 and wants to update it to 120. Should the result be 110, 120 or 130? To resolve this, the transaction must be able to handle conflicts. The easiest way to do this is to use locking. If you want your database engine to serve large numbers of users and transactions, locking is slow and expensive and can lead to [deadlocks](http://en.wikipedia.org/wiki/Deadlock). Locking is efficient when you almost expect a conflict, i.e. when the probability is high that you will have a conflict. The slow nature of locking is that it always consumes time, even if there is no conflict. Another word for locking is 'pessimistic concurrency control'. A more efficient way of providing concurrency is to use 'optimistic concurrency control'. As the name implies, you don't expect a conflict, but you will still handle it. The concurrency control in Starcounter is **optimistic concurrency control**. It makes the assumption that conflicts between transactions are unlikely. The database can allow transactions to execute without locking the modified objects. If a conflict occurs, Starcounter will restart the transaction until it commits, or 100 times. For long-running transactions, the developer has to implement the retry functionality. 
 
 {% import "../../macros.html" as macros %}
 

@@ -10,28 +10,30 @@ The StarDump tool unloads Starcounter database into an SQLite dump. The dump fil
 
 ### Usage
 
-**Unload database**
+#### Unload database
 
 ```
-StarDump.exe unload --database [DatabaseName] --dump [FilePath]
-```
-
-Example
-
-```
-StarDump.exe unload --database default --dump C:\Temp\default.sqlite3
-```
-
-**Reload database**
-
-```
-StarDump.exe reload --database [DatabaseName] --dump [FilePath]
+StarDump.exe unload --database [DatabaseName] --file [FilePath]
 ```
 
 Example
 
 ```
-StarDump.exe reload --database default --dump C:\Temp\default.sqlite3
+StarDump.exe unload --database default --file C:\Temp\default.sqlite3
+```
+
+#### Reload database
+
+Before upgrading from 2.2 in order to reload, delete the directory at `\<User>\Documents\Starcounter` since it is not compatible with 2.3+. **Warning!** this will delete all the database files, ensure that it's properly backed up first. 
+
+```
+StarDump.exe reload --database [DatabaseName] --file [FilePath]
+```
+
+Example
+
+```
+StarDump.exe reload --database default --file C:\Temp\default.sqlite3
 ```
 
 **Note:** the database should be dropped and created prior to reload.

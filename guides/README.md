@@ -21,7 +21,7 @@ To learn the fundamentals of Starcounter, read the articles listed below with a 
         "html views",
         "sql",
         "json data bindings",
-        "mapping and blending",
+        "blending",
         "handling http requests",
         "transactions",
         "creating http responses",
@@ -32,7 +32,7 @@ To learn the fundamentals of Starcounter, read the articles listed below with a 
 <h2>Articles in the guides:</h2>
 
 <div class="guide-articles">
-    {% for section in summary.parts[0].articles[3].articles %}
+    {% for section in summary.parts[0].articles[4].articles %}
         <section>
         {% if recommended_reading.indexOf(section.title.toLowerCase()) != -1 %}
             <h3><a href="../{{ section.path }}">{{ section.title }}&#9733;</a></h3>

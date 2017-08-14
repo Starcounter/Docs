@@ -16,34 +16,23 @@ Right now, Starcounter supports assigning only one `Json` from your app to a ses
 
 As a shorthand, the `session.Data` property and the `json.Session` properties are equivalent, but the `json.Session` property will be deprecated in the future.
 
-Here are some examples of creating a new session (property `UseSessionCookie` is described below). All examples will produce the same result:
+Here are some examples of creating a new session.
 
 ```cs
 var json = new Json();
+var session = new Session();
 
-// Creating a new session
+// The JSON and the session can then be connected by either setting the `Data` property on the
+// session or setting the `Session` property on JSON. Both will have the exact same outcome.
 
-Session.Current = new Session()
-{
-    Data = json,
-    UseSessionCookie = true
-};
-
-// Above is the same as
-
-json.Session = new Session()
-{
-    UseSessionCookie = true
-};
-
-// Above is the same as
-
-json.Session = new Session()
-{
-    UseSessionCookie = true,
-    Data = json
-};
+session.Data = json;
+// OR
+json.Session = session;
 ```
+
+By default communication with jsonpatch and version control of the attached viewmodel are enabled (more information about how versioning works can be found at http://tomalec.github.io/PuppetJs-operational-transformation/why-puppet-ot.html) when creating a new Session.
+
+To disable viewmodel versioning use the constructor that takes a `Session.Flags` parameter with value of set to `Flags.None`, i.e. `new Session(Session.Flags.None);`
 
 ## Session Properties
 
@@ -165,10 +154,10 @@ Handle.GET("/usesession/{?}", (Session session, Request request) =>
 
 * Session Cookie:
 
-`Session` object has a property called `UseSessionCookie` indicating that a Web browser's cookie `ScSessionCookie` should be used for transferring the session value. Client's Web browser can store and automatically send the `ScSessionCookie` cookie containing the session. Whenever `UseSessionCookie` is set, the `Location` header that is specified in the first case is not used.
+Use of automatic session cookie and the property `UseSessionCookie` have been obsoleted. Instead enable adding a header on outgoing response by setting property `UseSessionHeader` to `true` and optionally specify name of header with `SessionHeaderName` (default `X-Location`).
 
-The priorities for session determination are the following (latter has higher priority than previous):
-session on socket, `Referer` header, session cookie, `X-Referer` header, session URI parameter.
+The priorities for session determination, for incoming requests, are the following (latter has higher priority than previous):
+session on socket, `Referer` header, `X-Referer` header, session URI parameter.
 
 ## Interacting With a Server-Side JSON Objects
 
@@ -176,14 +165,14 @@ The newly created JSON object is automatically made available to the client usin
 
 More important, however is the built in support for the [HTTP PATCH method](http://tools.ietf.org/html/rfc5789) and [JSON-Patch](http://tools.ietf.org/html/rfc6902). This allows Starcounter to communicate using delta updates rather than sending complete JSON representations of the entire resource.
 
-## Session Options
+## Session Flags
 
-The `Session` constructor has an overload that takes the enum `SessionOptions`. This enum has five options:
+The `Session` constructor has an overload that takes the enum `Session.Flags`. The default flag is `PatchVersioning`. There are five flags:
 
 |Option|Explanation|
 |---|---|
-|`Default`| Is the default behavior of `Session`, declaring `new Session(SessionOptions.Default)` is the same as using the default constructor. |
-|`IncludeSchema`| Was added for Starcounter 1.x and does not serve a purpose anymore. Is the same as using the default constructor.  |
-|`PatchVersioning`| Enables operational transformation with Palindrom. Thus, `PatchVersioning` is required for communication with Palindrom.  |
+|`None`| Overrides the default behavior of `new Session()` so that `PatchVersioning` is not used. |
+|`IncludeSchema`| Was added for Starcounter 1.x and does not serve a purpose anymore. Is the same as `Session.Flags.None`. |
+|`PatchVersioning`| Enables operational transformation with Puppet/Palindrom. Thus, `PatchVersioning` is required for communication with Puppet/Palindrom. Is set by default when declaring `new Session()`. |
 |`StrictPatchRejection`| Throws an error instead of rejecting changes in two cases: (1) when an incoming patch tries to access an object or item in an array that is no longer valid and (2) when the client sends a patch with a different format than expected. |
-|`IncludeNamespaces`|Enables namespacing of Typed JSON responses. This is the default behavior and is thus the same as using the default constructor.|
+|`IncludeNamespaces`| Enables namespacing of Typed JSON responses. Is the same as `Session.Flags.None` since it's the default behavior. |

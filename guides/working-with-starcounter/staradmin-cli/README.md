@@ -122,18 +122,36 @@ staradmin new <type>
 
 where *type* specifies the kind of artifact to create. To create a database, use the **db** type; for applications, use **app**.
 
-<strong>Example: create database </strong>
+**Example: create database**
 
 To create a user-specified database use
 ```bash
-C:\>staradmin --database=NewDbName new db
+C:\>staradmin new db foo
 ```
-##### Object types
+
+### Object types
 
 The new command allow the following type of artifacts to be created:
 
-* **Databases**. Usage:  `staradmin -d=foo new db`. Creates a new database named "foo".
+* **Databases**. Usage:  `staradmin new db foo`. Creates a new database named "foo".
 * **Applications**. Usage:  `staradmin new app`. Creates a new application source code file, normally "app.cs".
+
+### Set configuration options on creation
+
+All the available configuration options in the underlying REST JSON representation can be set from the command line. These are:
+
+* `Uri`
+* `DataDirectory`
+* `TempDirectory`
+* `DefaultUserHttpPort`
+* `FirstObjectID`
+* `LastObjectID`
+
+The options are specified on the creation of the database using this syntax:
+
+```nginx
+staradmin new db DataDirectory=C:\Users\Per\Foo DefaultUserHttpPort=1234 Uri=http://example.com/api/databases/foo/configuration"
+```
 
 ## Reload command
 
@@ -176,7 +194,7 @@ C:\>staradmin --database=UserDbName start db
 ```
 To start the application with <code>.exe</code> extension on a specified database use:
 ```bash
-C:\"path to your application">star --database=newdb YourApplicationName.exe
+C:\[path to your application]>star --database=newdb YourApplicationName.exe
 ```
 
 To find out more about how to start and stop applications read <a href="/guides/working-with-starcounter/starting-and-stopping-apps">this article</a>.
