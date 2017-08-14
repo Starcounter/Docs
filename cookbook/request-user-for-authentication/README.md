@@ -65,12 +65,12 @@ It should be mapped to a token `userform-return`, which is understood in other a
 
 If [SignIn](https://github.com/StarcounterApps/SignIn) app is not running, the user will only get a message about not being authenticated.
 
-This message would come from the "Unauthenticated.Html".
+This message should be defined inside "Unauthenticated.Html" file which has to be set as the `Html` property for "unauthenticated" partial view.
 
 ![When signin app is not running](/assets/Authentication-nosignin.png)
 
 
-But if [SignIn](https://github.com/StarcounterApps/SignIn) app is running, it shows its own view. 
+But if [SignIn](https://github.com/StarcounterApps/SignIn) app is running, it shows its own view blended with the "Unauthenticated" warning message from the "Unauthenticated.Html" file. 
 ![When signin app is running](/assets/signin-authentication.png)
 
 That view is clever! Depending on `SignInFormAsFullPage` setting it will decide whether to display the login form right in this view, or redirect to a standalone page that only has the login form.
