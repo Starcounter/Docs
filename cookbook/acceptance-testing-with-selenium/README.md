@@ -128,7 +128,7 @@ It is a good practice to always wait:
 
 ## Run your first test
 
-Clone KitchenSink repo from the StarcounterApps organisation on GitHub.
+Clone [KitchenSink repo](https://github.com/StarcounterApps/KitchenSink) from the [StarcounterApps organisation](https://github.com/StarcounterApps) on GitHub.
 Follow the steps that were presented at `Install Selenium Standalone Server and browser drivers`.
 
 Build your test project. If it builds correctly, you should see this:
