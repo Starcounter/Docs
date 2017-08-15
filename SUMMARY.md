@@ -99,7 +99,7 @@
         * [Import HTML composition](guides/web-apps/import-html-composition/README.md)
         * [Avoiding URI conflicts](guides/blending/avoiding-uri-conflicts/README.md)
         * [Avoiding CSS conflicts](guides/blending/avoiding-css-conflicts/README.md)
-    * [Publishing on the App Warehouse](guides/publishing/README.md)
+    * [Publishing Apps](guides/publishing/README.md)
         * [Mapping file](guides/publishing/mapping-file/README.md)
         * [Entry point URI](guides/publishing/entry-point-uri/README.md)
         * [UI metadata](guides/publishing/ui-metadata/README.md)

@@ -1,4 +1,4 @@
-# Publishing on the App Warehouse
+# Publishing Apps
 
 If your app is blendable, it might be used in complex UI systems consisting of multiple apps coming from different vendors.
 
