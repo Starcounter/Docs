@@ -38,7 +38,7 @@ Sample `AppName.json` ([source](https://github.com/StarcounterApps/CssVariablesM
 
 The icon is an image (preferably inline SVG) in the HTML file which path is provided as the `html` property in the `app-name` metadata.
 
-Check out the [Icons](../../cookbook/icons/) cookbook to learn more about icons.
+Check out the [Icons](../../../cookbook/icons/) cookbook to learn more about icons.
 
 Sample `AppIcon.html` ([source](https://github.com/StarcounterApps/CssVariablesManager/blob/4aad5186522a6297bc4ca7f713d91424220d6552/src/CssVariablesManager/wwwroot/CssVariablesManager/AppIcon.html)):
 
