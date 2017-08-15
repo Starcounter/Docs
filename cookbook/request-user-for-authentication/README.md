@@ -29,12 +29,13 @@ Handle.GET("/your-app/partial/Unauthenticated?return_uri={?}", (string returnUri
 });
 ```
 
-The "unauthenticated" view can be empty (no JSON properties). Its only purpose is to map it with a token to the authentication view coming from the [SignIn](https://github.com/StarcounterApps/SignIn) app.
+The "unauthenticated" view model could be associated with a "unautheticated.html" which defines a warning message about not being authenticated. The main purpose for this partial is to provide the mapping to the authentication view coming from the [SignIn](https://github.com/StarcounterApps/SignIn) app using a predifined token.
 
 <div class="code-name">Unauthenticated.json</div>
 
 ```json
 {
+  "Html": "/people/viewmodels/UnauthorizedPage.html"
 }
 ```
 
