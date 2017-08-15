@@ -2,7 +2,7 @@
 
 If your app is blendable, it might be used in complex UI systems consisting of multiple apps coming from different vendors.
 
-To make sure that the apps play well together, the App Warehouse enforces several conventions.
+To make sure that apps play well together, we recommend that you follow certain conventions.
 
 These conventions exist for two reasons:
 

@@ -10,7 +10,7 @@ In the future, the information in this file is used for automated blending as we
 
 Sample `Images.map.md` ([source](https://github.com/StarcounterApps/Images/blob/develop/Images.map.md)):
 
-```txt
+```
 # Blendable views
 
 ## /images/partials/contents/{[Simplified.Ring1.Content](https://github.com/StarcounterApps/Simplified/blob/master/Ring1/Content.cs)}
