@@ -29,13 +29,13 @@ Handle.GET("/your-app/partial/Unauthenticated?return_uri={?}", (string returnUri
 });
 ```
 
-The "unauthenticated" view model could be associated with a "unautheticated.html" which defines a warning message about not being authenticated. The main purpose for this partial is to provide the mapping to the authentication view coming from the [SignIn](https://github.com/StarcounterApps/SignIn) app using a predifined token.
+The "unauthenticated" view model could be associated with a "Unautheticated.html" which defines a warning message about not being authenticated. The main purpose for this partial is to provide the mapping to the authentication view coming from the [SignIn](https://github.com/StarcounterApps/SignIn) app using a predifined token.
 
 <div class="code-name">Unauthenticated.json</div>
 
 ```json
 {
-  "Html": "/people/viewmodels/UnauthorizedPage.html"
+  "Html": "/people/viewmodels/Unauthenticated.html"
 }
 ```
 
@@ -50,6 +50,21 @@ namespace Your-App
     partial class Unauthenticated : Json 
     {
     }
+}
+```
+
+<div class="code-name">Unauthenticated.Html</div>
+
+```html
+{
+     	<template>
+		<template is="dom-bind">
+			<div>
+	    			<iron-icon icon="icons:warning"></iron-icon>
+	    			<label>You need to be signed in to use People.</label>
+			</div>
+		</template>
+	</template>
 }
 ```
 
