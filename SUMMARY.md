@@ -99,6 +99,13 @@
         * [Import HTML composition](guides/web-apps/import-html-composition/README.md)
         * [Avoiding URI conflicts](guides/blending/avoiding-uri-conflicts/README.md)
         * [Avoiding CSS conflicts](guides/blending/avoiding-css-conflicts/README.md)
+    * [Publishing Apps](guides/publishing/README.md)
+        * [Mapping file](guides/publishing/mapping-file/README.md)
+        * [Entry point URI](guides/publishing/entry-point-uri/README.md)
+        * [UI metadata](guides/publishing/ui-metadata/README.md)
+        * [Required and sample data](guides/publishing/required-and-sample-data/README.md)
+        * [Settings page](guides/publishing/settings-page/README.md)
+        * [Submitting to the App Warehouse](guides/publishing/submitting/README.md)
     * [Working with Starcounter](guides/working-with-starcounter/README.md)
         * [Release channels in Starcounter](guides/working-with-starcounter/release-channels-in-starcounter/README.md)
         * [Starting and stopping apps](guides/working-with-starcounter/starting-and-stopping-apps/README.md)
@@ -118,7 +125,7 @@
         * [Unload/Reload](guides/working-with-starcounter/unload-reload/README.md)
         * [Kernel Q&A](guides/working-with-starcounter/kernel-q-and-a/README.md)
         * [Log Retention](guides/working-with-starcounter/log-retention/README.md)
-		
+
 * [Cookbook](cookbook/README.md)
     * [Accessing methods in nested view-models](cookbook/accessing-methods-in-nested-view-models/README.md)
     * [Attach a request to long running transactions](cookbook/attach-a-request-to-long-running-transactions/README.md)
