@@ -11,19 +11,19 @@ For example: `/your-app/partial/unauthenticated?return_uri={?}`
 
 ```cs
 if (!IsSignedIn()) {
-	return Self.GET("/your-app/partial/Unauthenticated?return_uri=" + getURI);
+	return Self.GET("/your-app/partial/unauthenticated?return_uri=" + getURI);
 }
 ```
 
 
-The `getURI` is the Uri requested in the original GET request.
+The `getURI` is the URI requested in the original GET request.
 
 Then define a new handler for the "Unauthenticated" partial.
 
 <div class="code-name">PartialHandlers.cs</div>
 
 ```cs
-Handle.GET("/your-app/partial/Unauthenticated?return_uri={?}", (string returnUri) => 
+Handle.GET("/your-app/partial/unauthenticated?return_uri={?}", (string returnURI) => 
 {
 	return new UnauthenticatedPage();
 });
@@ -56,16 +56,16 @@ namespace Your-App
 <div class="code-name">Unauthenticated.Html</div>
 
 ```html
-{
-     	<template>
-		<template is="dom-bind">
-			<div>
-	    			<iron-icon icon="icons:warning"></iron-icon>
-	    			<label>You need to be signed in to use People.</label>
-			</div>
-		</template>
+
+<template>
+	<template is="dom-bind">
+		<div>
+			<iron-icon icon="icons:warning"></iron-icon>
+			<label>You need to be signed in to use People.</label>
+		</div>
 	</template>
-}
+</template>
+
 ```
 
 It should be mapped to a token `userform-return`, which is understood in other apps
@@ -73,9 +73,9 @@ It should be mapped to a token `userform-return`, which is understood in other a
 <div class="code-name">Mapping.cs</div>
 
 ```cs
-{
+
 	Blender.MapUri("/your-app/partial/Unauthenticated?return_uri={?}", "userform-return");
-}
+
 ```
 
 
