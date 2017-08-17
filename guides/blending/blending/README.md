@@ -12,48 +12,76 @@ The class `Blender` in the Starcounter namespace does the blending. The blender 
 
 ## Blending token
 
-The first parameter is always a mapped handler URI. If the token is a string, it's defined as the second parameter. If it's one or more classes, they are defined in the template or as a `Type` array parameter.
+The first parameter is either a handler URI or a specific URI. If the token is a string, it's defined as the second parameter. If it's one or more classes, they are defined in the template or as a `Type` array parameter.
 
 ```cs
 Blender.MapUri("/Products/settings", "settings");
 Blender.MapUri<Product>("/Products/partials/product/{?}");
 Blender.MapUri("/Products/menu", "menu");
+Blender.MapUri("/people/persons/34623", "person"); // Specific URI blending.
+Blender.MapUri<Person>("/people/persons/34623"); // Specific URI blending.
+
 ```
 
 An arbitrary number of classes are allowed as a blending token (up to 3 in template, more in array of class `Type`). Here are the `MapUri` signature examples (same exist for removing handler from blender): 
 
 ```cs
-static void MapUri<T>(String uri);
-static void MapUri<T1, T2, T3>(String uri);
-static void MapUri(String uri, Type[] types);
+static void MapUri<T>(String uri, String[] contexts = null);
+static void MapUri<T1, T2, T3>(String uri, String[] contexts = null);
+static void MapUri(String uri, Type[] types, String[] contexts = null);
 ```
+
+One can even register a blending with an empty token:
+```cs
+static void MapUri(String uri, String[] contexts = null);
+static void MapUri(String uri, Boolean allowFromUriConverter, Boolean allowToUriConverter, String[] contexts = null);
+```
+which is blended with other handlers with the same empty token.
+
+## Blending contexts
+
+Within the same token blending can have a more fine-grained matching. This is where blending contexts are useful. They are composed of a list of strings that acts as a bit map when matched with other contexts. No blending context (`null` value) means **match any context**. Otherwise two blendings are matched if source context includes the destination context. Examples:
+* Source context `{ "Readable", "View" }` is NOT matched with `{ "Writable", "View" }`.
+* Source context `null` is matched with `{ "Readable", "View" }` and `{ "Writable", "View" }` and any other context.
+* Source context `{ "View" }` is not matched with `{ "Writable", "View" }`, but the opposite way they match.
+
+Consider contexts as an additinal matching rule among blendings on the same token.
 
 ## Dynamic addition and removal
 
 It is possible to get a list of handlers and tokens that are in Blender and then remove some of them or add new ones.
 ```cs
 Blender.UnmapUri("/app4/{?}", token2);
-...
 Blender.UnmapUri("/twoparams3/{?}/{?}", token);
-...
 Blender.UnmapUri<MyClass>("/app1/{?}");
+Blender.UnmapUri<Person>("/people/persons/34623"); // Unmapping specific URI.
 ```
 
 To check if certain handler is in blender:
 ```cs
 isInBlender = Blender.IsMapped("/noparam1", token3);
 isInBlender = Blender.IsMapped<MyClass>("/noparam1");
+isInBlender = Blender.IsMapped<Person>("/people/persons/34623"); // Checking if specific URI is blended.
 ```
 
 To get a list of all blended handlers in a dictionary (keyed by tokens and URIs respectively):
 ```cs
-static Dictionary<String, List<BlendingInfo>> ListByTokens();
-static Dictionary<String, List<BlendingInfo>> ListByUris();
+static Dictionary<String, List<BlendingInfo>> ListAllByTokens();
+static Dictionary<String, List<BlendingInfo>> ListAllByUris();
 ```
 
-To get the list of all blended infos for a given URI handler:
+To get the list of blending candicates that are going to run for a given URI handler:
 ```cs
-List<BlendingInfo> ListForSpecificUri(String uri);
+List<BlendingInfo> GetRunCandidatesForUri(String uri);
+```
+
+To list registered blending rules for a given URI: 
+```cs
+List<BlendingInfo> ListByUri(String uri)
+```
+and the same but for a given token:
+```cs
+List<BlendingInfo> ListByToken(String blendingToken)
 ```
 
 As you might noticed, a special blending information structure is used here: `BlendingInfo`.
@@ -62,7 +90,10 @@ It contains the following methods/properties:
 String AppName; // Returns the application name to which the blended handler belongs.
 Boolean IsActive; // Shows if this blending is active.
 String Token; // Returns blending token.
-String Uri; // Returns blended handler URI.
+String Uri; // Returns blended URI (which is either specific URI or handler URI).
+String HandlerUri; // Returns blended handler URI (or null if handler is not yet registered).
+Boolean IsSpecificUri; // Is it a specific URI blended, not a handler.
+String[] Contexts; // Returns blending context (if any).
 Boolean IsFromUriConverterOn; // Returns True if the "FromUriConverter" is set/allowed.
 Boolean IsToUriConverterOn; // Returns True if the "ToUriConverter" is set/allowed.
 ```
