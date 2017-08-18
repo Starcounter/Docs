@@ -58,9 +58,9 @@ When defining the content of a view, it is important to keep in mind that the sl
     <p>Some text for te user to read</p>
     <button>A button to click</button>
 </template>
-``` 
+```
 
-Here, every element is at the root of the document and will be exposed for blending after they are attached to slots and distributed in the Shadow DOM. In some cases, putting every element on the root of the view, like we do in the example above, might not be desired. Then, the goal should still be to place as many elements as possible on the root of the view, especially elements like `<img>`, `<table>`, and custom elements that are visually obtrusive and might require blending to create a high level of interoperability. 
+Here, every element is at the root of the document and will be exposed for blending after they are attached to slots and distributed in the Shadow DOM. In some cases, putting every element on the root of the view, like we do in the example above, might not be desired. Then, the goal should still be to place as many elements as possible on the root of the view, especially elements like `<img>`, `<table>`, and custom elements that are visually obtrusive and might require blending to create a high level of interoperability.
 
 Additionally, there might be situations where the developer would like to have a higher level of abstraction on some of his or her content. For example, consider this pagination bar:
 
@@ -98,15 +98,21 @@ Here, it would not make sense to break it up into the respective parts because t
 
 ### Guideline 3: Attaching the Content to Slots
 
-To give clearer semantic meaning to the content of one application when mixing with other applications, explicit slot names are used. When not using explicit slot names, the elements at the root will get implicit slot names and look like this: `<slot name="MyApp/0"></slot>`, the zero is simply the index of the element in the view. With an explicit slot name, it becomes much clearer what kind of element it is: `<slot name="MyApp/MainHeadline"></slot>`.
+To have better flexibility in blending - to be able to distribute an element individually - the element needs to be assigned to a [named slots](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot#named-slot), like `<button slot="myapp/submitbutton">Submit</button>`. Such an element could be distributed via `<slot name="myapp/submitbutton"></slot>` in the Shadow DOM.
+Please prefix a slot name with the app name, to avoid collisions.
 
-Slot names are added as attributes to the elements like so: `<button slot="MyApp/SubmitButton">Submit</button>`.
+When no slot name is provided for an element it will be distributed in ["default slot"](https://w3c.github.io/webcomponents/spec/shadow/#shadow-tree-slots): `<slot></slot>`.
+Please note, that text nodes will also be distributed there.
+
 
 ### Guideline 4: Create the Layout in `declarative-shadow-dom`
 
-As outlined in guideline 1, the layout of the HTML view should be included within the `<template is="declarative-shadow-dom">`. There is one exception to this, if the default layout of the content equals the targeted look, both slot attributes and `declarative-shadow-dom` can be omitted.
+As outlined in guideline 1, the layout of the HTML view should be included within the `<template is="declarative-shadow-dom">`.
 
-The following syntax is used to distribute the content in the Shadow DOM: `<slot name="AppName/ElementName"></slot>`.
+There is one exception to this. Both slot attributes and `declarative-shadow-dom` can be omitted if the view contains only non-visual elements, or all elements should be distributed bulked together in default slot. The latter is rarely the case but may be useful for example for prototyping.
+
+
+The [`<slot>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot) is used to distribute the content in the Shadow DOM: `<slot name="appname/elementname"></slot>`.
 
 Consider the following HTML view definition:
 
@@ -181,13 +187,13 @@ To add `declarative-shadow-dom` to this HTML view, something like this can be do
 </template>
 ```
 
-Here, the elements are distributed in the way that the view will look when no blending is applied or when the app is running in standalone mode. 
+Here, the elements are distributed in the way that the view will look when no blending is applied or when the app is running in standalone mode.
 
 ### Guideline 5: Apply Styling to Avoid Conflicts and Allow Blending
 
 Regarding styling, there are two ways to make the application easier to visually integrate with other apps:
 
-1. Prefix the all class names with the name of the app. As outlined in [Avoiding CSS Conflicts](https://docs.starcounter.io/guides/blending/avoiding-css-conflicts/), the class should be prefixed with the name of the app to avoid CSS conflicts with classes from other apps.
+1. Prefix  all class names with the name of the app. As outlined in [Avoiding CSS Conflicts](https://docs.starcounter.io/guides/blending/avoiding-css-conflicts/), the class should be prefixed with the name of the app to avoid CSS conflicts with classes from other apps.
 
 2. Keep styling that will affect the layout inside the `declarative-shadow-dom`.
 
@@ -203,7 +209,7 @@ Regarding styling, there are two ways to make the application easier to visually
     </template>
     <template is="declarative-shadow-dom">
         <style>
-        @import url("/people/css/style.css"); 
+        @import url("/people/css/style.css");
         </style>
 
         <div class="people-field">
@@ -222,4 +228,4 @@ Regarding styling, there are two ways to make the application easier to visually
 
 ### Additional Resources
 
-To find more information about creating HTML View definitions, take a look at [the article linked above](https://starcounter.io/layout-compositions-html-partials/) and the [People app](https://github.com/StarcounterSamples/People/tree/develop/src/People/wwwroot/People/viewmodels) which fully adhers to these guidelines.
+To find more information about creating HTML View definitions, take a look at [the article linked above](https://starcounter.io/layout-compositions-html-partials/) and the [People app](https://github.com/StarcounterSamples/People/tree/develop/src/People/wwwroot/People/viewmodels) which fully adheres to these guidelines.
