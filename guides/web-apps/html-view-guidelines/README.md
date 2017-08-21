@@ -99,9 +99,11 @@ Here, it would not make sense to break it up into the respective parts because t
 ### Guideline 3: Attaching the Content to Slots
 
 To have better flexibility in blending - to be able to distribute an element individually - the element needs to be assigned to a [named slots](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot#named-slot), like `<button slot="myapp/submitbutton">Submit</button>`. Such an element could be distributed via `<slot name="myapp/submitbutton"></slot>` in the Shadow DOM.
-Please prefix a slot name with the app name, to avoid collisions.
+Please prefix slot names with the app name, to avoid collisions.
 
-When no slot name is provided for an element it will be distributed in ["default slot"](https://w3c.github.io/webcomponents/spec/shadow/#shadow-tree-slots): `<slot></slot>`.
+When no slot name is provided for an element it will be distributed in [the default slot](https://w3c.github.io/webcomponents/spec/shadow/#shadow-tree-slots): `<slot></slot>`.
+> The first slot in a shadow tree, in tree order, whose name is the empty string, is sometimes known as the "default slot".
+
 Please note, that text nodes will also be distributed there.
 
 
@@ -109,7 +111,7 @@ Please note, that text nodes will also be distributed there.
 
 As outlined in guideline 1, the layout of the HTML view should be included within the `<template is="declarative-shadow-dom">`.
 
-There is one exception to this. Both slot attributes and `declarative-shadow-dom` can be omitted if the view contains only non-visual elements, or all elements should be distributed bulked together in default slot. The latter is rarely the case but may be useful for example for prototyping.
+There is one exception to this. Both slot attributes and `declarative-shadow-dom` can be omitted if the view only contains non-visual elements or if all elements should be bulked together in the default slot. The latter is rarely the case but may be useful for example for prototyping.
 
 
 The [`<slot>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot) is used to distribute the content in the Shadow DOM: `<slot name="appname/elementname"></slot>`.
