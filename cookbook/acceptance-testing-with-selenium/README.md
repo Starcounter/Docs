@@ -25,9 +25,9 @@ You can learn more about Selenium at their [website (docs.seleniumhq.org)](http:
 
 NUnit is a testing framework that has great integration with Visual Studio as well as continuous integration systems (TeamCity, etc). We will use NUnit to run our Selenium tests.
 
-NUnit provides a [test runner](http://nunit.org/index.php?p=runningTests&r=2.6.4) (command line and built into Visual Studio), [attributes](http://nunit.org/index.php?p=attributes&r=2.6.4) to define the classes and functions that carry the testing code, [assertions](http://nunit.org/index.php?p=assertions&r=2.6.4) that test the actual values.
+NUnit provides a [test runner](https://github.com/nunit/docs/wiki/Console-Command-Line) (command line and built into Visual Studio), [attributes](https://github.com/nunit/docs/wiki/Attributes) to define the classes and functions that carry the testing code, [assertions](https://github.com/nunit/docs/wiki/Assertions) that test the actual values.
 
-You can learn more about NUnit at their [website (nunit.org)](http://nunit.org/index.php?p=quickStart&r=2.6.4) or read one of the interesting blog posts:
+You can learn more about NUnit at their [website (nunit.org)](https://github.com/nunit/docs/wiki/Getting-Started-in-Visual-Studio) or read one of the interesting blog posts:
 
 - [C# Unit Test Tutorial](http://www.rhyous.com/programming-development/csharp-unit-test-tutorial/)
 - [Unit testing with .NET](http://www.developerfusion.com/article/84847/unit-testing-with-net/)
@@ -58,22 +58,10 @@ Run the following commands in the console to install the required dependencies:
 ```
 Install-Package Selenium.WebDriver
 Install-Package Selenium.Support
-Install-Package NUnit -Version 3.*
-Install-Package NUnit.ConsoleRunner -Version 3.*
+Install-Package NUnit
+Install-Package NUnit.ConsoleRunner
 Install-Package NUnit3TestAdapter
 ```
-
-## Run your first test
-
-Clone KitchenSink repo from the StarcounterApps organisation on GitHub.
-
-Build your test project. If it builds correctly, you should see this:
-
-![Seleninium result screenshot](/assets/2016-04-01-13_34_52-Launcher-Microsoft-Visual-Studio.png)
-
-Now, the only thing left to do is to run that test! In the Test Explorer, click on the "Run All" button. If it works well, you should see your tests passing.
-
-![test explorer](/assets/2016-04-01-13_40_22-Launcher-Microsoft-Visual-Studio.png)
 
 ## Running in multiple browsers
 
@@ -117,28 +105,39 @@ It is a good practice to always wait:
 
 - Wait for a text element to be present before you check the content of that element
 
-	- An example can be found in the method `TextareaPage_WriteToTextArea` in KitchenSink 
-	Tests (see [TextareaPageTest.cs lines 28-38](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextareaPageTest.cs#L28-L38)). The method `WaitForText()` is used to 
-	compare the text value of `TextareaInfoLabel` asynchronously. The assertion passes if the 
-	text is found within 5 seconds, otherwise it fails.
+    - An example can be found in the method `TextareaPage_WriteToTextArea` in KitchenSink 
+    Tests (see [TextareaPageTest.cs lines 28-38](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextareaPageTest.cs#L28-L38)). The method `WaitForText()` is used to 
+    compare the text value of `TextareaInfoLabel` asynchronously. The assertion passes if the 
+    text is found within 5 seconds, otherwise it fails.
 
 - Wait for a button to be present before you click on that button
 
-	- An example can be found in the method `ButtonPage_RegularButton` in the KitchenSink 
-	tests (see [ButtonPageTest.cs lines 29-46](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionNumber/ButtonPageTest.cs#L29-L46)). The method `WaitUntil()` is used to 
-	asynchronously check the state of the `Displayed` property of a button. It halts the test 
-	for a default maximum time of 10 seconds. If the button is not displayed within that 
-	time, it throws an exception.
+    - An example can be found in the method `ButtonPage_RegularButton` in the KitchenSink 
+    tests (see [ButtonPageTest.cs lines 29-46](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionNumber/ButtonPageTest.cs#L29-L46)). The method `WaitUntil()` is used to 
+    asynchronously check the state of the `Displayed` property of a button. It halts the test 
+    for a default maximum time of 10 seconds. If the button is not displayed within that 
+    time, it throws an exception.
 
 - Wait for presence of an input field before typing in it and wait for text to be present in label
 
-	- An example can be found in the method `TextPage_TextPropagationOnUnfocus` in the 
-	KitchenSink tests (see [TextPageTest.cs lines 28-38](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextPageTest.cs#L28-L38)). This test mixes the other examples 
-	presented above. The method `WaitUntil()` is used here to asynchronously wait for the 
-	input to be `Displayed`. Notice that the following response check is also done 
-	asynchrously using `WaitForText`.
+    - An example can be found in the method `TextPage_TextPropagationOnUnfocus` in the 
+    KitchenSink tests (see [TextPageTest.cs lines 28-38](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextPageTest.cs#L28-L38)). This test mixes the other examples 
+    presented above. The method `WaitUntil()` is used here to asynchronously wait for the 
+    input to be `Displayed`. Notice that the following response check is also done 
+    asynchrously using `WaitForText`.
 
+## Run your first test
 
+Clone [KitchenSink repo](https://github.com/StarcounterApps/KitchenSink) from the [StarcounterApps organisation](https://github.com/StarcounterApps) on GitHub.
+Follow the steps that were presented at `Install Selenium Standalone Server and browser drivers`.
+
+Build your test project. If it builds correctly, you should see this:
+
+![Seleninium result screenshot](/assets/2016-04-01-13_34_52-Launcher-Microsoft-Visual-Studio.png)
+
+Now, the only thing left to do is to run that test! In the Test Explorer, click on the "Run All" button. If it works well, you should see your tests passing.
+
+![test explorer](/assets/2016-04-01-13_40_22-Launcher-Microsoft-Visual-Studio.png)
 
 ## Sample test suites
 
