@@ -20,7 +20,11 @@ SELECT u FROM User u FETCH ? OFFSETKEY ?
 
 The first time the query is used, you should supply the value `null` as the OFFSETKEY.
 
-The input parameter is a string key, which is obtained on an enumerator to be re-created by calling method ```GetOffsetKey()```. The string key for OFFSETKEY clause, _offset key_, can be also retrieved from the query already having OFFSETKEY clause
+The input parameter is a string key, which is obtained on an enumerator to be re-created by calling method ```GetOffsetKey()```. The string key for OFFSETKEY clause, _offset key_, can be also retrieved from the query already having OFFSETKEY clause.
+
+### Query limitation
+
+You can't use `OFFSETKEY` with `ORDER BY` or `GROUP BY` clauses. 
 
 ## Getting an offset key in initial query
 
@@ -72,15 +76,6 @@ using (IRowEnumerator<User> rows = Db.SQL<User>("SELECT u FROM User u").GetEnume
 }
 ```
 
-<!--
-Depending on the enumerator position the result of ```GetOffsetKey()``` is different:
-* If the enumerator is at the beginning, i.e., no `MoveNext()` was called after GetEnumerator, then the result is ```null```.
-* If the enumerator is at the end, i.e., `MoveNext()` was called one or more times and returned ```false```, then the result depends on the actual query:
-    * If the query contains FETCH clause and there are more records after the last fetched, then the result is a valid offset key.
-    * If there are no records to fetch in the fetch query or the query does not contain FETCH clause, then the result is the special key ```EndOfResult```.
-* If the enumerator is in between the beginning and the end, i.e., ```MoveNext``` was called and returned ```True```, then the result is a valid offset key.
--->
-
 ## Continuing to retrieve data with an offsetkey query
 
 To be able to recreate the `Enumerator` and continue query execution, the query with offset key, _offset key query_, should be the same as the initial query, which was used to obtain the offset key, _original query_. Both query string and query variable values should be the same. Only FETCH and OFFSETKEY clauses can be different between queries. Note that OFFSET and OFFSETKEY clauses cannot be presented in the same query.
@@ -94,43 +89,6 @@ Query with `null` value for OFFSETKEY clause is equivalent to query with omitted
 If a new row, which has the same values as the last row of original query, (with or without deleting the last row) is inserted, then depending on its place in an index used in the query plan the offset key query will either start from it or after it and the last row.
 
 ## Examples
-<!--
-### Example of using OFFSETKEY with `foreach`:
-```C#
-byte[] k = null;
-var query = Db.SQL<Account>("SELECT a FROM Account a WHERE a.AccountId < ? FETCH ? OFFSETKEY ?", 100, 10, k);
-foreach(Account a in query)
-   Console.Write(a.AccountId + " ");
-k = e.GetOffsetKey();
-if (k == null) return;
-Console.WriteLine();
-query = Db.SQL<Account>("SELECT a FROM Account a WHERE a.AccountId < ? FETCH ? OFFSETKEY ?", 100, 10, k);
-foreach(Account a in query)
-   Console.Write(a.AccountId + " ");
-k = e.GetOffsetKey();
-...
-```
-
-If the database contains accounts with following AccountIds:
-```
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 ...
-```
-The code above will return:
-```
-1 2 3 4 5 6 7 8 9 10
-11 12 13 14 15
-...
-```
-<br>
-If the database contains accounts with following AccountIds:
-```
-10 20 30 40 50 60 70 80 90 100 110 120 130 140 150 160 170 180 190 200 210 ...
-```
-The code above will return:
-```
-10 20 30 40 50 60 70 80 90
-```
--->
 
 ### Example of using OFFSETKEY:
 
