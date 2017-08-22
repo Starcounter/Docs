@@ -54,6 +54,10 @@ public class LargeTable
 } 
 ```
 
+## Nested Classes
+
+Nested database classes are not supported. The limitation is that inner database classes cannot be queried with SQL. 
+
 ## Preventing Fields From Becoming Database Columns
 Using the `Transient` attribute, it's possible to exclude fields and auto-implemented properties of a database class from becoming database columns. A field or auto-implemented property with this attribute will remain as a regular .NET field/property and its value will be stored on the CLR heap and be garbage collected along with the object it belongs to. Starcounter ignores these fields and properties which means that they are not available using SQL.
 
