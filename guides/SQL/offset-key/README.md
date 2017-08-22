@@ -20,7 +20,11 @@ SELECT u FROM User u FETCH ? OFFSETKEY ?
 
 The first time the query is used, you should supply the value `null` as the OFFSETKEY.
 
-The input parameter is a string key, which is obtained on an enumerator to be re-created by calling method ```GetOffsetKey()```. The string key for OFFSETKEY clause, _offset key_, can be also retrieved from the query already having OFFSETKEY clause
+The input parameter is a string key, which is obtained on an enumerator to be re-created by calling method ```GetOffsetKey()```. The string key for OFFSETKEY clause, _offset key_, can be also retrieved from the query already having OFFSETKEY clause.
+
+### Query limitation
+
+You can't use `OFFSETKEY` with `ORDER BY` or `GROUP BY` clauses. 
 
 ## Getting an offset key in initial query
 
