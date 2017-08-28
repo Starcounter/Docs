@@ -17,9 +17,9 @@ Db.Transact(() =>
 });
 ```
 
-Since `Db.Transact` is synchronous, there are cases where it becomes a performance bottleneck. Starcounter handles this by automatically scaling the number of working threads to continue processing requests even if some handlers are blocked. The maximum number of working threads is the number of CPU cores multiplied by 254, so with four cores, there would be a maximum of 1016 working threads. When these threads are occupied, the next `Db.Transact` call in line will have to wait until a thread is freed. [`Db.TransactAsync`](#dbtransactasync) circumvents this.
+Since `Db.Transact` is synchronous, it sometimes becomes a performance bottleneck. Starcounter handles this by automatically scaling the number of working threads to continue processing requests even if some handlers are blocked. The maximum number of working threads is the number of CPU cores multiplied by 254, so with four cores, there would be a maximum of 1016 working threads. When these threads are occupied, the next `Db.Transact` call in line will have to wait until a thread is freed. [`Db.TransactAsync`](#dbtransactasync) circumvents this.
 
-Worth noting is that `Db.Transact` is actually `Db.TransactAsync` but with a thin wrapper that synchronously waits for the returned `Task` object. 
+`Db.Transact` is an implementation of `Db.TransactAsync` with a thin wrapper that synchronously waits for the returned `Task` object. 
 
 ## `Db.TransactAsync`
 
@@ -34,11 +34,11 @@ Db.TransactAsync(() =>
 })
 ```
 
-It's worth nothing that if a handler issues write transactions, then it's reasonable to use `Db.TransactAsync` and then wait for all transactions at once with `Task.WaitForAll` or `TaskFactory.ContinueWhenAll`. Otherwise, the latency of such handler would degrade.
+If a handler creates write transactions, use `Db.TransactAsync` and then wait for all transactions at once with `Task.WaitForAll` or `TaskFactory.ContinueWhenAll`. Otherwise, the latency of the handler will degrade.
 
 ### Limitations
 
-With the `Db.TransactAsync` API, it's tempting to use async/await in applications. Syntactically it's possible, although it's not that useful due to these shortcomings:
+With the `Db.TransactAsync` API, it's tempting to use async/await in applications. Syntactically it's possible, although it's not that useful due to these limitations:
 
 1. Using async/await is not possible in a handler body as Handler API doesn't support async handlers.
 2. No special measures have been taken to force after-await code to run on Starcounter threads, so manual `Scheduling.ScheduleTask()` might be required (see [Running background jobs](../running-background-jobs) for details).
@@ -46,7 +46,7 @@ With the `Db.TransactAsync` API, it's tempting to use async/await in application
 
 ## `Db.Transact` and `Db.TransactAsync` Usage
 
-Use `Db.Transact` and `Db.TransactAsync` when changes are to commit instantly, in comparison to [`Db.Scope`](../long-running-transactions) where changes wait until they manually commit. Due to this, if there's a need to rollback changes, use `Db.Scope` over `Db.Transact` or `Db.TransactAsync`. Also, keep in mind that `Db.Scope` does not handle conflicts, thus, if conflicts are likely, `Db.Transact` or `Db.TransactAsync` is better suited for the job.
+Use `Db.Transact` and `Db.TransactAsync` when changes should commit instantly, in comparison to [`Db.Scope`](../long-running-transactions) where changes wait until they are manually commited. Due to this, if there's a need to rollback changes, use `Db.Scope` over `Db.Transact` or `Db.TransactAsync`. Also, `Db.Scope` does not handle conflicts, so if conflicts are likely, use `Db.Transact` or `Db.TransactAsync`.
 
 Code in `Db.Transact` and `Db.TransactAsync` should execute in as short time as possible because conflicts are likelier the longer the transaction is. Conflicts requires long transactions to run more times which can be expensive. The solution is to break the transaction into smaller transactions.
 
