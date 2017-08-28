@@ -136,4 +136,5 @@
     * [Icons](cookbook/icons/README.md)
     * [Proposed Project Structure](cookbook/project-structure/README.md)
     * [Acceptance testing with Selenium](cookbook/acceptance-testing-with-selenium/README.md)
+    * [Requesting a user to authenticate](cookbook/request-user-for-authentication/README.md)
 * [Advanced Search](search/README.md)
