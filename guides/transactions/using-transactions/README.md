@@ -46,11 +46,23 @@ With the `Db.TransactAsync` API, it's tempting to use async/await in application
 
 ## `Db.Transact` and `Db.TransactAsync` Usage
 
-Use `Db.Transact` and `Db.TransactAsync` when changes should commit instantly, in comparison to [`Db.Scope`](../long-running-transactions) where changes wait until they are manually commited. Due to this, if there's a need to rollback changes, use `Db.Scope` over `Db.Transact` or `Db.TransactAsync`. Also, `Db.Scope` does not handle conflicts, so if conflicts are likely, use `Db.Transact` or `Db.TransactAsync`.
+Use `Db.Transact` and `Db.TransactAsync` when changes should commit instantly, in comparison to [`Db.Scope`](../long-running-transactions) where changes wait until they are manually commited.
+
+### Transaction Size
 
 Code in `Db.Transact` and `Db.TransactAsync` should execute in as short time as possible because conflicts are likelier the longer the transaction is. Conflicts requires long transactions to run more times which can be expensive. The solution is to break the transaction into smaller transactions.
 
-Since `Db.Transact` and `Db.TransactAsync` can run more than once, they should not have any side effects, such as HTTP calls or writes to a file.  
+### Side Effects
+
+Since `Db.Transact` and `Db.TransactAsync` can run more than once because of conflicts, they should not have any side effects, such as HTTP calls or writes to a file.  
+
+### Rollbacks
+
+The only way to rollback changes in `Db.Transact` and `Db.TransactAsync` is to throw an exception in the transaction. The alternative is to use `Db.Scope` with `Transaction.Rollback`.
+
+### Conflicts
+
+If conflicts are likely, use `Db.Transact` or `Db.TransactAsync` because these handle conflicts while `Db.Scope` doesn't.
 
 ## Nested transactions
 
