@@ -104,7 +104,7 @@ Handle.GET("/email-client/new-email", () =>
 
 Handle.GET("/email-client/email/{?}", (string emailId) =>
 {
-  Email email = Db.SQL<Email>("SELECT e FROM Email e WHERE ObjectId=?", emailId).First;
+  Email email = Db.SQL<Email>("SELECT e FROM Email e WHERE ObjectId=?", emailId).FirstOrDefault();
   return new MailPage()
   {
     Data = email
@@ -162,7 +162,7 @@ partial class MailPage : Json, IBound<Mail>
 {
   void Handle(Input.RecipientAddress action)
   {
-    var emailAddress = Db.SQL<EmailAddress>("SELECT e FROM EmailAddress e WHERE Address = ?", action.value).First;
+    var emailAddress = Db.SQL<EmailAddress>("SELECT e FROM EmailAddress e WHERE Address = ?", action.value).FirstOrDefault();
     if (emailAddress == null)
     {
       emailAddress = new EmailAddress() 

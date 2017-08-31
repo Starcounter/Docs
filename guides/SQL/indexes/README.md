@@ -45,7 +45,7 @@ You can declare combined indexes on up to ten different properties/columns of a 
 The `indexName` must be unique. If you define the same name more than once you will get an exception. It is possible to check if an index was already created by issuing a query, which selects a record from table `Starcounter.Metadata.Index` with column `Name` equivalent to the index name as in the example below.
 
 ```cs
-if (Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "EmpDepartmentSalaryIndex").First == null)
+if (Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "EmpDepartmentSalaryIndex").FirstOrDefault() == null)
     Db.SQL("CREATE INDEX EmpDepartmentSalaryIndex ON Employee (Department ASC, Salary DESC)");
 ```
 

@@ -45,8 +45,8 @@ The first application is now able to access its own `App1Class` using full and s
 <div class="code-name">App1</div>
 
 ```cs
-var result = Db.SQL("SELECT c FROM App1.App1Class c").First;
-result = Db.SQL("SELECT c FROM App1Class c").First;
+var result = Db.SQL("SELECT c FROM App1.App1Class c").FirstOrDefault();
+result = Db.SQL("SELECT c FROM App1Class c").FirstOrDefault();
 ```
 
 The same appplies to the second application with the class `App2Class`.
@@ -56,7 +56,7 @@ However, the first application will not be able to retrieve classes from the sec
 <div class="code-name">App1</div>
 
 ```cs
-var result = Db.SQL("SELECT c FROM App2Class c").First;
+var result = Db.SQL("SELECT c FROM App2Class c").FirstOrDefault();
 ```
 
 Classes defined in private application references, such as private libraries, are only accessible within the application that references them.
@@ -81,8 +81,8 @@ namespace SharedDll
 With this, both applications are able to query the `SharedDllClass`:
 
 ```cs
-var x = Db.SQL("SELECT c FROM SharedDllClass c").First;
-var x2 = Db.SQL("SELECT c FROM SharedDll.SharedDllClass c").First;
+var x = Db.SQL("SELECT c FROM SharedDllClass c").FirstOrDefault();
+var x2 = Db.SQL("SELECT c FROM SharedDll.SharedDllClass c").FirstOrDefault();
 ```
 
 The usa of shared libraries is a way for several applications to share the same class definitions. If you have several applications that are required to use the same classes, you will need to create a shared library and move all common class definitions there. In rare cases whenever this is not possible and you still need to have several applications accessing each other classes, you can reference other applications from you "main" application, so only one application is started.

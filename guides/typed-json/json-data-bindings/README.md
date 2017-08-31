@@ -25,6 +25,7 @@ To bind the Typed JSON object `PersonPage` defined above to a database class `Pe
 
 ```cs
 using Starcounter;
+using System.Linq;
 
 namespace MyApp
 {
@@ -51,7 +52,7 @@ namespace MyApp
 
             Handle.GET("/GetPerson", () =>
             {
-                var person = Db.SQL<Person>("SELECT P FROM Person P").First; // Retrieve a database object from the database
+                var person = Db.SQL<Person>("SELECT P FROM Person P").FirstOrDefault(); // Retrieve a database object from the database
 
                 var json = new PersonPage() 
                 {
@@ -263,6 +264,7 @@ namespace MyApp
 
 ```cs
 using Starcounter;
+using System.Linq;
 
 namespace MyApp
 {
@@ -290,7 +292,7 @@ namespace MyApp
 
             Handle.GET("/GetPerson", () =>
             {
-                Person person = Db.SQL<Person>("SELECT P FROM Person P WHERE P.FirstName = ?", "Steve").First;
+                Person person = Db.SQL<Person>("SELECT P FROM Person P WHERE P.FirstName = ?", "Steve").FirstOrDefault();
                 var json = new PersonPage();
                 json.Data = person;
                 return json;

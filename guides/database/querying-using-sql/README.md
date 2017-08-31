@@ -23,7 +23,7 @@ Db.SQL("SELECT p.Name FROM Person p"); // Not recommended
 Db.SQL("SELECT p FROM Person p").Select(p => new { p.Name }); // Recommended
 ```
 
-To get the first object in the enumeration, you can use the property `First`. In addition to traditional SQL, Starcounter allows you to select objects in addition to primitive types such as strings and numbers. Also it allows you to use C# style path expressions such as `person.FullName`.
+In addition to traditional SQL, Starcounter allows you to select objects in addition to primitive types such as strings and numbers. Also it allows you to use C# style path expressions such as `person.FullName`.
 
 When writing queries by using `Db.SQL`, keep in mind that there are [certain reserved words](/guides/SQL/reserved-words) that should be escaped. That is done by surrounding the reserved word in quotation marks.
 
@@ -31,6 +31,7 @@ See more about SQL in [Guides: SQL](/guides/SQL/).
 
 ```cs
 using Starcounter;
+using System.Linq;
 
 namespace Querying
 {
@@ -57,7 +58,7 @@ namespace Querying
             Handle.GET("/querying", () =>
             {
                 //Query for the first Person in the enumerable and return its name
-                var person = Db.SQL<Person>("SELECT p FROM Person p").First;
+                var person = Db.SQL<Person>("SELECT p FROM Person p").FirstOrDefault();
                 return "<h1>" + person.Name + "</h1>";
              });
          }

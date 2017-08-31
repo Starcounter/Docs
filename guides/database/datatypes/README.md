@@ -85,6 +85,6 @@ public IEnumerable Animals;
 
 The properties with explicitly declared bodies cannot be queried for with SQL, but they can be accessed from the application code after they have been retrieved from the database. If a `Person` class has the property `Friends` with a declared body, then `Friends` can be accessed like so:
 ```cs
-var person = Db.SQL<Person>("SELECT p FROM Person p").First;
+var person = Db.SQL<Person>("SELECT p FROM Person p").FirstOrDefault();
 IEnumerable<Person> friends = person.Friends;
 ```

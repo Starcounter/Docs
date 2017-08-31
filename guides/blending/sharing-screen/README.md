@@ -103,7 +103,7 @@ Handle.GET("/images/partials/concept/{?}", (string objectId) =>
 {
     return Db.Scope<Json>(() =>
     {
-        Something something = Db.SQL<Something>("SELECT o FROM Simplified.Ring1.Something o WHERE ObjectID = ?", objectId).First;
+        Something something = Db.SQL<Something>("SELECT o FROM Simplified.Ring1.Something o WHERE ObjectID = ?", objectId).FirstOrDefault();
         ConceptPage a = new ConceptPage()
         {
             Html = "/Images/viewmodels/ConceptPage.html",

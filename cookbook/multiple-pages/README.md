@@ -93,7 +93,7 @@ namespace MultiplePagesDemo
 
             Handle.GET("/multiplepagesdemo/mails/{?}", (string id) =>
             {
-                Mail mail = Db.SQL<Mail>("SELECT m FROM multiplepagesdemo.mail m WHERE objectid=?", id).First;
+                Mail mail = Db.SQL<Mail>("SELECT m FROM multiplepagesdemo.mail m WHERE objectid=?", id).FirstOrDefault();
                 MailsPage mailsPage = Self.GET<MailsPage>("/multiplepagesdemo/mails");
                 mailsPage.Focused.Data = mail;
                 return mailsPage;
@@ -101,7 +101,7 @@ namespace MultiplePagesDemo
 
             Db.Transact(() =>
             {
-                bool emptyMailbox = Db.SQL<long>("SELECT COUNT(m) FROM multiplepagesdemo.mail m").First == 0;
+                bool emptyMailbox = Db.SQL<long>("SELECT COUNT(m) FROM multiplepagesdemo.mail m").FirstOrDefault() == 0;
                 if (emptyMailbox)
                 {
                     new Mail()
