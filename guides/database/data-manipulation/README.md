@@ -66,10 +66,12 @@ var john = new Person();
 john.Delete();
 
 Db.SQL("DELETE FROM Person");
+
+Db.SQL("DELETE FROM Person WHERE Name = ?", "John");
 ```
 
 `person.Delete()` will just delete `john` while `DELETE FROM Person` will delete all objects of the `Person` class. 
 
-**Note**: To delete database objects that are bound to the view-model, the view-model object should be deleted before the database object is deleted.
+To delete database objects that are bound to the view-model, the view-model object should be deleted before the database object is deleted.
 
 
