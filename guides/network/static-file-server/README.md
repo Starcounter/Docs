@@ -62,6 +62,8 @@ Resources directory can also be added programmatically in your code, by calling 
 AppsBootstrapper.AddStaticFileDirectory("C:\\MyWebsite\\Content", 80);
 ```
 
+To use `AddStaticFileDirectory`, add the `Starcounter.Apps.JsonPatch` assembly as a reference in the project. By default, it's found at `C:\Program Files\Starcounter\Public Assemblies`.
+
 ## Specifying multiple resource directories
 In both command-line mode aswell as in Visual Studio, we have shown how to specify a resource directory using the `--resourceDir` option. You can also use this option to specify multiple resource directories.
 
