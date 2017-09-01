@@ -102,6 +102,7 @@
         * [Release channels in Starcounter](guides/working-with-starcounter/release-channels-in-starcounter/README.md)
         * [Starting and stopping apps](guides/working-with-starcounter/starting-and-stopping-apps/README.md)
         * [Administrator Web UI](guides/working-with-starcounter/administrator-web-ui/README.md)
+        * [Star CLI](guides/working-with-starcounter/star-cli/README.md)
         * [Staradmin CLI](guides/working-with-starcounter/staradmin-cli/README.md)
         * [Working in Visual Studio](guides/working-with-starcounter/working-in-visual-studio/README.md)
         * [Error log](guides/working-with-starcounter/error-log/README.md)
