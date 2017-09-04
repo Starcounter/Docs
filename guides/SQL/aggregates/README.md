@@ -21,10 +21,17 @@ The asterisk shorthand is treated as a literal in `COUNT`. Since `Db.SQL` doesn'
 ScErrUnsupportLiteral (SCERR7029): Literals are not supported in the query. Method Starcounter.Db.SQL does not support queries with literals. Found literal is 1. Use variable and parameter instead.
 ```
 
-There are two ways to work around this. The first option is to use `Db.SlowSQL` which supports literals, the second option is to use Linq:
+There are three ways to work around this:
 
 ```cs
-Db.SQL("SELECT COUNT(*) FROM Person"); // SCERR7029
-Db.SlowSQL("SELECT COUNT(*) FROM Person"); // Works
-Db.SQL("SELECT p FROM Person p").Count(); // Works
+// This throws SCERR7029
+Db.SQL("SELECT COUNT(*) FROM Person").First();
+// Using an identifier instead of * works
+Db.SQL("SELECT COUNT(p) FROM Person p").First();
+// Db.SlowSQL supports literals, so it can be used
+Db.SlowSQL("SELECT COUNT(*) FROM Person").First();
+// Linq can also give you the number of rows
+Db.SQL("SELECT p FROM Person p").Count();
 ```
+  
+The first option of using an identifier to get the count best in most cases, both for versatility and performance. 
