@@ -92,3 +92,40 @@ public void PaySalaries()
 ```
 
 When executing `PaySalaries`, it creates an outer transaction scope. No changes will commit to the database until the scope ends. All the transactions created by `MakePayment` will commit at the same time. This protects the atomicity of the outer transaction in `PaySalaries`. 
+
+## ScErrReadOnlyTransaction
+
+If an operation is done on the database without a transaction an exception will be thrown:
+```
+The transaction is readonly and cannot be changed to write-mode. (ScErrReadOnlyTransaction (SCERR4093))
+```
+
+For example:
+
+```cs
+[Database]
+public class Person {}
+
+class Program
+{
+    static void Main()
+    {
+        new Person(); // SCERR4093
+    }
+}
+```
+
+To fix this, wrap the operation in a transaction:
+
+```cs
+[Database]
+public class Person {}
+
+class Program
+{
+    static void Main()
+    {
+        Db.Transact(() => new Person());
+    }
+}
+```
