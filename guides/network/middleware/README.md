@@ -1,6 +1,6 @@
 # Middleware
 
-Middleware is code that affects the *request pipeline*. Essentially, it enables applications to customize how the server handles requests. This customization comes in three different shapes:
+Middleware is code that affects the *request pipeline*. It enables applications to customize how the server handles requests. This customization comes in three different shapes:
 
 1. request filters
 2. response filters
@@ -288,6 +288,21 @@ When there is a call to`/person`, this is what will happen:
 4. It returns the HTML found at that path
 
 If the HTML at the path would be a complete HTML document, this would be enough. Though, because the HTML provided in this example is a HTML template, it's necessary to add another layer of middleware to convert the template to an HTML document that the browser can render. That's what `PartialToStandaloneHtmlProvider` does.
+
+#### ScErrInvalidOperation
+
+If you have a JSON file without an `Html` property, `HtmlFromJsonProvider` will throw this exception:
+```
+System.InvalidOperationException: ScErrInvalidOperation (SCERR1025): Operation invalid for the object's current state. Json instance MyJson missing 'Html' property.
+```
+
+If the JSON has a corresponding HTML file, add an `Html` property with the path to the HTML file. That will fix it. 
+
+If you don't have an `Html` property and don't intend to return HTML, but to return the JSON instead, set `IgnoreJsonWithoutHtml` to `true`:
+
+```cs
+Application.Current.Use(new HtmlFromJsonProvider() { IgnoreJsonWithoutHtml = true });
+```
 
 ### PartialToStandaloneHtmlProvider
 
