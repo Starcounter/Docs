@@ -25,6 +25,10 @@ Your object properties and fields may have the following data types (`DbTypeCode
 
 The data types `Boolean`, `Byte`, `DateTime`, `Double`, `Int16`, `Int32`, `Int64`, `SByte`, `Single`, `String`, `UInt16`, `UInt32`, `UInt64` correspond to the .NET data types with the same names.
 
+### String
+
+The `String` data type can store data up to 1 MB of encoded string data. Thus, all strings with a length of less than 270600 will fit into the string datatype. Strings longer than 270600 might fit depending on string content.
+
 ### Decimal
 
 The data type `Decimal` is stored as a 64-bit integer and has a precision of six decimals and a range between `4398046511104.999999` amd `-4398046511103.999999`. Trying to set the `Decimal` data type to a more precise value or to a value outside of the range throws `ScErrCLRDecToX6DecRangeError (SCERR4246)`. In those cases, `Double` can be used if data loss is acceptable.
@@ -35,7 +39,7 @@ The data type `object` represents a reference to a database object, i.e. an inst
 
 ### Binary
 
-The data type `Binary` is for representing binary data up to 8 kB.
+The data type `Binary` represents binary data up to 1 MB.
 
 ### Numerical Types
 
