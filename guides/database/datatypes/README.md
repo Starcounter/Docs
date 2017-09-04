@@ -2,7 +2,7 @@
 
 This page describes the expected data types of the `Db.SQL` query results for the database object properties, fields and arithmetic operations.
 
-## Properties and fields
+## Properties and Fields
 
 Your object properties and fields may have the following data types (`DbTypeCode`):
 
@@ -25,15 +25,33 @@ Your object properties and fields may have the following data types (`DbTypeCode
 
 The data types `Boolean`, `Byte`, `DateTime`, `Double`, `Int16`, `Int32`, `Int64`, `SByte`, `Single`, `String`, `UInt16`, `UInt32`, `UInt64` correspond to the .NET data types with the same names.
 
+### String
+
+The `String` data type can store data up to 1 MB of encoded string data. Thus, all strings with a length of less than 270600 will fit into the string datatype. Strings longer than 270600 might fit depending on string content.
+
+### Decimal
+
 The data type `Decimal` is stored as a 64-bit integer and has a precision of six decimals and a range between `4398046511104.999999` amd `-4398046511103.999999`. Trying to set the `Decimal` data type to a more precise value or to a value outside of the range throws `ScErrCLRDecToX6DecRangeError (SCERR4246)`. In those cases, `Double` can be used if data loss is acceptable.
+
+### Object
 
 The data type `object` represents a reference to a database object, i.e. an instance of a class, directly or by inheritance having the `Database` attribute set.
 
-The data type `Binary` is for representing binary data up to 8 kB.
+### Binary
 
-All signed integers, `Int64`, `Int32`, `Int16` and `SByte` are represented as `Int64` internally in Starcounter SQL. The unsigned integers, `UInt64`, `UInt32`, `UInt16` and `Byte` are represented as `UInt64`. The approximate numerical types `Single` and `Double` are represented as `Double`. `DateTime` is represented as an `Int64` of the number of .Net ticks from `DateTime.MinValue.Ticks`.
+The data type `Binary` represents binary data up to 1 MB.
 
-If you want to store `null` values for data types that essentially are value types, you can instead use the corresponding nullable data types:
+### Numerical Types
+
+All signed integers, `Int64`, `Int32`, `Int16` and `SByte` are represented as `Int64` internally in Starcounter SQL. The unsigned integers, `UInt64`, `UInt32`, `UInt16` and `Byte` are represented as `UInt64`. The approximate numerical types `Single` and `Double` are represented as `Double`.
+
+### DateTime
+
+`DateTime` is represented as an `Int64` of the number of .Net ticks from `DateTime.MinValue.Ticks`.
+
+### Nullable Types
+
+To store `null` values, use the corresponding nullable data types:
 
 * `Nullable<Boolean>`
 * `Nullable<Byte>`
@@ -49,7 +67,7 @@ If you want to store `null` values for data types that essentially are value typ
 * `Nullable<UInt32>`
 * `Nullable<UInt64>`
 
-## Arithmetic operations
+## Arithmetic Operations
 
 The data type of the result of an [arithmetic operation](/guides/SQL/data-operators/) is one of the following:
 
@@ -85,6 +103,6 @@ public IEnumerable Animals;
 
 The properties with explicitly declared bodies cannot be queried for with SQL, but they can be accessed from the application code after they have been retrieved from the database. If a `Person` class has the property `Friends` with a declared body, then `Friends` can be accessed like so:
 ```cs
-var person = Db.SQL<Person>("SELECT p FROM Person p").First;
+var person = Db.SQL<Person>("SELECT p FROM Person p").FirstOrDefault();
 IEnumerable<Person> friends = person.Friends;
 ```
