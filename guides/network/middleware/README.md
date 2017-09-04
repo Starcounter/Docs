@@ -323,6 +323,7 @@ var html = @"<!DOCTYPE html>
     <meta charset=""utf-8"">
     <title>{0}</title>
     <script src=""/sys/webcomponentsjs/webcomponents.min.js""></script>
+    <script src=""/sys/document-register-element/build/document-register-element.js""></script>
     <link rel=""import"" href=""/sys/polymer/polymer.html"">
     <link rel=""import"" href=""/sys/starcounter.html"">
     <link rel=""import"" href=""/sys/starcounter-include/starcounter-include.html"">
