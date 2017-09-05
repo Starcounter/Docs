@@ -203,3 +203,72 @@ foreach (var person in Db.SQL("SELECT p FROM Person p"))
 ```
 
 Due to this, we recommend not to execute code with side effects during the iteration since it might cause it to close. This is important when the developer does not have full control over the side effects, such as when making `Self.GET` calls that might have responses from other apps.
+
+### ScErrTransactionModifiedButNotReferenced (SCERR4287)
+
+`ScErr4287` is thrown when a long-running transaction that's not attached to a JSON object writes to the database without committing or rolling back at the end of the scope.
+
+For example:
+
+```cs
+using Starcounter;
+
+[Database]
+public class Person {}
+
+class Program
+{
+    static void Main()
+    {
+        Db.Scope(() =>
+        {
+            new Person(); // ScErr4287
+        });
+    }
+}
+```
+
+Here, a new object is written to the database but it's never committed or rolled back because long-running transactions don't automatically commit at the end of the scope. Starcounter throws an exception here to avoid confusion on what changes are commited.
+
+One way to deal with this is to use a short-running transaction instead which will always commit at the end of the scope. In the case above, that would be appropriate:
+
+```cs
+using Starcounter;
+
+[Database]
+public class Person {}
+
+class Program
+{
+    static void Main()
+    {
+        Db.Transact(() => 
+        {
+            new Person();
+        });
+    }
+}
+```
+
+If you need a long-running transaction, ensure that all writes are commited or rolled back before the end of the scope:
+
+```cs
+using Starcounter;
+
+[Database]
+public class Person {}
+
+class Program
+{
+    static void Main()
+    {
+        Db.Scope(() =>
+        {
+            new Person();
+            // some more code
+
+            Transaction.Current.Commit(); // Or Transaction.Current.Rollback();
+        });
+    }
+}
+```
