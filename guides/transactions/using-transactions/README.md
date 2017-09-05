@@ -48,11 +48,12 @@ class Program
 
             Db.Scope(() =>
             {
-                Transaction.Current.Commit(); // Commits the Person
-                new Animal();
+                new Animal();            
+
+                // Rolls back Person and Animal
+                Transaction.Current.Rollback();
             });
 
-            Transaction.Current.Commit(); // Commits the Animal
         });
     }
 }
