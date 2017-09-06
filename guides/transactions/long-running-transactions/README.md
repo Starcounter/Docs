@@ -228,29 +228,7 @@ class Program
 }
 ```
 
-Here, a new object is written to the database but it's never committed or rolled back because long-running transactions don't automatically commit at the end of the scope. Starcounter throws an exception here to avoid confusion on what changes are commited.
-
-One way to deal with this is to use a short-running transaction instead which will always commit at the end of the scope. In the case above, that would be appropriate:
-
-```cs
-using Starcounter;
-
-[Database]
-public class Person {}
-
-class Program
-{
-    static void Main()
-    {
-        Db.Transact(() => 
-        {
-            new Person();
-        });
-    }
-}
-```
-
-If you need a long-running transaction, ensure that all writes are commited or rolled back before the end of the scope:
+Here, a new object is written to the database but it's never committed or rolled back because long-running transactions don't automatically commit at the end of the scope. Starcounter throws an exception here to avoid confusion on what changes are commited. When using the long-running transaction, ensure that all writes are commited or rolled back before the end of the scope:
 
 ```cs
 using Starcounter;
