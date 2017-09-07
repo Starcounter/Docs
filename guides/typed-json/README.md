@@ -1,8 +1,8 @@
 # Typed JSON
 
-## Summary
+Typed JSON are C# classes that are serializeable to JSON. This makes it easy to work with JSON documents in an object-oriented manner. 
 
-Typed JSON are C# classes that are serializeable to JSON. The classes make up the view-model in Starcounter.
+The view-models are Typed JSON in Starcounter web apps.
 
 [JSON-by-example](/guides/typed-json/json-by-example) defines it, the [Code-Behind](/guides/typed-json/code-behind) extends it, and it's [bound]((/guides/typed-json/json-data-bindings) to database data. 
 
