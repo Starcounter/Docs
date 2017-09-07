@@ -1,86 +1,107 @@
-# Primitive arrays and single value types 
+# Primitive Arrays and Single Value Types 
 
-<section class="hero">This page contains material that should be considered advanced or non-essential and will not be used in the absolute majority of Starcounter applications.</section>
+You can create JSON-by-example that contains a primitive value, object, or array. In C#, all of these are handled the same way.
 
-It is allowed to specify JSON-by-example that contains of a single primitive value, object or array. In C# all of these are handled in the same way. A Typed JSON instance is created and values/properties are read and written in the same way both for single values and complex objects and arrays.
+## Type Checking
 
-For setting and getting single values a set of predefined properties exists, both to handle the value and to check what type a Typed JSON-instance is. If a value that does not correspond to the type of JSON is used an exception will be raised. For example trying to read `DecimalValue` on  a jsonobject that holds a string will not work.
+To check the type of a `Json`-instance, use one of these properties:
+* `IsBoolean`
+* `IsDecimal`
+* `IsDouble`
+* `IsInteger`
+* `IsString`
+* `IsObject`
+* `IsArray`
 
-The following properties are used to get and set primitive values: `BooleanValue`, `DecimalValue`, `DoubleValue`, `IntegerValue`, `StringValue`
+<div class="code-name">SimpleIntegerJson.json</div>
 
-There are also properties to check in an efficient way what type a Json-instance is: `IsBoolean`, `IsDecimal`, `IsDouble`, `IsInteger`, `IsString`, `IsObject`, `IsArray`
-
-#### Example 1, single primitive value
-
-In the following example we create a JSON-by-example file containing of a single string value, then we create a new instance, checks that the type is string, print the default value, sets another value and print that one and finally prints the whole Typed JSON-object as JSON.
-
-<div class="code-name">SingleValueJson.json</div>
-
-```js
-"Default"
+```json
+123
 ```
-
-<div class="code-name">Program.cs</div>
 
 ```cs
-public static void Main()
-{
-    var json = new SingleValueJson();
-    Console.WriteLine("Json is string: " + json.IsString);
-    Console.WriteLine("Value is: " + json.StringValue);
-    json.StringValue = "Changed";
-    Console.WriteLine("Value is: " + json.StringValue);
-    Console.WriteLine("ToJSon: " + json.ToJson());
-}
+var json = new SimpleIntegerJson();
+Debug.WriteLine(json.IsInteger); // => true
+Debug.WriteLine(json.IsString); // => false
 ```
 
-Running this example (project called SingleValueTest) will print the following to the console:
+## Getting and Setting Single Value Types
 
+To get or set values, use one of these properties:
+* `BooleanValue`
+* `DecimalValue`
+* `DoubleValue`
+* `IntegerValue` 
+* `StringValue`
+
+<div class="code-name">SimpleStringJson.json</div>
+
+```json
+"simple string"
 ```
-> star.exe SingleValueTest.exe
-SingleValueTest ->; default (started, default port 8080, admin 8181)
-Json is string: true
-Value is: Default
-Value is: Changed
-ToJSon: "Changed"
+
+```cs
+var json = SimpleStringJson();
+Console.WriteLine(json.StringValue); // => simple string
+json.StringValue = "another string";
+Console.WriteLine(json.StringValue); // => another string
 ```
 
-#### Example 2, single array with integers
+Trying to get or set to values of a different type will throw `InvalidOperationException`:
 
-A single array containing integers. We add two items and print.
+<div class="code-name">SimpleStringJson.json</div>
+
+```json
+"simple string"
+```
+
+```cs
+var json = SimpleStringJson();
+Console.WriteLine(json.IsInteger); // => false
+json.IntegerValue = 123; // InvalidOperationException
+```
+
+## Getting and Setting Primitive Arrays
+
+Values are added to arrays with the `Add` method. To get the values of an array, use `ToJson`.
 
 <div class="code-name">SingleArrayJson.json</div>
 
-```js
+```json
+[ ]
+```
+
+```cs
+var json = new SingleArrayJson();
+
+json.Add().IntegerValue = 1;
+json.Add().StringValue = "foo";
+
+Console.WriteLine(json.ToJson()); // [1, "foo"]
+```
+
+In the example above, the array holds values of different types. To restrict the array to one type, add a value of the type you want in the JSON-by-example. This value will not be included in the resulting JSON.
+
+<div class="code-name">SingleArrayJson.json</div>
+
+```json
 [ 99 ]
 ```
 
-<div class="code-name">Program.cs</div>
+```cs
+var json = new SingleArrayJson();
+
+Console.WriteLine(json.ToJson()); // => []
+json.Add().IntegerValue = 4;
+json.Add().IntegerValue = 2;
+Console.WriteLine(json.ToJson()); // => [4, 2]
+json.Add().StringValue = "foo"; // InvalidOperationException
+```
+
+Adding strings can be further simplified with an overload of `Add`:
 
 ```cs
-public static void Main()
-{
-    var json = new SingleArrayJson();
-
-    var item = json.Add(); // Adding an item to the array.
-    item.IntegerValue = 1;
-    var item2 = json.Add(); // Adding another item.
-    item2.IntegerValue = 2;
-
-    foreach (Json child in json)
-    {
-        Console.WriteLine(child.StringValue);
-    }
-    Console.WriteLine("ToJSon: " + json.ToJson());
-}
-```
-
-Running this example (project called SingleArrayTest) will print the following to the console:
-
-```
-> star.exe SingleArrayTest.exe
-SingleArrayTest -> default (started, default port 8080, admin 8181)
-1
-2
-ToJSon: [1,2]
+var json = EmptyArrayJson();
+json.Add("foo");
+Console.WriteLine(json.ToJson()); // => ["foo"]
 ```
