@@ -1,60 +1,12 @@
 # Using Transactions
 
-Starcounter implements transactions with `Db.Transact`, `Db.TransactAsync`, and `Db.Scope`. This page describes how to use `Db.Transact` and `Db.TransactAsync`. The page [Long Running Transactions](../long-running-transactions) covers `Db.Scope`.
+## Choosing Transaction
 
-## `Db.Transact`
-
-`Db.Transact` is the simplest way to create a transaction in Starcounter. It declares a transactional scope and runs synchronously, as described on the [previous page](/guides/transactions). The argument passed to the `Db.Transact` method is a delegate containing the code to run within the transaction. In code, it looks like this:
-
-```cs
-Db.Transact(() =>
-{
-    new Employee
-    {
-        FirstName = "Samwise",
-        LastName = "Gamgee"
-    };
-});
-```
-
-Since `Db.Transact` is synchronous, it sometimes becomes a performance bottleneck. Starcounter handles this by automatically scaling the number of working threads to continue processing requests even if some handlers are blocked. The maximum number of working threads is the number of CPU cores multiplied by 254, so with four cores, there would be a maximum of 1016 working threads. When these threads are occupied, the next `Db.Transact` call in line will have to wait until a thread is freed. [`Db.TransactAsync`](#dbtransactasync) circumvents this.
-
-`Db.Transact` is an implementation of `Db.TransactAsync` with a thin wrapper that synchronously waits for the returned `Task` object. 
-
-## `Db.TransactAsync`
-
-`Db.TransactAsync` is the asynchronous counterpart of `Db.Transact`. It allows developers to have more complicated application designs and higher throughput. It returns a `Task` object that is marked as completed when flushing the transaction log for this transaction.
-
-`Db.Transact` and `Db.TransactAsync` are syntactically identical:
-
-```cs
-Db.TransactAsync(() => 
-{
-    // The code to run in the transaction
-})
-```
-
-If a handler creates write transactions, use `Db.TransactAsync` and then wait for all transactions at once with `Task.WaitForAll` or `TaskFactory.ContinueWhenAll`. Otherwise, the latency of the handler will degrade.
-
-### Limitations
-
-With the `Db.TransactAsync` API, it's tempting to use async/await in applications. Syntactically it's possible, although it's not that useful due to these limitations:
-
-1. Using async/await is not possible in a handler body as Handler API doesn't support async handlers.
-2. No special measures have been taken to force after-await code to run on Starcounter threads, so manual `Scheduling.ScheduleTask()` might be required (see [Running background jobs](../running-background-jobs) for details).
-3. use async/await with caution as they may inadvertently increase the latency. Say if user code runs transactions sequentially, putting await in front of every `Db.TransactAsync` will accumulate all the individual latencies. The right stategy in this case is to make a list of tasks and then await them at once.
-
-## `Db.Transact` and `Db.TransactAsync` Usage
-
-Use `Db.Transact` and `Db.TransactAsync` when changes should commit instantly, in comparison to [`Db.Scope`](../long-running-transactions) where changes wait until they are manually commited.
-
-### Transaction Size
-
-Code in `Db.Transact` and `Db.TransactAsync` should execute in as short time as possible because conflicts are likelier the longer the transaction is. Conflicts requires long transactions to run more times which can be expensive. The solution is to break the transaction into smaller transactions.
+It's important to chose the right transaction. In most situation, the choice is clear - if you are going to attach a transaction to a view-model, use a long-running transaction, otherwise, use a short-running transaction. When the choice is not clear, consider these factors:
 
 ### Side Effects
 
-Since `Db.Transact` and `Db.TransactAsync` can run more than once because of conflicts, they should not have any side effects, such as HTTP calls or writes to a file.  
+Since `Db.Transact` and `Db.TransactAsync` can run more than once because of conflicts, they should not have any side effects, such as HTTP calls or writes to a file. `Db.Scope` can have side effects, as long as it's [not in an iterator](../long-running-transactions/#scerriteratorclosed-scerr4139). 
 
 ### Rollbacks
 
@@ -64,34 +16,132 @@ The only way to rollback changes in `Db.Transact` and `Db.TransactAsync` is to t
 
 If conflicts are likely, use `Db.Transact` or `Db.TransactAsync` because these handle conflicts while `Db.Scope` doesn't.
 
-## Nested transactions
+## Mixing Transactions
 
-When a transaction runs within another transaction, the changes will commit when the outermost transaction scope ends. Consider a situation like this: 
+Transactions can be mixed as outer and inner transactions - one transaction wraps around the other. These are the possible combinations and their effects:
+
+| Outer | Inner | Effect                                  |
+|-------|-------|-----------------------------------------|
+| Long  | Long  | Execute inner as a part of outer        |
+| Long  | Short | Execute inner as a separate transaction |
+| Short | Long  | Not supported. Run-time error           |
+| Short | Short | Execute inner as part of outer          |
+
+### Long-Running in Long-Running
+
+With a long-running transaction inside a long-running transaction, they act as if they were one transaction:
 
 ```cs
-public void MakePayment(Account payerAccount, Account receiverAccount, Decimal amount)
-{
-    Db.Transact(() => // Inner transaction
-    {
-        payerAccount.Balance -= amount;
-        receiverAccount.Balance += amount;
-    };
-}
+[Database]
+public class Person {}
 
-public void PaySalaries()
+[Database]
+public class Animal {}
+
+class Program
 {
-    Db.Transact(() => // Outer transaction
+    static void Main()
     {
-        QueryResultRows<Employee> employees = Db.SQL<Employee>("SELECT e FROM Employee e");
-        foreach(var employee in employees)
+        Db.Scope(() =>
         {
-            MakePayment(company.Account, employee.Account, employee.Salary);
-        }
-    };
+            new Person();
+
+            Db.Scope(() =>
+            {
+                new Animal();            
+
+                // Rolls back Person and Animal
+                Transaction.Current.Rollback();
+            });
+
+        });
+    }
 }
 ```
 
-When executing `PaySalaries`, it creates an outer transaction scope. No changes will commit to the database until the scope ends. All the transactions created by `MakePayment` will commit at the same time. This protects the atomicity of the outer transaction in `PaySalaries`. 
+### Short-Running in Long-Running
+
+Short-running transactions in long-running transactions are executed separately: 
+
+```cs
+using Starcounter;
+using System.Linq;
+
+[Database]
+public class Person {}
+
+[Database]
+public class Animal
+{
+    public string Specie { get; set; }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Db.Scope(() =>
+        {
+            new Person();
+
+            Db.Transact(() =>
+            {
+                new Animal() { Specie = "Dog" };
+            }); // Animal is commited to the database - transaction is done
+
+            // The Animal committed can be accessed in the outer transaction
+            var animal = Db.SQL("SELECT a FROM Animal a").First();
+
+            // Rolls back the Person but not the Animal
+            Transaction.Current.Rollback();
+        });
+    }
+}
+```
+
+### Long-Running in Short-Running
+
+Using long-running transactions in short-running transactions is not supported, it will throw `ScErrTransactionLockedOnThread (SCERR4031)`:
+
+```cs
+Db.Transact(() =>
+{
+    Db.Scope(() => // SCERR4031
+    {
+        new Person(); 
+    });
+}); 
+```
+
+## Short-Running in Short-Running
+
+Short-running in short-running transactions work the same as with long-running in long-running transactions: the inner transaction is executed as a part of the outer:
+
+```cs
+using Starcounter;
+
+[Database]
+public class Person {}
+
+[Database]
+public class Animal {}
+
+class Program
+{
+    static void Main()
+    {
+        Db.Transact(() =>
+        {
+            Db.Transact(() =>
+            {
+                new Person();
+            }); // Person is not commited
+
+            new Animal();
+        }); // Animal and Person are commited
+    }
+}
+```
 
 ## ScErrReadOnlyTransaction
 
