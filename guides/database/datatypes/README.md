@@ -55,16 +55,16 @@ All signed integers, `Int64`, `Int32`, `Int16` and `SByte` are represented as `I
 `enum` is supported as a data type. It's stored as a number in the database. Queries on `enum` will return a number which can be cast to an `enum`. 
 
 ```cs
-using Starcounter;
+using System;
 using System.Linq;
-using System.Diagnostics;
+using Starcounter;
 
-public enum Hairstyle { good, bad, ugly };
+public enum House { Targaryen, Tyrell, Baratheon, Greyjoy };
 
 [Database]
 public class Person
 {
-    public Hairstyle HairStyle { get; set; }
+    public House House { get; set; }
 }
 
 class Program
@@ -73,11 +73,11 @@ class Program
     {
         Db.Transact(() =>
         {
-            var person = new Person() { HairStyle = Hairstyle.bad };
-            var hairstyle = Db.SQL("SELECT p.Hairstyle FROM Person p").First();
-            Debug.Write(hairstyle); // => 1
-            Debug.Write((Hairstyle)hairstyle); // => bad
-            Debug.Write(Db.FromId<Person>(person.GetObjectID()).HairStyle); // => bad
+            var person = new Person() { House = House.Tyrell };
+            var house = Db.SQL("SELECT p.House FROM Person p").First();
+            Console.Write(house); // => 1
+            Console.Write((House)house); // => Tyrell
+            Console.Write(Db.FromId<Person>(person.GetObjectID()).House); // => Tyrell
         });
     }
 }
