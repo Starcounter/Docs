@@ -21,7 +21,7 @@ Since `Db.Transact` is synchronous, it sometimes becomes a performance bottlenec
 
 ## `Db.TransactAsync`
 
-`Db.TransactAsync` is the asynchronous counterpart of `Db.Transact`. It allows developers to have more complicated application designs and higher throughput. It returns a `Task` that is marked as completed when flushing the transaction log for this transaction. Thus, the database operation itself is synchronous while flushing to the transaction log is asynchronous. 
+`Db.TransactAsync` is the asynchronous counterpart of `Db.Transact`. It gives the developer more control to balance throughput and latency. The function returns a `Task` that is marked as completed when flushing the transaction log for the transaction. Thus, the database operation itself is synchronous while flushing to the transaction log is asynchronous. 
 
 `Db.Transact` and `Db.TransactAsync` are syntactically identical:
 
