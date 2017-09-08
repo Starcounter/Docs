@@ -21,7 +21,7 @@ Since `Db.Transact` is synchronous, it sometimes becomes a performance bottlenec
 
 ## `Db.TransactAsync`
 
-`Db.TransactAsync` is the asynchronous counterpart of `Db.Transact`. It allows developers to have more complicated application designs and higher throughput. It returns a `Task` object that is marked as completed when flushing the transaction log for this transaction.
+`Db.TransactAsync` is the asynchronous counterpart of `Db.Transact`. It allows developers to have more complicated application designs and higher throughput. It returns a `Task` that is marked as completed when flushing the transaction log for this transaction. Thus, the database operation itself is synchronous while flushing to the transaction log is asynchronous. 
 
 `Db.Transact` and `Db.TransactAsync` are syntactically identical:
 
@@ -31,6 +31,22 @@ Db.TransactAsync(() =>
     // The code to run in the transaction
 })
 ```
+
+While waiting for the write to the transaction log to finish, it's possible to do other things, such as sending an email:
+
+```cs
+Order order = null;
+Task task = Db.TransactAsync(() =>
+{
+    order = new Order();
+}); // Order has been added to the database
+
+SendConfirmationEmail(order);
+
+task.Wait(); // Wait for write to log to finish
+```
+
+This is more flexible and performant than `Db.Transact`, but it comes with certain risks; for example, if there's a power outage or other hardware failure after the email is sent but before writing to the log, the email will be incorrect - even if the user got a confirmation, the order will not be in the database since it was never written to the transaction log. 
 
 If a handler creates write transactions, use `Db.TransactAsync` and then wait for all transactions at once with `Task.WaitForAll` or `TaskFactory.ContinueWhenAll`. Otherwise, the latency of the handler will degrade.
 
