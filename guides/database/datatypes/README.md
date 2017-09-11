@@ -16,6 +16,7 @@ Your object properties and fields may have the following data types (`DbTypeCode
 * `Int32`
 * `Int64`
 * `object`
+* `enum`
 * `SByte`
 * `Single`
 * `String`
@@ -48,6 +49,39 @@ All signed integers, `Int64`, `Int32`, `Int16` and `SByte` are represented as `I
 ### DateTime
 
 `DateTime` is represented as an `Int64` of the number of .Net ticks from `DateTime.MinValue.Ticks`.
+
+### enum
+
+`enum` is supported as a data type. It's stored as a number in the database. Queries on `enum` will return a number which can be cast to an `enum`. 
+
+```cs
+using System;
+using System.Linq;
+using Starcounter;
+
+public enum House { Targaryen, Tyrell, Baratheon, Greyjoy };
+
+[Database]
+public class Person
+{
+    public House House { get; set; }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Db.Transact(() =>
+        {
+            var person = new Person() { House = House.Tyrell };
+            var house = Db.SQL("SELECT p.House FROM Person p").First();
+            Console.Write(house); // => 1
+            Console.Write((House)house); // => Tyrell
+            Console.Write(Db.FromId<Person>(person.GetObjectID()).House); // => Tyrell
+        });
+    }
+}
+```
 
 ### Nullable Types
 
