@@ -1,34 +1,54 @@
 # Sessions
 
-Sessions are used to retain the state in your app. A session is represented by an instance of a `Session` class. The `Json` tree that represents your apps' view-model must be assigned to a session to allow the client-server synchronization of the view.
+Sessions are used to retain the state in your app. A session is represented by an instance of a `Session` class. Together with an instance of a `Json` object it can be used to enable client-server communication and synchronization using JSON patch.
+
 
 ## Session Instance
 
-New session is created by calling the constructor on `Session` class. At this point, the static property `Session.Current` is automatically set to your new session and is available during the lifetime of the user handler execution.
+A new session is created by calling the constructor on `Session` class. To set the new session as active session, it's necessary to assign it to the static property `Session.Current`.
 
-When multiple apps are running, only one of them needs to create the `Session` object, because the session identifies the browser tab, not only your app in that tab. Therefore, you always need to check before creating a new session if `Session.Current` is `null`.
+When multiple apps are running, only one of them needs to create the `Session` object and set is as active, because the session identifies the browser tab, not only your app in that tab. Therefore, you always need to check before creating a new session if `Session.Current` is `null`.
 
 > **Note**: Each browser tab is a separate state of the UI. Therefore, each tab is tied to its own session. This makes it totally different from the session concept in frameworks like ASP.NET or Zend, where a session stores data from all the browser tabs.
 
-Once you have the session, you want to attach a state to it. In Starcounter, the state is represented by a `Json` instance (also called a view-model). To attach a JSON to a session, set the `Data` property of the session to be your JSON instance. At this point the static property `Session.Current.Data` is automatically set to that JSON instance.
+Starting with Starcounter 2.3.1.6839 there is a static method, `Session.Ensure()`, that can be used as simplification of the pattern described above that does this check and makes sure that a session with options enabled for patch-versioning and namespaces is set (if not already set) as current and returned. This method can be used everywhere where a session should be created if `Session.Current` is `null`.
 
-Right now, Starcounter supports assigning only one `Json` from your app to a session. If your app is composed of multiple `Json`s and you need a reference to all of them, you need to reference all of them in a single `Json` that you assign to the Session. In our sample apps, we call that single `Json` **MasterPage**.
-
-As a shorthand, the `session.Data` property and the `json.Session` properties are equivalent, but the `json.Session` property will be deprecated in the future.
-
-Here are some examples of creating a new session.
-
-```cs
-var json = new Json();
-var session = new Session();
-
-// The JSON and the session can then be connected by either setting the `Data` property on the
-// session or setting the `Session` property on JSON. Both will have the exact same outcome.
-
-session.Data = json;
-// OR
-json.Session = session;
+```csharp
+DateTime createdDate = Session.Ensure().Created; // Session.Ensure() will never be null.
 ```
+
+Once you have the session, you have the possibility to attach state to it. In Starcounter, the state is represented by a `Json` instance (also called a view-model). The `session` contains a storage where any number of `Json` instances can be kept, using a string as key. This storage is separated per app, so each running app has it own section and can only access it's own state.
+
+> **Note**: From Starcounter 2.3.1.6839, `Session.Data` have been obsoleted and replaced with `Session.Store`. Also `Json.Session` is obsoleted. Session should be obtained by using `Session.Current` or `Session.Ensure()`.
+
+```csharp
+Json state1 = new Json();
+Json state2 = new Json();
+
+Session session = Session.Ensure();
+session.Store["state1"] = state1;
+session.Store["state2"] = state2;
+...
+state1 = session.Store["state1"]
+```
+
+> **Note**: The storage on the session is *server-side* only. Nothing stored using `Session.Store` will be exposed to a client. This is a change in behaviour of using the old obsoleted `Session.Data`. See the next section on how to attach a `Json` to be used for client-server communication
+
+## Client-server synchronization using JSON Patch
+
+One additional feature when using `Session`, besides keeping state on the server,  is that it can enable client-server synchronization using [JSON Patch](http://tools.ietf.org/html/rfc6902). In short it allows the client and server to send deltas instead of the full viewmodel.
+
+When this is used, the client can send http requests using the `PATCH` verb ([HTTP PATCH method](http://tools.ietf.org/html/rfc5789)) or use websocket to send and receive patches.
+
+To enable this, the session needs to know which `Json` instance should be considered the root viewmodel. If the [PartialToStandalone middleware](../../network/middleware#partialtostandalonehtmlprovider) is used, the root viewmodel will be automatically assigned to the session based on the `Json` instance returned from a handler.
+
+There is also a way to manually specify which `Json` instance to use as root, `session.SetClientRoot(json)`. This functionality is included as an extension method instead of directly in the session class. The extension-method can be found in the `Starcounter.XSON.Advanced` namespace.
+
+
+> **Note**: From Starcounter 2.3.1.6839 the handling of determining root viewmodel on session have changed. `Session.PublicViewmodel` and `Session.Data` have been obsoleted and should no longer be used to set client root. Instead use the information in the section above.
+
+The whole root viewmodel can be obtained on the client using HTTP GET verb with a url that is sent in the `Location` header for the response of the request that created the session. The location contains a specific identifier for the session and viewmodel that is calculated for each session to be non-deterministic.
+
 
 ## Session Properties
 
@@ -88,44 +108,6 @@ Session.ScheduleTask(Db.SQL<SavedSession>("SELECT s FROM GroupedSession s WHERE 
 
 To schedule tasks on all active sessions, then `Session.ForAll` should be used (note that it runs on all active sessions and if you only need to update few - use `Session.ScheduleTask`).
 
-## Sessions and JSON Objects
-
-Starcounter allows you to keep JSON objects on the server as resources without storing them in the database.
-
-This is very useful when you want to keep server side session data such as server side view models.
-JSON object can be attached to session by assigning `Data` property on `Session` object.
-
-<div class="code-name">PersonView.json</div>
-
-```javascript
-{
-   "FirstName": "",
-   "LastName": "",
-   "Message": ""
-}
-```
-
-<div class="code-name">Program.cs</div>
-
-```cs
-using Starcounter;
-
-class Program  
-{
-  static void Main()
-  {
-    Handle.POST("/persons", () =>
-    {
-      var personView = new PersonView();
-
-      Session.Data = personView;
-      return personView;
-    });
-  }
-}
-```
-When responding to a request, Starcounter will check if `Session.Data` is `null`. If not, Starcounter will create a resource with an unique URI to represent a session. In this case, the URI might be `/__default/D11C498A1A5F64ABD0000010`.
-
 ## Advanced: Transmission of the session identity
 
 Current session is determined and set automatically before user handler is called.
@@ -136,7 +118,7 @@ Starcounter Gateway uses one of the following ways to determine the session that
 Using HTTP protocol, when creating a new session, the response will contain the `Location` HTTP header with  the value of a newly created session. Client code later can extract this session value from the received `Location` header and use the session in subsequent requests, using either of the specified ways. Often `X-Referer` or `Referer` request headers are used to specify the session value.
 
 * Automatic session creation when using WebSockets:
-When using WebSockets protocol, the session is automatically created (unless its already it was already on the socket). The session is kept for this WebSocket connection until it closes or session is explicitly destroyed. Session can also be changed during lifetime of WebSocket by setting `Session.Current` property.
+When using WebSockets protocol, the session is automatically created (unless it's already it was already on the socket). The session is kept for this WebSocket connection until it closes or session is explicitly destroyed. Session can also be changed during lifetime of WebSocket by setting `Session.Current` property.
 
 * Session as handler URI parameter:
 Session value can be specified as one of URI parameters when defining a handler, for example:
@@ -155,12 +137,6 @@ Use of automatic session cookie and the property `UseSessionCookie` have been ob
 The priorities for session determination, for incoming requests, are the following (latter has higher priority than previous):
 session on socket, `Referer` header, `X-Referer` header, session URI parameter.
 
-## Interacting With a Server-Side JSON Objects
-
-The newly created JSON object is automatically made available to the client using the GET method. I.e. if the response to the `PersonView` object in the example above returns a location such as `Location: /__default/D11C498A1A5F64ABD0000010`, you can access this resource by doing a `GET /__default/D11C498A1A5F64ABD0000010`. If the resource have not been accessed for a configurable period of time, it will be removed from the server.
-
-More important, however is the built in support for the [HTTP PATCH method](http://tools.ietf.org/html/rfc5789) and [JSON-Patch](http://tools.ietf.org/html/rfc6902). This allows Starcounter to communicate using delta updates rather than sending complete JSON representations of the entire resource.
-
 ## Session Options
 
 The `Session` constructor has an overload that takes the enum `SessionOptions`. This enum has five options:
@@ -172,3 +148,5 @@ The `Session` constructor has an overload that takes the enum `SessionOptions`. 
 |`PatchVersioning`| Enables operational transformation with Palindrom. Thus, `PatchVersioning` is required for communication with Palindrom.  |
 |`StrictPatchRejection`| Throws an error instead of rejecting changes in two cases: (1) when an incoming patch tries to access an object or item in an array that is no longer valid and (2) when the client sends a patch with a different format than expected. |
 |`IncludeNamespaces`|Enables namespacing of Typed JSON responses. This is the default behavior and is thus the same as using the default constructor.|
+
+
