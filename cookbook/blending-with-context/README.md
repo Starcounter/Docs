@@ -7,7 +7,7 @@ Contexts is an array of string that helps filter out the blending one step furth
 Blender.MapUri<Employee>("/Employees/view/{?}", string[] { "View" });
 Blender.MapUri<Employee>("/Employees/edit/{?}", string[] { "Writable" });
 ```
-All our prefab apps use Contexts with blending. For example some apps require a full view of Person from the [People](https://github.com/StarcounterApps/People) app while other only need very basic info e.g. information that can be displyed in the search result. With the help of Contexts this can be easily achieved like below:
+All our prefab apps use Contexts with blending. Some apps require a full view of Person from the [People](https://github.com/StarcounterApps/People) app while other only need very basic info e.g. information that can be displyed in the search result. So we have two different views mapped to the same entity but different contexts, the mapping can be achieved like:
 ```
 Blender.MapUri<Person>("/people/partials/persons/{?}", new string[] { "page" });
 Blender.MapUri<Person>("/people/partials/persons/rows/{?}", new string[] { "searchitem" });
