@@ -40,10 +40,10 @@ which is blended with other handlers with the same empty token.
 
 ## Blending contexts
 
-Within the same token blending can have a more fine-grained matching. This is where blending contexts are useful. They are composed of a list of strings that acts as a bit map when matched with other contexts. No blending context (`null` value) means **match any context**. Otherwise two blendings are matched if source context includes the destination context. Examples:
+Within the same token blending can have a more fine-grained matching. This is where blending contexts are useful. They are composed of a list of strings that acts as a bit map when matched with other contexts. No blending context (`null` value) means **match any context**. Otherwise two blendings are matched if source context contains same elements as destination context. Examples:
 * Source context `{ "Readable", "View" }` is NOT matched with `{ "Writable", "View" }`.
 * Source context `null` is matched with `{ "Readable", "View" }` and `{ "Writable", "View" }` and any other context.
-* Source context `{ "View" }` is not matched with `{ "Writable", "View" }`, but the opposite way they match.
+* Source context `{ "View", "Writable" }` is matched with `{ "Writable", "View" }` and vice versa.
 
 Consider contexts as an additinal matching rule among blendings on the same token.
 
