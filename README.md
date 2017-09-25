@@ -1,3 +1,5 @@
+# Edits made in this repo are no longer published. Please see CONTRIBUTING.md for more details
+
 # Starcounter Documentation
 
 This is the official documentation for Starcounter. It is divided into five main parts:
