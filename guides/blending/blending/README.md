@@ -19,7 +19,7 @@ Blender.MapUri("/Products/settings", "settings");
 Blender.MapUri<Product>("/Products/partials/product/{?}");
 Blender.MapUri("/Products/menu", "menu");
 Blender.MapUri("/people/persons/34623", "person"); // Specific URI blending.
-Blender.MapUri<Person>("/people/persons/34623"); // Specific URI blending.
+Blender.MapUri<Person>("/people/persons/{34623}"); // Specific URI blending using so-called mixed URI.
 
 ```
 
@@ -47,6 +47,11 @@ Within the same token blending can have a more fine-grained matching. This is wh
 
 Consider contexts as an additinal matching rule among blendings on the same token.
 
+## Bledning specific URIs
+
+Specific URI is the handler URI with parameters supplied. For example, for the handler `/people/{?}` the specific URIs will be `/people/john`, `/people/bob`, etc. When calling `Blender.MapUri` for a specific URI, you should pass a mixed URI which indicates what handler it belongs to. For the previous examples, the mixed URI will be `/people/{john}` and `/people/{bob}`, so the parameter in specific URI is wrapped into curly brackets. `Blender` class has helper methods to construct such mixed URIs: `Blender.GetMixedUriFromHandlerAndParameters`, `Blender.TryGetMixedUriFromSpecific`. The last method tries to find corresponding handler for the given specific URI, which might not be determined correctly (for example, in case when the corresponding handler is not yet registered). Mixed URIs in `MapUri` calls are needed so the underlying handler for a specific URI can be identified. Other `Blender` methods like `UnmapUri`, `IsMapped`, etc. can still use specific URIs and not mixed.
+
+
 ## Dynamic addition and removal
 
 It is possible to get a list of handlers and tokens that are in Blender and then remove some of them or add new ones.
@@ -54,7 +59,8 @@ It is possible to get a list of handlers and tokens that are in Blender and then
 Blender.UnmapUri("/app4/{?}", token2);
 Blender.UnmapUri("/twoparams3/{?}/{?}", token);
 Blender.UnmapUri<MyClass>("/app1/{?}");
-Blender.UnmapUri<Person>("/people/persons/34623"); // Unmapping specific URI.
+Blender.UnmapUri<Person>("/people/persons/34623"); // Unmapping specific URI (not that specific URI is used, not mixed).
+Blender.UnmapUriForAllTokens("/app1/param1/{?}"); // Unmapping URI for all blending tokens.
 ```
 
 To check if certain handler is in blender:
@@ -72,16 +78,15 @@ static Dictionary<String, List<BlendingInfo>> ListAllByUris();
 
 To get the list of blending candicates that are going to run for a given URI handler:
 ```cs
-List<BlendingInfo> GetRunCandidatesForUri(String uri);
+BlendingInfo[] GetRunCandidatesForUri(String uri);
 ```
-
 To list registered blending rules for a given URI: 
 ```cs
-List<BlendingInfo> ListByUri(String uri)
+BlendingInfo[] ListByUri(String uri);
 ```
 and the same but for a given token:
 ```cs
-List<BlendingInfo> ListByToken(String blendingToken)
+BlendingInfo[] ListByToken(String blendingToken)
 ```
 
 As you might noticed, a special blending information structure is used here: `BlendingInfo`.
@@ -90,9 +95,10 @@ It contains the following methods/properties:
 String AppName; // Returns the application name to which the blended handler belongs.
 Boolean IsActive; // Shows if this blending is active.
 String Token; // Returns blending token.
-String Uri; // Returns blended URI (which is either specific URI or handler URI).
-String HandlerUri; // Returns blended handler URI (or null if handler is not yet registered).
-Boolean IsSpecificUri; // Is it a specific URI blended, not a handler.
+String Uri; // Returns URI given in MapUri (which was either mixed, specific or handler URI).
+String SpecificUri; // Returns a specific blended URI or null if MapUri was called with handler URI.
+String HandlerUri; // Returns blended handler URI.
+Boolean IsSpecificUri; // Is it a specific URI blended, not a handler URI.
 String[] Contexts; // Returns blending context (if any).
 Boolean IsFromUriConverterOn; // Returns True if the "FromUriConverter" is set/allowed.
 Boolean IsToUriConverterOn; // Returns True if the "ToUriConverter" is set/allowed.
