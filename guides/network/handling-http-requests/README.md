@@ -140,32 +140,20 @@ Use the `HandlerAppName` property to find out which application the request belo
 When creating (using the `Handle` interface) and calling handlers (using the `Self` interface), one can supply last `HandlerOptions` parameter, which specifies certain options for handler calls or registration. Here are the notable handler options:
 
 * `SkipRequestFilters`: used to declare a handler for which request (previously middleware) filters will not be applied.
-* `ReplaceExistingHandler`: replace an existing handler if it was registered.
-* `HandlerLevel`: level on which the handlers should be registered or called.
+* `SkipResponsetFilters`: used to declare a handler for which response filters will not be applied.
 * `SkipHandlersPolicy`: If database flag "EnforceURINamespaces" is set to True, all application handlers are required to start with application name. In this case `SkipHandlersPolicy` flag allows to register any URI handler.
-* `SubstituteHandler`: specifies a delegate to be called to replace call for existing handler or to provide a call when handler does not exist.
 * `SelfOnly`: registered handler is going to be accessible only inside codehost using `Self` interface. `SelfOnly` handlers are not registered in gateway, in comparison with normal handlers.
 
 **Examples**:
 
-Registering a handler that skips middleware filters and is being called directly externally:
+Registering a handler that skips all middleware filters (request and response) and is being called directly externally:
 
 ```cs
 Handle.POST("/myhandler", (Request request) =>
 {
 	return 204;
-}, new HandlerOptions() { SkipMiddlewareFilters = true });
+}, new HandlerOptions() { SkipRequestFilters = true, SkipResponsetFilters = true });
 ```
-
-Calling the URI handler `/MyPostHandler` on handlers level `ApplicationLevel`:
-
-```cs
-Self.POST("/MyPostHandler", null, null, null, 0, new HandlerOptions()
-{
-	HandlerLevel = HandlerOptions.HandlerLevels.ApplicationLevel
-});
-```
-
 
 ## Exception Propagation Within Applications
 

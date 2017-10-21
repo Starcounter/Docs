@@ -83,7 +83,7 @@ if (404 == resp.StatusCode)
 return resp;
 ```
 
-When the codehost starts, Starcounter adds a static resource resolver on the default user port (GET handler on URI "/{?}"). To register a static resource resolver on the default user port, `HandlerOptions.ReplaceExistingHandler` should be supplied when registering a handler.
+When the codehost starts, Starcounter adds a static resource resolver on the default user port (GET handler on URI "/{?}").
 
 ## Delayed or explicitly handled responses
 
