@@ -62,8 +62,6 @@ To let requests to a certain handler bypass all request filters, use the class `
 Handle.GET("/my-url", () => new Json(), new HandlerOptions() { SkipRequestFilters = true });
 ```
 
-This only affects request filters and not response filters.
-
 ## Response filters
 
 Response filters do the opposite of request filters; they make alterations to outgoing responses. They work similarly to request filters by being executed one by one until one returns a non-null response. The main difference is that response filters are called after the handler has been called while request filters are called before. Response filters can either create entirely new responses and return those, or modify the response coming from the handler.
@@ -118,6 +116,14 @@ Application.Current.Use((Request request, Response response) =>
 ```
 
 Here, the response filter makes it possible to return a descriptive `404` page by checking the outgoing responses for the `404` status code and return a response containing the "not found" HTML page.
+
+### Skip response filters
+
+For a handler to bypass all response filters, use the class `HandlerOptions` and set `SkipResponseFilters` to `true`. Like this:
+
+```cs
+Handle.GET("/my-url", () => new Json(), new HandlerOptions() { SkipResponseFilters = true });
+```
 
 ### Response and request filter interaction
 
