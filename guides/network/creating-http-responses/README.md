@@ -87,20 +87,24 @@ When the codehost starts, Starcounter adds a static resource resolver on the def
 
 ## Delayed or explicitly handled responses
 
-Sometimes, the `Response` object cannot be returned immediately in the handler. One reason could be the access of third party resources or doing long-running jobs. By returning `HandlerStatus.Handled` in the handler, the user indicates that the response will be returned later or that it already has been returned another way.
+Sometimes, the `Response` object cannot be returned immediately in the handler. One reason could be the access to third party resources or performing long-running jobs. By returning `HandlerStatus.Handled` in the handler, the user indicates that the response will be returned later or that it already has been returned. To accomplish such behaviour there is a special method on `Request`: `void SendResponse(Response resp)` which sends given `Response` object. Sending response using `Request.SendResponse` must be done on Starcounter scheduler. Since HTTP is a request-response protocol, only one response can be send per request (in comparison with WebSocket protocol).
 
 For example:
 
 ```cs
 Handle.GET("/postponed", (Request req) =>
 {
-    Http.POST("/posttest", "Here I do a post!", null, null, (Response resp, Object userObject) =>
-    {
-        // Modifying the response object by injecting some data.
-        resp.Headers["MySuperHeader"] = "Here is my header value!";
-        resp.Headers["Set-Cookie"] = "MySuperCookie=CookieValue";
-        req.Response = resp;
-    }); // "resp" object will be automatically sent when delegate exits.
+    // Scheduling some job here, which will send the response.
+	Scheduling.ScheduleTask(() => {
+		// Do something external, like accessing third party resources or
+		// performing long-running jobs.
+		...
+		// Now send the response for the original "/postponed" request.
+		req.SendResponse(new Response { BodyBytes = myBodyData });
+	});
+	
+	// Immediately returning from the HTTP handler.
+	// The actual response will be sent later.
     return HandlerStatus.Handled;
 });
 ```
