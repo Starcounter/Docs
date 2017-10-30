@@ -102,6 +102,8 @@ Handle.CUSTOM("{?}", (string methodAndUri) =>
 });
 ```
 
+Here is the list of supported HTTP methods: GET, PUT, POST, DELETE, CONNECT, HEAD, COPY, CHECKOUT, LOCK, MKCOL, MOVE, MKACTIVITY, MERGE, M-SEARCH, NOTIFY, OPTIONS, PROPFIND, PROPPATCH, PATCH, PURGE, REPORT, SUBSCRIBE, SEARCH, TRACE, UNLOCK, UNSUBSCRIBE.
+
 ## The `Request` Object
 
 A `Request` parameter can be declared together with the enumerated parameters. It encapsulates the entire request.
