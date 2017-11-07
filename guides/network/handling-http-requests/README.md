@@ -75,6 +75,36 @@ Handle.GET("/{?}/{?}", (string list, int item) =>
 
 The accepted URIs would be, for example: `/serialnumbers/4534123`, `/itemid/34321`
 
+### Database object as parameter in handler
+
+One can also expect a database object as a parameter to a handler:
+```cs
+
+[Database]
+public class SomeDbClass {
+    public string Name { get; set; };
+}
+
+...
+
+Handle.GET("/SomeDbClass/{?}", (SomeDbClass db) => {
+    string name = db.Name ;
+    return name;
+});
+```
+
+Such handler can be called with database object ID as a parameter or using special `Self.GET` variant, which takes database class instance as a second parameter:
+
+```cs
+SomeDbClass c = Db.SQL<SomeDbClass>(...).First;
+Response r = Self.GET("/SomeDbClass/{?}", c);
+```
+
+The handler above can be also called with object ID as parameter:
+```cs
+String objectId = DbHelper.GetObjectID(c);
+Response r = Self.GET("/SomeDbClass/" + objectId);
+```
 
 ## Catching Other Verbs
 
