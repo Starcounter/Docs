@@ -165,6 +165,7 @@ Remarks:
 
 * `StatusCode` default value is 200
 * `StatusDescription` default value is _"OK"_
+* `Server` default value is "Server: Starcounter/#starcounter_version (Windows)", for example: `Server: Starcounter/2.3.1.7779 (Windows)`.
 * To access certain HTTP headers, use the `Headers` accessor on the `Response` or `Request` object:
 
 ```cs
