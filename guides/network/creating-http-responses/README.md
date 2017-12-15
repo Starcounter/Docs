@@ -160,6 +160,7 @@ Handle.GET("/response", () =>
     return response;
 });
 ```
+Its recommended to encode complex HTTP header values (for example, containing line separators) using `base64` or similar encoding.
 
 Remarks:
 
