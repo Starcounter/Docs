@@ -20,7 +20,6 @@ Blender.MapUri<Product>("/Products/partials/product/{?}");
 Blender.MapUri("/Products/menu", "menu");
 Blender.MapUri("/people/persons/34623", "person"); // Specific URI blending.
 Blender.MapUri<Person>("/people/persons/{34623}"); // Specific URI blending using so-called mixed URI.
-
 ```
 
 An arbitrary number of classes are allowed as a blending token (up to 3 in template, more in array of class `Type`). Here are the `MapUri` signature examples (same exist for removing handler from blender): 
@@ -148,3 +147,44 @@ Blender.MapUri("/app4/{?}", token2);
 Here handler "/app1/{?}" participates in blending with `token1` and `token2` handlers.
 
 When an app requests `Self.GET("/app1/xyz")`, both handlers mapped to `token1` and `token2` will be triggered.
+
+## Separate blending rules in Json
+
+It is possible to describe blending rules in Json format, separately from application code. If file `blend.json` is found in the same directory as starting application assembly - the file is parsed and extracted blending rules are applied right after the application `Main` function. The same happens when application restarts. Using this mechanism blending rules can be changed for the existing shipped application (when source code is not available, just binaries). Here is an example of such `blend.json` file contents:
+```json
+[
+  {
+	 "Uri": "/someuri1",
+	 "Token": "sometoken1",
+	 "Contexts":[],
+	 "AllowFromDirection": true,
+	 "AllowToDirection": false
+  },
+  {
+	 "Uri": "/someuri2/{?}/bla",
+	 "Token": "",
+	 "Contexts":["context1","context2"],
+	 "AllowFromDirection": false,
+	 "AllowToDirection": true
+  },
+  {
+	 "Uri": "/someuri3/{name}/xxx",
+	 "Token": "sometoken3",
+	 "Contexts":["context1","context2", "context3"],
+	 "AllowFromDirection": true,
+	 "AllowToDirection": true
+  }
+]
+```
+
+Each element of the array contains the following fields:
+```
+String Uri; // Mixed, specific or handler URI.
+String Token; // Blending token.
+String[] Contexts; // Blending contexts (if any).
+Boolean AllowFromDirection; // Allows blending calls from this URI.
+Boolean AllowToDirection; // Allows blending calls to this URI.
+```
+
+In short, the meaning of the above fields is the same as in `Blender.MapUri` functions variations.
+
