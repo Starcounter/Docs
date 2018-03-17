@@ -1,4 +1,4 @@
-## Starcounter
+# Starcounter
 
 Starcounter is an In-memory Application Platform with a built in [REST](http://en.wikipedia.org/wiki/Representational_state_transfer) style server. It supports [SQL](http://en.wikipedia.org/wiki/Sql) queries and is fully [ACID](http://en.wikipedia.org/wiki/ACID) compliant. Disks secure the transaction log as well as a checkpointed database image.
 
@@ -7,3 +7,4 @@ Starcounter is the platform for building modern applications such as web applica
 Starcounter is highly optimized for stellar throughput, concurrency, and low latency. It also features tight integration with web standards such as HTTP, REST, JSON.
 
 Starcounter offers unmatched simplicity to create web browser view-models with zero glue code.
+

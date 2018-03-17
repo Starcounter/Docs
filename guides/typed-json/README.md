@@ -1,21 +1,20 @@
 # Typed JSON
 
-Typed JSON are C# classes that are serializeable to JSON. This makes it easy to work with JSON documents in an object-oriented manner. 
+## Introduction
 
-The view-models are Typed JSON in Starcounter web apps.
+Typed JSON are C\# classes that are serializeable to JSON. This makes it easy to work with JSON documents in an object-oriented manner.
 
-[JSON-by-example](/guides/typed-json/json-by-example) defines it, the [Code-Behind](/guides/typed-json/code-behind) extends it, and it's [bound]((/guides/typed-json/json-data-bindings) to database data. 
+ The view-models are Typed JSON in Starcounter web apps.
+
+[JSON-by-example](json-by-example.md) defines it, the [Code-Behind](code-behind.md) extends it, and it's [bound](json-data-bindings.md) to database data.
 
 ## Content
 
 This section describes how to use Typed JSON.
 
-* [JSON-by-example](/guides/typed-json/json-by-example) and [Code-Behind](/guides/typed-json/code-behind) describes how to define the Typed JSON and extend it to allow for interactivity.
+* [JSON-by-example](json-by-example.md) and [Code-Behind](code-behind.md) describes how to define the Typed JSON and extend it to allow for interactivity.
+* [JSON Data Bindings](json-data-bindings.md) explains how to initially add database data to the Typed JSON objects and then bind Typed JSON objects to database classes.
+* [Callback Methods](callback-methods.md) describes the use of callback methods for certain actions on the Typed JSON objects.
+* [Responding With JSON](responding-with-json.md) and [Accepting JSON in Requests](/guides/typed-json/accepting-JSON-in-requests/README.md) describes how to send and receive Typed JSON objects using HTTP.
+* [Primitive Arrays and Single Value Types](primitive-arrays-and-single-value-types.md) and [Typed JSON Internals](typed-json-internals.md) covers topics that, in most cases, are not practically applicable but can still be useful in some niche cases.
 
-* [JSON Data Bindings](/guides/typed-json/json-data-bindings) explains how to initially add database data to the Typed JSON objects and then bind Typed JSON objects to database classes.
-
-* [Callback Methods](/guides/typed-json/callback-methods) describes the use of callback methods for certain actions on the Typed JSON objects.
-
-* [Responding With JSON](/guides/typed-json/responding-with-json) and [Accepting JSON in Requests](/guides/typed-json/accepting-JSON-in-requests) describes how to send and receive Typed JSON objects using HTTP.
-
-* [Primitive Arrays and Single Value Types](/guides/typed-json/primitive-arrays-and-single-value-types) and [Typed JSON Internals](/guides/typed-json/typed-json-internals) covers topics that, in most cases, are not practically applicable but can still be useful in some niche cases.
