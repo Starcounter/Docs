@@ -1,1 +1,0 @@
-# Starcounter documentation
