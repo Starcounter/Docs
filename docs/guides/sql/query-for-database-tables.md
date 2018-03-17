@@ -30,7 +30,7 @@ AND c.UniqueIdentifier NOT LIKE 'SocietyObjects%'
 
 For example, if the query is run after following the steps in [part one](../../getting-started/tutorial/create-a-database-class.md) of the tutorial, it should look like this:
 
-![](../../.gitbook/assets/capture.png)
+![](../../.gitbook/assets/all_tables.png)
 
 
 
