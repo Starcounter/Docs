@@ -4,11 +4,15 @@ Sometimes, it might be useful to declare JSON and a corresponding code-behind th
 
 In this example, it's described how to create a strongly typed collection of `Person` objects as created here:
 
+Person.json
+
 ```javascript
 {
   "Name": ""
 }
 ```
+
+Person.json.cs
 
 ```csharp
 using Starcounter;
@@ -25,6 +29,8 @@ To start creating a collection, add a new item using the `Starcounter Typed JSON
 
 To allow this JSON to contain a collection of other objects, the JSON-by-example has to look something like this:
 
+PersonCollection.json
+
 ```javascript
 {
   "People": [{}]
@@ -32,6 +38,8 @@ To allow this JSON to contain a collection of other objects, the JSON-by-example
 ```
 
 In the code-behind for the JSON object, make the collection strongly typed by using the following code:
+
+PersonCollection.json.cs
 
 ```csharp
 using Starcounter;

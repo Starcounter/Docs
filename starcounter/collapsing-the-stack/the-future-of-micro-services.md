@@ -2,11 +2,7 @@
 
 In light of the recent micro-services movement, the inception of a new breed of in-memory technology is a central component.
 
-
-
-![](../../.gitbook/assets/starcounter_microservices.png)
-
-
+![microservices](../../.gitbook/assets/starcounter_microservices%20%281%29.png)
 
 Figure 2: Evolution of the database; Monolithic, micro-services, and Starcounter’s micro-apps
 
@@ -18,7 +14,7 @@ Whereas today’s storage procedures will often put chunks of code closer to the
 
 What’s more, by shrinking the [database and application tiers into a single layer](../integrated-database-and-web-server.md), additional value can be realized via the elimination of messages relayed between the web and app server, inter-process communication, data redundancy, and similar “middlemen”. In addition, the glue code which was binding the layers goes away, resulting in the pure, beautiful business logic expressed by concise code.
 
-### Who will Benefit Most from Collapsing the Stack?
+## Who will Benefit Most from Collapsing the Stack?
 
 Any data or performance-critical business is a strong candidate for collapsing the stack and adopting an in-memory platform. Likewise, any business demanding agility and performance is a good match. Such a platform can be used within any vertical, but likely within industries including banking, finance, retail, internet, telecom and gambling/gaming.
 

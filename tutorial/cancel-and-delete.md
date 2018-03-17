@@ -13,8 +13,8 @@ Similar to how the "Add new expense" button was implemented, the process to add 
 
 We start by adding our needed trigger properties for our future buttons to the `PersonJson.json`.
 
-{% code-tabs %}
-{% code-tabs-item title="PersonJson.json" %}
+PersonJson.json
+
 ```javascript
 {
   "Html": "/HelloWorld/PersonJson.html",
@@ -29,41 +29,17 @@ We start by adding our needed trigger properties for our future buttons to the `
   "DeleteAllTrigger$": 0
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
 ## Add Buttons to the View
 
 Now, let's add the buttons that will increment these values in the same way that our save and new expense button does now.
 
-Delete button:
-
-{% code-tabs %}
-{% code-tabs-item title="PersonJson.html" %}
-```markup
-<button value="{{model.DeleteAllTrigger$::click}}" onmousedown="++this.value">Delete all expenses</button>
-```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
-
-Cancel button:
-
-{% code-tabs %}
-{% code-tabs-item title="PersonJson.html" %}
-```markup
-<button value="{{model.CancelTrigger$::click}}" onmousedown="++this.value">Cancel</button>
-```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
-
-We'll place the delete button at the bottom of the page and the cancel button next to the save button.
-
 ## Create Event Handlers
 
 The next step is to build handlers to react accordingly. We will also do that similar to the way we did with the other buttons.
 
-{% code-tabs %}
-{% code-tabs-item title="PersonJson.json.cs" %}
+Person.json.cs
+
 ```csharp
 void Handle(Input.CancelTrigger action)
 {
@@ -72,12 +48,10 @@ void Handle(Input.CancelTrigger action)
 
 void Handle(Input.DeleteAllTrigger action)
 {
-    Db.SQL("DELETE FROM Expense WHERE Spender = ?", this.Data);
+    Db.SlowSQL("DELETE FROM Expense WHERE Spender = ?", this.Data);
     this.Expenses.Clear();
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
 `Transaction.Rollback()` simply rolls back the state of your application to where you last ran a `Transaction.Commit()`.
 
@@ -87,7 +61,7 @@ The `DeleteAllTrigger` handler deletes all the expenses for the current `Person`
 
 You can now run your application again and rollback any mistakes you make or delete all expenses.
 
-![](../.gitbook/assets/resizedpart6.gif)
+![part 6 gif](../.gitbook/assets/resizedpart6.gif)
 
-If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/e8424d4129d79379154281174cd31ad236bd8e22).
+If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/7f370fde6c500989c2b1b49b6390279c17094c25).
 

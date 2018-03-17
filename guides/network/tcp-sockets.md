@@ -1,10 +1,8 @@
 # TCP Sockets
 
-## Introduction
-
 TCP is a connection-oriented protocol.
 
-## Using TCP Sockets
+> Learn more about [TCP on Wikipedia](http://en.wikipedia.org/wiki/Transmission_Control_Protocol)
 
 TCP sockets in user code are represented by objects of the class `TcpSocket`. User code can define a handler for retrieving data and detecting disconnects on a socket by using `Handle.Tcp` method:
 
@@ -24,7 +22,7 @@ static void Handle.Tcp(UInt16 port, Action<TcpSocket tcpSocket, Byte[] data> han
 * `Boolean IsDead()`: checks if TCP socket object is still active.
 * `static TcpSocket Current`: currently active TCP socket for this scheduler.
 
-NOTE: When doing operations on the same TcpSocket but from different Starcounter schedulers - the order in which operations \(like `Send`\) will actually be performed is not guaranteed to be the same as the order in which they were initiated.
+**NOTE:** When doing operations on the same TcpSocket but from **different** Starcounter schedulers - the order in which operations \(like `Send`\) will actually be performed is not guaranteed to be the same as the order in which they were initiated.
 
 Once the TCP socket object is returned, user can fetch the ID representing this socket \(ToUInt64\(\)\), and of course, perform data sends and disconnect.
 

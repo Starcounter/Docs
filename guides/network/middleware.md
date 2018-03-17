@@ -1,6 +1,6 @@
 # Middleware
 
-## Introduction
+## Middleware
 
 Middleware is code that affects the _request pipeline_. It enables applications to customize how the server handles requests. This customization comes in three different shapes:
 
@@ -31,11 +31,11 @@ static void Main()
 
 Middleware does not impact internal `Self.GET` calls.
 
-## Request Filters
+### Request filters
 
 When allowing external HTTP requests, it might be useful to pre-process or filter out certain requests before the designated handler is called. Request filters make it possible to do exactly that. They are lists of user-supplied delegates, or filters, that are executed on external requests before the actual handlers are called. These filters are executed one by one until one of the filters returns a non-null `Response`. If a `Response` was returned from the request filter, then this response is returned to the client without calling the handler. If none of the filters returned a `Response` object, then the request will be passed on and dealt with by the handler.
 
-![](../../.gitbook/assets/middleware-example.PNG)
+![Middleware example](../../.gitbook/assets/middleware-example.PNG)
 
 An example of this can be an basic spam filter:
 
@@ -56,19 +56,19 @@ Application.Current.Use((Request request) =>
 
 When there is an incoming request, this request filter checks if the URI contains the string "spam", and returns a `Response` object if that's the case. This means that the request will be blocked without reaching the handler. Otherwise, it returns `null` and allows the request to move on to the next request filter or go to the handler if there was only one request filter.
 
-### Skip Request Filters
+#### Skip request filters
 
 To let requests to a certain handler bypass all request filters, use the class `HandlerOptions` and set `SkipRequestFilters` to `true`. Like this:
 
 ```csharp
-Handle.GET("/my-url", () => new Json(), new HandlerOptions() { SkipRequestFilters = true });Response Filters
+Handle.GET("/my-url", () => new Json(), new HandlerOptions() { SkipRequestFilters = true });
 ```
 
-## Response Filters
+### Response filters
 
 Response filters do the opposite of request filters; they make alterations to outgoing responses. They work similarly to request filters by being executed one by one until one returns a non-null response. The main difference is that response filters are called after the handler has been called while request filters are called before. Response filters can either create entirely new responses and return those, or modify the response coming from the handler.
 
-![](../../.gitbook/assets/middleware-response.PNG)
+![Middleware response example](../../.gitbook/assets/middleware-response.PNG)
 
 For example, response filters makes it possible to add a certain HTTP header to responses for requests with a `/special` URI prefix after the request has been dealt with by the handler:
 
@@ -119,7 +119,7 @@ Application.Current.Use((Request request, Response response) =>
 
 Here, the response filter makes it possible to return a descriptive `404` page by checking the outgoing responses for the `404` status code and return a response containing the "not found" HTML page.
 
-### Skip response filters
+#### Skip response filters
 
 For a handler to bypass all response filters, use the class `HandlerOptions` and set `SkipResponseFilters` to `true`. Like this:
 
@@ -127,7 +127,7 @@ For a handler to bypass all response filters, use the class `HandlerOptions` and
 Handle.GET("/my-url", () => new Json(), new HandlerOptions() { SkipResponseFilters = true });
 ```
 
-## Response and Request Filter Interaction
+#### Response and request filter interaction
 
 When using both request and response filters, response filters will intercept responses coming from request filters. Consider the following example:
 
@@ -169,7 +169,7 @@ static void Main()
 
 When sending a request to the `/Test` handler, the request filter will intercept it and create a `Response` object. This response is then intercepted by the response filter that creates another `Response` object which will be the one received by the client. When this code runs, "THIS IS FROM THE RESPONSE FILTER" displays.
 
-## Middleware Interaction with Other Applications
+#### Middleware interaction with other applications
 
 Both request and response filters catch requests to handlers in other applications that are running simultaneously.
 
@@ -207,7 +207,7 @@ Application.Current.Use((Request request) =>
 });
 ```
 
-## Middleware Classes
+### Middleware classes
 
 `Application.Current.Use` also allows for exposing custom middleware classes. These middleware classes implement the `IMiddleware` interface.
 
@@ -249,18 +249,17 @@ Middleware classes makes it possible to hide the implementation of middleware.
 
 These classes do not have to contain request or response filters. Although, that is the common way of using middleware classes.
 
-### HtmlFromJsonProvider
+#### HtmlFromJsonProvider
 
 `HtmlFromJsonProvider` is a custom middleware class provided by Starcounter. It acts as a response filter by intercepting outgoing responses containing JSON objects and instead responding with the corresponding HTML. For example, look at the following application:
 
-```markup
-<template>
-    <template is="dom-bind">
-        <h1>{{model.FirstName}}</h1>
-        <h3>{{model.LastName}}</h3>
-    </template>
-</template>
-```
+Person.html {% raw %} \`\`\`html
+
+## {{model.FirstName}}
+
+#### {{model.LastName}}
+
+ \`\`\` {% endraw %}Person.json
 
 ```csharp
 {
@@ -269,6 +268,8 @@ These classes do not have to contain request or response filters. Although, that
   "LastName": "Doe"
 }
 ```
+
+Program.cs
 
 ```csharp
 void Main() 
@@ -291,24 +292,23 @@ When there is a call to`/person`, this is what will happen:
 
 If the HTML at the path would be a complete HTML document, this would be enough. Though, because the HTML provided in this example is a HTML template, it's necessary to add another layer of middleware to convert the template to an HTML document that the browser can render. That's what `PartialToStandaloneHtmlProvider` does.
 
-#### ScErrInvalidOperation
+**ScErrInvalidOperation**
 
- If you have a JSON file without an \`Html\` property, `HtmlFromJsonProvider` will throw this exception:
+If you have a JSON file without an `Html` property, `HtmlFromJsonProvider` will throw this exception:
 
 ```text
 System.InvalidOperationException: ScErrInvalidOperation (SCERR1025): Operation invalid for the object's current state. Json instance MyJson missing 'Html' property.
 ```
 
-  
-If the JSON has a corresponding HTML file, add an \`Html\` property with the path to the HTML file. That will fix it.
+If the JSON has a corresponding HTML file, add an `Html` property with the path to the HTML file. That will fix it.
 
- If you don't have an `Html` property and don't intend to return HTML, but to return the JSON instead, set `IgnoreJsonWithoutHtml` to `true`:
+If you don't have an `Html` property and don't intend to return HTML, but to return the JSON instead, set `IgnoreJsonWithoutHtml` to `true`:
 
 ```csharp
 Application.Current.Use(new HtmlFromJsonProvider() { IgnoreJsonWithoutHtml = true });
 ```
 
-### PartialToStandaloneHtmlProvider
+#### PartialToStandaloneHtmlProvider
 
 This middleware class checks if the HTML is a full document, or essentially if it starts with a `<!DOCTYPE html>`. If it's not a full HTML document, it wraps the existing HTML inside the body of an HTML document that contains the following:
 
@@ -318,36 +318,6 @@ This middleware class checks if the HTML is a full document, or essentially if i
 4. The session URL which makes it possible for PuppetJs to request the relevant JSON in a future request
 
 It's possible to override this default HTML by passing a string containing HTML as a parameter. Here's an example of that:
-
-```csharp
-var html = @"<!DOCTYPE html>
-<html>
-<head>
-    <meta charset=""utf-8"">
-    <title>{0}</title>
-    <script src=""/sys/webcomponentsjs/webcomponents.min.js""></script>
-    <script src=""/sys/document-register-element/build/document-register-element.js""></script>
-    <link rel=""import"" href=""/sys/polymer/polymer.html"">
-    <link rel=""import"" href=""/sys/starcounter.html"">
-    <link rel=""import"" href=""/sys/starcounter-include/starcounter-include.html"">
-    <link rel=""import"" href=""/sys/starcounter-debug-aid/src/starcounter-debug-aid.html"">
-    <link rel=""import"" href=""/sys/bootstrap.html"">
-    <style>
-        body {{
-            margin: 20px;
-        }}
-    </style>
-</head>
-<body>
-    <template is=""dom-bind"" id=""puppet-root"">
-        <template is=""imported-template"" content$=""{{{{model.Html}}}}"" model=""{{{{model}}}}""></template>
-    </template>
-    <palindrom-client ref=""puppet-root"" remote-url=""{1}""></palindrom-client>
-    <starcounter-debug-aid></starcounter-debug-aid>
-</body>
-</html>";
-Application.Current.Use(new PartialToStandaloneHtmlProvider(html))
-```
 
 Since `PartialToStandaloneHtmlProvider` wraps the actual response from the handler, it will have the HTTP status code of the response.
 

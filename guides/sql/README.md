@@ -1,19 +1,16 @@
 # SQL
 
-## Introduction
-
-Starcounter SQL follows the established standard SQL92 \(ANSI INCITS 135-1992, R1998\) to support easy data exchange with other databases and external tools.
+Starcounter SQL follows the established standard SQL92 \(ANSI INCITS 135-1992, R1998\) to support easy data exchange with other databases and external tools. Currently we only support the query part of SQL92 which consists of the `SELECT` statement. See [Limitations](limitations.md).
 
 ## Calling SQL
 
-There are two to use Starcounter SQL:
+There are currently two main ways of using Starcounter SQL:  
+1. Writing the queries in the programming code with `Db.SQL` as described in [Querying using SQL](../database/querying-using-sql.md).  
+2. Executing queries in the interactive SQL browser of the [Starcounter Administrator](../working-with-starcounter/administrator-web-ui.md).
 
-1. In programming code with `Db.SQL` as described in [Querying using SQL](../database/querying-using-sql.md).
-2.  In the interactive SQL browser of the [Starcounter Administrator](../working-with-starcounter/administrator-web-ui.md).
+The SQL in the Administrator and in code are not identical. For performance reasons, [literals](literals.md) can't be used in the programming code with `Db.SQL` while it's available in the Administrator. Because of this, when using the examples in this documentation, remember to replace literals with [variables](../database/variables.md) in the programming code.
 
-The SQL in the Administrator and in code are not identical. For performance reasons, [literals](literals.md) can't be used in the programming code with `Db.SQL` while it's available in the Administrator. Because of this, when using the examples in this documentation, remember to replace literals with [variables](../database/querying-using-sql.md#using-variables) in programming code.
-
-## Object Extensions to SQL
+## Object extensions to SQL
 
 Starcounter SQL contains some extensions to the SQL92 standard to better deal with objects, since the standard SQL only supports relational databases. For these extensions we follow the Object Data Standard ODMG 3.0 \(ISBN 1-55860-647-4\). The object extensions in Starcounter SQL are:
 
@@ -42,7 +39,9 @@ SELECT e.FirstName, e.Department.Name FROM Employee e
 
 In object oriented programming the extent of a class is all object instances of that class. An extent of object instances corresponds to a table of rows in a relational database. Thus, `Employee` in the example queries above can either be regarded as the extent of the class `Employee` or as the table `Employee`.
 
+## Performance notes
 
+The current version of Starcounter SQL is not performance optimized. However, for most queries with the right indexes, Starcounter SQL gives you the extreme performance of the Starcounter database.
 
 
 

@@ -1,18 +1,20 @@
 # Database Refactoring
 
-## Introduction
+## About
 
-When an application is started, Starcounter will analyze all database classes defined and synchronize their structure with the underlying database schema. This process is sometimes referred to as binding.
+When an application is started, Starcounter will analyze all database classes defined and synchronize their structure with the underlying database schema. This process is sometimes referred to as **binding**.
 
 If the database has just been created, it contains no schema at all and the binding is simple - every database construct in the application \(such as a defined database class field\) will render a corresponding construct in the database schema.
 
-If a database schema already exists, Starcounter must make sure that the application schema and the underlying database harmonize. If they don't, it will try to figure out how to make the two schemas match. This could involve adding, removing or changing already defined schema constructs. This process will be referred to as database refactoring.
+If a database schema already exists, Starcounter must make sure that the application schema and the underlying database harmonize. If they don't, it will try to figure out how to make the two schemas match. This could involve adding, removing or changing already defined schema constructs. This process will be referred to as **database refactoring**.
+
+Starcounter 2.3.0.4643 is the Starcounter version used throughout this page
 
 ## Rebuilding the Database
 
 Starcounter supports rebuilding a database by using an unload-reload operation pair.
 
-Unloading a database is supported via an API, though it is more often done using `staradmin unload db` in the command prompt. Unloading a database will fetch all data in the database and write out INSERT-statements to a file that, when reapplied, will insert the unloaded data inside a new, empty database. This file is sometimes referred to as a dump.
+Unloading a database is supported via an API, though it is more often done using `staradmin unload db` in the command prompt. Unloading a database will fetch all data in the database and write out INSERT-statements to a file that, when reapplied, will insert the unloaded data inside a new, empty database. This file is sometimes referred to as a **dump**.
 
 Reloading has similar, but reverse semantics. It will act on a file produced by a previous unload, a dump, and re-apply each INSERT-statement it contains.
 
@@ -43,14 +45,14 @@ Rebuilds are using a dump file captured before the refactoring that is applied t
 3. Refactor the app and start it without any transactions being applied
 4. Reload the dump with `staradmin reload --file=data.sql`.
 
-### 1. Add a Field
+## 1. Add a field
 
 _Add a database field to an existing database class_
 
-#### Source code
+### Source code
 
-{% code-tabs %}
-{% code-tabs-item title="Before.cs" %}
+Before.cs
+
 ```csharp
 using Starcounter;
 
@@ -71,9 +73,9 @@ namespace AddField
     }
 }
 ```
-{% endcode-tabs-item %}
 
-{% code-tabs-item title="After.cs" %}
+After.cs
+
 ```csharp
 using Starcounter;
 
@@ -97,40 +99,36 @@ namespace AddField
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
-#### Traits
+### Traits
 
 * Auto-migration supported: true
 * Rebuilt works: true
 
-#### Dumps
+### Dumps
 
-{% code-tabs %}
-{% code-tabs-item title="Before" %}
+Before.sql
+
 ```sql
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."AddField"."Foo"(__id)VALUES(object 1)
 ```
-{% endcode-tabs-item %}
 
-{% code-tabs-item title="After" %}
+After.sql
+
 ```sql
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."AddField"."Foo"(__id,"Bar")VALUES(object 2,'Value'),(object 1,NULL)
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
-### 2. Add a Property
+## 2. Add a property
 
 _Add a database property to an existing database class._
 
-#### Source code
+### Source code
 
-{% code-tabs %}
-{% code-tabs-item title="Before.cs" %}
+Before.cs
+
 ```csharp
 using Starcounter;
 
@@ -151,9 +149,9 @@ namespace AddProperty
     }
 }
 ```
-{% endcode-tabs-item %}
 
-{% code-tabs-item title="After.cs" %}
+After.cs
+
 ```csharp
 using Starcounter;
 
@@ -177,40 +175,36 @@ namespace AddProperty
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
-#### Traits
+### Traits
 
 * Auto-migration supported: true
 * Rebuild works: true
 
-#### Dumps
+### Dumps
 
-{% code-tabs %}
-{% code-tabs-item title="Before" %}
+Before.sql
+
 ```sql
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."AddProperty"."Foo"(__id)VALUES(object 1)
 ```
-{% endcode-tabs-item %}
 
-{% code-tabs-item title="After" %}
+After.sql
+
 ```sql
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."AddProperty"."Foo"(__id,"Bar")VALUES(object 2,'Value'),(object 1,NULL)
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
-### 3. Add a Class
+## 3. Add a class
 
 _Add a database class when there is already a class present and instances of it._
 
-#### Source code
+### Source code
 
-{% code-tabs %}
-{% code-tabs-item title="Before.cs" %}
+Before.cs
+
 ```csharp
 using Starcounter;
 
@@ -231,9 +225,9 @@ namespace AddProperty
     }
 }
 ```
-{% endcode-tabs-item %}
 
-{% code-tabs-item title="After.cs" %}
+After.cs
+
 ```csharp
 using Starcounter;
 
@@ -261,41 +255,37 @@ namespace AddProperty
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
-#### Traits
+### Traits
 
 * Auto-migration supported: true
 * Rebuild works: true
 
-#### Dumps
+### Dumps
 
-{% code-tabs %}
-{% code-tabs-item title="Before" %}
+Before.sql
+
 ```sql
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."AddClass"."Foo"(__id)VALUES(object 1)
 ```
-{% endcode-tabs-item %}
 
-{% code-tabs-item title="After" %}
+After.sql
+
 ```sql
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."AddClass"."Foo"(__id)VALUES(object 1),(object 2)
 INSERT INTO "Starcounter"."Raw"."AddClass"."Bar"(__id)VALUES(object 3)
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
-### 4. Remove a Field
+## 4. Remove a field
 
 _Remove a database field from a class._
 
-#### Source code
+### Source code
 
-{% code-tabs %}
-{% code-tabs-item title="Before.cs" %}
+Before.cs
+
 ```csharp
 using Starcounter;
 
@@ -322,9 +312,9 @@ namespace RemoveField
     }
 }
 ```
-{% endcode-tabs-item %}
 
-{% code-tabs-item title="After.cs" %}
+After.cs
+
 ```csharp
 using Starcounter;
 
@@ -345,43 +335,39 @@ namespace RemoveField
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
-#### Traits
+### Traits
 
 * Auto-migration supported: true
 * Rebuild works: **false** \(see remarks below\)
 
-#### Dumps
+### Dumps
 
-{% code-tabs %}
-{% code-tabs-item title="Before" %}
+Before.sql
+
 ```sql
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."RemoveField"."Foo"(__id,"Bar")VALUES(object 1,'Value')
 ```
-{% endcode-tabs-item %}
 
-{% code-tabs-item title="After" %}
-```
+After.sql
+
+```sql
 Not possible to achieve - see remarks below.
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
-#### Remarks
+### Remarks
 
-Reloading the database dump after removing the field will fail. Also, just doing an unload will fail if issued after the auto-migration have succeeded.
+Reloading the database dump after removing the field will fail. This issue is reported in [issue 3929](https://github.com/Starcounter/Starcounter/issues/3929). Also, just doing an unload will fail if issued after the auto-migration have succeeded; reported in [issue 3932](https://github.com/Starcounter/Starcounter/issues/3932).
 
-### 5. Remove a Property
+## 5. Remove a property
 
 _Remove a database property from a class._
 
-#### Source code
+### Source code
 
-{% code-tabs %}
-{% code-tabs-item title="Before.cs" %}
+Before.cs
+
 ```csharp
 using Starcounter;
 
@@ -408,9 +394,9 @@ namespace RemoveProperty
     }
 }
 ```
-{% endcode-tabs-item %}
 
-{% code-tabs-item title="After.cs" %}
+After.cs
+
 ```csharp
 using Starcounter;
 
@@ -431,43 +417,39 @@ namespace RemoveProperty
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
-#### Traits
+### Traits
 
 * Auto-migration supported: true
 * Rebuild works: **false** \(see remarks below\)
 
-#### Dumps
+### Dumps
 
-{% code-tabs %}
-{% code-tabs-item title="Before" %}
+Before.sql
+
 ```sql
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."RemoveProperty"."Foo"(__id,"Bar")VALUES(object 1,'Value')
 ```
-{% endcode-tabs-item %}
 
-{% code-tabs-item title="After" %}
-```
+After.sql
+
+```sql
 Not possible to achieve - see remarks below.
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
-#### Remarks
+### Remarks
 
-Reloading the database dump after removing the property will fail. Also, just doing an unload will fail if issued after the auto-migration have succeeded.
+Reloading the database dump after removing the property will fail. This issue is reported in [issue 3929](https://github.com/Starcounter/Starcounter/issues/3929). Also, just doing an unload will fail if issued after the auto-migration have succeeded; reported in [issue 3932](https://github.com/Starcounter/Starcounter/issues/3932).
 
-### 6. Remove a Class
+## 6. Remove a class
 
 _Remove a database class that was previously bound._
 
-#### Source code
+### Source code
 
-{% code-tabs %}
-{% code-tabs-item title="Before.cs" %}
+Before.cs
+
 ```csharp
 using Starcounter;
 
@@ -501,9 +483,9 @@ namespace RemoveClass
     }
 }
 ```
-{% endcode-tabs-item %}
 
-{% code-tabs-item title="After.cs" %}
+After.cs
+
 ```csharp
 using Starcounter;
 
@@ -524,45 +506,41 @@ namespace RemoveClass
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
-#### Traits
+### Traits
 
 * Auto-migration supported: true
 * Rebuild works: **true, with issues** \(see remarks below\)
 
-#### Dumps
+### Dumps
 
-{% code-tabs %}
-{% code-tabs-item title="Before" %}
+Before.sql
+
 ```sql
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."RemoveClass"."Foo"(__id)VALUES(object 1)
 INSERT INTO "Starcounter"."Raw"."RemoveClass"."Bar"(__id,"Value")VALUES(object 2,'Value')
 ```
-{% endcode-tabs-item %}
 
-{% code-tabs-item title="After" %}
+After.sqlcaptured with --alowPartial flag
+
 ```sql
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."RemoveClass"."Foo"(__id)VALUES(object 1),(object 3)
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
-#### Remarks
+### Remarks
 
-To successfully unload after the auto-migration has occurred, the unload has to be carried out with the `--allowPartial` flag, i.e. `staradmin unload --allowPartial`.
+To successfully unload after the auto-migration has occurred, the unload has to be carried out with the `--allowPartial` flag, i.e. `staradmin unload --allowPartial`. This issue is being discussed in [issue 3933](https://github.com/Starcounter/Starcounter/issues/3933).
 
-### 7. Rename a Field
+## 7. Rename a field
 
 _Rename a field in a database class._
 
-#### Source code
+### Source code
 
-{% code-tabs %}
-{% code-tabs-item title="Before.cs" %}
+Before.cs
+
 ```csharp
 using Starcounter;
 
@@ -586,9 +564,9 @@ namespace RenameField
     }
 }
 ```
-{% endcode-tabs-item %}
 
-{% code-tabs-item title="After.cs" %}
+After.cs
+
 ```csharp
 using Starcounter;
 
@@ -612,21 +590,19 @@ namespace RenameField
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
-#### Remarks
+### Remarks
 
 Renaming a field equals a combined refactoring of removing a field and adding a field. Hence, everything that applies to those refactorings applies here.
 
-### 8. Rename a Property
+## 8. Rename a property
 
 _Rename a property in a database class._
 
-#### Source code
+### Source code
 
-{% code-tabs %}
-{% code-tabs-item title="Before.cs" %}
+Before.cs
+
 ```csharp
 using Starcounter;
 
@@ -650,9 +626,9 @@ namespace RenameProperty
     }
 }
 ```
-{% endcode-tabs-item %}
 
-{% code-tabs-item title="After.cs" %}
+After.cs
+
 ```csharp
 using Starcounter;
 
@@ -676,21 +652,19 @@ namespace RenameProperty
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
-#### Remarks
+### Remarks
 
 Renaming a property equals a combined refactoring of removing a property and adding a property. Hence, everything that applies to those refactorings applies here.
 
-### 9. Rename a Class
+## 9. Rename a class
 
 _Rename a database class._
 
-#### Source code
+### Source code
 
-{% code-tabs %}
-{% code-tabs-item title="Before.cs" %}
+Before.cs
+
 ```csharp
 using Starcounter;
 
@@ -711,9 +685,9 @@ namespace RenameClass
     }
 }
 ```
-{% endcode-tabs-item %}
 
-{% code-tabs-item title="After.cs" %}
+After.cs
+
 ```csharp
 using Starcounter;
 
@@ -734,10 +708,10 @@ namespace RenameClass
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
-#### Remarks
+### Remarks
 
 Renaming a field equals a combined refactoring of removing a class and adding a class. Hence, everything that applies to those refactorings applies here.
+
+For more information take a look at all issues tagged [database refactoring](https://github.com/Starcounter/Starcounter/labels/Database%20refactoring)
 

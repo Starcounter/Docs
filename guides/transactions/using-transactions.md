@@ -1,22 +1,18 @@
 # Using Transactions
 
-## Introduction
-
-Although short- and long-running transaction are similar in many ways, there are also some crucial differences. This page outlines how to choose what transaction to use and how to mix transactions.
-
 ## Choosing Transaction
 
 It's important to chose the right transaction. In most situation, the choice is clear - if you are going to attach a transaction to a view-model, use a long-running transaction, otherwise, use a short-running transaction. When the choice is not clear, consider these factors:
 
 ### Side Effects
 
-Since `Db.Transact` and `Db.TransactAsync` can run more than once because of conflicts, they should not have any side effects, such as HTTP calls or writes to a file. \`Db.Scope\` can have side effects, as long as it's not in an iterator.
+Since `Db.Transact` and `Db.TransactAsync` can run more than once because of conflicts, they should not have any side effects, such as HTTP calls or writes to a file. `Db.Scope` can have side effects, as long as it's [not in an iterator](long-running-transactions.md#scerriteratorclosed-scerr4139).
 
 ### Rollbacks
 
 The only way to rollback changes in `Db.Transact` and `Db.TransactAsync` is to throw an exception in the transaction. The alternative is to use `Db.Scope` with `Transaction.Rollback`.
 
-### Conflics
+### Conflicts
 
 If conflicts are likely, use `Db.Transact` or `Db.TransactAsync` because these handle conflicts while `Db.Scope` doesn't.
 
@@ -25,13 +21,11 @@ If conflicts are likely, use `Db.Transact` or `Db.TransactAsync` because these h
 Transactions can be mixed as outer and inner transactions - one transaction wraps around the other. These are the possible combinations and their effects:
 
 | Outer | Inner | Effect |
-| :--- | :--- | :--- |
-| Long | Long | Execute inner as part of outer |
+| --- | --- | --- |
+| Long | Long | Execute inner as a part of outer |
 | Long | Short | Execute inner as a separate transaction |
 | Short | Long | Not supported. Run-time error |
 | Short | Short | Execute inner as part of outer |
-
-Transactions can be mixed as outer and inner transactions - one transaction wraps around the other. These are the possible combinations and their effects:
 
 ### Long-Running in Long-Running
 
@@ -54,11 +48,12 @@ class Program
 
             Db.Scope(() =>
             {
-                Transaction.Current.Commit(); // Commits the Person
-                new Animal();
+                new Animal();            
+
+                // Rolls back Person and Animal
+                Transaction.Current.Rollback();
             });
 
-            Transaction.Current.Commit(); // Commits the Animal
         });
     }
 }
@@ -66,7 +61,7 @@ class Program
 
 ### Short-Running in Long-Running
 
-Short-running transactions in long-running transactions are executed separately: 
+Short-running transactions in long-running transactions are executed separately:
 
 ```csharp
 using Starcounter;
@@ -115,10 +110,10 @@ Db.Transact(() =>
     {
         new Person(); 
     });
-}); 
+});
 ```
 
-### Short-Running in Short-Running
+## Short-Running in Short-Running
 
 Short-running in short-running transactions work the same as with long-running in long-running transactions: the inner transaction is executed as a part of the outer:
 
@@ -150,13 +145,13 @@ class Program
 
 ## ScErrReadOnlyTransaction
 
- If an operation is done on the database without a transaction an exception will be thrown:
+If an operation is done on the database without a transaction an exception will be thrown:
 
 ```text
 The transaction is readonly and cannot be changed to write-mode. (ScErrReadOnlyTransaction (SCERR4093))
 ```
 
- For example:
+For example:
 
 ```csharp
 [Database]
@@ -171,7 +166,7 @@ class Program
 }
 ```
 
- To fix this, wrap the operation in a transaction:
+To fix this, wrap the operation in a transaction:
 
 ```csharp
 [Database]

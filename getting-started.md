@@ -59,11 +59,7 @@ namespace HelloStarcounter
 
 Run the application by pressing `F5` and go to `http://localhost:8080/Hello`.
 
-
-
-![](.gitbook/assets/hellostarcounter.PNG)
-
-
+![Hello Starcounter!](.gitbook/assets/hellostarcounter%20%281%29.PNG)
 
 If you see the screen above, then you've done everything right so far.
 
@@ -73,7 +69,7 @@ With everthing set up, you can start the [HelloWorld tutorial](tutorial/). It wi
 
 ## 5. Read More About Starcounter
 
-To get a deeper understanding of Starcounter, read the [Starcounter](/Starcounter/README.md) section where we describe some of the fundamental concepts. You can then head over to the [topic guides](guides/) and get an in depth look on specific topics.
+To get a deeper understanding of Starcounter, read the [Starcounter](https://github.com/Starcounter/Docs/tree/a457da51e4f68712de07c6ce90f9b1987ce2f3db/Starcounter/README.md) section where we describe some of the fundamental concepts. You can then head over to the guides and read the [essential reading](guides/).
 
 ## 6. Try the Sample Apps
 

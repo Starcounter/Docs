@@ -3,7 +3,7 @@
 Let's deepen into technical details in order to understand how two layers, application and database, are physically merged into one.  
 We can say that database and application server are represented by two parallel running processes. In the picture they are presented as ScDATA and ScCODE respectively. Inbound and outbound traffic towards those processes is initially handled by Gateway process.
 
-![](https://blobscdn.gitbook.com/v0/b/gitbook-28427.appspot.com/o/assets%2Fstarcounter%2F-KtlXIfH9-aKypOu9PcB%2F-KtlXLIx1NBxEuqS_zbR%2FConnects.gif?alt=media&token=d9ecfe43-57b9-401b-b63b-ede9027a43f3)
+![](http://starcounter.io/wp-content/uploads/2016/06/web-DB-explanation.gif)
 
 Distinction of depicted processes:
 
@@ -13,7 +13,7 @@ Distinction of depicted processes:
 
 Communication between processes is organized through the shared memory. This allows processes to efficiently exchange messages, preserving processes isolation, security and consistency.
 
-## Codehost Isolation
+## Codehost isolation
 
 Gateway and Codehost processes operate on one shared memory segment, while Database and Codehost on another, meaning that Gateway has no direct access to Database process - it can only communicate with the Codehost.
 

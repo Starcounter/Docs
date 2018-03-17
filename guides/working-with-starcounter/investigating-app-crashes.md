@@ -1,10 +1,6 @@
-# Investigating App Crashes
-
-## Introduction
+# Investigating app crashes
 
 Recall how Starcounter works: it loads your whole application inside Starcounter host process. Hence, if your application has a bug \(in its code, in one of 3-rd party components you use etc\), the bug will crash Starcounter process. This crash shall not corrupt any data, as the data manager works in a different process and the database is inherently designed to survive software and hardware failures. In case of exception, Starcounter uses "let it crash and die" principle: thus, we do not intercept the exception from user code into Starcounter host process, and let the process die in case of exception. This also means that Starcounter will not leave a record in its log in case of your application's exception. However, when your code crashes Starcounter host, you want to get max out of the crash to debug your app. In order to achieve that, you need to tune your OS in the way explained below.
-
-## Collecting Crash Dumps
 
 If your application crashed:
 

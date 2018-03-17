@@ -1,7 +1,5 @@
 # JSON-by-example
 
-## Introduction
-
 JSON-by-example defines Typed JSON objects.
 
 It works by providing a sample instance of JSON that transpiles into Typed JSON classes. You can find these generated classes in the `obj > x64 > Debug` or `obj > x64 > Release` directory of the project with the filename extension `json.g.cs`.
@@ -18,16 +16,14 @@ To create a Typed JSON class, choose `New item`, or use Ctrl + Shift + A in Visu
 
 One of the simplest JSON-by-example files look like this:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json" %}
+PersonPage.json
+
 ```javascript
 {
     "FirstName": "",
     "LastName": ""
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
 Here, we set the value to an empty string to declare the type.
 
@@ -40,22 +36,22 @@ var personPage = new PersonPage();
 string name = personPage.FirstName; // Contains the value "", an empty string
 ```
 
-## Default Values
+### Default Values
 
 It's simple to set default values in JSON-by-example. Building on the previous code example, it might look like this:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json" %}
+PersonPage.json
+
 ```javascript
 {
     "FirstName": "Steven", 
     "LastName": "Smith"
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
 By doing this, the JSON returned when creating a new `PersonPage` object will be `{"FirstName":"Steven","LastName":"Smith"}`:
+
+Program.cs
 
 ```csharp
 Handle.GET("/GetPerson", () =>
@@ -64,7 +60,7 @@ Handle.GET("/GetPerson", () =>
 });
 ```
 
-## Supported Datatypes
+## Supported datatypes
 
 Typed JSON follows the specification of JSON, which means that objects, arrays and single values are all allowed. One difference is that when working with the C\#-object and numbers we have the possibility to specify a more exact type. What in JSON is `Number`, splits up in `Int64`, `Double` and `Decimal`.
 
@@ -81,11 +77,15 @@ The following is a list of the tokens in JSON and the equivalence in C\#:
 
 To specify the type of a member in JSON-by-example, define it in the code-behind:
 
+Foo.json
+
 ```javascript
 {
   "Value": 2E3 // will parse as decimal by default.
 }
 ```
+
+Foo.json.cs
 
 ```csharp
 partial class Foo : Json
@@ -111,7 +111,7 @@ To mark a specific value as writable by the client, add a dollar sign \(`$`\) at
 }
 ```
 
-## Trigger Properties
+### Trigger Properties
 
 Trigger properties is a common use for writable JSON properties. They notify the code-behind that a change has happened. Here's an example of a trigger property:
 
@@ -125,7 +125,7 @@ Trigger properties is a common use for writable JSON properties. They notify the
 
 An incrementation in `SaveTrigger$`
 
-## The HTML Property
+## The HTML property
 
 In all the [sample apps](https://github.com/StarcounterApps/), there is an "Html" property in every, or almost every, `.json` file. The value of this property contains the path to the corresponding HTML view which means that the middleware [HtmlFromJsonProvider](../network/middleware.md#htmlfromjsonprovider) can locate this HTML view and send it to the client. This allows the developer to return a Typed JSON object from a handler and still return the corresponding view as well.
 

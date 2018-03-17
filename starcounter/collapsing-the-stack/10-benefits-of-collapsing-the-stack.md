@@ -1,5 +1,7 @@
 # 10 Benefits of Collapsing the Stack
 
+## 10 Benefits of Collapsing the Stack
+
 The best way we can illustrate the benefits of the collapsed-stack approach is by sharing some of the results we’ve achieved with our own in-memory database and application platform:
 
 ### 1. Fast, responsive and multi-platform GUI
@@ -42,7 +44,7 @@ Sharing data allows it to be managed in a meaningful way, and empowers strong no
 
 Enterprise system users will benefit from running highly modular solutions built with a full set of integrated modules, as requested by the business. Wrapper apps functioning inside the platform will allow for the seamless integration of legacy systems into the new solution, providing enterprises with a smooth migration path, as well as an escape from vendor lock-in situations.
 
-### Are you Ready for the Future?
+## Are you Ready for the Future?
 
 The approaching Internet of Things era makes utilization of in-memory platforms and collapsed stacks unavoidable. To put things in perspective, moving from around 7 billion humans to 60 billion humans—users and devices— means we can expect an increase of at least 7 times more transaction loads. As soon as the year 2020, 26 to 50 billion devices are expected to be connected to the network.
 

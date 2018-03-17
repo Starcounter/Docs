@@ -1,14 +1,12 @@
 # Referential Integrity and Constraints
 
-## Introduction
+A widely accepted [definition](http://databases.about.com/cs/administration/g/refintegrity.htm) of referential integrity says that: "Referential integrity is a database concept that ensures that relationships between tables remain consistent. When one table has a foreign key to another table, the concept of referential integrity states that you may not add a record to the table that contains the foreign key unless there is a corresponding record in the linked table."
 
-Starcounter does not have complete support for referential integrity or constraints. 
+You can get a more in-depth explanation of this concept on [Wikipedia](https://en.wikipedia.org/wiki/Referential_integrity).
 
-Referential integrity can instead be achieved using commit hooks which allow the developer to ensure that the correct corresponding item is deleted or added when removing or committing an item to the database.
+Starcounter does not, in the status quo, have complete support for referential integrity. Instead, referential integrity can be achieved using [commit hooks](../transactions/commit-hooks.md) which allow the developer to ensure that the correct corresponding item is deleted or added when removing or committing an item to the database.
 
-## Referential Integrity with Commit Hooks
-
-Commit hooks should be implemented in a separate class and then registered when the application is started. Here's an example of that:
+These commit hooks should be implemented in a separate class and then registered when the application is started. Here's an example of that:
 
 Let's say you have two DB classes: parent `Order` and child `OrderItem`:
 
@@ -29,7 +27,7 @@ public class OrderItem
 }
 ```
 
-Here the commit hooks are declared in a separate class in a `Register` method:
+Here the commit hooks are declared in a separate class within a `Register` method:
 
 ```csharp
 public class Hooks
@@ -45,8 +43,7 @@ public class Hooks
         {
             if (entity.Order == null)
             {
-                throw new Exception(
-                    "OrderItem.Order is not a null property");
+                throw new Exception("OrderItem.Order is not a null property");
             }
         };
 
@@ -54,15 +51,14 @@ public class Hooks
         {
             if (entity.Order == null)
             {
-                throw new Exception(
-                    "OrderItem.Order is not a null property");
+                throw new Exception("OrderItem.Order is not a null property");
             }
         };
     }
 }
 ```
 
-In this code, we register the hooks by using `var hooks = new Hooks();` and `hooks.Register();`.
+In this code, we register the hooks by simply using `Hooks hooks = new Hooks();` and `hooks.Register();`.
 
 ```csharp
 public class Program 
@@ -76,13 +72,13 @@ public class Program
         // This transaction will pass without errors.
         Db.Transact(() =>
         {
-            var order = new Order()
+            Order order = new Order()
             {
                 Customer = "A customer",
                 Date = DateTime.Now
             };
 
-            var item = new OrderItem()
+            OrderItem item = new OrderItem()
             {
                 Order = Order,
                 Product = "Starcounter license",
@@ -94,7 +90,7 @@ public class Program
         // since the Order property of the OrderItem is NULL.
         Db.Transact(() =>
         {
-            var item = new OrderItem()
+            OrderItem item = new OrderItem()
             {
                 Product = "Starcounter license",
                 Quantity = 10
@@ -111,7 +107,7 @@ public class Program
 }
 ```
 
-Two things that are done here:
+There are essentially two things that are done here:
 
 1. When making an `INSERT` or `UPDATE`, the commit hooks will check if the reference to the database object is set properly. If not, then it throws an exception and prevents the item from being updated or saved to the database.
 2. Before deleting a parent entity it deletes the children of that entity.
@@ -120,13 +116,13 @@ Two things that are done here:
 
 As an alternative to the `BeforeDelete` commit hook, you can use the Starcounter method `OnDelete`.
 
-`OnDelete` works similar to the `OnData` and `HasChanged` callback methods that are explained on the [callback methods page](../typed-json/callback-methods.md). It executes some code every time an instance of that class is deleted.
+`OnDelete` works similar to the `OnData` and `HasChanged` callback methods that are explained [here](../typed-json/callback-methods.md). It executes some code every time an instance of that class is deleted. To accomplish this you have to make use of the `IEntity` interface.
 
-This is how it looks in code:
+This is how it would look in code:
 
 ```csharp
 [Database]
-public class Foo
+public class Foo : IEntity
 {
     public void OnDelete()
     {
@@ -135,7 +131,7 @@ public class Foo
 }
 ```
 
-If we create a new instance of the class `Foo` and then delete it by calling `fooInstance.Delete()` we would run `CalledWhenInstanceIsDeleted()`.
+So if we create a new instance of the class `Foo` and then delete it by calling `fooInstance.Delete()` we would run `CalledWhenInstanceIsDeleted()`.
 
 ## Constraints
 

@@ -11,17 +11,15 @@ Every app should have a black and white icon that appears:
 * as the package icon in the Warehouse
 * as the link to the default entrypoint in the [Launchpad](https://github.com/starcounterapps/launchpad)
 
-### Icon Size
+## Icon size
 
 The default icon size should be **24x24** pixels.
 
 This happens to be the default size in Polymer \([`iron-icon`](https://elements.polymer-project.org/elements/iron-icon)\). It is one of the standard icon sizes in many icon packs, such as [Visualpharm](http://www.visualpharm.com/articles/icon_sizes.html) and [Icons8](https://icons8.com/articles/choosing-the-right-size-and-format-for-icons/).
 
-### Insert an SVG Button Icon and Restyle It
+## How to insert an SVG button icon and restyle it
 
-{% hint style="warning" %}
-The icon should not have a `fill` attribute anywhere inside of the SVG file. Otherwise, it will be harder to style it from CSS.
-{% endhint %}
+**Warning**: The icon should not have a `fill` attribute anywhere inside of the SVG file. Otherwise, it will be harder to style it from CSS.
 
 In the `dom-bind` part of your partial define a `<button>` that includes an inline SVG or and inline SVG with `<use>` reference to an external file:
 

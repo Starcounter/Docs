@@ -1,19 +1,17 @@
 # Callback Methods
 
-## Introduction
-
 Typed JSON files can be affected by changes from the client or the server. This page describes callback methods for changes on the server side.
 
 ## OnData
 
-`OnData` is the method that is called when the `Data` property is set, as described in the [data bindings section](json-data-bindings.md#binding-to-database-objects).
+`OnData` is the method that is called when the `Data` property is set, as described in the [data bindings section](data-bindings.md#binding-to-database-objects).
 
 The `OnData` method is usually used to initialize the parts of the view-model that cannot be initialized by setting the `Data` property. Several examples of this can be found in the [KitchenSink repo](https://github.com/StarcounterApps/KitchenSink/blob/fad83975ec3b4ebf6201458ea228547e6756d507/src/KitchenSink/ChartPage.json.cs).
 
 The basic structure for using `OnData` looks like this:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json.cs" %}
+PersonPage.json.cs
+
 ```csharp
 using Starcounter;
 
@@ -30,8 +28,6 @@ namespace MyApp
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
 ## HasChanged
 
@@ -71,5 +67,5 @@ namespace ModelChangeEventTestProject
 Just to sum up methods purposes:
 
 * `OnData` - triggered when the data property is changed.
-* `HasChanged` - triggered when the value is changed. 
+* `Haschaned` - triggered when the value is changed. 
 

@@ -1,4 +1,4 @@
-# Attach an HTTP Request to an Existing Long-Running Transaction
+# Attach a request to long running transactions
 
 When you are building a multi-page application, it might be useful to create an object in a transaction without committing it.
 
@@ -45,7 +45,7 @@ Handle.GET("/people/persons/{?}", (string id) =>
 });
 ```
 
-### Read more
+## Read more
 
 [Guide: Long-running transactions](../guides/transactions/long-running-transactions.md)
 
