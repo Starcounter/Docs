@@ -123,7 +123,7 @@ Go to `localhost:8181/#/server/network` to see internal environment, the informa
 
 The system port and gateway port can be changed at `localhost:8181/#/server/settings`.
 
-![](../../.gitbook/assets/capture.PNG)
+![](../../.gitbook/assets/changing_ports.png)
 
 The "Allow Remote Access" option determines if the Administrator accepts requests from outside localhost. If it's set to "yes", any other machine in the same network can access the Administrator and if it's "no", then the Administrator will only accept requests from localhost. The default value is "no". 
 
