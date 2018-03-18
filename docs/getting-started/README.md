@@ -1,9 +1,3 @@
----
-description: >-
-  To get started building apps with Starcounter, follow these steps and you'll
-  know everything you need to build world class web apps.
----
-
 # Getting started
 
 ## 1. Install Visual Studio
@@ -20,7 +14,7 @@ Take a look at the [download page](https://starcounter.io/download/) for system 
 
 The installer will guide you through the process and install the Visual Studio Starcounter extension.
 
-{% page-ref page="../guides/working-with-starcounter/installation.md" %}
+{% page-ref page="../topic-guides/working-with-starcounter/installation.md" %}
 
 {% hint style="info" %}
 Starcounter can also be used with Docker, see [Starcounter.Docker.Windows](https://github.com/Starcounter/Starcounter.Docker.Windows).
@@ -83,7 +77,7 @@ If you see the screen above, then you've done everything right so far.
 
 ## 4. Do the HelloWorld tutorial
 
-With everthing set up, you can start the [HelloWorld tutorial](tutorial/). It will teach you the basic features of Starcounter and how to build a standalone app.
+With everthing set up, you can start the [HelloWorld tutorial](hello-world-tutorial/). It will teach you the basic features of Starcounter and how to build a standalone app.
 
 ## 5. Read more about Starcounter
 
