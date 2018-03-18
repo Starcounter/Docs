@@ -13,7 +13,7 @@ SELECT (e.Salary * 12) / 365 FROM Employee e
 ```
 
 {% hint style="info" %}
-For the expected datatypes of an arithmetic operation, see [Datatypes](../database/datatypes.md).
+For the expected datatypes of an arithmetic operation, see [Datatypes](../database/data-types.md).
 {% endhint %}
 
 ## String Concatenation

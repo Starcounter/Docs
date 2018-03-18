@@ -26,7 +26,7 @@ We recommend using auto-implemented properties instead of fields in database cla
 
 #### Access Levels
 
-Properties and fields have to be public, otherwise, `ScErrNonPublicFieldNotExposed` will be thrown with `ScErrCantBindAppWithPrivateData (SCERR2149)`. This also applies to properties with the [`Transient`](creating-database-classes.md#preventing-fields-from-becoming-database-columns) attribute.
+Properties and fields have to be public, otherwise, `ScErrNonPublicFieldNotExposed` will be thrown with `ScErrCantBindAppWithPrivateData (SCERR2149)`. This also applies to properties with the [`Transient`](database-classes.md#preventing-fields-from-becoming-database-columns) attribute.
 
 #### Preventing Fields From Becoming Database Columns
 

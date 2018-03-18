@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Literals are used for queries in the [Administrator](../working-with-starcounter/administrator-web-ui.md), they can also be used instead of [variables](../database/querying-using-sql.md#using-variables) in programming code with `Db.SlowSQL` although, this comes with a heavy performance penalty.
+Literals are used for queries in the [Administrator](../working-with-starcounter/administrator-web-ui.md), they can also be used instead of [variables](../database/querying-with-sql.md#using-variables) in programming code with `Db.SlowSQL` although, this comes with a heavy performance penalty.
 
 ## Boolean
 

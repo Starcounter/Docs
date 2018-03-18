@@ -2,7 +2,7 @@
 
 ## Introduction
 
-There are three data manipulation statements in SQL92: `INSERT`, `UPDATE` and `DELETE`. `UPDATE` is not supported in Starcounter SQL, `DELETE` is available through `Db.SQL`, and `INSERT` is available with [reload](../working-with-starcounter/unload-reload.md). Objects are otherwise created and updated in the programming code.
+There are three data manipulation statements in SQL92: `INSERT`, `UPDATE` and `DELETE`. `UPDATE` is not supported in Starcounter SQL, `DELETE` is available through `Db.SQL`, and `INSERT` is available with [reload](../working-with-starcounter/using-unloadreload-to-modify-database-schema.md). Objects are otherwise created and updated in the programming code.
 
 All modifications have to be wrapped in a transaction. These modifications are visible to other transaction after the changes have been commited.
 
@@ -19,7 +19,7 @@ new Person()
 ```
 
 {% hint style="info" %}
-Read more about creating database object on the [database classes page](creating-database-classes.md#create-database-objects)
+Read more about creating database object on the [database classes page](database-classes.md#create-database-objects)
 {% endhint %}
 
 ## Update
@@ -80,5 +80,5 @@ foreach (var person in people)
 }
 ```
 
-Read more in the [kernel Q&A](../working-with-starcounter/kernel-q-and-a.md).
+Read more in the [kernel Q&A](../working-with-starcounter/kernel-questions-and-answers.md).
 

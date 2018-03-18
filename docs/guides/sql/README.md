@@ -8,10 +8,10 @@ Starcounter SQL follows the established standard SQL92 \(ANSI INCITS 135-1992, R
 
 There are two to use Starcounter SQL:
 
-1. In programming code with `Db.SQL` as described in [Querying using SQL](../database/querying-using-sql.md).
+1. In programming code with `Db.SQL` as described in [Querying using SQL](../database/querying-with-sql.md).
 2.  In the interactive SQL browser of the [Starcounter Administrator](../working-with-starcounter/administrator-web-ui.md).
 
-The SQL in the Administrator and in code are not identical. For performance reasons, [literals](literals.md) can't be used in the programming code with `Db.SQL` while it's available in the Administrator. Because of this, when using the examples in this documentation, remember to replace literals with [variables](../database/querying-using-sql.md#using-variables) in programming code.
+The SQL in the Administrator and in code are not identical. For performance reasons, [literals](literals.md) can't be used in the programming code with `Db.SQL` while it's available in the Administrator. Because of this, when using the examples in this documentation, remember to replace literals with [variables](../database/querying-with-sql.md#using-variables) in programming code.
 
 ## Object Extensions to SQL
 

@@ -6,7 +6,7 @@ Typed JSON files can be affected by changes from the client or the server. This 
 
 ## OnData
 
-`OnData` is the method that is called when the `Data` property is set, as described in the [data bindings section](json-data-bindings.md#binding-to-database-objects).
+`OnData` is the method that is called when the `Data` property is set, as described in the [data bindings section](data-bindings.md#binding-to-database-objects).
 
 The `OnData` method is usually used to initialize the parts of the view-model that cannot be initialized by setting the `Data` property. Several examples of this can be found in the [KitchenSink repo](https://github.com/StarcounterApps/KitchenSink/blob/fad83975ec3b4ebf6201458ea228547e6756d507/src/KitchenSink/ChartPage.json.cs).
 

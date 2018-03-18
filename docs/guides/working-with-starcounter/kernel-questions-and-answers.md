@@ -31,7 +31,7 @@ Due to the latency of external storage, securing every transaction independently
 
 ### How does logging work?
 
-A description of logging and anwers to questions like "what is log and logopt?", "when and how are logs converted into logopt?", and "what is the way to tweak the parameters of logging?" can be found on the [Log Retention page](log-retention.md).
+A description of logging and anwers to questions like "what is log and logopt?", "when and how are logs converted into logopt?", and "what is the way to tweak the parameters of logging?" can be found on the [Log Retention page](log-files.md).
 
 ### How is the transaction log data secured?
 

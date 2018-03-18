@@ -20,7 +20,7 @@ To make transaction isolated, Starcounter uses [snapshot isolation](https://en.w
 
 ### Durability
 
-Durability ensures that commited transactions will survive permanently. Starcounter solves this by writing transactions to a transaction log after commits. Find more information about this at the [log retention](../working-with-starcounter/log-retention.md) page.
+Durability ensures that commited transactions will survive permanently. Starcounter solves this by writing transactions to a transaction log after commits. Find more information about this at the [log retention](../working-with-starcounter/log-files.md) page.
 
 ### Concurrency Control
 

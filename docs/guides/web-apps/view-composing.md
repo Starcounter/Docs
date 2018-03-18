@@ -171,7 +171,7 @@ Composing allows us to make views coming from multiple apps to look like one by 
 ## Read More
 
 * [Layout compositions for HTML partials](https://starcounter.io/layout-compositions-html-partials/) - Blog October 2016
-* [Html Views Blending Guidelines](html-view-guidelines.md) - Docs
+* [Html Views Blending Guidelines](html-views-blending-guidelines.md) - Docs
 * [Shadow DOM v1: Self-Contained Web Components](https://developers.google.com/web/fundamentals/getting-started/primers/shadowdom) - Google Developers
 
 

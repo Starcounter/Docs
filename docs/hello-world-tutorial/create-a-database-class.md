@@ -6,7 +6,7 @@ We will start by creating a Starcounter application in Visual Studio by going to
 
 ## Add a Persistent Class
 
-Create a new class called `Person` with the attribute [`[Database]`](../guides/database/creating-database-classes.md) in the `Program.cs` file. This attribute tag will make all instances of the class persistent.
+Create a new class called `Person` with the attribute [`[Database]`](../guides/database/database-classes.md) in the `Program.cs` file. This attribute tag will make all instances of the class persistent.
 
 Add the properties `FirstName` and `LastName` to this class. Your code should now look like this:
 

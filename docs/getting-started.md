@@ -75,7 +75,7 @@ If you see the screen above, then you've done everything right so far.
 
 ## 4. Do the HelloWorld Tutorial
 
-With everthing set up, you can start the [HelloWorld tutorial](tutorial/). It will teach you the basic features of Starcounter and how to build a standalone app.
+With everthing set up, you can start the [HelloWorld tutorial](hello-world-tutorial/). It will teach you the basic features of Starcounter and how to build a standalone app.
 
 ## 5. Read More About Starcounter
 

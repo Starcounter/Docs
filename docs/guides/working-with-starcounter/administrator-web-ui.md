@@ -27,8 +27,6 @@ It's possible to create and delete databases in the Administrator. To prevent co
 
 Create new databases at `localhost:8181/#/databases` by pressing "New database".
 
-
-
 ![](../../.gitbook/assets/3.png)
 
 Databases are also deleted in the same view. Deletions have to be verified by entering the name of the database in the pop-up window.
@@ -51,7 +49,7 @@ Go to a database by clicking on its name in the list of databases. Then, click o
 
 Apps will start together with the database if "Auto-Start" is clicked. The padlock icon shows if an app can be deleted.
 
-![](../../.gitbook/assets/database.png)
+![](../../.gitbook/assets/database%20%281%29.png)
 
 ## SQL Browser
 
@@ -71,7 +69,7 @@ SELECT Person.FullName, Text FROM Quote WHERE Person.FirstName = 'Albert'
 
 This is the result:
 
-![](../../.gitbook/assets/screenshot-2015-10-02-17.23.40.png)
+![](../../.gitbook/assets/screenshot-2015-10-02-17.23.40%20%281%29.png)
 
 ### SQL Query Plan
 
@@ -89,13 +87,13 @@ Apps can be downloaded to a database from the `App Warehouse` tab. Once an app h
 
 Click the `Download` button to download an app. Downloaded apps can be controlled on the database page.
 
-![](../../.gitbook/assets/appstore1.png)
+![](../../.gitbook/assets/appstore1%20%281%29.png)
 
 ## Starting Executables {#starting-executables}
 
 You can launch an application in a database by going to `localhost:8181/#/databases/default/applicationStart`. Specify the path to your `.exe` application in the field and, optional, the resource directories \(which contain files needed for the app, like html files\).
 
-![](../../.gitbook/assets/startapp.png)
+![](../../.gitbook/assets/startapp%20%281%29.png)
 
 ## Database Configuration
 
@@ -117,7 +115,7 @@ Go to `localhost:8181/#/server/log` to see debug steps, notices, warnings, and e
 
 Go to `localhost:8181/#/server/network` to see internal environment, the information about network facilities for Starcounter installation that comes with the network gateway.
 
-![](../../.gitbook/assets/9.png)
+![](../../.gitbook/assets/9%20%281%29.png)
 
 ## Server Configuration
 
@@ -125,5 +123,5 @@ The system port and gateway port can be changed at `localhost:8181/#/server/sett
 
 ![](../../.gitbook/assets/changing_ports.png)
 
-The "Allow Remote Access" option determines if the Administrator accepts requests from outside localhost. If it's set to "yes", any other machine in the same network can access the Administrator and if it's "no", then the Administrator will only accept requests from localhost. The default value is "no". 
+The "Allow Remote Access" option determines if the Administrator accepts requests from outside localhost. If it's set to "yes", any other machine in the same network can access the Administrator and if it's "no", then the Administrator will only accept requests from localhost. The default value is "no".
 

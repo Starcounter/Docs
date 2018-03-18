@@ -105,7 +105,7 @@ If you want to store `null` values for data types that essentially are value typ
 
 ## Arithmetic Operations
 
-The data type of the result of an [arithmetic operation](../sql/comparison-predicates.md) is one of the following:
+The data type of the result of an [arithmetic operation](../sql/comparisons-and-logical-operators.md) is one of the following:
 
 1. `Double` \(representing approximate numeric values\) \[highest precedence\]
 2. `Decimal` \(representing exact numeric values\)

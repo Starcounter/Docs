@@ -4,7 +4,7 @@
 
 StarDump CLI is a command-line interface that unloads and reloads database data. It's found in `C:\Program Files\Starcounter\StarDump`.  
 
-The data is unloaded into `sqlite3` files that can be examined or [modified](unload-reload.md#modify-the-schema-in-the-database) with [DB Browser for SQLite](http://sqlitebrowser.org/).
+The data is unloaded into `sqlite3` files that can be examined or [modified](using-unloadreload-to-modify-database-schema.md#modify-the-schema-in-the-database) with [DB Browser for SQLite](http://sqlitebrowser.org/).
 
 {% hint style="info" %}
 All examples on this page assume that you have `C:\Program Files\Starcounter\StarDump` as an environment variable.

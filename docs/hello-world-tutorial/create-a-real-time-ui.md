@@ -17,7 +17,7 @@ With a solid file structure, we can continue by creating the view-model.
 
 ## Define the View-Model
 
-In the JSON file, create three properties called `Html`, `FirstName`, and `LastName`. The values of the properties `FirstName` and `LastName` will be bound to the view _and_ the database. Because of that, it is crucial, for this example, that you name these properties the same as the properties that we have in the `Person` class. That will allow Starcounter to recognize that the `Person` object and the `PersonJson` view-model represents the same things and bind the values of their properties. Learn more about this in the [docs](../guides/typed-json/json-data-bindings.md).
+In the JSON file, create three properties called `Html`, `FirstName`, and `LastName`. The values of the properties `FirstName` and `LastName` will be bound to the view _and_ the database. Because of that, it is crucial, for this example, that you name these properties the same as the properties that we have in the `Person` class. That will allow Starcounter to recognize that the `Person` object and the `PersonJson` view-model represents the same things and bind the values of their properties. Learn more about this in the [docs](../guides/typed-json/data-bindings.md).
 
 The value of the `Html` property is the path to the view that the view-model should be connected to.
 
