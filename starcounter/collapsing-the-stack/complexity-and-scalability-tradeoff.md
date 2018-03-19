@@ -16,11 +16,15 @@ Even if a scaled-out solution contained no complex logic or heavy computations, 
 
 Multi-tier, scale-out, data-excessive architectures can be seen as a tool to solve an effect in popular cases, but not a cause. They work well in different circumstances like social networks, historical data storage, or overnight business intelligence, but produce failures in applications involving the management of valuable resources, including ERP and line-of-business apps.
 
-## Collapsing the Stack
+### Collapsing the Stack
 
 Luckily, instead of attempting to solve the effect—leveraging for local gains with multiple separate tiers—its possible to address the root cause, the development platform itself. Implementing the platform according to updated fundamentals allows for a new breed of applications, globally optimized by simplicity, performance, and modularity. This vision is summarized by the concept of collapsing the stack. For software development, this means making the code concise, eliminating glue code, simplifying system architecture, increasing flexibility, and thus the scalability of the resulting solution. In business terms, this translates to improved agility, competitiveness, and reduced total cost of ownership.
 
-![Collapsing the stack](../../.gitbook/assets/collapsed-stack.png)
+
+
+![](../../.gitbook/assets/collapsed-stack.png)
+
+
 
 Figure 1: Collapsing the software stack; traditional vs. collapsed
 

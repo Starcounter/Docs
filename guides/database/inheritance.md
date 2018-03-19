@@ -1,6 +1,12 @@
 # Inheritance
 
-Starcounter allows any database object to inherit from any other database object.
+## Introduction
+
+Any database object can inherit from any other database object. The `Database` attribute is inherited from base- to subclasses. Hence, any class that directly or indirectly inherits a class with the `Database` attribute becomes a database class.
+
+## Example
+
+In this example, both `PrivateCustomer` and `CorporateCustomer` become database classes due to them inheriting `Customer`:
 
 ```csharp
 [Database]
@@ -20,8 +26,6 @@ public class CorporateCustomer : Customer
 }
 ```
 
-The `Database` attribute is inherited from base- to subclasses. Hence, any class that directly or indirectly inherits a class with the `Database` attribute becomes a database class. In the example above, both `PrivateCustomer` and `CorporateCustomer` become database classes due to them inheriting `Customer`.
-
 The table `Customer` will contain all `PrivateCustomers` and all `CorporateCustomers`. So if there is a private customer called "Goldman, Carl" and a corporate customer called "Goldman Sachs", the result of `SELECT C FROM Customer c` will contain both of them.
 
 ## Base Classes
@@ -34,7 +38,7 @@ SELECT C FROM Customer C WHERE Name LIKE 'Goldman%'
 
 Returns `[ { Name:"Goldman Sachs" }, { Name:"Goldman, Carl" } ]`
 
-### Derived classes
+## Derived classes
 
 ```sql
 SELECT C FROM PrivateCustomer C WHERE Name LIKE 'Goldman%'

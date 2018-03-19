@@ -1,4 +1,6 @@
-# Long-Running Transactions
+# Long running transactions
+
+## Introduction
 
 Starcounter supports long-running transactions. A long-running transaction, as its name indicates, spans over a longer period of time. To create a long-running transaction, use `Db.Scope(Action)` or `(new Transaction(...)).Scope(Action)` and attach it to a view-model.
 
@@ -6,10 +8,11 @@ When creating long-running transactions, it could contain objects that might be 
 
 A long-running transaction can be used on any scheduled thread, however, it cannot be used from more than one thread at a time. If two or more threads call `transaction.Scope(Action)`at the same time, an exception will be thrown.
 
-This document is divided into four parts:  
-1. Creating and attaching long-running transactions  
-2. Dealing with already attached long-running transactions in view-models  
-4. Exceptions and how to solve them
+ This document is divided into three parts:
+
+1.  Creating and attaching long-running transactions
+2.  Dealing with already attached long-running transactions in view-models
+3.  Exceptions and how to solve them
 
 ## Create and Attach
 
@@ -21,7 +24,7 @@ Let's say, for example, that the discount of an order changes when you change th
 
 By allowing the business objects to live inside a transactional scope, the form can view the world as if the changes are there while the outside world does not yet see them. When the form is saved, the transaction is committed or if the form is not saved, the transaction is simply aborted.
 
-### Assigning JSON to a transaction
+### Assigning JSON to a Transaction
 
 Let's assume that you are composing an email in a mail program. You are entering a recipient that is not yet in your contact database. You would then create a new EmailAddress object and assign it to your email.
 
@@ -47,7 +50,7 @@ When Starcounter executes the `Handle` function or when it otherwise operates on
 
 Inside your form, the changes are all there and the information appears updated on the user screen. For the outside world, no unsaved changes are visible to disturb the consistency of your database.
 
-### Using an existing transaction
+### Using an Existing Transaction
 
 Sometimes a transaction is already attached on another part of the view-model. To reuse it, it needs to be scoped before the new page is created.
 
@@ -66,7 +69,7 @@ Handle.GET("/email-client/new-email", () =>
 });
 ```
 
-### Attaching a transaction to an existing JSON object
+## Attaching a Transaction to an Existing JSON Object
 
 If the part of the view-model that the transaction should attach to is already instantiated, for example a default value for a property of type `Json`, the transaction can attach manually.
 
@@ -84,7 +87,7 @@ Handle.GET("/email-client/new-email", () =>
 });
 ```
 
-### Sharing transactions
+### Sharing Transactions
 
 A transaction can attach and be used on more than one instance in the view-model. When a transaction has a scope, all calls inside the scope will use the same transaction.
 
@@ -105,7 +108,7 @@ Handle.GET("/email-client/new-email", () =>
 
 Handle.GET("/email-client/email/{?}", (string emailId) =>
 {
-  Email email = Db.SQL<Email>("SELECT e FROM Email e WHERE ObjectId=?", emailId).FirstOrDefault();
+  Email email = Db.SQL<Email>("SELECT e FROM Email e WHERE ObjectId=?", emailId).First;
   return new MailPage()
   {
     Data = email
@@ -133,7 +136,7 @@ Handle.GET("/email-client/new-email", () =>
 });
 ```
 
-## Handling Long-Running Transactions in View-Models
+### Handling Long-Running Transactions in View-Models
 
 When inside a view-model that's attached to a long-running transaction, it's possible to commit and rollback changes.
 
@@ -164,7 +167,7 @@ partial class MailPage : Json, IBound<Mail>
 {
   void Handle(Input.RecipientAddress action)
   {
-    var emailAddress = Db.SQL<EmailAddress>("SELECT e FROM EmailAddress e WHERE Address = ?", action.value).FirstOrDefault();
+    var emailAddress = Db.SQL<EmailAddress>("SELECT e FROM EmailAddress e WHERE Address = ?", action.value).First;
     if (emailAddress == null)
     {
       emailAddress = new EmailAddress() 
@@ -187,7 +190,7 @@ partial class MailPage : Json, IBound<Mail>
 }
 ```
 
-You can find an example of this in [step 6](https://github.com/Starcounter/Docs/tree/a457da51e4f68712de07c6ce90f9b1987ce2f3db/guides/tutorial/cancel-and-delete/README.md) of the tutorial.
+You can find an example of this in [step 6](/guides/tutorial/cancel-and-delete/README.md) of the tutorial.
 
 ## Exceptions
 
@@ -230,6 +233,7 @@ class Program
 }
 ```
 
+  
 Here, a new object is written to the database but it's never committed or rolled back because long-running transactions don't automatically commit at the end of the scope. Starcounter throws an exception here to avoid confusion on what changes are commited. When using the long-running transaction, ensure that all writes are commited or rolled back before the end of the scope:
 
 ```csharp
@@ -252,4 +256,6 @@ class Program
     }
 }
 ```
+
+
 

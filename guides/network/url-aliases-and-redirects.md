@@ -1,5 +1,7 @@
 # URL Aliases and Redirects
 
+## Introduction
+
 With HTTP handlers, it is possible to express URL transformations such as aliases and redirects.
 
 ## Alias
@@ -40,7 +42,7 @@ Handle.GET("/villains/anakin-skywalker", () =>
 });
 ```
 
-## API for redirection
+### API for Redirection
 
 To redirect your app's URL handler to another handler, call `GET /sc/redirect/{PortNumber}{FromUri};{ToUri}` on system port \(by default 8181\).
 
@@ -48,7 +50,9 @@ For example, to create redirection of `/` to `/myapp` on port 8080, the followin
 
 To create redirection on the startup of your application, you may call `Http.GET(8181, "/sc/redirect/8080/;/myapp");`. Keep in mind, that any other app can overwrite this redirect because there can only be one app handling the host root.
 
-## URI aliasing in network gateway
+## Uri Aliasing
+
+### URI Aliasing in Network Gateway
 
 The classical example is to alias root URI to some other URI in your application. URI aliases are configured in `scnetworkgateway.xml` in your server directory.  
 The following section is an excerpt from gateway configuration:
@@ -80,7 +84,7 @@ In the example above we have declared two URI aliases:
 1. On port 8181 from URI "/" to "/index.html". This is often used to display application initial "index" page when user just specifies the DNS name of the Web-server in the browser.  
 2. On port 8080 from URI "/" to "/launcher". Used to display a dynamic launcher page for the same purposes.
 
-## API for URI aliasing
+### API for URI Aliasing
 
 Starcounter allows adding, modifying, listing, and deleting URI aliases using the following REST API \(should be called on system port \(by default 8181\)\):
 
@@ -124,5 +128,7 @@ For example, `http://127.0.0.1:8181/sc/alias/GET/8080//SomeFromUri`
 Deleting specific URI alias is done using `DELETE /sc/alias/{?}/{?}/{?}` where parameters are `string httpMethod, long dbport, string fromUri`.  
 For example, `http://127.0.0.1:8181/sc/alias/GET/8080//SomeFromUri`
 
-_NOTE_: In comparison with redirects, URI aliasing API adds entries to network gateway configuration and preserved upon gateway/code-host restart.
+{% hint style="info" %}
+In comparison with redirects, URI aliasing API adds entries to network gateway configuration and preserved upon gateway/code-host restart.
+{% endhint %}
 

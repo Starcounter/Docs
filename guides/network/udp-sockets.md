@@ -1,8 +1,10 @@
 # UDP Sockets
 
+## Introduction
+
 UDP is a connection-less protocol with unreliable delivery.
 
-> Learn more about [UDP on Wikipedia](http://en.wikipedia.org/wiki/User_Datagram_Protocol)
+## Using UDP Sockets
 
 Incoming UDP datagrams with maximum size of 30000 bytes are supported \(user code can send datagrams up to 65000 bytes\). In order to receive UDP datagrams, user needs to register a handler using `Handle.Udp`:
 

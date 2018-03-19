@@ -1,18 +1,24 @@
 # Responding with JSON
 
+## Introduction
+
 Typed JSON objects are serialized automatically to the `application/json` format when returned from a handler.
 
-PersonPage.json
+## Example
 
+{% code-tabs %}
+{% code-tabs-item title="PersonPage.json" %}
 ```javascript
 {
     "FirstName": "Bilbo",
     "LastName": "Baggins"
 }
 ```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
 
-Program.cs
-
+{% code-tabs %}
+{% code-tabs-item title="PersonPage.json.cs" %}
 ```csharp
 using Starcounter;
 
@@ -30,6 +36,8 @@ namespace MyApp
     }
 }
 ```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
 
 ## Setting Status Code and Description
 
@@ -39,8 +47,8 @@ To change this, two methods are provided to the `Handle` class: `SetOutgoingStat
 
 In code, they look like this:
 
-Program.cs
-
+{% code-tabs %}
+{% code-tabs-item title="Program.cs" %}
 ```csharp
 using Starcounter;
 
@@ -60,11 +68,13 @@ namespace MyApp
     }
 }
 ```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
 
 It is also possible to change the status code and description by creating a `Response` object:
 
-PersonPage.json
-
+{% code-tabs %}
+{% code-tabs-item title="PersonPage.json" %}
 ```javascript
 {
     "FirstName": "Gandalf",
@@ -72,9 +82,11 @@ PersonPage.json
     "Quote": "You shall not pass!" 
 }
 ```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
 
-Program.cs
-
+{% code-tabs %}
+{% code-tabs-item title="PersonPage.json.cs" %}
 ```csharp
 using Starcounter;
 
@@ -101,6 +113,8 @@ namespace MyApp
     }
 }
 ```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
 
-Note that the JSON needs to be explicitly parsed to a string using `ToJson` when attaching a Typed JSON object to the body of a `Response`.
+The JSON needs to be explicitly parsed to a string using `ToJson` when attaching a Typed JSON object to the body of a `Response`.
 

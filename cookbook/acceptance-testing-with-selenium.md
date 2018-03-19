@@ -1,10 +1,10 @@
-# Acceptance testing with Selenium
+# Acceptance Testing with Selenium
 
 Puppet web apps are C\# apps with a thin presentation layer rendered in HTML5. Because of that, acceptance tests need to be executed in a web browser. If you would like to add automated acceptance testing to your project, there is no better tool than Selenium.
 
 This page teaches how to use NUnit to run Selenium acceptance tests of a Starcounter Puppet web app. It is assumed here that you are using Visual Studio 2015, though it should also work with the older editions.
 
-## What is Selenium
+### What is Selenium
 
 Selenium is a free \(open source\) automated testing suite for web applications across different browsers and platforms.
 
@@ -21,7 +21,7 @@ You can learn more about Selenium at their [website \(docs.seleniumhq.org\)](htt
 * [Selenium Tutorial: Learn Selenium WebDriver](https://blog.udemy.com/selenium-ide-tutorial/)
 * [Getting Started with Selenium IDE](http://www.softwaretestinghelp.com/selenium-ide-download-and-installation-selenium-tutorial-2/)
 
-## What is NUnit
+### What is NUnit
 
 NUnit is a testing framework that has great integration with Visual Studio as well as continuous integration systems \(TeamCity, etc\). We will use NUnit to run our Selenium tests.
 
@@ -33,7 +33,7 @@ You can learn more about NUnit at their [website \(nunit.org\)](https://github.c
 * [Unit testing with .NET](http://www.developerfusion.com/article/84847/unit-testing-with-net/)
 * [Learning NUnit In Easy Way For Beginners](http://learnseleniumtesting.com/learning-nunit-in-easy-way-for-beginners/)
 
-## Create a test project
+### Create a Test Project
 
 It is recommended to keep the testing project in the same solution as the tested project. Note that they are two different projects.
 
@@ -41,9 +41,9 @@ In the following example, we will add acceptance tests to Launcher. Let's create
 
 Call the new project "Launcher.AcceptanceTest". We will use `Launcher\test\` as the project location.
 
-![add new project](../.gitbook/assets/2016-04-01-13_03_00-add-new-project.png)
+![](../.gitbook/assets/2016-04-01-13_03_00-add-new-project.png)
 
-## Install required packages
+### Install Required Packages
 
 Open the newly created test project. Now, we need to install a bunch of libraries mentioned above.
 
@@ -51,7 +51,7 @@ Open the package manager \(Tools → NuGet Packet Manager → Packet Manager Con
 
 **Important:** In the console, choose your test project from the "Default project" dropdown.
 
-![install required packages](../.gitbook/assets/2016-04-01-13_05_38-launcher-microsoft-visual-studio%20%281%29.png)
+![](../.gitbook/assets/2016-04-01-13_05_38-launcher-microsoft-visual-studio.png)
 
 Run the following commands in the console to install the required dependencies:
 
@@ -63,11 +63,11 @@ Install-Package NUnit.ConsoleRunner
 Install-Package NUnit3TestAdapter
 ```
 
-## Running in multiple browsers
+### Running in Multiple Browsers
 
 We don't want to test only Firefox. Because of that, you should use Selenium RemoteWebDriver, which adds a layer of abstraction that runs tests in multiple browsers, possibly on remote machines.
 
-### Install Selenium Standalone Server and browser drivers
+### Install Selenium Standalone Server and Browser Drivers
 
 To make this happen, you will need to install some additional software.
 
@@ -80,9 +80,9 @@ To make this happen, you will need to install some additional software.
   * Google Chrome Driver \(`chromedriver.exe`\)
 * Put the `jar` file as well as 3 `exe` files directly in `C:\Selenium`
 
-Open your `Properties` in the `Tests` project. Go to `Reference Paths`, enter C:\Selenium and click Add Folder.
+Open your Properties in the Tests project. Go to Reference Paths, enter C:\Selenium and click Add Folder.
 
-### Use BaseTest class to run tests in multiple browsers
+### Use BaseTest Class to Run Tests in Multiple Browsers
 
 BaseTest is a helper class that makes it easier to test multiple browsers. The source code is available:
 
@@ -93,11 +93,11 @@ When you rebuild the test project now, you should see each test for every browse
 
 The final setup looks like this:
 
-![visual studio selenium screenshot](../.gitbook/assets/2016-04-01-13_51_26-launcher-microsoft-visual-studio.png)
+![](../.gitbook/assets/2016-04-01-13_51_26-launcher-microsoft-visual-studio.png)
 
 Before you can execute the tests, start Selenium Server Standalone by calling `java -jar selenium-server-standalone-3.*.jar`.
 
-## Wait for asynchronous content
+### Wait for Asynchronous Content
 
 There is one common pitfall when writing Selenium tests. The test is executed with disregard of the asynchronously loaded content. This means that your tests need to explicitly wait for UI elements to appear before running any actions or assertions on them.
 
@@ -132,20 +132,20 @@ It is a good practice to always wait:
 
     asynchrously using `WaitForText`.
 
-## Run your first test
+### Run the First Test
 
 Clone [KitchenSink repo](https://github.com/StarcounterApps/KitchenSink) from the [StarcounterApps organisation](https://github.com/StarcounterApps) on GitHub.  
 Follow the steps that were presented at `Install Selenium Standalone Server and browser drivers`.
 
 Build your test project. If it builds correctly, you should see this:
 
-![Seleninium result screenshot](../.gitbook/assets/2016-04-01-13_34_52-launcher-microsoft-visual-studio%20%281%29.png)
+![](../.gitbook/assets/2016-04-01-13_34_52-launcher-microsoft-visual-studio.png)
 
 Now, the only thing left to do is to run that test! In the Test Explorer, click on the "Run All" button. If it works well, you should see your tests passing.
 
-![test explorer](../.gitbook/assets/2016-04-01-13_40_22-launcher-microsoft-visual-studio%20%281%29.png)
+![](../.gitbook/assets/2016-04-01-13_40_22-launcher-microsoft-visual-studio.png)
 
-## Sample test suites
+### Sample Test Suites
 
 Some of the Starcounter's sample apps come with acceptance test suite. We run tests every night to make sure that we keep the good quality.
 

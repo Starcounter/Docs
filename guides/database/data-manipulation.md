@@ -1,24 +1,14 @@
 # Data manipulation
 
-There are three data manipulation statements in SQL92: `INSERT`, `UPDATE` and `DELETE`. `INSERT`and `UPDATE` are not supported in Starcounter SQL while `DELETE` is available through `Db.SQL`. Objects are created and updated in the programming code.
+## Introduction
+
+There are three data manipulation statements in SQL92: `INSERT`, `UPDATE` and `DELETE`. `UPDATE` is not supported in Starcounter SQL, `DELETE` is available through `Db.SQL`, and `INSERT` is available with [reload](../working-with-starcounter/unload-reload.md). Objects are otherwise created and updated in the programming code.
 
 All modifications have to be wrapped in a transaction. These modifications are visible to other transaction after the changes have been commited.
 
-## Create Database Objects
+## Create
 
-Database objects are created with the native program code operator `new`. For example, consider the following database class:
-
-```csharp
-[Database]
-public class Person
-{
-
-    public String FirstName { get; set; }
-    public String LastName { get; set; }
-}
-```
-
-To create a new instance of this class, the syntax `new Person()` would be used, like this:
+Database objects are created with the native program code operator `new`:
 
 ```csharp
 new Person()
@@ -28,7 +18,11 @@ new Person()
 };
 ```
 
-## Update Database Objects
+{% hint style="info" %}
+Read more about creating database object on the [database classes page](creating-database-classes.md#create-database-objects)
+{% endhint %}
+
+## Update
 
 A database object can be updated using the native program code assign operator `=`.
 
@@ -50,7 +44,7 @@ foreach (var person in people)
 }
 ```
 
-## Delete Database Objects
+## Delete
 
 There are two ways to delete database objects:
 
@@ -73,4 +67,18 @@ Db.SQL("DELETE FROM Person WHERE Name = ?", "John");
 `person.Delete()` will just delete `john` while `DELETE FROM Person` will delete all objects of the `Person` class.
 
 To delete database objects that are bound to the view-model, the view-model object should be deleted before the database object is deleted.
+
+### ScErrMemoryLimitReachedAbort \(SCERR8036\)
+
+Deleting many records with `DELETE FROM` might breach the size limit for a single transaction which will cause Starcounter to throw `ScErrMemoryLimitReachedAbort`. This can be fixed by using `Delete` and splitting the deletion in smaller transactions: 
+
+```csharp
+var people = Db.SQL($"SELECT p FROM {typeof(Person)} p");
+foreach (var person in people)
+{
+    Db.Transact(() => person.Delete());
+}
+```
+
+Read more in the [kernel Q&A](../working-with-starcounter/kernel-q-and-a.md).
 

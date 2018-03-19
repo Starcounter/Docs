@@ -1,10 +1,12 @@
-# Offset key
+# Offset Key
+
+## Introduction
 
 Starcounter allows to retrieve query results in portions without need to keep an `Enumerator` \(a cursor\) with query result open. In addition to standard [OFFSET](fetch.md) clause, Starcounter SQL is extended with `OFFSETKEY` clause, which re-creates the query enumerator and continues after the last retrieved record.
 
 While a server side cursor can provide a snapshot isolation, the `OFFSETKEY` functionality is a good compromise. It provides for client side cursors with no server side state, just as `OFFSET` does, but without the duplicate or missing records common with `OFFSET`.
 
-## How to create queries with OFFSETKEY
+## How to Create Queries with Offset Key
 
 You retrieve each portion of the query result by sending a new query, just as you do with a standard `OFFSET` query. Instead of a number indicating the position you should skip to, you instead retrieve a string value \(the offset key\) at the end of each portion. For the next portion, you provide the exact same query, but with the new key as a parameter value.
 
@@ -22,11 +24,11 @@ The first time the query is used, you should supply the value `null` as the OFFS
 
 The input parameter is a string key, which is obtained on an enumerator to be re-created by calling method `GetOffsetKey()`. The string key for OFFSETKEY clause, _offset key_, can be also retrieved from the query already having OFFSETKEY clause.
 
-### Query limitation
+## Query Limitation
 
 You can't use `OFFSETKEY` with `ORDER BY` or `GROUP BY` clauses.
 
-## Getting an offset key in initial query
+## Getting an Offset Key in Initial Query
 
 The offset key is obtained by calling method `GetOffsetKey()` on enumerable or on enumerator, which is instance of `IRowEnumerator`. Getting offset key on enumerable can be done only if one enumerator was open.
 
@@ -77,45 +79,52 @@ using (IRowEnumerator<User> rows = Db.SQL<User>("SELECT u FROM User u").GetEnume
 }
 ```
 
-## Continuing to retrieve data with an offsetkey query
+## Continue to Retrieve Data with an Offset Key Query
 
-To be able to recreate the `Enumerator` and continue query execution, the query with offset key, _offset key query_, should be the same as the initial query, which was used to obtain the offset key, _original query_. Both query string and query variable values should be the same. Only FETCH and OFFSETKEY clauses can be different between queries. Note that OFFSET and OFFSETKEY clauses cannot be presented in the same query.
+To be able to recreate the `Enumerator` and continue query execution, the query with offset key, _offset key query_, should be the same as the initial query, which was used to obtain the offset key, _original query_. Both query string and query variable values should be the same. Only `FETCH` and `OFFSETKEY` clauses can be different between queries. Note that `OFFSET` and `OFFSETKEY` clauses cannot be presented in the same query.
 
-If an offset key query is not exactly the same as the original query \(apart from the FETCH or OFFSETKEY clauses and  values\), then Starcounter will throw an exception.
+If an offset key query is not exactly the same as the original query \(apart from the `FETCH` or `OFFSETKEY` clauses and  values\), then Starcounter will throw an exception.
 
 If the offset key query is the same as the original query and the offset key is not `null`, then the first row of the result of the offset key query will be the next row after the row of the original query, which was retrieved last before the offset key was gotten. The next row is defined for the moment when the offset key query is called. Thus if there were rows inserted after the last row of the original query, then the offset key query will retrieve them. Deleting the last row of the original query does not affect the result of the offset key query.
 
-Query with `null` value for OFFSETKEY clause is equivalent to query with omitted OFFSETKEY clause.
+Query with `null` value for `OFFSETKEY` clause is equivalent to query with omitted `OFFSETKEY` clause.
 
 If a new row, which has the same values as the last row of original query, \(with or without deleting the last row\) is inserted, then depending on its place in an index used in the query plan the offset key query will either start from it or after it and the last row.
 
-## Examples
-
-### Example of using OFFSETKEY:
+## Example
 
 ```csharp
-byte[] k  = null;
-using (IRowEnumerator<Account> e = Db.SQL<Account>("SELECT a FROM Account a WHERE a.AccountId < ? FETCH ?", 100, 10).GetEnumerator())
+byte[] offsetKey  = null;
+var accounts = Db.SQL<Account>(
+   "SELECT a FROM Account a WHERE a.AccountId < ? FETCH ?", 100, 10);
+    
+using (var enumerator = accounts.GetEnumerator())
 {
-   while (e.MoveNext()
+   while (enumerator.MoveNext()
    {
-       Account a = e.Current;
-       Console.Write(a.AccountId + " ");
+       Account account = enumerator.Current;
+       Console.Write(account.AccountId + " ");
    }
-   k = e.GetOffsetKey();
+   offsetKey = enumerator.GetOffsetKey();
 }
 
-if (k == null) return;
+if (offsetKey == null) 
+   return;
+   
 Console.WriteLine();
 
-using (IRowEnumerator<Account> e = Db.SQL<Account>("SELECT a FROM Account a WHERE a.AccountId < ? FETCH ? OFFSETKEY ?", 100, 5, k).GetEnumerator())
+var accounts = Db.SQL<Account>(
+   "SELECT a FROM Account a WHERE a.AccountId < ? FETCH ? OFFSETKEY ?",
+   100, 5, offsetKey);
+   
+using (var enumerator = accounts.GetEnumerator())
 {
-   while (e.MoveNext()
+   while (enumerator.MoveNext()
    {
-       Account a = e.Current;
-       Console.Write(a.AccountId + " ");
+       Account account = enumerator.Current;
+       Console.Write(account.AccountId + " ");
    }
-   k = e.GetOffsetKey();
+   offsetKey = enumerator.GetOffsetKey();
 }
 ...
 ```
@@ -134,7 +143,6 @@ The code above will return:
 ...
 ```
 
-  
   
 If the database contains accounts with following AccountIds:
 

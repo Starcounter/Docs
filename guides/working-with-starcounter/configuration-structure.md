@@ -2,9 +2,9 @@
 
 ## Introduction
 
-In this page, it's described how the Starcounter configuration structure looks after downloading [Starcounter 2.3](http://downloads.starcounter.com/) and where to find the essential directories and configuration files.
+In this page, it's described how the Starcounter configuration structure looks after downloading Starcounter 2.3 and where to find the essential directories and configuration files.
 
-## Established directories on installation
+## Established Directories on Installation
 
 The Starcounter installer establishes two directories: the _installation directory_ and the _server repository_.
 
@@ -13,7 +13,7 @@ The paths of these can be customized on installation. By default they are:
 * Installation directory: `%ProgramFiles%\Starcounter`
 * Server repository: `%UserProfile%\Documents\Starcounter\Personal`
 
-### Installation directory
+### Installation Directory
 
 All Starcounter binaries are stored under the installation directory. This includes:
 
@@ -22,7 +22,7 @@ All Starcounter binaries are stored under the installation directory. This inclu
 * Internal runtime libraries \(native and managed\)
 * Supportive executables, such as the gateway executable and the data manager executable
 
-**How to find the installation directory**
+#### How to Find the Installation Directory
 
 As part of installing, we populate an environment variable with the path to the installation directory. It can easily be viewed from a prompt doing:
 
@@ -31,11 +31,12 @@ C:\Users\Per>set StarcounterBin
 StarcounterBin=C:\Program Files\Starcounter
 ```
 
-### Server repository
+### Server Repository
 
 This directory store configurations concerning each database. At the root of it is the server configuration file. This file is consumed by Starcounter to find additional configurations. Currently, all configurations are in XML format.
 
-**How to find the server repository**  
+#### How to find the server repository
+
 In the installation directory, we store a file \(`Personal.xml`\) under the Configuration folder:
 
 ```text
@@ -53,18 +54,18 @@ The XML-path `service\server-dir` in this file will reveal the path to the serve
 </service>
 ```
 
-#### The server configuration file
+## The Server Configuration File
 
 The server configuration file is called **Personal.server.config**. At the root is the `Server` node. Some of the more important elements are:
 
 **Database directory:**  
-The directory where we look for the configuration describing each database. Default value: `%ServerRepo%\Databases`.
+The directory where we look for the configuration describing each database. Default value: %ServerRepo%\Databases.
 
 **LogDirectory:**  
-The directory where we write all event logs to. Normally accessed by the user in the Web Administrator "Logs" tab. Default value: `%ServerRepo%\Logs`.
+The directory where we write all event logs to. Normally accessed by the user in the Web Administrator "Logs" tab. Default value: %ServerRepo%\Logs.
 
 **TempDirectory:**  
-The directory used by us when storing temporary data. Should normally be OK to delete all content from. Default value: `%ServerRepo%\Temp`.
+The directory used by us when storing temporary data. Should normally be OK to delete all content from. Default value: %ServerRepo%\Temp.
 
 **SystemHttpPort:**  
 The port we expose the Web Adminstrator on. Can be customized in the installer. Default:8181.
@@ -74,9 +75,9 @@ Default configuration values we use when a new database is created. Customizing 
 
 Example file \(trimmed and simplified\):
 
-![example file](../../.gitbook/assets/c326dc5e-c38e-11e6-8fd6-c095de9c6229-1024x246%20%281%29.png)
+![](../../.gitbook/assets/c326dc5e-c38e-11e6-8fd6-c095de9c6229-1024x246.png)
 
-#### Database configuration files
+## Database Configuration Files
 
 Each database is described by a configuration file. Starcounter will look for such files in the `DatabaseDirectory` as specified in the server configuration file \(see above\). For a database configuration file to be recognized, it must be stored in a directory that has the name of that database. The file itself must use a pattern using the same name.
 
@@ -93,7 +94,7 @@ Example of two configured files:
 The root of each database configuration file is the Database node. Here are the more important elements:
 
 **ImageDirectory:**  
-The directory where the main database data files reside. Default value: `%ServerConfigFile%\DefaultDatabaseConfiguration\Runtime\ImageDirectory`. At the time of creation, Starcounter will add a unique string to the end of that path before creating files.
+The directory where the main database data files reside. Default value: %ServerConfigFile%\DefaultDatabaseConfiguration\Runtime\ImageDirectory. At the time of creation, Starcounter will add a unique string to the end of that path before creating files.
 
 **TransactionLogDirectory:**  
 The directory where transaction logs are stored. Default value: same principle as ImageDirectory applies.
@@ -103,5 +104,5 @@ The port used for handlers registered in user code, if no port is explicitly giv
 
 Example file \(trimmed and simplified\):
 
-![config files](../../.gitbook/assets/0ea702a6-c391-11e6-9949-cd3876f30acb-1024x117.png)
+![](../../.gitbook/assets/0ea702a6-c391-11e6-9949-cd3876f30acb-1024x117.png)
 

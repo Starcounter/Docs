@@ -1,10 +1,12 @@
 # WebSocket
 
+## Introduction
+
 WebSocket is a web technology providing full-duplex communications channels over a single TCP connection.
 
-> Learn more about [WebSocket on Wikipedia](http://en.wikipedia.org/wiki/WebSocket)
+> Learn more about WebSocket on Wikipedia
 
-Starcounter WebSocket implementation is based on [RFC 6455](http://tools.ietf.org/html/rfc6455).
+Starcounter WebSocket implementation is based on RFC 6455.
 
 WebSocket connection upgrade can be made inside an ordinary HTTP handler by calling `SendUpgrade` method on received HTTP `Request` object, for example:
 
@@ -62,7 +64,7 @@ WebSocket ws = new WebSocket(savedWsId);
 ws.Send("My server message!");
 ```
 
-## Details of the SendUpgrade call
+## Details of the SendUpgrade Call
 
 When the `SendUpgrade` method is called, the approving WebSocket upgrade HTTP Response is sent immediately. To be able to get the WebSocket ID before calling `SendUpgrade`, call the `UInt64 Request.GetWebSocketId()`.
 
@@ -85,7 +87,7 @@ where:
 
 Once the WebSocket object is returned, user can fetch the ID representing this WebSocket \(`ToUInt64()`\), and of course, perform data sends and disconnect.
 
-## WebSocket group name and disconnect handlers
+## WebSocket Group Name and Disconnect Handlers
 
 To register a specific WebSocket group to handle WebSocket data receiving events, the `Handle.WebSocket` method should be used, for example:
 
@@ -118,7 +120,7 @@ Handle.WebSocketDisconnect("echotestws", (WebSocket ws) =>
 
 Disconnect event is triggered when underlying socket connection is closed, regardless the reason for it \(e.g. normal WebSocket closure, connection drop, etc\). Note that WebSockets have no inactive timeout disconnect.
 
-## WebSocket object
+## WebSocket Object
 
 The returned `WebSocket` object contains the following notable methods:
 
@@ -138,11 +140,11 @@ void Send(Byte[] data,
   Response.ConnectionFlags connFlags = Response.ConnectionFlags.NoSpecialFlags)
 ```
 
-Using `isText` parameter you can specify if your WebSocket data should be sent as `Text` or `Binary` frame \(see [RFC6455](http://tools.ietf.org/html/rfc6455)\)
+Using `isText` parameter you can specify if your WebSocket data should be sent as `Text` or `Binary` frame \(see RFC6455\)
 
 `Response.ConnectionFlags` parameter is used to manipulate corresponding WebSocket connection: for example, if you want to close the connection with client or send data and then close the connection. Please see section about handling responses for more information on `Response.ConnectionFlags`.
 
-**NOTE:** When doing operations on the same WebSocket but from **different** Starcounter schedulers - the order in which operations \(like `Send`\) will actually be performed is not guaranteed to be the same as the order in which they were initiated.
+NOTE: When doing operations on the same WebSocket but from different Starcounter schedulers - the order in which operations \(like `Send`\) will actually be performed is not guaranteed to be the same as the order in which they were initiated.
 
 Disconnecting an active WebSocket \(with an error message and/or close code according to RFC6455\):
 
@@ -159,7 +161,7 @@ Other following methods and properties are available:
 * `enum WebSocketCloseCodes`: list of available WebSocket disconnect codes, according to RFC6455.
 * `Boolean IsDead()`: checks if WebSocket is already disconnected or invalid.
 
-## Operating on multiple WebSockets
+## Operating on Multiple WebSockets
 
 Sometimes its needed to perform the some "action" on a group of WebSocket connections, for example, to unicast some common data. To accomplish this, user can create a WebSocket object from saved UInt64 ID and perform operations with that object \(send/disconnect\). The only requirement is that operating thread should be attached to Starcounter scheduler. The following code snippet demonstrates broadcasting of previously saved WebSockets every second from arbitrary .NET thread:
 
@@ -208,7 +210,7 @@ WebSocketSessionsTimer = new Timer((state) =>
 }, null, 1000, 1000);
 ```
 
-## Additional information
+## Additional Information
 
 `Session` object contains the reference to the last active WebSocket: `ActiveWebsocket`, which is associated with this session. `ActiveWebsocket` however can be `null` when session has no WebSocket attached to it.
 

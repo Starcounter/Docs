@@ -1,4 +1,6 @@
-# Run Starcounter in production
+# Run Starcounter in Production
+
+## Introduction
 
 While Starcounter offers replication facilities for the enterprises to implement their high availability business scenarios \(e.g., when a point-of-sales is disconnected from a main server, but continues to operate autonomously until the connection resumes\), it doesn't provide a built-in support for disasters-related scenarios such as hot failover, regular backups and disaster recovery. A large variety of ready-made facilities are available today to support those disaster-related scenarios out of the box. E.g., most of the facilities needed for those are shipped with Windows Server 2012 R2 Standard off the shelf.
 
@@ -6,13 +8,13 @@ When it comes to running applications, developers want to perform the "full repl
 
 Starcounter is not taking a goal to outperform those with any of our potential house-grown tools, preferring to focus on our core unique features. Instead, we do our best to supply our customers with the latest information on doing these scenarios with the OS standard facilities. This article aims to provide such information for community version users as well.
 
-## Logs and checkpoint files
+## Logs and Checkpoint Files
 
 Starcounter is an in-memory technology, hence it only uses disks for persistence and recovery rather than a primary storage. Starcounter streams changes in your data to disk, while uses only primary memory to read data. Changes from committed transactions are logged to disk by a means of log writer and stored in Starcounter `.log` files. Periodically a disk image of the database is updated. This image, which is also known as a checkpoint, is stored in `.sci` and `.sci2` files. When checkpoint creation is executed, log files with records that the checkpoint now incorporates become redundant and thus are renamed from `.log` to `.log.bak` and are a subject of manual deletion. The fraction of `.log` files that are still in work along with snapshot image files together represent a current durable state of the database.
 
 **Having **`.log.bak`** files regularly erased.** In order to clean `.log.bak` files you need to create a task in your preferred task scheduler for Windows or in Windows Task Scheduler to run `del` command on your `.log.bak` files. Please make sure that the created task in Task Scheduler do actually run as expected. Sometimes it will not run because the correct user privileges aren't set.
 
-## Backup and failover
+## Backup and Failover
 
 Fault-tolerance is a property of a system to continue operating correctly after a software or a hardware failure. Fault-tolerance is achieved by redundancy on physical level together with some failover strategy. Failover strategies entail preventing malfunctions of hard drives \(RAID, SAN\), electricity chains problems \(backup battery pack\), general hardware failure \(running multiple standby machines with different level of steadiness, running multiple active load-balanced machines\).
 
@@ -20,7 +22,7 @@ Note that doing backups of data and providing failover strategy are not mutually
 
 While failover is about disaster recovery, scaling-out a system to multiple replicated nodes is done for high availability. Not only a hardware disaster may affect availability of a system, but also can do a deny of its service due to increased workloads. You might be familiar with situations when some database server "dies" under 1000 of simultaneous connections. Starcounter is highly available by design, so that a single node is capable of millions transactions per second out of the box. However, hardware issues might happen and you need to get ready for them. Different strategies for failover/disaster recovery are discussed in a checklist further.
 
-## Making database backups
+## Database Backups
 
 Starcounter works with data files on a byte level, so that some of these files are locked and other processes and users are secured from reading them. This locking prevents users and services from making inconsistent copies of the files that are currently under operation.
 
@@ -30,10 +32,21 @@ Windows [Volume Shadow Copy Service \(VSS\)](https://en.wikipedia.org/wiki/Shado
 
 **Hot backup of database files using VSS**. Native tools to create and access VSS snapshots are available in Windows Server \(`diskshadow.exe`\), but are not included in other Windows environments. We will use a tool that works effortlessly on all modern Windows operating systems \(desktop and server\). The below instruction explains how to backup the most recently available VSS snapshot of all files from a given location to another given location.
 
-Objective: backup a location `c:\Users\User\Documents\Starcounter\Personal\Data\Default\Default-20150915T100722555\` to `Y:\Backup`. Steps to achieve:
+Objective: backup a location `c:\Users\User\Documents\Starcounter\Personal\Data\Default\Default-20150915T100722555\` to `Y:\Backup`.
 
-1. Get the latest version of `shadowspawn.exe` utility from [https://github.com/candera/shadowspawn/downloads](https://github.com/candera/shadowspawn/downloads). Put the utility on your machine in a globally available location, e.g. `C:\Windows\System32`.
-2. Run a backup command: `shadowspawn c:\Users\User\Documents\Starcounter\Personal\Data\Default\Default-20150915T100722555\ Q: robocopy Q:\ Y:\Backup\%date%_%time:~0,2%-%time:~3,2%-%time:~6,2% /s`. This will make a shadow copy of a drive, mount shadowed copy of a source folder to `Q:` \(the drive letter `Q` must be spare, otherwise choose other letter\), copy contents of `Q:\` to a subfolder in `Y:\Backup` named after current date and time, e.g. `Y:\Backup\2015-09-15_16-41-48`, unmount and destroy a shadow copy. Copying is done with `robocopy` utility that ships with Windows, you can use any other command, e.g. you can call your favourite incremental binary backup utility and store the result in a cloud.
+Start by downloading the latest version of the `shadowspawn.exe` utility from [https://github.com/candera/shadowspawn/downloads](https://github.com/candera/shadowspawn/downloads). Put the utility on your machine in a globally available location, such as `C:\Windows\System32`.
+
+Run this backup command
+
+```text
+shadowspawn C:\Users\User\Documents\Starcounter\Personal\Data\default\Default-20150915T100722555\ Q:\ robocopy Q:\ "Y:\Backup\%date:~10,4%.%date:~4,2%.%date:~7,2%-%TIME:~0,2%.%TIME:~3,2%.%TIME:~6,2%" /s
+```
+
+This will create a shadow copy of a drive, mount shadowed copy of a source folder to `Q:` \(the drive letter `Q` must be free, otherwise choose other letter\), copy contents of `Q:\` to a sub-folder in `Y:\Backup` named after the current date and time, such as `Y:\Backup\2015-09-15_16-41-48`, unmount and destroy a shadow copy. Copying is done with `robocopy` utility that ships with Windows, you can use any other command, e.g. you can call your favorite incremental binary backup utility and store the result in a cloud.
+
+{% hint style="info" %}
+Read more about robocopy in the [robycopy documentation](https://www.computerhope.com/robocopy.htm).
+{% endhint %}
 
 **Note:** creating and removing a VSS snapshot during the described backup routine may affect performance of your Starcounter application when you have user activity peaks. Consider running backup scenario in periods of time when you have less than hundreds of thousands of simultaneously connected users.
 
@@ -59,11 +72,11 @@ Follow these steps to find these files:
 
 In the case that there is no full `.log` file in the directory, there will be no `.optlog` file.
 
-## Restoring a database from a backup
+## Restoring a Database From a Backup
 
 Database is a set of files you have made backup for. To recover your database to one of the backups, you can create a new database in Starcounter Administrator and then, without starting it, copy all backup files into that database data folder. After doing so, you can shut down the old database and run your application on a new database with minimal downtime. If you have a failover machine, you can switch your web-frontend to route requests to a failover machine. The simplest way to restore a database from backup is to stop Starcounter, remove all database data files, copy backup files in data files location and start Starcounter.
 
-## Starcounter in a virtual machine
+## Starcounter in a Virtual Machine
 
 Virtual machine is a convenient tool to make production environment easily deployable and manageable. For Starcounter apps running in virtual machine, the simplest way to do cold backup is to shut down VM, copy VM image, turn on VM. To perform hot backups of VMs, one should use Hyper-V facilities for shadow copying and [Hyper-V asynchronous replication](http://blogs.technet.com/b/yungchou/archive/2013/01/10/hyper-v-replica-explained.aspx) for disaster recovery. Please refer to the [official Microsoft documentation](https://technet.microsoft.com/en-us/library/jj134172.aspx) on Hyper-V high availability features. Note that, since Starcounter is capable of doing millions of DB transactions per second on a single commodity server, it has a nice overcapacity to run with extreme performance even inside a VM.
 
@@ -71,7 +84,11 @@ Virtual machine is a convenient tool to make production environment easily deplo
 
 Starcounter streams changes to disk sequentially. Modern HDDs can stream terrabytes of data in seconds with sequential writes. That's why you can run your app suite on big commodity HDDs with our in-memory engine safely and performantly. Choice of HDD, SSD or PCI flash appliance will not affect your read performance at all, in most cases it is a choice of your preference. What is more, with cheap HHDs you can setup inexpensive RAID-1 array to make your solution be tolerant towards hardware faults and make your regular backups onto more disks. If you run an application with a vast amount of writes \(more that 30% of writes among all database operations\), consider going for faster storage devices to increase throughput while having tens of thousands of users operating simultaneously.
 
-## Checklist: Starcounter in production
+## Disabling Anti-Virus Scan of Database Files
+
+For higher performance, disable your anti-virus from scanning the database files in the [server directory](configuration-structure.md#server-repository). 
+
+## Checklist: Starcounter in Production
 
 1. Always have enough spare space for the database log files and images on your hard-drive: 2-3x RAM.
 2. Install task to clean `.log.bak` files in Windows Task Scheduler. Avoid disk overflow with `.bak` files that you don't need! Verify that the task is actually executed as expected, since you might miss certain task settings so that Windows disallows it to run.
@@ -83,13 +100,5 @@ Starcounter streams changes to disk sequentially. Modern HDDs can stream terraby
 
 **Please always remember that your data is one of your most important assets!** Implement the proper strategy for backup, failover and disaster recovery from day one. Using advices from the article, you can make your data safety strategy gradual. First of all, start with simple Shadow Copy backups. Use Dropbox for Business and asynchronous cryptography \(with private and public keys\) to store terabytes of backups for just hundreds of dollars per year. If you run Starcounter in a cloud like Amazon, then you most likely run Windows Server 2012 R2 Standard, which ships with Failover Clustering role out of the box. Use the facilities like Failover Clustering that go for free with your operating system. Create a simple Failover Cluster with one master machine and one hot-standby machine which would always be a replica of your master machine. Store your database image files on a Cluster Shared Volume, so that the hot-standby machine will continue to run on exact the same data. It will take some seconds for the replica machine to start Starcounter \(since two machines cannot open the same database at one time\), so the resulted failover will be warm. However, today you can achieve true synchronous hot failover using Windows Server 2016 Storage Replica \(Datacenter edition is required\).
 
-![Failover clustering role](../../.gitbook/assets/screen-shot-2015-10-06-at-11.24.041-1024x726%20%281%29.png)
-
-## Meet in future version of Starcounter
-
-Our team is working hard on the new features to improve your productivity:
-
-1. **Multiple log file destination.** It would be possible to specify destinations where Starcounter stream logs via its log writer. Before all destinations are reached \(or a fraction of them, so that a flexible disaster recovery policy can be maintained\), Starcounter will not report transaction as committed.
-2. **Replicator \(asynchronous and synchronous\).** Often one needs to stream log changes to a 3-rd party system, database \(Starcounter-based or any 3-rd party\) or a service. It isn't convenient to propagate that connection logic straight into your application. Replicator serves the purpose of data export: log reader reacts to changes in data files and streams changes to outer systems via an efficient transport.
-3. **Filtered replication \(asynchronous and synchronous\).** Full-data replication is a hard task: you can loose on performance a lot waiting for network to deliver your changes to replicated machines. Often you want to replicate only a fraction of data. E.g., you have a worldwide HR system with servers in Japan, Sweden and Canada offices. Those offices share only a small fraction of data, which has to be shared by replication, while other data is kept locally at the offices \(sometimes this is a legal requirement\).
+![](../../.gitbook/assets/screen-shot-2015-10-06-at-11.24.041-1024x726.png)
 

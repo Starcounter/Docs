@@ -1,9 +1,13 @@
 # Accepting JSON in Requests
 
+## Introduction
+
 Typed JSON objects can be used as a representation of the HTTP \(or other REST protocol\) request body payload. To accept a JSON object in a PUT message, simply declare a parameter with the type `Json`.
 
-PersonMsg.json
+## Example
 
+{% code-tabs %}
+{% code-tabs-item title="PersonMsg.json" %}
 ```javascript
 {
    "FirstName": "",
@@ -11,9 +15,11 @@ PersonMsg.json
    "Age": 0
 }
 ```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
 
-Hello.cs
-
+{% code-tabs %}
+{% code-tabs-item title="Program.cs" %}
 ```csharp
 using Starcounter;
 
@@ -28,6 +34,8 @@ class Hello
    }
 }
 ```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
 
 The parameter is not associated with the URI template, so the content of the body will be used to fill in the object.
 
@@ -40,6 +48,4 @@ http://localhost:8080/hello/Olle
 
 Welcome Olle you are 49 years old.
 ```
-
-> More information about using cURL and other HTTP clients can be found on page [Testing HTTP Requests](../working-with-starcounter/testing-http-requests.md)
 

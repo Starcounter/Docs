@@ -1,5 +1,7 @@
 # Administrator Web UI
 
+## Introduction
+
 Administrator is a web based administration tool that comes with Starcounter. It can be started in three different ways:  
 1. Run `staradmin start server`  
 2. Run an app  
@@ -13,7 +15,7 @@ The default port `8181` can be changed during installation or in the server conf
 
 Databases are handled from `localhost:8181/#/databases`.
 
-![Database home screen screenshot](../../.gitbook/assets/1.png)
+![](../../.gitbook/assets/1%20%281%29.png)
 
 ### Default Database
 
@@ -25,7 +27,9 @@ It's possible to create and delete databases in the Administrator. To prevent co
 
 Create new databases at `localhost:8181/#/databases` by pressing "New database".
 
-![Creating and deleting databases](../../.gitbook/assets/3.png)
+
+
+![](../../.gitbook/assets/3%20%281%29.png)
 
 Databases are also deleted in the same view. Deletions have to be verified by entering the name of the database in the pop-up window.
 
@@ -33,21 +37,21 @@ Databases are also deleted in the same view. Deletions have to be verified by en
 
 Start and stop databases by clicking the "Start" or "Stop" buttons at `localhost:8181/#/databases`:
 
-![starting and stopping a database](../../.gitbook/assets/56.png)
+![](../../.gitbook/assets/56%20%281%29.png)
 
 Databases with a green checkmark are running.
 
-### View Application Output
+## View Application Output
 
 Go to a database by clicking on its name in the list of databases. Then, click on the application name in the "Applications" list. This will open up a view that displays the output of the application.
 
-![application output](../../.gitbook/assets/appoutput2%20%281%29.gif)
+![](../../.gitbook/assets/appoutput2%20%281%29.gif)
 
-### Control Apps
+## Control Apps
 
 Apps will start together with the database if "Auto-Start" is clicked. The padlock icon shows if an app can be deleted.
 
-![database control](../../.gitbook/assets/database.png)
+![](../../.gitbook/assets/database.png)
 
 ## SQL Browser
 
@@ -55,7 +59,7 @@ Apps will start together with the database if "Auto-Start" is clicked. The padlo
 
 The data of a database can be queried in the SQL browser. See [SQL reference](../sql/) for details on the syntax.
 
-The queries that are supported by the method `Db.SQL` are also supported except that [literals](../sql/literals.md) are used in the SQL browser instead of [variables](../database/variables.md).
+The queries that are supported by the method `Db.SQL` are also supported except that [literals](../sql/literals.md) are used in the SQL browser instead of variables.
 
 The app that defines that table needs to run in order to query it.
 
@@ -67,58 +71,59 @@ SELECT Person.FullName, Text FROM Quote WHERE Person.FirstName = 'Albert'
 
 This is the result:
 
-![query result](../../.gitbook/assets/screenshot-2015-10-02-17.23.40.png)
+![](../../.gitbook/assets/screenshot-2015-10-02-17.23.40.png)
 
 ### SQL Query Plan
 
 If you navigate to "Query Plan" after the SQL request, you can see the steps to access the data.
 
-![examine query plan](../../.gitbook/assets/5.png)
+![](../../.gitbook/assets/5%20%281%29.png)
 
 ## App Warehouse
 
 Apps can be downloaded to a database from the `App Warehouse` tab. Once an app has been downloaded, it can be started and stopped from its database page.
 
-![app store tab](../../.gitbook/assets/appstoretab.png)
+![](../../.gitbook/assets/appstoretab%20%281%29.png)
 
 ### Download and Install Apps
 
 Click the `Download` button to download an app. Downloaded apps can be controlled on the database page.
 
-![Download and install apps](../../.gitbook/assets/appstore1%20%281%29.png)
+![](../../.gitbook/assets/appstore1.png)
 
-## Starting Executables
+## Starting Executables {#starting-executables}
 
-You can launch an application in a database by going to `localhost:8181/#/databases/default/executabeStart`.  
-Specify the path to your `.exe` application in the field.
+You can launch an application in a database by going to `localhost:8181/#/databases/default/executabeStart`. Specify the path to your `.exe` application in the field. 
 
-![start executable](../../.gitbook/assets/6%20%281%29.png)
+![](../../.gitbook/assets/capture%20%281%29.PNG)
 
 ## Database Configuration
 
 Access the database settings by going to `localhost:8181/#/databases/default/settings`. The available settings are:
 
 * Database port - 8080 by default
-* Scheduler count, defines the degree of parallelization - 4 by default
+* Scheduler count, defines the degree of parallelization - the default value is the number of available logical CPU cores. The max number of schedulers is 31. Running two code hosts with 16 schedulers each will fail since it's more than 31.  
 * Chunks, for advanced users, should not be modified for most databases - 65536 by default
 
-![database configuration](../../.gitbook/assets/7%20%281%29.png)
+![](../../.gitbook/assets/7%20%281%29.png)
 
 ## Log
 
 Go to `localhost:8181/#/server/log` to see debug steps, notices, warnings, and errors. Sort the log by "Source" to see the behavior of specific components.
 
-![Log screenshot](../../.gitbook/assets/8.png)
+![](../../.gitbook/assets/8%20%281%29.png)
 
 ## Network
 
 Go to `localhost:8181/#/server/network` to see internal environment, the information about network facilities for Starcounter installation that comes with the network gateway.
 
-![Network screenshot](../../.gitbook/assets/9%20%281%29.png)
+![](../../.gitbook/assets/9.png)
 
 ## Server Configuration
 
 The system port and gateway port can be changed at `localhost:8181/#/server/settings`.
 
-![Server configuration](../../.gitbook/assets/10%20%281%29.png)
+![](../../.gitbook/assets/capture.PNG)
+
+The "Allow Remote Access" option determines if the Administrator accepts requests from outside localhost. If it's set to "yes", any other machine in the same network can access the Administrator and if it's "no", then the Administrator will only accept requests from localhost. The default value is "no". 
 

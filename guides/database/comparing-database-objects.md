@@ -1,36 +1,41 @@
-# Comparing database objects
+# Comparing Database Objects
 
-## Comparison in SQL queries
+## Introduction {#comparison-in-sql-queries}
+
+Database object can either be compared in SQL `WHERE` clauses or in programming code. 
+
+## Comparison in SQL Queries {#comparison-in-sql-queries}
 
 In SQL queries database objects can be compared either by the equals `=` operator or by the `ObjectNo` value. The direct comparison is always preferable.
 
 ```csharp
-var products = Db.SQL<Product>("SELECT p FROM Product p WHERE p.Customer = ?", customer);
+var products = Db.SQL<Product>(
+    "SELECT p FROM Product p WHERE p.Customer = ?", customer);
 ```
 
 ```csharp
-var products = Db.SQL<Product>("SELECT p FROM Product p WHERE p.Customer.ObjectNo = ?", customer.GetObjectNo());
+var products = Db.SQL<Product>(
+    "SELECT p FROM Product p WHERE p.Customer.ObjectNo = ?",
+    customer.GetObjectNo());
 ```
 
-## Comparison between instances
+## Comparison Between Instances {#comparison-between-instances}
 
 Two instances of a database class can be compared either with the `Object.Equals` method or with the `ObjectNo` value. The `Object.Equals` method is the preferable way.
-
-**Note:** the equals `==` operator and the `Object.ReferenceEquals` method will always return `false`.
 
 ```csharp
 var firstProduct = new Product();
 var secondProduct = new Product();
-var anotherFirstProduct = DbHelper.FromID(p1.GetObjectNo());
-bool equals;
 
-equals = firstProduct.Equals(secondProduct); // false
-equals = firstProduct.GetObjectNo() == secondProduct.GetObjectNo(); // false
+var anotherFirstProduct = Db.FromId(firstProduct.GetObjectNo());
 
-equals = firstProduct.Equals(anotherFirstProduct); // true
-equals = firstProduct.GetObjectNo() == anotherFirstProduct.GetObjectNo(); // true
-
-equals = firstProduct == anotherFirstProduct; // false
-equals = object.ReferenceEquals(firstProduct, anotherFirstProduct); // false
+firstProduct.Equals(secondProduct); // false
+firstProduct.GetObjectNo() == secondProduct.GetObjectNo(); // false
+firstProduct.Equals(anotherFirstProduct); // true
+firstProduct.GetObjectNo() == anotherFirstProduct.GetObjectNo(); // true
 ```
+
+{% hint style="warning" %}
+The equals `==` operator and the `Object.ReferenceEquals` method will always return `false` when comparing database objects.
+{% endhint %}
 

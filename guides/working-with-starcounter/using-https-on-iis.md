@@ -1,8 +1,8 @@
 # Using HTTPS on IIS
 
-This article explains how to use Microsoft [Internet Information Server](https://www.iis.net/) \(IIS\) as an HTTPS proxy on top of Starcounter. While NGINX might be a better web server overall, it requires a separate Linux machine. IIS can be installed alongside Starcounter on the same Windows machine.
+## Introduction
 
-**Note:** IIS splits big web socket messages into chunks, but this is not yet supported by Starcounter. Usually it only affects file upload over web socket. See this issue: [Add support for frame fragmentation in WebSockets](https://github.com/Starcounter/Starcounter/issues/3837). Temporary solution is to reduce file upload chunk size to `500 bytes`.
+This article explains how to use Microsoft [Internet Information Server](https://www.iis.net/) \(IIS\) as an HTTPS proxy on top of Starcounter. While NGINX might be a better web server overall, it requires a separate Linux machine. IIS can be installed alongside Starcounter on the same Windows machine.
 
 ## Installing IIS
 
@@ -10,7 +10,9 @@ IIS is available from the `Turn Windows features on or off` console.
 
 The following items should be installed.
 
-![Installing IIS](../../.gitbook/assets/starcounter-https-iis-0%20%281%29.png)
+![](../../.gitbook/assets/starcounter-https-iis-0.png)
+
+
 
 You can add any extra features if needed.
 
@@ -21,25 +23,29 @@ Open Internet Information Services \(IIS\) Manager from the Start menu. And inst
 * URL Rewrite 2.0
 * Application Request Routing 3.0
 
-![Setting up 1](../../.gitbook/assets/starcounter-https-iis-1.png)
+![](../../.gitbook/assets/starcounter-https-iis-1.png)
 
 Enable `system.webServer/webSocket` configuration section via Configuration Editor.
 
-![Setting up 2](../../.gitbook/assets/starcounter-https-iis-2.png)
+![](../../.gitbook/assets/starcounter-https-iis-2.png)
+
+
 
 Restart the machine.
 
 Open `Application Request Routing Cache` section and go to it's settings page.
 
-![setting up 3](../../.gitbook/assets/starcounter-https-iis-3%20%281%29.png)
+![](../../.gitbook/assets/starcounter-https-iis-3.png)
 
-![setting up 4](../../.gitbook/assets/starcounter-https-iis-4%20%281%29.png)
+![](../../.gitbook/assets/starcounter-https-iis-4.png)
 
 Enable proxy, update timeout to `600` seconds, and click the `Apply` button.
 
-![setting up 5](../../.gitbook/assets/starcounter-https-iis-5%20%281%29.png)
+![](../../.gitbook/assets/starcounter-https-iis-5.png)
 
-## Setting up IIS website
+
+
+## Setting up IIS Website
 
 By default there should be a `Default Web Site` item in the `Sites` section of IIS. The website should listen on the `80` port. Check that by opening `http://localhost/` in your browser. It should show the default IIS webpage.
 

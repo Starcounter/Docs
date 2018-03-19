@@ -1,4 +1,4 @@
-# Cookie-based authentication
+# Cookie-Based Authentication
 
 In Starcounter you have as many sessions as there are browser windows or tabs opened with your app. The session object stores the state of a view-model for that particular window or tab. Each session is assigned a new, unique identifier. Session is not aware of concepts like "authentication" or "a returning user".
 
@@ -8,7 +8,7 @@ How do you implement cookie-based authentication with Starcounter? You have to c
 
 [Sign In](https://github.com/StarcounterApps/SignIn) is a prefab app that authenticates a user using a username and a password. It generates an auth token and stores it in a cookie for use in future sessions.
 
-## Internals of Sign In app
+### Internals of Sign In App
 
 Let's take a deeper look at how Sign In app works. Essentially, this can be divided into three parts:
 
@@ -16,15 +16,13 @@ Let's take a deeper look at how Sign In app works. Essentially, this can be divi
 * HTTP handler that sets the cookie
 * Middleware that reads the cookie
 
-## Form for authentication input
+### Form for Authentication Input
 
 Sign In has a view-model that can be mapped to any app. It is a typical HTML form that asks for authentication input \(username & password\).
 
 Unlike typical Puppet-based view-models, the form is not sent using WebSocket. The form result is sent using `XmlHttpRequest` to a HTTP handler, because that's the only way to set a cookie.
 
 This is how the form gets submitted to force using HTTP:
-
- [signin-element.html](https://github.com/StarcounterApps/SignIn/blob/master/src/SignIn/wwwroot/SignIn/elements/signin-element.html)
 
 ```csharp
 var password = Sha1.hash(this.password);
@@ -33,11 +31,9 @@ this.set("password", "");
 document.querySelector("palindrom-client").network.changeState(url);
 ```
 
-## HTTP handler that sets the cookie
+### HTTP Handler that Sets the Cookie
 
 When the user submits the form, a relevant HTTP handler tries to authenticate the user. In case of successful authentication, an auth token is generated and stored in the database:
-
- [Simplified/blob/master/Ring3/User/SystemUser.Static.cs](https://github.com/StarcounterApps/Simplified/blob/master/Ring3/User/SystemUser.Static.cs)
 
 ```csharp
 var systemUser = Db.SQL<SystemUser>("SELECT o FROM Simplified.Ring3.SystemUser o WHERE o.Username = ?", Username).FirstOrDefault();
@@ -70,8 +66,6 @@ Db.Transact(() =>
 
 Auth token is now sent to the user as a cookie in the HTTP response. Future HTTP requests from that user will include the auth token cookie:
 
- [MainHandlers.cs](https://github.com/StarcounterApps/SignIn/blob/master/src/SignIn/Api/MainHandlers.cs)
-
 ```csharp
 var cookie = new Cookie()
 {
@@ -99,13 +93,11 @@ else
 Handle.AddOutgoingCookie(cookie.Name, cookie.GetFullValueString());
 ```
 
-## Middleware that reads the cookie
+### Middleware that Reads the Cookie
 
 Sign In app registers a request middleware. The middleware checks if the request contains a valid auth token cookie. In that case, we can immediately authenticate the user without asking for the credentials.
 
 If the auth token is correct, the middleware creates a Session object and identifies the user. Any other app that handles this request will now see the user.
-
- [MainHandlers.cs](https://github.com/StarcounterApps/SignIn/blob/master/src/SignIn/Api/MainHandlers.cs)
 
 ```csharp
 Application.Current.Use((Request request) =>
@@ -114,7 +106,7 @@ Application.Current.Use((Request request) =>
 
     if (cookie != null)
     {
-        Session.Current = Session.Current ?? new Session();
+        Session.Current = Session.Current ?? new Session(SessionOptions.PatchVersioning);
 
         var session = SystemUser.SignInSystemUser(cookie.Value);
 
@@ -129,8 +121,6 @@ Application.Current.Use((Request request) =>
 ```
 
 With this middleware, any app that handles this request will see that the session already exists. In case of our sample apps, the User Admin app shares the data model with the Sign In app. A simple lookup in the `SystemUserSession` table will get the relevant `SystemUser` object.
-
- [UserAdmin/Helpers/Helper.cs](https://github.com/StarcounterPrefabs/UserAdmin/blob/master/src/UserAdmin/Helpers/Helper.cs)
 
 ```csharp
 var query = "SELECT o FROM Simplified.Ring5.SystemUserSession o WHERE o.SessionIdString = ?";

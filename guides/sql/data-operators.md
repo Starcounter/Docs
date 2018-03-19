@@ -1,18 +1,26 @@
 # Data operators
 
-In Starcounter SQL only the most common operators on data are implemented.
+## Introduction
 
-The standard arithmetic operators, plus \(`+ x`\), minus \(`- x`\), addition \(`x + y`\), subtraction \(`x - y`\), multiplication \(`x * y`\) and division \(`x / y`\), are supported for all numerical types. See example below.
+In Starcounter SQL, the most common operators on data are implemented.
+
+## Arithmetic Operators
+
+The standard arithmetic operators, plus \(+ x\), minus \(- x\), addition \(x + y\), subtraction \(x - y\), multiplication \(x \* y\) and division \(x / y\), are supported for all numerical types:
 
 ```sql
 SELECT (e.Salary * 12) / 365 FROM Employee e
 ```
 
-String concatenation \(`x || y`\) is supported. See example below.
+{% hint style="info" %}
+For the expected datatypes of an arithmetic operation, see [Datatypes](../database/datatypes.md).
+{% endhint %}
+
+## String Concatenation
+
+String concatenation \(x \|\| y\) is supported. See example below.
 
 ```sql
 SELECT e.FirstName || ' ' || e.LastName FROM Employee e
 ```
-
-For the expected datatypes of an arithmetic operation, see [Datatypes](../database/data-types.md).
 

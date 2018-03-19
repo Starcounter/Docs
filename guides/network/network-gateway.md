@@ -1,6 +1,8 @@
 # Network Gateway
 
-The network gateway is a key network communication component of Starcounter. The `scnetworkgateway.exe` process, which is separated from the database, represents the network gateway. It handles all external communications with the codehost, as well as communication between different codehosts on one machine.
+## Introduction
+
+The network gateway is a key network communication component of Starcounter. The `scnetworkgateway.exe` process, which is separated from the database, represents the network gateway. It handles all external communications with the code-host, as well as communication between different code-hosts on one machine.
 
 The gateway process talks to the codehost process \(sccode\) through shared memory. The same way codehost process is also separated from database process \(scdata\) and talks to it through shared memory. There is no direct connection between gateway and scdata, only through sccode. Network gateway parses network traffic, and prepares "messages" that are delivered to sccode through shared memory and executed there. The responses from sccode go back through the same shared memory to gateway, which sends them outside.
 
@@ -10,29 +12,23 @@ Detailed network gateway configuration and statistics can be retrieved using `GE
 
 Network gateway is configured in `scnetworkgateway.xml`, which is located in the server repository \(e.g User/Documents/Starcounter/Personal\). Here are some notable configuration options:
 
-### Notable Configuration Options
-
-#### WorkersNumber
+### WorkersNumber
 
 Is the number of gateway worker threads. Normally this value should be 1-2. On high loads, this value can be increased.
 
-#### MaxConnectionsPerWorker
+### MaxConnectionsPerWorker
 
 Is the maximum number of connection per each gateway worker. Connections are equally distributed between workers.
 
-#### MaximumReceiveContentLength
+### MaximumReceiveContentLength
 
 Is the maximum size of incoming HTTP body/content, in bytes. Requests with bigger bodies are rejected with `413 Request Entity Too Large` and closure of TCP connection.
 
-The value of `MaximumReceiveContentLength` can be found in runtime with `NetworkGateway.Deserealize().MaximumReceiveContentLength`. For this to work, `using Starcounter.Internal` has to be included as well.
-
-**NOTE: NetworkGateway.Deserealize\(\) is deprecated and will be removed in the next versions of Starcounter.**
-
-#### InactiveConnectionTimeout
+### InactiveConnectionTimeout
 
 Is the inactive HTTP connections life time in seconds. Inactive connections are those on which send/receive are not performed.
 
-## Big size uploads
+## Big size Uploads
 
 Since the network gateway supports limited size uploads, the user has to write a custom big-data uploader for both HTTP and WebSocket protocols.
 
@@ -40,7 +36,7 @@ Since the network gateway supports limited size uploads, the user has to write a
 
 Starcounter gateway provides basic reverse proxy functionality based on HTTP Host header in requests. Reverse proxies are defined in `ReverseProxies` section of gateway configuration. Here is an example of reverse proxy that redirects all incoming HTTP requests on port 80, with Host header equals "www.example1.sc", to service on localhost and port 8080:
 
-```text
+```markup
 <ReverseProxy>
   <DestinationIP>127.0.0.1</DestinationIP>
   <DestinationPort>8080</DestinationPort>

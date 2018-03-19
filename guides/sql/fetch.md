@@ -1,6 +1,8 @@
 # Fetch
 
-The number of returned results can be limited using the `FETCH` clause. An example can be seen below:
+## Introduction
+
+The number of returned results can be limited with the `FETCH` clause:
 
 ```sql
 SELECT e.LastName, e.FirstName
@@ -16,6 +18,8 @@ SELECT e.LastName, e.FirstName
   FETCH 5
 ```
 
+## Using Fetch with Other Clauses
+
 The `FETCH` clause should be after the main part of the query possibly including an `ORDER BY` clause but before an `OPTION` clause including hints, see example below.
 
 ```sql
@@ -25,6 +29,8 @@ SELECT e.LastName, e.FirstName
   FETCH 5
   OPTION INDEX (e MyIndexOnFirstName)
 ```
+
+### Fetch with Offset
 
 The `OFFSET` clause can be used to skip a number of rows before beginning to fetch the rows. This can be used to apply patterns like result pagination. `OFFSET 0` is the same as omitting the `OFFSET` clause.
 
@@ -39,5 +45,5 @@ The standard `OFFSET` functionality typically used in RESTful web applications h
 
 Furthermore, `OFFSET` has performance limitations, since it is difficult to know which objects should be retrieved from each table to skip the requested number of rows in the result.
 
-For the reasons outlined above, it is advised to use [`OFFSETKEY`](offset-key.md) instead of OFFSET.
+For the reasons outlined above, use [`OFFSETKEY`](offset-key.md) instead of `OFFSET` when possible.
 

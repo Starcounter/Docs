@@ -1,33 +1,80 @@
-# Path expressions
+# Path Expressions
 
-In standard SQL92 you can only refer to columns \(properties\) of the tables \(extents\) which are specified in the `FROM` clause of the `SELECT` statement. In contrast to that, in Starcounter SQL you can refer to any property/column of an object in any extent/table as long as there is a path from an extent/table specified in the `FROM` clause to that property/column.
+## Introduction
 
-A path expression is an arbitrary long sequence of identifiers separated by points. The first identifier in the sequence should be an alias to an extent/table defined in the `FROM` clause of the `SELECT` statement. The following identifiers  except the last one should have object references as return values. The last identifier may return any supported datatype. See example below.
+In Starcounter SQL you can refer to any property of a database classes as long as there is a path from the database class specified in the `FROM` clause to that property.
+
+A path expression is an arbitrary long sequence of identifiers separated by dots. The first identifier in the sequence should be an alias to an database class defined in the `FROM` clause of the `SELECT` statement. The following identifiers except the last one should have object references as return values. The last identifier may return any supported datatype. For example:
 
 ```sql
 SELECT e.Manager.Department.Location.Street FROM Employee e
 ```
 
-Note that if some identifier in a path expression will return `null` then the complete path expression will also return `null`.
+If an identifier in a path expression returns `null` then the complete path expression will return `null`.
 
-In fact, you do not have to qualify \(start with an extent/table alias\) a path expression. You are allowed to omit the qualifications of the path expressions \(column references\) as in the   query \(2\) below.
+Path expression can also be used in `WHERE` and `ORDER BY` clauses:
 
 ```sql
-SELECT Manager.Department.Location.Street, Name FROM Employee JOIN Department ON DepartmentId = Id
+SELECT e FROM Employee e WHERE e.Manager.Department.Name = 'sales'
+SELECT e FROM Employee e ORDER BY e.Manager.Department.Profit
 ```
 
-However, you are only allowed to omit the qualifications as long as the names of the  properties/columns are unique, and this may change over time. Therefore we strongly recommend that when you write SQL statements in program code you always qualify all path expressions so your code will hold for future modifications of the database schema.
+## Wildcards
 
-You are also allowed to use a wildcard \(`*`\) to select all properties/columns of an extent/table as in the queries below.
+You can use a wildcard \(\*\) to select all properties of a database class:
 
 ```sql
 SELECT * FROM Employee
 SELECT e.* FROM Employee e
 ```
 
-Note that the above queries return all properties/columns of the `Employee` objects, while the below query returns references to the `Employee` objects themselves.
+The above queries return all the properties of the `Employee` objects, while the below query returns references to the `Employee` objects themselves.
 
 ```sql
 SELECT e FROM Employee e
 ```
+
+## Cast Operation
+
+In some path expressions you need to cast the type of a property.
+
+For example, consider a data model like this:
+
+```csharp
+[Database]
+public class Person
+{
+  public Person Father { get; set; }
+}
+
+[Database]
+public class Employee : Person
+{
+  public Employee Manager { get; set; }
+}
+```
+
+ If you want to select the manager of each person's father whenever such manager exists, then this is incorrect  since `Father` is of type `Person` and `Person` has no `Manager` property:
+
+{% code-tabs %}
+{% code-tabs-item title="Incorrect" %}
+```sql
+SELECT p.Father.Manager FROM Person p
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+However, if you cast `Father` to type `Employee` then you can continue the path expression with `Manager`:
+
+{% code-tabs %}
+{% code-tabs-item title="Correct" %}
+```sql
+SELECT CAST(p.Father AS Employee).Manager FROM Person p
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+If the object reference `Father` for some objects in the extent `Person` is not of type, or subtype of `Employee` , then this object reference can't be cast to `Employee` and the operation returns `null`.
+
+The cast operation only supports casts between different types of database objects and not between different value types.
 

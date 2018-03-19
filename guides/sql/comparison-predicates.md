@@ -1,4 +1,12 @@
-# Comparison predicates
+# Comparisons and Logical Operators
+
+## Introduction
+
+Starcounter implements operators that can be used for filtering in `WHERE` clauses. They can, for example, check if a value is equal to another value or if a value matches a specific pattern.
+
+## Relational Operators
+
+### Equality
 
 The comparison predicates "equal" \(`x = y`\) and "not equal" \(`x <> y`\) are supported for all data types. See for example query below.
 
@@ -6,11 +14,11 @@ The comparison predicates "equal" \(`x = y`\) and "not equal" \(`x <> y`\) are s
 SELECT e FROM Employee e WHERE e.FirstName = 'Bob'
 ```
 
-Note that all string comparisons are case insensitive. The query \(1\) is therefore equivalent to the query.
+{% hint style="warning" %}
+Starcounter SQL is case insensitive, so "Bob" will also match with "bob", "BOB" and so on.
+{% endhint %}
 
-```sql
-SELECT e FROM Employee e WHERE e.FirstName = 'bob'
-```
+### Comparisons
 
 The comparison predicates "less than" \(`x < y`\), "greater than" \(`x > y`\), "less than or equal" \(`x <= y`\) and "greater than or equal" \(`x >= y`\) are implemented for the data types `String`, `DateTime` and all numerical types. See example below.
 
@@ -22,14 +30,40 @@ Since a `DateTime` value represents a timestamp it is often necessary to compare
 
 ```sql
 SELECT e.FirstName, e.HireDate FROM Employee e
-  WHERE e.HireDate >= DATE '2006-11-01' AND e.HireDate < DATE '2006-11-02'
+  WHERE e.HireDate >= DATE '2006-11-01' 
+  AND e.HireDate < DATE '2006-11-02'
 ```
 
-The comparison predicates "is null" \(`x IS NULL`\) and "is not null" \(`x IS NOT NULL`&gt;\) are implemented for all data types. See for example query below.
+## Logical Operators
+
+There are three logical operators in Starcounter SQL, `AND`, `OR`, and `NOT`:
+
+```sql
+SELECT e FROM Employee e 
+    WHERE e.FirstName = 'Bob' 
+    AND e.LastName = 'Smith'
+    
+SELECT e FROM Employee e 
+    WHERE e.FirstName = 'Bob' 
+    OR e.FirstName = 'John'
+    
+SELECT e FROM Employee e 
+    WHERE NOT e.FirstName = 'Bob'
+```
+
+{% hint style="info" %}
+The logical operators `NOT` and `OR` usually imply that indexes can't be used in the execution of the query, and therefore these operators should be used restrictively.
+{% endhint %}
+
+## IS NULL
+
+The comparison predicates "is null" \(`x IS NULL`\) and "is not null" \(`x IS NOT NULL`\) are implemented for all data types. See for example query below.
 
 ```sql
 SELECT e FROM Employee e WHERE e.Manager IS NULL
 ```
+
+## LIKE
 
 The comparison predicate "like" \(`x LIKE y [ESCAPE z]`\) is implemented for the data type `String`. In the specified pattern \(`y`\) the underscore character \(`'_'`\) match any single character in the string, and the percent character \(`'%'`\) match any sequence \(possibly empty\) of characters in the string. See for example query below.
 
@@ -43,7 +77,7 @@ The optional third argument to the `LIKE` predicate is an "escape character", fo
 SELECT s FROM Share s WHERE s.Unit LIKE '\%' ESCAPE '\\'
 ```
 
-## `IS` Operator
+## IS
 
 The comparison predicate `IS` checks if an object can be cast to a given type. It has similar semantics to [`Type.IsAssignableFrom`](https://msdn.microsoft.com/en-us/library/system.type.isassignablefrom.aspx). Consider, for example, the following code:
 
