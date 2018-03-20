@@ -8,9 +8,40 @@ When it comes to running applications, developers want to perform the "full repl
 
 Starcounter is not taking a goal to outperform those with any of our potential house-grown tools, preferring to focus on our core unique features. Instead, we do our best to supply our customers with the latest information on doing these scenarios with the OS standard facilities. This article aims to provide such information for community version users as well.
 
-## Silent Mode Installation
+## Installation modes
 
-In `Silent Mode Installation` the Starcounter installation process runs seamlessly without prompting any messages to the user or asking about any choices - Yes/No popups. This is particularly useful in production environments where user wants to install Starcounter in an unattended fashion with some commands or scripts.  
+Starcounter can be installed in three different modes: `Developer Mode`, `Production Mode` or `Silent Mode`. Following section describes these modes:
+
+### Developer mode
+
+This is the default installation mode where the `Starcounter Server Service` can be started on-demand, typically when you start a Starcounter Application.
+
+### Production mode
+
+In `Production Mode` the installer starts `Starcounter Server Service` as part of the installation process and also sets the `Startup Type` of the service to `Automatic` so that it can be started on Windows Logon.
+
+#### How to install
+
+There are two ways you can install Starcounter in Production Mode :
+
+* Run the  `<Your setup file name>.exe`  by double clicking on it.
+* Select `Production` on the Setup screen :
+
+![](../../.gitbook/assets/productionmode%20%281%29.PNG)
+
+#### OR
+
+* Open a `Command Prompt`window with `Administrator` privileges
+* Browse the directory where the Starcounter setup file exists.
+* Run the following command :
+
+  ```text
+  <Your setup file name>.exe productionmode
+  ```
+
+### Silent mode
+
+In `Silent Mode`the Starcounter installation process runs seamlessly without prompting any messages to the user or asking about any choices - Yes/No popups. This is particularly useful in production environments where user wants to install Starcounter in an unattended fashion with some commands or scripts.  
 
 #### How to install
 
@@ -66,9 +97,11 @@ This will create a shadow copy of a drive, mount shadowed copy of a source folde
 Read more about robocopy in the [robycopy documentation](https://www.computerhope.com/robocopy.htm).
 {% endhint %}
 
-**Note:** creating and removing a VSS snapshot during the described backup routine may affect performance of your Starcounter application when you have user activity peaks. Consider running backup scenario in periods of time when you have less than hundreds of thousands of simultaneously connected users.
+{% hint style="warning" %}
+Creating and removing a VSS snapshot during the described backup routine may affect performance of your Starcounter application when you have user activity peaks. Consider running backup scenario in periods of time when you have less than hundreds of thousands of simultaneously connected users.
+{% endhint %}
 
-**Working with VSS snapshots.** VSS snapshot is a powerful tool. You can use native Windows tool `vssadmin` to manage snapshots in a command line. We recommend a GUI-based tool [ShadowExplorer](http://www.shadowexplorer.com/) \(free\) and [Z-VSSCopy](http://www.z-dbackup.com/vss-shadow-copy-open-file-backup.html) \(free for non-commercial use\) to create, view and mount VSS snapshots.
+**Working with VSS snapshots.** VSS snapshot is a powerful tool. You can use the native Windows tool `vssadmin` to manage snapshots in a command line. We recommend a GUI-based tool [ShadowExplorer](http://www.shadowexplorer.com/) \(free\) and [Z-VSSCopy](http://www.z-dbackup.com/vss-shadow-copy-open-file-backup.html) \(free for non-commercial use\) to create, view and mount VSS snapshots.
 
 **Files to backup:**  
 The files necessary for backup are:
