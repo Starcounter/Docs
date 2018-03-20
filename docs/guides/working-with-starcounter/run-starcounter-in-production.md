@@ -26,7 +26,6 @@ There are two ways you can install Starcounter in Production Mode :
 ![](../../.gitbook/assets/developer%20%281%29.PNG)
 
 
-
 ### Production Mode
 
 In `Production Mode` the installer starts `Starcounter Server Service` as part of the installation process and also sets the `Startup Type` of the service to `Automatic` so that it can be started on Windows Logon.
@@ -108,16 +107,20 @@ This will create a shadow copy of a drive, mount shadowed copy of a source folde
 Read more about robocopy in the [robycopy documentation](https://www.computerhope.com/robocopy.htm).
 {% endhint %}
 
-**Note:** creating and removing a VSS snapshot during the described backup routine may affect performance of your Starcounter application when you have user activity peaks. Consider running backup scenario in periods of time when you have less than hundreds of thousands of simultaneously connected users.
+{% hint style="warning" %}
+Creating and removing a VSS snapshot during the described backup routine may affect performance of your Starcounter application when you have user activity peaks. Consider running backup scenario in periods of time when you have less than hundreds of thousands of simultaneously connected users.
+{% endhint %}
 
-**Working with VSS snapshots.** VSS snapshot is a powerful tool. You can use native Windows tool `vssadmin` to manage snapshots in a command line. We recommend a GUI-based tool [ShadowExplorer](http://www.shadowexplorer.com/) \(free\) and [Z-VSSCopy](http://www.z-dbackup.com/vss-shadow-copy-open-file-backup.html) \(free for non-commercial use\) to create, view and mount VSS snapshots.
+**Working with VSS snapshots.** VSS snapshot is a powerful tool. You can use the native Windows tool `vssadmin` to manage snapshots in a command line. We recommend a GUI-based tool [ShadowExplorer](http://www.shadowexplorer.com/) \(free\) and [Z-VSSCopy](http://www.z-dbackup.com/vss-shadow-copy-open-file-backup.html) \(free for non-commercial use\) to create, view and mount VSS snapshots.
 
 **Files to backup:**  
 The files necessary for backup are:
 
 * `<database_name>.cfg`
 * `<database_name>.*.log`
-* `<database_name>.*.optlog`Follow these steps to find these files:
+* `<database_name>.*.optlog`
+
+Follow these steps to find these files:
 
 1. Go to the server repository that is found, by default, at `%UserProfile%\Documents\Starcounter\Personal`. If configurations have been done in the installer, then it might reside somewhere else. In that case, it can be found by following the `<server-dir>` path at `Program Files\Starcounter\configuration\Personal.xml`, if the default setting were accepted in the installer.
 2. Open `Personal.server.config` in this repository.
