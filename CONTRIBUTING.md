@@ -16,7 +16,7 @@ When merging, beware of merge conflicts. There might be structural differences b
 
 ## Reviews
 
-To maintain high quality and consistency in the documentation, add changes that are not typo fixes or other smaller changes through a pull request. The branches 2.3.2 and 2.4 are protected branches that requires someone to approve the changes before merging.
+To maintain high quality and consistency in the documentation, add changes that are not typo fixes or other smaller changes through a pull request. 
 
 ## Formatting
 
@@ -28,3 +28,9 @@ To make it easier for the reader to skim through the pages, we're trying to keep
   * Step 2
   * Step 3
 * Summary
+
+## Editing on docs.starcounter.io
+
+In addition to pushing to GitHub, it's also possible to edit directly in the browser on docs.starcounter.io. These changes are then automatically synced to GitHub. To edit directly on docs.starcounter.io, you have to have the correct authorization. To get authorization, contact @Mackiovello.
+
+Editing directly is appropriate when moving pages or making other structural changes. By doing that in the web interface, GitBook will handle paths and other related things. It's also useful to edit in the browser when you're using more visual elements, such as hints, API blocks, or tabs, since that allows you to see how it looks before publishing. 
