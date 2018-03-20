@@ -1,6 +1,6 @@
 # How to create single page apps
 
-Typically, whenever you move from one page to another page in a browser, the browser loses all state apart from the set cookies. This means that all JavaScript code, any DOM elements and ongoing animations are lost. This makes moving between pages slower than it could be.
+Whenever you move from one page to another page in a browser, the browser loses all state apart from the set cookies. This means that all JavaScript code, any DOM elements and ongoing animations are lost. This makes moving between pages slower than it could be.
 
 This is solved in single page applications \(SPA\) using [`history.pushState`](https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Manipulating_the_browser_history). For instance, GMail allows the user to bookmark emails and use the navigation buttons \(back and forward\) while, technically, everything is going on on a single page. In this way, the user gets the best of two worlds, the speed of SPA and the expected behaviour of a multipage application. Starcounter has built in support for creating SPA applications that supports multiple pages.
 
