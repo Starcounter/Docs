@@ -105,7 +105,7 @@ To get the list of blending candidates that are going to run for a given URI han
 BlendingInfo[] GetRunCandidatesForUri(String uri);
 ```
 
-To list registered blending rules for a given URI:
+To list registered attachment rules for a given URI:
 
 ```csharp
 BlendingInfo[] ListByUri(String uri)
@@ -181,9 +181,9 @@ Here, the handler `/app1/{?}` is mapped to the `token1` and `token2`.
 
 When an app requests `Self.GET("/app1/xyz")`, both handlers mapped to `token1` and `token2` will be triggered.
 
-## Separate blending rules in JSON
+## Separate attachment rules in JSON
 
-You can describe blending rules in JSON, separate from the application code. If the file `blend.json` is in the same directory as the starting application assembly - the file is parsed and the extracted blending rules are applied right after the `Main` method. The same happens when the application restarts. With this mechanism, blending rules can be changed for shipped application, where you only have the binaries. Here is an example of the content of a `blend.json` file:
+You can describe attachment rules in JSON, separate from the application code. If the file `blend.json` is in the same directory as the starting application assembly - the file is parsed and the extracted attachment rules are applied right after the `Main` method. The same happens when the application restarts. With this mechanism, attachment rules can be changed for shipped application, where you only have the binaries. Here is an example of the content of a `blend.json` file:
 
 ```javascript
 [
