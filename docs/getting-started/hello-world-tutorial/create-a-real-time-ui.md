@@ -35,7 +35,7 @@ The value of the `Html` property is the path to the view that the view-model sho
 
 ## Create the HTTP handler
 
-To get the view-model and the corresponding view to the client, an HTTP handler has to be created. This handler sets the specific database object that the view-model should be bound to, creates a [session](../../topic-guides/web-apps/sessions.md), and returns the view-model to the client.
+To get the view-model and the corresponding view to the client, an HTTP handler has to be created. This handler sets the specific database object that the view-model should be bound to, creates a [session](../../topic-guides/blendable-web-apps/sessions.md), and returns the view-model to the client.
 
 This handler will only return the JSON tree that we defined earlier and not any HTML, which is what we want to render. The solution is to use [middleware](../../topic-guides/network/middleware.md). For this app, and most other Starcounter apps, we use the `HtmlFromJsonProvider` and `PartialToStandaloneHtmlProvider` middleware. These affect the pipeline by catching the outgoing JSON, finding the HTML at the `Html` path, wrapping the HTML to form a complete HTML document, and forwarding it to the client. By doing this, a complete HTML document can be sent to the client, even if the only thing that's returned from the handler is a simple JSON tree.
 

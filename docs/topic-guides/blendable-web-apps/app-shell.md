@@ -7,19 +7,19 @@ A view exposed from your app should follow the [inversion of control](https://en
 The view is inserted in the main document by another view or, if it is at the root of the view-model, by the Starcounter app shell.
 
 {% hint style="info" %}
- "App shell" is a term coined by Google that is explained well at their web page [The App Shell Model](https://developers.google.com/web/fundamentals/architecture/app-shell).
+"App shell" is a term coined by Google that is explained well at their web page [The App Shell Model](https://developers.google.com/web/fundamentals/architecture/app-shell).
 {% endhint %}
 
 ## Starcounter app shell
 
 The Starcounter app shell is a minimalist, configurable HTML document that imports the prerequisites for all blendable web apps:
 
-*  a polyfill for the browsers that do not have a native implementation of the Web Components specs
-*  Palindrom JS library for communication with the server
-*  the `<starcounter-include>` custom element
-*  Underwear.css, a CSS framework
-*  a placeholder for the Web App Manifest \(`link rel="manifest"`\).
-*  `starcounter.html` file that contains a script, which automatically adds the `aria-current-"page"` attribute to links which, for example, you can use to highlight the current link in the menu, like the [Uniform.css](https://docs.starcounter.io/v/2.4/topic-guides/blendable-web-apps/starcounter-design-system#uniform.css-ui-patterns-in-a-separated-presentation-layer) `uni-layout-left-nav` class does.
+* a polyfill for the browsers that do not have a native implementation of the Web Components specs
+* Palindrom JS library for communication with the server
+* the `<starcounter-include>` custom element
+* Underwear.css, a CSS framework
+* a placeholder for the Web App Manifest \(`link rel="manifest"`\).
+* `starcounter.html` file that contains a script, which automatically adds the `aria-current-"page"` attribute to links which, for example, you can use to highlight the current link in the menu, like the [Uniform.css](https://docs.starcounter.io/v/2.4/topic-guides/blendable-web-apps/starcounter-design-system#uniform.css-ui-patterns-in-a-separated-presentation-layer) `uni-layout-left-nav` class does.
 
 On page load, the app shell establishes the Palindrom session with the server, obtains the JSON view-model tree, inserts the root view using `<starcounter-include>` and connects the root view to the view-model.
 

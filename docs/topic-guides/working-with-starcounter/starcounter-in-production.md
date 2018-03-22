@@ -27,7 +27,7 @@ There are two ways you can install Starcounter in Production Mode :
 * Run the  `<Your setup file name>.exe`  by double clicking on it.
 * Select `Production` on the Setup screen :
 
-![](../../.gitbook/assets/productionmode%20%281%29.PNG)
+![](../../.gitbook/assets/productionmode-1.PNG)
 
 #### OR
 
@@ -41,7 +41,7 @@ There are two ways you can install Starcounter in Production Mode :
 
 ### Silent mode
 
-In `Silent Mode`the Starcounter installation process runs seamlessly without prompting any messages to the user or asking about any choices - Yes/No popups. This is particularly useful in production environments where user wants to install Starcounter in an unattended fashion with some commands or scripts.  
+In `Silent Mode`the Starcounter installation process runs seamlessly without prompting any messages to the user or asking about any choices - Yes/No popups. This is particularly useful in production environments where user wants to install Starcounter in an unattended fashion with some commands or scripts.
 
 #### How to install
 
@@ -53,7 +53,7 @@ In `Silent Mode`the Starcounter installation process runs seamlessly without pro
 <Your setup file name>.exe Silent productionmode unattended
 ```
 
-![](../../.gitbook/assets/silent-mode%20%281%29.PNG)
+![](../../.gitbook/assets/silent-mode-1.PNG)
 
 * It should install Starcounter seamlessly
 
@@ -137,7 +137,7 @@ Starcounter streams changes to disk sequentially. Modern HDDs can stream terraby
 
 ## Disabling anti-virus scan of database files
 
-For higher performance, disable your anti-virus from scanning the database files in the [server directory](configuration-structure.md#server-repository). 
+For higher performance, disable your anti-virus from scanning the database files in the [server directory](configuration-structure.md#server-repository).
 
 ## Production checklist
 
@@ -151,5 +151,5 @@ For higher performance, disable your anti-virus from scanning the database files
 
 **Please always remember that your data is one of your most important assets!** Implement the proper strategy for backup, failover and disaster recovery from day one. Using advices from the article, you can make your data safety strategy gradual. First of all, start with simple Shadow Copy backups. Use Dropbox for Business and asynchronous cryptography \(with private and public keys\) to store terabytes of backups for just hundreds of dollars per year. If you run Starcounter in a cloud like Amazon, then you most likely run Windows Server 2012 R2 Standard, which ships with Failover Clustering role out of the box. Use the facilities like Failover Clustering that go for free with your operating system. Create a simple Failover Cluster with one master machine and one hot-standby machine which would always be a replica of your master machine. Store your database image files on a Cluster Shared Volume, so that the hot-standby machine will continue to run on exact the same data. It will take some seconds for the replica machine to start Starcounter \(since two machines cannot open the same database at one time\), so the resulted failover will be warm. However, today you can achieve true synchronous hot failover using Windows Server 2016 Storage Replica \(Datacenter edition is required\).
 
-![](../../.gitbook/assets/screen-shot-2015-10-06-at-11.24.041-1024x726.png)
+![](../../.gitbook/assets/screen-shot-2015-10-06-at-11.24.041-1024x726%20%281%29.png)
 
