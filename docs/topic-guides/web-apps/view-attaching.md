@@ -1,10 +1,10 @@
-# View Attaching
+# View-model Attaching
 
 ## Introduction
 
-When the browser sends a request to the server, the app with the matching URI sends back a response with the view. Starcounter has a unique feature of _attaching _views from other apps to the main view in the same response using a system based on _tokens _and _contexts_.
+When the browser sends a request to the server, the app with the matching URI sends back a response with the view-model. Starcounter has a unique feature of _attaching _view-models from other apps to the main view-model in the same response using a system based on _tokens _and _contexts_.
 
-For example, if a user wants to see a profile of a person, the browser makes a request to the People app: `GET http://localhost:8080/people/person/4782`. The response that is sent to the browser will include not only the view from the People app but also views from other apps that are attached to it.
+For example, if a user wants to see a profile of a person, the browser makes a request to the People app: `GET http://localhost:8080/people/person/4782`. The response that is sent to the browser will include not only the view-model from the People app but also view-models from other apps that are attached to it.
 
 On a high level, these are the specific steps involved with sending the response:
 
@@ -12,7 +12,7 @@ On a high level, these are the specific steps involved with sending the response
 2. The server receives the request and routes it to the corresponding handler in an app \(People\).
 3. The handler is mapped to a token that describes the sort of resource it deals with, in this case, it's the  person table in the database \(`simplified.ring2.person`\). 
 4. The server requests responses from all the other handlers registered in the code host that are mapped to the same token.
-5. For the responses from other apps that are views, the server attaches the views to the view from the initial handler \(which is called the main view\) during the serialization process.
+5. For the responses from other apps that are view-models, the server attaches the view-models to the view-model from the initial handler \(which is called the main view-model\) during the serialization process.
 6. The server sends the response, which now contains views from multiple apps, back to the client.
 
 By using tokens, the apps don't need to know anything about other apps in the code host - they don't even need to know if there are other apps -  they only have to communicate what concept the handlers deal with. Thus, apps should be built to not depend on, or expect, attaching. 
