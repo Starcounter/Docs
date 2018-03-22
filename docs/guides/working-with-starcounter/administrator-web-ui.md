@@ -15,7 +15,7 @@ Databases are handled from `localhost:8181/#/databases`.
 
 
 
-![](../../.gitbook/assets/1.png)
+![](../../.gitbook/assets/1%20%281%29.png)
 
 
 
@@ -31,7 +31,7 @@ Create new databases at `localhost:8181/#/databases` by pressing "New database".
 
 
 
-![](../../.gitbook/assets/3.png)
+![](../../.gitbook/assets/3%20%281%29.png)
 
 
 
@@ -43,7 +43,7 @@ Start and stop databases by clicking the "Start" or "Stop" buttons at `localhost
 
 
 
-![](../../.gitbook/assets/56.png)
+![](../../.gitbook/assets/56%20%281%29.png)
 
 
 
@@ -55,7 +55,7 @@ Go to a database by clicking on its name in the list of databases. Then, click o
 
 
 
-![](../../.gitbook/assets/appoutput2.gif)
+![](../../.gitbook/assets/appoutput2%20%281%29.gif)
 
 
 
@@ -99,7 +99,7 @@ If you navigate to "Query Plan" after the SQL request, you can see the steps to 
 
 
 
-![](../../.gitbook/assets/5.png)
+![](../../.gitbook/assets/5%20%281%29.png)
 
 
 
@@ -109,7 +109,7 @@ Apps can be downloaded to a database from the `App Warehouse` tab. Once an app h
 
 
 
-![](../../.gitbook/assets/appstoretab.png)
+![](../../.gitbook/assets/appstoretab%20%281%29.png)
 
 
 
@@ -144,7 +144,7 @@ Access the database settings by going to `localhost:8181/#/databases/default/set
 
 
 
-![](../../.gitbook/assets/7.png)
+![](../../.gitbook/assets/7%20%281%29.png)
 
 
 
@@ -154,7 +154,7 @@ Go to `localhost:8181/#/server/log` to see debug steps, notices, warnings, and e
 
 
 
-![](../../.gitbook/assets/8.png)
+![](../../.gitbook/assets/8%20%281%29.png)
 
 
 
