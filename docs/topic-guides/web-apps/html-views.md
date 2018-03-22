@@ -58,9 +58,9 @@ Handle.GET("/your/partial/url", () =>
 
 This handler only returns the JSON and HTML if the app uses the `HtmlFromJsonProvider` and `PartialToStandaloneHtmlProvider` [middleware](../network/middleware.md).
 
-### Adding the blending point
+### Adding the blended view-model insertion point
 
-You can now create a blending point for this partial by attaching the partial to a parent partial using `Self.GET`. For example:
+You can now create a blended view-model insertion point for this partial by attaching the partial to a parent partial using `Self.GET`. For example:
 
 ```csharp
 mainPage.SubPage = Self.GET("/your/partial/url");
