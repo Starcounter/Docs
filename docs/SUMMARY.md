@@ -61,7 +61,7 @@
     * [Web Components](topic-guides/web-apps/web-components.md)
     * [App shell](topic-guides/web-apps/app-shell.md)
     * [Starcounter Design System](topic-guides/web-apps/starcounter-design-system.md)
-    * [View Attaching](topic-guides/web-apps/view-attaching.md)
+    * [View-model Attaching](topic-guides/web-apps/view-attaching.md)
     * [View Composing](topic-guides/web-apps/view-composing.md)
     * [HTML Views Composition Guidelines](topic-guides/web-apps/html-views-composition-guidelines.md)
     * [Avoiding CSS conflicts](topic-guides/web-apps/avoiding-css-conflicts.md)
