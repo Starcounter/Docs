@@ -11,9 +11,9 @@ To get a technical background, the article [Layout compositions for HTML partial
 
 [CompositionProvider](https://github.com/Starcounter/CompositionProvider) has to run for the code in these guidelines to work. There are two ways to start `CompositionProvider`: follow the instructions in the [README file](https://github.com/Starcounter/CompositionProvider/blob/master/README.md), or, when Starcounter is running, go to `http://localhost:8181/#/databases/default/appstore`, click on the download button next to `CompositionProvider`, and click `Start` at `http://localhost:8181/#/databases/yourDatabase`. This requirement is temporary.
 
-## Guideline 1: Separation of Layout and Content
+## Guideline 1: Separation of Presentation and Content
 
-To make applications look great when running independently while also allowing them to look as one while running with other applications, it is beneficial to separate the layout and the content. This is accomplished using the `<template is="declarative-shadow-dom">` element.
+To make applications look great when running independently while also allowing them to look as one while running with other applications, it is beneficial to separate the presentation and the content. This is accomplished using the `<template is="declarative-shadow-dom">` element.
 
 The basic boilerplate of a Starcounter HTML view, which is created by adding a `Starcounter HTML template with dom-bind` file in Visual Studio, looks like this:
 
@@ -27,7 +27,7 @@ The basic boilerplate of a Starcounter HTML view, which is created by adding a `
 </template>
 ```
 
-To separate the layout and content in this file, the element mentioned above, `<template is="declarative-shadow-dom">` should be used. This element should contain the layout of the HTML view while the `<template is="dom-bind">` should contain the content. Note that this only applies when using Polymer as a templating engine. When using other frameworks, it will not use `dom-bind`, although, the principle of separating the layout from the content will stay constant. In code, this is how it looks:
+To separate the presentation and content in this file, the element mentioned above, `<template is="declarative-shadow-dom">` should be used. This element should contain the presentation of the HTML view while the `<template is="dom-bind">` should contain the content. Note that this only applies when using Polymer as a templating engine. When using other frameworks, it will not use `dom-bind`, although, the principle of separating the presentation from the content will stay constant. In code, this is how it looks:
 
 ```markup
 <link rel="import" href="/sys/polymer/polymer.html">
@@ -37,7 +37,7 @@ To separate the layout and content in this file, the element mentioned above, `<
         <!-- content goes here -->
     </template>
     <template is="declarative-shadow-dom">
-        <!-- layout goes here-->
+        <!-- presentation goes here-->
     </template>
 </template>
 ```
@@ -84,9 +84,9 @@ Use explicit slot names instead of relying on the default slot. The solution own
 
 It's not necessary to declare the default slot in the `declarative-shadow-dom` part of your view. The Starcounter's HTML merger automatically adds a default slot at the bottom of the composition of your view for fallback reasons.
 
-## Guideline 4: Create the Layout in `declarative-shadow-dom`
+## Guideline 4: Create the Presentation in `declarative-shadow-dom`
 
-As outlined in guideline 1, the layout of the HTML view should be included within the `<template is="declarative-shadow-dom">`.
+As outlined in guideline 1, the presentation of the HTML view should be included within the `<template is="declarative-shadow-dom">`.
 
 There is one exception to this. Both slot attributes and `declarative-shadow-dom` can be omitted if the view only contains non-visual elements or if all elements should be bulked together in the default slot. The latter is rarely the case but may be useful for example for prototyping.
 
@@ -172,7 +172,7 @@ Here, the elements are distributed in the way that the view will look when no Co
 Regarding styling, there are two ways to make the application easier to visually integrate with other apps:
 
 1. Prefix all class names with the name of the app, as outlined in [Avoiding CSS Conflicts](https://docs.starcounter.io/guides/blending/avoiding-css-conflicts/).
-2. Keep styling that will affect the layout inside the `declarative-shadow-dom`.
+2. Keep styling that will affect the presentation inside the `declarative-shadow-dom`.
 3. To avoid writing the same Shadow DOM CSS on different pages, it can be imported with the CSS `import` rule. The syntax for this is `<style>@import url("/yourapp/css/style.css");</style>`. In the example above it would be done this way:
 
 ```markup
