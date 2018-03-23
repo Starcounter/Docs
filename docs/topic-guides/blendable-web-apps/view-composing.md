@@ -45,7 +45,7 @@ The structure of this separation looks like this:
 
 Here, the content of the view is defined on the root level and the composition is defined inside the `declarative-shadow-dom`. The [slot](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot) elements are insertion points for the content into the composition.
 
-The `declarative-shadow-dom` is used as the default composition that can be further modified or replaced in runtime using the Starcounter system app [Blending](https://github.com/Starcounter/Blending) and Its feature - compositionEditor.
+The `declarative-shadow-dom` is used as the default composition that can be further modified or replaced in runtime using the Starcounter system app [Blending](https://github.com/Starcounter/Blending) and its feature - compositionEditor.
 
 ## Composing the attached views
 
