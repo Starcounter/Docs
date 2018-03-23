@@ -84,6 +84,10 @@ Use explicit slot names instead of relying on the default slot. The solution own
 
 It's not necessary to declare the default slot in the `declarative-shadow-dom` part of your view. The Starcounter's HTML merger automatically adds a default slot at the bottom of the composition of your view for fallback reasons.
 
+## Tip: how to hide content
+
+To hide some content in the presentation layer, you can remove `<slot>` element that slots this content or move the `<slot>` element to be a child of `<div style="display: none">`.
+
 ## Guideline 4: Create the Layout in `declarative-shadow-dom`
 
 As outlined in guideline 1, the layout of the HTML view should be included within the `<template is="declarative-shadow-dom">`.
