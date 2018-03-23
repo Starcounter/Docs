@@ -20,15 +20,15 @@ The implementation of JSON-Patch is provided by `json-patch-duplex.js`, which co
 
 The implementation of operational transformation in Palindrom is provided by [json-patch-queue](https://github.com/Palindrom/JSON-Patch-Queue), [json-patch-ot-agent](https://github.com/Palindrom/JSON-Patch-OT-agent), and [json-patch-ot](https://github.com/Palindrom/JSON-Patch-OT).
 
-Palindrom and its dependencies are wrapped into the Custom Element [palindrom-polymer-client](https://github.com/Palindrom/palindrom-polymer-client) to make it easy to add. Adding this Custom Element into the DOM automatically loads and configures all the dependencies.
+Palindrom and its dependencies are wrapped into the custom element [palindrom-client](https://github.com/Palindrom/palindrom-client) to make it easy to add. Adding this custom element into the DOM automatically loads and configures all the dependencies.
 
 ### Template engine
 
 Since Palindrom provides a JavaScript object that reflects the server-side view-model, it needs a template engine to present the UI in the DOM. JavaScript libraries, such as D3 or React, can consume this object.
 
-To render HTML templates in the DOM we recommend the [`dom-bind`](https://www.polymer-project.org/1.0/docs/devguide/data-binding) Custom Element that is part of the [Polymer](https://github.com/Polymer/polymer) library. It supports binding annotations using curly braces \(`{{}}`\), conditional fragments with [`dom-if`](https://www.polymer-project.org/1.0/docs/devguide/templates#dom-if) and loops with [`dom-repeat`](https://www.polymer-project.org/1.0/docs/devguide/templates#dom-repeat).
+To render HTML templates in the DOM we recommend the [`dom-bind`](https://www.polymer-project.org/2.0/docs/devguide/templates) custom element that is part of [Polymer](https://www.polymer-project.org/). It supports binding annotations using curly braces \(`{{}}`\), conditional fragments with [`dom-if`](https://www.polymer-project.org/2.0/docs/devguide/templates#dom-if) and loops with [`dom-repeat`](https://www.polymer-project.org/2.0/docs/devguide/templates#dom-repeat).
 
-The solution is based on the Web Components APIs from the latest  HTML specifications. It's approved by all major browser vendors and is [widely adopted](https://www.webcomponents.org/). However, not everything is there yet, some browsers require the `webcomponents.js` polyfill to be loaded to support for these APIs.
+The solution is based on the Web Components APIs from the latest  HTML specifications. It's approved by all major browser vendors and is [widely adopted](https://caniuse.com/#search=web%20components). However, not everything is there yet, some browsers require the `webcomponents-lite.js` polyfill to be loaded to support for these APIs.
 
 ### Template loading
 
