@@ -71,7 +71,7 @@ mainPage.SubPage = Self.GET("/your/partial/url");
 In the partial HTML view for the `mainPage` above, the HTML from the `SubPage` partial can be stamped in like so:
 
 ```markup
-<starcounter-include partial="{{model.SubPage}}"></starcounter-include>
+<starcounter-include view-model="{{model.SubPage}}"></starcounter-include>
 ```
 
 ## Partial HTML view example
@@ -98,16 +98,17 @@ All child nodes will receive a `model` property with JSON view-model,
 which is automatically bound to the server-side.
 -->
 <template>
-    <template is="dom-bind">
-        <!--
-            Now, the double curly brace syntax "{{}}" can be used 
-            for two-way data bindings from the HTML view to serverside. 
-            For example:
-         -->
-        <h2 class="myapp-address-entry-name">{{model.FullName}}</h2>
-        <h4>Address</h4>
-        <starcounter-include partial="{{model.Address}}">
-        </starcounter-include>
+    <dom-bind>
+        <template>
+            <!--
+                Now, Polymer's double curly brace syntax "{{}}" can be used 
+                for two-way data bindings between the view and the view-model
+             -->
+            <h2 class="myapp-address-entry-name">{{model.FullName}}</h2>
+            <h4>Address</h4>
+            <starcounter-include view-model="{{model.Address}}">
+            </starcounter-include>
+        </template>
     </template>
 </template>
 ```
