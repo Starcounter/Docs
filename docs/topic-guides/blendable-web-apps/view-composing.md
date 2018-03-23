@@ -45,7 +45,7 @@ The structure of this separation looks like this:
 
 Here, the content of the view is defined on the root level and the composition is defined inside the `declarative-shadow-dom`. The [slot](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot) elements are insertion points for the content into the composition.
 
-The `declarative-shadow-dom` is used as the default composition that can be further modified or replaced in runtime using the Starcounter system apps CompositionEditor and CompositionProvider.
+The `declarative-shadow-dom` is used as the default composition that can be further modified or replaced in runtime using the Starcounter system app [Blending](https://github.com/Starcounter/Blending) and Its feature - compositionEditor.
 
 ## Composing the attached views
 
@@ -146,9 +146,9 @@ Compositions can also be accessed with the static methods `GetUsingkey(string ke
 
 ### Providing custom compositions
 
-Custom compositions are provided by the [CompositionProvider](https://github.com/starcounterapps/compositionprovider) app. When views are merged, this app checks if there's a composition in the database with the same identifier and serves it, otherwise, the default composition is used.
+Custom compositions are provided by the [BlendingProvider](https://github.com/Starcounter/Blending) app. When views are merged, this app checks if there's a composition in the database with the same identifier and serves it, otherwise, the default composition is used.
 
-Because of this, the CompositionProvider has to be running if you want to render custom compositions of your views.
+Because of this, the BlendingProvider has to be running if you want to render custom compositions of your views.
 
 ## Result
 

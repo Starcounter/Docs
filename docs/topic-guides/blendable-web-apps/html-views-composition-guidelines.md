@@ -9,7 +9,7 @@ To get a technical background, the article [Layout compositions for HTML partial
 * [Unobtrusive styling and composing 3rd party HTML content](http://starcounter.io/unobtrusive-styling-composing-3rd-party-html-content/)
 * [HTML partials/includes WebComponents-way](http://starcounter.io/html-partialsincludes-webcomponents-way/)
 
-[CompositionProvider](https://github.com/Starcounter/CompositionProvider) has to run for the code in these guidelines to work. There are two ways to start `CompositionProvider`: follow the instructions in the [README file](https://github.com/Starcounter/CompositionProvider/blob/master/README.md), or, when Starcounter is running, go to `http://localhost:8181/#/databases/default/appstore`, click on the download button next to `CompositionProvider`, and click `Start` at `http://localhost:8181/#/databases/yourDatabase`. This requirement is temporary.
+[BlendingProvider](https://github.com/Starcounter/Blending) has to run for the code in these guidelines to work. There are two ways to start `BlendingProvider`: follow the instructions in the [README file](https://github.com/Starcounter/Blending/blob/master/README.md), or, when Starcounter is running, go to `http://localhost:8181/#/databases/default/appstore`, click on the download button next to `Blending`, and click `Start` at `http://localhost:8181/#/databases/yourDatabase`. This requirement is temporary.
 
 ## Guideline 1: Separation of Layout and Content
 
