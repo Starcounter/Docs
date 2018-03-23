@@ -95,7 +95,7 @@ The [`<slot>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element
 Consider the following HTML view definition:
 
 ```markup
-<link rel="import" href="/sys/palindrom-redirect/palindrom-redirect.html" />
+<link rel="import" href="/sys/palindrom-redirect/palindrom-redirect.html">
 
 <template>
     <template is="dom-bind">
@@ -119,7 +119,7 @@ Consider the following HTML view definition:
                 <label slot="people/first-name-label" class="control-label">First name:</label>
             </div>
             <div class="people-field__control">
-                <input slot="people/first-name-control" type="text" value="{{model.FirstName$::change}}" placeholder="First name" class="form-control" />
+                <input slot="people/first-name-control" type="text" value="{{model.FirstName$::change}}" placeholder="First name" class="form-control">
             </div>
          </div>
     </template>
@@ -129,12 +129,12 @@ Consider the following HTML view definition:
 To add `declarative-shadow-dom` to this HTML view, something like this can be done:
 
 ```markup
-<link rel="import" href="/sys/palindrom-redirect/palindrom-redirect.html" />
+<link rel="import" href="/sys/palindrom-redirect/palindrom-redirect.html">
 
 <template>
     <template is="dom-bind">
         <label slot="people/first-name-label" class="control-label">First name:</label>
-        <input slot="people/first-name-control" type="text" value="{{model.FirstName$::change}}" placeholder="First name" class="form-control" />
+        <input slot="people/first-name-control" type="text" value="{{model.FirstName$::change}}" placeholder="First name" class="form-control">
     </template>
     <template is="declarative-shadow-dom">
         <style>
@@ -176,12 +176,12 @@ Regarding styling, there are two ways to make the application easier to visually
 3. To avoid writing the same Shadow DOM CSS on different pages, it can be imported with the CSS `import` rule. The syntax for this is `<style>@import url("/yourapp/css/style.css");</style>`. In the example above it would be done this way:
 
 ```markup
-<link rel="import" href="/sys/palindrom-redirect/palindrom-redirect.html" />
+<link rel="import" href="/sys/palindrom-redirect/palindrom-redirect.html">
 
 <template>
     <template is="dom-bind">
         <label slot="People/first-name-label" class="control-label">First name:</label>
-        <input slot="People/first-name-control" type="text" value="{{model.FirstName$::change}}" placeholder="First name" class="form-control" />
+        <input slot="People/first-name-control" type="text" value="{{model.FirstName$::change}}" placeholder="First name" class="form-control">
     </template>
     <template is="declarative-shadow-dom">
         <style>

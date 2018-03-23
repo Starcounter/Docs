@@ -158,7 +158,7 @@ The second, `Handle.GET("/multiplepagesdemo/mails/{?}"...`, returns a MailsPage 
 <template>
     <template is="dom-bind">
         <h3>{{model.Title}}</h3>
-        <hr />
+        <hr>
         <article>{{model.Content}}</article>
     </template>
 </template>
@@ -171,7 +171,7 @@ The `Focused.html` referenced by `Focused.json` simply displays the title and co
 {% code-tabs %}
 {% code-tabs-item title="MailsPage.html" %}
 ```markup
-<link rel="import" href="/sys/polymer/polymer.html" />
+<link rel="import" href="/sys/polymer/polymer.html">
 <template>
     <style>
         .multiplepagesdemo-content {
@@ -189,7 +189,7 @@ The `Focused.html` referenced by `Focused.json` simply displays the title and co
         <div class="multiplepagesdemo-content">
             <div class="multiplepagesdemo-content__item">
                 <h5>Mails</h5>
-                <hr />
+                <hr>
                 <ul>
                     <template is="dom-repeat" items="{{model.Mails}}">
                         <li>
@@ -200,7 +200,7 @@ The `Focused.html` referenced by `Focused.json` simply displays the title and co
             </div>
             <div class="multiplepagesdemo-content__item">
                 <h5>Mail Content</h5>
-                <hr />
+                <hr>
                 <div>
                     <template is="imported-template" model="{{model.Focused}}" content$="{{model.Focused.Html}}">
                     </template>

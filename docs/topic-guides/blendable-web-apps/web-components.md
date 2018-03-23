@@ -50,8 +50,8 @@ In addition to loading Custom Elements, Starcounter takes benefit from HTML Impo
 
 Web Components are loaded by browser with HTML Imports. HTML Import for Polymer in Starcounter should look like this:
 
-```markup
-<link rel="import" href="/sys/polymer/polymer.html" />
+```html
+<link rel="import" href="/sys/polymer/polymer.html">
 ```
 
 ### Avoiding loading the same files multiple times {#avoiding-loading-the-same-files-multiple-times}
@@ -62,8 +62,8 @@ How does the browser know which of the components has already been imported then
 
 This will be loaded twice and then lead to a Polymer error:
 
-```markup
-<link rel="import" href="/bower_components/polymer/polymer.html" /><link rel="import" href="/sys/polymer/polymer.html" />
+```html
+<link rel="import" href="/bower_components/polymer/polymer.html"><link rel="import" href="/sys/polymer/polymer.html">
 ```
 
 It is a good practice to avoid double loading of external libraries. Hence, you need to use the same URL pattern as other apps. The recommended way is to use the pattern: `/sys/<dependency-name>/<dependency-files>`.

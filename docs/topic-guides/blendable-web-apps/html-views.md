@@ -86,7 +86,7 @@ Load you dependencies: <script>s, HTML Imports, CSS stylesheets etc.
 Those dependencies will only be executed once when the partial is imported
 -->
 <!-- For example, to use Polymer's dom-bind custom element: -->
-<link rel="import" href="/sys/polymer/polymer.html" />
+<link rel="import" href="/sys/polymer/polymer.html">
 <style>
     .myapp-address-entry-name {
         font-weight: bold;
