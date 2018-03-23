@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Sessions are used to retain the state in your app. A session is represented by an instance of the `Session` class. Together with an instance of a `Json` object it can be used to enable client-server communication and synchronization using JSON patch.
+Sessions are used to retain the state in your app. In Starcounter, the state is represented by a view-model, which is technically an instance of the `Json` class. A session is represented by an instance of the `Session` class. The combination of a session and a view-model enables client-server communication using JSON Patch.
 
 ## Session instance
 
@@ -26,7 +26,7 @@ Sessions in Starcounter are tied to individual browser tabs, this is different f
 DateTime createdDate = Session.Ensure().Created;
 ```
 
-Once you have the session, you can attach state to it. In Starcounter, the state is represented by a `Json`instance, also called a view-model\) The `session` contains a storage where any number of `Json` instances can be kept, using a string as key. This storage is separated per app, so each running app has it own section and can only access it's own state.
+Once you have the session, you can attach state to it. The `session` contains a storage where any number of `Json` instances can be kept, using a string as key. This storage is separated per app, so each running app has it own section and can only access it's own state.
 
 ```csharp
 var state1 = new Json();
@@ -49,7 +49,7 @@ One additional feature when using `Session`, besides keeping state on the server
 
 When this is used, the client can send HTTP requests using the `PATCH` verb \([HTTP PATCH method](http://tools.ietf.org/html/rfc5789)\) or use WebSocket to send and receive patches.
 
-To enable this, the session needs to know which `Json` instance should be considered the root viewmodel. If the [PartialToStandalone middleware](https://github.com/Starcounter/Docs/blob/2ffb62f69111b62d73cc9493ef5f190250aa8729/guides/network/middleware#partialtostandalonehtmlprovider) is used, the root viewmodel will be automatically assigned to the session based on the `Json`instance returned from a handler.
+To enable this, the session needs to know which `Json` instance should be considered the root view-model. If the [PartialToStandalone middleware](https://github.com/Starcounter/Docs/blob/2ffb62f69111b62d73cc9493ef5f190250aa8729/guides/network/middleware#partialtostandalonehtmlprovider) is used, the root view-model will be automatically assigned to the session based on the `Json`instance returned from a handler.
 
 To specify which `Json` instance to use as the root, use the `SetClientRoot` extension method from the `Starcounter.XSON.Advanced` namespace. It's called on a `Session` object with a `Json` instance as the argument.
 

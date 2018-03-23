@@ -32,9 +32,7 @@ The solution is based on the Web Components APIs from the latest  HTML specifica
 
 ### Template loading
 
-To build modular apps out of many partial views, use the `imported-template` Custom Element. It loads the templates from separate HTML files and stamp them to the DOM, it plays well with Polymer's data-bindings and regular DOM APIs.
-
-To make it easier to use with Starcounter, `imported-template` is wrapped in the [starcounter-include](https://github.com/Starcounter/starcounter-include) Custom Element, which also sets up the data binding between Palindrom and imported-template.
+To build modular apps out of many partial views, use the [starcounter-include](https://github.com/Starcounter/starcounter-include) custom element. It loads the templates from separate HTML files, stamps them to the DOM and binds the view-model as exposed by Palindrom. It plays well with Polymer's data-bindings and regular DOM APIs.
 
 ## The stack, visualized
 
