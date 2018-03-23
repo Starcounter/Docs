@@ -8,7 +8,7 @@ This is solved in single page applications \(SPA\) using [`history.pushState`](h
 
 Let's assume that we have an email application. On the left is a list of all emails and on the right is a single focused email. You can use an URL to navigate to any particular email \(i.e. `/MultiplePagesDemo/emails/123`\). In this way, each particular email works as a separate web page. However, when you step between the emails in the list on the left, you don't want the browser to load a completely new page. This would make the email application slow and any DOM that is outside of the email page \(i.e. the page inside the main page\) would be reset.
 
-![](../.gitbook/assets/multiplepages.gif)
+![](../.gitbook/assets/multiplepages%20%281%29.gif)
 
 In Starcounter, you can create master pages and sub pages that are handled on the browser side. In this way, the part of the master page that does not change between pages is actually the _same_ DOM when you move in-between pages. The JavaScript instance is the same and any ongoing animations work fluently. Above all, performance is stellar.
 
@@ -96,7 +96,7 @@ namespace MultiplePagesDemo
                 {
                    Data = mailPage.Mails.FirstOrDefault().Data
                 };
-                
+
                 mailPage.Focused = focused;
 
                 return mailPage;
@@ -107,10 +107,10 @@ namespace MultiplePagesDemo
                 var mail = Db.SQL<Mail>(
                     "SELECT m FROM mail m WHERE objectid=?", id)
                     .FirstOrDefault();
-                    
+
                 var mailsPage = Self.GET<MailsPage>(
                     "/multiplepagesdemo/mails");
-                    
+
                 mailsPage.Focused.Data = mail;
                 return mailsPage;
             });
@@ -119,7 +119,7 @@ namespace MultiplePagesDemo
             {
                 var mails = Db.SQL<Mail>(
                     "SELECT m FROM Mail m");
-                    
+
                 if (mails.FirstOrDefault() == null)
                 {
                     new Mail()

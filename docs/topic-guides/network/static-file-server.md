@@ -42,7 +42,7 @@ Starcounter has certain files that are served by default to the `sys` directory 
   
 With this approach, we ensure that HTML imports only load each dependency one time.
 
-For further instructions on how to add external dependencies to Web Components, read [avoiding loading the same files multiple times](../web-apps/web-components.md#avoiding-loading-the-same-files-multiple-times) on the Web Components page.
+For further instructions on how to add external dependencies to Web Components, read [avoiding loading the same files multiple times](../blendable-web-apps/web-components.md#avoiding-loading-the-same-files-multiple-times) on the Web Components page.
 
 ## Specifying static resource directory
 
