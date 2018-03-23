@@ -41,7 +41,9 @@ A partial view-model together with its corresponding partial HTML view can simpl
 A partial can be accessed in two different ways:
 
 1. Directly through an HTTP request that is handled in the application by a `Handle.GET`. The response to this request should be a complete HTML and JSON document. 
-2. Through a blending point. A blending point is a combination of a `Self.GET` call, which acts as the partial view-model blending point, and a `<starcounter-include>` tag, which acts as a partial HTML view blending point. The `<starcounter-include>` tag determines where in the DOM tree the partial HTML view should be rendered.
+2. Through a pair of insertion points in a view-model and a view:
+   - a blended view-model insertion point is represented by a property in the view-model. The property inserts the result of a `Self.GET` call to a partial view-model in a parent view-model.
+   - a blended view insertion point is represented by a `<starcounter-include>` tag in HTML. The tag inserts the partial view in the parent DOM tree.
 
 ## Examples
 
