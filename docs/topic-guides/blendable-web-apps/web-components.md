@@ -10,7 +10,7 @@ Web Components are a set of new features in HTML 5 and beyond. Each feature is u
 
 For instance, Web Components allow us to render a list of products and their barcodes by executing this code in a web browser:
 
-```html
+```markup
 <link rel="import" href="/sys/x-barcode/src/x-barcode.html">
 
 <template is="dom-repeat" items="{{model.Products}}">
@@ -45,7 +45,7 @@ In addition to loading custom elements, Starcounter takes benefit from HTML Impo
 
 Web Components are loaded by browser with HTML Imports. HTML Import for Polymer in Starcounter should look like this:
 
-```html
+```markup
 <link rel="import" href="/sys/polymer/polymer.html">
 ```
 
@@ -57,7 +57,7 @@ How does the browser know which of the components has already been imported then
 
 This will be loaded twice and then lead to a Polymer error:
 
-```html
+```markup
 <link rel="import" href="/bower_components/polymer/polymer.html"><link rel="import" href="/sys/polymer/polymer.html">
 ```
 
