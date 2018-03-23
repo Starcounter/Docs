@@ -42,7 +42,31 @@ The following chart shows the bird-eye's view on the client side libraries used.
 
 ![](../../.gitbook/assets/client-side-components.svg)
 
-## Versions
+## Client side libraries distributed with Starcounter
 
-See the file `ClientFiles\bower-list.txt` in your Starcounter installation directory \(usually `C:\Program Files\Starcounter`\) for the list of client side libraries bundled with your Starcounter instance, including their version numbers.
+The `StaticFiles` folder from Starcounter installation is automatically served as a static content folder. When Starcounter server receives a request for a static file, it searches for the file in all of the static content folders. The project folder has higher priority over internal folder.
 
+See the file `ClientFiles\bower-list.txt` in your Starcounter installation directory (usually `C:\Program Files\Starcounter`) for the list of client side libraries bundled with your Starcounter instance, including their version numbers.
+
+For Starcounter 2.4.0.5470, it looks like this:
+
+```text
+bower check-new     Checking for new versions of the project dependencies...
+starcounter-clientfiles#2.1.1 C:\Work\Starcounter\StarcounterClientFiles\src\StarcounterClientFiles
+├─┬ imported-template#3.2.0
+│ └── juicy-html#4.0.0
+├─┬ palindrom-client#5.0.0
+│ ├── Palindrom#5.1.0
+│ └── polymer not installed
+├── palindrom-redirect#1.0.0
+├─┬ polymer-source#2.5.0
+│ ├── shadycss#1.1.1
+│ └── webcomponentsjs#1.1.0
+├─┬ starcounter-include#5.0.0
+│ └── imported-template#3.2.0
+├── underwear.css#0.0.7
+├── uniform.css#0.0.9
+└── webcomponentsjs#1.1.0
+```
+
+Read more on the [static file server page](../network/static-file-server.md).
