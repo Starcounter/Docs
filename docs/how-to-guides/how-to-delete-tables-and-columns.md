@@ -36,7 +36,7 @@ To delete the reference between the database class and the table, rebuild and re
 
 ### 3. Run SQL command DROP TABLE
 
-To mark that the underlying table should be deleted with all its data, run this command in the [Administrator](): 
+To mark that the underlying table should be deleted with all its data, run this command in the [Administrator](../topic-guides/working-with-starcounter/administrator-web-ui.md): 
 
 ```sql
 DROP TABLE MyApp.UselessTable
@@ -93,7 +93,7 @@ Since the `ALTER TABLE` command can't be executed while the table it alters is r
 
 ### 4. Run SQL command DROP COLUMN
 
-In the [Administrator](), run this query to mark that the column should be dropped:
+In the [Administrator](../topic-guides/working-with-starcounter/administrator-web-ui.md), run this query to mark that the column should be dropped:
 
 ```sql
 ALTER TABLE MyApp.Person DROP COLUMN IrrelevantFact
