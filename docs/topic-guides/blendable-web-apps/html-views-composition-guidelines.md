@@ -9,7 +9,7 @@ To get a technical background, the article [Layout compositions for HTML partial
 * [Unobtrusive styling and composing 3rd party HTML content](http://starcounter.io/unobtrusive-styling-composing-3rd-party-html-content/)
 * [HTML partials/includes WebComponents-way](http://starcounter.io/html-partialsincludes-webcomponents-way/)
 
-[CompositionProvider](https://github.com/Starcounter/CompositionProvider) has to run for the code in these guidelines to work. There are two ways to start `CompositionProvider`: follow the instructions in the [README file](https://github.com/Starcounter/CompositionProvider/blob/master/README.md), or, when Starcounter is running, go to `http://localhost:8181/#/databases/default/appstore`, click on the download button next to `CompositionProvider`, and click `Start` at `http://localhost:8181/#/databases/yourDatabase`. This requirement is temporary.
+[BlendingProvider](https://github.com/Starcounter/Blending) has to run for the code in these guidelines to work. There are two ways to start `BlendingProvider`: follow the instructions in the [README file](https://github.com/Starcounter/Blending/blob/master/README.md), or, when Starcounter is running, go to `http://localhost:8181/#/databases/default/appstore`, click on the download button next to `Blending`, and click `Start` at `http://localhost:8181/#/databases/yourDatabase`. This requirement is temporary.
 
 ## Guideline 1: Separation of Layout and Content
 
@@ -80,9 +80,13 @@ When no slot name is provided for an element it will be distributed in [the defa
 
 Text nodes are also distributed in the default slot.
 
-Use explicit slot names instead of relying on the default slot. The solution owner can remove the default slot from a view composition with the [CompositionEditor](https://github.com/Starcounter/Blending#blending-app-suite). As a result, all elements from the view that don't have a `slot` attribute are not rendered.
+Use explicit slot names instead of relying on the default slot. The solution owner can remove the default slot from a view composition with  composition editor feature of [BlendingEditor](https://github.com/Starcounter/Blending#blending-app-suite). As a result, all elements from the view that don't have a `slot` attribute are not rendered.
 
 It's not necessary to declare the default slot in the `declarative-shadow-dom` part of your view. The Starcounter's HTML merger automatically adds a default slot at the bottom of the composition of your view for fallback reasons.
+
+{% hint style="info" %} 
+To hide some content in the presentation layer, you can remove `<slot>` element that slots this content or move the `<slot>` element to be a child of `<div style="display: none">`.
+{% endhint %}
 
 ## Guideline 4: Create the Layout in `declarative-shadow-dom`
 

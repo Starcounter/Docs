@@ -45,7 +45,7 @@ The structure of this separation looks like this:
 
 Here, the content of the view is defined on the root level and the composition is defined inside the `declarative-shadow-dom`. The [slot](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot) elements are insertion points for the content into the composition.
 
-The `declarative-shadow-dom` is used as the default composition that can be further modified or replaced in runtime using the Starcounter system apps CompositionEditor and CompositionProvider.
+The `declarative-shadow-dom` is used as the default composition that can be further modified or replaced in runtime using the Starcounter  app suite [Blending](https://github.com/Starcounter/Blending) and its feature - composition editor.
 
 ## Composing the attached views
 
@@ -124,9 +124,9 @@ To create a custom composition, we will move the MedicalRecord table and headlin
 
 We have now produced the result shown in the image above; the view from the MedicalRecord app has been neatly integrated with the view from PetList.
 
-The tool for creating these custom compositions is the [CompositionEditor](https://github.com/starcounterapps/CompositionEditor) app. When this app is running, you can open it at any page with `Ctrl + E`. When the app opens, it gives you an HTML editor for the composition of your attached views. 
+The tool for creating these custom compositions is the composition editor feature of [BlendingEditor](https://github.com/Starcounter/Blending). When this app is running, you can open it at any page with `Ctrl + E`. When the app opens, it gives you an HTML editor for the composition of your attached views. 
 
-There are two main concepts in the CompositionEditor - the identifier and composition \("layout" on the below picture\).
+There are two main concepts in the composition editor - the identifier and composition \("layout" on the below picture\).
 
 ![](../../.gitbook/assets/compositioneditor.png)
 
@@ -140,15 +140,13 @@ The `/sc/htmlmerger` is a prefix that is added every time a view contains views 
 
 The composition changes made in the editor are displayed in real time.
 
-Compositions are saved in the database and can be queried for with `SELECT * FROM Starcounter.HTMLComposition`. Since the CompositionEditor interacts with the database, it should not run in production.  
-  
-Compositions can also be accessed with the static methods `GetUsingkey(string key)` and `GetUsingKeyAndVersion(string key, string version)`on the `HTMLComposition` class. These methods return an `HTMLComposition` with the specified key, or key and version.
+Compositions are saved in the database and can be queried for with `SELECT * FROM Starcounter.HtmlViewComposition`. Since the composition editor interacts with the database, it should not run in production. See the [Blending](https://github.com/Starcounter/Blending) repo for more information about the data model of compositions.
 
 ### Providing custom compositions
 
-Custom compositions are provided by the [CompositionProvider](https://github.com/starcounterapps/compositionprovider) app. When views are merged, this app checks if there's a composition in the database with the same identifier and serves it, otherwise, the default composition is used.
+Custom compositions are provided by the [BlendingProvider](https://github.com/Starcounter/Blending) app. When views are merged, this app checks if there's a composition in the database with the same identifier and serves it, otherwise, the default composition is used.
 
-Because of this, the CompositionProvider has to be running if you want to render custom compositions of your views.
+Because of this, the BlendingProvider has to be running if you want to render custom compositions of your views.
 
 ## Result
 
