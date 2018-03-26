@@ -80,7 +80,7 @@ When no slot name is provided for an element it will be distributed in [the defa
 
 Text nodes are also distributed in the default slot.
 
-Use explicit slot names instead of relying on the default slot. The solution owner can remove the default slot from a view composition with the [CompositionEditor](https://github.com/Starcounter/Blending#blending-app-suite). As a result, all elements from the view that don't have a `slot` attribute are not rendered.
+Use explicit slot names instead of relying on the default slot. The solution owner can remove the default slot from a view composition with  composition editor feature of [BlendingEditor](https://github.com/Starcounter/Blending#blending-app-suite). As a result, all elements from the view that don't have a `slot` attribute are not rendered.
 
 It's not necessary to declare the default slot in the `declarative-shadow-dom` part of your view. The Starcounter's HTML merger automatically adds a default slot at the bottom of the composition of your view for fallback reasons.
 

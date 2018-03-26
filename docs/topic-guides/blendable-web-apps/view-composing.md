@@ -45,7 +45,7 @@ The structure of this separation looks like this:
 
 Here, the content of the view is defined on the root level and the composition is defined inside the `declarative-shadow-dom`. The [slot](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot) elements are insertion points for the content into the composition.
 
-The `declarative-shadow-dom` is used as the default composition that can be further modified or replaced in runtime using the Starcounter system app [Blending](https://github.com/Starcounter/Blending) and its feature - compositionEditor.
+The `declarative-shadow-dom` is used as the default composition that can be further modified or replaced in runtime using the Starcounter  app suite [Blending](https://github.com/Starcounter/Blending) and its feature - composition editor.
 
 ## Composing the attached views
 
@@ -124,9 +124,9 @@ To create a custom composition, we will move the MedicalRecord table and headlin
 
 We have now produced the result shown in the image above; the view from the MedicalRecord app has been neatly integrated with the view from PetList.
 
-The tool for creating these custom compositions is the [CompositionEditor](https://github.com/starcounterapps/CompositionEditor) app. When this app is running, you can open it at any page with `Ctrl + E`. When the app opens, it gives you an HTML editor for the composition of your attached views. 
+The tool for creating these custom compositions is the composition editor feature of [BlendingEditor](https://github.com/Starcounter/Blending). When this app is running, you can open it at any page with `Ctrl + E`. When the app opens, it gives you an HTML editor for the composition of your attached views. 
 
-There are two main concepts in the CompositionEditor - the identifier and composition \("layout" on the below picture\).
+There are two main concepts in the composition editor - the identifier and composition \("layout" on the below picture\).
 
 ![](../../.gitbook/assets/compositioneditor.png)
 
