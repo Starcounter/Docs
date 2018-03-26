@@ -6,7 +6,7 @@ When [Attaching views](view-attaching.md) from different apps, the views are sta
 
 ![](../../.gitbook/assets/assets2fstarcounter2fe48b74d0-8680-11e7-9944-1f85270462c62fe5df1df0-8680-11e7-9944-1f85270462c62fsim.png)
 
-In the example above, there are two apps, PetList and MedicalRecord. By default, they are stacked on top of each other. This makes it seem like they are not related, when they actually are. By Composing, we can move the table of examinations into the card from the PetList app and make it look like one coherent concept. In essence, we are **changing the composition but not the content** to combine apps that were not explicitly built to share the same screen. This is done without touching the source code of the individual apps.
+In the example above, there are two apps, PetList and MedicalRecord. By default, they are stacked on top of each other. This makes it seem like the information coming from thems is not related, when it actually is. By Composing, we can move the table of examinations into the card from the PetList app and make it look like one coherent concept. In essence, we are **changing the presentation but not the content** to combine apps that were not explicitly built to share the same screen. This is done without touching the source code of the individual apps.
 
 This ability of modifying the composition of views coming from different apps is crucial, especially when working with many apps. Without it, there would just be a stack of views with no meaningful visual context, as shown in this illustration:
 
@@ -16,9 +16,9 @@ This ability of modifying the composition of views coming from different apps is
 Composing was previously called "client-side-blending"
 {% endhint %}
 
-## Composition and Content Separation
+## Presentation and Content Separation
 
-Composing works by replacing or modifying the default structure of HTML elements. For this to work, content and composition has to be separated. [Shadow DOM](https://www.html5rocks.com/en/tutorials/webcomponents/shadowdom/) handles this separation - the content is in light DOM and the composition is in Shadow DOM.
+Composing works by replacing or modifying the default structure of HTML elements used for the presentation. For this to work, content and presentation has to be separated. [Shadow DOM](https://www.html5rocks.com/en/tutorials/webcomponents/shadowdom/) handles this separation - the content is in light DOM and the presentation is in Shadow DOM.
 
 The structure of this separation looks like this:
 
@@ -27,6 +27,7 @@ The structure of this separation looks like this:
     <h1 slot="myapp/main-heading">My heading</h1>
     <button slot="myapp/left-button">Go left</button>
     <button slot="myapp/right-button">Go right</button>
+
     <template is="declarative-shadow-dom">
         <style>
             .myapp-direction-controls {
@@ -43,7 +44,7 @@ The structure of this separation looks like this:
 </template>
 ```
 
-Here, the content of the view is defined on the root level and the composition is defined inside the `declarative-shadow-dom`. The [slot](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot) elements are insertion points for the content into the composition.
+Here, the content of the view is defined on the root level and the presentation is defined inside the `declarative-shadow-dom`. The [slot](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot) elements are insertion points for the content into the presentation.
 
 The `declarative-shadow-dom` is used as the default composition that can be further modified or replaced in runtime using the Starcounter system apps CompositionEditor and CompositionProvider.
 
