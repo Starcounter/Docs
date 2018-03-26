@@ -193,14 +193,14 @@
             </text>
             <g id="Rectangle-1-+-Data-sync" transform="translate(14.000000, 613.000000)">
                 <use id="Rectangle-1" stroke="#FFFFFF" mask="url(#mask-36)" stroke-width="2" fill="#46404A" xlink:href="#path-35"></use>
-                <text id="&lt;puppet-client&gt;" font-family="LucidaGrande, Lucida Grande" font-size="20" font-weight="normal" fill="#F67E00">
-                    <tspan x="78.4951172" y="51">&lt;puppet-client&gt;</tspan>
+                <text id="&lt;palindrom-client&gt;" font-family="LucidaGrande, Lucida Grande" font-size="20" font-weight="normal" fill="#F67E00">
+                    <tspan x="78.4951172" y="51">&lt;palindrom-client&gt;</tspan>
                 </text>
             </g>
             <g id="Rectangle-1-+-Data-sync" transform="translate(15.000000, 124.000000)">
                 <use id="Rectangle-1" stroke="#FFFFFF" mask="url(#mask-38)" stroke-width="2" fill="#158100" xlink:href="#path-37"></use>
-                <text id="Partial-HTML" font-family="LucidaGrande, Lucida Grande" font-size="20" font-weight="normal" fill="#FFFFFF">
-                    <tspan x="78.5332031" y="51">Partial HTML</tspan>
+                <text id="View" font-family="LucidaGrande, Lucida Grande" font-size="20" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="78.5332031" y="51">View</tspan>
                 </text>
             </g>
             <g id="Group">

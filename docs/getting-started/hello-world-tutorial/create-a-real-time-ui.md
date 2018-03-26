@@ -74,7 +74,7 @@ This is how it looks in code:
 {% code-tabs %}
 {% code-tabs-item title="PersonJson.html" %}
 ```markup
-<link rel="import" href="/sys/polymer/polymer.html"/>
+<link rel="import" href="/sys/polymer/polymer.html">
 <template>
     <template is="dom-bind">
         <fieldset>

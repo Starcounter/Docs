@@ -310,44 +310,9 @@ Application.Current.Use(new HtmlFromJsonProvider() { IgnoreJsonWithoutHtml = tru
 
 ### PartialToStandaloneHtmlProvider
 
-This middleware class checks if the HTML is a full document, or essentially if it starts with a `<!DOCTYPE html>`. If it's not a full HTML document, it wraps the existing HTML inside the body of an HTML document that contains the following:
+This middleware class checks if the HTML is a full document, or essentially if it starts with a `<!DOCTYPE html>`. If it's not a full HTML document, it wraps the existing HTML inside the body of an HTML document that imports the prerequisites for all blendable web apps, called the [app shell](../blendable-web-apps/app-shell.html).
 
-1. A `palindrom-client` element to create a WebSocket connection
-2. Import links to the Starcounter custom elements `starcounter-include` and `starcounter-debug-aid`
-3. Import links to the outside libraries Polymer and Bootstrap
-4. The session URL which makes it possible for Palindrom to request the relevant JSON in a future request
-
-It's possible to override this default HTML by passing a string containing HTML as a parameter. Here's an example of that:
-
-```csharp
-var html = @"<!DOCTYPE html>
-<html>
-<head>
-    <meta charset=""utf-8"">
-    <title>{0}</title>
-    <script src=""/sys/webcomponentsjs/webcomponents.min.js""></script>
-    <script src=""/sys/document-register-element/build/document-register-element.js""></script>
-    <link rel=""import"" href=""/sys/polymer/polymer.html"">
-    <link rel=""import"" href=""/sys/starcounter.html"">
-    <link rel=""import"" href=""/sys/starcounter-include/starcounter-include.html"">
-    <link rel=""import"" href=""/sys/starcounter-debug-aid/src/starcounter-debug-aid.html"">
-    <link rel=""import"" href=""/sys/bootstrap.html"">
-    <style>
-        body {{
-            margin: 20px;
-        }}
-    </style>
-</head>
-<body>
-    <template is=""dom-bind"" id=""palindrom-root"">
-        <template is=""imported-template"" content$=""{{{{model.Html}}}}"" model=""{{{{model}}}}""></template>
-    </template>
-    <palindrom-client ref=""palindrom-root"" remote-url=""{1}""></palindrom-client>
-    <starcounter-debug-aid></starcounter-debug-aid>
-</body>
-</html>";
-Application.Current.Use(new PartialToStandaloneHtmlProvider(html))
-```
+It's possible to override this default HTML by passing a string containing HTML as a parameter. 
 
 Since `PartialToStandaloneHtmlProvider` wraps the actual response from the handler, it will have the HTTP status code of the response.
 

@@ -11,9 +11,9 @@ To get a technical background, the article [Layout compositions for HTML partial
 
 [BlendingProvider](https://github.com/Starcounter/Blending) has to run for the code in these guidelines to work. There are two ways to start `BlendingProvider`: follow the instructions in the [README file](https://github.com/Starcounter/Blending/blob/master/README.md), or, when Starcounter is running, go to `http://localhost:8181/#/databases/default/appstore`, click on the download button next to `Blending`, and click `Start` at `http://localhost:8181/#/databases/yourDatabase`. This requirement is temporary.
 
-## Guideline 1: Separation of Layout and Content
+## Guideline 1: Separation of Presentation and Content
 
-To make applications look great when running independently while also allowing them to look as one while running with other applications, it is beneficial to separate the layout and the content. This is accomplished using the `<template is="declarative-shadow-dom">` element.
+To make applications look great when running independently while also allowing them to look as one while running with other applications, it is beneficial to separate the presentation and the content. This is accomplished using the `<template is="declarative-shadow-dom">` element.
 
 The basic boilerplate of a Starcounter HTML view, which is created by adding a `Starcounter HTML template with dom-bind` file in Visual Studio, looks like this:
 
@@ -27,7 +27,7 @@ The basic boilerplate of a Starcounter HTML view, which is created by adding a `
 </template>
 ```
 
-To separate the layout and content in this file, the element mentioned above, `<template is="declarative-shadow-dom">` should be used. This element should contain the layout of the HTML view while the `<template is="dom-bind">` should contain the content. Note that this only applies when using Polymer as a templating engine. When using other frameworks, it will not use `dom-bind`, although, the principle of separating the layout from the content will stay constant. In code, this is how it looks:
+To separate the presentation and content in this file, the element mentioned above, `<template is="declarative-shadow-dom">` should be used. This element should contain the presentation of the HTML view while the `<template is="dom-bind">` should contain the content. Note that this only applies when using Polymer as a templating engine. When using other frameworks, it will not use `dom-bind`, although, the principle of separating the presentation from the content will stay constant. In code, this is how it looks:
 
 ```markup
 <link rel="import" href="/sys/polymer/polymer.html">
@@ -37,7 +37,7 @@ To separate the layout and content in this file, the element mentioned above, `<
         <!-- content goes here -->
     </template>
     <template is="declarative-shadow-dom">
-        <!-- layout goes here-->
+        <!-- presentation goes here-->
     </template>
 </template>
 ```
@@ -88,9 +88,10 @@ It's not necessary to declare the default slot in the `declarative-shadow-dom` p
 To hide some content in the presentation layer, you can remove `<slot>` element that slots this content or move the `<slot>` element to be a child of `<div style="display: none">`.
 {% endhint %}
 
-## Guideline 4: Create the Layout in `declarative-shadow-dom`
+## Guideline 4: Create the Presentation in `declarative-shadow-dom`
 
-As outlined in guideline 1, the layout of the HTML view should be included within the `<template is="declarative-shadow-dom">`.
+
+As outlined in guideline 1, the presentation of the HTML view should be defined within the `<template is="declarative-shadow-dom">`.
 
 There is one exception to this. Both slot attributes and `declarative-shadow-dom` can be omitted if the view only contains non-visual elements or if all elements should be bulked together in the default slot. The latter is rarely the case but may be useful for example for prototyping.
 
@@ -99,7 +100,7 @@ The [`<slot>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element
 Consider the following HTML view definition:
 
 ```markup
-<link rel="import" href="/sys/palindrom-redirect/palindrom-redirect.html" />
+<link rel="import" href="/sys/palindrom-redirect/palindrom-redirect.html">
 
 <template>
     <template is="dom-bind">
@@ -123,7 +124,7 @@ Consider the following HTML view definition:
                 <label slot="people/first-name-label" class="control-label">First name:</label>
             </div>
             <div class="people-field__control">
-                <input slot="people/first-name-control" type="text" value="{{model.FirstName$::change}}" placeholder="First name" class="form-control" />
+                <input slot="people/first-name-control" type="text" value="{{model.FirstName$::change}}" placeholder="First name" class="form-control">
             </div>
          </div>
     </template>
@@ -133,12 +134,12 @@ Consider the following HTML view definition:
 To add `declarative-shadow-dom` to this HTML view, something like this can be done:
 
 ```markup
-<link rel="import" href="/sys/palindrom-redirect/palindrom-redirect.html" />
+<link rel="import" href="/sys/palindrom-redirect/palindrom-redirect.html">
 
 <template>
     <template is="dom-bind">
         <label slot="people/first-name-label" class="control-label">First name:</label>
-        <input slot="people/first-name-control" type="text" value="{{model.FirstName$::change}}" placeholder="First name" class="form-control" />
+        <input slot="people/first-name-control" type="text" value="{{model.FirstName$::change}}" placeholder="First name" class="form-control">
     </template>
     <template is="declarative-shadow-dom">
         <style>
@@ -176,16 +177,16 @@ Here, the elements are distributed in the way that the view will look when no Co
 Regarding styling, there are two ways to make the application easier to visually integrate with other apps:
 
 1. Prefix all class names with the name of the app, as outlined in [Avoiding CSS Conflicts](https://docs.starcounter.io/guides/blending/avoiding-css-conflicts/).
-2. Keep styling that will affect the layout inside the `declarative-shadow-dom`.
+2. Keep styling that will affect the presentation inside the `declarative-shadow-dom`.
 3. To avoid writing the same Shadow DOM CSS on different pages, it can be imported with the CSS `import` rule. The syntax for this is `<style>@import url("/yourapp/css/style.css");</style>`. In the example above it would be done this way:
 
 ```markup
-<link rel="import" href="/sys/palindrom-redirect/palindrom-redirect.html" />
+<link rel="import" href="/sys/palindrom-redirect/palindrom-redirect.html">
 
 <template>
     <template is="dom-bind">
         <label slot="People/first-name-label" class="control-label">First name:</label>
-        <input slot="People/first-name-control" type="text" value="{{model.FirstName$::change}}" placeholder="First name" class="form-control" />
+        <input slot="People/first-name-control" type="text" value="{{model.FirstName$::change}}" placeholder="First name" class="form-control">
     </template>
     <template is="declarative-shadow-dom">
         <style>

@@ -93,27 +93,32 @@ We recommend the following rules when using BEM selectors in Starcounter apps.
 
   If there’s need for more nesting, it means there’s too much complexity and the elements should be stripped down into smaller blocks.
 
-* **Mixing BEM with Bootstrap**
+* **Mixing BEM with Uniform.css**
 
-  Starcounter sample apps use the CSS framework Bootstrap to create a unified look and feel.
+  Starcounter sample apps use Uniform.css to create a unified look and feel.
 
-  Even though Bootstrap does not follow BEM, there are no issues with mixing Bootstrap and BEM in a single project because there are no collisions. In fact, by just looking at the class, you can immediately tell if that class is shared with other apps \(Bootstrap\) or if it's private to this particular app \(BEM\).
+  There are no issues with mixing Uniform.css and your styles by following BEM. In fact, by just looking at the class, you can immediately tell if that class is shared with other apps \(Uniform.css\) or if it's private to this particular app \(BEM\).
 
-  It is **not** fine to override Bootstrap classes in your app's stylesheet. The only proper way to extend style is to with a BEM selector, for example:
+  It is **not** fine to override Uniform.css classes in your app's stylesheet. The only proper way to extend style is to with a BEM selector, for example:
 
 
 
   ```markup
-  <ul class="chatter-autocomplete">
-    <template is="dom-repeat" items="{{model.FoundAttachment}}">
-        <li class="chatter-autocomplete__item">
-            <button type="button" class="btn btn-sm btn-link chatter-autocomplete__choose" onmousedown="++this.value;" value="{{item.ChooseTrigger$::click}}">{{item.NameAndType}}</button>
-        </li>
-    </template>
-  </ul>
+  <style>
+      .kitchensink-section-primary-grid {
+          display: grid;
+          grid-gap: var(--uni-section-padding-vertical, var(--uni-default-section-padding-vertical));
+      }
+  </style>
+  <div class="uni-section-primary kitchensink-section-primary-grid">
+      <div class="uni-card">
+          <div class="uni-title">
+              <slot name="kitchensink/buttonpage-regular-heading"></slot>
+          </div>
+          <slot name="kitchensink/buttonpage-regular-description"></slot>
+      </div>
+  </div>
   ```
-
-  For reference, the available Bootstrap classes can be found in [bootstrap.css](https://github.com/twbs/bootstrap/blob/v3.3.7/dist/css/bootstrap.css).
 
 ## Further reading
 

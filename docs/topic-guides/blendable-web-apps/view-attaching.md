@@ -1,25 +1,27 @@
-# View Attaching
+# View-model Attaching
 
 ## Introduction
 
-When the browser sends a request to the server, the app with the matching URI sends back a response with the view. Starcounter has a unique feature of _attaching _views from other apps to the main view in the same response using a system based on _tokens _and _contexts_.
+When the browser sends a request to the server, the app with a URI handler that matches the request responds with a view-model. Starcounter has a unique feature of _attaching_ view-models from other apps to the main view-model in the same response using a system based on attachment rules.
 
-For example, if a user wants to see a profile of a person, the browser makes a request to the People app: `GET http://localhost:8080/people/person/4782`. The response that is sent to the browser will include not only the view from the People app but also views from other apps that are attached to it.
+For example, if a user wants to see a profile of a person, the browser makes a request to the People app: `GET http://localhost:8080/people/person/4782`. The response will include not only the view-model from the People app but also view-models from other apps that are attached to it.
+
+An attachment rule consiststs, of a URI, a token and a context.
 
 On a high level, these are the specific steps involved with sending the response:
 
 1. The browser makes a request for a resource, such as:  `GET http://localhost:8080/people/person/4782`.
 2. The server receives the request and routes it to the corresponding handler in an app \(People\).
-3. The handler is mapped to a token that describes the sort of resource it deals with, in this case, it's the  person table in the database \(`simplified.ring2.person`\). 
-4. The server requests responses from all the other handlers registered in the code host that are mapped to the same token.
-5. For the responses from other apps that are views, the server attaches the views to the view from the initial handler \(which is called the main view\) during the serialization process.
-6. The server sends the response, which now contains views from multiple apps, back to the client.
+3. The handler has an attachment rule that maps the URI to a token that represents the concept, in this case, it's the person table in the database \(`simplified.ring2.person`\). 
+4. The view-model attaching engine requests responses from all the other handlers registered in the code host that have an attachment rule with the same token.
+5. During the serialization process, the server attaches the responses from other apps that are view-models to the main view-model from the initial handler.
+6. The server sends the response, which now contains view-models from multiple apps, back to the client.
 
-By using tokens, the apps don't need to know anything about other apps in the code host - they don't even need to know if there are other apps -  they only have to communicate what concept the handlers deal with. Thus, apps should be built to not depend on, or expect, attaching. 
+By using attchment rules, the apps don't need to know anything about other apps in the code host - they don't even need to know if there are other apps -  they only have to communicate what concept the handlers deal with. The apps should be built to not depend on, but expect, attaching.
 
-The process of mapping handlers to tokens and attaching responses is handled by the `Blender` class in the `Starcounter` namespace.
+The process of defining the attachment rules and attaching the responses is handled by the `Blender` class in the `Starcounter` namespace.
 
-Attaching works well with [view composing](view-composing.md) to make different apps looks like one.
+Attaching works well with [view composing](view-composing.md), which makes the views representing the attached view-models look like one app.
 
 {% hint style="info" %}
 Attaching was previously called "server-side blending"
@@ -27,7 +29,7 @@ Attaching was previously called "server-side blending"
 
 ## Tokens
 
-Attaching uses tokens. These tokens are either strings or classes. Handlers with the same token are called on internal `Self.GET` calls or external URI that matches one of the handlers. Once the handler with a token is called, it will not trigger further calls mapped to that handler directly, only when a new `Self` call is made.
+Atachment rules use tokens. These tokens are either strings or classes. Handlers with the same token are called on internal `Self.GET` calls or external URI that matches one of the handlers. Once the handler with a token is called, it will not trigger further calls mapped to that handler directly, only when a new `Self` call is made.
 
 The first parameter is either a handler URI or a specific URI. If the token is a string, it's defined as the second parameter. If it's one or more classes, they are defined in the template or as a `Type` array parameter.
 
@@ -35,8 +37,8 @@ The first parameter is either a handler URI or a specific URI. If the token is a
 Blender.MapUri("/Products/settings", "settings");
 Blender.MapUri<Product>("/Products/partials/product/{?}");
 Blender.MapUri("/Products/menu", "menu");
-Blender.MapUri("/people/persons/34623", "person"); // Specific URI blending.
-Blender.MapUri<Person>("/people/persons/{34623}"); // Specific URI blending using so-called mixed URI.
+Blender.MapUri("/people/persons/34623", "person"); // Specific URI attachement rule.
+Blender.MapUri<Person>("/people/persons/{34623}"); // Specific URI attachement rule using so-called mixed URI.
 ```
 
 An arbitrary number of classes are allowed as tokens \(up to 3 in template, more in array of class `Type`\). Here are the `MapUri` signature examples \(same exist for removing token mapping from a handler\):
@@ -60,9 +62,9 @@ Handlers with empty tokens are called with other handlers with the same empty to
 
 Token matching can be made more fine-grained by using contexts. They are composed of a list of strings that acts as a bit map when matched with other contexts. No context \(`null` value\) means **match any context**. Otherwise, two handlers are matched if source context contains same elements as destination context. Examples:
 
-* Source context `{ "Readable", "View" }` is NOT matched with `{ "Writable", "View" }`.
-* Source context `null` is matched with `{ "Readable", "View" }` and `{ "Writable", "View" }` and any other context.
-* Source context `{ "View", "Writable" }` is matched with `{ "Writable", "View" }` and vice versa.
+* Source context `{ "Readable", "Page" }` is NOT matched with `{ "Writable", "Page" }`.
+* Source context `null` is matched with `{ "Readable", "Page" }` and `{ "Writable", "Page" }` and any other context.
+* Source context `{ "Page", "Writable" }` is matched with `{ "Writable", "Page" }` and vice versa.
 
 Consider contexts as an additional matching rule for handlers with the same token.
 
@@ -99,13 +101,13 @@ static Dictionary<string, List<BlendingInfo>> ListAllByUris();
 
 The dictionary returned by `ListAllByTokens` has the token as the key. The entries in the dictionary are sorted alphabetically based on the token. The same applies for `ListByAllUris` but for URIs.
 
-To get the list of blending candidates that are going to run for a given URI handler:
+To get the list of attachment candidates that are going to run for a given request URI:
 
 ```csharp
 BlendingInfo[] GetRunCandidatesForUri(String uri);
 ```
 
-To list registered blending rules for a given URI:
+To list registered attachment rules for a given URI:
 
 ```csharp
 BlendingInfo[] ListByUri(String uri)
@@ -117,12 +119,12 @@ and the same but for a given token:
 BlendingInfo[] ListByToken(String token)
 ```
 
-As you might noticed, a special blending information structure is used here: `BlendingInfo`.  
+As you might noticed, a special attachment rule information structure is used here: `BlendingInfo`.  
 It contains the following methods/properties:
 
 ```csharp
 String AppName; // Returns the application name to which the handler belongs.
-Boolean IsActive; // Shows if this blending is active.
+Boolean IsActive; // Shows if this attachment rule is active.
 String Token; // Returns the token.
 String Uri; // Returns URI given in MapUri (which was either mixed, specific or handler URI).
 String SpecificUri; // Returns a specific blended URI or null if MapUri was called with handler URI.
@@ -181,9 +183,9 @@ Here, the handler `/app1/{?}` is mapped to the `token1` and `token2`.
 
 When an app requests `Self.GET("/app1/xyz")`, both handlers mapped to `token1` and `token2` will be triggered.
 
-## Separate blending rules in JSON
+## Separate attachment rules in JSON
 
-You can describe blending rules in JSON, separate from the application code. If the file `blend.json` is in the same directory as the starting application assembly - the file is parsed and the extracted blending rules are applied right after the `Main` method. The same happens when the application restarts. With this mechanism, blending rules can be changed for shipped application, where you only have the binaries. Here is an example of the content of a `blend.json` file:
+You can describe attachment rules in JSON, separate from the application code. If the file `blend.json` is in the same directory as the starting application assembly - the file is parsed and the extracted attachment rules are applied right after the `Main` method. The same happens when the application restarts. With this mechanism, attachment rules can be changed for shipped application, where you only have the binaries. Here is an example of the content of a `blend.json` file:
 
 ```javascript
 [
@@ -215,10 +217,10 @@ Each element of the array contains the following fields:
 
 ```csharp
 string Uri; // Mixed, specific or handler URI.
-string Token; // Blending token.
-string[] Contexts; // Blending contexts (if any).
-bool AllowFromDirection; // Allows blending calls from this URI.
-bool AllowToDirection; // Allows blending calls to this URI.
+string Token; // Token.
+string[] Contexts; // Contexts (if any).
+bool AllowFromDirection; // Allows attachment rule calls from this URI.
+bool AllowToDirection; // Allows attachment rule calls to this URI.
 ```
 
 In short, the meaning of the above fields is the same as in `Blender.MapUri` functions variations.

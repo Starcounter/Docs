@@ -18,7 +18,7 @@ The protocol is defined in the [Palindrom wiki](https://github.com/Palindrom/Pal
 
 To make it easy to use this pattern in your web apps, we are using a library called [Palindrom](https://github.com/Palindrom/Palindrom). It is possible to use Palindrom implicitly in your web apps, so using it becomes self-configurable and as easy as putting few lines of code in your app.
 
-For the maximum benefit, use a two-way data binding framework such as Polymer or AngularJS to render your UI in HTML without writing a single line of JavaScript. If you have needs for client-side coding, a JavaScript object is exposed and can be used with any library, such as D3 or React.
+For the maximum benefit, use a two-way data binding framework such as Polymer or AngularJS to render your views in HTML without writing a single line of JavaScript. If you have needs for client-side coding, a JavaScript object is exposed and can be used with any library, such as D3 or React.
 
 In most of the code samples we stay on the bleeding edge of web development by using Palindrom with Polymer and Web Components.
 

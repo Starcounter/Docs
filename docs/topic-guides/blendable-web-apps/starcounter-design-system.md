@@ -33,7 +33,7 @@ Head to the [demo page of Underwear.css](https://starcounter.github.io/underwear
 
 ### Uniform.css - UI patterns in a separated presentation layer
 
-The developer of a blendable web app should apply specific UI patterns, such as sections, cards, alerts, primary buttons in the presentation layer. The presentation layer, implemented through HTML view compositions, can be altered by a designer without touching the app source code.
+The developer of a blendable web app should apply specific UI patterns, such as sections, cards, alerts, primary buttons in the presentation layer. The presentation layer, can be altered by a designer without touching the app source code through [View composing](view-composing.md).
 
 For this layer, Starcounter Design System uses the CSS library [Uniform.css](https://github.com/Starcounter/uniform.css) to implement basic UI patterns. Apps that use these patterns will get a common look and feel that is changeable in compositions.
 

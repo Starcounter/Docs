@@ -17,7 +17,7 @@ Blending is achieved with two different technologies: [Attaching](view-attaching
 
 Attaching handles requests from the browser to allow multiple apps to respond to the same request without the apps being aware of it. This means that the browser will receive one response containing the combined responses of multiple apps.
 
-When a response containing multiple responses is received by the browser, the results are stacked on top of each other - it still looks like they are from different apps, even if they come from the same response. Composition takes the response and composes the layout to fit to that particular set of apps. Thus, the layout can be adapted to look like there's only one app on the screen.
+When a response containing multiple responses is received by the browser, the composition comes into play. Composition adjusts the presentation layer to achieve a desired user experience of this particular set of apps. Thus, the presentation layer can adapted to look like there's only one app on the screen with a consistent look and feel.
 
 {% hint style="info" %}
 The code examples in this section are built on modern web technologies that are supported in the current versions of Chrome, Firefox, Safari, Edge, and Opera. Other web browsers are currently not supported.
