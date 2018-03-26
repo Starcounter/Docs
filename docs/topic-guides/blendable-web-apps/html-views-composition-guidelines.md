@@ -86,7 +86,7 @@ It's not necessary to declare the default slot in the `declarative-shadow-dom` p
 
 ## Guideline 4: Create the Presentation in `declarative-shadow-dom`
 
-As outlined in guideline 1, the presentation of the HTML view should be included within the `<template is="declarative-shadow-dom">`.
+As outlined in guideline 1, the presentation of the HTML view should be defined within the `<template is="declarative-shadow-dom">`.
 
 There is one exception to this. Both slot attributes and `declarative-shadow-dom` can be omitted if the view only contains non-visual elements or if all elements should be bulked together in the default slot. The latter is rarely the case but may be useful for example for prototyping.
 
