@@ -140,9 +140,7 @@ The `/sc/htmlmerger` is a prefix that is added every time a view contains views 
 
 The composition changes made in the editor are displayed in real time.
 
-Compositions are saved in the database and can be queried for with `SELECT * FROM Starcounter.HTMLComposition`. Since the CompositionEditor interacts with the database, it should not run in production.  
-  
-Compositions can also be accessed with the static methods `GetUsingkey(string key)` and `GetUsingKeyAndVersion(string key, string version)`on the `HTMLComposition` class. These methods return an `HTMLComposition` with the specified key, or key and version.
+Compositions are saved in the database and can be queried for with `SELECT * FROM Starcounter.HtmlViewComposition`. Since the composition editor interacts with the database, it should not run in production. See the [Blending](https://github.com/Starcounter/Blending) repo for more information about the data model of compositions.
 
 ### Providing custom compositions
 
