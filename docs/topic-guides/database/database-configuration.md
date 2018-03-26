@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The database can be configured in three different ways: with the [staradmin CLI](../working-with-starcounter/staradmin-cli.md), in the [Administrator](), or directly in the configuration file.
+The database can be configured in three different ways: with the [staradmin CLI](../working-with-starcounter/staradmin-cli.md), in the [Administrator](../working-with-starcounter/administrator-web-ui.md), or directly in the configuration file.
 
 ## Configuration file
 
