@@ -61,7 +61,7 @@ Handle.GET("/your/partial/url", () =>
 }
 ```
 
-The view-model will be rendered by the Starcounter app shell only if the app uses the `HtmlFromJsonProvider` and `PartialToStandaloneHtmlProvider` [middleware](../network/middleware.md).
+The Starcounter app shell renders the view-model if the app uses the `HtmlFromJsonProvider` and `PartialToStandaloneHtmlProvider` [middleware](../network/middleware.md).
 
 ### Adding the blended view-model insertion point
 

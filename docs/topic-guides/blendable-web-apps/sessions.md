@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Sessions are used to retain the state in your app. In Starcounter, the state is represented by a view-model, which is technically an instance of the `Json` class. A session is represented by an instance of the `Session` class. The combination of a session and a view-model enables client-server communication using JSON Patch.
+Sessions are used to retain the state in your app. In Starcounter, the state is represented by a view-model, which is an instance of the `Json` class. A session is represented by an instance of the `Session` class. The combination of a session and a view-model enables client-server communication using JSON Patch.
 
 ## Session instance
 

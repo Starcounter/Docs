@@ -36,7 +36,7 @@ Server-side view-models leverage the JSON capabilities of Starcounter. You can c
 
 ## View
 
-Because view-models are shared between the client and server, it allows for the offset the view rendering to be performed on the client. In this way, you get better performance and as the number of users grow, so does the number of CPUs that renders the user interfaces.
+Because view-models are shared between the client and server, it allows offsetting the view rendering to the client. In this way, you get better performance and as the number of users grow, so does the number of CPUs that renders the user interfaces.
 
 When the view-model changes, the UI changes and when the user interacts with the UI, the model changes. In the simplest cases, this is often referred to as data based templating - you have some JSON data and you inject HTML into the DOM based on that data.
 
