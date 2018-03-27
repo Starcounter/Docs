@@ -4,8 +4,6 @@
 
 Starcounter follows the model-view-viewmodel \(MVVM\) pattern. Although, it still has some distinct differences with other frameworks that use model-view-controller \(MVC\) or MVVM. This page describes some of these differences.
 
-
-
 ## Model
 
 In most database systems, the back end tier is a database management system \(DBMS\) and the next tier is an application layer that reads and writes data to the DBMS. In Starcounter, these two tiers are merged.
@@ -20,15 +18,15 @@ While it might sound expensive to keep a copy of each client's state on the serv
 
 Starcounter view-models are [Typed JSON classes](../typed-json/) defined by the server. Although JSON is a text based notation format for object trees, the Typed JSON implementation is a dynamic runtime tree that allows you to add, remove and change objects.
 
-#### What is Typed JSON?
+### What is Typed JSON?
 
 Typed JSON is a multipurpose vehicle. It supports the six data types of JSON \(object, array, boolean, number, string and null\). It typically has two uses. The first is to create and receive JSON messages as you would typically do in a REST style service or client. The other is to represent live view-models that can be bound to a user interface \(client\) or a controller \(server\).
 
-#### Schema-less or schema-full
+### Schema-less or schema-full
 
 Typed JSON allows dynamic creation of JSON trees. In addition, Typed JSON allows you to specify schemas. This can be done in two ways: with the Typed JSON API or by using JSON-by-example,  where the developer defines a sample JSON tree and Starcounter constructs the Types JSON schema from it. JSON-by-example gives you an intuitive way to view you schema and share it between the client and server.
 
-#### Data binding
+### Data binding
 
 In addition to allowing the developer to create object trees and assign properties one-by-one, Typed JSON also supports binding data with the `Data` property. In this way, you can assign database results to populate JSON. The data bindings are two-way bindings: changes to the data object is reflected in the Typed JSON and the changes to the Typed JSON is propagated to the data object.
 

@@ -6,7 +6,7 @@ Palindrom is a library that implements a simple, standards-compliant protocol fo
 
 ## Protocol
 
-![](../../.gitbook/assets/palindrom-flow.png)
+![](../../.gitbook/assets/palindrom-flow%20%281%29.png)
 
 With Palindrom, the application state is kept in JSON. Any changes to it, coming from the client or the server, are expressed in automatically generated JSON-Patch \([RFC 6902](http://tools.ietf.org/html/rfc6902)\). HTTP PATCH and WebSocket are used to send the changes over the network.
 

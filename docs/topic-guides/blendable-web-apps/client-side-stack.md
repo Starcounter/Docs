@@ -38,13 +38,13 @@ To build modular apps out of many partial views, use the [starcounter-include](h
 
 The following chart shows the bird-eye's view on the client side libraries used.
 
-![](../../.gitbook/assets/client-side-components.svg)
+![](../../.gitbook/assets/client-side-components%20%281%29.svg)
 
 ## Client side libraries distributed with Starcounter
 
 The `StaticFiles` folder from Starcounter installation is automatically served as a static content folder. When Starcounter server receives a request for a static file, it searches for the file in all of the static content folders. The project folder has a higher priority than the internal folder.
 
-See the file `ClientFiles\bower-list.txt` in your Starcounter installation directory (usually `C:\Program Files\Starcounter`) for the list of client side libraries bundled with your Starcounter instance, including their version numbers.
+See the file `ClientFiles\bower-list.txt` in your Starcounter installation directory \(usually `C:\Program Files\Starcounter`\) for the list of client side libraries bundled with your Starcounter instance, including their version numbers.
 
 For Starcounter 2.4.0.5470, it looks like this:
 
@@ -68,3 +68,4 @@ starcounter-clientfiles#2.1.1 C:\Work\Starcounter\StarcounterClientFiles\src\Sta
 ```
 
 Read more on the [static file server page](../network/static-file-server.md).
+

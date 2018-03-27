@@ -68,7 +68,7 @@ Handle.GET("/my-url", () => new Json(), new HandlerOptions() { SkipRequestFilter
 
 Response filters do the opposite of request filters; they make alterations to outgoing responses. They work similarly to request filters by being executed one by one until one returns a non-null response. The main difference is that response filters are called after the handler has been called while request filters are called before. Response filters can either create entirely new responses and return those, or modify the response coming from the handler.
 
-![](../../.gitbook/assets/middleware-response.PNG)
+![](../../.gitbook/assets/middleware-response%20%281%29.PNG)
 
 For example, response filters makes it possible to add a certain HTTP header to responses for requests with a `/special` URI prefix after the request has been dealt with by the handler:
 
@@ -293,16 +293,15 @@ If the HTML at the path would be a complete HTML document, this would be enough.
 
 #### ScErrInvalidOperation
 
- If you have a JSON file without an \`Html\` property, `HtmlFromJsonProvider` will throw this exception:
+If you have a JSON file without an \`Html\` property, `HtmlFromJsonProvider` will throw this exception:
 
 ```text
 System.InvalidOperationException: ScErrInvalidOperation (SCERR1025): Operation invalid for the object's current state. Json instance MyJson missing 'Html' property.
 ```
 
-  
 If the JSON has a corresponding HTML file, add an \`Html\` property with the path to the HTML file. That will fix it.
 
- If you don't have an `Html` property and don't intend to return HTML, but to return the JSON instead, set `IgnoreJsonWithoutHtml` to `true`:
+If you don't have an `Html` property and don't intend to return HTML, but to return the JSON instead, set `IgnoreJsonWithoutHtml` to `true`:
 
 ```csharp
 Application.Current.Use(new HtmlFromJsonProvider() { IgnoreJsonWithoutHtml = true });
@@ -310,9 +309,9 @@ Application.Current.Use(new HtmlFromJsonProvider() { IgnoreJsonWithoutHtml = tru
 
 ### PartialToStandaloneHtmlProvider
 
-This middleware class checks if the HTML is a full document, or essentially if it starts with a `<!DOCTYPE html>`. If it's not a full HTML document, it wraps the existing HTML inside the body of an HTML document that imports the prerequisites for all blendable web apps, called the [app shell](../blendable-web-apps/app-shell.html).
+This middleware class checks if the HTML is a full document, or essentially if it starts with a `<!DOCTYPE html>`. If it's not a full HTML document, it wraps the existing HTML inside the body of an HTML document that imports the prerequisites for all blendable web apps, called the [app shell](https://github.com/Starcounter/Docs/tree/4fc2662c856690d93fddfaf344d9d6f8d9244f54/docs/topic-guides/blendable-web-apps/app-shell.html).
 
-It's possible to override this default HTML by passing a string containing HTML as a parameter. 
+It's possible to override this default HTML by passing a string containing HTML as a parameter.
 
 Since `PartialToStandaloneHtmlProvider` wraps the actual response from the handler, it will have the HTTP status code of the response.
 

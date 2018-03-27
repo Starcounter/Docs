@@ -70,7 +70,7 @@ Consider contexts as an additional matching rule for handlers with the same toke
 
 ### Attaching Specific URIs
 
- Specific URI is the handler URI with parameters supplied. For example, for the handler `/people/{?}` the specific URIs will be `/people/john`, `/people/bob`, etc. When calling `Blender.MapUri` for a specific URI, you should pass a mixed URI which indicates what handler it belongs to. For the previous examples, the mixed URI will be `/people/{john}` and `/people/{bob}`, so the parameter in specific URI is wrapped into curly brackets. `Blender` class has helper methods to construct such mixed URIs: `Blender.GetMixedUriFromHandlerAndParameters`, `Blender.TryGetMixedUriFromSpecific`. The last method tries to find corresponding handler for the given specific URI, which might not be determined correctly \(for example, in case when the corresponding handler is not yet registered\). Mixed URIs in `MapUri` calls are needed so the underlying handler for a specific URI can be identified. Other `Blender` methods like `UnmapUri`, `IsMapped`, etc. can still use specific URIs and not mixed.
+Specific URI is the handler URI with parameters supplied. For example, for the handler `/people/{?}` the specific URIs will be `/people/john`, `/people/bob`, etc. When calling `Blender.MapUri` for a specific URI, you should pass a mixed URI which indicates what handler it belongs to. For the previous examples, the mixed URI will be `/people/{john}` and `/people/{bob}`, so the parameter in specific URI is wrapped into curly brackets. `Blender` class has helper methods to construct such mixed URIs: `Blender.GetMixedUriFromHandlerAndParameters`, `Blender.TryGetMixedUriFromSpecific`. The last method tries to find corresponding handler for the given specific URI, which might not be determined correctly \(for example, in case when the corresponding handler is not yet registered\). Mixed URIs in `MapUri` calls are needed so the underlying handler for a specific URI can be identified. Other `Blender` methods like `UnmapUri`, `IsMapped`, etc. can still use specific URIs and not mixed.
 
 ## Dynamic Addition and Removal
 
@@ -190,25 +190,25 @@ You can describe attachment rules in JSON, separate from the application code. I
 ```javascript
 [
   {
-	 "Uri": "/someuri1",
-	 "Token": "sometoken1",
-	 "Contexts":[],
-	 "AllowFromDirection": true,
-	 "AllowToDirection": false
+     "Uri": "/someuri1",
+     "Token": "sometoken1",
+     "Contexts":[],
+     "AllowFromDirection": true,
+     "AllowToDirection": false
   },
   {
-	 "Uri": "/someuri2/{?}/bla",
-	 "Token": "",
-	 "Contexts":["context1","context2"],
-	 "AllowFromDirection": false,
-	 "AllowToDirection": true
+     "Uri": "/someuri2/{?}/bla",
+     "Token": "",
+     "Contexts":["context1","context2"],
+     "AllowFromDirection": false,
+     "AllowToDirection": true
   },
   {
-	 "Uri": "/someuri3/{name}/xxx",
-	 "Token": "sometoken3",
-	 "Contexts":["context1","context2", "context3"],
-	 "AllowFromDirection": true,
-	 "AllowToDirection": true
+     "Uri": "/someuri3/{name}/xxx",
+     "Token": "sometoken3",
+     "Contexts":["context1","context2", "context3"],
+     "AllowFromDirection": true,
+     "AllowToDirection": true
   }
 ]
 ```

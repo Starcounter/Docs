@@ -45,7 +45,7 @@ Note here that **everything at the root level must be a block**. A block can hav
 
 Consider the [SignIn app](https://github.com/starcounterapps/signin):
 
-![](../../.gitbook/assets/bem-example.PNG)
+![](../../.gitbook/assets/bem-example%20%281%29.PNG)
 
 Here, the block is marked in red and the element sections in blue.
 
@@ -101,9 +101,7 @@ We recommend the following rules when using BEM selectors in Starcounter apps.
 
   It is **not** fine to override Uniform.css classes in your app's stylesheet. The only proper way to extend style is to with a BEM selector, for example:
 
-
-
-  ```markup
+```markup
   <style>
       .kitchensink-section-primary-grid {
           display: grid;
@@ -118,7 +116,7 @@ We recommend the following rules when using BEM selectors in Starcounter apps.
           <slot name="kitchensink/buttonpage-regular-description"></slot>
       </div>
   </div>
-  ```
+```
 
 ## Further reading
 

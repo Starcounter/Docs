@@ -65,5 +65,5 @@ To make it easier for you to kickstart app design, we have made available a UI k
 
 ![Example from the UI kit](../../.gitbook/assets/uikit1.png)
 
-![Sample design](../../.gitbook/assets/uikit2.png)
+![Sample design](../../.gitbook/assets/uikit2%20%281%29.png)
 

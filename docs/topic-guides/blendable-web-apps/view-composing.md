@@ -2,15 +2,15 @@
 
 ## Introduction
 
-When [Attaching views](view-attaching.md) from different apps, the views are stacked on top of each other. In most cases, that's not what we want. Instead, we would like to compose elements in the views to make the result look like one page. That's what View Composing does:
+When [Attaching views](view-model-attaching.md) from different apps, the views are stacked on top of each other. In most cases, that's not what we want. Instead, we would like to compose elements in the views to make the result look like one page. That's what View Composing does:
 
-![](../../.gitbook/assets/assets2fstarcounter2fe48b74d0-8680-11e7-9944-1f85270462c62fe5df1df0-8680-11e7-9944-1f85270462c62fsim.png)
+![](../../.gitbook/assets/assets2fstarcounter2fe48b74d0-8680-11e7-9944-1f85270462c62fe5df1df0-8680-11e7-9944-1f85270462c62fsim%20%281%29.png)
 
 In the example above, there are two apps, PetList and MedicalRecord. By default, they are stacked on top of each other. This makes it seem like the information coming from thems is not related, when it actually is. By Composing, we can move the table of examinations into the card from the PetList app and make it look like one coherent concept. In essence, we are **changing the presentation but not the content** to combine apps that were not explicitly built to share the same screen. This is done without touching the source code of the individual apps.
 
 This ability of modifying the composition of views coming from different apps is crucial, especially when working with many apps. Without it, there would just be a stack of views with no meaningful visual context, as shown in this illustration:
 
-![](../../.gitbook/assets/assets2fstarcounter2fe48b74d0-8680-11e7-9944-1f85270462c62fe5df1df1-8680-11e7-9944-1f85270462c62fcli.png)
+![](../../.gitbook/assets/assets2fstarcounter2fe48b74d0-8680-11e7-9944-1f85270462c62fe5df1df1-8680-11e7-9944-1f85270462c62fcli%20%281%29.png)
 
 {% hint style="info" %}
 Composing was previously called "client-side-blending"
@@ -125,7 +125,7 @@ To create a custom composition, we will move the MedicalRecord table and headlin
 
 We have now produced the result shown in the image above; the view from the MedicalRecord app has been neatly integrated with the view from PetList.
 
-The tool for creating these custom compositions is the composition editor feature of [BlendingEditor](https://github.com/Starcounter/Blending). When this app is running, you can open it at any page with `Ctrl + E`. When the app opens, it gives you an HTML editor for the composition of your attached views. 
+The tool for creating these custom compositions is the composition editor feature of [BlendingEditor](https://github.com/Starcounter/Blending). When this app is running, you can open it at any page with `Ctrl + E`. When the app opens, it gives you an HTML editor for the composition of your attached views.
 
 There are two main concepts in the composition editor - the identifier and composition \("layout" on the below picture\).
 
@@ -151,7 +151,7 @@ Because of this, the BlendingProvider has to be running if you want to render cu
 
 ## Result
 
-![Composing in action](../../.gitbook/assets/inside%20%281%29.PNG)
+![Composing in action](../../.gitbook/assets/inside-1.PNG)
 
 This screenshot is a result of several of our sample apps running together:
 
@@ -172,6 +172,4 @@ Composing allows us to make views coming from multiple apps to look like one by 
 * [Layout compositions for HTML partials](https://starcounter.io/layout-compositions-html-partials/) - Blog October 2016
 * [Html Views Blending Guidelines](html-views-composition-guidelines.md) - Docs
 * [Shadow DOM v1: Self-Contained Web Components](https://developers.google.com/web/fundamentals/getting-started/primers/shadowdom) - Google Developers
-
-
 

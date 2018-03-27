@@ -80,7 +80,7 @@ Session is created on current Starcounter scheduler and should be operated only 
 
 One can store sessions by obtaining session ID string \(`Session.SessionId`\). Session strings can be grouped using desired principles, for example when one wants to broadcasts different messages on different session groups. When the session represented by the string should be used, one should call `Session.RunTask(String sessionId, Session.SessionTask task)`. This procedure takes care of executing action that uses session on the scheduler where the session was originally created. This procedure underneath uses `Scheduling.RunTask` thereby it can be executed from arbitrary .NET thread.
 
-There is a variation of `Session.RunTask` that takes care of sessions grouped by some principle: `Session.RunTask(IEnumerable<String> sessionIds, Session.SessionTask task)`. 
+There is a variation of `Session.RunTask` that takes care of sessions grouped by some principle: `Session.RunTask(IEnumerable<String> sessionIds, Session.SessionTask task)`.
 
 To schedule tasks on all active sessions, then `Session.RunTaskForAll` should be used \(note that it runs on all active sessions and if you only need to update few - use `Session.RunTask`\).
 
@@ -133,7 +133,7 @@ void Handle(Input.SendOrderTrigger _)
 }
 ```
 
-To fix this, use `CalculatePatchAndPushOnWebSocket`. That lets the user see the status message immediately after the order has been sent. 
+To fix this, use `CalculatePatchAndPushOnWebSocket`. That lets the user see the status message immediately after the order has been sent.
 
 ```csharp
 void Handle(Input.SendOrderTrigger _)

@@ -4,7 +4,7 @@
 
 This page explains how view-models and HTML views are used to create blendable web apps.
 
-## HTML view 
+## HTML view
 
 An HTML view is a valid HTML document that contains at least one `<template>` tag and can be loaded with the [`<starcounter-include>`](https://github.com/Starcounter/starcounter-include) or [`imported-template`](https://github.com/Juicy/imported-template) web component. The `<template>` tag is cached on the client and stamped out as many times as needed.
 
@@ -28,7 +28,7 @@ The Polymer version used by Starcounter was changed from Polymer 1 to Polymer 2 
 
 ## View-model class
 
-A view-model class is a valid JSON document with the filename extension `.json` that contains an `Html` property that points to the corresponding HTML view. It will also contain properties for the data that will be bound between the view and the database model. Starcounter compiles view-models defined in `.json` files to a `Json` class in C#.
+A view-model class is a valid JSON document with the filename extension `.json` that contains an `Html` property that points to the corresponding HTML view. It will also contain properties for the data that will be bound between the view and the database model. Starcounter compiles view-models defined in `.json` files to a `Json` class in C\#.
 
 The view-model class can be extended with an optional code-behind in a file with the extension `.json.cs`. The code-behind defines the class name and contains input handlers.
 
@@ -42,8 +42,8 @@ A view is rendered when the client obtains a view-model with a view. This can ha
 
 1. On a root level, through an HTTP request that is handled in the application by a `Handle.GET`. The response to this request is a view-model. The Starcounter [app shell](app-shell.md) renders it automatically. 
 2. On a nested level, through a pair of insertion points in a view-model and a view:
-   - a blended view-model insertion point is represented by a property in the view-model. The property inserts the result of a `Self.GET` call to a partial view-model in a parent view-model.
-   - a blended view insertion point is represented by a `<starcounter-include>` tag in HTML. The tag inserts the partial view in the parent view.
+   * a blended view-model insertion point is represented by a property in the view-model. The property inserts the result of a `Self.GET` call to a partial view-model in a parent view-model.
+   * a blended view insertion point is represented by a `<starcounter-include>` tag in HTML. The tag inserts the partial view in the parent view.
 
 ## Examples
 

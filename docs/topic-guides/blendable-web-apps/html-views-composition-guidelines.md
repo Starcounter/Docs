@@ -64,7 +64,7 @@ Here, every element is at the root of the document and will be exposed for Compo
 
 Additionally, there might be situations where the developer would like to have a higher level of abstraction on some of his or her content. For example, consider this pagination bar:
 
-![](../../.gitbook/assets/pagination.PNG)
+![](../../.gitbook/assets/pagination%20%281%29.PNG)
 
 Here, it would not make sense to break it up into the respective parts because they do not have any real meaning when presented individually. It would rather make sense to put the parent on the root level so that the whole bar is exposed for Composition, and not the individual buttons.
 
@@ -75,7 +75,7 @@ To have better flexibility in blending - to be able to distribute an element ind
 When no slot name is provided for an element it will be distributed in [the default slot](https://w3c.github.io/webcomponents/spec/shadow/#shadow-tree-slots): `<slot></slot>`.
 
 {% hint style="info" %}
- The first slot in a shadow tree, in tree order, whose name is the empty string, is sometimes known as the "default slot".
+The first slot in a shadow tree, in tree order, whose name is the empty string, is sometimes known as the "default slot".
 {% endhint %}
 
 Text nodes are also distributed in the default slot.
@@ -84,12 +84,11 @@ Use explicit slot names instead of relying on the default slot. The solution own
 
 It's not necessary to declare the default slot in the `declarative-shadow-dom` part of your view. The Starcounter's HTML merger automatically adds a default slot at the bottom of the composition of your view for fallback reasons.
 
-{% hint style="info" %} 
+{% hint style="info" %}
 To hide some content in the presentation layer, you can remove `<slot>` element that slots this content or move the `<slot>` element to be a child of `<div style="display: none">`.
 {% endhint %}
 
 ## Guideline 4: Create the Presentation in `declarative-shadow-dom`
-
 
 As outlined in guideline 1, the presentation of the HTML view should be defined within the `<template is="declarative-shadow-dom">`.
 

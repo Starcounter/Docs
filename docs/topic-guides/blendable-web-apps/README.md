@@ -13,7 +13,7 @@ Starcounter apps are small, individually functional web apps that can easily int
 
 Blending is the concept of making several apps look as one without apps knowing about each other. This means that apps can be developed separately and still be used together without touching the source code. In practice, a developer can build an app that does one thing and does it well and then run that app with multiple other apps in different combinations and still make all the apps look as one. It allows reuse on a new level.
 
-Blending is achieved with two different technologies: [Attaching](view-attaching.md) and [Composing](view-composing.md).
+Blending is achieved with two different technologies: [Attaching](view-model-attaching.md) and [Composing](view-composing.md).
 
 Attaching handles requests from the browser to allow multiple apps to respond to the same request without the apps being aware of it. This means that the browser will receive one response containing the combined responses of multiple apps.
 
