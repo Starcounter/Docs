@@ -10,28 +10,28 @@ Starcounter is not taking a goal to outperform those with any of our potential h
 
 ## Installation modes
 
-Starcounter can be installed in three different modes: `Developer Mode`, `Production Mode` or `Silent Mode`. Following section describes these modes:
+Starcounter can be installed in three different modes: `Developer Mode`, `Production Mode` and `Silent Mode`.
 
 ### Developer mode
 
-This is the default installation mode where the `Starcounter Server Service` can be started on-demand, typically when you start a Starcounter Application.
+This is the default installation mode where the `Starcounter Server Service` is started on-demand, typically when you start a Starcounter Application.
 
-### Production mode
+### Production Mode
 
-In `Production Mode` the installer starts `Starcounter Server Service` as part of the installation process and also sets the `Startup Type` of the service to `Automatic` so that it can be started on Windows Logon.
+In `Production Mode`, the installer starts `Starcounter Server Service` as part of the installation process and also sets the `Startup Type` of the service to `Automatic` so that it can be started on Windows Logon.
 
 #### How to install
 
-There are two ways you can install Starcounter in Production Mode :
+There are two different ways to install Starcounter in Production Mode.
 
-* Run the  `<Your setup file name>.exe`  by double clicking on it.
+* Run the `<Your setup file name>.exe` by double clicking on it.
 * Select `Production` on the Setup screen :
 
 ![](../../.gitbook/assets/productionmode-1.PNG)
 
 #### OR
 
-* Open a `Command Prompt`window with `Administrator` privileges
+* Open a `Command Prompt` window with `Administrator` privileges
 * Browse the directory where the Starcounter setup file exists.
 * Run the following command :
 
