@@ -94,7 +94,7 @@ shadowspawn C:\Users\User\Documents\Starcounter\Personal\Data\default\Default-20
 This will create a shadow copy of a drive, mount shadowed copy of a source folder to `Q:` \(the drive letter `Q` must be free, otherwise choose other letter\), copy contents of `Q:\` to a sub-folder in `Y:\Backup` named after the current date and time, such as `Y:\Backup\2015-09-15_16-41-48`, unmount and destroy a shadow copy. Copying is done with `robocopy` utility that ships with Windows, you can use any other command, e.g. you can call your favorite incremental binary backup utility and store the result in a cloud.
 
 {% hint style="info" %}
-Read more about robocopy in the [robycopy documentation](https://www.computerhope.com/robocopy.htm).
+Read more about robocopy in the [robycopy documentation](https://www.computerhope.com/robocopy.htm). You can also read this thread on GitHub for more information: https://github.com/Starcounter/Home/issues/363.
 {% endhint %}
 
 **Note:** creating and removing a VSS snapshot during the described backup routine may affect performance of your Starcounter application when you have user activity peaks. Consider running backup scenario in periods of time when you have less than hundreds of thousands of simultaneously connected users.
@@ -106,7 +106,17 @@ The files necessary for backup are:
 
 * `<database_name>.cfg`
 * `<database_name>.*.log`
-* `<database_name>.*.optlog`Follow these steps to find these files:
+* `<database_name>.*.optlog`
+
+{% hint style="info" %}
+The `.cfg` file is locked while the database is running, but since this file doesn't change during the lifetime of the database, you only have to create a backup of it once.
+{% endhint %}
+
+{% hint style="info" %}
+Starcounter does not update the `Date modified` attribute of the `.log` files for performance reasons. Thus, don't rely on `Date modified` to check if there are any changes.
+{% endhint %}
+
+Follow these steps to find these files:
 
 1. Go to the server repository that is found, by default, at `%UserProfile%\Documents\Starcounter\Personal`. If configurations have been done in the installer, then it might reside somewhere else. In that case, it can be found by following the `<server-dir>` path at `Program Files\Starcounter\configuration\Personal.xml`, if the default setting were accepted in the installer.
 2. Open `Personal.server.config` in this repository.
@@ -121,7 +131,7 @@ In the case that there is no full `.log` file in the directory, there will be no
 
 ## Restoring a database from a backup
 
-Database is a set of files you have made backup for. To recover your database to one of the backups, you can create a new database in Starcounter Administrator and then, without starting it, copy all backup files into that database data folder. After doing so, you can shut down the old database and run your application on a new database with minimal downtime. If you have a failover machine, you can switch your web-frontend to route requests to a failover machine. The simplest way to restore a database from backup is to stop Starcounter, remove all database data files, copy backup files in data files location and start Starcounter.
+Database is a set of files you have made backup for. To recover your database to one of the backups, you can create a new database in Starcounter Administrator and then, without starting it, copy all backup files into that database data folder. After doing so, you can shut down the old database and run your application on a new database with minimal downtime. If you have a failover machine, you can switch your web-frontend to route requests to a failover machine. The simplest way to restore a database from backup is to stop Starcounter, remove all database data files, copy backup files in data files location and start Starcounter. Starcounter reads the log files into memory on database start. Because of this, you have to restart the database to pickup the data from the backup files.
 
 ## Starcounter in a virtual machine
 
