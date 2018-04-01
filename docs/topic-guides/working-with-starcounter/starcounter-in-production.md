@@ -94,7 +94,7 @@ shadowspawn C:\Users\User\Documents\Starcounter\Personal\Data\default\Default-20
 This will create a shadow copy of a drive, mount shadowed copy of a source folder to `Q:` \(the drive letter `Q` must be free, otherwise choose other letter\), copy contents of `Q:\` to a sub-folder in `Y:\Backup` named after the current date and time, such as `Y:\Backup\2015-09-15_16-41-48`, unmount and destroy a shadow copy. Copying is done with `robocopy` utility that ships with Windows, you can use any other command, e.g. you can call your favorite incremental binary backup utility and store the result in a cloud.
 
 {% hint style="info" %}
-Read more about robocopy in the [robycopy documentation](https://www.computerhope.com/robocopy.htm). You can also read this thread on GitHub for more information: https://github.com/Starcounter/Home/issues/363.
+Read more about robocopy in the [robycopy documentation](https://www.computerhope.com/robocopy.htm). You can also read this thread on GitHub for more information: [https://github.com/Starcounter/Home/issues/363](https://github.com/Starcounter/Home/issues/363).
 {% endhint %}
 
 **Note:** creating and removing a VSS snapshot during the described backup routine may affect performance of your Starcounter application when you have user activity peaks. Consider running backup scenario in periods of time when you have less than hundreds of thousands of simultaneously connected users.
@@ -157,5 +157,5 @@ For higher performance, disable your anti-virus from scanning the database files
 
 **Please always remember that your data is one of your most important assets!** Implement the proper strategy for backup, failover and disaster recovery from day one. Using advices from the article, you can make your data safety strategy gradual. First of all, start with simple Shadow Copy backups. Use Dropbox for Business and asynchronous cryptography \(with private and public keys\) to store terabytes of backups for just hundreds of dollars per year. If you run Starcounter in a cloud like Amazon, then you most likely run Windows Server 2012 R2 Standard, which ships with Failover Clustering role out of the box. Use the facilities like Failover Clustering that go for free with your operating system. Create a simple Failover Cluster with one master machine and one hot-standby machine which would always be a replica of your master machine. Store your database image files on a Cluster Shared Volume, so that the hot-standby machine will continue to run on exact the same data. It will take some seconds for the replica machine to start Starcounter \(since two machines cannot open the same database at one time\), so the resulted failover will be warm. However, today you can achieve true synchronous hot failover using Windows Server 2016 Storage Replica \(Datacenter edition is required\).
 
-![](../../.gitbook/assets/screen-shot-2015-10-06-at-11.24.041-1024x726%20%281%29.png)
+![](../../.gitbook/assets/screen-shot-2015-10-06-at-11.24.041-1024x726-1.png)
 

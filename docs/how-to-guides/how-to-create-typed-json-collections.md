@@ -89,7 +89,7 @@ namespace TypedJSONCollectionSample
 
 ## Summary
 
-With this setup, it's possible to add instances of the `Person` class to the `PersonCollection` and know that the array only contains `Person` objects:
+With this setup, you can add instances of the `Person` class to the `PersonCollection` and know that the array only contains `Person` objects:
 
 {% code-tabs %}
 {% code-tabs-item title="Program.cs" %}
