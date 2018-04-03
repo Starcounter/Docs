@@ -333,7 +333,7 @@ As Starcounter schedules threads in a optimized way, it is recommended to allow 
 ```csharp
 Handle.GET("/movie", () =>
 {
-   FileStream stream = File.Open("bigfile.mpg", FileMode.Open, FileAccess.Read, FileShare.Read));
+   FileStream stream = File.Open("bigfile.mpg", FileMode.Open, FileAccess.Read, FileShare.Read);
    var response = new Response()
    {
         StreamedBody = stream,
