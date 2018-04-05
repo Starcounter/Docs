@@ -1,5 +1,5 @@
 # View Attaching
-<aside class="notice">Converter functions are obsoleted and will be removed from Blender.MapUri in Starcounter 2.4.</aside>
+:warning: Converter functions are obsoleted and will be removed from Blender.MapUri in Starcounter 2.4 :warning:
 
 ## Introduction
 
