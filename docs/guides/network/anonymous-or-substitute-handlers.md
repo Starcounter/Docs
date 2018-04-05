@@ -1,5 +1,7 @@
 # Anonymous or Substitute Handlers
-:warning: Substitute handlers/delegates are deprecated and will be removed in the next versions of Starcounter. Please use normal handlers instead. :warning:
+{% hint style="warning" %}
+Substitute handlers/delegates are deprecated and will be removed from Blender.MapUri in Starcounter 2.4. Please use normal handlers instead.
+{% endhint %}
 
 ## Introduction
 
