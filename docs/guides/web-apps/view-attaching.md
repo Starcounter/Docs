@@ -1,4 +1,5 @@
 # View Attaching
+<aside class="notice">Converter functions are obsoleted and will be removed from Blender.MapUri in Starcounter 2.4.</aside>
 
 ## Introduction
 
@@ -51,7 +52,7 @@ Handlers can be mapped to empty tokens:
 
 ```csharp
 static void MapUri(String uri, String[] contexts = null);
-static void MapUri(String uri, Boolean allowFromUriConverter, Boolean allowToUriConverter, String[] contexts = null);
+static void MapUri(String uri, Boolean allowBlendingFromUri, Boolean allowBlendingToUri, String[] contexts = null);
 ```
 
 Handlers with empty tokens are called with other handlers with the same empty token.

@@ -1,4 +1,5 @@
 # Anonymous or Substitute Handlers
+<aside class="notice">Substitute handlers/delegates are deprecated and will be removed in the next versions of Starcounter. Please use normal handlers instead.</aside>
 
 ## Introduction
 
