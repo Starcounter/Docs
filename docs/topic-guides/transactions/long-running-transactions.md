@@ -6,9 +6,9 @@ Starcounter supports long-running transactions. A long-running transaction, as i
 
 When creating long-running transactions, it could contain objects that might be modified by other transactions during the transaction's lifetime. This is because the isolation level for long-running transactions is lower and it will therefore not detect conflicts. This is different from the behavior of `Db.Transact` and `Db.TransactAsync`, as described in the [Short-Running Transactions](short-running-transactions.md).
 
-A long-running transaction can be used on any scheduled thread, however, it cannot be used from more than one thread at a time. If two or more threads call `transaction.Scope(Action)`at the same time, an exception will be thrown.
+A long-running transaction can be used on any scheduled thread, however, it cannot be used from more than one thread at a time. If two or more threads call `transaction.Scope(Action)` at the same time, Starcounter throws an exception.
 
- This document is divided into three parts:
+This document is divided into three parts:
 
 1.  Creating and attaching long-running transactions
 2.  Dealing with already attached long-running transactions in view-models
