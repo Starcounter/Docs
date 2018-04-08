@@ -1,4 +1,5 @@
 # View-model Attaching
+
 {% hint style="warning" %}
 Converter functions are obsoleted and will be removed from Blender.MapUri in Starcounter 2.4.
 {% endhint %}
@@ -20,7 +21,7 @@ On a high level, these are the specific steps involved with sending the response
 5. During the serialization process, the server attaches the responses from other apps that are view-models to the main view-model from the initial handler.
 6. The server sends the response, which now contains view-models from multiple apps, back to the client.
 
-By using attchment rules, the apps don't need to know anything about other apps in the code host - they don't even need to know if there are other apps -  they only have to communicate what concept the handlers deal with. The apps should be built to not depend on, but expect, attaching.
+By using attchment rules, the apps don't need to know anything about other apps in the code host - they don't even need to know if there are other apps - they only have to communicate what concept the handlers deal with. The apps should be built to not depend on, but expect, attaching.
 
 The process of defining the attachment rules and attaching the responses is handled by the `Blender` class in the `Starcounter` namespace.
 

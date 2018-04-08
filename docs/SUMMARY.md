@@ -90,7 +90,7 @@
     * [Weaver](topic-guides/working-with-starcounter/weaver.md)
     * [Investigating app crashes](topic-guides/working-with-starcounter/investigating-app-crashes.md)
     * [Configuration structure](topic-guides/working-with-starcounter/configuration-structure.md)
-    * [Kernel Q&A](topic-guides/working-with-starcounter/kernel-qanda.md)
+    * [Kernel Q&A](topic-guides/working-with-starcounter/kernel-q-and-a.md)
     * [Log files](topic-guides/working-with-starcounter/log-files.md)
     * [Security](topic-guides/working-with-starcounter/security.md)
 * [How-to guides](how-to-guides/README.md)

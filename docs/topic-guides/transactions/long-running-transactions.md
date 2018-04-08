@@ -10,9 +10,9 @@ A long-running transaction can be used on any scheduled thread, however, it cann
 
 This document is divided into three parts:
 
-1.  Creating and attaching long-running transactions
-2.  Dealing with already attached long-running transactions in view-models
-3.  Exceptions and how to solve them
+1. Creating and attaching long-running transactions
+2. Dealing with already attached long-running transactions in view-models
+3. Exceptions and how to solve them
 
 ## Create and attach
 
@@ -190,7 +190,7 @@ partial class MailPage : Json, IBound<Mail>
 }
 ```
 
-You can find an example of this in [step 6](/guides/tutorial/cancel-and-delete/README.md) of the tutorial.
+You can find an example of this in [step 6](https://github.com/Starcounter/Docs/tree/5b5c9d73bef12a50fc09149955e5169cf3b276f0/guides/tutorial/cancel-and-delete/README.md) of the tutorial.
 
 ## Exceptions
 
@@ -233,7 +233,6 @@ class Program
 }
 ```
 
-  
 Here, a new object is written to the database but it's never committed or rolled back because long-running transactions don't automatically commit at the end of the scope. Starcounter throws an exception here to avoid confusion on what changes are commited. When using the long-running transaction, ensure that all writes are commited or rolled back before the end of the scope:
 
 ```csharp
@@ -256,6 +255,4 @@ class Program
     }
 }
 ```
-
-
 

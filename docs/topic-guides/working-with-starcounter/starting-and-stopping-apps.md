@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Starcounter apps can be started and stopped with the `star` CLI, the Administrator, and Visual Studio. This page describes how to use these tools to start and stop apps.
+You can start and stop apps with the `star` CLI, the Administrator, and Visual Studio. This page describes how to use these tools to start and stop apps.
 
 ## Starting
 

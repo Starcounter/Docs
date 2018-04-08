@@ -80,5 +80,5 @@ foreach (var person in people)
 }
 ```
 
-Read more in the [kernel Q&A](../working-with-starcounter/kernel-qanda.md).
+Read more in the [kernel Q&A](../working-with-starcounter/kernel-q-and-a.md).
 

@@ -175,7 +175,7 @@ Use the `HandlerAppName` property to find out which application the request belo
 When creating \(using the `Handle` interface\) and calling handlers \(using the `Self` interface\), one can supply last `HandlerOptions` parameter, which specifies certain options for handler calls or registration. Here are the notable handler options:
 
 * `SkipRequestFilters`: used to declare a handler for which request filters will not be applied.
-*  `SkipResponsetFilters`: used to declare a handler for which response filters will not be applied.
+* `SkipResponsetFilters`: used to declare a handler for which response filters will not be applied.
 * `SkipHandlersPolicy`: If the database flag "EnforceURINamespaces" is set to True, all application handlers are required to start with application name. In this case `SkipHandlersPolicy` flag allows to register any URI handler.
 * `SelfOnly`: registered handler is going to be accessible only inside codehost using `Self` interface. `SelfOnly` handlers are not registered in gateway, in comparison with normal handlers.
 
@@ -211,7 +211,7 @@ Typed JSON objects can be used as a representation of the HTTP request body payl
 Handle.PUT("/hello/{?}", (string name, PersonMessage message) =>
 {
    return $"Welcome {name} you are {message.Age} years old.";
-});         
+});
 ```
 {% endcode-tabs-item %}
 {% endcode-tabs %}
@@ -240,11 +240,11 @@ Console.WriteLine(secondCall.Body); // => "no response"
 
 ### Size limit on payloads
 
-The default limit on payloads in requests is 1048576 bytes, exceeding this limit will prevent the request from going through and this warning will be printed in the [Administrator log](): 
+The default limit on payloads in requests is 1048576 bytes, exceeding this limit will prevent the request from going through and this warning will be printed in the [Administrator log](http.md):
 
 > Attempt to HTTP upload of more than 1048576 bytes. Closing socket connection
 
-The limit can be increased to a maximum of 2048576 bytes by changing the value of  `MaximumReceiveContentLength` in `%userprofile%\Documents\Starcounter\Personal\scnetworkgateway.xml`.
+The limit can be increased to a maximum of 2048576 bytes by changing the value of `MaximumReceiveContentLength` in `%userprofile%\Documents\Starcounter\Personal\scnetworkgateway.xml`.
 
 {% hint style="info" %}
 When sending large files, we recommend to use WebSocket instead of HTTP. That pattern is demonstrated in the `FileUploadPage` \([code-behind](https://github.com/StarcounterApps/KitchenSink/blob/master/src/KitchenSink/FileUploadPage.json.cs), [HTML](https://github.com/StarcounterApps/KitchenSink/blob/master/src/KitchenSink/wwwroot/KitchenSink/FileUploadPage.html)\) in the sample app [KitchenSink](https://github.com/StarcounterApps/KitchenSink).
@@ -262,7 +262,7 @@ The `Response` class has many implicit cast operators to make this convenient.
 * `int`, `uint`, `decimal`, `bool`, `double`, `long`, `ulong`, `DateTime` returns a Javascript literal \(JSON\)
 * `null` \(no content\)
 
- The default HTTP status code for responses is 200 OK.
+  The default HTTP status code for responses is 200 OK.
 
 ### Returning different types
 
@@ -363,7 +363,7 @@ When the codehost starts, Starcounter adds a static resource resolver on the def
 
 ### Delayed or explicitly handled responses
 
- Sometimes, the `Response` object cannot be returned immediately in the handler. One reason could be the access to third party resources or performing long-running jobs. By returning `HandlerStatus.Handled` in the handler, the user indicates that the response will be returned later or that it already has been returned. To accomplish such behavior there is a special method on `Request`: `void SendResponse(Response resp)` which sends given `Response` object. Sending response using `Request.SendResponse` must be done on Starcounter scheduler. Since HTTP is a request-response protocol, only one response can be send per request \(in comparison with WebSocket protocol\).
+Sometimes, the `Response` object cannot be returned immediately in the handler. One reason could be the access to third party resources or performing long-running jobs. By returning `HandlerStatus.Handled` in the handler, the user indicates that the response will be returned later or that it already has been returned. To accomplish such behavior there is a special method on `Request`: `void SendResponse(Response resp)` which sends given `Response` object. Sending response using `Request.SendResponse` must be done on Starcounter scheduler. Since HTTP is a request-response protocol, only one response can be send per request \(in comparison with WebSocket protocol\).
 
 For example:
 
@@ -371,16 +371,16 @@ For example:
 Handle.GET("/postponed", (Request req) =>
 {
     // Scheduling some job here, which will send the response.
-	Scheduling.ScheduleTask(() => {
-		// Do something external, like accessing third party resources or
-		// performing long-running jobs.
-		...
-		// Now send the response for the original "/postponed" request.
-		req.SendResponse(new Response { BodyBytes = myBodyData });
-	});
-	
-	// Immediately returning from the HTTP handler.
-	// The actual response will be sent later.
+    Scheduling.ScheduleTask(() => {
+        // Do something external, like accessing third party resources or
+        // performing long-running jobs.
+        ...
+        // Now send the response for the original "/postponed" request.
+        req.SendResponse(new Response { BodyBytes = myBodyData });
+    });
+
+    // Immediately returning from the HTTP handler.
+    // The actual response will be sent later.
     return HandlerStatus.Handled;
 });
 ```
@@ -498,7 +498,7 @@ void SetOutgoingStatusCode(UInt16 statusCode);
 
 ## Internal calls
 
-Starcounter provides an efficient way for REST communication within the codehost instance. Simply put, `Self` is used to call handlers that are registered using the `Handle` class inside the codehost. To communicate between different codehosts, `Http` should be used. `Self` communication does not use either networking or shared memory, so it is very efficient. It is represented by the `Self` class, which is similar to the `Http` interface.   
+Starcounter provides an efficient way for REST communication within the codehost instance. Simply put, `Self` is used to call handlers that are registered using the `Handle` class inside the codehost. To communicate between different codehosts, `Http` should be used. `Self` communication does not use either networking or shared memory, so it is very efficient. It is represented by the `Self` class, which is similar to the `Http` interface.  
 For example, the same HTTP methods are supported, as in `Http`. However, in comparison, `Self` calls are always synchronous, so asynchronous mode is not presented in it. Like for `Http`, the `Response` object is returned as a result of `Self` call. To conclude, `Self` is used ubiquitously in Starcounter as it is the core REST communication mechanism.
 
 ### Use
