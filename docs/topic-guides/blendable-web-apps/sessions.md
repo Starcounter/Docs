@@ -100,7 +100,7 @@ Handle.GET("/usesession/{?}", (Session session, Request request) =>
 });
 ```
 
-* Session Cookie: Add a header on outgoing response by setting property `UseSessionHeader` to `true` and optionally specify name of header with `SessionHeaderName` \(default `X-Location`\).
+* Unique session URL: Add an HTTP header on outgoing response by setting property `UseSessionHeader` to true and optionally specify name of header with `SessionHeaderName` (default `X-Location`).
 
 The priorities for session determination, for incoming requests, are the following \(latter has higher priority than previous\): session on socket, `Referer` header, `X-Referer` header, session URI parameter.
 
