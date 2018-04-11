@@ -41,7 +41,7 @@ Weaved code is not visible to the developer, even if it’s used by the compiler
 
 ## Creating database classes
 
-Database classes are, for the most part, created the same way as any other class. The main difference is under the hood; public fields and public auto-created properties in the database class become database columns and properties with explicitly declared bodies, such as `FullName` in the example below become code properties, which are not stored as columns, but can be accessed in SQL queries:
+Database classes are, for the most part, created the same way as any other class. The main difference is under the hood; public properties in the database class become database columns and properties with explicitly declared bodies, such as `FullName` in the example below become code properties, which are not stored as columns, but can be accessed in SQL queries:
 
 ```csharp
 [Database]
@@ -59,19 +59,15 @@ Database classes have to be declared as `public`, otherwise, Starcounter throws`
 
 ### Properties and fields
 
-We recommend using auto-implemented properties instead of fields in database classes because Starcounter will only allow auto-implemented properties in future versions to reduce maintenance and make it easier to be cross-platform. For developers this also means that weaving is faster and that error messages for edge cases will be clearer.
-
-#### Access levels
-
-Properties and fields have to be public, otherwise, Starcounter throws `ScErrNonPublicFieldNotExposed` with `ScErrCantBindAppWithPrivateData (SCERR2149)`. This also applies to properties with the [`Transient`](database-classes.md#preventing-fields-from-becoming-database-columns) attribute.
+Database classes only support public properties.
 
 The data types supported and their limitation are listed on the page [Querying with SQL](querying-with-sql.md#data-types).
 
 #### Preventing fields from becoming database columns
 
-Use the `Transient` attribute to exclude fields and properties from becoming database columns. Fields or properties with the `Transient` attribute remain as regular .NET fields and properties and their values are stored on the heap and garbage collected with the objects they belong to. These fields and properties can't be queried with SQL.
+Use the `Transient` attribute to exclude properties from becoming database columns. Properties with the `Transient` attribute remain as regular .NET and properties and their values are stored on the heap and garbage collected with the objects they belong to. These properties can't be queried with SQL.
 
-Since transient properties and fields are regular .NET fields and properties, you can only retrieve their values with the initial object reference. Thus, transient fields or properties of objects that have been fetched from the database return the default value of the fields or properties:
+Since transient properties are regular .NET properties, you can only retrieve their values with the initial object reference. Thus, transient properties of objects that have been fetched from the database return the default value of the properties:
 
 ```csharp
 using System;
@@ -120,7 +116,7 @@ namespace TransientSampleApp1
 }
 ```
 
-Due to the way reference navigation works with database objects, transient fields or properties of objects that are retrieved through reference navigation return the default value of the field or property:
+Due to the way reference navigation works with database objects, transient properties of objects that are retrieved through reference navigation return the default value of the property:
 
 ```csharp
 using System;
