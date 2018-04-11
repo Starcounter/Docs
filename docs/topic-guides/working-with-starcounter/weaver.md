@@ -122,7 +122,7 @@ You have an assembly (application or library) that fail to weave, reporting `ScE
 What can be done in this case is
 
 1. If you have any database classes in your assembly, move these out to another (possibly new) library - one with a minimum set of those dependencies of your failing application.
-2. Edit your project, adding a new property: `<DisallowDatabaseClasses>True</DisallowDatabaseClasses>`
+2. Edit your project.csproj file, adding a new property: `<DisallowDatabaseClasses>True</DisallowDatabaseClasses>`
 3. Rebuild your project (causing weaving to run again, but in a restricted way).
 
 With `<DisallowDatabaseClasses>True</DisallowDatabaseClasses>` set, you can't *declare* database classes in that project / assembly, but you can still *use* database classes from referenced assemblies, including instantiating database types, reading- and writing properties, querying, and so on.
