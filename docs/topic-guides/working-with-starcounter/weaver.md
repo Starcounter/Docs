@@ -112,3 +112,19 @@ We can get the full diagnostic by running `scweaver --nocache --verbosity=diagno
 
 There's no obvious solution to this exception. Reading [Troubleshooting Weaver Failures](weaver.md#troubleshooting-weaver-failures) might be helpful. You can also take a look at [Starcounter/Home\#88](https://github.com/Starcounter/Home/issues/88), [Starcounter/Home\#87](https://github.com/Starcounter/Home/issues/87), and [Starcounter/Home\#166](https://github.com/Starcounter/Home/issues/166) for more information.
 
+#### When nothing else works: running the restricted weaver
+If nothing of the above resolve the issue, there is a last-resort workaround that might require you to restructure your code somewhat, but have the potential of solving some of the more advanced cases. This option is available starting from 2.4 and allow the weaver to run in a more restricted mode by giving the promise that no database classes are defined in the project failing to weave (they can instead be moved out to a separate assembly).
+
+Let's look at a typical scenario and how to address it:
+
+You have an assembly (application or library) that fail to weave, reporting `ScErrUnhandledWeaverException`. The most likely cause is that the weaver can't handle some dependency of that assembly, for example due to the fact that new, unsupported features are used, causing the weaver trouble when analyzing the dependency tree.
+
+What can be done in this case is
+
+1. If you have any database classes in your assembly, move these out to another (possibly new) library - one with a minimum set of those dependencies of your failing application.
+2. Edit your project.csproj file, adding a new property: `<DisallowDatabaseClasses>True</DisallowDatabaseClasses>`
+3. Rebuild your project (causing weaving to run again, but in a restricted way).
+
+With `<DisallowDatabaseClasses>True</DisallowDatabaseClasses>` set, you can't *declare* database classes in that project / assembly, but you can still *use* database classes from referenced assemblies, including instantiating database types, reading- and writing properties, querying, and so on.
+
+To test this feature by running it from the command-line, use `scweave --disallowdatabaseclasses your_assembly.dll`
