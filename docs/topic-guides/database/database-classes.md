@@ -54,20 +54,59 @@ public class Person
 ```
 
 {% hint style="warning" %}
-Database classes have to be declared as `public`, otherwise, Starcounter throws`ScErrEntityClassNotPublic (SCERR4220)` in compile-time. 
+Database classes have to be declared as `public`, otherwise, Starcounter throws `ScErrEntityClassNotPublic (SCERR4220)` in compile-time. 
 {% endhint %}
 
 ### Properties and fields
 
-Database classes only support public properties.
+Database classes only support public auto-implemented properties or public properties backed by private fields:
+
+```csharp
+[Database]
+public class DatabaseFieldsAndProperties
+{
+    // Supported. Public properties are treated as columns
+    // which means that their values are stored persistently
+    // and they can be queried through SQL
+    public string PublicAutoImplementedProperty { get; set; }
+
+    // Supported. The property is treated as a column.
+    // The property can't contain any logic.
+    // The setter is optional
+    private string privateField;
+    public string PublicPropertyWithBackingField
+    {
+        get => privateField;
+        set => privateField = value;
+    }
+
+    // Not supported. Throws ScErrNonPublicFieldNotExposed (SCERR4285)
+    // or ScErrDebugSequenceFailUnexpect (SCERR12016) when you start the application.
+    internal string InternalProperty { get; set; }
+
+    // Not supported. Throws ScErrNonPublicCodeProperty (SCERR4306)
+    // when you try to query it
+    protected string ProtectedProperty { get; set; }
+
+    // Not supported. Throws ScErrFieldInDatabaseType (SCERR4307)
+    // in compile-time
+    public string PublicField;
+
+    // Supported. It's ignored by the weaver and thus
+    // treated as a regular .NET field.
+    // You can't query a transient field
+    [Transient]
+    public string PublicTransientField;
+}
+```
 
 The data types supported and their limitation are listed on the page [Querying with SQL](querying-with-sql.md#data-types).
 
 #### Preventing fields from becoming database columns
 
-Use the `Transient` attribute to exclude properties from becoming database columns. Properties with the `Transient` attribute remain as regular .NET and properties and their values are stored on the heap and garbage collected with the objects they belong to. These properties can't be queried with SQL.
+Use the `Transient` attribute to exclude properties and fields from becoming database columns. Properties and fields with the `Transient` attribute remain as regular .NET and properties or fields and their values are stored on the heap and garbage collected with the objects they belong to. These properties and fields can't be queried with SQL.
 
-Since transient properties are regular .NET properties, you can only retrieve their values with the initial object reference. Thus, transient properties of objects that have been fetched from the database return the default value of the properties:
+Since transient properties and fields are regular .NET properties, you can only retrieve their values with the initial object reference. Thus, transient properties and fields of objects that have been fetched from the database return the default value of the property or field:
 
 ```csharp
 using System;
@@ -116,7 +155,7 @@ namespace TransientSampleApp1
 }
 ```
 
-Due to the way reference navigation works with database objects, transient properties of objects that are retrieved through reference navigation return the default value of the property:
+Due to the way reference navigation works with database objects, transient properties of objects that are retrieved through reference navigation return the default value of the property or field:
 
 ```csharp
 using System;
@@ -262,8 +301,6 @@ public void UpdatePerson(ExternalApiModel data)
 ```
 
 Instead, database object creation should be done with the `new` operator.
-
-
 
 ## Inheritance
 
