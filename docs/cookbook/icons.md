@@ -9,7 +9,7 @@ Why not other formats? We do not use icon fonts, because they have conflicts whe
 Every app should have a black and white icon that appears:
 
 * as the package icon in the Warehouse
-* as the link to the default entrypoint in the [Launchpad](https://github.com/starcounterapps/launchpad)
+* as the link to the default entrypoint in the [Launchpad](https://github.com/Starcounter/launchpad)
 
 ### Icon Size
 

@@ -5,7 +5,7 @@
 When you want to deploy your custom HTML composition, you have two options:
 
 * Use the REST API for HTML compositions
-* Use the [CompositionEditor](https://github.com/starcounterapps/compositioneditor)
+* Use the [CompositionEditor](https://github.com/Starcounter/compositioneditor)
 
 ## REST API for HTML Compositions
 

@@ -30,7 +30,7 @@ The `model.Partial` will contain the returned `new Page()` and all the responses
 
 ### Shared UI Sections
 
-The most common case is the [Launcher](https://github.com/starcounterapps/launcher). The Launcher defines different UI sections and populates them with anonymous `Self.GET` requests.
+The most common case is the [Launcher](https://github.com/Starcounter/launcher). The Launcher defines different UI sections and populates them with anonymous `Self.GET` requests.
 
 ```csharp
 //UriMapping.MappingUriPrefix - a constant, equals to "/sc/mapping"

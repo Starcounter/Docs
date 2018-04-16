@@ -30,7 +30,7 @@ When you run multiple apps with a common data model, restarting one app will not
 
 ## The Simplified data model
 
-All the Starcounter [sample apps](https://github.com/Starcounterapps) use a preinstalled data model called "Simplified". This allows all these apps to share data. To utilize this data model and share data with the sample apps, load the data model into an app by referencing it and setting "Copy Local" to false.
+All the Starcounter [sample apps](https://github.com/search?q=topic%3Aapp+org%3AStarcounter&type=Repositories) use a preinstalled data model called "Simplified". This allows all these apps to share data. To utilize this data model and share data with the sample apps, load the data model into an app by referencing it and setting "Copy Local" to false.
 
 ## Packing apps with common data models
 

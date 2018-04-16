@@ -244,7 +244,7 @@ The default limit on payloads in requests is 1048576 bytes, exceeding this limit
 The limit can be increased to a maximum of 2048576 bytes by changing the value of  `MaximumReceiveContentLength` in `%userprofile%\Documents\Starcounter\Personal\scnetworkgateway.xml`.
 
 {% hint style="info" %}
-When sending large files, we recommend to use WebSocket instead of HTTP. That pattern is demonstrated in the `FileUploadPage` \([code-behind](https://github.com/StarcounterApps/KitchenSink/blob/master/src/KitchenSink/FileUploadPage.json.cs), [HTML](https://github.com/StarcounterApps/KitchenSink/blob/master/src/KitchenSink/wwwroot/KitchenSink/FileUploadPage.html)\) in the sample app [KitchenSink](https://github.com/StarcounterApps/KitchenSink).
+When sending large files, we recommend to use WebSocket instead of HTTP. That pattern is demonstrated in the `FileUploadPage` \([code-behind](https://github.com/Starcounter/KitchenSink/blob/master/src/KitchenSink/FileUploadPage.json.cs), [HTML](https://github.com/Starcounter/KitchenSink/blob/master/src/KitchenSink/wwwroot/KitchenSink/FileUploadPage.html)\) in the sample app [KitchenSink](https://github.com/Starcounter/KitchenSink).
 {% endhint %}
 
 ## Responses

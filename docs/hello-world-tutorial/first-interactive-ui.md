@@ -136,5 +136,5 @@ If you are an especially curious person, you can try to change the name and then
 
 Neat! Right? The next step is to display the name change in real time and let the code-behind calculate the full name.
 
-If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/e16d15bb6ea3d1253d21496328045e0036af4d5a).
+If you get any errors, you can check your code against the [source code](https://github.com/Starcounter/HelloWorld/commit/e16d15bb6ea3d1253d21496328045e0036af4d5a).
 
