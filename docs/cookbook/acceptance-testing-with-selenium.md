@@ -86,8 +86,8 @@ Open your Properties in the Tests project. Go to Reference Paths, enter C:\Selen
 
 BaseTest is a helper class that makes it easier to test multiple browsers. The source code is available:
 
-* BaseTest helper class [here](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/BaseTest.cs)
-* Using of BaseTest class [here](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionBoolean/CheckboxPageTest.cs)
+* BaseTest helper class [here](https://github.com/Starcounter/KitchenSink/blob/master/test/KitchenSink.Tests/Test/BaseTest.cs)
+* Using of BaseTest class [here](https://github.com/Starcounter/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionBoolean/CheckboxPageTest.cs)
 
 When you rebuild the test project now, you should see each test for every browser.
 
@@ -106,7 +106,7 @@ It is a good practice to always wait:
 * Wait for a text element to be present before you check the content of that element
   * An example can be found in the method `TextareaPage_WriteToTextArea` in KitchenSink 
 
-    Tests \(see [TextareaPageTest.cs lines 28-38](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextareaPageTest.cs#L28-L38)\). The method `WaitForText()` is used to 
+    Tests \(see [TextareaPageTest.cs lines 28-38](https://github.com/Starcounter/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextareaPageTest.cs#L28-L38)\). The method `WaitForText()` is used to 
 
     compare the text value of `TextareaInfoLabel` asynchronously. The assertion passes if the 
 
@@ -114,7 +114,7 @@ It is a good practice to always wait:
 * Wait for a button to be present before you click on that button
   * An example can be found in the method `ButtonPage_RegularButton` in the KitchenSink 
 
-    tests \(see [ButtonPageTest.cs lines 29-46](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionNumber/ButtonPageTest.cs#L29-L46)\). The method `WaitUntil()` is used to 
+    tests \(see [ButtonPageTest.cs lines 29-46](https://github.com/Starcounter/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionNumber/ButtonPageTest.cs#L29-L46)\). The method `WaitUntil()` is used to 
 
     asynchronously check the state of the `Displayed` property of a button. It halts the test 
 
@@ -124,7 +124,7 @@ It is a good practice to always wait:
 * Wait for presence of an input field before typing in it and wait for text to be present in label
   * An example can be found in the method `TextPage_TextPropagationOnUnfocus` in the 
 
-    KitchenSink tests \(see [TextPageTest.cs lines 28-38](https://github.com/StarcounterApps/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextPageTest.cs#L28-L38)\). This test mixes the other examples 
+    KitchenSink tests \(see [TextPageTest.cs lines 28-38](https://github.com/Starcounter/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextPageTest.cs#L28-L38)\). This test mixes the other examples 
 
     presented above. The method `WaitUntil()` is used here to asynchronously wait for the 
 
@@ -134,7 +134,7 @@ It is a good practice to always wait:
 
 ### Run the First Test
 
-Clone [KitchenSink repo](https://github.com/StarcounterApps/KitchenSink) from the [StarcounterApps organisation](https://github.com/StarcounterApps) on GitHub.  
+Clone [KitchenSink repo](https://github.com/Starcounter/KitchenSink) from the [Starcounter organisation](https://github.com/Starcounter) on GitHub.  
 Follow the steps that were presented at `Install Selenium Standalone Server and browser drivers`.
 
 Build your test project. If it builds correctly, you should see this:
@@ -149,7 +149,5 @@ Now, the only thing left to do is to run that test! In the Test Explorer, click 
 
 Some of the Starcounter's sample apps come with acceptance test suite. We run tests every night to make sure that we keep the good quality.
 
-The [KitchenSink](https://github.com/StarcounterApps/KitchenSink) sample app includes a Selenium test case for every UI pattern that is presented in that app. You can learn from the test project \(in the `test` directory\), how to achieve Selenium testing of particular actions, such as button clicks, page changing, typing in forms, etc.
-
-The [Launcher](https://github.com/StarcounterApps/Launcher) prefab app includes Selenium test of using Launcher with two mock applications \(called "Launcher\_AcceptanceHelperOne" and "Launcher\_AcceptanceHelperTwo"\). The test include executing JavaScript code on a page to scroll a DIV element and then checking the scroll position.
+The [KitchenSink](https://github.com/Starcounter/KitchenSink) sample app includes a Selenium test case for every UI pattern that is presented in that app. You can learn from the test project \(in the `test` directory\), how to achieve Selenium testing of particular actions, such as button clicks, page changing, typing in forms, etc.
 

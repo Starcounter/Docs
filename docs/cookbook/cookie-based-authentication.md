@@ -6,7 +6,7 @@ This is different from persistent user sessions known from other frameworks such
 
 How do you implement cookie-based authentication with Starcounter? You have to code it on your own using our HTTP low level API. Or if you want to keep it simple - run your app alongside another app that does just that in middleware.
 
-[Sign In](https://github.com/StarcounterApps/SignIn) is a prefab app that authenticates a user using a username and a password. It generates an auth token and stores it in a cookie for use in future sessions.
+[Sign In](https://github.com/Starcounter/SignIn) is a prefab app that authenticates a user using a username and a password. It generates an auth token and stores it in a cookie for use in future sessions.
 
 ### Internals of Sign In App
 

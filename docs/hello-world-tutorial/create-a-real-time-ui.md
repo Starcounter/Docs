@@ -103,5 +103,5 @@ Check out how it looks by starting the application with F5 and go to `http://loc
 
 It's impossible for us to see the immediate changes as there is no way for the user to change the info. Let us fix that by adding some interactivity!
 
-If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/ce3e787313aacbd6d8f6d18956ab39e24befc452).
+If you get any errors, you can check your code against the [source code](https://github.com/Starcounter/HelloWorld/commit/ce3e787313aacbd6d8f6d18956ab39e24befc452).
 

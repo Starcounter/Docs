@@ -80,7 +80,7 @@ You should not do that automatically, but use Bower to install such dependencies
 
 #### .bowerrc {#.bowerrc}
 
-The `.bowerrc` file contains the Bower configuration. It specifies the destination directory and what dependencies should be ignored, because they are delivered with Starcounter. An example of this can be found in the [KitchenSink app](https://github.com/StarcounterApps/KitchenSink/blob/master/src/KitchenSink/.bowerrc).
+The `.bowerrc` file contains the Bower configuration. It specifies the destination directory and what dependencies should be ignored, because they are delivered with Starcounter. An example of this can be found in the [KitchenSink app](https://github.com/Starcounter/KitchenSink/blob/master/src/KitchenSink/.bowerrc).
 
 To find the specific dependencies that are delivered with Starcounter, go to `C:\Program Files\Starcounter\ClientFiles\bower-list.txt`. For Starcounter 2.3.1.6694, it looks like this:
 
@@ -131,7 +131,7 @@ sys#1.0.0 D:\repos\Starcounter\src\BuildSystem\ClientFiles
 
 `bower.json` file that keeps the list of your app's client side dependencies. This file should not be created and maintained manually. It should be modified using the command line tool: `bower init`, `bower install paper-dialog --save`.
 
-A sample file can be found in the [KitchenSink app](https://github.com/StarcounterApps/KitchenSink/blob/master/src/KitchenSink/bower.json).
+A sample file can be found in the [KitchenSink app](https://github.com/Starcounter/KitchenSink/blob/master/src/KitchenSink/bower.json).
 
 ## Static File Server {#starcounter-static-file-server}
 

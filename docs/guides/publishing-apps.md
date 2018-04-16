@@ -21,12 +21,12 @@ Every view must be explained in the file and preferably illustrated with a scree
 
 In the future, the information in this file is used for automated blending as well as for [testing purposes](https://github.com/Starcounter/Guidelines/issues/26).
 
-Sample `Images.map.md` \([source](https://github.com/StarcounterApps/Images/blob/develop/Images.map.md)\):
+Sample `Images.map.md` \([source](https://github.com/Starcounter/Images/blob/develop/Images.map.md)\):
 
 ```text
 # Blendable views
 
-## /images/partials/contents/{[Simplified.Ring1.Content](https://github.com/StarcounterApps/Simplified/blob/master/Ring1/Content.cs)}
+## /images/partials/contents/{[Simplified.Ring1.Content](https://github.com/Starcounter/Simplified/blob/master/Ring1/Content.cs)}
 
 Shows a simple page for `Content` preview, image or video. In case of unexisting
 content, shows empty file preview image.
@@ -42,7 +42,7 @@ When you access this URI, the app main screen should be presented.
 
 If there is no main screen, show a splash screen saying that the app is running.
 
-Sample `MainHandlers.cs` \([source](https://github.com/StarcounterApps/People/blob/94341b2dc62ad6637808313c367f986a417d349b/src/People/Api/MainHandlers.cs#L32-L35)\):
+Sample `MainHandlers.cs` \([source](https://github.com/Starcounter/People/blob/94341b2dc62ad6637808313c367f986a417d349b/src/People/Api/MainHandlers.cs#L32-L35)\):
 
 ```csharp
 Handle.GET("/people", () =>
@@ -55,7 +55,7 @@ Handle.GET("/people", () =>
 
 By convention, a blendable web app must provide a metadata JSON that responds to the `app-name` blending token.
 
-System apps and navigation apps like [Launchpad](https://github.com/StarcounterApps/Launchpad) will display a link to the entry point URI using the app name from this metadata. They will also use the icon, if provided.
+System apps and navigation apps like [Launchpad](https://github.com/Starcounter/Launchpad) will display a link to the entry point URI using the app name from this metadata. They will also use the icon, if provided.
 
 The response JSON can consist of the following properties:
 
@@ -65,19 +65,19 @@ The response JSON can consist of the following properties:
 | `description` | Optional. Short \(single sentence\) description of the app. |
 | `html` | Optional. URI to a view that contains the app icon. |
 
-Sample `MainHandlers.cs` \([source](https://github.com/StarcounterApps/CssVariablesManager/blob/develop/src/CssVariablesManager/Api/MainHandlers.cs#L13)\):
+Sample `MainHandlers.cs` \([source](https://github.com/Starcounter/CssVariablesManager/blob/develop/src/CssVariablesManager/Api/MainHandlers.cs#L13)\):
 
 ```csharp
 Handle.GET("/cssvariablesmanager/app-name", () => new AppName());
 ```
 
-Sample `BlendingHooks.cs` \([source](https://github.com/StarcounterApps/CssVariablesManager/blob/4aad5186522a6297bc4ca7f713d91424220d6552/src/CssVariablesManager/Api/BlendingHooks.cs#L9)\):
+Sample `BlendingHooks.cs` \([source](https://github.com/Starcounter/CssVariablesManager/blob/4aad5186522a6297bc4ca7f713d91424220d6552/src/CssVariablesManager/Api/BlendingHooks.cs#L9)\):
 
 ```csharp
 Blender.MapUri("/cssvariablesmanager/app-name", "app-name");
 ```
 
-Sample `AppName.json` \([source](https://github.com/StarcounterApps/CssVariablesManager/blob/4aad5186522a6297bc4ca7f713d91424220d6552/src/CssVariablesManager/ViewModels/AppName.json)\):
+Sample `AppName.json` \([source](https://github.com/Starcounter/CssVariablesManager/blob/4aad5186522a6297bc4ca7f713d91424220d6552/src/CssVariablesManager/ViewModels/AppName.json)\):
 
 ```javascript
 {
@@ -93,7 +93,7 @@ The icon is an image \(preferably inline SVG\) in the HTML file which path is pr
 
 Check out the [Icons](../cookbook/icons.md) cookbook to learn more about icons.
 
-Sample `AppIcon.html` \([source](https://github.com/StarcounterApps/CssVariablesManager/blob/4aad5186522a6297bc4ca7f713d91424220d6552/src/CssVariablesManager/wwwroot/CssVariablesManager/AppIcon.html)\):
+Sample `AppIcon.html` \([source](https://github.com/Starcounter/CssVariablesManager/blob/4aad5186522a6297bc4ca7f713d91424220d6552/src/CssVariablesManager/wwwroot/CssVariablesManager/AppIcon.html)\):
 
 ```markup
 <template>
@@ -136,8 +136,8 @@ The settings page might contain a button to do a "Factory Reset" of the app \(re
 
 Sample and prefab apps that have a settings page:
 
-* [https://github.com/StarcounterApps/Products](https://github.com/StarcounterApps/Products)
-* [https://github.com/StarcounterApps/SignIn](https://github.com/StarcounterApps/SignIn)
+* [https://github.com/Starcounter/Products](https://github.com/Starcounter/Products)
+* [https://github.com/Starcounter/SignIn](https://github.com/Starcounter/SignIn)
 
 ## Submitting to the App Warehouse
 

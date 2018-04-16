@@ -124,7 +124,7 @@ To create a custom composition, we will move the MedicalRecord table and headlin
 
 We have now produced the result shown in the image above; the view from the MedicalRecord app has been neatly integrated with the view from PetList.
 
-The tool for creating these custom compositions is the [CompositionEditor](https://github.com/starcounterapps/CompositionEditor) app. When this app is running, you can open it at any page with `Ctrl + E`. When the app opens, it gives you an HTML editor for the composition of your attached views. 
+The tool for creating these custom compositions is the [CompositionEditor](https://github.com/Starcounter/CompositionEditor) app. When this app is running, you can open it at any page with `Ctrl + E`. When the app opens, it gives you an HTML editor for the composition of your attached views. 
 
 There are two main concepts in the CompositionEditor - the identifier and composition \("layout" on the below picture\).
 
@@ -146,7 +146,7 @@ Compositions can also be accessed with the static methods `GetUsingkey(string ke
 
 ### Providing custom compositions
 
-Custom compositions are provided by the [CompositionProvider](https://github.com/starcounterapps/compositionprovider) app. When views are merged, this app checks if there's a composition in the database with the same identifier and serves it, otherwise, the default composition is used.
+Custom compositions are provided by the [CompositionProvider](https://github.com/Starcounter/compositionprovider) app. When views are merged, this app checks if there's a composition in the database with the same identifier and serves it, otherwise, the default composition is used.
 
 Because of this, the CompositionProvider has to be running if you want to render custom compositions of your views.
 
@@ -157,10 +157,10 @@ Because of this, the CompositionProvider has to be running if you want to render
 This screenshot is a result of several of our sample apps running together:
 
 * [Website](https://github.com/Starcounter/Website)
-* [People](https://github.com/StarcounterApps/People)
-* [Images](https://github.com/StarcounterApps/Images)
-* [SignIn](https://github.com/StarcounterApps/SignIn)
-* [Search](https://github.com/StarcounterApps/Search)
+* [People](https://github.com/Starcounter/People)
+* [Images](https://github.com/Starcounter/Images)
+* [SignIn](https://github.com/Starcounter/SignIn)
+* [Search](https://github.com/Starcounter/Search)
 
 As you can see, they look like one app because of Attaching and Composing.
 
