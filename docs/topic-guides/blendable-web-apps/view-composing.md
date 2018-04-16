@@ -156,10 +156,10 @@ Because of this, the BlendingProvider has to be running if you want to render cu
 This screenshot is a result of several of our sample apps running together:
 
 * [Website](https://github.com/Starcounter/Website)
-* [People](https://github.com/StarcounterApps/People)
-* [Images](https://github.com/StarcounterApps/Images)
-* [SignIn](https://github.com/StarcounterApps/SignIn)
-* [Search](https://github.com/StarcounterApps/Search)
+* [People](https://github.com/Starcounter/People)
+* [Images](https://github.com/Starcounter/Images)
+* [SignIn](https://github.com/Starcounter/SignIn)
+* [Search](https://github.com/Starcounter/Search)
 
 As you can see, they look like one app because of Attaching and Composing.
 

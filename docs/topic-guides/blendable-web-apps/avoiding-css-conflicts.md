@@ -43,7 +43,7 @@ Note here that **everything at the root level must be a block**. A block can hav
 
 ## Example
 
-Consider the [SignIn app](https://github.com/starcounterapps/signin):
+Consider the [SignIn app](https://github.com/Starcounter/signin):
 
 ![](../../.gitbook/assets/bem-example%20%281%29.PNG)
 
@@ -59,7 +59,7 @@ From this, these BEM classes can be derived:
 .signin-form__labeled-checkbox--checked {}
 ```
 
-Check out the source code of [People](https://github.com/StarcounterApps/People) or [KitchenSink](https://github.com/StarcounterApps/KitchenSink). These sample apps show how to apply BEM in practice.
+Check out the source code of [People](https://github.com/Starcounter/People) or [KitchenSink](https://github.com/Starcounter/KitchenSink). These sample apps show how to apply BEM in practice.
 
 ## BEM in Starcounter apps
 

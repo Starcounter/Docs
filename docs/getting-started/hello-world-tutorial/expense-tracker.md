@@ -257,5 +257,5 @@ Run the program and try to add expenses, change their cost, and see the current 
 
 With every keystroke, the UI is updated almost instantly from the database. Starcounter's in-memory database makes this possible. There's no delay, everything simply happens at the moment the user interacts with the view.
 
-If you get any errors, you can check your code against the [source code](https://github.com/StarcounterApps/HelloWorld/commit/a6e91b5a2dbedd49d5f228b4fca55487f20c1dda).
+If you get any errors, you can check your code against the [source code](https://github.com/Starcounter/HelloWorld/commit/a6e91b5a2dbedd49d5f228b4fca55487f20c1dda).
 

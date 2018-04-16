@@ -85,7 +85,7 @@ To get a deeper understanding of Starcounter, read the [technical overview](http
 
 ## 6. Try the sample apps
 
-We've developed a bunch of apps that are available for everyone on [GitHub](https://github.com/starcounterapps). Feel free to run them, change them, make issues, and make pull requests. They should also give you an idea of apps are built to interact with each other.
+We've developed a bunch of apps that are available for everyone on [GitHub](https://github.com/search?q=topic%3Aapp+org%3AStarcounter&type=Repositories). Feel free to run them, change them, make issues, and make pull requests. They should also give you an idea of apps are built to interact with each other.
 
 ## 7. Build your own app
 

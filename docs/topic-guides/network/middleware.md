@@ -10,7 +10,7 @@ Middleware is code that affects the _request pipeline_. It enables applications 
 
 These can help with a range of issues, such as security, logging, wrapping, request modification, and more.
 
-An example of this is the [Launcher](https://github.com/starcounterapps/launcher) which uses request filters to wrap responses from other applications into its own response.
+An example of this is the [Launcher](https://github.com/Starcounter/launcher) which uses request filters to wrap responses from other applications into its own response.
 
 All middleware is registered with the `Application.Current.Use` API which has three overloads corresponding to the different types of middleware listed above. The registration is usually done at the entry point of the application and can look something like this:
 
