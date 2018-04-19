@@ -63,6 +63,16 @@ The key for the custom compositions is the main view. If there is more than one 
 
 ![](../../.gitbook/assets/subset-match.gif)
 
+### Glossary
+
+This file uses the following definitions:
+
+- *view* - URI of the partial HTML view file in a Starcounter app
+- *main view* - view of the response for the browser or `Self.GET` request
+- *attached view* - views that extend the main view through blending
+- *custom composition* - composition stored in the database tables `Starcounter.HTMLComposition` (legacy, deprecated) or `Starcounter.HtmlViewComposition` + `Starcounter.HtmlViewAttachment` + `Starcounter.HtmlView` (current)
+- *default composition* - composition provided by the app author in `declarative-shadow-dom` of the HTML file
+
 ### Example
 
 The main view is `/people/person.html` with the attached views `/skyper/callme.html`, `/images/illustration.html`
