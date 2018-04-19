@@ -48,6 +48,45 @@ Here, the content of the view is defined on the root level and the presentation 
 
 The `declarative-shadow-dom` is used as the default composition that can be further modified or replaced in runtime using the Starcounter  app suite [Blending](https://github.com/Starcounter/Blending) and its feature - composition editor.
 
+## Subset and superset composition matching
+
+The key for the custom compositions is the main view. If there is more than one custom composition, the best matching composition is picked by its distance to the attached views:
+
+1. If there is an exact match of a custom composition to attached views, provide this composition
+2. Else, if there are superset custom compositions (compositions that include all of the attached views and more), provide the smallest superset
+3. Else, if there are subset custom compositions (compositions that include some of the attached views [*intersection*] and maybe some other views [*complement*]), provide the subset that has the largest intersection and smallest relative complement. For the attached views not included in the composition, use their default composition
+4. Else, use the default compositions
+
+![](../../.gitbook/assets/exact-match.png)
+
+![](../../.gitbook/assets/superset-match.gif)
+
+![](../../.gitbook/assets/subset-match.gif)
+
+### Example
+
+The main view is `/people/person.html` with the attached views `/skyper/callme.html`, `/images/illustration.html`
+
+1. If there is a custom composition for `/people/person.html, [/skyper/callme.html, /images/illustration.html]`, provide this composition
+2. Else, if there are the following superset custom compositions, provide the composition (2), because it is the smallest superset:
+    1. `/people/person.html, [/skyper/callme.html, /images/illustration.html, /foo/foo.html, /bar/bar.html]`
+    2. `/people/person.html, [/skyper/callme.html, /images/illustration.html, /foo/foo.html]`
+3. Else, if there are the following subset custom compositions, provide the composition (2). Both (1) and (2) are the smallest intersection with the attached views, both (1) and (2) have no complement and (2) is first alphabetically:
+    1. `/people/person.html, [/skyper/callme.html]`
+    2. `/people/person.html, [/images/something.html]`
+    3. `/people/person.html, [/skyper/callme.html, /foo/foo.html]`
+    4. `/people/person.html, [/foo/foo.html]`
+4. Else, use the default compositions from `/people/person.html`, `/skyper/callme.html`, `/images/illustration.html`.
+
+### Migration from `Starcounter.HTMLComposition` to `Starcounter.HtmlViewComposition` data model
+
+Versions of BlendingProvider (previously CompositionProvider) prior to 3.0.0 use a legacy `Starcounter.HTMLComposition` data model. Version 3.0.0 and up uses `Starcounter.HtmlViewComposition` and automatically upgrades the legacy data.
+
+On start up, the app converts all existing `Starcounter.HTMLComposition` objects to `Starcounter.HtmlViewComposition` objects. It does not delete `Starcounter.HTMLComposition` objects.
+
+CompositionProvider skips the migration process in case if at least one `Starcounter.HtmlViewComposition` object already exists.
+
+
 ## Composing the attached views
 
 ### Default compositions of the attached views
@@ -172,4 +211,3 @@ Composing allows us to make views coming from multiple apps to look like one by 
 * [Layout compositions for HTML partials](https://starcounter.io/layout-compositions-html-partials/) - Blog October 2016
 * [Html Views Blending Guidelines](html-views-composition-guidelines.md) - Docs
 * [Shadow DOM v1: Self-Contained Web Components](https://developers.google.com/web/fundamentals/getting-started/primers/shadowdom) - Google Developers
-
