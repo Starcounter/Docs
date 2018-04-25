@@ -185,7 +185,7 @@ Async/await programming in Starcounter is the same as in standard .NET. The only
 ```csharp
 [Database]
 public class Person {
-    public String Name { get; set; }
+    public String Id { get; set; }
 }
 class Program {
 
@@ -195,7 +195,7 @@ class Program {
 
             // As we are on Starcounter thread already, we can create a database object.
             // Notice that we use `Db.TransactAsync` here. Read about it in a separate article.
-            Db.TransactAsync(() => new Person() { Name = id.ToString() });
+            Db.TransactAsync(() => new Person() { Id = id.ToString() });
 
             // Now we run an async task that will return the response later.
             DoSomethingAsync(req, id);
@@ -216,11 +216,11 @@ class Program {
         await Scheduling.RunTask(() => {
 
             // Quering the person.
-            var person = Db.SQL<Person>("SELECT p FROM Person p WHERE p.Name = ?", id.ToString()).FirstOrDefault();
+            var person = Db.SQL<Person>("SELECT p FROM Person p WHERE p.Id = ?", id.ToString()).FirstOrDefault();
 
             // Doing some database operations.
             // Notice that we use `Db.TransactAsync` here. Read about it in a separate article.
-            Db.TransactAsync(() => person.Name += id);
+            Db.TransactAsync(() => person.Id += id);
 
             // Finally returning the response.
             Response resp = new Response() {
