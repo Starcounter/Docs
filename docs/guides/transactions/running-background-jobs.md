@@ -1,5 +1,5 @@
 # Running Background Jobs
-
+ 
 ## Introduction
 
 This article describes useful patterns to run background jobs in Starcounter applications which require access to the database. In regards to the current implementation in Starcounter 2.x, it is important to keep in mind how transactions and deleting of objects work and thus avoid jobs that run for a long time, or possible forever.
@@ -178,48 +178,59 @@ Handle.GET("/Hello", () =>
 });
 ```
 
-## Await with scheduled tasks
+## Task scheduling and async/await
 
-Since .NET pick the thread when using the `await` keyword, there's no way to ensure that the code after an awaited scheduled task is executed on a Starcounter thread or .NET thread.
-
-```csharp
-// Create a database object on the Starcounter thread
-var person = Db.Transact(() => new Person());
-
-// The await keyword lets .NET pick the thread
-await Scheduling.RunTask(() => Thread.Sleep(2000));
-
-// .NET might pick a .NET thread or Starcounter thread. If a 
-// .NET thread is picked, this code will throw an exception
-Db.Transact(() => person.Name = "John");
-```
-
-To prevent undeterministic exceptions like this, use the `Wait` method to wait for the task to finish execution.
+Async/await programming in Starcounter is the same as in standard .NET. The only difference is that if there is a Starcounter-related code (SQL, transactions, etc.) that comes after the `await` statement - such code should be wrapped into a delegate given to `Scheduling.RunTask`. Below is an example demonstrating this. It uses delayed `Response`. Note also the use of `Db.TransactAsync` - its needed so that Starcounter scheduler is not creating additional threads.
 
 ```csharp
-var person = Db.Transact(() => new Person());
+[Database]
+public class Person {
+    public String Name { get; set; }
+}
+class Program {
 
-// Wait for the task to finish with the Wait method
-Scheduling.RunTask(() => Thread.Sleep(2000)).Wait();
+    static void Main() {
 
-// This is now guaranteed to be on a Starcounter thread
-Db.Transact(() => person.Name = "John");
-```
+        Handle.GET("/hello/{?}", (Request req, Int32 id) => {
 
-You can also use the task returned by `RunTask` to wait for the task when the Starcounter thread is needed.
+            // As we are on Starcounter thread already, we can create a database object.
+            // Notice that we use `Db.TransactAsync` here. Read about it in a separate article.
+            Db.TransactAsync(() => new Person() { Name = id.ToString() });
 
-```csharp
-var person = Db.Transact(() => new Person());
-Task task = Scheduling.RunTask(() => Thread.Sleep(2000));
+            // Now we run an async task that will return the response later.
+            DoSomethingAsync(req, id);
 
-// Call a method that doesn't require a Starcounter thread
-SomeLongCalculation();
+            // Indicating that HTTP response will be returned later.
+            return HandlerStatus.Handled;
+        });
+    }
 
-// Wait for the task to finish to get back on a Starcounter thread
-task.Wait();
+    // Async call that does some await and performs database operations after.
+    static async void DoSomethingAsync(Request req, Int32 id) {
 
-// Excute code that requires a Starcounter thread
-Db.Transact(() => person.Name = "John");
+        // Now using async Simulating some long operation using await statement.
+        await Task.Delay(10000);
+
+        // Since this is not a Starcounter thread now, so we need to schedule
+        // a Starcounter task so we can do our database operations.
+        await Scheduling.RunTask(() => {
+
+            // Quering the person.
+            var person = Db.SQL<Person>("SELECT p FROM Person p WHERE p.Name = ?", id.ToString()).FirstOrDefault();
+
+            // Doing some database operations.
+            // Notice that we use `Db.TransactAsync` here. Read about it in a separate article.
+            Db.TransactAsync(() => person.Name += id);
+
+            // Finally returning the response.
+            Response resp = new Response() {
+                Body = "Done with object " + id
+            };
+
+            req.SendResponse(resp);
+        });
+    }
+}
 ```
 
 
