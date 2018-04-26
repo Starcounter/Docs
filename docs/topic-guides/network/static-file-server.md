@@ -32,11 +32,11 @@ The same convention applies in Visual Studio. If you have a Starcounter applicat
 
 ## Application specific static files
 
-Application specific static files should be put in a directory with the name of the application. For example, for the [People](https://github.com/StarcounterApps/People) app, the HTML, CSS, images, JavaScript and other files that are strictly specific to that app should be put in the directory `wwwroot/People`. This prevents namespace collisions between apps running together.
+Application specific static files should be put in a directory with the name of the application. For example, for the [People](https://github.com/Starcounter/People) app, the HTML, CSS, images, JavaScript and other files that are strictly specific to that app should be put in the directory `wwwroot/People`. This prevents namespace collisions between apps running together.
 
 ## External dependencies
 
-External dependencies, such as fonts, Web Components and other files that might be used in more than one app should be put in a `sys` directory. For example, the [People](https://github.com/StarcounterApps/People) app puts the Polymer elements it uses in `wwwroot/sys`.
+External dependencies, such as fonts, Web Components and other files that might be used in more than one app should be put in a `sys` directory. For example, the [People](https://github.com/Starcounter/People) app puts the Polymer elements it uses in `wwwroot/sys`.
 
 Starcounter has certain files that are served by default to the `sys` directory which makes them available to all apps. One example is Polymer; even if it's not put in the `sys` folder of individual apps, it's still available with the HTML import `<link rel="import" href="/sys/polymer/polymer.html">` because it's served by Starcounter.  
   

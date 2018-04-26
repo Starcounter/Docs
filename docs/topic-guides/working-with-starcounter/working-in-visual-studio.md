@@ -53,7 +53,7 @@ namespace MyApp
 
 #### Starcounter Class Library
 
-The Starcounter class library template is the starting point for creating a shared data model to use across applications. For example, the [Simplified](https://github.com/StarcounterApps/Simplified) DLL that is used to provide a shared data model to the Starcounter [sample apps](https://github.com/StarcounterApps) is built with this template. It contains the same references as the Starcounter application template. This is how the boilerplate `Program.cs` file looks:
+The Starcounter class library template is the starting point for creating a shared data model to use across applications. For example, the [Simplified](https://github.com/Starcounter/Simplified) DLL that is used to provide a shared data model to the Starcounter [sample apps](https://github.com/Starcounter) is built with this template. It contains the same references as the Starcounter application template. This is how the boilerplate `Program.cs` file looks:
 
 ```csharp
 using System;

@@ -76,7 +76,7 @@ The `Input` class is auto generated per each JSON view-model. It provides the fo
 * method `Cancel()` - reject the new value. It prevents the propagation of the new value to JSON as well as to the bound data object
 * property `Cancelled` - boolean, true if the `Cancel()` method was called
 
-To get many more examples of how interactivity is handled, take a look at the [KitchenSink repo](https://github.com/StarcounterApps/KitchenSink) where the most common UI patterns are demonstrated.
+To get many more examples of how interactivity is handled, take a look at the [KitchenSink repo](https://github.com/Starcounter/KitchenSink) where the most common UI patterns are demonstrated.
 
 ## Referring to nested objects
 

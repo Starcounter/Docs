@@ -183,7 +183,7 @@ Source file: [TextPageTest.cs](https://github.com/Starcounter/KitchenSink/blob/6
 
 ## Run the first test
 
-Clone [KitchenSink repo](https://github.com/StarcounterApps/KitchenSink) from the [StarcounterApps organisation](https://github.com/StarcounterApps) on GitHub.  
+Clone [KitchenSink repo](https://github.com/Starcounter/KitchenSink) from the [Starcounter organisation](https://github.com/Starcounter) on GitHub.  
 Follow the steps that were presented at `Install Selenium Standalone Server and browser drivers`.
 
 Build your test project. If it builds correctly, you should see this:
@@ -198,5 +198,5 @@ Now, the only thing left to do is to run that test. In the Test Explorer, click 
 
 Some of the Starcounter's sample apps come with acceptance test suite.
 
-The [KitchenSink](https://github.com/StarcounterApps/KitchenSink) sample app includes a Selenium test case for every UI pattern that is presented in that app. You can learn from the test project \(in the `test` directory\), how to achieve Selenium testing of particular actions, such as button clicks, page changing, typing in forms, etc.
+The [KitchenSink](https://github.com/Starcounter/KitchenSink) sample app includes a Selenium test case for every UI pattern that is presented in that app. You can learn from the test project \(in the `test` directory\), how to achieve Selenium testing of particular actions, such as button clicks, page changing, typing in forms, etc.
 
