@@ -80,7 +80,7 @@ namespace HelloWorld
     {
         void Handle(Input.SaveTrigger action)
         {
-            Transaction.Commit();
+            AttachedScope.Commit();
         }
     }
 }
@@ -90,7 +90,7 @@ namespace HelloWorld
 
 `Input.SaveTrigger action` makes the method run when a change is detected in the `SaveTrigger` value. Note that we do not need to use a `$` here like in the view-model. The rule is that we use `$` for the view, and view-model, but not in the application code.
 
-`Transaction.Commit()` commits the current state of the view-model to the database so that the data is accessible from other transactions.
+`AttachedScope.Commit()` commits the current state of the view-model to the database so that the data is accessible from other transactions.
 
 With server-side view-models like this, you don't have to write a single line of "glue code" to update the view in HTML. Any change in the view-model made in C\# will instantly be synced to the client using [Palindrom](../../topic-guides/blendable-web-apps/palindrom.md), which in turn automatically renders because of Polymer's data bindings. This saves you from creating single-purpose REST APIs, need for double validation of user input, and more. This also means that all logic that can be written on the server-side should be written on the server-side to enjoy these benefits.
 
@@ -104,19 +104,21 @@ We'll change our previous text elements to input elements and add a button:
 {% code-tabs-item title="PersonJson.html" %}
 ```markup
 <template>
-    <template is="dom-bind">
-        <fieldset>
-            <label>First name:</label>
-            <input value="{{model.FirstName$::input}}">
-        </fieldset>
+    <dom-bind>
+        <template is="dom-bind">
+            <fieldset>
+                <label>First name:</label>
+                <input value="{{model.FirstName$::input}}">
+            </fieldset>
 
-        <fieldset>
-            <label>Last name:</label>
-            <input value="{{model.LastName$::input}}">
-        </fieldset>
+            <fieldset>
+                <label>Last name:</label>
+                <input value="{{model.LastName$::input}}">
+            </fieldset>
 
-        <button value="{{model.SaveTrigger$::click}}" onmousedown="++this.value">Save</button>
-    </template>
+            <button value="{{model.SaveTrigger$::click}}" onmousedown="++this.value">Save</button>
+        </template>
+    </dom-bind>
 </template>
 ```
 {% endcode-tabs-item %}
@@ -135,6 +137,4 @@ If you are an especially curious person, you can try to change the name and then
 ![](../../.gitbook/assets/page3resized.gif)
 
 Neat! Right? The next step is to display the name change in real time and let the code-behind calculate the full name.
-
-If you get any errors, you can check your code against the [source code](https://github.com/Starcounter/HelloWorld/commit/e16d15bb6ea3d1253d21496328045e0036af4d5a).
 

@@ -66,7 +66,7 @@ Since the middleware wraps the HTML to create a complete HTML document, we only 
 
 To create a two-way binding between the view and the view model, we choose to use Polymer. There are three parts needed to make the bindings work:  
 1. Import Polymer  
-2. Use `<template is="dom-bind">` to allow the use of bindings in a fragment  
+2. Use `<dom-bind>` to allow the use of bindings in a fragment  
 3. Bind the specific properties using the double bracket syntax like this: `{{model.FirstName}}`. `model` represents the JSON file, so `{{model.FirstName}}` is the `FirstName` value in `PersonJson.json`.
 
 This is how it looks in code:
@@ -76,17 +76,19 @@ This is how it looks in code:
 ```markup
 <link rel="import" href="/sys/polymer/polymer.html">
 <template>
-    <template is="dom-bind">
-        <fieldset>
-            <label>First name:</label>
-            <strong>{{model.FirstName}}</strong>
-        </fieldset>
+    <dom-bind>
+        <template is="dom-bind">
+            <fieldset>
+                <label>First name:</label>
+                <strong>{{model.FirstName}}</strong>
+            </fieldset>
 
-        <fieldset>
-            <label>Last name:</label>
-            <strong>{{model.LastName}}</strong>
-        </fieldset>
-    </template>
+            <fieldset>
+                <label>Last name:</label>
+                <strong>{{model.LastName}}</strong>
+            </fieldset>
+        </template>
+    </dom-bind>
 </template>
 ```
 {% endcode-tabs-item %}
@@ -101,6 +103,4 @@ Check out how it looks by starting the application with F5 and go to `http://loc
 ![](../../.gitbook/assets/part2.png)
 
 It's impossible for us to see the immediate changes as there is no way for the user to change the info. Let us fix that by adding some interactivity!
-
-If you get any errors, you can check your code against the [source code](https://github.com/Starcounter/HelloWorld/commit/ce3e787313aacbd6d8f6d18956ab39e24befc452).
 
