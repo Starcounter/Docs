@@ -26,7 +26,7 @@ namespace StarcounterApplication4
         {
             while (true)
             {
-                Scheduling.RunTask(() => // Schedule a job on scheduler 0
+                Scheduling.RunTask(() =>
                 {
                     Db.Transact(() =>
                     {
@@ -48,15 +48,10 @@ namespace StarcounterApplication4
 Each Starcounter scheduler has a queue of tasks that are supposed to be run on this scheduler. Tasks are picked from the queue and executed. To put a task in a queue, the `Scheduling.RunTask` should be used. When scheduling a task, you can specify the scheduler number, and if the thread should wait for the task to be picked by scheduler and completed. Here is the signature of the `Scheduling.RunTask`:
 
 ```csharp
-Task RunTask(
-    Action action,
-    Byte schedulerId = StarcounterEnvironment.InvalidSchedulerId)
+Task RunTask(Action action)
 ```
 
-where:
-
-* `Action action`: procedure to execute on scheduler.
-* `Byte schedulerId = StarcounterEnvironment.InvalidSchedulerId`: optional parameter to select the scheduler, on which the `action` is going to run.
+where `Action action` is a procedure to execute on scheduler.
 
 To make the `Action` execute synchronously, use the `Wait` method:
 
@@ -64,7 +59,7 @@ To make the `Action` execute synchronously, use the `Wait` method:
 Scheduling.RunTask(() => { }).Wait()
 ```
 
-To determine if current thread is on scheduler call `StarcounterEnvironment.IsOnScheduler()`. To determine the amount of schedulers in your database call `StarcounterEnvironment.SchedulerCount`. To get current scheduler id call `StarcounterEnvironment.CurrentSchedulerId` \(in case if calling thread is not on Starcounter scheduler the value `StarcounterEnvironment.InvalidSchedulerId` is returned\).
+To determine if current thread is on scheduler call `StarcounterEnvironment.IsOnScheduler()`.
 
 ## Task scheduling and async/await
 
