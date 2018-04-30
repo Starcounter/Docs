@@ -2,7 +2,7 @@
  
 ## Introduction
 
-Code that is provded via Starcounter API (transactions, SQL, request/response handling, Web sockets handling, etc.) should execute in a special context. Such context is already given inside the `Main()` function, view-model handles and handlers (for example, `Handle.GET`). In other situations, like in separately created background .NET threads or tasks, to be able to execute Starcounter code, one should schedule it using `Scheduling.RunTask()`.
+Code that is provided via Starcounter API (transactions, SQL, request/response handling, Web sockets handling, etc.) should execute in a special context. Such context is already given inside the `Main()` function, view-model handles and handlers (for example, `Handle.GET`). In other situations, like in separately created background .NET threads or tasks, to be able to execute Starcounter code, one should schedule it using `Scheduling.RunTask()`.
 
 Example of running a background job and accessing database periodically:
 
