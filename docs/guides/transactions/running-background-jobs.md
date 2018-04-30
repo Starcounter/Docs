@@ -2,9 +2,9 @@
  
 ## Introduction
 
-Starcounter maintains its own threadpool. Most of Starcounter API may be called only from a thread from starcounter threadpool. Among such APIs are: methods from Starcounter.Db class, methods from Starcounter.Request class etc. Safer to regard all APIs from Starcounter namespace as required to be called on a starcounter thread, unless explicitly stated otherwise. Starcounter assures that an application Main, view-model handles and hhtp-handlers are called on a starcounter thread. In other situations, like your code is running on a separately created .NET threads or on .Net thread pool, you have to schedule a task on Starcounter threadpool using `Scheduling.RunTask` in order to be able to use Starcounter API. `Scheduling.RunTask` is one of exceptional API's that can be called on any thread. Another notable exception is `StarcounterEnvironment.IsOnScheduler()` which is to determine whether you're on a starcounter thread.
+Starcounter maintains its own thread pool. Most of Starcounter API may be called only from a thread from the Starcounter thread pool. Among such APIs are: methods from Starcounter.Db class, methods from Starcounter.Request class etc. Safer to regard all APIs from Starcounter namespace as required to be called on a Starcounter thread, unless explicitly stated otherwise. Starcounter assures that an application `Main`, view-model handles and HTTP-handlers are called on a Starcounter thread. In other situations, like your code is running on separately created .Net threads or on .Net thread pool, you have to schedule a task on Starcounter thread pool using `Scheduling.RunTask` in order to be able to use Starcounter API. `Scheduling.RunTask` is one of exceptional API's that can be called on any thread. Another notable exception is `StarcounterEnvironment.IsOnScheduler()` which is to determine whether you're on a Starcounter thread.
 
-Example of running a background job and accessing database periodically:
+Example of running a background job and accessing database:
 
 ```csharp
 using System.Threading;
@@ -27,7 +27,7 @@ namespace StarcounterSampleApp
                 {
                     await Db.TransactAsync(() =>
                     {
-                            // Access database.
+                        // Access database.
                     });
                 }).Wait();
             }
@@ -38,7 +38,7 @@ namespace StarcounterSampleApp
 
 ## Basic Information About Scheduling
 
-Tasks scheduled by `Scheduling.RunTask` as well as ready-to-call handlers make a queue of ready tasks. Then Starcounter picks tasks and runs them on a free thread from the thread pool. By default Starcounter thread pool hosts number of threads equal to number of CPU cores. It allows to maximize throughput by avoiding unnecessary context switches. But what if user code happens to block on IO or synchronization. Starcounter is able to detect such condition and launch an additional thread, so that queue processing is not stall. To maximize throughput it's not recommended to rely on threadpool scaling. Better to avoid blocking calls and use async IO whenever possible. 
+Tasks scheduled by `Scheduling.RunTask` as well as ready-to-call handlers make a queue of ready tasks. Then Starcounter picks tasks and runs them on a free thread from the thread pool. By default Starcounter thread pool hosts number of threads equal to number of CPU cores. It allows to maximize throughput by avoiding unnecessary context switches. But what if user code happens to block on IO or synchronization? Starcounter is able to detect such condition and launch an additional thread, so that queue processing is not stall. To maximize throughput it's not recommended to rely on thread pool scaling. Better to avoid blocking calls and use async IO whenever possible. 
 To put a task in a queue, the `Scheduling.RunTask` should be used:
 
 ```csharp
@@ -46,11 +46,11 @@ Task RunTask(Action action)
 Task RunTask(Func<Task> action)
 ```
 
-where `Action action` is a procedure to execute on a starcounter thread. Task being returned is a regular .Net task object which can be used in any appropriate context as any regular .Net task.
+where `action` is a procedure to execute on a Starcounter thread. Task being returned is a regular .Net task object which can be used in any appropriate context as any regular .Net task.
 
 ## Task scheduling and async/await
 
-Starcounter currently doesn't provide specialized .Net synchronization context. As a consequence if you're programming asyncronouse delegate and use async/await in your code, the continuation code after await gets scheduled on a regular .net threadpool thread, not on a starcounter thread. It means, Starcounter API can't be directly used in a continuation. Instead, one should manually schedule continuation with `Scheduling.RunTask`. Below is an example demonstrating this. It uses delayed `Response`. Note also the use of `Db.TransactAsync` - it's needed because `Db.Transact` is also a blocking call that can increase number of threads in Starcounter threadpool.
+Starcounter currently doesn't provide specialized .Net synchronization context. As a consequence if you're programming asynchronous delegate and use async/await in your code, the continuation code after await gets scheduled on a regular .Net thread pool thread, not on a Starcounter thread. It means that Starcounter API can't be directly used in a continuation. Instead, one should manually schedule continuation with `Scheduling.RunTask`. Below is an example demonstrating this. It uses delayed `Response`. Note also the use of `Db.TransactAsync` - it's needed because `Db.Transact` is also a blocking call that can increase number of threads in Starcounter thread pool.
 
 ```csharp
 [Database]
@@ -87,7 +87,7 @@ class Program
 
         // Since this is not a Starcounter thread now, so we need to schedule
         // a Starcounter task so we can do our database operations.
-        await Scheduling.RunTask(() => {
+        await Scheduling.RunTask(async () => {
             // Querying the person.
             var person = Db.SQL<Person>("SELECT p FROM Person p WHERE p.Id = ?", id.ToString()).FirstOrDefault();
 
@@ -108,4 +108,4 @@ class Program
 
 ## Exceptions in scheduled tasks
 
-Unhandled exceptions in scheduled tasks are logged to the [Administrator log](../working-with-starcounter/administrator-web-ui.md#log). Besides of this fact, exception handling is identical to that of a regular .net task.
+Unhandled exceptions in scheduled tasks are logged to the [Administrator log](../working-with-starcounter/administrator-web-ui.md#log). Besides of this fact, exception handling is identical to that of a regular .Net task.
