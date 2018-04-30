@@ -38,7 +38,7 @@ namespace StarcounterSampleApp
 
 ## Basic Information About Scheduling
 
-Tasks scheduled by `Scheduling.RunTask` as well as ready-to-call handlers make a queue of ready tasks. Then Starcounter picks tasks and runs them on a free thread from the thread pool. By default Starcounter thread pool hosts number of threads equal to number of CPU cores. It allows to maximize throughput by avoiding unnecessary context switches. But what if user code happens to block on IO or synchronization? Starcounter is able to detect such condition and launch an additional thread, so that queue processing is not stall. To maximize throughput it's not recommended to rely on thread pool scaling. Better to avoid blocking calls and use async IO whenever possible. 
+Tasks scheduled by `Scheduling.RunTask` as well as ready-to-call handlers make a queue of ready tasks. Then Starcounter picks tasks and runs them on a free thread from the thread pool. By default Starcounter thread pool hosts number of threads equal to number of CPU cores. It allows to maximize throughput by avoiding unnecessary context switches. But what if user code happens to block on IO or synchronization? Starcounter is able to detect such condition and launch an additional thread, so that queue processing doesn't stall. To maximize throughput, don't rely on thread pool scaling. Better to avoid blocking calls and use async IO whenever possible. 
 To put a task in a queue, the `Scheduling.RunTask` should be used:
 
 ```csharp
