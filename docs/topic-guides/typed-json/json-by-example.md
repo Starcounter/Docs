@@ -127,5 +127,5 @@ An incrementation in `SaveTrigger$`
 
 ## The HTML property
 
-In all the [sample apps](https://github.com/Starcounter/), there is an "Html" property in every, or almost every, `.json` file. The value of this property contains the path to the corresponding HTML view which means that the middleware [HtmlFromJsonProvider](../network/middleware.md#htmlfromjsonprovider) can locate this HTML view and send it to the client. This allows the developer to return a Typed JSON object from a handler and still return the corresponding view as well.
+In all the [sample apps](https://github.com/search?q=topic%3Aapp+org%3AStarcounter&type=Repositories), there is an "Html" property in every, or almost every, `.json` file. The value of this property contains the path to the corresponding HTML view which means that the middleware [HtmlFromJsonProvider](../network/middleware.md#htmlfromjsonprovider) can locate this HTML view and send it to the client. This allows the developer to return a Typed JSON object from a handler and still return the corresponding view as well.
 

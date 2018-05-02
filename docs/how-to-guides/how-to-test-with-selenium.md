@@ -86,7 +86,10 @@ Open your Properties in the Tests project. Go to Reference Paths, enter `C:\Sele
 
 ### Use BaseTest class
 
-BaseTest is a helper class that makes it easier to test multiple browsers. The source code is available in the `BaseTest.cs` files in [KitchenSink](https://github.com/Starcounter/KitchenSink/blob/418468b44f5593c5d7cb8652ff9a2c12920b8f7c/test/KitchenSink.Tests/Test/BaseTest.cs). There are multiple examples of how to use `BaseTest` in KitchenSink, such as the [CheckboxPageTest](https://github.com/Starcounter/KitchenSink/blob/e382432b929057feb6850e9823533d086fb9b427/test/KitchenSink.Tests/Test/SectionBoolean/CheckboxPageTest.cs).
+BaseTest is a helper class that makes it easier to test multiple browsers. The source code is available:
+
+* BaseTest helper class [here](https://github.com/Starcounter/KitchenSink/blob/master/test/KitchenSink.Tests/Test/BaseTest.cs)
+* Using of BaseTest class [here](https://github.com/Starcounter/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionBoolean/CheckboxPageTest.cs)
 
 When you rebuild the test project now, you should see each test for every browser.
 
@@ -100,28 +103,30 @@ Before you can execute the tests, start Selenium Server Standalone by calling `j
 
 There is one common pitfall when writing Selenium tests. The test is executed with disregard of the asynchronously loaded content. This means that your tests need to explicitly wait for UI elements to appear before running any actions or assertions on them.
 
-#### Examples
+It is a good practice to always wait:
 
-Waiting for a text element to exists before checking it's content:
+* Wait for a text element to be present before you check the content of that element
+  * An example can be found in the method `TextareaPage_WriteToTextArea` in KitchenSink 
 
-```csharp
-[Test]
-public void TextareaPage_WriteToTextArea()
-{
-    const string newText = "We all love princess cake!";
+    Tests \(see [TextareaPageTest.cs lines 28-38](https://github.com/Starcounter/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextareaPageTest.cs#L28-L38)\). The method `WaitForText()` is used to 
 
-    WaitUntil(x => _textareaPage.Textarea.Displayed);
-    _textareaPage.ClearTextarea();
-    
-    WaitUntil(x => _textareaPage.Textarea
-        .GetAttribute("text-value") != string.Empty);
-    _textareaPage.FillTextarea(newText);
-    
-    Assert.IsTrue(WaitForText(
-        _textareaPage.TextareaInfoLabel, 
-        "Length of your bio: 26 chars", 5));
-}
-```
+    compare the text value of `TextareaInfoLabel` asynchronously. The assertion passes if the 
+
+    text is found within 5 seconds, otherwise it fails.
+* Wait for a button to be present before you click on that button
+  * An example can be found in the method `ButtonPage_RegularButton` in the KitchenSink 
+
+    tests \(see [ButtonPageTest.cs lines 29-46](https://github.com/Starcounter/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionNumber/ButtonPageTest.cs#L29-L46)\). The method `WaitUntil()` is used to 
+
+    asynchronously check the state of the `Displayed` property of a button. It halts the test 
+
+    for a default maximum time of 10 seconds. If the button is not displayed within that 
+
+    time, it throws an exception.
+* Wait for presence of an input field before typing in it and wait for text to be present in label
+  * An example can be found in the method `TextPage_TextPropagationOnUnfocus` in the 
+
+    KitchenSink tests \(see [TextPageTest.cs lines 28-38](https://github.com/Starcounter/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextPageTest.cs#L28-L38)\). This test mixes the other examples 
 
 Source file: [TextareaPageTest.cs](https://github.com/Starcounter/KitchenSink/blob/f44d0fec964b7a076bb3bc9f4186280c1b68bce2/test/KitchenSink.Tests/Test/SectionString/TextareaPageTest.cs#L28-L38).
 
@@ -195,8 +200,6 @@ Now, the only thing left to do is to run that test. In the Test Explorer, click 
 ![](../.gitbook/assets/2016-04-01-13_40_22-launcher-microsoft-visual-studio.png)
 
 ## Sample test suites
-
-Some of the Starcounter's sample apps come with acceptance test suite.
 
 The [KitchenSink](https://github.com/Starcounter/KitchenSink) sample app includes a Selenium test case for every UI pattern that is presented in that app. You can learn from the test project \(in the `test` directory\), how to achieve Selenium testing of particular actions, such as button clicks, page changing, typing in forms, etc.
 

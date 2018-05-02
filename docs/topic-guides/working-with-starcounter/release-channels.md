@@ -8,7 +8,7 @@ Starcounter supports a number of different release [channels](http://downloads.s
 
 Stability: **High**, Frequency: **Low**
 
-This channel contains releases that have been thoroughly tested by the Starcounter team and our clients. The latest release on this channel is used for the master branch of our [sample apps](https://github.com/Starcounter). For most purposes, using the latest release from this channel is recommended. It's updated approximately once every six months.
+This channel contains releases that have been thoroughly tested by the Starcounter team and our clients. The latest release on this channel is used for the master branch of our [sample apps](https://github.com/search?q=topic%3Aapp+org%3AStarcounter&type=Repositories). For most purposes, using the latest release from this channel is recommended. It's updated approximately once every six months.
 
 ## Release Candidate
 
