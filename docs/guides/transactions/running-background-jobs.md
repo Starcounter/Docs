@@ -2,7 +2,7 @@
  
 ## Introduction
 
-Starcounter maintains its own thread pool. Most of Starcounter API may be called only from a thread from the Starcounter thread pool. Among such APIs are: methods from Starcounter.Db class, methods from Starcounter.Request class etc. Safer to regard all APIs from Starcounter namespace as required to be called on a Starcounter thread, unless explicitly stated otherwise. Starcounter assures that an application `Main`, view-model handles and HTTP-handlers are called on a Starcounter thread. In other situations, like your code is running on separately created .Net threads or on .Net thread pool, you have to schedule a task on Starcounter thread pool using `Scheduling.RunTask` in order to be able to use Starcounter API. `Scheduling.RunTask` is one of exceptional API's that can be called on any thread. Another notable exception is `StarcounterEnvironment.IsOnScheduler()` which is to determine whether you're on a Starcounter thread.
+Starcounter maintains its own thread pool. Most of Starcounter API may be called only from a thread from the Starcounter thread pool. Among such APIs are: methods from Starcounter.Db class, methods from Starcounter.Request class etc. Safer to regard all APIs from Starcounter namespace as required to be called on a Starcounter thread, unless explicitly stated otherwise. Starcounter assures that an application `Main`, typed JSON event handlers and HTTP-handlers registered with the `Handle` API are called on a Starcounter thread. In other situations, like your code is running on separately created .Net threads or on .Net thread pool, you have to schedule a task on Starcounter thread pool using `Scheduling.RunTask` in order to be able to use Starcounter API. You can call `Scheduling.RunTask` while on a .NET or Starcounter thread. `StarcounterEnvironment.IsOnScheduler` is another method that can be called on any thread, it tells you if the current thread is a Starcounter thread.
 
 Example of running a background job and accessing database:
 
@@ -95,13 +95,18 @@ class Program
             // Notice that we use `Db.TransactAsync` here. Read about it in a separate article.
             await Db.TransactAsync(() => person.Id += id);
 
-            // Finally returning the response.
-            Response resp = new Response() {
-                Body = "Done with object " + id
-            };
+                // Now in continuation we need to perform some other Starcounter operations
+                // therefore we need to use `Scheduling.RunTask` again.
+                await Scheduling.RunTask(() => {
+                
+                    // Finally returning the response.
+                    Response resp = new Response() {
+                        Body = "Done with object " + id
+                    };
 
-            req.SendResponse(resp);
-        });
+                    req.SendResponse(resp);
+                });
+            });
     }
 }
 ```
