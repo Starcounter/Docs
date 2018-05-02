@@ -79,8 +79,7 @@ class Program
     }
 
     // Async call that does some await and performs database operations after.
-    static async void DoSomethingAsync(Request req, Int32 id)
-    {
+    static async void DoSomethingAsync(Request req, Int32 id) {
 
         // Now using async to simulate some long operation using await statement.
         await Task.Delay(10000);
@@ -94,19 +93,19 @@ class Program
             // Doing some database operations.
             // Notice that we use `Db.TransactAsync` here. Read about it in a separate article.
             await Db.TransactAsync(() => person.Id += id);
+        });
 
-                // Now in continuation we need to perform some other Starcounter operations
-                // therefore we need to use `Scheduling.RunTask` again.
-                await Scheduling.RunTask(() => {
-                
-                    // Finally returning the response.
-                    Response resp = new Response() {
-                        Body = "Done with object " + id
-                    };
+        // Now in continuation we need to perform some other Starcounter operations
+        // therefore we need to use `Scheduling.RunTask` again.
+        await Scheduling.RunTask(() => {
 
-                    req.SendResponse(resp);
-                });
-            });
+            // Finally returning the response.
+            Response resp = new Response() {
+                Body = "Done with object " + id
+            };
+
+            req.SendResponse(resp);
+        });
     }
 }
 ```
