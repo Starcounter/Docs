@@ -75,3 +75,12 @@ The produced SQLite dump is compatible with the StarDump tool and can be used to
 
 **Note**: the tools are in alpha stage and crashes are expected. Please use the [StarDump](https://github.com/Starcounter/StarDump) and [StarDump.Migrator.2.2](https://github.com/Starcounter/StarDump.Migrator.2.2) repositories to report any issue found.
 
+## Migrating From Starcounter 2.3.1 to 2.3.2 troubleshooting
+
+During migration from Starcounter 2.3.1 to version 2.3.2 you can experience errors about missmatching schemas. Those are aftermaths of changes in data-model schema that were made during 2.3.1 version development. To fix those errors you can manually run those commands in the administrator SQL command line:
+
+```
+ALTER TABLE Starcounter.HtmlViewAttachment DROP COLUMN AttachedViewUri
+ALTER TABLE Starcounter.HtmlViewComposition DROP COLUMN MainViewUri
+ALTER TABLE Starcounter.HtmlViewComposition DROP COLUMN Version
+```
