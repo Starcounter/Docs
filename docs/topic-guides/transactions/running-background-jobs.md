@@ -86,13 +86,13 @@ class Program
 
         // Since this is not a Starcounter thread now, so we need to schedule
         // a Starcounter task so we can do our database operations.
-        await Scheduling.RunTask(async () => {
+        await Scheduling.RunTask(() => {
             // Querying the person.
             var person = Db.SQL<Person>("SELECT p FROM Person p WHERE p.Id = ?", id.ToString()).FirstOrDefault();
 
             // Doing some database operations.
             // Notice that we use `Db.TransactAsync` here. Read about it in a separate article.
-            await Db.TransactAsync(() => person.Id += id);
+            Db.TransactAsync(() => person.Id += id);
         });
 
         // Now in continuation we need to perform some other Starcounter operations
