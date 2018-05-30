@@ -10,9 +10,9 @@ When the browser sends a request to the server, the app with a URI handler that 
 
 For example, if a user wants to see a profile of a person, the browser makes a request to the People app: `GET http://localhost:8080/people/person/4782`. The response will include not only the view-model from the People app but also view-models from other apps that are attached to it.
 
-An attachment rule consiststs, of a URI, a token and a context.
+An attachment rule consists, of a URI, a token and a context.
 
-On a high level, these are the specific steps involved with sending the response:
+On a high level, these are the specific steps involved in sending the response:
 
 1. The browser makes a request for a resource, such as:  `GET http://localhost:8080/people/person/4782`.
 2. The server receives the request and routes it to the corresponding handler in an app \(People\).
@@ -21,7 +21,7 @@ On a high level, these are the specific steps involved with sending the response
 5. During the serialization process, the server attaches the responses from other apps that are view-models to the main view-model from the initial handler.
 6. The server sends the response, which now contains view-models from multiple apps, back to the client.
 
-By using attchment rules, the apps don't need to know anything about other apps in the code host - they don't even need to know if there are other apps - they only have to communicate what concept the handlers deal with. The apps should be built to not depend on, but expect, attaching.
+By using attachment rules, the apps don't need to know anything about other apps in the code host - they don't even need to know if there are other apps - they only have to communicate what concept the handlers deal with. The apps should be built to not depend on, but expect, attaching.
 
 The process of defining the attachment rules and attaching the responses is handled by the `Blender` class in the `Starcounter` namespace.
 
@@ -33,7 +33,7 @@ Attaching was previously called "server-side blending"
 
 ## Tokens
 
-Atachment rules use tokens. These tokens are either strings or classes. Handlers with the same token are called on internal `Self.GET` calls or external URI that matches one of the handlers. Once the handler with a token is called, it will not trigger further calls mapped to that handler directly, only when a new `Self` call is made.
+Attachment rules use tokens. These tokens are either strings or classes. Handlers with the same token are called on internal `Self.GET` calls or external URI that matches one of the handlers. Once the handler with a token is called, it will not trigger further calls mapped to that handler directly, only when a new `Self` call is made.
 
 The first parameter is either a handler URI or a specific URI. If the token is a string, it's defined as the second parameter. If it's one or more classes, they are defined in the template or as a `Type` array parameter.
 
@@ -45,7 +45,7 @@ Blender.MapUri("/people/persons/34623", "person"); // Specific URI attachement r
 Blender.MapUri<Person>("/people/persons/{34623}"); // Specific URI attachement rule using so-called mixed URI.
 ```
 
-An arbitrary number of classes are allowed as tokens \(up to 3 in template, more in array of class `Type`\). Here are the `MapUri` signature examples \(same exist for removing token mapping from a handler\):
+An arbitrary number of classes are allowed as tokens \(up to 3 in a template, more in an array of class `Type`\). Here are the `MapUri` signature examples \(same exist for removing the token mapping from a handler\):
 
 ```csharp
 static void MapUri<T>(String uri, String[] contexts = null);
@@ -137,7 +137,7 @@ and the same but for a given token:
 BlendingInfo[] ListByToken(String token)
 ```
 
-As you might noticed, a special attachment rule information structure is used here: `BlendingInfo`.  
+As you might be noticed, a special attachment rule information structure is used here: `BlendingInfo`.  
 It contains the following methods/properties:
 
 ```csharp
@@ -155,7 +155,7 @@ Boolean IsToUriConverterOn; // Returns True if the "ToUriConverter" is set/allow
 
 ## Parameters in Handlers
 
-Handlers are allowed to have an arbitrary number of parameters. When there is at least one parameter, the conversion functions are used. First converter translates handler arguments to token arguments, while the second converter does the opposite. Both converters are taking and returning an array of strings:
+Handlers are allowed to have an arbitrary number of parameters. When there is at least one parameter, the conversion functions are used. The first converter translates handler arguments to token arguments, while the second converter does the opposite. Both converters are taking and returning an array of strings:
 
 ```csharp
 Blender.MapUri("/twoparams1/{?}/{?}", token,
@@ -168,11 +168,11 @@ Blender.MapUri("/twoparams1/{?}/{?}", token,
 
 In the example above, converter passes handler parameters to token parameters, as is. There are signatures of `Blender.MapUri` with no converters, which means that parameters are simply passed through, like above.
 
-Often it's needed to trigger attachment on a specific URI. To achieve this, first converter should return non-null string array on certain parameters.
+Often it's needed to trigger attachment on a specific URI. To achieve this, the first converter should return non-null string array on certain parameters.
 
 ## Call Direction
 
-You can specify the direction of which handlers should be called. This is needed to trigger attaching in a certain direction: from handler or to handler. The direction is determined by the value that corresponding converter is returning: `null` converter or `null` string array returned in converter blocks the direction of the call. In case of zero parameters, there is a special `Blender.MapUri` override with corresponding boolean parameters to determine the allowed call directions.
+You can specify the direction of which handlers should be called. This is needed to trigger attaching in a certain direction: from the handler or to handler. The direction is determined by the value that corresponding converter is returning: `null` converter or `null` string array returned in converter blocks the direction of the call. In case of zero parameters, there is a special `Blender.MapUri` overrides with corresponding boolean parameters to determine the allowed call directions.
 
 ```csharp
 Blender.MapUri("/twoparams1/{?}/{?}", myToken, null, (String[] to) => {
