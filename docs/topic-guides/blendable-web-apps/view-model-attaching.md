@@ -67,22 +67,27 @@ Handlers with empty tokens are called with other handlers with the same empty to
 Token matching can be made more fine-grained by using contexts. They are composed of a list of strings that acts as a bit map when matched with other contexts. This list isn't materialized anywhere, it is just an un-written contract between the apps.
 
 Starcounter came up with few predefined contexts that have shared meaning which can be understood by all app authors:
-* `page` — an entire page content;
-* `thumbnail` — a thumbnail of a page content;
-* `row` — single row of entity data;
-* `icon` — launch icons or smaller icons in other scenarios;
-* `search` — a search result;
-* `app` — a meta context that represents the current app;
+* `page` — a size factor context. Use it if the view contains full information that the app has about a concept. The view renders in multiple lines. The view is suitable to be attached in full pages about a concept;
+* `thumbnail` — a size factor context. Use it if the view contains basic information that the app has about a concept. The view renders in multiple lines. The view is suitable to be attached in side information or teasers about a concept;
+* `row` — a size factor context. Use it if the view contains basic information that the app has about a concept. The view renders in a single line. The view is suitable to be attached in lists;
+* `icon` — a size factor context. Use it if the view contains the smallest unit of information that the app has about a concept. The view renders in a single element that is a link to a bigger view. The view is suitable to be attached in menu bars;
+* `search` — a meta context. Use it if the view is suitable for search results;
+* `app` — a meta context. Use it if the view represents the app itself, rather than a concept;
 
-As an app author or solution owner, you can come up with his own contexts. That such contexts are unknown to other app developers, so they are less likely to attach view-models from other apps.
+There are some compound contexts, that have a meaning of their own:
 
-You also can use custom contexts in place of the original contexts for fine tuning of the view-model attachment rules. And furthermore contexts can be combined in view-attachment rules, for example `search, row` will be used most commonly for search results and `app, icon` is used to provide app shortcuts for Launchpad.
+* `search, row` — a single-line row that is suitable for search results;
+* `app, icon` — an icon that opens the main page of the app;
+
+As an app author or solution owner, you can come up with your own contexts. Keep in mind that such contexts are unknown to other app authors, so they are less likely to attach view-models from other apps.
+
+As a solution owner, you can replace the original contexts provided by an app author with custom contexts for fine tuning of the view-model attachment rules.
 
 No context \(`null` value\) means **match any context**. Otherwise, two handlers are matched if source context contains same elements as destination context. Examples:
 
-* Source context `{ "Readable", "Page" }` is NOT matched with `{ "Writable", "Page" }`.
-* Source context `null` is matched with `{ "Readable", "Page" }` and `{ "Writable", "Page" }` and any other context.
-* Source context `{ "Page", "Writable" }` is matched with `{ "Writable", "Page" }` and vice versa.
+* Source context `{ "raw", "page" }` is NOT matched with `{ "search", "page" }`.
+* Source context `null` is matched with `{ "raw", "page" }` and `{ "search", "page" }` and any other context.
+* Source context `{ "page", "search" }` is matched with `{ "search", "page" }` and vice versa.
 
 Consider contexts as an additional matching rule for handlers with the same token.
 
@@ -137,7 +142,7 @@ and the same but for a given token:
 BlendingInfo[] ListByToken(String token)
 ```
 
-As you might be noticed, a special attachment rule information structure is used here: `BlendingInfo`.  
+As you might have noticed, a special attachment rule information structure is used here: `BlendingInfo`.  
 It contains the following methods/properties:
 
 ```csharp
