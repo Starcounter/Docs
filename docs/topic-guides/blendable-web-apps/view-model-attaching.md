@@ -170,6 +170,12 @@ Blender.MapUri("/noparam1", token3, true, false);
 In the first example above, handler "/twoparams1/{?}/{?}" should not trigger calls on the `myToken` token, but it can be called when attaching is triggered by other handlers on the same token.  
 In the second example above, handler "/noparam1" can trigger other handlers on the same token, but can't be triggered by them.
 
+### Practical use
+
+If you have an app which specifies uni-directional mapping `Blender.MapUri(..., "settings", false ,true)`, then a Self.GET to your own URL will not return other views.
+
+Furthermore let's imagine that in the same database, you have another running app (let's call it **Settings**) which should show settings from all other running apps, but do not has self settings for example, then it should has a uni-directional mapping in the opposite direction `Blender.MapUri(..., "settings", true, false))`. In this case, it will pull all settings views from all apps, but won't show self settings when URIs attached to the same `settings` token will be called.
+
 ## Same Handler - Different Tokens
 
 Handlers can be mapped to multiple tokens:
