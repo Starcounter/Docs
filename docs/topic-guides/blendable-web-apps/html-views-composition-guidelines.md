@@ -173,7 +173,7 @@ Here, the elements are distributed in the way that the view will look when no Co
 
 ## Guideline 5: Apply Styling to Avoid Conflicts and Allow Composition
 
-Regarding styling, there are two ways to make the application easier to visually integrate with other apps:
+Regarding styling, there are few ways to make the application easier to visually integrate with other apps:
 
 1. Prefix all class names with the name of the app, as outlined in [Avoiding CSS Conflicts](https://docs.starcounter.io/guides/blending/avoiding-css-conflicts/).
 2. Keep styling that will affect the presentation inside the `declarative-shadow-dom`.
