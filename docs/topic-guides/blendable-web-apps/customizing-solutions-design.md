@@ -20,7 +20,7 @@ This requires an element to actively look up for a theme when it's defined. That
 
 That's because we put all presentation into Shadow DOM, and old, global CSS cannot pierce through this boundary.
 
-We actually consider it a fundamental feature, as it prevents the cases when tiny little CSS rule inserted in one part of big enterprise solution breaks the styling of something in the distant part, probably unrelated or delivered by a different party.
+We actually consider it a fundamental feature. It prevents the cases when tiny little CSS rule inserted in one part of big enterprise solution breaks the styling of something in the distant part, probably unrelated or delivered by a different party.
 
 #### How to use it?
 
@@ -43,7 +43,7 @@ When a theme is inserted, it loads to the main document a piece of markup and CS
 
 It is an HTML document as any other that could be loaded via HTML Imports. That allows a theme to bundle more themes. For example, `material-theme.html` could import `vaadin-material-date-picker.html`, `vaadin-material-combo-box.html`, plus some global CSS variables and rules to make native elements look more material-ish.
 
-But what is most important, it's a document that contains a set of CSS rules to be picked up by custom element definition to style its `::parts`. Until it's standardized, it's tightly related to individual element's implementation. See [Vaadin's `vaadin-material-theme/.../vaadin-date-picker.html`]( https://github.com/vaadin/vaadin-material-theme/blob/master/vaadin-date-picker.html) for example
+But what is most important, it's a document that contains a set of CSS rules to be picked up by custom element definition to style its `::parts`. Until it's standardized, it's tightly related to individual element's implementation. See [Vaadin's `vaadin-material-theme/.../vaadin-date-picker.html`]( https://github.com/vaadin/vaadin-material-theme/blob/master/vaadin-date-picker.html) for example.
 
 #### Where to get the theme from?
 
@@ -64,15 +64,15 @@ Again [Blending](https://github.com/Starcounter/Blending) apps suite [delivers G
 
 ## Overwriting `uni-elements` definitions
 
-That is the lowest-level approach, that is slightly hacky, but this hackiness allows you to total changes and re-design.
+That is the lowest-level approach, that is slightly hacky, but this hackiness allows you to do any kind of changes and re-design.
 
 It allows you to completely change not only look but also the behavior of any UI element.
 
 Assuming, the solution of apps is created consistently using Starcounter Design System and Uniform Components, for example, all date pickers are presented using `<uni-date-picker>`.
 
-Then if you want to drastically change its look or even behavior. You can do so, by creating your own custom element with the same name, but with more sophisticated behavior.
+Then if you want to drastically change its look or even behavior, you can do so, by creating your own custom element with the same name, but with more sophisticated behavior.
 
-For example, airline company could have high demands on the UX and feature set of the date picker. With Starcounter, it could still use an app which was created with regular date picker needs in mind.
+For example, an airline company could have high demands on the UX and feature set of the date picker. With Starcounter, it could still use an app which was created with regular date picker needs.
 
 The requirements are that initial design author has stuck to the conventions of Starcounter Design System, and the new date picker supports the same API, which in case of Uniform Components is just nothing more than being able to wrap the native HTML elements. That means no specific API, just exchange data with native HTML API.
 
@@ -85,8 +85,8 @@ Then you need to add this definition to any apps `/sys` folder under the same pa
 
 ## Need more?
 
-If any of the above fulfill your needs for general customization and theming. First of all, please let us know.
+If any of the above fulfill your needs for general customization and theming, first of all, please let us know.
 
 If you need to change more, you can always edit every view's presentation using [View Composition](view-composition.md), you can re-arrange HTML, change CSS, replace custom elements with your own, do any kind of HTML+CSS+JS magic you need.
 
-If the apps were made according to our guidelines, you should have all the presentation available there for your changes. All presentation and only presentation - the content, functionality, and data-binding should be safe in the light DOM, out of reach for encapsulated composition.
+If the apps were made according to our guidelines, you should have entire presentation available there for you to change. Nothing but presentation - the content, functionality, and data-binding should be safe in the light DOM, out of reach for encapsulated composition.
