@@ -1,14 +1,14 @@
 # Customizing Solution's Design
 
 
-Building your app or solution design the way we suggest does not only help you create a consistent look and feel fast and easily. It also gives you means to customize it later, by applying global themes, switching color & configuration schemes, or replacing the definition of every component at once.
+Building your app or solution design the way we suggest does not only help you create a consistent look and feel fast and easily. It also lets you customize it later, by applying global themes, switching color and configuration schemes, or replacing the definition of every component at once.
 
-This page covers ways of customizing your **entire** app's  (solution's) design at once. You can always customize/edit every single view individually, by changing its composition, see [View Composing](view-composing.md)
+This page covers ways of customizing your **entire** app or solution's design at once. To customize every view individually, you can change its composition, see [View Composing](view-composing.md)
 
 
 ## Themes
 
-Theming is the very high-level way to change the look and feel of many UI elements and patterns with a single step, by just attaching already created theme to given layout.
+Theming is the high-level way to change the look and feel of many UI elements and patterns with a single step, by just attaching already created theme to given layout.
 
 This allows you to provide one package that can completely redefine styling for individual UI components no matter how deeply they are composed in the view.
 
@@ -16,15 +16,15 @@ We are trying to keep our theming solution closest to the upcoming standard: [CS
 
 This requires an element to actively look up for a theme when it's defined. That's how Vaadin custom elements work, and that's how we will keep Uniform Components working. Therefore, as long as you stick to [Starcounter Design System](starcounter-design-system.md), you don't need to worry about those implementation details.
 
-#### But why good old Bootstrap-like themes do not work?
+### But why good old Bootstrap-like themes do not work?
 
 That's because we put all presentation into Shadow DOM, and old, global CSS cannot pierce through this boundary.
 
 We actually consider it a fundamental feature. It prevents the cases when tiny little CSS rule inserted in one part of big enterprise solution breaks the styling of something in the distant part, probably unrelated or delivered by a different party.
 
-#### How to use it?
+### How to use it?
 
-If you are not into the code, you can start the [Blending](https://github.com/Starcounter/Blending) apps suite, and use a [GUI to manage the themes](https://github.com/Starcounter/Blending/blob/master/docs/gui.md). There you can pick a layout, then add URLs to the themes you would like to add.
+If you are not into the code, you can start the [Blending](https://github.com/Starcounter/Blending) app suite, and use a [GUI to manage the themes](https://github.com/Starcounter/Blending/blob/master/docs/gui.md). There you can pick a layout, then add URLs to the themes you would like to add.
 
 If you are more into the code, all you need is a URL to your theme, then you can edit layout's Shadow DOM composition and add a theme using
 ```html
@@ -32,20 +32,20 @@ If you are more into the code, all you need is a URL to your theme, then you can
 ```
 `<enlighted-link>` is nothing more than HTML Import (`<link rel="import">`) that works in Shadow DOM.
 
-#### How it works?
+### How it works?
 
 When a theme is inserted, it loads to the main document a piece of markup and CSS, which is later picked up by custom elements definitions, so they could look different.
 
 
 {% hint style="warning" %} Themes are global, meaning they are not scoped to the subtree of partial views it's inserted in. By applying the theme, you are changing the look of all applicable components on the page.{% endhint %}
 
-#### What is the theme?
+### What is the theme?
 
 It is an HTML document as any other that could be loaded via HTML Imports. That allows a theme to bundle more themes. For example, `material-theme.html` could import `vaadin-material-date-picker.html`, `vaadin-material-combo-box.html`, plus some global CSS variables and rules to make native elements look more material-ish.
 
 But what is most important, it's a document that contains a set of CSS rules to be picked up by custom element definition to style its `::parts`. Until it's standardized, it's tightly related to individual element's implementation. See [Vaadin's `vaadin-material-theme/.../vaadin-date-picker.html`]( https://github.com/vaadin/vaadin-material-theme/blob/master/vaadin-date-picker.html) for example.
 
-#### Where to get the theme from?
+### Where to get the theme from?
 
 Usually, from your custom elements vendor, Starcounter will publish a list of known themes for Uniform components, you can check [Vaadin themes](https://vaadin.com/themes) as well.
 
@@ -54,11 +54,11 @@ Naturally, you can create your own, and ship it with an app.
 
 ## Collections of CSS Custom Properties
 
-Slightly lower-level way to customize existing design is by using CSS Variables (Custom Properties). Well-behaved design systems, themes, custom elements and even individual CSS rules usually use CSS Variables which could be used to customize it.
+A lower-level way to customize existing design is by using CSS Variables (Custom Properties). Well-behaved design systems, themes, custom elements and even individual CSS rules usually use CSS Variables which could be used to customize it.
 
 This allows to change color schemes, or configure other values like font sizing, margins, etc.
 
-Again [Blending](https://github.com/Starcounter/Blending) apps suite [delivers GUI](https://github.com/Starcounter/Blending/blob/master/docs/gui.md#css-variables-manager) to do that without touching any code. You can as well add it to you composition code manually.
+Again [Blending](https://github.com/Starcounter/Blending) app suite [delivers GUI](https://github.com/Starcounter/Blending/blob/master/docs/gui.md#css-variables-manager) to do that without touching any code. You can as well add it to you composition code manually.
 
 {% hint style="warning" %} Attaching CSS Variables' collection through Blending app, allows you to set them on light DOM. Currently to the global scope - `body` (https://github.com/Starcounter/Blending/issues/232). While setting it in view's composition, attaches them in Shadow DOM to the scope you choose. {% endhint %}
 

@@ -15,7 +15,7 @@ Unlike many design systems, the Starcounter Design System is open-ended and them
 Starcounter Design System consists of 4 layers:
 
 1. Underwear.css - a modern-looking default stylesheet
-2. Uniform - a library of UI patterns and custom elements to be used in a separated presentation layer
+2. Uniform - a library of UI patterns and custom elements to use in a separated presentation layer
 3. Customization through Themes and CSS custom properties
 4. Free, hackable world of HTML, CSS & JS
 
@@ -42,7 +42,7 @@ More advanced components, like date pickers, are [implemented as custom elements
 
 Uniform.css or Uniform components must be explicitly imported in any view shadow root that uses it.
 
-Uniform is configurable using CSS custom properties and themes, for more, read [next section](#customization-through-themes-and-css-custom-properties).
+Uniform is configurable using CSS custom properties and themes, for more, read [the next section](#customization-through-themes-and-css-custom-properties).
 
 Head to the [demo page of Uniform](https://starcounter.github.io/uniform.css/) for a preview.
 
@@ -60,11 +60,11 @@ One of the tools in the [Blending](https://github.com/Starcounter/Blending) apps
 
 For more sophisticated theming we would love to use native [CSS shadow parts and themes](https://meowni.ca/posts/part-theme-explainer/), unfortunately, it's not supported yet.
 Luckily, we are able to mimic its behavior to the satisfactory degree with Themes tailored to our elements, based on [Vaadin themes](https://vaadin.com/themes).
-The main difference is that those Themes works on the global level, but given that you can still customize them per each view level - it's the typical case anyway.
+The main difference is that those Themes works on the global level, but given that you can still customize per view level - it's the typical case anyway.
 
 We also have a GUI tool in the [Blending](https://github.com/Starcounter/Blending) apps suite to manage themes for specific layouts.
 
-To read more on customizing the design of the blended solution, please check [dedicated page](customizing-solutions-design.md).
+To read more on customizing the design of the blended solution, please check [the dedicated page](customizing-solutions-design.md).
 
 ### Free, hackable world of HTML, CSS & JS
 
