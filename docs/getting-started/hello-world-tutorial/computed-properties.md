@@ -39,7 +39,7 @@ partial class PersonJson : Json
 
     void Handle(Input.SaveTrigger action)
     {
-        Transaction.Commit();
+        AttachedScope.Commit();
     }
 }
 ```
@@ -56,21 +56,23 @@ To display this computed property, we just have to add it to to the view. This i
 {% code-tabs-item title="PersonJson.html" %}
 ```markup
 <template>
-    <template is="dom-bind">
-        <h1>Hey, {{model.FullName}}!</h1>
+    <dom-bind>
+        <template is="dom-bind">
+            <h1>Hey, {{model.FullName}}!</h1>
 
-        <fieldset>
-            <label>First name:</label>
-            <input value="{{model.FirstName$::input}}">
-        </fieldset>
+            <fieldset>
+                <label>First name:</label>
+                <input value="{{model.FirstName$::input}}">
+            </fieldset>
 
-        <fieldset>
-            <label>Last name:</label>
-            <input value="{{model.LastName$::input}}">
-        </fieldset>
+            <fieldset>
+                <label>Last name:</label>
+                <input value="{{model.LastName$::input}}">
+            </fieldset>
 
-        <button value="{{model.SaveTrigger$::click}}" onmousedown="++this.value">Save</button>
-    </template>
+            <button value="{{model.SaveTrigger$::click}}" onmousedown="++this.value">Save</button>
+        </template>
+    </dom-bind>
 </template>
 ```
 {% endcode-tabs-item %}
@@ -85,6 +87,4 @@ Start the application and see how the computed property is calculated keystroke 
 
 
 The next step is to practice working on multiple object instances and relations by turning the app into a simple expense tracker.
-
-If you get any errors, you can check your code against the [source code](https://github.com/Starcounter/HelloWorld/commit/69cfcb0bd2dedf268b4d97fcb24cab4da3f40190).
 

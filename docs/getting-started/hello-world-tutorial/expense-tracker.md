@@ -63,10 +63,12 @@ The view for the expense can be extremely simple. It will only contain two input
 {% code-tabs-item title="ExpenseJson.html" %}
 ```markup
 <template>
-    <template is="dom-bind">
-        <input value="{{model.Description$::input}}">
-        <input value="{{model.Amount$::input}}">
-    </template>
+    <dom-bind>
+        <template is="dom-bind">
+            <input value="{{model.Description$::input}}">
+            <input value="{{model.Amount$::input}}">
+        </template>
+    </dom-bind>
 </template>
 ```
 {% endcode-tabs-item %}
@@ -150,34 +152,36 @@ In addition to this, we want to display the current balance and change the headl
 {% code-tabs-item title="PersonJson.html" %}
 ```markup
 <template>
-    <template is="dom-bind">
-        <h1>{{model.FullName}}'s expense list</h1>
+    <dom-bind>
+        <template is="dom-bind">
+            <h1>{{model.FullName}}'s expense list</h1>
 
-        <fieldset>
-            <label>First name:</label>
-            <input value="{{model.FirstName$::input}}">
-        </fieldset>
+            <fieldset>
+                <label>First name:</label>
+                <input value="{{model.FirstName$::input}}">
+            </fieldset>
 
-        <fieldset>
-            <label>Last name:</label>
-            <input value="{{model.LastName$::input}}">
-        </fieldset>
+            <fieldset>
+                <label>Last name:</label>
+                <input value="{{model.LastName$::input}}">
+            </fieldset>
 
-        <button value="{{model.SaveTrigger$::click}}" onmousedown="++this.value">Save</button>
+            <button value="{{model.SaveTrigger$::click}}" onmousedown="++this.value">Save</button>
 
-        <hr>
+            <hr>
 
-        <template is="dom-repeat" items="{{model.Expenses}}">
-            <div>
-                <template is="imported-template" model="{{item}}" href$="{{item.Html}}">
-                </template>
-            </div>
+            <template is="dom-repeat" items="{{model.Expenses}}">
+                <div>
+                    <imported-template model="{{item}}" href$="{{item.Html}}">
+                    </imported-template>
+                </div>
+            </template>
+
+            <hr>
+
+            <h2>Current Balance: {{model.CurrentBalance}}</h2>
         </template>
-
-        <hr>
-
-        <h2>Current Balance: {{model.CurrentBalance}}</h2>
-    </template>
+    </dom-bind>
 </template>
 ```
 {% endcode-tabs-item %}
@@ -256,6 +260,4 @@ Run the program and try to add expenses, change their cost, and see the current 
 
 
 With every keystroke, the UI is updated almost instantly from the database. Starcounter's in-memory database makes this possible. There's no delay, everything simply happens at the moment the user interacts with the view.
-
-If you get any errors, you can check your code against the [source code](https://github.com/Starcounter/HelloWorld/commit/a6e91b5a2dbedd49d5f228b4fca55487f20c1dda).
 
