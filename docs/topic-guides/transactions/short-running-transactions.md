@@ -93,7 +93,7 @@ With the `Db.TransactAsync` API, it's tempting to use async/await in application
 
 1.  Using async/await is not possible in a handler body as Handler API doesn't support async handlers.
 2.  No special measures have been taken to force after-await code to run on Starcounter threads, so manual `Scheduling.ScheduleTask` might be required \(see [Running background jobs](running-background-jobs.md) for details\).
-3.  use async/await with caution as they may inadvertently increase the latency. Say if user code runs transactions sequentially, putting await in front of every `Db.TransactAsync` will accumulate all the individual latencies. The right stategy in this case is to make a list of tasks and then await them at once.
+3.  Use async/await with caution as they may inadvertently increase the latency. Say if user code runs transactions sequentially, putting await in front of every `Db.TransactAsync` will accumulate all the individual latencies. The right stategy in this case is to make a list of tasks and then await them at once.
 
 ## Transaction size
 

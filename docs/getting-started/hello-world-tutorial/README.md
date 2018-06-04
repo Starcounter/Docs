@@ -18,9 +18,9 @@ In the four following steps, you will create an expense tracker by establishing 
 
 To get through this tutorial, you will need to fulfill the [system requirements](http://starcounter.io/download/) which includes having Visual Studio 2015 or 2017 \(not VS Code\) and the [latest release candidate](http://downloads.starcounter.com/download) of Starcounter installed.
 
-## Extra resources {#extra-resources}
+## Extra Resources {#extra-resources}
 
-Since the author is a mere mortal, there might be mistakes in the code or text.
+Since the author is a mere mortal, there might be mistakes in the code or text. If you experience that something doesn't work as intended, you can look at the [source code](https://github.com/Starcounter/HelloWorld). Each commit in this repository represents one step in the tutorial. For further explanations of the concepts discussed, you can take a look at the [guide section](../guides/).
 
 Are you ready?
 

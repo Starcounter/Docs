@@ -6,7 +6,7 @@ This is different from persistent user sessions known from other frameworks such
 
 To implement cookie-based authentication, you have to code it on using the `Handle` API. An alternative to implementing it yourself is to run your app with another app that does it with middleware.
 
-[SignIn](https://github.com/Starcounter/SignIn) is a app that authenticates users. It generates an auth token and stores it in a cookie for use in future sessions.
+[SignIn](https://github.com/Starcounter/SignIn) is an app that authenticates users. It generates an auth token and stores it in a cookie for use in future sessions.
 
 ## Internals of Sign In app
 

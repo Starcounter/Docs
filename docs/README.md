@@ -8,3 +8,5 @@ This is the official documentation for Starcounter. The main parts are:
 
 The drop down on the left sidebar lets you choose different versions of the documentation.
 
+Sample apps are available in the [Starcounter](https://github.com/Starcounter) organization. They all have ["app" topic](https://github.com/search?q=topic%3Aapp+org%3AStarcounter&type=Repositories).
+
