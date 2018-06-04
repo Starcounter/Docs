@@ -58,7 +58,7 @@ A lower-level way to customize existing design is by using CSS Variables (Custom
 
 This allows to change color schemes, or configure other values like font sizing, margins, etc.
 
-Again [Blending](https://github.com/Starcounter/Blending) app suite [delivers GUI](https://github.com/Starcounter/Blending/blob/master/docs/gui.md#css-variables-manager) to do that without touching any code. You can as well add it to you composition code manually.
+Again [Blending](https://github.com/Starcounter/Blending) app suite [delivers GUI](https://github.com/Starcounter/Blending/blob/master/docs/gui.md#css-variables-manager) to add collections of values for CSS Variables without touching any code. You can as well add it to you composition code manually.
 
 {% hint style="warning" %} Attaching CSS Variables' collection through Blending app, allows you to set them on light DOM. Currently to the global scope - `body` (https://github.com/Starcounter/Blending/issues/232). While setting it in view's composition, attaches them in Shadow DOM to the scope you choose. {% endhint %}
 
@@ -85,8 +85,6 @@ Then you need to add this definition to any apps `/sys` folder under the same pa
 
 ## Need more?
 
-If any of the above fulfill your needs for general customization and theming, first of all, please let us know.
-
-If you need to change more, you can always edit every view's presentation using [View Composition](view-composition.md), you can re-arrange HTML, change CSS, replace custom elements with your own, do any kind of HTML+CSS+JS magic you need.
+If none of the above fulfill your needs for general customization and theming, and you need to change more, you can always edit every view's presentation using [View Composition](view-composition.md), you can re-arrange HTML, change CSS, replace custom elements with your own, do any kind of HTML+CSS+JS magic you need.
 
 If the apps were made according to our guidelines, you should have entire presentation available there for you to change. Nothing but presentation - the content, functionality, and data-binding should be safe in the light DOM, out of reach for encapsulated composition.

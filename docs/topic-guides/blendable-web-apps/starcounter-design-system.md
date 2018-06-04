@@ -60,7 +60,7 @@ One of the tools in the [Blending](https://github.com/Starcounter/Blending) apps
 
 For more sophisticated theming we would love to use native [CSS shadow parts and themes](https://meowni.ca/posts/part-theme-explainer/), unfortunately, it's not supported yet.
 Luckily, we are able to mimic its behavior to the satisfactory degree with Themes tailored to our elements, based on [Vaadin themes](https://vaadin.com/themes).
-The main difference is that those Themes works on the global level, but given that you can still customize per view level - it's the typical case anyway.
+The main difference is that those Themes works on the global level, given that you can still customize composition per view level - it's the typical case anyway.
 
 We also have a GUI tool in the [Blending](https://github.com/Starcounter/Blending) apps suite to manage themes for specific layouts.
 
