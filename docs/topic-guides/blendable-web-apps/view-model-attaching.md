@@ -33,7 +33,7 @@ Attaching was previously called "server-side blending"
 
 ## Tokens
 
-Atachment rules use tokens. These tokens are either strings or classes. Handlers with the same token are called on internal `Self.GET` calls or external URI that matches one of the handlers. Once the handler with a token is called, it will not trigger further calls mapped to that handler directly, only when a new `Self` call is made.
+Attachment rules use tokens. These tokens are either strings or classes, that are also converted to strings using full class names. Tokens are case insensitive. Handlers with the same token are called on internal `Self.GET` calls or external URI that matches one of the handlers. Once the handler with a token is called, it will not trigger further calls mapped to that handler directly, only when a new `Self` call is made.
 
 The first parameter is either a handler URI or a specific URI. If the token is a string, it's defined as the second parameter. If it's one or more classes, they are defined in the template or as a `Type` array parameter.
 
