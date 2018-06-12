@@ -11,7 +11,7 @@ This is the default installation mode where the  `Starcounter Server Service`  c
 ### How to install
 
 * Run the  `<Your setup file name>.exe`  by double clicking on it.
-* Select `Production` on the Setup screen :
+* Select `Developer` on the Setup screen :
 
 ![](../../.gitbook/assets/developer.PNG)
 
