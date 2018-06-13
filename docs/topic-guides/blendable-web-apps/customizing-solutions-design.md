@@ -14,7 +14,7 @@ This allows you to provide one package that can completely redefine styling for 
 
 We are trying to keep our theming solution closest to the upcoming standard: [CSS Shadow Themes & Parts](https://meowni.ca/posts/part-theme-explainer/). Unfortunately, there is no polyfill that is performant enough, so we are forced to fall back to the slightly more opinionated solution.
 
-This requires an element to actively look up for a theme when it's defined. That's how Vaadin custom elements work, and that's how we will keep Uniform Components working. Therefore, as long as you stick to [Starcounter Design System](starcounter-design-system.md), you don't need to worry about those implementation details.
+This requires an element to actively look up for a theme when it's defined. That's how Vaadin custom elements work, and that's how we will keep Uniform Components working. Therefore, as long as you stick to [Uniform Design System](uniform-design-system.md), you don't need to worry about those implementation details.
 
 ### But why good old Bootstrap-like themes do not work?
 

@@ -60,7 +60,7 @@
     * [HTML views](topic-guides/blendable-web-apps/html-views.md)
     * [Web Components](topic-guides/blendable-web-apps/web-components.md)
     * [App shell](topic-guides/blendable-web-apps/app-shell.md)
-    * [Starcounter Design System](topic-guides/blendable-web-apps/starcounter-design-system.md)
+    * [Uniform Design System](topic-guides/blendable-web-apps/uniform-design-system.md)
     * [View-model Attaching](topic-guides/blendable-web-apps/view-model-attaching.md)
     * [View Composing](topic-guides/blendable-web-apps/view-composing.md)
     * [HTML Views Composition Guidelines](topic-guides/blendable-web-apps/html-views-composition-guidelines.md)
