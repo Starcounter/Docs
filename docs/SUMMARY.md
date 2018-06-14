@@ -65,7 +65,6 @@
     * [View Composing](topic-guides/blendable-web-apps/view-composing.md)
     * [HTML Views Composition Guidelines](topic-guides/blendable-web-apps/html-views-composition-guidelines.md)
     * [Avoiding CSS conflicts](topic-guides/blendable-web-apps/avoiding-css-conflicts.md)
-    * [Customizing solution's design](topic-guides/blendable-web-apps/customizing-solutions-design.md)
     * [Debugging](topic-guides/blendable-web-apps/debugging.md)
   * [Network](topic-guides/network/README.md)
     * [HTTP](topic-guides/network/http.md)

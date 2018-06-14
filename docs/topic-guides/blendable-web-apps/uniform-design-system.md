@@ -15,7 +15,7 @@ Starcounter host follows a layered design that allows controlling the look and f
 1. Native HTML5 and Shadow DOM
 2. Uniform design system
 3. Theme configuration through CSS custom properties
-4. Replacing parts of Uniform with HTML, CSS, and JavaScript
+4. Extend or replace the theme with HTML, CSS, and JavaScript
 
 ### Native HTML5 and Shadow DOM
 
@@ -29,9 +29,9 @@ To prevent the Starcounter host from controlling the rendering of a UI component
 
 Uniform design system is the toolkit used by the Starcoutner host to give a common look and feel to all apps.
 
-It consists of a CSS custom properties declaration, CSS reset, a pattern library and a component library.
+It consists of CSS custom properties, CSS reset and a library of patterns and components.
 
-The CSS custom properties declaration is a basic set of primitives. It expresses the fonts, colors and white space values that are used by Uniform.
+The CSS custom properties are the basic set of primitives. They define the fonts, sizes, colors, margins and other values used throughout Uniform.
 
 The CSS reset, nicknamed "Underwear," overwrites the default user agent stylesheet. It provides the look of the native HTML5 elements such as the headings (H1-H6), links, inputs, buttons, and tables. For more details and preview, see [Underwear.css](https://github.com/Starcounter/underwear.css) on GitHub.
 
@@ -41,7 +41,7 @@ The component library is a set of custom elements that implement interactive UI 
 
 The CSS reset is implicitly loaded for any blendable web app by the Starcounter app shell, so there is no need to load it explicitly in the views. 
 
-To use the patterns and components, you must import them explicitly. They are used in the shadow root of the view container by wrapping distributed native HTML5 elements. That allows to serve real progressive enhancement, and what is crucial for a system of blended apps: keep app content's markup semantic and unopinionated, giving solution owner a way to apply own opinion on top of functional elements without changing of the app source code.
+To use the patterns and components, you must import them explicitly. They are used in the shadow root of the view container by wrapping distributed native HTML5 elements. That allows to serve real progressive enhancement, and what is crucial for a system of blended apps: keep app content's markup semantic and unopinionated, giving solution owner a way to apply own opinion without changing the app source code.
 
 The names of the CSS custom properties, CSS classes, and custom elements have a `uni-` prefix.
 
@@ -51,19 +51,33 @@ Our [KitchenSink](https://kitchensink.starcounter.io/) app ([source](https://git
 
 Uniform design system comes with a modern-looking default theme.
 
-As a solution owner, you can customize the look and feel of the theme by providing new values for the [CSS Custom Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables).
+As a solution owner, you can customize the look and feel of the theme by providing new values for the [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables). This allows changing the fonts, colors, etc. without replacing the stylesheet.
 
-One of the tools in the [Blending](https://github.com/Starcounter/Blending) app suite is a CSS custom properties manager. It stores theme configurations based on CSS custom properties in the database. It provides simple to use way of providing a theme configuration conditionally in specific layouts.
+You can overwrite CSS custom property values in a stylesheet in a custom composition. It requires some skill in CSS and HTML but allows for spectacular results such as providing a theme configuration only for a specific part of the app.
+
+If you don't need that much of control and prefer a simple to use GUI, use the "Theme configurations" feature of [Blending](https://github.com/Starcounter/Blending) app suite. It is an administration tool that stores the values of CSS custom properties in the database. It can provide theme configurations for specific layouts that affect all Uniform components on the screen.
+
+{% hint style="warning" %} Attaching CSS custom properties through "Theme configurations" sets them on the global scope - the `body` of the light DOM (https://github.com/Starcounter/Blending/issues/232). Providing CSS custom properties values in custom compositions attaches them in shadow DOM to the scope that you choose. {% endhint %}
 
 For more sophisticated theming we would love to use native [CSS shadow parts and themes](https://meowni.ca/posts/part-theme-explainer/). Unfortunately, it's not supported yet by any browser.
 
-To read more on customizing the design of the blended solution, please check [the dedicated page](customizing-solutions-design.md).
+### Extend or replace the theme with HTML, CSS and JavaScript
 
-### Replacing parts of Uniform with HTML, CSS and JavaScript
+The architecture of Uniform design system is based on the inversion of control. This means that all the `uni-` classes and components can be replaced by the solution owner when needed. It allows you to completely change not only the look but also the behavior of the UI, without changing the app source code.
 
-We are using all those just-released-features of Web not just because we love using the bleeding edge of the latest technology. It is mostly to serve the best functionality, with solid base and interoperability without limiting the freedom of web development.
+As a solution owner, you are free to add, enhance, replace or hack the presentation layer using your  HTML, CSS or JavaScript code. The only technical limitation is Shadow DOM encapsulation. 
 
-Uniform design system delivers an easy to use abstraction layer and building blocks to create unified, consistent UI and UX for your app and solution of apps without a hassle. However, because we are building our features on top of the open Web Platform, at any point, you are free to add, enhance, replace or hack the presentation layer using your  HTML, CSS or JavaScript code. The only technical limitation is Shadow DOM encapsulation.
+For example, when all apps consistently use Uniform components, all date pickers are presented using `<uni-date-picker>`. If you want to drastically change its look or behavior, you can do so, by creating your own custom element.
+
+If you want to provide the new behavior for all date pickers in the solution, you would simply replace the definition of `<uni-date-picker>`. The new definition must be provided by running an app that registers it at the same URI, for example `/sys/uniform.css/components/uni-date-picker/uni-date-picker.html`.
+
+If you want to provide the new behavior just for some date pickers, you would fork `<uni-date-picker>` and give it a new name, such as `<your-date-picker>`. To use it, you would need to change `<uni-date-picker>` to `<your-date-picker>` in selected custom compositions.
+
+To create your own components, you can fork [`uni-element`](https://github.com/Starcounter/uniform.css/tree/master/components) or start from scratch. In your own components, you can use Uniform's CSS custom properties to apply common fonts, colors, etc.
+
+You must provide your own components to the Starcounter host by running an app that contains the static files. You can fork [StarcounterClientFiles app](https://github.com/Starcounter/StarcounterClientFiles/) for this purpose.
+
+{% hint style="info" %} The same technique works for any custom element, not only Uniform one. {% endhint %}
 
 ## UI Kit
 
