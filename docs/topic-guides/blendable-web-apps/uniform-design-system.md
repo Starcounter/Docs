@@ -8,6 +8,8 @@ Uniform is applied by the Starcounter host. It controls the look and feel of nat
 
 Unlike many design systems, Uniform is open-ended and themeable. It can be configured, extended or replaced in parts to achieve anything that is possible with HTML, CSS, and JavaScript.
 
+![Decision tree of theming Uniform design system](../../.gitbook/assets/uniform-decision-tree.png)
+
 ## Mental model of client-side rendering by the Starcounter host
 
 Starcounter host follows a layered design that allows controlling the look and feel of all apps. These layers are:
