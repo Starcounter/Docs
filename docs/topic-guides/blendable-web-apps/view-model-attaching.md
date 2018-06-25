@@ -67,17 +67,17 @@ Handlers with empty tokens are called with other handlers with the same empty to
 Token matching can be made more fine-grained by using contexts. They are composed of a list of strings that acts as a bit map when matched with other contexts. This list isn't materialized anywhere, it is just an un-written contract between the apps.
 
 Starcounter came up with few predefined contexts that have shared meaning which can be understood by all app authors:
-* `page` — a size factor context. Use it if the view contains full information that the app has about a concept. The view renders in multiple lines. The view is suitable to be attached in full pages about a concept;
-* `thumbnail` — a size factor context. Use it if the view contains basic information that the app has about a concept. The view renders in multiple lines. The view is suitable to be attached in side information or teasers about a concept;
-* `row` — a size factor context. Use it if the view contains basic information that the app has about a concept. The view renders in a single line. The view is suitable to be attached in lists;
-* `icon` — a size factor context. Use it if the view contains the smallest unit of information that the app has about a concept. The view renders in a single element that is a link to a bigger view. The view is suitable to be attached in menu bars;
-* `search` — a meta context. Use it if the view is suitable for search results;
-* `app` — a meta context. Use it if the view represents the app itself, rather than a concept;
+* `page` - a size factor context. Use it if the view contains full information that the app has about a concept. The view renders in multiple lines. The view is suitable to be attached in full pages about a concept;
+* `thumbnail` - a size factor context. Use it if the view contains basic information that the app has about a concept. The view renders in multiple lines. The view is suitable to be attached in side information or teasers about a concept;
+* `row` - a size factor context. Use it if the view contains basic information that the app has about a concept. The view renders in a single line. The view is suitable to be attached in lists;
+* `icon` - a size factor context. Use it if the view contains the smallest unit of information that the app has about a concept. The view renders in a single element that is a link to a bigger view. The view is suitable to be attached in menu bars;
+* `search` - a meta context. Use it if the view is suitable for search results;
+* `app` - a meta context. Use it if the view represents the app itself, rather than a concept;
 
 There are some compound contexts, that have a meaning of their own:
 
-* `search, row` — a single-line row that is suitable for search results;
-* `app, icon` — an icon that opens the main page of the app;
+* `search, row` - a single-line row that is suitable for search results;
+* `app, icon` - an icon that opens the main page of the app;
 
 As an app author or solution owner, you can come up with your own contexts. Keep in mind that such contexts are unknown to other app authors, so they are less likely to attach view-models from other apps.
 
