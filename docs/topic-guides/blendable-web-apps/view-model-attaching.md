@@ -175,7 +175,7 @@ In the example above, converter passes handler parameters to token parameters, a
 
 Often it's needed to trigger attachment on a specific URI. To achieve this, the first converter should return non-null string array on certain parameters.
 
-Current URI matcher selects the most concrete URI handler possible, among all choices. It's not related to a number of parameters. So below, for `/op2/first/second`, the more concrete handler is `/op2/{?}/{?}` and not `/op1/{?}`.
+The URI matcher selects the most concrete URI handler possible, among all choices. It's not related to the number of parameters. So below, for `/op2/first/second`, the more concrete handler is `/op2/{?}/{?}` and not `/op1/{?}`.
 
  ```csharp
 Handle.GET("/op1/{?}", (string first) =>
@@ -190,7 +190,7 @@ Handle.GET("/op2/{?}/{?}", (string first, string second) =>
 Blender.MapUri("/op1/{?}", "token1");
 Blender.MapUri("/op2/{?}/{?}", "token1");
 
-Response resp = Self.GET("/op2/first/second");
+Response resp = Self.GET("/op2/first/second"); //returns "/op2/{?}/{?}", not "/op1/{?}"
 ```
 
 ## Call Direction
