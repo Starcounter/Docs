@@ -175,6 +175,24 @@ In the example above, converter passes handler parameters to token parameters, a
 
 Often it's needed to trigger attachment on a specific URI. To achieve this, the first converter should return non-null string array on certain parameters.
 
+The URI matcher selects the most concrete URI handler possible, among all choices. It's not related to the number of parameters. So below, for `/op2/first/second`, the more concrete handler is `/op2/{?}/{?}` and not `/op1/{?}`.
+
+ ```csharp
+Handle.GET("/op1/{?}", (string first) =>
+{
+    return first;
+});
+Handle.GET("/op2/{?}/{?}", (string first, string second) =>
+{
+    return first + " and " + second;
+});
+
+Blender.MapUri("/op1/{?}", "token1");
+Blender.MapUri("/op2/{?}/{?}", "token1");
+
+Response resp = Self.GET("/op2/first/second"); //returns "/op2/{?}/{?}", not "/op1/{?}"
+```
+
 ## Call Direction
 
 You can specify the direction of which handlers should be called. This is needed to trigger attaching in a certain direction: from the handler or to handler. The direction is determined by the value that corresponding converter is returning: `null` converter or `null` string array returned in converter blocks the direction of the call. In case of zero parameters, there is a special `Blender.MapUri` overrides with corresponding boolean parameters to determine the allowed call directions.
