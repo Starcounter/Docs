@@ -108,7 +108,7 @@ It is a good practice to always wait:
 * Wait for a text element to be present before you check the content of that element
   * An example can be found in the method `TextareaPage_WriteToTextArea` in UniformDocs 
 
-    Tests \(see [TextareaPageTest.cs lines 28-38](https://github.com/Starcounter/UniformDocs/blob/master-2.4/test/UniformDocs.Tests/Test/TextareaPageTest.cs#L28-L36)\). The method `WaitForText()` is used to 
+    Tests \(see [TextareaPageTest.cs](https://github.com/Starcounter/UniformDocs/blob/master-2.4/test/UniformDocs.Tests/Test/TextareaPageTest.cs)\). The method `WaitForText()` is used to 
 
     compare the text value of `TextareaInfoLabel` asynchronously. The assertion passes if the 
 
@@ -116,7 +116,7 @@ It is a good practice to always wait:
 * Wait for a button to be present before you click on that button
   * An example can be found in the method `ButtonPage_RegularButton` in the UniformDocs 
 
-    tests \(see [ButtonPageTest.cs lines 29-46](https://github.com/Starcounter/UniformDocs/blob/master-2.4/test/UniformDocs.Tests/Test/ButtonPageTest.cs#L33-L46)\). The method `WaitUntil()` is used to 
+    tests \(see [ButtonPageTest.cs](https://github.com/Starcounter/UniformDocs/blob/master-2.4/test/UniformDocs.Tests/Test/ButtonPageTest.cs)\). The method `WaitUntil()` is used to 
 
     asynchronously check the state of the `Displayed` property of a button. It halts the test 
 
@@ -126,7 +126,7 @@ It is a good practice to always wait:
 * Wait for presence of an input field before typing in it and wait for text to be present in label
   * An example can be found in the method `TextPage_TextPropagationOnUnfocus` in the 
 
-    UniformDocs tests \(see [TextPageTest.cs lines 28-38](https://github.com/Starcounter/UniformDocs/blob/master-2.4/test/UniformDocs.Tests/Test/TextPageTest.cs#L28-L37)\). This test mixes the other examples 
+    UniformDocs tests \(see [TextPageTest.cs](https://github.com/Starcounter/UniformDocs/blob/master-2.4/test/UniformDocs.Tests/Test/TextPageTest.cs)\). This test mixes the other examples 
 
 Source file: [TextareaPageTest.cs](https://github.com/Starcounter/UniformDocs/blob/master-2.4/test/UniformDocs.Tests/Test/TextareaPageTest.cs).
 
