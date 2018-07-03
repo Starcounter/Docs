@@ -88,7 +88,7 @@ Open your Properties in the Tests project. Go to Reference Paths, enter `C:\Sele
 
 BaseTest is a helper class that makes it easier to test multiple browsers. The source code is available:
 
-* BaseTest helper class [here](https://github.com/Starcounter/UniformDocs/blob/master-2.4/test/UniformDocs.Tests/UniformDocs.Tests.csproj)
+* BaseTest helper class [here](https://github.com/Starcounter/UniformDocs/blob/master-2.4/test/UniformDocs.Tests/Test/BaseTest.cs)
 * Using of BaseTest class [here](https://github.com/Starcounter/UniformDocs/blob/master-2.4/test/UniformDocs.Tests/Test/CheckboxPageTest.cs)
 
 When you rebuild the test project now, you should see each test for every browser.
