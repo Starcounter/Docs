@@ -59,7 +59,7 @@ From this, these BEM classes can be derived:
 .signin-form__labeled-checkbox--checked {}
 ```
 
-Check out the source code of [People](https://github.com/Starcounter/People) or [KitchenSink](https://github.com/Starcounter/KitchenSink). These sample apps show how to apply BEM in practice.
+Check out the source code of [People](https://github.com/Starcounter/People) or [UniformDocs](https://github.com/Starcounter/UniformDocs). These sample apps show how to apply BEM in practice.
 
 ## BEM in Starcounter apps
 
@@ -103,17 +103,17 @@ We recommend the following rules when using BEM selectors in Starcounter apps.
 
 ```markup
   <style>
-      .kitchensink-section-primary-grid {
+      .uniformdocs-section-primary-grid {
           display: grid;
           grid-gap: var(--uni-section-padding-vertical, var(--uni-default-section-padding-vertical));
       }
   </style>
-  <div class="uni-section-primary kitchensink-section-primary-grid">
+  <div class="uni-section-primary uniformdocs-section-primary-grid">
       <div class="uni-card">
           <div class="uni-title">
-              <slot name="kitchensink/buttonpage-regular-heading"></slot>
+              <slot name="uniformdocs/buttonpage-regular-heading"></slot>
           </div>
-          <slot name="kitchensink/buttonpage-regular-description"></slot>
+          <slot name="uniformdocs/buttonpage-regular-description"></slot>
       </div>
   </div>
 ```

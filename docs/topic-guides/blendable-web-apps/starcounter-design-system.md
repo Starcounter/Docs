@@ -47,9 +47,9 @@ Head to the [demo page of Uniform.css](https://starcounter.github.io/uniform.css
 
 Your blendable web app can use any custom elements. However, finding or implementing a good custom element and creating a view-model for it takes time.
 
-Our [KitchenSink](https://github.com/Starcounter/KitchenSink) app demonstrates implementation of some commonly used components, such as a datepicker or a combo box, using custom elements that we can endorse.
+Our [UniformDocs](https://github.com/Starcounter/UniformDocs) app demonstrates implementation of some commonly used components, such as a datepicker or a combo box, using custom elements that we can endorse.
 
-Head to the [hosted version of KitchenSink](https://kitchensink.starcounter.io/) for a preview.
+Head to the [hosted version of UniformDocs](https://uniform.starcounter.io/) for a preview.
 
 ### Themes based on CSS custom properties
 
