@@ -6,9 +6,9 @@ When the browser sends a request to the server, the app with a URI handler that 
 
 For example, if a user wants to see a profile of a person, the browser makes a request to the People app: `GET http://localhost:8080/people/person/4782`. The response will include not only the view-model from the People app but also view-models from other apps that are attached to it.
 
-An attachment rule consiststs, of a URI, a token and a context.
+An attachment rule consists, of a URI, a token and a context.
 
-On a high level, these are the specific steps involved with sending the response:
+On a high level, these are the specific steps involved in sending the response:
 
 1. The browser makes a request for a resource, such as:  `GET http://localhost:8080/people/person/4782`.
 2. The server receives the request and routes it to the corresponding handler in an app \(People\).
@@ -17,7 +17,7 @@ On a high level, these are the specific steps involved with sending the response
 5. During the serialization process, the server attaches the responses from other apps that are view-models to the main view-model from the initial handler.
 6. The server sends the response, which now contains view-models from multiple apps, back to the client.
 
-By using attchment rules, the apps don't need to know anything about other apps in the code host - they don't even need to know if there are other apps - they only have to communicate what concept the handlers deal with. The apps should be built to not depend on, but expect, attaching.
+By using attachment rules, the apps don't need to know anything about other apps in the code host - they don't even need to know if there are other apps - they only have to communicate what concept the handlers deal with. The apps should be built to not depend on, but expect, attaching.
 
 The process of defining the attachment rules and attaching the responses is handled by the `blend.json` file described below.
 
@@ -33,9 +33,28 @@ Attachment rules use tokens. Tokens are case insensitive strings. Handlers (iden
 
 Token matching can be made more fine-grained by using contexts. They are composed of a list of strings that acts as a bit map when matched with other contexts. Contexts are also case-insensitive. No context \(`null` value\) means **match any context**. Otherwise, two handlers are matched if source context contains same elements as destination context. Examples:
 
-* Source context `{ "Readable", "Page" }` is NOT matched with `{ "Writable", "Page" }`.
-* Source context `null` is matched with `{ "Readable", "Page" }` and `{ "Writable", "Page" }` and any other context.
-* Source context `{ "Page", "Writable" }` is matched with `{ "Writable", "Page" }` and vice versa.
+Starcounter came up with few predefined contexts that have shared meaning which can be understood by all app authors:
+* `page` - a size factor context. Use it if the view contains full information that the app has about a concept. The view renders in multiple lines. The view is suitable to be attached in full pages about a concept;
+* `thumbnail` - a size factor context. Use it if the view contains basic information that the app has about a concept. The view renders in multiple lines. The view is suitable to be attached in side information or teasers about a concept;
+* `row` - a size factor context. Use it if the view contains basic information that the app has about a concept. The view renders in a single line. The view is suitable to be attached in lists;
+* `icon` - a size factor context. Use it if the view contains the smallest unit of information that the app has about a concept. The view renders in a single element that is a link to a bigger view. The view is suitable to be attached in menu bars;
+* `search` - a meta context. Use it if the view is suitable for search results;
+* `app` - a meta context. Use it if the view represents the app itself, rather than a concept;
+
+There are some compound contexts, that have a meaning of their own:
+
+* `search, row` - a single-line row that is suitable for search results;
+* `app, icon` - an icon that opens the main page of the app;
+
+As an app author or solution owner, you can come up with your own contexts. Keep in mind that such contexts are unknown to other app authors, so they are less likely to attach view-models from other apps.
+
+As a solution owner, you can replace the original contexts provided by an app author with custom contexts for fine tuning of the view-model attachment rules.
+
+No context \(`null` value\) means **match any context**. Otherwise, two handlers are matched if source context contains same elements as destination context. Examples:
+
+* Source context `{ "raw", "page" }` is NOT matched with `{ "search", "page" }`.
+* Source context `null` is matched with `{ "raw", "page" }` and `{ "search", "page" }` and any other context.
+* Source context `{ "page", "search" }` is matched with `{ "search", "page" }` and vice versa.
 
 Consider contexts as an additional matching criteria for handlers with the same token.
 
@@ -91,4 +110,3 @@ Here is the explanation of each field:
 * `Contexts`: Attachment rule contexts (if any). Default value is "null".
 * `AllowFromDirection`: Allows attachment rule calls from this URI (it defines if this URI can trigger attachment process). Default value is "True".
 * `AllowToDirection`: Allows attachment rule calls to this URI (it defines if this URI can be triggered during attachment process). Default value is "True".
-
