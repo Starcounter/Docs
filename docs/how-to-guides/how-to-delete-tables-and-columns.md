@@ -70,7 +70,6 @@ public class Person
   public string Name { get; set; }
   public string IrrelevantFact { get; set; }
 }
-
 ```
 
 ### 1. Stop the app
@@ -95,7 +94,6 @@ public class Person
 {
   public string Name { get; set; }
 }
-
 ```
 
 ### 4. Restart the application
