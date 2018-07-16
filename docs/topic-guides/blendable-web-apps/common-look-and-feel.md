@@ -78,13 +78,3 @@ You must provide your own components to the Starcounter host by running an app t
 The following diagram presents a decision tree of what technique of theming to use in your case.
 
 ![Decision tree of theming Uniform design system](../../.gitbook/assets/uniform-decision-tree.png)
-
-## UI Kit
-
-To make it easier for you to kickstart app design, we have made available a UI kit for Adobe XD that utilizes Uniform design system. The kit contains the assets used in Uniform and sample design files of an app \([BlendingEditor](https://github.com/Starcounter/Blending)\).
-
-[Download the kit from our Google Drive](https://drive.google.com/drive/folders/1-71NMTdjGFo4IizBfKdvl2oi93z1RUoH?usp).
-
-![Example from the UI kit](../../.gitbook/assets/uikit1.png)
-
-![Sample design](../../.gitbook/assets/uikit2%20%281%29.png)
