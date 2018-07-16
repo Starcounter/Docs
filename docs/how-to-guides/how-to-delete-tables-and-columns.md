@@ -23,7 +23,8 @@ Tables should be dropped if it's not referenced by a database class and the data
 public class UselessTable
 {
     public string Nothing { get; set; }
-}
+}
+
 ```
 
 ### 1. Delete the database class from the code
@@ -68,10 +69,22 @@ public class Person
 {
   public string Name { get; set; }
   public string IrrelevantFact { get; set; }
-}
+}
 ```
 
-### 1. Delete the property from the database class
+### 1. Stop the app
+
+Since the `ALTER TABLE` command can't be executed while the table it alters is referenced in any running app - you have to stop the app before running `ALTER TABLE`, you can do this by running `staradmin stop app MyApp`.
+
+### 2. Run SQL command DROP COLUMN
+
+In the [Administrator](../topic-guides/working-with-starcounter/administrator-web-ui.md), run this query to mark that the column should be dropped:
+
+```sql
+ALTER TABLE MyApp.Person DROP COLUMN IrrelevantFact
+```
+
+### 3. Delete the property from the database class
 
 To drop a column, the corresponding property has to be deleted. In this case, the class will then look like this:
 
@@ -80,24 +93,13 @@ To drop a column, the corresponding property has to be deleted. In this case, th
 public class Person 
 {
   public string Name { get; set; }
-}
+}
 ```
 
-### 2. Restart the application
+### 4. Restart the application
 
 To delete the reference between the property and the column, rebuild and restart the application. If you don't do this, the Administrator will throw `ScErrColumnIsMapped (SCERR15014)`.
 
-### 3. Stop the app
-
-Since the `ALTER TABLE` command can't be executed while the table it alters is referenced in any running app - you have to stop the app before running `ALTER TABLE`, you can do this by running `staradmin stop app MyApp`.
-
-### 4. Run SQL command DROP COLUMN
-
-In the [Administrator](../topic-guides/working-with-starcounter/administrator-web-ui.md), run this query to mark that the column should be dropped:
-
-```sql
-ALTER TABLE MyApp.Person DROP COLUMN IrrelevantFact
-```
 
 ### 5. Run the cleaner
 
@@ -113,7 +115,7 @@ After this, the column is deleted and all the data that was stored in it is perm
 
 Data definition language queries \(DDL\) are executed in the Administrator to delete tables or columns. Running the queries by themselves does not delete the data - you also have to run the cleaner to delete the data. To run DDL queries with either `DROP COLUMN` or `DROP TABLE`, you can't have the affected tables loaded. This means that the apps with references to those tables can't run unless the references to the tables are removed in the app.
 
-To help you with find unused tables and columns you can use the tool [WhatsNotReferenced](https://github.com/per-samuelsson/WhatsNotReferenced).  It checks, when you start the database, for all tables and columns that are not in use by any currently running application
+To help you with find unused tables and columns you can use the tool [WhatsNotReferenced](https://github.com/per-samuelsson/WhatsNotReferenced). It checks, when you start the database, for all tables and columns that are not in use by any currently running application
 
 Again, be careful when permanently deleting data. If the data is of any value, you should make a backup before cleaning it.
 

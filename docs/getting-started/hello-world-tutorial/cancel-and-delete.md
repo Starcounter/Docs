@@ -67,19 +67,18 @@ The next step is to build handlers to react accordingly. We will also do that si
 ```csharp
 void Handle(Input.CancelTrigger action)
 {
-    Transaction.Rollback();
+    AttachedScope.Rollback();
 }
 
 void Handle(Input.DeleteAllTrigger action)
 {
     Db.SQL("DELETE FROM Expense WHERE Spender = ?", this.Data);
-    this.Expenses.Clear();
 }
 ```
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-`Transaction.Rollback()` simply rolls back the state of your application to where you last ran a `Transaction.Commit()`.
+`AttachedScope.Rollback()` simply rolls back the state of your application to where you last ran a `AttachedScope.Commit()`.
 
 The `DeleteAllTrigger` handler deletes all the expenses for the current `Person` in the database and clears the `Expenses` property in the view-model
 
@@ -88,6 +87,4 @@ The `DeleteAllTrigger` handler deletes all the expenses for the current `Person`
 You can now run your application again and rollback any mistakes you make or delete all expenses.
 
 ![](../../.gitbook/assets/resizedpart6.gif)
-
-If you get any errors, you can check your code against the [source code](https://github.com/Starcounter/HelloWorld/commit/e8424d4129d79379154281174cd31ad236bd8e22).
 

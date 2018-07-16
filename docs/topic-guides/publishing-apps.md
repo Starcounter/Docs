@@ -36,7 +36,7 @@ content, shows empty file preview image.
 
 ## Entry point URI
 
-Every blendable web app should have the entry point URI that follows the pattern `/<appname>`, e.g. `/kitchensink` \(lowercase\).
+Every blendable web app should have the entry point URI that follows the pattern `/<appname>`, e.g. `/uniformdocs` \(lowercase\).
 
 When you access this URI, the app main screen should be presented.
 

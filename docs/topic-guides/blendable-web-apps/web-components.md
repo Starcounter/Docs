@@ -77,11 +77,11 @@ You should not do that automatically, but use Bower to install such dependencies
 
 The `bower.json` file keeps the list of your app's client side dependencies. This file should not be created and maintained manually. It should be modified using the command line tool: `bower init`, `bower install paper-dialog --save`.
 
-A sample file can be found in the [KitchenSink app](https://github.com/Starcounter/KitchenSink/blob/master-2.4/src/KitchenSink/bower.json).
+A sample file can be found in the [UniformDocs app](https://github.com/Starcounter/UniformDocs/blob/master-2.4/src/UniformDocs/bower.json).
 
 #### .bowerrc {#.bowerrc}
 
 Keep in mind that you can use another version of Polymer by putting it into your local `sys` folder. This will affect all other apps, though. To prevent that, use a `.bowerrc` file.
 
-The `.bowerrc` file contains the Bower configuration. It specifies the destination directory and what dependencies should be ignored, because they are delivered with Starcounter. An example of this can be found in the [KitchenSink app](https://github.com/Starcounter/KitchenSink/blob/master-2.4/src/KitchenSink/.bowerrc).
+The `.bowerrc` file contains the Bower configuration. It specifies the destination directory and what dependencies should be ignored, because they are delivered with Starcounter. An example of this can be found in the [UniformDocs app](https://github.com/Starcounter/UniformDocs/blob/master-2.4/src/UniformDocs/.bowerrc).
 

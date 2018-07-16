@@ -85,7 +85,7 @@ Use explicit slot names instead of relying on the default slot. The solution own
 It's not necessary to declare the default slot in the `declarative-shadow-dom` part of your view. The Starcounter's HTML merger automatically adds a default slot at the bottom of the composition of your view for fallback reasons.
 
 {% hint style="info" %}
-To hide some content in the presentation layer, you can remove `<slot>` element that slots this content or move the `<slot>` element to be a child of `<div style="display: none">`.
+To hide some content in the presentation layer, you can remove `<slot name="…">` element that slots this content or move the `<slot name="…">` element to be a child of `<div style="display: none">`.
 {% endhint %}
 
 ## Guideline 4: Create the Presentation in `declarative-shadow-dom`
@@ -173,7 +173,7 @@ Here, the elements are distributed in the way that the view will look when no Co
 
 ## Guideline 5: Apply Styling to Avoid Conflicts and Allow Composition
 
-Regarding styling, there are two ways to make the application easier to visually integrate with other apps:
+Regarding styling, there are few ways to make the application easier to visually integrate with other apps:
 
 1. Prefix all class names with the name of the app, as outlined in [Avoiding CSS Conflicts](https://docs.starcounter.io/guides/blending/avoiding-css-conflicts/).
 2. Keep styling that will affect the presentation inside the `declarative-shadow-dom`.
@@ -206,5 +206,5 @@ Regarding styling, there are two ways to make the application easier to visually
 
 ## Additional Resources
 
-To find more information about creating HTML View definitions, take a look at [the article linked above](https://starcounter.io/layout-compositions-html-partials/) and the [People app](https://github.com/StarcounterSamples/People/tree/develop/src/People/wwwroot/People/viewmodels) which fully adheres to these guidelines.
+To find more information about creating HTML View definitions, take a look at [the article linked above](https://starcounter.io/layout-compositions-html-partials/) and the [People app](https://github.com/Starcounter/People/tree/master/src/People/wwwroot/People/viewmodels) which fully adheres to these guidelines.
 

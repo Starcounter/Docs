@@ -41,7 +41,7 @@ To use the patterns and the components, you must import them explicitly. They ar
 
 The names of the CSS custom properties, CSS classes, and custom elements begin with a `uni-` prefix.
 
-Our [KitchenSink](https://kitchensink.starcounter.io/) app demonstrates the use of Uniform design system as well as commonly used 3rd party custom elements that we can endorse, such as a Google map or a combo box.
+Our [UniformDocs](https://uniform.starcounter.io/) app demonstrates the use of Uniform design system as well as commonly used 3rd party custom elements that we can endorse, such as a Google map or a combo box.
 
 ### Theme configuration through CSS custom properties
 

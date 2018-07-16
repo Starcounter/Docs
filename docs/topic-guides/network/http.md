@@ -79,6 +79,21 @@ Handle.GET("/{?}/{?}", (string list, int item) =>
 
 The accepted URIs would be, for example: `/serialnumbers/4534123`, `/itemid/34321`
 
+The URI matcher selects the most concrete URI handler possible, among all choices. It's not related to the number of parameters. So below, for `/op2/first/second`, the more concrete handler is `/op2/{?}/{?}` and not `/op1/{?}`.
+
+ ```csharp
+Handle.GET("/op1/{?}", (string first) =>
+{
+    return first;
+});
+Handle.GET("/op2/{?}/{?}", (string first, string second) =>
+{
+    return first + " and " + second;
+});
+
+Response resp = Self.GET("/op2/first/second"); //returns "/op2/{?}/{?}", not "/op1/{?}"
+```
+
 #### Database object as parameter in handler
 
 One can also expect a database object as a parameter to a handler:
@@ -247,7 +262,7 @@ The default limit on payloads in requests is 1048576 bytes, exceeding this limit
 The limit can be increased to a maximum of 2048576 bytes by changing the value of `MaximumReceiveContentLength` in `%userprofile%\Documents\Starcounter\Personal\scnetworkgateway.xml`.
 
 {% hint style="info" %}
-When sending large files, we recommend to use WebSocket instead of HTTP. That pattern is demonstrated in the `FileUploadPage` \([code-behind](https://github.com/Starcounter/KitchenSink/blob/master/src/KitchenSink/FileUploadPage.json.cs), [HTML](https://github.com/Starcounter/KitchenSink/blob/master/src/KitchenSink/wwwroot/KitchenSink/FileUploadPage.html)\) in the sample app [KitchenSink](https://github.com/Starcounter/KitchenSink).
+When sending large files, we recommend to use WebSocket instead of HTTP. That pattern is demonstrated in the `FileUploadPage` \([code-behind](https://github.com/Starcounter/UniformDocs/blob/master-2.4/src/UniformDocs/ViewModels/HowTo/FileUploadPage.json.cs), [HTML](https://github.com/Starcounter/UniformDocs/blob/master-2.4/src/UniformDocs/wwwroot/UniformDocs/HowTo/FileUploadPage.html)\) in the sample app [UniformDocs](https://github.com/Starcounter/UniformDocs).
 {% endhint %}
 
 ## Responses
