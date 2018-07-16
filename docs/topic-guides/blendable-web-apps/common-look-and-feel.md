@@ -1,4 +1,4 @@
-# Uniform Design System
+# Common look and feel of apps
 
 ## Introduction
 
