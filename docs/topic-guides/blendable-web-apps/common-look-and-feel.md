@@ -27,7 +27,7 @@ In the content part, you provide the native semantic HTML elements that can be r
 
 As the basic way for providing a common look and feel in the presentation layer, Starcounter provides [Uniform Design System](https://uniform.starcounter.io/). It consists of theme primitives, CSS reset, and a library of user interface design patterns implemented using a stylesheet and components.
 
-Uniform follows the inversion of control principle, which allows app authors to delegate the implementation and themeing of common parts of user interface to the Starcoutner host and the solution owner.
+Uniform follows the inversion of control principle, which allows app authors to delegate the implementation and theming of common parts of user interface to the Starcounter host and the solution owner.
 
 Unlike many design systems, Uniform is open-ended and themeable. It can be configured, extended or replaced in parts to achieve anything that is possible with HTML, CSS, and JavaScript.
 
@@ -59,7 +59,7 @@ If you don't need that much of control and prefer a simple to use GUI, use the "
 
 {% hint style="warning" %} Attaching custom CSS properties through "Theme configurations" sets them on the global scope - the `body` of the light DOM (https://github.com/Starcounter/Blending/issues/232). Providing custom CSS properties values in custom compositions attaches them in shadow DOM to the scope that you choose. {% endhint %}
 
-{% hint style="info" %} For more sophisticated themeing we would love to use native [CSS shadow parts and themes](https://meowni.ca/posts/part-theme-explainer/). Unfortunately, it's not supported yet by any browser. {% endhint %}
+{% hint style="info" %} For more sophisticated theming we would love to use native [CSS shadow parts and themes](https://meowni.ca/posts/part-theme-explainer/). Unfortunately, it's not supported yet by any browser. {% endhint %}
 
 ### Extend or replace the theme with HTML, CSS and JavaScript
 
@@ -79,6 +79,6 @@ You must provide your own components to the Starcounter host by running an app t
 
 {% hint style="info" %} The same technique works for any custom element, not only Uniform one. {% endhint %}
 
-The following diagram presents a decision tree of what technique of themeing to use in your case.
+The following diagram presents a decision tree of what technique of theming to use in your case.
 
-![Decision tree of themeing Uniform](../../.gitbook/assets/uniform-decision-tree.png)
+![Decision tree of theming Uniform](../../.gitbook/assets/uniform-decision-tree.png)
