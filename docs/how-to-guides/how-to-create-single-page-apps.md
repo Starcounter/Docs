@@ -142,11 +142,11 @@ namespace MultiplePagesDemo
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-The program defines two [`Handle.GET`](https://docs.starcounter.io/guides/network/handling-http-requests/) operations. One to retrieve the master, MailsPage, and the other to retrieve specific emails.
+The program defines two [`Handle.GET`](../topic-guides/network/http.md) operations. One to retrieve the master, MailsPage, and the other to retrieve specific emails.
 
 The first, `Handle.GET("/MultiplePagesDemo/mails"...`, returns the master json MailsPage. It checks if there is a current session and if so uses it instead of creating a new. It uses the first mail, if any, as the focused mail.
 
-The second, `Handle.GET("/multiplepagesdemo/mails/{?}"...`, returns a MailsPage as well. It does however specify which email should be focused. By relying on [`Self.GET`](https://docs.starcounter.io/guides/network/internal-self-calls/) we call the first handler which includes the functionality to check for exisiting sessions.
+The second, `Handle.GET("/multiplepagesdemo/mails/{?}"...`, returns a MailsPage as well. It does however specify which email should be focused. By relying on [`Self.GET`](../topic-guides/network/http.md#internal-calls) we call the first handler which includes the functionality to check for exisiting sessions.
 
 ### View
 
