@@ -175,7 +175,7 @@ Here, the elements are distributed in the way that the view will look when no Co
 
 Regarding styling, there are few ways to make the application easier to visually integrate with other apps:
 
-1. Prefix all class names with the name of the app, as outlined in [Avoiding CSS Conflicts](https://docs.starcounter.io/guides/blending/avoiding-css-conflicts/).
+1. Prefix all class names with the name of the app, as outlined in [Avoiding CSS Conflicts](avoiding-css-conflicts.md).
 2. Keep styling that will affect the presentation inside the `declarative-shadow-dom`.
 3. To avoid writing the same Shadow DOM CSS on different pages, it can be imported with the CSS `import` rule. The syntax for this is `<style>@import url("/yourapp/css/style.css");</style>`. In the example above it would be done this way:
 

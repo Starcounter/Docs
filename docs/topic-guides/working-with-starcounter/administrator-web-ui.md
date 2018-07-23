@@ -56,9 +56,9 @@ Apps will start together with the database if "Auto-Start" is clicked. The padlo
 
 ### Execute SQL queries {#execute-sql-queries}
 
-The data of a database can be queried in the SQL browser. See [SQL reference](https://docs.starcounter.io/guides/sql) for details on the syntax.
+The data of a database can be queried in the SQL browser. See [SQL reference](../sql) for details on the syntax.
 
-The queries that are supported by the method `Db.SQL` are also supported except that [literals](https://docs.starcounter.io/guides/sql/literals) are used in the SQL browser instead of [variables](https://docs.starcounter.io/guides/database/variables).
+The queries that are supported by the method `Db.SQL` are also supported except that [literals](../sql/literals.md) are used in the SQL browser instead of [variables](../database/querying-with-sql.md#using-variables).
 
 The app that defines that table needs to run in order to query it.
 
