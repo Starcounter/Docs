@@ -30,10 +30,10 @@ The default content of the app shell is tied to the StarcounterClientFiles versi
 The app shell is invoked automatically for any `Json` with a `Html` property that is returned from your app. The only provision is that your app needs to register the following middleware:
 
 ```csharp
-Starcounter.Application.Current.
-    Use(new HtmlFromJsonProvider());
-Starcounter.Application.Current.
-    Use(new PartialToStandaloneHtmlProvider());
+Starcounter.Application.Current
+    .Use(new HtmlFromJsonProvider());
+Starcounter.Application.Current
+    .Use(new PartialToStandaloneHtmlProvider());
 ```
 
 The [middleware](../network/middleware.md#middleware-classes) page explains the APIs presented above. In short, the `HtmlFromJsonProvider` middleware fetches the view associated with a view-model, and `PartialToStandaloneHtmlProvider` wraps the view in the app shell.
