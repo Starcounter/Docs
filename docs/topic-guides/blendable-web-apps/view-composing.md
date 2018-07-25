@@ -20,7 +20,7 @@ In a composition of multiple views, there is always a single **main view** and o
 
 ## Presentation and Content Separation
 
-Composing works by replacing or modifying the default structure of HTML elements used for the presentation. For this to work, content and presentation has to be separated. [Shadow DOM](https://www.html5rocks.com/en/tutorials/webcomponents/shadowdom/) handles this separation - the content is in light DOM and the presentation is in Shadow DOM.
+Composing works by replacing or modifying the default structure of HTML elements used for the presentation. For this to work, content and presentation has to be separated. [Shadow DOM](https://developers.google.com/web/fundamentals/web-components/shadowdom) handles this separation - the content is in light DOM and the presentation is in Shadow DOM.
 
 The structure of this separation looks like this:
 
