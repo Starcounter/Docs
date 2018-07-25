@@ -108,5 +108,5 @@ Here is the explanation of each field:
 * `Token`: Attachment rule token described above. Default value is an empty string which is treated as "DefaultToken".
 * `Active`: Defines default attachment rule rule activeness. Default value is "True".
 * `Contexts`: Attachment rule contexts (if any). Default value is "null".
-* `AllowFromDirection`: Allows attachment rule calls from this URI (it defines if this URI can trigger attachment process). For example if app call uri by `Self.GET` with this attribute set to false, then other apps won't recieve any request. Default value is "True".
-* `AllowToDirection`: Allows attachment rule calls to this URI (it defines if this URI can be triggered during attachment process). For example if app call uri by `Self.GET` with this attribute set to true, then other apps with the same contexts and AllowFromDirection set to true will recieve a request and respond. Default value is "True".
+* `AllowFromDirection`: Allows attachment rule calls from this URI (it defines if this URI can trigger attachment process). That means if app calls `Self.GET()` on attachment rule URI it will/will not request other apps for content with the same contexts. Default value is "True".
+* `AllowToDirection`: Allows attachment rule calls to this URI (it defines if this URI can be triggered during attachment process). That means if other app requests on attachment rule with the same contexts as one of the attachment rules described in your app, your app will/will not respond. Default value is "True".
