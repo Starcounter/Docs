@@ -90,7 +90,7 @@ Current session is determined and set automatically before user handler is calle
 
 Starcounter Gateway uses one of the following ways to determine the session that should be used for calling user handler.
 
-* `Location` + `X-Referer` or `Referer` headers: Using HTTP protocol, when creating a new session, the response will contain the `Location` HTTP header with the value of a newly created session. Client code later can extract this session value from the received `Location` header and use the session in subsequent requests, using either of the specified ways. Often `X-Referer` or `Referer` request headers are used to specify the session value.
+* `X-Location` + `X-Referer`/`Referer` headers: Using HTTP protocol, when creating a new session, if the `UseSessionHeader` is set to `true` (which is the default), the response will contain a `X-Location` HTTP header. The value of that header is the URI of the newly created session. Client code can provide this value in the subsequent requests as an `X-Referer` or `Referer` header to identify the session. The name of the header can be changed from `X-Location` to a different name using the `SessionHeaderName` property.
 * Session as handler URI parameter: Session value can be specified as one of URI parameters when defining a handler, for example:
 
 ```csharp
@@ -99,8 +99,6 @@ Handle.GET("/usesession/{?}", (Session session, Request request) =>
     // Implementation
 });
 ```
-
-* Session Cookie: Add a header on outgoing response by setting property `UseSessionHeader` to `true` and optionally specify name of header with `SessionHeaderName` \(default `X-Location`\).
 
 The priorities for session determination, for incoming requests, are the following \(latter has higher priority than previous\): session on socket, `Referer` header, `X-Referer` header, session URI parameter.
 
