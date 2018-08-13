@@ -1,6 +1,6 @@
 # Installation
 
-Installing Starcounter is straight forward and just like installing any other software application. Following sections guide you through the installation process:
+You install Starcounter by downloading and running an installer. The following sections describe how to install Starcounter and the different options you have during the installation:
 
 ### How to install
 
