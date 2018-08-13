@@ -1,32 +1,14 @@
 # Installation
 
-Starcounter can be installed in two different modes namely `Developer Mode` and `Production Mode`
-
- Following section describes these modes:
-
-## Developer Mode
-
-This is the default installation mode where the  `Starcounter Server Service`  can be started on-demand, typically when you start a Starcounter Application. 
+Installing Starcounter is straight forward and just like installing any other software application. Following sections guide you through the installation process:
 
 ### How to install
 
 * Run the  `<Your setup file name>.exe`  by double clicking on it.
-* Select `Developer` on the Setup screen :
+* Check the `Install Extension` checkbox [Recommended] which will create Project Templates in Visual Studio to help you creating applications with Starcounter.
+* Click install.
 
-![](../../.gitbook/assets/developer.PNG)
-
-## Production Mode
-
-In `Production Mode` the installer starts `Starcounter Server Service` as part of the installation process and also sets the `Startup Type` of the service to `Automatic` so that it can be started on Windows Logon. 
-
-### How to install
-
-There are two ways you can install Starcounter in Production Mode :
-
-* Run the  `<Your setup file name>.exe`  by double clicking on it.
-* Select `Production` on the Setup screen :
-
-![](../../.gitbook/assets/productionmode.PNG)
+![](../../.gitbook/assets/StarcounterInstallation.PNG)
 
 ### Installing with command line
 
