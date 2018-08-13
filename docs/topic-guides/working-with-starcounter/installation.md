@@ -10,15 +10,7 @@ Installing Starcounter is straight forward and just like installing any other so
 
 ![](../../.gitbook/assets/StarcounterInstallation.PNG)
 
-### Installing with command line
 
-* Open a `Command Prompt`window with `Administrator` privileges
-* Browse the directory where the Starcounter setup file exists.
-* Run the following command :
-
-```text
-<Your setup file name>.exe productionmode
-```
 
 ## Silent Installation
 
@@ -31,7 +23,7 @@ In `Silent Installation`the Starcounter installation process runs seamlessly wit
 * Run the following command :
 
 ```text
-<Your setup file name>.exe Silent productionmode unattended
+<Your setup file name>.exe Silent unattended
 ```
 
 ![](../../.gitbook/assets/silent-mode.PNG)
