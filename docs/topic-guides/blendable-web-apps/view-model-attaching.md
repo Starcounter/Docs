@@ -65,7 +65,7 @@ Attachment system needs to know if you try to add a rule for the handler with su
 
 ## Separate attachment rules in JSON
 
-Attachment rules should be described in JSON, separate from the application code. If the file `blend.json` is in the same directory as the starting application assembly - the file is parsed and the extracted attachment rules are applied right after the `Main` method. The same happens when the application restarts. With this mechanism, attachment rules can be changed for shipped application, where you only have the binaries. Here is an example of the content of a `blend.json` file:
+Attachment rules should be described in JSON, separate from the application code: `blend.json`. **NOTE**: `blend.json` file should be placed in the same directory as the starting application assembly. In Visual Studio you can click on `Properties` of this file and set `Copy to Output Directory` to `Copy if newer`. Upon application startup, `blend.json` is parsed and the extracted attachment rules are applied right after the `Main` method. The same happens when the application restarts. With this mechanism, attachment rules can be changed for shipped application, where you only have the binaries. Here is an example of the content of a `blend.json` file:
 
 ```javascript
 [
