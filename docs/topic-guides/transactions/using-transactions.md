@@ -16,7 +16,7 @@ Since `Db.Transact` and `Db.TransactAsync` can run more than once because of con
 
 The only way to rollback changes in `Db.Transact` and `Db.TransactAsync` is to throw an exception in the transaction. The alternative is to use `Db.Scope` with `Transaction.Rollback`.
 
-### Conflics
+### Conflicts
 
 If conflicts are likely, use `Db.Transact` or `Db.TransactAsync` because these handle conflicts while `Db.Scope` doesn't.
 
