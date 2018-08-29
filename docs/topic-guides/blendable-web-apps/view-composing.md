@@ -59,9 +59,7 @@ Default compositions of HTML views are provided by the app authors in the `decla
 With the MedicalProvider and PetList example we have two views, each with its default composition:
 
 ```markup
-<style>
-    @import '/PetList/style.css';
-</style>
+<link rel="stylesheet" href="/PetList/style.css">
 <div class="pet-list-wrapper">
     <div class="pet-list-wrapper__row">
         <slot name="petlist/details-name"></slot>
@@ -83,9 +81,7 @@ With the MedicalProvider and PetList example we have two views, each with its de
 When these two views are attached, the default composition from MedicalRecord is appended at the end of the PetList wrapper. The resulting composition looks like this:
 
 ```markup
-<style>
-    @import '/PetList/style.css';
-</style>
+<link rel="stylesheet" href="/PetList/style.css">
 <div class="pet-list-wrapper">
     <div class="pet-list-wrapper__row">
         <slot name="petlist/details-name"></slot>
@@ -108,8 +104,8 @@ Custom compositions are created by solution owners and stored as configuration i
 To create a custom composition, we will move the MedicalRecord table and headline into the `div class="pet-list-wrapper"` and expand the width of the wrapper to fit the table:
 
 ```markup
+<link rel="stylesheet" href="/PetList/style.css">
 <style>
-    @import '/PetList/style.css';
     .pet-list-wrapper {
         max-width: 750px;
     }

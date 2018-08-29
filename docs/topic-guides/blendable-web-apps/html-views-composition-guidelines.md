@@ -177,7 +177,7 @@ Regarding styling, there are few ways to make the application easier to visually
 
 1. Prefix all class names with the name of the app, as outlined in [Avoiding CSS Conflicts](avoiding-css-conflicts.md).
 2. Keep styling that will affect the presentation inside the `declarative-shadow-dom`.
-3. To avoid writing the same Shadow DOM CSS on different pages, it can be imported with the CSS `import` rule. The syntax for this is `<style>@import url("/yourapp/css/style.css");</style>`. In the example above it would be done this way:
+3. To avoid writing the same Shadow DOM CSS on different pages, it can be imported with the [`<link>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link). The syntax for this is `<link rel="stylesheet" href="/yourapp/css/style.css">`. In the example above it would be done this way:
 
 ```markup
 <link rel="import" href="/sys/palindrom-redirect/palindrom-redirect.html">
@@ -188,9 +188,7 @@ Regarding styling, there are few ways to make the application easier to visually
         <input slot="People/first-name-control" type="text" value="{{model.FirstName$::change}}" placeholder="First name" class="form-control">
     </template>
     <template is="declarative-shadow-dom">
-        <style>
-        @import url("/people/css/style.css");
-        </style>
+        <link rel="stylesheet" href="/people/css/style.css">
 
         <div class="people-field">
             <div class="people-field__label">
@@ -207,4 +205,3 @@ Regarding styling, there are few ways to make the application easier to visually
 ## Additional Resources
 
 To find more information about creating HTML View definitions, take a look at [the article linked above](https://starcounter.io/layout-compositions-html-partials/) and the [People app](https://github.com/Starcounter/People/tree/master/src/People/wwwroot/People/viewmodels) which fully adheres to these guidelines.
-
