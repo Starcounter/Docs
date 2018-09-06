@@ -44,7 +44,7 @@ The information that we want to have in the view is the description and the amou
 This is the result:
 
 {% code-tabs %}
-{% code-tabs-item title="ExpenseJson.html" %}
+{% code-tabs-item title="ExpenseJson.json" %}
 ```javascript
 {
   "Html": "/HelloWorld/ExpenseJson.html",
