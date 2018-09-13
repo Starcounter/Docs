@@ -33,13 +33,19 @@ Attachment rules use tokens. Tokens are case insensitive strings. Handlers (iden
 
 Token matching can be made more fine-grained by using contexts. They are composed of a list of strings that acts as a bit map when matched with other contexts. Contexts are also case-insensitive. No context \(`null` value\) means **match any context**. Otherwise, two handlers are matched if source context contains same elements as destination context. Examples:
 
-Starcounter came up with few predefined contexts that have shared meaning which can be understood by all app authors:
-* `page` - a size factor context. Use it if the view contains full information that the app has about a concept. The view renders in multiple lines. The view is suitable to be attached in full pages about a concept;
-* `thumbnail` - a size factor context. Use it if the view contains basic information that the app has about a concept. The view renders in multiple lines. The view is suitable to be attached in side information or teasers about a concept;
-* `row` - a size factor context. Use it if the view contains basic information that the app has about a concept. The view renders in a single line. The view is suitable to be attached in lists;
-* `icon` - a size factor context. Use it if the view contains the smallest unit of information that the app has about a concept. The view renders in a single element that is a link to a bigger view. The view is suitable to be attached in menu bars;
-* `search` - a meta context. Use it if the view is suitable for search results;
-* `app` - a meta context. Use it if the view represents the app itself, rather than a concept;
+Starcounter came up with few predefined **size factor contexts** that have shared meaning which can be understood by all app authors:
+
+* `page` - the view contains full information that the app has about a concept. The view renders in multiple lines. The view is suitable to be attached in full pages about a concept;
+* `thumbnail` - the view contains basic information that the app has about a concept. The view renders in multiple lines. The view is suitable to be attached in side information or teasers about a concept;
+* `row` - the view contains basic information that the app has about a concept. The view renders in a single line. The view is suitable to be attached in lists;
+* `icon` - view contains the smallest unit of information that the app has about a concept. The view renders in a single element that is a link to a bigger view. The view is suitable to be attached in menu bars;
+
+{% hint style="info" %} Every attachment rule should have exactly one size factor context. {% endhint %}
+
+In addition, there are also two kinds of predefined **meta contexts**:
+
+* `search` - the view is suitable for search results;
+* `app` - the view represents the app itself, rather than a concept;
 
 There are some compound contexts, that have a meaning of their own:
 
