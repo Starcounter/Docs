@@ -1,5 +1,7 @@
 # View-model Attaching
 
+{% hint style="working" %} Starcounter developers and invited partners have access to [Docs erratum](https://github.com/Starcounter/RebelsLounge/wiki/Docs-erratum) which lists important changes in the upcoming version. Please request your access. {% endhint %}
+
 ## Introduction
 
 When the browser sends a request to the server, the app with a URI handler that matches the request responds with a view-model. Starcounter has a unique feature of _attaching_ view-models from other apps to the main view-model in the same response using a system based on attachment rules.
