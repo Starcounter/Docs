@@ -31,7 +31,7 @@ Attaching was previously called "server-side blending"
 
 Attachment rules use tokens. Tokens are case insensitive strings. Handlers (identified by their URIs) with the same token are called on internal `Self.GET` calls or external URI that matches one of the handlers. Once the handler with a token is called, it will not trigger further calls mapped to that handler directly, only when a new `Self` call is made.
 
-Token matching can be made more fine-grained by using contexts. They are composed of a list of strings that acts as a bit map when matched with other contexts. Contexts are also case-insensitive. No context \(`null` value\) means **match any context**. Otherwise, two handlers are matched if source context contains same elements as destination context. Examples:
+Token matching can be made more fine-grained by using contexts. They are composed of a list of strings that acts as a bit map when matched with other contexts. Contexts are also case-insensitive. No context \(`null` value\) means **match any context**. Otherwise, two attachment rules are matched if source context has all elements of the destination context (superset matching). To understand such superset matching see examples below.
 
 Starcounter came up with few predefined **size factor contexts** that have shared meaning which can be understood by all app authors:
 
@@ -56,11 +56,12 @@ As an app author or solution owner, you can come up with your own contexts. Keep
 
 As a solution owner, you can replace the original contexts provided by an app author with custom contexts for fine tuning of the view-model attachment rules.
 
-No context \(`null` value\) means **match any context**. Otherwise, two handlers are matched if source context contains same elements as destination context. Examples:
+As we mentioned above, no context \(`null` value\) means **match any context**. Otherwise, Otherwise, two attachment rules are matched if source context has all elements of the destination context (superset matching). Examples:
 
 * Source context `{ "raw", "page" }` is NOT matched with `{ "search", "page" }`.
 * Source context `null` is matched with `{ "raw", "page" }` and `{ "search", "page" }` and any other context.
 * Source context `{ "page", "search" }` is matched with `{ "search", "page" }` and vice versa.
+* Source context `{ "page", "search", "raw" }` is matched with `{ "search", "page" }` but NOT vice versa.
 
 Consider contexts as an additional matching criteria for handlers with the same token.
 
