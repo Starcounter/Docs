@@ -32,16 +32,16 @@ Generating SSL private key in your local environment will require you to install
 Use openssl to generate a new private key.
 
 ```bash
-$openssl genrsa -des3 -out /var/www/master.oops-email.pass.com.key
+$ openssl genrsa -des3 -out master.myserver.pass.key
 ...
-Enter pass phrase for master.oops-email.pass.com.key:
-Verifying - Enter pass phrase for master.oops-email.pass.com.key:
+Enter pass phrase for master.myserver.pass.key:
+Verifying - Enter pass phrase for master.myserver.pass.key:
 ```
 
 Generated private key can stripped of its password so it can be loaded without manual password entry. You can do it if it's your test key.
 
 ```bash
-$ openssl rsa -in /var/www/master.oops-email.pass.com.key -out /var/www/master.oops-email.com.key
+$ openssl rsa -in master.myserver.pass.key -out master.myserver.key
 ```
 
 ### Generate CSR
@@ -49,10 +49,10 @@ $ openssl rsa -in /var/www/master.oops-email.pass.com.key -out /var/www/master.o
 Now that you've created your key, it's time to create the Certificate Signing Request, which will be used by the Certificate Authority of your choice to generate the Certificate that SSL will present to other parties during the handshake.
 
 ```bash
-$ openssl req -x509 -new -key master.oops-email.com.key -out master.oops-email.com.csr
+$ openssl req -x509 -new -key master.myserver.key -out master.myserver.csr
 ```
 
-The result will be a master.oops-email.com.csr file in your local directory \(alongside the master.oops-email.pass.com.key private key file from the above step\).  
+The result will be a master.myserver.csr file in your local directory \(alongside the master.myserver.pass.key private key file from the above step\).  
 You will be asked to enter a set of information. Before we proceed let's see which information we actually stated in the above command:
 
 * **openssl**: This is the basic command line tool for creating and managing OpenSSL certificates, keys, and other files.
@@ -82,14 +82,14 @@ Now we just need to modify server configuration to use those by adjusting our se
 ```bash
 server {
 listen 80;
-server_name master.oops-email.com;
+server_name master.myserver;
 return 301 https://$host$request_uri;
 }
 
 server {
 listen 443 ssl;
-ssl_certificate     /var/www/master.oops-email.com.csr;
-ssl_certificate_key /var/www/master.oops-email.com.key;
+ssl_certificate     master.myserver.csr;
+ssl_certificate_key master.myserver.key;
 ssl on;
 
 location / {
@@ -98,7 +98,7 @@ proxy_set_header Host $host;
 proxy_set_header X-Real-IP $remote_addr; }
 
 location /website/update {
-root /var/www/master.oops-email.com;
+root /path/to/master.myserver;
 }
 
 location ~ /__(.*)/[A-Z0-9]+ {
