@@ -54,7 +54,7 @@ There are some compound contexts, that have a meaning of their own:
 * `search, row` - a single-line row that is suitable for search results;
 * `app, icon` - an icon that opens the main page of the app;
 
-As an app author or solution owner, you can come up with your own contexts. Keep in mind that such contexts are unknown to other app authors, so they are less likely to attach view-models from other apps.
+As an app author, you should avoid coming up with your own contexts that are unknown to other app authors. In case you give a context that is only known to you, there isn't much chance that your view-model will be attached to a request that originates from another app.
 
 As a solution owner, you can replace the original contexts provided by an app author with custom contexts for fine tuning of the view-model attachment rules.
 
