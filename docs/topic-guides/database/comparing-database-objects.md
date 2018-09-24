@@ -10,12 +10,12 @@ In SQL queries database objects can be compared either by the equals `=` operato
 
 ```csharp
 var products = Db.SQL<Product>(
-    "SELECT p FROM Product p WHERE p.Customer = ?", customer);
+    $"SELECT p FROM {typeof(Product)} p WHERE p.{nameof(Customer)} = ?", customer);
 ```
 
 ```csharp
 var products = Db.SQL<Product>(
-    "SELECT p FROM Product p WHERE p.Customer.ObjectNo = ?",
+    $"SELECT p FROM {typeof(Product)} p WHERE p.Customer.ObjectNo = ?",
     customer.GetObjectNo());
 ```
 

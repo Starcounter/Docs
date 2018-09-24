@@ -88,7 +88,7 @@ class Program
         // a Starcounter task so we can do our database operations.
         await Scheduling.RunTask(() => {
             // Querying the person.
-            var person = Db.SQL<Person>("SELECT p FROM Person p WHERE p.Id = ?", id.ToString()).FirstOrDefault();
+            var person = Db.SQL<Person>($"SELECT p FROM {typeof(Person)} p WHERE p.{nameof(Person)} = ?", id.ToString()).FirstOrDefault();
 
             // Doing some database operations.
             // Notice that we use `Db.TransactAsync` here. Read about it in a separate article.

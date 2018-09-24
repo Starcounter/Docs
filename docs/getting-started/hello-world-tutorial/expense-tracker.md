@@ -97,10 +97,10 @@ public class Person
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public IEnumerable<Expense> Expenses => Db.SQL<Expense>(
-            "SELECT e FROM Expense e WHERE e.Spender = ?", this);
+            $"SELECT e FROM {typeof(Expense)} e WHERE e.{nameof(Spender)} = ?", this);
             
     public decimal CurrentBalance => Db.SQL<Expense>(
-            "SELECT e FROM Expense e WHERE e.Spender = ?", this)
+            $"SELECT e FROM {typeof(Expense)} e WHERE e.{nameof(Spender)} = ?", this)
             .Sum(e => e.Amount);
 }
 ```

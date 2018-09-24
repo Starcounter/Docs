@@ -36,7 +36,7 @@ document.querySelector("palindrom-client").network.changeState(url);
 When the user submits the form, a relevant HTTP handler tries to authenticate the user. In case of successful authentication, an auth token is generated and stored in the database:
 
 ```csharp
-var systemUser = Db.SQL<SystemUser>("SELECT o FROM Simplified.Ring3.SystemUser o WHERE o.Username = ?", Username).FirstOrDefault();
+var systemUser = Db.SQL<SystemUser>($"SELECT o FROM {typeof(SystemUser)} o WHERE o.{nameof(Username)} = ?", Username).FirstOrDefault();
 
 if (systemUser == null)
 {
@@ -123,7 +123,7 @@ Application.Current.Use((Request request) =>
 With this middleware, any app that handles this request will see that the session already exists. In case of our sample apps, the UserAdmin app shares the data model with the SignIn app. A simple lookup in the `SystemUserSession` table will get the relevant `SystemUser` object.
 
 ```csharp
-var query = "SELECT o FROM Simplified.Ring5.SystemUserSession o WHERE o.SessionIdString = ?";
+var query = $"SELECT o FROM {typeof(SystemUserSession)} o WHERE o.SessionIdString = ?";
 var userSession = Db.SQL<SystemUserSession>(query, Session.Current.SessionId).FirstOrDefault();
 
 return userSession?.Token?.User;

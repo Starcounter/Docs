@@ -108,7 +108,7 @@ Handle.GET("/email-client/new-email", () =>
 
 Handle.GET("/email-client/email/{?}", (string emailId) =>
 {
-  Email email = Db.SQL<Email>("SELECT e FROM Email e WHERE ObjectId=?", emailId).First;
+  Email email = Db.FromId<Email>(emailId);
   return new MailPage()
   {
     Data = email
@@ -167,7 +167,7 @@ partial class MailPage : Json, IBound<Mail>
 {
   void Handle(Input.RecipientAddress action)
   {
-    var emailAddress = Db.SQL<EmailAddress>("SELECT e FROM EmailAddress e WHERE Address = ?", action.value).First;
+    var emailAddress = Db.SQL<EmailAddress>($"SELECT e FROM {typeof(EmailAddress)} e WHERE  e.{nameof(Address)} = ?", action.value).First;
     if (emailAddress == null)
     {
       emailAddress = new EmailAddress() 
@@ -201,7 +201,7 @@ Starcounter throws this exception when an iterator closes before finishing. An i
 This is the simplest way to close the iteration and throw the exception if we assume that this code is in a long-running transaction:
 
 ```csharp
-foreach (var person in Db.SQL("SELECT p FROM Person p"))
+foreach (var person in Db.SQL($"SELECT p FROM {typeof(Person)} p"))
 {
     Transaction.Commit();
 }

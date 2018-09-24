@@ -37,7 +37,7 @@ person.LastName = "Doe";
 To update the `LastName` of all the `Person` objects in the database, they would be looped through and updated, like so:
 
 ```csharp
-var people = Db.SQL<Person>("SELECT p FROM Person p");
+var people = Db.SQL<Person>($"SELECT p FROM {typeof(Person)} p");
 foreach (var person in people)
 {
     person.LastName = person.LastName.ToUpper();
@@ -59,9 +59,9 @@ They look like this:
 var john = new Person();
 john.Delete();
 
-Db.SQL("DELETE FROM Person");
+Db.SQL($"DELETE FROM {typeof(Person)}");
 
-Db.SQL("DELETE FROM Person WHERE Name = ?", "John");
+Db.SQL($"DELETE FROM {typeof(Person)} p WHERE p.{nameof(Name)} = ?", "John");
 ```
 
 `person.Delete()` will just delete `john` while `DELETE FROM Person` will delete all objects of the `Person` class.

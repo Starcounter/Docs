@@ -104,9 +104,7 @@ namespace MultiplePagesDemo
 
             Handle.GET("/multiplepagesdemo/mails/{?}", (string id) =>
             {
-                var mail = Db.SQL<Mail>(
-                    "SELECT m FROM mail m WHERE objectid=?", id)
-                    .FirstOrDefault();
+                var mail = Db.FromId<Mail>(id);
 
                 var mailsPage = Self.GET<MailsPage>(
                     "/multiplepagesdemo/mails");
@@ -118,7 +116,7 @@ namespace MultiplePagesDemo
             Db.Transact(() =>
             {
                 var mails = Db.SQL<Mail>(
-                    "SELECT m FROM Mail m");
+                    $"SELECT m FROM {typeof(Mail)} m");
 
                 if (mails.FirstOrDefault() == null)
                 {

@@ -55,7 +55,7 @@ class Program
         Handle.GET("/GetPerson", () =>
         {
             // Retrieve a database object from the database
-            var person = Db.SQL<Person>("SELECT P FROM Person P")
+            var person = Db.SQL<Person>($"SELECT P FROM {typeof(Person)} P")
                 .First(); 
 
             return new PersonPage() 
@@ -452,7 +452,7 @@ class Program
         Handle.GET("/GetPerson", () =>
         {
             var person = Db.SQL<Person>(
-                "SELECT P FROM Person P WHERE P.FirstName = ?",
+                $"SELECT P FROM {typeof(Person)} P WHERE P.{nameof(Person)} = ?",
                 "Steve")
                 .FirstOrDefault();
             
@@ -571,10 +571,10 @@ It's not possible to set the data object of an empty Typed JSON object. For exam
 var personPage = new PersonPage();
 
 // Throws ScErrInvalidOperationDataOnEmptyJson
-personPage.Person.Data = Db.SQL("SELECT p FROM Person p").First();
+personPage.Person.Data = Db.SQL($"SELECT p FROM {typeof(Person)} p").First();
 
  // Throws ScErrInvalidOperationDataOnEmptyJson 
-personPage.Friends.Data = Db.SQL("SELECT p.Friends FROM Person p");
+personPage.Friends.Data = Db.SQL($"SELECT p.{nameof(Friends)} FROM {typeof(Person)} p");
 ```
 
 These lines throw exceptions because it's not clear what should be done. Since there are no properties, there's nothing to bind to, and thus the assignment serves no purpose. Throwing an exceptions ensures that developers don't write code that they expect something from but in reality does nothing.
