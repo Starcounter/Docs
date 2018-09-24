@@ -2,7 +2,7 @@
 
 Welcome to the first part of our Hello World tutorial!
 
-We will start by creating a Starcounter application in Visual Studio by going to `New Project -> Templates -> Visual C# -> Starcounter -> Starcounter 2.3 Application`. We will name the application `HelloWorld`.
+We will start by creating a Starcounter application in Visual Studio by going to `New Project -> Templates -> Visual C# -> Starcounter -> Starcounter 2.4 Application`. We will name the application `HelloWorld`.
 
 ## Add a persistent class
 
@@ -51,7 +51,7 @@ class Program
     {
         Db.Transact(() =>
         {
-            var person = Db.SQL<Person>("SELECT p FROM Person p")
+            var person = Db.SQL<Person>($"SELECT p FROM {typeof(Person)} p")
                 .FirstOrDefault();
             if (person == null)
             {

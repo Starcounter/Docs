@@ -12,7 +12,7 @@ Querying a database class or property that doesn't follow these restrictions wil
 [Database]
 public class Päron {}
 
-Db.SQL("SELECT p FROM Päron p"); // SqlException
+Db.SQL($"SELECT p FROM typeof(Päron)} p"); // SqlException
 ```
 
 ## Casing

@@ -18,7 +18,7 @@ public class Department
 {
   public IEnumerable Employees => 
     Db.SQL<Employee>(
-      "SELECT e FROM Employee e WHERE e.Department = ?", this);
+      $"SELECT e FROM {typeof(Employee)} e WHERE e.{nameof(Department)} = ?", this);
 }
 
 [Database]
@@ -44,7 +44,7 @@ public class Person
 {
   public IEnumerable EquityPortfolio => 
     Db.SQL<Shares>(
-      "SELECT s.Equity FROM Shares s WHERE s.Owner = ?", this);
+      $"SELECT s.{nameof(Equity)} FROM {typeof(Shares)} s WHERE s.{nameof(Owner)} = ?", this);
 }
 
 [Database]
@@ -52,7 +52,7 @@ public class Company
 {
   public IEnumerable ShareHolders => 
     Db.SQL<Shares>(
-      "SELECT s.Owner FROM Shares s WHERE s.Equity = ?", this);
+      $"SELECT s.{nameof(Owner)} FROM {typeof(Shares)} s WHERE s.{nameof(Equity)} = ?", this);
 }
 
 [Database]

@@ -9,8 +9,8 @@ You can query data stored in the database with SQL queries. The query is passed 
 SQL queries are executed with the `Db.SQL` method. If the SQL command is `SELECT`, the function returns `IEnumerable<object>` or `IEnumerable<T>` depending on if you use the generic method or not, it otherwise returns `null`.
 
 ```csharp
-Db.SQL("SELECT p FROM Person p"); // => IEnumerable<Person>
-Db.SQL("DELETE FROM Person"); // => null
+Db.SQL($"SELECT p FROM {typeof(Person)} p"); // => IEnumerable<Person>
+Db.SQL($"DELETE FROM {typeof(Person)}"); // => null
 ```
 
 In addition to traditional SQL, Starcounter lets you select objects in addition to primitive types such as strings and numbers. Also, it allows you to use C\# style path expressions such as `person.FullName`.
@@ -19,10 +19,10 @@ The `Db.SQL<T>` method supports the `System.Tuple` result type. You can use it f
 
 ```csharp
 var maxAndMinAgeByGender = Db.SQL<Tuple<long, long>>(
-    "SELECT MAX(p.Age), MIN(p.Age) FROM Person p GROUP BY p.Gender");
+    $"SELECT MAX(p.Age), MIN(p.Age) FROM {typeof(Person)} p GROUP BY p.{nameof(Gender)}");
     
 var ageHeightAndWeight = Db.SQL<Tuple<int, short?, byte?>>(
-    "SELECT p.Age, p.Height, p.Weight FROM Person p");
+    $"SELECT p.Age, p.Height, p.Weight FROM {typeof(Person)} p");
 ```
 
 The tuple argument has to be consistent with the type of the corresponding queried property. Type casting is only supported for the types that can be implicitly cast.
@@ -31,60 +31,18 @@ For queries with more than 7 properties, use nested tuples:
 
 ```csharp
 Db.SQL<Tuple<int, int, int, int, int, int, int, Tuple<int, int>>>(
-    "SELECT p.Attr1, p.Attr2, p.Attr3, p.Attr4, p.Attr5, p.Attr6, p.Attr7, p.Attr8, p.Attr9 FROM Person p");
+    $"SELECT p.Attr1, p.Attr2, p.Attr3, p.Attr4, p.Attr5, p.Attr6, p.Attr7, p.Attr8, p.Attr9 FROM {typeof(Person)} p");
 
 Db.SQL<Tuple<int, int, int, int, int, int, int,
              Tuple<int, int, int, int, int, int, int,
                    Tuple<int, int, int, int>>>>(
     "SELECT p.Attr1, p.Attr2, p.Attr3, p.Attr4, p.Attr5, p.Attr6, p.Attr7, p.Attr8, p.Attr9, p.Attr10, " +
-    "p.Attr11, p.Attr12, p.Attr13, p.Attr14, p.Attr15, p.Attr16, p.Attr17, p.Attr18 FROM Person p");
+    $"p.Attr11, p.Attr12, p.Attr13, p.Attr14, p.Attr15, p.Attr16, p.Attr17, p.Attr18 FROM {typeof(Person)} p");
 ```
 
 {% hint style="warning" %}
 When writing queries with `Db.SQL`, keep in mind that there are [certain reserved words](../sql/reserved-words.md) that should be escaped. That is done by surrounding the reserved word in quotation marks.
 {% endhint %}
-
-## Making queries less fragile
-
-Since the queries are strings, they are sensitive to refactoring, for example if a database class is renamed. To make the queries less fragile, `typeof` and `nameof` can be used:
-
-```csharp
-Db.SQL<Person>(
-    $"SELECT p FROM {typeof(Person)} p");
-    
-Db.SQL<string>(
-    $"SELECT p.{nameof(Person.Name)} FROM {typeof(Person)} p");
-    
-Db.SQL<Person>(
-    $@"SELECT s FROM {typeof(Person).Name} s
-    WHERE s.{nameof(Person.Name)}
-    LIKE ?", "A%");
-```
-
-If a database class or one of its properties includes a SQL [reserved word](../sql/reserved-words.md), it has to be escaped with quotation marks:
-
-```csharp
-//fast, not refactorable
-Db.SQL("SELECT * FROM Customer.\"Order\"");
-
-// slow and refactorable
-var customerName = $"{typeof(Customer).FullName.Replace(".", "\".\"")}"
-Db.SQL($"SELECT * FROM \"{customerName}\""); 
-```
-
-Since `typeof` is evaluated during runtime, a query with `typeof` that is used many times should be constructed once to avoid the performance cost of constructing the string every time:
-
-```csharp
-var query = $@"SELECT s FROM {typeof(Person).Name} s 
-               WHERE s.{nameof(Person.Name)} LIKE ?";
-               
-var names = new[] {"a", "very", "long", "list"};
-foreach(var name in names)
-{
-  var person = Db.SQL<Person>(query, name);
-  DoSomethingAboutIt(person);
-}
-```
 
 ## Using variables
 
@@ -92,7 +50,7 @@ SQL variables are represented by question marks \(?\) in the query string, and y
 
 ```csharp
 var employees = Db.SQL<Employee>(
-  "SELECT e FROM Employee e WHERE e.FirstName = ?", "Joe");
+  $"SELECT e FROM {typeof(Employee)} e WHERE e.{nameof(FirstName)} = ?", "Joe");
   
 foreach (var employee in employees)
 {
@@ -107,7 +65,7 @@ var lastName = "Smith";
 var manager = new Employee("John", "Doe", bigBoss);
 
 var employees = Db.SQL<Employee>(
-  "SELECT e FROM Employee e WHERE e.LastName = ? AND e.Manager = ?", 
+  $"SELECT e FROM {typeof(Employee)} e WHERE e.{nameof(LastName)} = ? AND e.{nameof(Manager)} = ?", 
   lastName, manager);
   
 foreach (var employee in employees)
@@ -129,7 +87,7 @@ If a query cannot be processed due to some syntax or type checking error then th
 ```csharp
 try
 {  
-    var people = Db.SQL<Person>("SELECT e.NonExistingProperty FROM Person p");
+    var people = Db.SQL<Person>($"SELECT e.NonExistingProperty FROM {typeof(Person)} p");
     
     foreach(Person person in people)  
     {    
@@ -218,7 +176,7 @@ class Program
         Db.Transact(() =>
         {
             var person = new Person() { House = House.Tyrell };
-            var house = Db.SQL("SELECT p.House FROM Person p").First();
+            var house = Db.SQL($"SELECT p.{nameof(House)} FROM {typeof(Person)} p").FirstOrDefault();
             Console.Write(house); // => 1
             Console.Write((House)house); // => Tyrell
             Console.Write(Db.FromId<Person>(person.GetObjectID()).House); // => Tyrell
@@ -268,7 +226,7 @@ It is possible to have collections in the database class if the collection has a
 ```csharp
 public List<string> Branches => new List<string>(){ "develop", "master" };
 
-public IEnumerable<Person> Friends => Db.SQL<Person>("SELECT p FROM Person p");
+public IEnumerable<Person> Friends => Db.SQL<Person>($"SELECT p FROM {typeof(Person)} p");
 ```
 
 These properties and fields are not allowed:
@@ -282,7 +240,7 @@ public IEnumerable Animals;
 The properties with explicitly declared bodies cannot be queried for with SQL, but they can be accessed from the application code after they have been retrieved from the database. If a `Person` class has the property `Friends` with a declared body, then `Friends` can be accessed like so:
 
 ```csharp
-var person = Db.SQL<Person>("SELECT p FROM Person p").FirstOrDefault();
+var person = Db.SQL<Person>($"SELECT p FROM {typeof(Person)} p").FirstOrDefault();
 IEnumerable<Person> friends = person.Friends;
 ```
 

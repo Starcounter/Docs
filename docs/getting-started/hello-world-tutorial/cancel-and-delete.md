@@ -72,7 +72,7 @@ void Handle(Input.CancelTrigger action)
 
 void Handle(Input.DeleteAllTrigger action)
 {
-    Db.SQL("DELETE FROM Expense WHERE Spender = ?", this.Data);
+    Db.SQL($"DELETE FROM {typeof(Expense)} e WHERE e.{nameof(Spender)} = ?", this.Data);
 }
 ```
 {% endcode-tabs-item %}

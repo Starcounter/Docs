@@ -50,7 +50,7 @@ Application.Current.Use(new PartialToStandaloneHtmlProvider());
 Handle.GET("/HelloWorld", () =>
 {
     Session.Ensure();
-    var person = Db.SQL<Person>("SELECT p FROM Person p")
+    var person = Db.SQL<Person>($"SELECT p FROM {typeof(Person)} p")
         .FirstOrDefault();
     return new PersonJson { Data = person };
 });

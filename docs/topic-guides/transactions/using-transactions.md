@@ -95,7 +95,7 @@ class Program
             }); // Animal is commited to the database - transaction is done
 
             // The Animal committed can be accessed in the outer transaction
-            var animal = Db.SQL("SELECT a FROM Animal a").First();
+            var animal = Db.SQL($"SELECT a FROM {typeof(Animal)} a").First();
 
             // Rolls back the Person but not the Animal
             Transaction.Current.Rollback();

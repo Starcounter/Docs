@@ -21,13 +21,13 @@ The asterisk shorthand is treated as a literal in `COUNT`. Since `Db.SQL` doesn'
 
 ```csharp
 // This throws SCERR7029
-Db.SQL("SELECT COUNT(*) FROM Person").First();
+Db.SQL($"SELECT COUNT(*) FROM {typeof(Person)}").FirstOrDefault();
 // Using an identifier instead of * works
-Db.SQL("SELECT COUNT(p) FROM Person p").First();
+Db.SQL($"SELECT COUNT(p) FROM typeof(Person)} p").FirstOrDefault();
 // Db.SlowSQL supports literals, so it can be used
-Db.SlowSQL("SELECT COUNT(*) FROM Person").First();
+Db.SlowSQL($"SELECT COUNT(*) FROM typeof(Person)}").FirstOrDefault();
 // Linq can also give you the number of rows
-Db.SQL("SELECT p FROM Person p").Count();
+Db.SQL($"SELECT p FROM typeof(Person)} p").Count();
 ```
 
  The first option of using an identifier to get the count best in most cases, both for versatility and performance.

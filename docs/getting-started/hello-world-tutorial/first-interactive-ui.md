@@ -19,7 +19,7 @@ Handle.GET("/HelloWorld", () =>
     return Db.Scope(() =>
     {
         Session.Ensure();
-        var person = Db.SQL<Person>("SELECT p FROM Person p")
+        var person = Db.SQL<Person>($"SELECT p FROM {typeof(Person)} p")
             .FirstOrDefault();
         return new PersonJson { Data = person };
     });

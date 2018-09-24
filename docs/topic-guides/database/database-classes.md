@@ -142,8 +142,8 @@ namespace TransientSampleApp1
             // Fetch the object from the database. 
             // The reference is not the initial reference anymore
             person = Db.SQL<Person>(
-                "SELECT p FROM Person p WHERE p.Name = ?", "Jane Doe")
-                .First();
+                $"SELECT p FROM {typeof(Person)} p WHERE p.{typeof(Name)} = ?", "Jane Doe")
+                .FirstOrDefault();
 
             // Retrieving the non-transient property works
             Console.Write(person.Name); // => "Jane Doe"
