@@ -4,15 +4,15 @@ Real world applications often need to support a variety of languages. This artic
 
 ## Getting started
 
-1. Create resources file with strings you want to localize.
-   1. In Visual Studio, open "Add new item" menu and choose "Resources File"
-   1. Select any name for your file. We'll use `Strings.resx` in this example
-   1. Add as many resources files as many languages you want to support. Use the following format when naming them: `name.ll-cc.resx` where `ll` is the language code and `cc` is the country code. To continue our example, you would add `Strings.sv-se.resx` to support Swedish language as used in Sweden.
-1. Populate your resources files with texts you want to localize.
+1. Create a resource file with the strings to localize.
+   1. In Visual Studio, open "Add new item" menu and choose "Resources File".
+   1. Select any name for your file. We'll use `Strings.resx` in this example.
+   1. Add as many resource files as many languages you want to support. Use the following format when naming them: `name.ll-cc.resx` where `ll` is the language code and `cc` is the country code. To continue our example, you would add `Strings.sv-se.resx` to support Swedish language as used in Sweden.
+1. Populate your resource files with texts you want to localize.
    1. The `name` column should contain a valid C# indentifier, like `SignIn`. Value should be the relevant text in language chosen for this file. For example, it could be "Logga in" in file `Strings.sv-se.resx`. The comments column can be used freely.
-1. Visual Studio will generate a class from your resources file. In our example, it will generate `Strings` class with a string member `SignIn`
-   1. Value of this member will depend on currently selected culture. You don't have to worry about setting it in your application, it's done by a special language selection application.
-   1. In your application, instead of using hard-coded strings use members of this class. For example, here is an example of view-model using a generated resources class:
+1. Visual Studio will generate a class from your resource file. In our example, it will generate `Strings` class with a string member `SignIn`.
+   1. The value of this property will depend on currently selected culture. You don't have to worry about setting it in your application, it's done by a special language selection application.
+   1. In your application, instead of using hard-coded strings use members of this class. For example, here is an example of view-model using a generated resource class:
 
    ```c#
    public partial class SignInViewModel: Json
@@ -51,7 +51,7 @@ You can introduce a simple class that wraps this formatting to make your code mo
 ```c#
 public class StringsFormatted
 {
-    public string HelloUser(string userName) => string.Format(Strings.HelloUser, userName);
+    public static string HelloUser(string userName) => string.Format(Strings.HelloUser, userName);
 }
 ```
 ```c#
@@ -60,7 +60,7 @@ Message = StringsFormatted.HelloUser(user.FirstName);
 
 ## Localizing client-side strings
 
-To localize texts that are currently hard-coded into html views, you have to move them to the view-model. For example, imagine you want to localize the following view-model:
+To localize texts that are currently hard-coded into HTML views, you have to move them to the view-model. For example, imagine you want to localize the following view-model:
 
 ```json
 {
@@ -112,4 +112,4 @@ public partial class TermsViewModel: Json
 }
 ```
 
-Now, your view-model is localized
+Now, your view-model is localized.
