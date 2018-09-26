@@ -1,6 +1,6 @@
 # Localizing Starcounter Apps
 
-Starcounter applications are .NET applications and they are localized as such.
+Real world applications often need to support a variety of languages. This article describes how to add such support to your application. It doesn't describe any practices for translation of texts or internals of how localization support works in Starcounter.
 
 ## Getting started
 
