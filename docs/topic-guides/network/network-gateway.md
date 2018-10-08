@@ -56,8 +56,6 @@ Starcounter gateway provides basic reverse proxy functionality based on HTTP Hos
 
 In the example above when HTTP request with `Host` header `www.example1.sc` comes on port 80 its automatically transferred to port 8080 on localhost.
 
-You can see current configuration for reverse proxies by calling `GET /gw/stats` on system port.
-
 To apply current gateway configuration \(URI aliases and reverse proxy configuration\) from `scnetworkgateway.xml` one should call `GET /gw/updateconf` on system port. If errors occur applying new changes - the previous configuration is kept.
 
 ## URI aliasing
