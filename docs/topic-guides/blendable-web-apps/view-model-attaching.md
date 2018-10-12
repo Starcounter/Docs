@@ -123,3 +123,13 @@ Here is the explanation of each field:
 * `Contexts`: Attachment rule contexts (if any). Default value is "null".
 * `AllowFromDirection`: Allows attachment rule calls from this URI (it defines if this URI can trigger attachment process). That means if it's set to true, when an app calls `Self.GET()` on an attachment rule URI it will request other apps for content with the same contexts, otherwise it will not. Default value is "True".
 * `AllowToDirection`: Allows attachment rule calls to this URI (it defines if this URI can be triggered during attachment process). That means if it's set to true, when other app requests on attachment rule with the same contexts as one of the attachment rules described in your app, your app will respond, otherwise it will not. Default value is "True".
+
+
+## Troubleshooting
+
+If the view attachment rules are not working as you expect, here is the list of things that might cause this:
+- The contexts in the attachment rules do not match.
+- The handler does not return a response of type `Json`.
+- Your view-model `Json` object does not have `Html` property.
+- Your attachment point is not expressed via `Self.GET`.
+- There is no handler in the app that responds to the attachment point `Self.GET`.
