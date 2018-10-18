@@ -2,7 +2,7 @@
 
 ## Introduction
 
-If you are writing web applications and you're allowed to use modern browser features, Web Components is a powerful ally. A good introduction can be found on [WebComponents.org](https://www.webcomponents.org/introduction/), but we will give you a summary and how to use Web Components in Starcounter web apps.
+If you are writing web applications and you're allowed to use modern browser features, Web Components is a powerful ally. A good introduction can be found on [MDN](https://developer.mozilla.org/en-US/docs/Web/Web_Components) and [WebComponents.org](https://www.webcomponents.org/introduction/), but we will give you a summary and how to use Web Components in Starcounter web apps.
 
 ## Summary of Web Components
 
