@@ -41,27 +41,21 @@ Since the network gateway supports limited size uploads, the user has to write a
 
 ## Reverse proxy functionality
 
-Starcounter gateway provides basic reverse proxy functionality based on HTTP Host header in requests. Reverse proxies are defined in `ReverseProxies` section of gateway configuration. Here is an example of reverse proxy that redirects all incoming HTTP requests on port 80, with Host header equals "www.example1.sc", to service on localhost and port 8080:
+Starcounter gateway provides basic reverse proxy functionality to other port (either on codehost or in gateway) based on HTTP Host header in requests. Reverse proxies are defined in `ReverseProxies` section of gateway configuration. Here is an example of reverse proxy that redirects all incoming HTTP requests on port 80, with Host header equals "www.example1.sc", to the port 8080:
 
 ```markup
 <ReverseProxy>
-  <DestinationIP>127.0.0.1</DestinationIP>
   <DestinationPort>8080</DestinationPort>
   <StarcounterProxyPort>80</StarcounterProxyPort>
   <MatchingHost>www.example1.sc</MatchingHost>
 </ReverseProxy>
 ```
 
-* **DestinationIP**: IP address of destination server, to which proxied requests are redirected.
-
-  or
-
-* **DestinationDNS**: DNS name of destination server, to which proxied requests are redirected.
-* **DestinationPort**: port address of destination service.
+* **DestinationPort**: destination port.
 * **StarcounterProxyPort**: Starcounter gateway port on which requests that should be proxied are received.
 * **MatchingHost**: HTTP Host header value to filter out requests to be processed by this proxy.
 
-In the example above when HTTP request with `Host` header `www.example1.sc` comes on port 80 its automatically transferred to port 8080 on localhost.
+In the example above when HTTP request with `Host` header `www.example1.sc` comes on port 80 its automatically transferred to handlers on port 8080.
 
 ## URI aliasing
 
