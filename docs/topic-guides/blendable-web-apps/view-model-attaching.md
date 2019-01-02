@@ -74,7 +74,7 @@ Attachment system needs to know if you try to add a rule for the handler with su
 
 ## Separate attachment rules in JSON
 
-Attachment rules should be described in JSON, separate from the application code. Upon application startup, `blend.json` is parsed and the extracted attachment rules are applied right after the `Main` method. The same happens when the application restarts. With this mechanism, attachment rules can be changed for shipped application, where you only have the binaries. 
+Attachment rules should be described in JSON, separate from the application code. Upon application startup, `[appname].blend.json` (or, if not found, `blend.json`) is parsed and the extracted attachment rules are applied right after the `Main` method. The same happens when the application restarts. With this mechanism, attachment rules can be changed for shipped application, where you only have the binaries. 
 
 {% hint style="warning" %} `blend.json` file should be placed in the same directory as the starting application assembly. In Visual Studio you can click on `Properties` of this file and set `Copy to Output Directory` to `Copy if newer`. {% endhint %}
 
@@ -123,3 +123,13 @@ Here is the explanation of each field:
 * `Contexts`: Attachment rule contexts (if any). Default value is "null".
 * `AllowFromDirection`: Allows attachment rule calls from this URI (it defines if this URI can trigger attachment process). That means if it's set to true, when an app calls `Self.GET()` on an attachment rule URI it will request other apps for content with the same contexts, otherwise it will not. Default value is "True".
 * `AllowToDirection`: Allows attachment rule calls to this URI (it defines if this URI can be triggered during attachment process). That means if it's set to true, when other app requests on attachment rule with the same contexts as one of the attachment rules described in your app, your app will respond, otherwise it will not. Default value is "True".
+
+
+## Troubleshooting
+
+If the view attachment rules are not working as you expect, here is the list of things that might cause this:
+- The contexts in the attachment rules do not match.
+- The handler does not return a response of type `Json`.
+- Your view-model `Json` object does not have `Html` property.
+- Your attachment point is not expressed via `Self.GET`.
+- There is no handler in the app that responds to the attachment point `Self.GET`.
