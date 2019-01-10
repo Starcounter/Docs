@@ -1,5 +1,6 @@
 # Star CLI
 
+
 ## Introduction
 
 The `star` command line interface \(CLI\) handles tasks in a database. This page covers the most important commands. The rest of the commands can be found with `star --help` or `star --helpextended`.
