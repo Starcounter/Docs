@@ -556,6 +556,10 @@ Note that if the actual response `Body` object returned in handler is of differe
 
 The hierarchy of `Self` calls can be quite deep and sometimes its needed to get the current call level. To achieve that there is a special thread static variable `Handle.CallLevel`. Every `Self` call the variable is incremented and then restored to current value on the way back.
 
+### Origin of the requests
+
+The origin of the request (external - coming from the network, or internal - coming from `Self.GET`) can be identified using the `IsExternal` property of the `Request` object.
+
 ## Alias
 
 An alias is a `GET` handle that returns the result of an `Self.GET` call.
