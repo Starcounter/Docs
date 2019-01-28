@@ -101,7 +101,7 @@ Handle.GET("/email-client/new-email", () =>
   {
     var email = new Email();
     var mailPage = Self.GET<MailPage>("/email-client/email/" + email.GetObjectID());
-    masterPage.CurrentPage = page;
+    masterPage.CurrentPage = mailPage;
   });
   return masterPage;
 });
