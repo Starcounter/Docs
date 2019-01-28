@@ -31,8 +31,6 @@ Transactions can be mixed as outer and inner transactions - one transaction wrap
 | Short | Long | Not supported. Run-time error |
 | Short | Short | Execute inner as part of outer |
 
-Transactions can be mixed as outer and inner transactions - one transaction wraps around the other. These are the possible combinations and their effects:
-
 ### Long-running in long-running
 
 With a long-running transaction inside a long-running transaction, they act as if they were one transaction:
