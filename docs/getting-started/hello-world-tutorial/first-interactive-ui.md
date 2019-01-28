@@ -1,7 +1,7 @@
 # First interactive UI
 
 The initial UI will allow us to change the name of a person and save those changes to the database. This requires a couple of things:  
-1. The database should be able to commit changes to the database at any time  
+1. The application should be able to commit changes to the database at any time  
 2. The view-model needs to be writable from the view  
 3. The view has to allow input and bind the input to the view-model
 

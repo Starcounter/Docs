@@ -44,16 +44,19 @@ This is how the handler and middleware looks in code:
 {% code-tabs %}
 {% code-tabs-item title="Program.cs" %}
 ```csharp
-Application.Current.Use(new HtmlFromJsonProvider());
-Application.Current.Use(new PartialToStandaloneHtmlProvider());
-
-Handle.GET("/HelloWorld", () =>
+static void Main()
 {
-    Session.Ensure();
-    var person = Db.SQL<Person>("SELECT p FROM Person p")
-        .FirstOrDefault();
-    return new PersonJson { Data = person };
-});
+    Application.Current.Use(new HtmlFromJsonProvider());
+    Application.Current.Use(new PartialToStandaloneHtmlProvider());
+
+    Handle.GET("/HelloWorld", () =>
+    {
+        Session.Ensure();
+        var person = Db.SQL<Person>("SELECT p FROM Person p")
+            .FirstOrDefault();
+        return new PersonJson { Data = person };
+    });
+}
 ```
 {% endcode-tabs-item %}
 {% endcode-tabs %}
