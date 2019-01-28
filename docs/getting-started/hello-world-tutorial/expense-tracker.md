@@ -91,6 +91,8 @@ In code, it looks like this:
 {% code-tabs %}
 {% code-tabs-item title="Program.cs" %}
 ```csharp
+using System.Collections.Generic;
+
 [Database]
 public class Person
 {
