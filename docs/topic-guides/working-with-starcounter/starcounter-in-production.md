@@ -118,7 +118,7 @@ Starcounter does not update the `Date modified` attribute of the `.log` files fo
 
 Follow these steps to find these files:
 
-1. Go to the server repository that is found, by default, at `%UserProfile%\Documents\Starcounter\Personal`. If configurations have been done in the installer, then it might reside somewhere else. In that case, it can be found by following the `<server-dir>` path at `Program Files\Starcounter\configuration\Personal.xml`, if the default setting were accepted in the installer.
+1. Go to the server repository that is found, by default, at `%UserProfile%\Documents\Starcounter\Personal`. If configurations have been done in the installer, then it might reside somewhere else. In that case, it can be found by checking the value of environment variable `StarcounterDataDir`, which is set by installer.
 2. Open `Personal.server.config` in this repository.
 3. Go to the path specified by `<DatabaseDirectory>`. It's normally something like: `%UserProfile%\Documents\Starcounter\Personal\Databases`.
 4. In this directory, there will be a directory for each database with the same name as the database.

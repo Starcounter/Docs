@@ -33,25 +33,10 @@ StarcounterBin=C:\Program Files\Starcounter
 
 ### Server repository
 
-This directory store configurations concerning each database. At the root of it is the server configuration file. This file is consumed by Starcounter to find additional configurations. Currently, all configurations are in XML format.
+This directory stores configurations concerning each database. At the root of it is the server configuration file. This file is consumed by Starcounter to find additional configurations. Currently, all configurations are in XML format.
 
 **How to find the server repository**  
-In the installation directory, we store a file \(`Personal.xml`\) under the Configuration folder:
-
-```text
-\Program Files\Starcounter
-  \Configuration\
-    Personal.xml
-```
-
-The XML-path `service\server-dir` in this file will reveal the path to the server repository:
-
-```text
-<?xml version="1.0" encoding="UTF-8"?>
-<service>
-  <server-dir>C:\Users\Per\Documents\Starcounter\Personal</server-dir>
-</service>
-```
+Path to server directory is stored in environment variable `StarcounterDataDir` which is set during installation. If this environment variable is not set by some reason, the default path for server is checked in: `%UserProfile%\Documents\Starcounter\Personal`.
 
 ## The server configuration file
 
