@@ -35,7 +35,7 @@ Middleware does not impact internal `Self.GET` calls.
 
 When allowing external HTTP requests, it might be useful to pre-process or filter out certain requests before the designated handler is called. Request filters make it possible to do exactly that. They are lists of user-supplied delegates, or filters, that are executed on external requests before the actual handlers are called. These filters are executed one by one until one of the filters returns a non-null `Response`. If a `Response` was returned from the request filter, then this response is returned to the client without calling the handler. If none of the filters returned a `Response` object, then the request will be passed on and dealt with by the handler.
 
-![](../../.gitbook/assets/middleware-example.PNG)
+![](../../.gitbook/assets/middleware-example%20%283%29.PNG)
 
 An example of this can be an basic spam filter:
 

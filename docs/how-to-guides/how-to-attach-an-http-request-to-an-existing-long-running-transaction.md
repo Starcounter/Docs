@@ -45,7 +45,7 @@ Handle.GET("/people/persons/{?}", (string id) =>
 });
 ```
 
-### Read more
+## Read more
 
 [Guide: Long-running transactions](../topic-guides/transactions/long-running-transactions.md)
 

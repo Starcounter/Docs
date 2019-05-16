@@ -49,7 +49,7 @@ One additional feature when using `Session`, besides keeping state on the server
 
 When this is used, the client can send HTTP requests using the `PATCH` verb \([HTTP PATCH method](http://tools.ietf.org/html/rfc5789)\) or use WebSocket to send and receive patches.
 
-To enable this, the session needs to know which `Json` instance should be considered the root view-model. If the [PartialToStandalone middleware](../network/middleware#partialtostandalonehtmlprovider) is used, the root view-model will be automatically assigned to the session based on the `Json`instance returned from a handler.
+To enable this, the session needs to know which `Json` instance should be considered the root view-model. If the [PartialToStandalone middleware](../network/middleware.md) is used, the root view-model will be automatically assigned to the session based on the `Json`instance returned from a handler.
 
 To specify which `Json` instance to use as the root, use the `SetClientRoot` extension method from the `Starcounter.XSON.Advanced` namespace. It's called on a `Session` object with a `Json` instance as the argument.
 
@@ -114,7 +114,7 @@ The `Session` constructor has an overload that takes the enum `Session.Flags`. T
 | `StrictPatchRejection` | Throws an error instead of rejecting changes in two cases: \(1\) when an incoming patch tries to access an object or item in an array that is no longer valid and \(2\) when the client sends a patch with a different format than expected. |
 | `IncludeNamespaces` | Enables namespacing of Typed JSON responses. Is the same as `Session.Flags.None` since it's the default behavior. |
 
-## CalculatePatchAndPushOnWebSocket <a id="calculatepatchandpushonwebsocket"></a>
+## CalculatePatchAndPushOnWebSocket  <a id="calculatepatchandpushonwebsocket"></a>
 
 JSON patches are calculated whenever there's an incoming request that asks for JSON patch. This means asynchronous changes to the view-model that are finished after the response is sent will not be included in the response patch.
 
