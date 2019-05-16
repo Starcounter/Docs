@@ -1,6 +1,8 @@
 # View-model Attaching
 
-{% hint style="working" %} Starcounter developers and invited partners have access to [Docs erratum](https://github.com/Starcounter/RebelsLounge/wiki/Docs-erratum) which lists important changes in the upcoming version. Please request your access. {% endhint %}
+{% hint style="info" %}
+Starcounter developers and invited partners have access to [Docs erratum](https://github.com/Starcounter/RebelsLounge/wiki/Docs-erratum) which lists important changes in the upcoming version. Please request your access.
+{% endhint %}
 
 ## Introduction
 
@@ -31,7 +33,7 @@ Attaching was previously called "server-side blending"
 
 ## Attachment rule components
 
-Attachment rules use tokens. Tokens are case insensitive strings. Handlers (identified by their URIs) with the same token are called on internal `Self.GET` calls or external URI that matches one of the handlers. Once the handler with a token is called, it will not trigger further calls mapped to that handler directly, only when a new `Self` call is made.
+Attachment rules use tokens. Tokens are case insensitive strings. Handlers \(identified by their URIs\) with the same token are called on internal `Self.GET` calls or external URI that matches one of the handlers. Once the handler with a token is called, it will not trigger further calls mapped to that handler directly, only when a new `Self` call is made.
 
 Token matching can be made more fine-grained by using contexts. They are composed of a list of strings that acts as a bit map when matched with other contexts.
 
@@ -42,7 +44,9 @@ Starcounter came up with few predefined **size factor contexts** that have share
 * `row` - the view contains basic information that the app has about a concept. The view renders in a single line. The view is suitable to be attached in lists;
 * `icon` - view contains the smallest unit of information that the app has about a concept. The view renders in a single element that is a link to a bigger view. The view is suitable to be attached in menu bars;
 
-{% hint style="info" %} Every attachment rule should have exactly one size factor context. {% endhint %}
+{% hint style="info" %}
+Every attachment rule should have exactly one size factor context.
+{% endhint %}
 
 In addition, there are also two kinds of predefined **meta contexts**:
 
@@ -58,7 +62,7 @@ As an app author, you should avoid coming up with your own contexts that are unk
 
 As a solution owner, you can replace the original contexts provided by an app author with custom contexts for fine tuning of the view-model attachment rules.
 
-Contexts are case-insensitive. No context \(`null` value\) means **match any context**. Otherwise, two attachment rules are matched if the source context has all elements of the destination context (superset matching). Examples:
+Contexts are case-insensitive. No context \(`null` value\) means **match any context**. Otherwise, two attachment rules are matched if the source context has all elements of the destination context \(superset matching\). Examples:
 
 * Source context `{ "raw", "page" }` is NOT matched with `{ "search", "page" }`.
 * Source context `null` is matched with `{ "raw", "page" }` and `{ "search", "page" }` and any other context.
@@ -67,16 +71,15 @@ Contexts are case-insensitive. No context \(`null` value\) means **match any con
 
 Consider contexts as an additional matching criteria for handlers with the same token.
 
-Attachment system needs to know if you try to add a rule for the handler with substituted parameter, or a handler template, or a non-parametrized handler:
-1. Handler with substituted parameter. For example, for the handler `/people/{?}` the URI with substituted parameter will be `/people/john`, `/people/bob`, etc. You should have a rule in `blend.json` with parameters `/people/{john}` and `/people/{bob}` correspondingly. Mind the braces.
-2. Handler template. For example, for the handler `/people/{?}` you should have a rule in `blend.json` with parameter `/people/{?}`.
-3. Non-parametrized handler. For example, we have a handler without any parameters, for example, `/people/john`. You should should have a rule in `blend.json` with parameter `/people/john`.
+Attachment system needs to know if you try to add a rule for the handler with substituted parameter, or a handler template, or a non-parametrized handler: 1. Handler with substituted parameter. For example, for the handler `/people/{?}` the URI with substituted parameter will be `/people/john`, `/people/bob`, etc. You should have a rule in `blend.json` with parameters `/people/{john}` and `/people/{bob}` correspondingly. Mind the braces. 2. Handler template. For example, for the handler `/people/{?}` you should have a rule in `blend.json` with parameter `/people/{?}`. 3. Non-parametrized handler. For example, we have a handler without any parameters, for example, `/people/john`. You should should have a rule in `blend.json` with parameter `/people/john`.
 
 ## Separate attachment rules in JSON
 
-Attachment rules should be described in JSON, separate from the application code. Upon application startup, `[appname].blend.json` (or, if not found, `blend.json`) is parsed and the extracted attachment rules are applied right after the `Main` method. The same happens when the application restarts. With this mechanism, attachment rules can be changed for shipped application, where you only have the binaries. 
+Attachment rules should be described in JSON, separate from the application code. Upon application startup, `[appname].blend.json` \(or, if not found, `blend.json`\) is parsed and the extracted attachment rules are applied right after the `Main` method. The same happens when the application restarts. With this mechanism, attachment rules can be changed for shipped application, where you only have the binaries.
 
-{% hint style="warning" %} `blend.json` file should be placed in the same directory as the starting application assembly. In Visual Studio you can click on `Properties` of this file and set `Copy to Output Directory` to `Copy if newer`. {% endhint %}
+{% hint style="warning" %}
+`blend.json` file should be placed in the same directory as the starting application assembly. In Visual Studio you can click on `Properties` of this file and set `Copy to Output Directory` to `Copy if newer`.
+{% endhint %}
 
 Here is an example of the content of a `blend.json` file:
 
@@ -117,19 +120,21 @@ bool AllowToDirection;
 ```
 
 Here is the explanation of each field:
+
 * `Uri`: URI which is either the handler with substituted parameter, or a handler template, or a non-parametrized handler. Must be defined.
 * `Token`: Attachment rule token described above. Default value is an empty string which is treated as "DefaultToken".
 * `Active`: Defines default attachment rule rule activeness. Default value is "True".
-* `Contexts`: Attachment rule contexts (if any). Default value is "null".
-* `AllowFromDirection`: Allows attachment rule calls from this URI (it defines if this URI can trigger attachment process). That means if it's set to true, when an app calls `Self.GET()` on an attachment rule URI it will request other apps for content with the same contexts, otherwise it will not. Default value is "True".
-* `AllowToDirection`: Allows attachment rule calls to this URI (it defines if this URI can be triggered during attachment process). That means if it's set to true, when other app requests on attachment rule with the same contexts as one of the attachment rules described in your app, your app will respond, otherwise it will not. Default value is "True".
-
+* `Contexts`: Attachment rule contexts \(if any\). Default value is "null".
+* `AllowFromDirection`: Allows attachment rule calls from this URI \(it defines if this URI can trigger attachment process\). That means if it's set to true, when an app calls `Self.GET()` on an attachment rule URI it will request other apps for content with the same contexts, otherwise it will not. Default value is "True".
+* `AllowToDirection`: Allows attachment rule calls to this URI \(it defines if this URI can be triggered during attachment process\). That means if it's set to true, when other app requests on attachment rule with the same contexts as one of the attachment rules described in your app, your app will respond, otherwise it will not. Default value is "True".
 
 ## Troubleshooting
 
 If the view attachment rules are not working as you expect, here is the list of things that might cause this:
-- The contexts in the attachment rules do not match.
-- The handler does not return a response of type `Json`.
-- Your view-model `Json` object does not have `Html` property.
-- Your attachment point is not expressed via `Self.GET`.
-- There is no handler in the app that responds to the attachment point `Self.GET`.
+
+* The contexts in the attachment rules do not match.
+* The handler does not return a response of type `Json`.
+* Your view-model `Json` object does not have `Html` property.
+* Your attachment point is not expressed via `Self.GET`.
+* There is no handler in the app that responds to the attachment point `Self.GET`.
+

@@ -49,7 +49,7 @@ Web Components are loaded by browser with HTML Imports. HTML Import for Polymer 
 <link rel="import" href="/sys/polymer/polymer.html">
 ```
 
-### Avoiding loading the same files multiple times {#avoiding-loading-the-same-files-multiple-times}
+### Avoiding loading the same files multiple times <a id="avoiding-loading-the-same-files-multiple-times"></a>
 
 Browser loads HTML Imports only once, not like scripts and styles, which are loaded as many times as many references page has.
 
@@ -67,19 +67,19 @@ Some common components such as Polymer and Palindrom are included in Starcounter
 
 The benefit of this is that you can rely on having a specific version of Starcounter to include a specific version of Polymer, Palindrom, etc.
 
-### Adding external dependencies to apps {#adding-external-dependencies-to-your-apps}
+### Adding external dependencies to apps <a id="adding-external-dependencies-to-your-apps"></a>
 
 In order to add files that match this pattern, simply put a `sys` folder in your `wwwroot` folder that holds the static files for your project.
 
 You should not do that automatically, but use Bower to install such dependencies. A correct Bower configuration consists of two files in your project: `bower.json` and `.bowerrc`.
 
-#### bower.json {#bower.json}
+#### bower.json <a id="bower.json"></a>
 
 The `bower.json` file keeps the list of your app's client side dependencies. This file should not be created and maintained manually. It should be modified using the command line tool: `bower init`, `bower install paper-dialog --save`.
 
 A sample file can be found in the [UniformDocs app](https://github.com/Starcounter/UniformDocs/blob/master-2.4/src/UniformDocs/bower.json).
 
-#### .bowerrc {#.bowerrc}
+#### .bowerrc <a id=".bowerrc"></a>
 
 Keep in mind that you can use another version of Polymer by putting it into your local `sys` folder. This will affect all other apps, though. To prevent that, use a `.bowerrc` file.
 

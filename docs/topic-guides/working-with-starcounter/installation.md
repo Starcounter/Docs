@@ -5,16 +5,14 @@ You install Starcounter by downloading and running an installer. The following s
 ### How to install
 
 * Run the  `<Your setup file name>.exe`  by double clicking on it.
-* Check the `Install Extension` checkbox [Recommended] which will create Project Templates in Visual Studio to help you creating applications with Starcounter.
+* Check the `Install Extension` checkbox \[Recommended\] which will create Project Templates in Visual Studio to help you creating applications with Starcounter.
 * Click install.
 
-![](../../.gitbook/assets/StarcounterInstallation.PNG)
-
-
+![](../../.gitbook/assets/starcounterinstallation.PNG)
 
 ## Silent Installation
 
-In `Silent Installation`the Starcounter installation process runs seamlessly without prompting any messages to the user or asking about any choices - Yes/No popups. This is particularly useful in production environments where user wants to install Starcounter in an unattended fashion with some commands or scripts.  
+In `Silent Installation`the Starcounter installation process runs seamlessly without prompting any messages to the user or asking about any choices - Yes/No popups. This is particularly useful in production environments where user wants to install Starcounter in an unattended fashion with some commands or scripts.
 
 ### How to install
 
@@ -30,7 +28,7 @@ In `Silent Installation`the Starcounter installation process runs seamlessly wit
 
 * It should install Starcounter seamlessly
 
-**Note**: By default the  `Starcounter Server Service` runs under the `Local Service` account.
+**Note**: By default the `Starcounter Server Service` runs under the `Local Service` account.
 
 ## Docker
 

@@ -27,7 +27,7 @@ There are two different ways to install Starcounter in Production Mode.
 * Run the `<Your setup file name>.exe` by double clicking on it.
 * Select `Production` on the Setup screen :
 
-![](../../.gitbook/assets/productionmode-1.PNG)
+![](https://github.com/Starcounter/Docs/tree/37365d216aa7400514249b9fccc613dacd465a7f/docs/.gitbook/assets/productionmode-1.PNG)
 
 #### OR
 
@@ -53,7 +53,7 @@ In `Silent Mode`the Starcounter installation process runs seamlessly without pro
 <Your setup file name>.exe Silent productionmode unattended
 ```
 
-![](../../.gitbook/assets/silent-mode-1.PNG)
+![](../../.gitbook/assets/silent-mode-1%20%282%29.PNG)
 
 * It should install Starcounter seamlessly
 
@@ -61,7 +61,7 @@ In `Silent Mode`the Starcounter installation process runs seamlessly without pro
 
 Starcounter is an in-memory technology, hence it only uses disks for persistence and recovery rather than a primary storage. Starcounter streams changes in your data to disk, while uses only primary memory to read data. Changes from committed transactions are logged to disk by a means of log writer and stored in Starcounter `.log` files. Periodically a disk image of the database is updated. This image, which is also known as a checkpoint, is stored in `.sci` and `.sci2` files. When checkpoint creation is executed, log files with records that the checkpoint now incorporates become redundant and thus are renamed from `.log` to `.log.bak` and are a subject of manual deletion. The fraction of `.log` files that are still in work along with snapshot image files together represent a current durable state of the database.
 
-**Having **`.log.bak`** files regularly erased.** In order to clean `.log.bak` files you need to create a task in your preferred task scheduler for Windows or in Windows Task Scheduler to run `del` command on your `.log.bak` files. Please make sure that the created task in Task Scheduler do actually run as expected. Sometimes it will not run because the correct user privileges aren't set.
+**Having** `.log.bak` **files regularly erased.** In order to clean `.log.bak` files you need to create a task in your preferred task scheduler for Windows or in Windows Task Scheduler to run `del` command on your `.log.bak` files. Please make sure that the created task in Task Scheduler do actually run as expected. Sometimes it will not run because the correct user privileges aren't set.
 
 ## Backup and failover
 
@@ -157,5 +157,5 @@ For higher performance, disable your anti-virus from scanning the database files
 
 **Please always remember that your data is one of your most important assets!** Implement the proper strategy for backup, failover and disaster recovery from day one. Using advices from the article, you can make your data safety strategy gradual. First of all, start with simple Shadow Copy backups. Use Dropbox for Business and asynchronous cryptography \(with private and public keys\) to store terabytes of backups for just hundreds of dollars per year. If you run Starcounter in a cloud like Amazon, then you most likely run Windows Server 2012 R2 Standard, which ships with Failover Clustering role out of the box. Use the facilities like Failover Clustering that go for free with your operating system. Create a simple Failover Cluster with one master machine and one hot-standby machine which would always be a replica of your master machine. Store your database image files on a Cluster Shared Volume, so that the hot-standby machine will continue to run on exact the same data. It will take some seconds for the replica machine to start Starcounter \(since two machines cannot open the same database at one time\), so the resulted failover will be warm. However, today you can achieve true synchronous hot failover using Windows Server 2016 Storage Replica \(Datacenter edition is required\).
 
-![](../../.gitbook/assets/screen-shot-2015-10-06-at-11.24.041-1024x726-1.png)
+![](../../.gitbook/assets/screen-shot-2015-10-06-at-11.24.041-1024x726-1%20%281%29.png)
 

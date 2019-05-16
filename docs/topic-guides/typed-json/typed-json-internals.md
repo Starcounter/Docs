@@ -7,7 +7,7 @@ Typed JSON consists of two parts, a template and an instance of the type `Json`.
 ## Templates and instances
 
 | Template class | .Net type | Json type | Comment |
-| --- | --- | --- | --- |
+| :--- | :--- | :--- | :--- |
 | TObject | Json | object | A single JSON object of type `Json` or subclass |
 | TObjArr | Arr&lt;Json&gt; | array | An array of JSON-objects. Arr is a subclass of Json |
 | TArray&lt;T&gt; | Arr&lt;T&gt; | array | An array of T, where T is `Json` or subclass |

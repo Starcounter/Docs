@@ -64,7 +64,7 @@ Here, every element is at the root of the document and will be exposed for Compo
 
 Additionally, there might be situations where the developer would like to have a higher level of abstraction on some of his or her content. For example, consider this pagination bar:
 
-![](../../.gitbook/assets/pagination%20%281%29.PNG)
+![](../../.gitbook/assets/pagination-1.PNG)
 
 Here, it would not make sense to break it up into the respective parts because they do not have any real meaning when presented individually. It would rather make sense to put the parent on the root level so that the whole bar is exposed for Composition, and not the individual buttons.
 
@@ -80,7 +80,7 @@ The first slot in a shadow tree, in tree order, whose name is the empty string, 
 
 Text nodes are also distributed in the default slot.
 
-Use explicit slot names instead of relying on the default slot. The solution owner can remove the default slot from a view composition with  composition editor feature of [BlendingEditor](https://github.com/Starcounter/Blending#blending-app-suite). As a result, all elements from the view that don't have a `slot` attribute are not rendered.
+Use explicit slot names instead of relying on the default slot. The solution owner can remove the default slot from a view composition with composition editor feature of [BlendingEditor](https://github.com/Starcounter/Blending#blending-app-suite). As a result, all elements from the view that don't have a `slot` attribute are not rendered.
 
 It's not necessary to declare the default slot in the `declarative-shadow-dom` part of your view. The Starcounter's HTML merger automatically adds a default slot at the bottom of the composition of your view for fallback reasons.
 
@@ -205,3 +205,4 @@ Regarding styling, there are few ways to make the application easier to visually
 ## Additional Resources
 
 To find more information about creating HTML View definitions, take a look at [the article linked above](https://starcounter.io/layout-compositions-html-partials/) and the [People app](https://github.com/Starcounter/People/tree/master/src/People/wwwroot/People/viewmodels) which fully adheres to these guidelines.
+

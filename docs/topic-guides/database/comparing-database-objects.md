@@ -1,10 +1,10 @@
 # Comparing database objects
 
-## Introduction {#comparison-in-sql-queries}
+## Introduction <a id="comparison-in-sql-queries"></a>
 
 Database object can either be compared in SQL `WHERE` clauses or in programming code. 
 
-## Comparison in SQL queries {#comparison-in-sql-queries}
+## Comparison in SQL queries <a id="comparison-in-sql-queries"></a>
 
 In SQL queries database objects can be compared either by the equals `=` operator or by the `ObjectNo` value. The direct comparison is always preferable.
 
@@ -19,7 +19,7 @@ var products = Db.SQL<Product>(
     customer.GetObjectNo());
 ```
 
-## Comparison between instances {#comparison-between-instances}
+## Comparison between instances <a id="comparison-between-instances"></a>
 
 Two instances of a database class can be compared either with the `Object.Equals` method or with the `ObjectNo` value. The `Object.Equals` method is the preferable way.
 

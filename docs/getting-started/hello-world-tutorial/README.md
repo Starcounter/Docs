@@ -4,23 +4,23 @@ In this "Hello World" tutorial you will learn how to use the essential features 
 
 We will use C\# as the server-side language. All the app logic will be written in C\# and execute in the database. The client-server communication will be handled by [Palindrom](../../topic-guides/blendable-web-apps/palindrom.md) over HTTP and WebSocket. This is how we recommend building Starcounter apps.
 
-## Content {#content}
+## Content <a id="content"></a>
 
 In the first two steps, you will create the simplest possible application that binds the database to the view.
 
 In the four following steps, you will create an expense tracker by establishing a UI and building functionality that allows CRUD operations on the database.
 
-## Final result {#final-result}
+## Final result <a id="final-result"></a>
 
 ![Final result](https://blobscdn.gitbook.com/v0/b/gitbook-28427.appspot.com/o/assets%2Fstarcounter%2Fe48b74d0-8680-11e7-9944-1f85270462c6%2Fe504c380-8680-11e7-9944-1f85270462c6%2Fresizedpart6.gif?generation=1503327411295174&alt=media)
 
-## Requirements {#requirements}
+## Requirements <a id="requirements"></a>
 
 To get through this tutorial, you will need to fulfill the [system requirements](http://starcounter.io/download/) which includes having Visual Studio 2015 or 2017 \(not VS Code\) and the [latest release candidate](http://downloads.starcounter.com/download) of Starcounter installed.
 
-## Extra Resources {#extra-resources}
+## Extra Resources <a id="extra-resources"></a>
 
-Since the author is a mere mortal, there might be mistakes in the code or text. If you experience that something doesn't work as intended, you can look at the [source code](https://github.com/Starcounter/HelloWorld). Each commit in this repository represents one step in the tutorial. For further explanations of the concepts discussed, you can take a look at the [guide section](/topic-guides).
+Since the author is a mere mortal, there might be mistakes in the code or text. If you experience that something doesn't work as intended, you can look at the [source code](https://github.com/Starcounter/HelloWorld). Each commit in this repository represents one step in the tutorial. For further explanations of the concepts discussed, you can take a look at the [guide section](https://github.com/Starcounter/Docs/tree/a93ef046404db2f2f15fe79f8640f4b3974c2663/topic-guides/README.md).
 
 Are you ready?
 

@@ -19,7 +19,6 @@ Db.Transact(() =>
 });
 ```
 
-  
 Since `Db.Transact` is synchronous, it sometimes becomes a performance bottleneck. Starcounter handles this by automatically scaling the number of working threads to continue processing requests even if some handlers are blocked. The maximum number of working threads is the number of CPU cores multiplied by 254, so with four cores, there would be a maximum of 1016 working threads. When these threads are occupied, the next `Db.Transact` call in line will have to wait until a thread is freed. [Db.TransactAsync](short-running-transactions.md#db.transactasync) circumvents this.
 
 `Db.Transact` is an implementation of `Db.TransactAsync` with a thin wrapper that synchronously waits for the returned `Task` object.
@@ -28,7 +27,7 @@ Since `Db.Transact` is synchronous, it sometimes becomes a performance bottlenec
 
 `Db.TransactAsync` is the asynchronous counterpart of `Db.Transact`. It gives the developer more control to balance throughput and latency. The function returns a `Task` that is marked as completed when flushing the transaction log for the transaction. Thus, the database operation itself is synchronous while flushing to the transaction log is asynchronous.
 
- `Db.Transact` and `Db.TransactAsync` are syntactically identical:
+`Db.Transact` and `Db.TransactAsync` are syntactically identical:
 
 ```csharp
 Db.TransactAsync(() => 
@@ -51,7 +50,7 @@ SendConfirmationEmail(order);
 task.Wait(); // Wait for write to log to finish
 ```
 
-This is more flexible and performant than `Db.Transact`, but it comes with certain risks; for example, if there's a power outage or other hardware failure after the email is sent but before writing to the log, the email will be incorrect - even if the user got a confirmation, the order will not be in the database since it was never written to the transaction log. 
+This is more flexible and performant than `Db.Transact`, but it comes with certain risks; for example, if there's a power outage or other hardware failure after the email is sent but before writing to the log, the email will be incorrect - even if the user got a confirmation, the order will not be in the database since it was never written to the transaction log.
 
 If a handler creates multiple write transactions, use `Db.TransactAsync` and then wait for all transactions at once with `Task.WaitAll` or `TaskFactory.ContinueWhenAll`. Otherwise, the latency of the handler will degrade.
 
@@ -91,9 +90,9 @@ In this case, each iteration of the loop doesn't require the previous transactio
 
 With the `Db.TransactAsync` API, it's tempting to use async/await in applications. Syntactically it's possible, although it's not that useful due to these limitations:
 
-1.  Using async/await is not possible in a handler body as Handler API doesn't support async handlers.
-2.  No special measures have been taken to force after-await code to run on Starcounter threads, so manual `Scheduling.ScheduleTask` might be required \(see [Running background jobs](running-background-jobs.md) for details\).
-3.  Use async/await with caution as they may inadvertently increase the latency. Say if user code runs transactions sequentially, putting await in front of every `Db.TransactAsync` will accumulate all the individual latencies. The right stategy in this case is to make a list of tasks and then await them at once.
+1. Using async/await is not possible in a handler body as Handler API doesn't support async handlers.
+2. No special measures have been taken to force after-await code to run on Starcounter threads, so manual `Scheduling.ScheduleTask` might be required \(see [Running background jobs](running-background-jobs.md) for details\).
+3. Use async/await with caution as they may inadvertently increase the latency. Say if user code runs transactions sequentially, putting await in front of every `Db.TransactAsync` will accumulate all the individual latencies. The right stategy in this case is to make a list of tasks and then await them at once.
 
 ## Transaction size
 

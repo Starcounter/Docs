@@ -8,7 +8,7 @@ We recommend BEM, a well-known convention that solves this problem.
 
 ## What is BEM?
 
-In the BEM naming convention, you **only use classes** in your stylesheets.  There are three kinds of classes at your disposal: blocks, elements, and modifiers.
+In the BEM naming convention, you **only use classes** in your stylesheets. There are three kinds of classes at your disposal: blocks, elements, and modifiers.
 
 A **block** is a basic class that represents a logical area of your app's UI \(_a menu, login form, a search form_\).
 
@@ -45,7 +45,7 @@ Note here that **everything at the root level must be a block**. A block can hav
 
 Consider the [SignIn app](https://github.com/Starcounter/signin):
 
-![](../../.gitbook/assets/bem-example%20%281%29.PNG)
+![](../../.gitbook/assets/bem-example-1%20%281%29.PNG)
 
 Here, the block is marked in red and the element sections in blue.
 

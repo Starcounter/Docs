@@ -50,7 +50,7 @@ staradmin delete [--force] [--failmissing]
 
 Example: delete database 
 
-To create a user-specified database use
+To create a user-specified database use:
 
 ```bash
 C:\>staradmin --database=NewDbName delete db
@@ -238,7 +238,7 @@ where _type_ will indicate the type of the given reference. As an example, to st
 
 Example: stop database
 
-To start a user-specified database use
+To start a user-specified database use:
 
 ```bash
 C:\>staradmin --database=UserDbName stop db

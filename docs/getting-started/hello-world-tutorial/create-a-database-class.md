@@ -38,7 +38,7 @@ namespace HelloWorld
 
 ## Add an instance to the class
 
-Add a first instance to the class by defining a new person, its properties, and wrapping it in a [`Db.Transact()`](../../topic-guides/transactions/short-running-transactions.md). Using a transaction allows us to access database objects and makes the changes inside the transaction atomic and isolated. 
+Add a first instance to the class by defining a new person, its properties, and wrapping it in a [`Db.Transact()`](../../topic-guides/transactions/short-running-transactions.md). Using a transaction allows us to access database objects and makes the changes inside the transaction atomic and isolated.
 
 {% page-ref page="../../topic-guides/transactions/" %}
 
@@ -68,15 +68,15 @@ class Program
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-The if statement here checks if you already have a `Person` in the database by accessing the first result that we get from the query. If that is the case, you do not need to create a new one. Without it, we would create a new instance of `Person` every time we run the program, which we do not intend to do.  
-  
+The if statement here checks if you already have a `Person` in the database by accessing the first result that we get from the query. If that is the case, you do not need to create a new one. Without it, we would create a new instance of `Person` every time we run the program, which we do not intend to do.
+
 Remember to import `System.Linq` for `FirstOrDefault`.
 
 ## Result
 
 Start your program with Starcounter by clicking F5 in Visual Studio. To see for yourself, open the administrator at `localhost:8181/#/databases/default/sql` and enter `SELECT * FROM HelloWorld.Person`. This will display all the instances, represented as rows, of the `Person` class. Note that these instances are persistent. You can restart the application, or even the computer, and the instances will still be there.
 
-![](../../.gitbook/assets/part1resized.gif)
+![](../../.gitbook/assets/part1resized%20%281%29.gif)
 
 For the next step, we'll add a UI which will help us to display the data in the browser.
 

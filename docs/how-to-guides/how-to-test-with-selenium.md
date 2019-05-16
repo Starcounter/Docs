@@ -2,7 +2,7 @@
 
 Palindrom web apps are C\# apps with a thin presentation layer rendered in HTML5. Because of that, acceptance tests need to be executed in a web browser. If you would like to add automated acceptance testing to your project, there is no better tool than Selenium.
 
-This page describes how to use NUnit to run Selenium acceptance tests on Palindrom web apps. 
+This page describes how to use NUnit to run Selenium acceptance tests on Palindrom web apps.
 
 ## What is Selenium
 
@@ -41,7 +41,7 @@ In the following example, we will add acceptance tests to Launcher. Let's create
 
 Call the new project "Launcher.AcceptanceTest". We will use `Launcher\test\` as the project location.
 
-![](../.gitbook/assets/2016-04-01-13_03_00-add-new-project.png)
+![](../.gitbook/assets/2016-04-01-13_03_00-add-new-project%20%282%29.png)
 
 ## Install required packages
 
@@ -50,10 +50,10 @@ Open the newly created test project. Now, we need to install a bunch of librarie
 Open the package manager \(Tools → NuGet Packet Manager → Packet Manager Console\).
 
 {% hint style="warning" %}
- In the console, choose your test project from the "Default project" drop-down.
+In the console, choose your test project from the "Default project" drop-down.
 {% endhint %}
 
-![](../.gitbook/assets/2016-04-01-13_05_38-launcher-microsoft-visual-studio.png)
+![](../.gitbook/assets/2016-04-01-13_05_38-launcher-microsoft-visual-studio%20%281%29.png)
 
 Run the following commands in the console to install the required dependencies:
 
@@ -95,7 +95,7 @@ When you rebuild the test project now, you should see each test for every browse
 
 The final setup looks like this:
 
-![](../.gitbook/assets/2016-04-01-13_51_26-launcher-microsoft-visual-studio.png)
+![](../.gitbook/assets/2016-04-01-13_51_26-launcher-microsoft-visual-studio%20%282%29.png)
 
 Before you can execute the tests, start Selenium Server Standalone by calling `java -jar selenium-server-standalone-3.*.jar`.
 
@@ -106,27 +106,27 @@ There is one common pitfall when writing Selenium tests. The test is executed wi
 It is a good practice to always wait:
 
 * Wait for a text element to be present before you check the content of that element
-  * An example can be found in the method `TextareaPage_WriteToTextArea` in UniformDocs 
+  * An example can be found in the method `TextareaPage_WriteToTextArea` in UniformDocs
 
-    Tests \(see [TextareaPageTest.cs](https://github.com/Starcounter/UniformDocs/blob/master-2.4/test/UniformDocs.Tests/Test/TextareaPageTest.cs)\). The method `WaitForText()` is used to 
+    Tests \(see [TextareaPageTest.cs](https://github.com/Starcounter/UniformDocs/blob/master-2.4/test/UniformDocs.Tests/Test/TextareaPageTest.cs)\). The method `WaitForText()` is used to
 
-    compare the text value of `TextareaInfoLabel` asynchronously. The assertion passes if the 
+    compare the text value of `TextareaInfoLabel` asynchronously. The assertion passes if the
 
     text is found within 5 seconds, otherwise it fails.
 * Wait for a button to be present before you click on that button
-  * An example can be found in the method `ButtonPage_RegularButton` in the UniformDocs 
+  * An example can be found in the method `ButtonPage_RegularButton` in the UniformDocs
 
-    tests \(see [ButtonPageTest.cs](https://github.com/Starcounter/UniformDocs/blob/master-2.4/test/UniformDocs.Tests/Test/ButtonPageTest.cs)\). The method `WaitUntil()` is used to 
+    tests \(see [ButtonPageTest.cs](https://github.com/Starcounter/UniformDocs/blob/master-2.4/test/UniformDocs.Tests/Test/ButtonPageTest.cs)\). The method `WaitUntil()` is used to
 
-    asynchronously check the state of the `Displayed` property of a button. It halts the test 
+    asynchronously check the state of the `Displayed` property of a button. It halts the test
 
-    for a default maximum time of 10 seconds. If the button is not displayed within that 
+    for a default maximum time of 10 seconds. If the button is not displayed within that
 
     time, it throws an exception.
 * Wait for presence of an input field before typing in it and wait for text to be present in label
-  * An example can be found in the method `TextPage_TextPropagationOnUnfocus` in the 
+  * An example can be found in the method `TextPage_TextPropagationOnUnfocus` in the
 
-    UniformDocs tests \(see [TextPageTest.cs](https://github.com/Starcounter/UniformDocs/blob/master-2.4/test/UniformDocs.Tests/Test/TextPageTest.cs)\). This test mixes the other examples 
+    UniformDocs tests \(see [TextPageTest.cs](https://github.com/Starcounter/UniformDocs/blob/master-2.4/test/UniformDocs.Tests/Test/TextPageTest.cs)\). This test mixes the other examples
 
 Source file: [TextareaPageTest.cs](https://github.com/Starcounter/UniformDocs/blob/master-2.4/test/UniformDocs.Tests/Test/TextareaPageTest.cs).
 
@@ -175,7 +175,7 @@ public void TextPage_TextPropagationOnUnfocus()
     Assert.IsTrue(WaitForText(
         _textPage.InputInfoLabel, 
         "Hi, Krystian!", 5));
-        
+
     _textPage.ClearInput(_textPage.Input);
     WaitUntil(x => _textPage.Input.Text == string.Empty);
     Assert.AreEqual(
@@ -193,11 +193,11 @@ Follow the steps that were presented at `Install Selenium Standalone Server and 
 
 Build your test project. If it builds correctly, you should see this:
 
-![](../.gitbook/assets/2016-04-01-13_34_52-launcher-microsoft-visual-studio.png)
+![](../.gitbook/assets/2016-04-01-13_34_52-launcher-microsoft-visual-studio%20%281%29.png)
 
 Now, the only thing left to do is to run that test. In the Test Explorer, click on the "Run All" button. If it works well, you should see your tests passing.
 
-![](../.gitbook/assets/2016-04-01-13_40_22-launcher-microsoft-visual-studio.png)
+![](../.gitbook/assets/2016-04-01-13_40_22-launcher-microsoft-visual-studio%20%281%29.png)
 
 ## Sample test suites
 

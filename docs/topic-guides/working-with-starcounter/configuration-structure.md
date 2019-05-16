@@ -59,7 +59,7 @@ Default configuration values we use when a new database is created. Customizing 
 
 Example file \(trimmed and simplified\):
 
-![](../../.gitbook/assets/c326dc5e-c38e-11e6-8fd6-c095de9c6229-1024x246.png)
+![](../../.gitbook/assets/c326dc5e-c38e-11e6-8fd6-c095de9c6229-1024x246%20%281%29.png)
 
 ## Database configuration files
 
@@ -78,7 +78,7 @@ Example of two configured files:
 The root of each database configuration file is the Database node. Here are the more important elements:
 
 **ImageDirectory:**  
-The directory where the main database data files reside. Default value: %ServerConfigFile%\DefaultDatabaseConfiguration\Runtime\ImageDirectory. At the time of creation, Starcounter will add a unique string to the end of that path before creating files.
+The directory where the main database data files reside. Default value: `%ServerConfigFile%\DefaultDatabaseConfiguration\Runtime\ImageDirectory`. At the time of creation, Starcounter will add a unique string to the end of that path before creating files.
 
 **TransactionLogDirectory:**  
 The directory where transaction logs are stored. Default value: same principle as ImageDirectory applies.

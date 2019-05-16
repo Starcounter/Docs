@@ -64,7 +64,7 @@ class Program
 
 ### Short-running in long-running
 
-Short-running transactions in long-running transactions are executed separately: 
+Short-running transactions in long-running transactions are executed separately:
 
 ```csharp
 using Starcounter;
@@ -113,7 +113,7 @@ Db.Transact(() =>
     {
         new Person(); 
     });
-}); 
+});
 ```
 
 ### Short-running in short-running
@@ -148,13 +148,13 @@ class Program
 
 ## ScErrReadOnlyTransaction
 
- If an operation is done on the database without a transaction an exception will be thrown:
+If an operation is done on the database without a transaction an exception will be thrown:
 
 ```text
 The transaction is readonly and cannot be changed to write-mode. (ScErrReadOnlyTransaction (SCERR4093))
 ```
 
- For example:
+For example:
 
 ```csharp
 [Database]
@@ -169,7 +169,7 @@ class Program
 }
 ```
 
- To fix this, wrap the operation in a transaction:
+To fix this, wrap the operation in a transaction:
 
 ```csharp
 [Database]

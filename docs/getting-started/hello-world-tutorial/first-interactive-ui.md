@@ -134,7 +134,7 @@ We now have a program where we can change the view-model in real time and then c
 
 If you are an especially curious person, you can try to change the name and then take a look at the database again with SQL. Here's how it should work:
 
-![](../../.gitbook/assets/page3resized.gif)
+![](../../.gitbook/assets/page3resized%20%282%29.gif)
 
 Neat! Right? The next step is to display the name change in real time and let the code-behind calculate the full name.
 

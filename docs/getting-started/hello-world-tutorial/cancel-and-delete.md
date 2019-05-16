@@ -86,5 +86,5 @@ The `DeleteAllTrigger` handler deletes all the expenses for the current `Person`
 
 You can now run your application again and rollback any mistakes you make or delete all expenses.
 
-![](../../.gitbook/assets/resizedpart6.gif)
+![](../../.gitbook/assets/resizedpart6%20%281%29.gif)
 

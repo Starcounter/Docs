@@ -8,7 +8,7 @@ Starcounter offers a layered approach that allows app authors to adapt to a comm
 
 ## Mental model of client-side rendering by the Starcounter host
 
-Starcounter host follows a standards-based layered approach that separates the responsibilities of the app author, the design system, and the solution owner. 
+Starcounter host follows a standards-based layered approach that separates the responsibilities of the app author, the design system, and the solution owner.
 
 The full design consists of:
 
@@ -33,11 +33,11 @@ Unlike many design systems, Uniform is open-ended and themeable. It can be confi
 
 The theme primitives define the fonts, sizes, colors, margins and other values used throughout the reset and components.
 
-The CSS reset overwrites the default user agent stylesheet. It provides the look of the native HTML5 elements such as the headings (H1-H6), links, inputs, buttons, and tables. It is loaded by the Starcounter app shell, so there is no need to load it explicitly in the views. 
+The CSS reset overwrites the default user agent stylesheet. It provides the look of the native HTML5 elements such as the headings \(H1-H6\), links, inputs, buttons, and tables. It is loaded by the Starcounter app shell, so there is no need to load it explicitly in the views.
 
 The stylesheet part of Uniform implements visual hierarchy using sections, cards, and titles. It also allows giving specific roles to native elements, for example, to designate "primary" or "danger" buttons.
 
-The component part of Uniform is a set of custom elements that implement interactive UI controls. The first version includes a form item, a date picker, a data table and a pagination control. 
+The component part of Uniform is a set of custom elements that implement interactive UI controls. The first version includes a form item, a date picker, a data table and a pagination control.
 
 To use the Uniform stylesheet and components, you must import them explicitly in the presentation layer of the view.
 
@@ -57,15 +57,19 @@ You can provide new values directly in a stylesheet in a custom composition. It 
 
 If you don't need that much of control and prefer a simple to use GUI, use the "Theme configurations" feature of the [Blending](https://github.com/Starcounter/Blending) app suite. It is an administration tool that stores the values of custom CSS properties in the database. It can provide theme configurations for specific layouts that affect all the Uniform components on the screen.
 
-{% hint style="warning" %} Attaching custom CSS properties through "Theme configurations" sets them on the global scope - the `body` of the light DOM (https://github.com/Starcounter/Blending/issues/232). Providing custom CSS properties values in custom compositions attaches them in shadow DOM to the scope that you choose. {% endhint %}
+{% hint style="warning" %}
+Attaching custom CSS properties through "Theme configurations" sets them on the global scope - the `body` of the light DOM \([https://github.com/Starcounter/Blending/issues/232](https://github.com/Starcounter/Blending/issues/232)\). Providing custom CSS properties values in custom compositions attaches them in shadow DOM to the scope that you choose.
+{% endhint %}
 
-{% hint style="info" %} For more sophisticated theming we would love to use native [CSS shadow parts and themes](https://meowni.ca/posts/part-theme-explainer/). Unfortunately, it's not supported yet by any browser. {% endhint %}
+{% hint style="info" %}
+For more sophisticated theming we would love to use native [CSS shadow parts and themes](https://meowni.ca/posts/part-theme-explainer/). Unfortunately, it's not supported yet by any browser.
+{% endhint %}
 
 ### Extend or replace the theme with HTML, CSS and JavaScript
 
 The rendering of apps in a Starcounter host is based on the inversion of control. This means that all parts of the presentation can be extended or replaced by the solution owner when needed. It allows you to completely change the look or behavior without changing the app source code.
 
-As a solution owner, you are free to add, enhance, replace or hack the presentation layer using your HTML, CSS or JavaScript code. The only constraint is that the presentation is encapsulated in shadow DOM. 
+As a solution owner, you are free to add, enhance, replace or hack the presentation layer using your HTML, CSS or JavaScript code. The only constraint is that the presentation is encapsulated in shadow DOM.
 
 For example, when all apps consistently use Uniform components, all the date pickers are presented using `<uni-date-picker>`. You can drastically change its look or behavior by creating your own custom element.
 
@@ -77,8 +81,11 @@ Create your own components by forking [`uni-element`](https://github.com/Starcou
 
 You must provide your own components to the Starcounter host by running an app that contains the static files. You can fork [StarcounterClientFiles app](https://github.com/Starcounter/StarcounterClientFiles/) for this purpose.
 
-{% hint style="info" %} The same technique works for any custom element, not only Uniform one. {% endhint %}
+{% hint style="info" %}
+The same technique works for any custom element, not only Uniform one.
+{% endhint %}
 
 The following diagram presents a decision tree of what technique of theming to use in your case.
 
 ![Decision tree of theming Uniform](../../.gitbook/assets/uniform-decision-tree.png)
+

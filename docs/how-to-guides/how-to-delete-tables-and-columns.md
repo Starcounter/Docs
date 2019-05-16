@@ -2,16 +2,16 @@
 
 ## Introduction
 
-Starcounter only deletes data when explicitly told to. In code, data is deleted with the `Delete` method or with `DELETE` SQL queries, read more in [Data manipulation - delete](../topic-guides/database/data-manipulation.md#delete). 
+Starcounter only deletes data when explicitly told to. In code, data is deleted with the `Delete` method or with `DELETE` SQL queries, read more in [Data manipulation - delete](../topic-guides/database/data-manipulation.md#delete).
 
-For example, if a database class is deleted from the code, the underlying table and the data in that table will not be deleted even if it's not referenced by any database class. The reason for this is that there's no way for Starcounter to determine if the data is abandoned and will never be used again. 
+For example, if a database class is deleted from the code, the underlying table and the data in that table will not be deleted even if it's not referenced by any database class. The reason for this is that there's no way for Starcounter to determine if the data is abandoned and will never be used again.
 
 To delete tables and columns that will not be used, you can mark that they can be dropped with SQL and then delete them by executing the command `staradmin start cleaner`.
 
 `staradmin start cleaner` launches the cleaning process by looking up all `DROP TABLE` or `ALTER TABLE` commands that were executed since the last time it ran. It will run until all those commands have been processed and then terminate. This will permanently delete the tables and columns.
 
 {% hint style="danger" %}
-Data that is deleted with `start cleaner` can't be recovered. Backup your data before deleting anything to have a safe point to revert to. 
+Data that is deleted with `start cleaner` can't be recovered. Backup your data before deleting anything to have a safe point to revert to.
 {% endhint %}
 
 ## How to drop a table
@@ -24,7 +24,6 @@ public class UselessTable
 {
     public string Nothing { get; set; }
 }
-
 ```
 
 ### 1. Delete the database class from the code
@@ -37,19 +36,19 @@ To delete the reference between the database class and the table, rebuild and re
 
 ### 3. Run SQL command DROP TABLE
 
-To mark that the underlying table should be deleted with all its data, run this command in the [Administrator](../topic-guides/working-with-starcounter/administrator-web-ui.md): 
+To mark that the underlying table should be deleted with all its data, run this command in the [Administrator](../topic-guides/working-with-starcounter/administrator-web-ui.md):
 
 ```sql
 DROP TABLE MyApp.UselessTable
 ```
 
 {% hint style="warning" %}
-If you try to run `DROP TABLE` without deleting all the references to the table in all the apps that are running, Starcounter will throw  `ScErrTableIsReferenced (SCERR15012)`. 
+If you try to run `DROP TABLE` without deleting all the references to the table in all the apps that are running, Starcounter will throw `ScErrTableIsReferenced (SCERR15012)`.
 {% endhint %}
 
 ### 4. Run the cleaner
 
-To permanently delete `UselessTable`, execute `staradmin start cleaner`, when it's finished, it will print:  `Done (nothing more to clean)`.
+To permanently delete `UselessTable`, execute `staradmin start cleaner`, when it's finished, it will print: `Done (nothing more to clean)`.
 
 If you add `UselessTable` back to the code, executing `SELECT * FROM MyApp.UselessTable` will yield no results. The data has successfully been deleted.
 
@@ -100,7 +99,6 @@ public class Person
 
 To delete the reference between the property and the column, rebuild and restart the application. If you don't do this, the Administrator will throw `ScErrColumnIsMapped (SCERR15014)`.
 
-
 ### 5. Run the cleaner
 
 To delete the data and the column, run this command:
@@ -118,6 +116,4 @@ Data definition language queries \(DDL\) are executed in the Administrator to de
 To help you with find unused tables and columns you can use the tool [WhatsNotReferenced](https://github.com/per-samuelsson/WhatsNotReferenced). It checks, when you start the database, for all tables and columns that are not in use by any currently running application
 
 Again, be careful when permanently deleting data. If the data is of any value, you should make a backup before cleaning it.
-
-
 

@@ -54,7 +54,7 @@ public class Person
 ```
 
 {% hint style="warning" %}
-Database classes have to be declared as `public`, otherwise, Starcounter throws `ScErrEntityClassNotPublic (SCERR4220)` in compile-time. 
+Database classes have to be declared as `public`, otherwise, Starcounter throws `ScErrEntityClassNotPublic (SCERR4220)` in compile-time.
 {% endhint %}
 
 ### Properties and fields
@@ -119,7 +119,7 @@ namespace TransientSampleApp1
     public class Person
     {
         public string Name { get; set; }
-        
+
         [Transient]
         public int ProcessSessionNumber { get; set; }
     }
@@ -138,7 +138,7 @@ namespace TransientSampleApp1
             // It's the initial reference, so retrieving 
             // the value of the transient property works
             Console.Write(person.ProcessSessionNumber); // => 1234
-            
+
             // Fetch the object from the database. 
             // The reference is not the initial reference anymore
             person = Db.SQL<Person>(

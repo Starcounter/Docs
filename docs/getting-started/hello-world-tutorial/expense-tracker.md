@@ -7,15 +7,15 @@ With Starcounter, views and view-models can be broken up into parts and nested. 
 1. Add a new Starcounter "HTML template with dom-bind" in the HelloWorld folder together with `PersonJson.html`. Name it `ExpenseJson.html`.
 2. Add a new Starcounter "Typed JSON with Code-behind" file to the HelloWorld project together with `PersonJson.json` and `PersonJson.json.cs`. Name it `ExpenseJson.json`.
 
-![](../../.gitbook/assets/expense-file-structure.png)
+![](../../.gitbook/assets/expense-file-structure%20%281%29.png)
 
 ## Define the expenses
 
 To define the expenses, three parts are needed:
 
-1.  A database class which can store the expenses
-2.  A view that can display the expenses
-3.  A view-model to bind the database class and the view
+1. A database class which can store the expenses
+2. A view that can display the expenses
+3. A view-model to bind the database class and the view
 
 ### Database class
 
@@ -100,7 +100,7 @@ public class Person
     public string LastName { get; set; }
     public IEnumerable<Expense> Expenses => Db.SQL<Expense>(
             "SELECT e FROM Expense e WHERE e.Spender = ?", this);
-            
+
     public decimal CurrentBalance => Db.SQL<Expense>(
             "SELECT e FROM Expense e WHERE e.Spender = ?", this)
             .Sum(e => e.Amount);
@@ -258,8 +258,6 @@ void Handle(Input.NewExpenseTrigger action)
 Run the program and try to add expenses, change their cost, and see the current balance change in real time.
 
 ![](../../.gitbook/assets/part5resized.gif)
-
-
 
 With every keystroke, the UI is updated almost instantly from the database. Starcounter's in-memory database makes this possible. There's no delay, everything simply happens at the moment the user interacts with the view.
 

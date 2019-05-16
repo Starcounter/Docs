@@ -81,7 +81,7 @@ The accepted URIs would be, for example: `/serialnumbers/4534123`, `/itemid/3432
 
 The URI matcher selects the most concrete URI handler possible, among all choices. It's not related to the number of parameters. So below, for `/op2/first/second`, the more concrete handler is `/op2/{?}/{?}` and not `/op1/{?}`.
 
- ```csharp
+```csharp
 Handle.GET("/op1/{?}", (string first) =>
 {
     return first;
@@ -558,7 +558,7 @@ The hierarchy of `Self` calls can be quite deep and sometimes its needed to get 
 
 ### Origin of the requests
 
-The origin of the request (external - coming from the network, or internal - coming from `Self.GET`) can be identified using the `IsExternal` property of the `Request` object.
+The origin of the request \(external - coming from the network, or internal - coming from `Self.GET`\) can be identified using the `IsExternal` property of the `Request` object.
 
 ## Alias
 

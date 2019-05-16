@@ -10,12 +10,12 @@ Detailed network gateway configuration and statistics can be retrieved using `GE
 
 ## Configuration
 
-Network gateway is configured in `scnetworkgateway.xml`, which is located in the server repository \(e.g User/Documents/Starcounter/Personal\). 
+Network gateway is configured in `scnetworkgateway.xml`, which is located in the server repository \(e.g User/Documents/Starcounter/Personal\).
 
 To apply changes in this file, you must either:
 
-- restart Starcounter, or:
-- call `GET /gw/updateconf` on system port (by default 8181). If errors occur while applying the new changes, the previous configuration is kept.
+* restart Starcounter, or:
+* call `GET /gw/updateconf` on system port \(by default 8181\). If errors occur while applying the new changes, the previous configuration is kept.
 
 Here are some notable configuration options:
 
@@ -41,7 +41,7 @@ Since the network gateway supports limited size uploads, the user has to write a
 
 ## Reverse proxy functionality
 
-Starcounter gateway provides basic reverse proxy functionality to other port (either on codehost or in gateway) based on HTTP Host header in requests. Reverse proxies are defined in `ReverseProxies` section of gateway configuration. Here is an example of reverse proxy that redirects all incoming HTTP requests on port 80, with Host header equals "www.example1.sc", to the port 8080:
+Starcounter gateway provides basic reverse proxy functionality to other port \(either on codehost or in gateway\) based on HTTP Host header in requests. Reverse proxies are defined in `ReverseProxies` section of gateway configuration. Here is an example of reverse proxy that redirects all incoming HTTP requests on port 80, with Host header equals "www.example1.sc", to the port 8080:
 
 ```markup
 <ReverseProxy>

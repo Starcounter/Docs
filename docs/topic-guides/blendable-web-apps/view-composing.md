@@ -4,13 +4,13 @@
 
 When [Attaching views](view-model-attaching.md) from different apps, the views are stacked on top of each other. In most cases, that's not what we want. Instead, we would like to compose elements in the views to make the result look like one page. That's what View Composing does:
 
-![](../../.gitbook/assets/assets2fstarcounter2fe48b74d0-8680-11e7-9944-1f85270462c62fe5df1df0-8680-11e7-9944-1f85270462c62fsim.png)
+![](../../.gitbook/assets/assets2fstarcounter2fe48b74d0-8680-11e7-9944-1f85270462c62fe5df1df0-8680-11e7-9944-1f85270462c62fsim%20%281%29.png)
 
 In the example above, there are two apps, PetList and MedicalRecord. By default, they are stacked on top of each other. This makes it seem like the information coming from thems is not related, when it actually is. By Composing, we can move the table of examinations into the card from the PetList app and make it look like one coherent concept. In essence, we are **changing the presentation but not the content** to combine apps that were not explicitly built to share the same screen. This is done without touching the source code of the individual apps.
 
 This ability of modifying the composition of views coming from different apps is crucial, especially when working with many apps. Without it, there would just be a stack of views with no meaningful visual context, as shown in this illustration:
 
-![](../../.gitbook/assets/assets2fstarcounter2fe48b74d0-8680-11e7-9944-1f85270462c62fe5df1df1-8680-11e7-9944-1f85270462c62fcli.png)
+![](../../.gitbook/assets/assets2fstarcounter2fe48b74d0-8680-11e7-9944-1f85270462c62fe5df1df1-8680-11e7-9944-1f85270462c62fcli%20%281%29.png)
 
 {% hint style="info" %}
 Composing was previously called "client-side-blending"
@@ -48,7 +48,7 @@ The structure of this separation looks like this:
 
 Here, the content of the view is defined on the root level and the presentation is defined inside the `declarative-shadow-dom`. The [slot](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot) elements are insertion points for the content into the presentation.
 
-The `declarative-shadow-dom` is used as the default composition that can be further modified or replaced in runtime using the Starcounter  app suite [Blending](https://github.com/Starcounter/Blending) and its feature - composition editor.
+The `declarative-shadow-dom` is used as the default composition that can be further modified or replaced in runtime using the Starcounter app suite [Blending](https://github.com/Starcounter/Blending) and its feature - composition editor.
 
 ## Composing the attached views
 
@@ -99,7 +99,7 @@ When these two views are attached, the default composition from MedicalRecord is
 
 ### Custom compositions of the attached views
 
-Custom compositions are created by solution owners and stored as configuration in the database. A solution owner can manage custom compositions using [BlendingEditor](https://github.com/Starcounter/Blending). Custom compositions are stored in the system tables `Starcounter.HTMLComposition` (legacy, deprecated) or `Starcounter.HtmlViewComposition` + `Starcounter.HtmlViewAttachment` + `Starcounter.HtmlView` (current).
+Custom compositions are created by solution owners and stored as configuration in the database. A solution owner can manage custom compositions using [BlendingEditor](https://github.com/Starcounter/Blending). Custom compositions are stored in the system tables `Starcounter.HTMLComposition` \(legacy, deprecated\) or `Starcounter.HtmlViewComposition` + `Starcounter.HtmlViewAttachment` + `Starcounter.HtmlView` \(current\).
 
 To create a custom composition, we will move the MedicalRecord table and headline into the `div class="pet-list-wrapper"` and expand the width of the wrapper to fit the table:
 
@@ -131,7 +131,7 @@ The tool for creating these custom compositions is the composition editor featur
 
 There are two main concepts in the composition editor - the identifier and composition \("layout" on the below picture\).
 
-![](../../.gitbook/assets/compositioneditor.png)
+![](../../.gitbook/assets/compositioneditor%20%282%29.png)
 
 The identifier represents the unique set of the attached views. For example, the identifier for the PetList and MedicalProvider example looks like this:
 
@@ -170,13 +170,13 @@ As you can see, they look like one app because of Attaching and Composing.
 The key for the custom compositions is the main view. If there is more than one custom composition, the best matching composition is picked by its distance to the attached views:
 
 1. If there is an exact match of a custom composition to attached views, provide this composition
-2. Else, if there are superset custom compositions (compositions that include all of the attached views and more), provide the smallest superset
-3. Else, if there are subset custom compositions (compositions that include some of the attached views [*intersection*] and maybe some other views [*complement*]), provide the subset that has the largest intersection and smallest relative complement. For the attached views not included in the composition, use their default composition
+2. Else, if there are superset custom compositions \(compositions that include all of the attached views and more\), provide the smallest superset
+3. Else, if there are subset custom compositions \(compositions that include some of the attached views \[_intersection_\] and maybe some other views \[_complement_\]\), provide the subset that has the largest intersection and smallest relative complement. For the attached views not included in the composition, use their default composition
 4. Else, use the default compositions
 
-![](../../.gitbook/assets/exact-match.png)
+![](../../.gitbook/assets/exact-match%20%281%29.png)
 
-![](../../.gitbook/assets/superset-match.gif)
+![](../../.gitbook/assets/superset-match%20%281%29.gif)
 
 ![](../../.gitbook/assets/subset-match.gif)
 
@@ -185,19 +185,19 @@ The key for the custom compositions is the main view. If there is more than one 
 The main view is `/people/person.html` with the attached views `/skyper/callme.html`, `/images/illustration.html`
 
 1. If there is a custom composition for `/people/person.html, [/skyper/callme.html, /images/illustration.html]`, provide this composition
-2. Else, if there are the following superset custom compositions, provide the composition (2), because it is the smallest superset:
-    1. `/people/person.html, [/skyper/callme.html, /images/illustration.html, /foo/foo.html, /bar/bar.html]`
-    2. `/people/person.html, [/skyper/callme.html, /images/illustration.html, /foo/foo.html]`
-3. Else, if there are the following subset custom compositions, provide the composition (2). Both (1) and (2) are the smallest intersection with the attached views, both (1) and (2) have no complement and (2) is first alphabetically:
-    1. `/people/person.html, [/skyper/callme.html]`
-    2. `/people/person.html, [/images/something.html]`
-    3. `/people/person.html, [/skyper/callme.html, /foo/foo.html]`
-    4. `/people/person.html, [/foo/foo.html]`
+2. Else, if there are the following superset custom compositions, provide the composition \(2\), because it is the smallest superset:
+   1. `/people/person.html, [/skyper/callme.html, /images/illustration.html, /foo/foo.html, /bar/bar.html]`
+   2. `/people/person.html, [/skyper/callme.html, /images/illustration.html, /foo/foo.html]`
+3. Else, if there are the following subset custom compositions, provide the composition \(2\). Both \(1\) and \(2\) are the smallest intersection with the attached views, both \(1\) and \(2\) have no complement and \(2\) is first alphabetically:
+   1. `/people/person.html, [/skyper/callme.html]`
+   2. `/people/person.html, [/images/something.html]`
+   3. `/people/person.html, [/skyper/callme.html, /foo/foo.html]`
+   4. `/people/person.html, [/foo/foo.html]`
 4. Else, use the default compositions from `/people/person.html`, `/skyper/callme.html`, `/images/illustration.html`.
 
 ### Migration from `Starcounter.HTMLComposition` to `Starcounter.HtmlViewComposition` data model
 
-Versions of BlendingProvider (previously CompositionProvider) prior to 3.0.0 use a legacy `Starcounter.HTMLComposition` data model. Version 3.0.0 and up uses `Starcounter.HtmlViewComposition` and automatically upgrades the legacy data.
+Versions of BlendingProvider \(previously CompositionProvider\) prior to 3.0.0 use a legacy `Starcounter.HTMLComposition` data model. Version 3.0.0 and up uses `Starcounter.HtmlViewComposition` and automatically upgrades the legacy data.
 
 On start up, the app converts all existing `Starcounter.HTMLComposition` objects to `Starcounter.HtmlViewComposition` objects. It does not delete `Starcounter.HTMLComposition` objects.
 
@@ -212,3 +212,4 @@ Composing allows us to make views coming from multiple apps to look like one by 
 * [Layout compositions for HTML partials](https://starcounter.io/layout-compositions-html-partials/) - Blog October 2016
 * [Html Views Blending Guidelines](html-views-composition-guidelines.md) - Docs
 * [Shadow DOM v1: Self-Contained Web Components](https://developers.google.com/web/fundamentals/getting-started/primers/shadowdom) - Google Developers
+

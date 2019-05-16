@@ -1,6 +1,5 @@
 # Star CLI
 
-
 ## Introduction
 
 The `star` command line interface \(CLI\) handles tasks in a database. This page covers the most important commands. The rest of the commands can be found with `star --help` or `star --helpextended`.
@@ -76,10 +75,10 @@ class Program
 }
 ```
 
-Custom arguments starting with hyphens will throw `ScErrBadCommandLineSyntax (SCERR1031)`. To prevent this, prefix the argument with any other character:
+Custom arguments starting with hyphens will throw `ScErrBadCommandLineSyntax (SCERR1031)`. To prevent this, begin the custom argument name with any other character. It is advised to use Window convention arguments that begin with a forward slash:
 
 ```text
-> star app.exe \-argument1
+> star app.exe /argument1 /argument-two
 ```
 
 Arguments enclosed in quotation marks will be evaluated as one argument.

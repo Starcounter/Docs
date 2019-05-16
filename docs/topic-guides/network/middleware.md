@@ -68,7 +68,7 @@ Handle.GET("/my-url", () => new Json(), new HandlerOptions() { SkipRequestFilter
 
 Response filters do the opposite of request filters; they make alterations to outgoing responses. They work similarly to request filters by being executed one by one until one returns a non-null response. The main difference is that response filters are called after the handler has been called while request filters are called before. Response filters can either create entirely new responses and return those, or modify the response coming from the handler.
 
-![](../../.gitbook/assets/middleware-response%20%281%29.PNG)
+![](../../.gitbook/assets/middleware-response-1.PNG)
 
 For example, response filters makes it possible to add a certain HTTP header to responses for requests with a `/special` URI prefix after the request has been dealt with by the handler:
 

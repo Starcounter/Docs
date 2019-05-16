@@ -40,7 +40,7 @@ state1 = session.Store["state1"]
 ```
 
 {% hint style="info" %}
-The storage on the session is _server-side_ only. Nothing stored using `Session.Store` will be exposed to a client. This is a change in behavior from the  obsoleted `Session.Data`. See the next section on how to attach a `Json` to be used for client-server communication
+The storage on the session is _server-side_ only. Nothing stored using `Session.Store` will be exposed to a client. This is a change in behavior from the obsoleted `Session.Data`. See the next section on how to attach a `Json` to be used for client-server communication
 {% endhint %}
 
 ## Client-server synchronization with JSON Patch
@@ -90,7 +90,7 @@ Current session is determined and set automatically before user handler is calle
 
 Starcounter Gateway uses one of the following ways to determine the session that should be used for calling user handler.
 
-* `X-Location` + `X-Referer`/`Referer` headers: Using HTTP protocol, when creating a new session, if the `UseSessionHeader` is set to `true` (which is the default), the response will contain a `X-Location` HTTP header. The value of that header is the URI of the newly created session. Client code can provide this value in the subsequent requests as an `X-Referer` or `Referer` header to identify the session. The name of the header can be changed from `X-Location` to a different name using the `SessionHeaderName` property.
+* `X-Location` + `X-Referer`/`Referer` headers: Using HTTP protocol, when creating a new session, if the `UseSessionHeader` is set to `true` \(which is the default\), the response will contain a `X-Location` HTTP header. The value of that header is the URI of the newly created session. Client code can provide this value in the subsequent requests as an `X-Referer` or `Referer` header to identify the session. The name of the header can be changed from `X-Location` to a different name using the `SessionHeaderName` property.
 * Session as handler URI parameter: Session value can be specified as one of URI parameters when defining a handler, for example:
 
 ```csharp
@@ -107,14 +107,14 @@ The priorities for session determination, for incoming requests, are the followi
 The `Session` constructor has an overload that takes the enum `Session.Flags`. The default flag is `PatchVersioning`. There are five flags:
 
 | Option | Explanation |
-| --- | --- |
+| :--- | :--- |
 | `None` | Overrides the default behavior of `new Session()` so that `PatchVersioning` is not used. |
 | `IncludeSchema` | Was added for Starcounter 1.x and does not serve a purpose anymore. Is the same as `Session.Flags.None`. |
 | `PatchVersioning` | Enables operational transformation with Palindrom. Thus, `PatchVersioning` is required for communication with Palindrom. Is set by default when declaring `new Session()`. |
 | `StrictPatchRejection` | Throws an error instead of rejecting changes in two cases: \(1\) when an incoming patch tries to access an object or item in an array that is no longer valid and \(2\) when the client sends a patch with a different format than expected. |
 | `IncludeNamespaces` | Enables namespacing of Typed JSON responses. Is the same as `Session.Flags.None` since it's the default behavior. |
 
-## CalculatePatchAndPushOnWebSocket {#calculatepatchandpushonwebsocket}
+## CalculatePatchAndPushOnWebSocket <a id="calculatepatchandpushonwebsocket"></a>
 
 JSON patches are calculated whenever there's an incoming request that asks for JSON patch. This means asynchronous changes to the view-model that are finished after the response is sent will not be included in the response patch.
 

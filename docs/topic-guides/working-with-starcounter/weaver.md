@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The weaver** **is the component that transforms and recompiles user code before it is loaded in the database. The weaver lets developers to write plain, ordinary business-focused source code and transparently enjoy the power of the Starcounter database engine.
+The weaver ****is the component that transforms and recompiles user code before it is loaded in the database. The weaver lets developers to write plain, ordinary business-focused source code and transparently enjoy the power of the Starcounter database engine.
 
 For example, the simplest transformation might look something like this:
 
@@ -100,7 +100,7 @@ In some situations, weaving fails. Failures normally come in one of two categori
 
 The first category of errors are generally easier to resolve and the error information we can provide to you as a developer is often quite concise. As an example, if you define a `private` database class in an application targeting Starcounter 2.x, you'll get a clear message informing you this is not supported, and the identity of the class that was private. The way to resolve it is to make it public.
 
-For the second category, or for any error that does not include a specific error condition, detecting what is actually wrong can be harder. As an example, dependency resolution failures can occur deep in a long chain of dependencies, and hence not trivial to fully comprehend. The solution is normally to exclude** **some file part of your application from being weaved/analyzed, as was described above in [How to exclude a file from being processed](weaver.md#how-to-exclude-a-file-from-being-processed) But how should you know what file you need to exclude?
+For the second category, or for any error that does not include a specific error condition, detecting what is actually wrong can be harder. As an example, dependency resolution failures can occur deep in a long chain of dependencies, and hence not trivial to fully comprehend. The solution is normally to exclude ****some file part of your application from being weaved/analyzed, as was described above in [How to exclude a file from being processed](weaver.md#how-to-exclude-a-file-from-being-processed) But how should you know what file you need to exclude?
 
 One way to diagnose any failing application is to invoke the weaver in isolation. Instructions for this is in the [weaving from the command line section](weaver.md#weaving-from-the-command-line).
 
@@ -113,18 +113,20 @@ We can get the full diagnostic by running `scweaver --nocache --verbosity=diagno
 There's no obvious solution to this exception. Reading [Troubleshooting Weaver Failures](weaver.md#troubleshooting-weaver-failures) might be helpful. You can also take a look at [Starcounter/Home\#88](https://github.com/Starcounter/Home/issues/88), [Starcounter/Home\#87](https://github.com/Starcounter/Home/issues/87), and [Starcounter/Home\#166](https://github.com/Starcounter/Home/issues/166) for more information.
 
 #### When nothing else works: running the restricted weaver
-If nothing of the above resolve the issue, there is a last-resort workaround that might require you to restructure your code somewhat, but have the potential of solving some of the more advanced cases. This option is available starting from 2.4 and allow the weaver to run in a more restricted mode by giving the promise that no database classes are defined in the project failing to weave (they can instead be moved out to a separate assembly).
+
+If nothing of the above resolve the issue, there is a last-resort workaround that might require you to restructure your code somewhat, but have the potential of solving some of the more advanced cases. This option is available starting from 2.4 and allow the weaver to run in a more restricted mode by giving the promise that no database classes are defined in the project failing to weave \(they can instead be moved out to a separate assembly\).
 
 Let's look at a typical scenario and how to address it:
 
-You have an assembly (application or library) that fail to weave, reporting `ScErrUnhandledWeaverException`. The most likely cause is that the weaver can't handle some dependency of that assembly, for example due to the fact that new, unsupported features are used, causing the weaver trouble when analyzing the dependency tree.
+You have an assembly \(application or library\) that fail to weave, reporting `ScErrUnhandledWeaverException`. The most likely cause is that the weaver can't handle some dependency of that assembly, for example due to the fact that new, unsupported features are used, causing the weaver trouble when analyzing the dependency tree.
 
 What can be done in this case is
 
-1. If you have any database classes in your assembly, move these out to another (possibly new) library - one with a minimum set of those dependencies of your failing application.
+1. If you have any database classes in your assembly, move these out to another \(possibly new\) library - one with a minimum set of those dependencies of your failing application.
 2. Edit your project.csproj file, adding a new property: `<DisallowDatabaseClasses>True</DisallowDatabaseClasses>`
-3. Rebuild your project (causing weaving to run again, but in a restricted way).
+3. Rebuild your project \(causing weaving to run again, but in a restricted way\).
 
-With `<DisallowDatabaseClasses>True</DisallowDatabaseClasses>` set, you can't *declare* database classes in that project / assembly, but you can still *use* database classes from referenced assemblies, including instantiating database types, reading- and writing properties, querying, and so on.
+With `<DisallowDatabaseClasses>True</DisallowDatabaseClasses>` set, you can't _declare_ database classes in that project / assembly, but you can still _use_ database classes from referenced assemblies, including instantiating database types, reading- and writing properties, querying, and so on.
 
 To test this feature by running it from the command-line, use `scweave --disallowdatabaseclasses your_assembly.dll`
+

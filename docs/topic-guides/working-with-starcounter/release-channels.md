@@ -20,7 +20,7 @@ This channel is for versions that are stable enough to be considered for release
 
 Stability: **Low**, Frequency: **High**
 
- This channel is the unstable iterated release channel. It's updated every night after a full day of work. Features from the Develop release are most probable to appear in the next “Release” version, use it to try out these features. Since the versions from this channel are under constant development, they should be used with care - expect that they will corrupt your database and contain bugs that won't be fixed immediately.
+This channel is the unstable iterated release channel. It's updated every night after a full day of work. Features from the Develop release are most probable to appear in the next “Release” version, use it to try out these features. Since the versions from this channel are under constant development, they should be used with care - expect that they will corrupt your database and contain bugs that won't be fixed immediately.
 
 ## Custom
 

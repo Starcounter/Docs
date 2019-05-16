@@ -137,8 +137,6 @@ The following items should be installed.
 
 ![](../.gitbook/assets/starcounter-https-iis-0.png)
 
-
-
 You can add any extra features if needed.
 
 ### Setting up IIS
@@ -152,7 +150,7 @@ Open Internet Information Services \(IIS\) Manager from the Start menu. And inst
 
 Enable `system.webServer/webSocket` configuration section via Configuration Editor.
 
-![](../.gitbook/assets/starcounter-https-iis-2.png)
+![](../.gitbook/assets/starcounter-https-iis-2%20%281%29.png)
 
 Restart the machine.
 
@@ -164,7 +162,7 @@ Open `Application Request Routing Cache` section and go to it's settings page.
 
 Enable proxy, update timeout to `600` seconds, and click the `Apply` button.
 
-![](../.gitbook/assets/starcounter-https-iis-5.png)
+![](../.gitbook/assets/starcounter-https-iis-5%20%281%29.png)
 
 ### Setting up IIS website
 
