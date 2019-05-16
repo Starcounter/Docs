@@ -11,7 +11,7 @@ In its most basic form, Typed JSON consists of two parts, a template and an inst
 
 
 | Template class | .Net type | Json type | Comment |
-| --- | --- | --- | --- |
+| :--- | :--- | :--- | :--- |
 | TObject | Json | object | A single JSON object of type `Json` or subclass |
 | TObjArr | Arr&lt;Json&gt; | array | An array of JSON-objects. Arr is a subclass of Json |
 | TArray&lt;T&gt; | Arr&lt;T&gt; | array | An array of T, where T is `Json` or subclass |
@@ -46,7 +46,7 @@ The delegates takes the JSON instance as parameter, and the setters an additiona
 
 In this example we create a template for a single JSON object, that describes a person, containing the properties FullName \(string\) and Age \(Int64\):
 
-```csharp
+```
 using System;
 using Starcounter;
 using Starcounter.Templates;

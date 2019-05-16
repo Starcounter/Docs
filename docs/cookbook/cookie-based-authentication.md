@@ -26,7 +26,7 @@ This is how the form gets submitted to force using HTTP:
 
 
 
-```csharp
+```
 var password = Sha1.hash(this.password);
 var url = this.url + this.username + "/" + password + "/" + this.rememberMe;
 this.set("password", "");
@@ -39,7 +39,7 @@ When the user submits the form, a relevant HTTP handler tries to authenticate th
 
 
 
-```csharp
+```
 var systemUser = Db.SQL<SystemUser>("SELECT o FROM Simplified.Ring3.SystemUser o WHERE o.Username = ?", Username).FirstOrDefault();
 
 if (systemUser == null)
@@ -72,7 +72,7 @@ Auth token is now sent to the user as a cookie in the HTTP response. Future HTTP
 
 
 
-```csharp
+```
 var cookie = new Cookie()
 {
     Name = AuthCookieName
@@ -107,7 +107,7 @@ If the auth token is correct, the middleware creates a Session object and identi
 
 
 
-```csharp
+```
 Application.Current.Use((Request request) =>
 {
     Cookie cookie = GetSignInCookie();
@@ -132,7 +132,7 @@ With this middleware, any app that handles this request will see that the sessio
 
 
 
-```csharp
+```
 var query = "SELECT o FROM Simplified.Ring5.SystemUserSession o WHERE o.SessionIdString = ?";
 var userSession = Db.SQL<SystemUserSession>(query, Session.Current.SessionId).FirstOrDefault();
 

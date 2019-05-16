@@ -2,7 +2,7 @@
 
 Web Components are loaded by browser with HTML Imports. HTML Import for Polymer in Starcounter should look like this:
 
-```markup
+```
 <link rel="import" href="/sys/polymer/polymer.html" />
 ```
 
@@ -14,7 +14,7 @@ How does the browser know which of the components has already been imported then
 
 This will be loaded twice and then lead to a Polymer error:
 
-```markup
+```
 <link rel="import" href="/bower_components/polymer/polymer.html" />
 <link rel="import" href="/sys/polymer/polymer.html" />
 ```
@@ -39,7 +39,7 @@ To find the specific dependencies that are delivered with Starcounter, go to `C:
 
 
 
-```text
+```
 bower check-new     Checking for new versions of the project dependencies...
 sys#1.0.0 C:\Users\omer\Desktop\shared folder\new SC\level1\src\BuildSystem\ClientFiles
 ├─┬ PuppetJs#2.5.0

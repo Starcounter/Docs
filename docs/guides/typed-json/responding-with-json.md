@@ -4,7 +4,7 @@ Typed JSON objects are serialized automatically to the `application/json` format
 
 
 
-```javascript
+```
 {
     "FirstName": "Bilbo",
     "LastName": "Baggins"
@@ -13,7 +13,7 @@ Typed JSON objects are serialized automatically to the `application/json` format
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace MyApp
@@ -41,7 +41,7 @@ In code, they look like this:
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace MyApp
@@ -65,7 +65,7 @@ It is also possible to change the status code and description by creating a `Res
 
 
 
-```javascript
+```
 {
     "FirstName": "Gandalf",
     "LastName": "Gray",
@@ -75,7 +75,7 @@ It is also possible to change the status code and description by creating a `Res
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace MyApp

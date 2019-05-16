@@ -14,7 +14,7 @@ Starting apps for the first time, even if you have other apps loaded, is fast. T
 
 For example, if you have three apps up and running and you would like to start another app, let's name it `app4.exe`. Then you would simply run `star app4.exe` which would start the app without much delay. Now, if you want to **restart** two of the other apps, `app1.exe` and `app2.exe` the situation would be different. Simply running `star app1.exe` would require the host process to be recycled, `app2.exe`, `app3.exe`, and `app4.exe` to be stopped, unloaded, and started again. The same would be the case when we restart `app2.exe`. This code describes the gist of the process:
 
-```python
+```
 host = [app1, app2, app3, app4]
 
 def star(my_app):
@@ -53,7 +53,7 @@ To see the console output in Administrator, navigate to the database by clicking
 
 To start an app from the command line, you use the `star` command. It accepts .cs files in addition to .exe files.
 
-```bash
+```
 C:\> star hello.exe
 [Starting "hello.exe" in "Default" on "Personal" (127.0.0.1:8181)]
 "hello.exe" started in database "Default". Default port is 8080 (Executable),
@@ -67,7 +67,7 @@ C:\> star test.cs
 
 The command line option `--database` \(or `-d`\) can be used to specify what database to run the application in.
 
-```bash
+```
 C:\> star --database=mydb hello.cs
 [Starting "hello.cs" in "mydb" on "Personal" (127.0.0.1:8181)]
 "hello.cs" started in database "mydb". Default port is 8080 (Executable),
@@ -102,7 +102,7 @@ Contrary to desktop programs, the program remains loaded after main has been exe
 
 In order to unload a program, you need to run the `star --stop <application>` command.
 
-```bash
+```
 C:\> star --stop hello.cs
 [Stopping "hello.cs" in "Default" on "Personal" (127.0.0.1:8181)]
   - Restarting database "Default"

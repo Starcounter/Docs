@@ -8,7 +8,7 @@ To use `Action`, it has to be declared.
 
 
 
-```csharp
+```
 using System;
 using Starcounter;
 using Simplified.Ring3;
@@ -29,7 +29,7 @@ The other thing that must be done is to actually pass a method to the `Action` d
 
 
 
-```csharp
+```
 public void RefreshCustomElements()
 {
     this.CustomElements.Clear();
@@ -60,7 +60,7 @@ After declaring the `Action` delegate and assigning a method, in this case `this
 
 
 
-```csharp
+```
 void AddNewItem(Input.SelectedType input)
 {
     if (!string.IsNullOrWhiteSpace(input.Value) && IsAvailable(input.Value))

@@ -22,7 +22,7 @@ In Starcounter, you can create master pages and sub pages that are handled on th
 
 
 
-```javascript
+```
 {
   "Html": "/MultiplePagesDemo/views/MailsPage.html",
   "Mails": [
@@ -39,7 +39,7 @@ The `Mails` element is used to display a list with links to their corresponding 
 
 
 
-```javascript
+```
 {
   "Html": "/MultiplePagesDemo/views/Focused.html",
   "Title": "",
@@ -53,7 +53,7 @@ The `Focused.json` has its own Html file which will be inserted into the `MailsP
 
 
 
-```csharp
+```
 using Starcounter;
 using System.Linq;
 
@@ -138,7 +138,7 @@ The second, `Handle.GET("/multiplepagesdemo/mails/{?}"...`, returns a MailsPage 
 
 
 
-```markup
+```
 <link rel="import" href="/sys/polymer/polymer.html">
 
 <template>
@@ -154,7 +154,7 @@ The `Focused.html` referenced by `Focused.json` simply displays the title and co
 
 
 
-```markup
+```
 <link rel="import" href="/sys/polymer/polymer.html" />
 <template>
     <style>

@@ -26,7 +26,7 @@ All Starcounter binaries are stored under the installation directory. This inclu
 
 As part of installing, we populate an environment variable with the path to the installation directory. It can easily be viewed from a prompt doing:
 
-```text
+```
 C:\Users\Per>set StarcounterBin
 StarcounterBin=C:\Program Files\Starcounter
 ```
@@ -38,7 +38,7 @@ This directory store configurations concerning each database. At the root of it 
 **How to find the server repository**  
 In the installation directory, we store a file \(`Personal.xml`\) under the Configuration folder:
 
-```text
+```
 \Program Files\Starcounter
   \Configuration\
     Personal.xml
@@ -46,7 +46,7 @@ In the installation directory, we store a file \(`Personal.xml`\) under the Conf
 
 The XML-path `service\server-dir` in this file will reveal the path to the server repository:
 
-```text
+```
 <?xml version="1.0" encoding="UTF-8"?>
 <service>
   <server-dir>C:\Users\Per\Documents\Starcounter\Personal</server-dir>
@@ -86,7 +86,7 @@ Each database is described by a configuration file. Starcounter will look for su
 
 Example of two configured files:
 
-```text
+```
 \Databases\
   Default\
     Default.db.config
@@ -109,7 +109,7 @@ Example file \(trimmed and simplified\):
 
 
 
-![](../../.gitbook/assets/0ea702a6-c391-11e6-9949-cd3876f30acb-1024x117.png)
+![](../../.gitbook/assets/0ea702a6-c391-11e6-9949-cd3876f30acb-1024x117%20%281%29.png)
 
 
 

@@ -18,7 +18,7 @@ One of the simplest JSON-by-example files look like this:
 
 
 
-```javascript
+```
 {
     "FirstName": "",
     "LastName": ""
@@ -31,7 +31,7 @@ You create an instance of the generated Typed JSON with a normal constructor cal
 
 Accesing the properties of Typed JSON is the same as with any C\# object:
 
-```csharp
+```
 var personPage = new PersonPage();
 string name = personPage.FirstName; // Contains the value "", an empty string
 ```
@@ -42,7 +42,7 @@ It's simple to set default values in JSON-by-example. Building on the previous c
 
 
 
-```javascript
+```
 {
     "FirstName": "Steven", 
     "LastName": "Smith"
@@ -53,7 +53,7 @@ By doing this, the JSON returned when creating a new `PersonPage` object will be
 
 
 
-```csharp
+```
 Handle.GET("/GetPerson", () =>
 {
     return new PersonPage(); // {"FirstName":"Steven","LastName":"Smith"}
@@ -67,7 +67,7 @@ Typed JSON follows the specification of JSON, which means that objects, arrays a
 The following is a list of the tokens in JSON and the equivalence in C\#:
 
 | JSON | C\# |
-| --- | --- |
+| :--- | :--- |
 | `{ }` | Object |
 | `[ ]` | Array |
 | `"value"` | String |
@@ -79,7 +79,7 @@ To specify the type of a member in JSON-by-example, define it in the code-behind
 
 
 
-```javascript
+```
 {
   "Value": 2E3 // will parse as decimal by default.
 }
@@ -87,7 +87,7 @@ To specify the type of a member in JSON-by-example, define it in the code-behind
 
 
 
-```csharp
+```
 partial class Foo : Json
 {
     static Foo()
@@ -104,7 +104,7 @@ By default, all the values declared in JSON-by-example are read-only for the cli
 
 To mark a specific value as writable by the client, add a dollar sign \(`$`\) at the end of the property name, e.g.:
 
-```javascript
+```
 {
    "FirstName$": "",
    "LastName$": ""
@@ -115,7 +115,7 @@ To mark a specific value as writable by the client, add a dollar sign \(`$`\) at
 
 Trigger properties is a common use for writable JSON properties. They notify the code-behind that a change has happened. Here's an example of a trigger property:
 
-```javascript
+```
 {
     "FirstName": "",
     "LastName": "",

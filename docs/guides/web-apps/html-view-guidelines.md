@@ -17,7 +17,7 @@ To make applications look great when running independently while also allowing t
 
 The basic boilerplate of a Starcounter HTML view, which is created by adding a `Starcounter HTML template with dom-bind` file in Visual Studio, looks like this:
 
-```markup
+```
 <link rel="import" href="/sys/polymer/polymer.html">
 
 <template>
@@ -29,7 +29,7 @@ The basic boilerplate of a Starcounter HTML view, which is created by adding a `
 
 To separate the layout and content in this file, the element mentioned above, `<template is="declarative-shadow-dom">` should be used. This element should contain the layout of the HTML view while the `<template is="dom-bind">` should contain the content. Note that this only applies when using Polymer as a templating engine. When using other frameworks, it will not use `dom-bind`, although, the principle of separating the layout from the content will stay constant. In code, this is how it looks:
 
-```markup
+```
 <link rel="import" href="/sys/polymer/polymer.html">
 
 <template>
@@ -52,7 +52,7 @@ The content of the HTML view is distributed to the layout using a Shadow DOM con
 
 When defining the content of a view, it is important to keep in mind that the slotable elements, which are the ones that will be exposed for blending, have to be on the root of the HTML view. Consider the following HTML view:
 
-```markup
+```
 <template>
     <h1>A Headline</h1>
     <p>Some text for te user to read</p>
@@ -102,7 +102,7 @@ The following syntax is used to distribute the content in the Shadow DOM: `<slot
 
 Consider the following HTML view definition:
 
-```markup
+```
 <link rel="import" href="/sys/palindrom-redirect/palindrom-redirect.html" />
 
 <template>
@@ -136,7 +136,7 @@ Consider the following HTML view definition:
 
 To add `declarative-shadow-dom` to this HTML view, something like this can be done:
 
-```markup
+```
 <link rel="import" href="/sys/palindrom-redirect/palindrom-redirect.html" />
 
 <template>
@@ -183,7 +183,7 @@ Regarding styling, there are two ways to make the application easier to visually
 2. Keep styling that will affect the layout inside the `declarative-shadow-dom`.
 3. To avoid writing the same Shadow DOM CSS on different pages, it can be imported with the CSS `import` rule. The syntax for this is `<style>@import url("/yourapp/css/style.css");</style>`. In the example above it would be done this way:
 
-```markup
+```
 <link rel="import" href="/sys/palindrom-redirect/palindrom-redirect.html" />
 
 <template>

@@ -10,7 +10,7 @@ It is recommended to declare indexes before any retrieval query is issued. **Not
 
 In the examples \(1\), \(2\), \(3\), \(4\) and \(5\) below we declare indexes on different properties/columns of the class/table Employee.
 
-```sql
+```
 (1) CREATE INDEX EmpFirstNameIndex ON Employee (FirstName ASC)
 
 (2) CREATE INDEX EmpLastNameIndex ON Employee (LastName ASC)
@@ -28,7 +28,7 @@ You can declare indexes on properties/columns of the following datatypes \(DbTyp
 
 You can declare combined indexes on up to ten different properties/columns of a class/table. In the examples \(6\), \(7\), \(8\) and \(9\) we have some combined indexes on two properties/columns of the class/table Employee.
 
-```sql
+```
 (6) CREATE INDEX EmpLastnameFirstNameIndex ON Employee (LastName ASC, FirstName ASC)
 
 (7) CREATE INDEX EmpFirstNameLastNameIndex1 ON Employee (FirstName ASC, LastName ASC)
@@ -44,7 +44,7 @@ You can declare combined indexes on up to ten different properties/columns of a 
 
 The `indexName` must be unique. If you define the same name more than once you will get an exception. It is possible to check if an index was already created by issuing a query, which selects a record from table `Starcounter.Metadata.Index` with column `Name` equivalent to the index name as in the example below.
 
-```csharp
+```
 if (Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "EmpDepartmentSalaryIndex").First == null)
     Db.SQL("CREATE INDEX EmpDepartmentSalaryIndex ON Employee (Department ASC, Salary DESC)");
 ```
@@ -53,7 +53,7 @@ if (Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "Emp
 
 Existing indexes can be dropped from a database by query with syntax `DROP INDEX index_name ON table_name`. For example:
 
-```csharp
+```
 Db.SQL("DROP INDEX EmpDepartmentSalaryIndex ON Employee");
 ```
 
@@ -79,7 +79,7 @@ An execution of the query \(16\) can also make use of the combined index \(6\) t
 
 An execution of the query \(17\) can make use of the combined index \(7\) in the reverse order to find all Employees objects/rows in the requested order without any sorting order. However, an execution of this query can not efficienlty make use of the combined index \(8\) since it neither in the normal nor the reverse order match the requested order.
 
-```sql
+```
 (11) SELECT e FROM Employee e WHERE e.FirstName = ?
 
 (12) SELECT e FROM Employee e WHERE e.FirstName = ? AND e.LastName = ?
@@ -104,7 +104,7 @@ You can give a hint to Starcounter on what index to use for a specific query. Se
 
 The current version do not support derived indexes. You need to define index on the class you like to query. For instance, say we have the following structure:
 
-```csharp
+```
 [Database]
 public class LegalEntity
 {

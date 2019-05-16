@@ -8,7 +8,7 @@ All modifications have to be wrapped in a transaction. These modifications are v
 
 Database objects are created with the native program code operator `new`. For example, consider the following database class:
 
-```csharp
+```
 [Database]
 public class Person
 {
@@ -20,7 +20,7 @@ public class Person
 
 To create a new instance of this class, the syntax `new Person()` would be used, like this:
 
-```csharp
+```
 new Person()
 {
     FirstName = "John",
@@ -34,7 +34,7 @@ A database object can be updated using the native program code assign operator `
 
 For example, instead of instantiating an object like in the example above, it's possible to create the object and then update its properties:
 
-```csharp
+```
 var person = new Person();
 person.FirstName = "John";
 person.LastName = "Doe";
@@ -42,7 +42,7 @@ person.LastName = "Doe";
 
 To update the `LastName` of all the `Person` objects in the database, they would be looped through and updated, like so:
 
-```csharp
+```
 var people = Db.SQL<Person>("SELECT p FROM Person p");
 foreach (var person in people)
 {
@@ -61,7 +61,7 @@ There are two ways to delete database objects:
 
 They look like this:
 
-```csharp
+```
 var john = new Person();
 john.Delete();
 

@@ -16,7 +16,7 @@ For instance, Web Components allow us to render a list of products and their bar
 
 
 
-```markup
+```
 <link rel="import" href="/sys/x-barcode/src/x-barcode.html">
 <link rel="import" href="/sys/palindrom-client/palindrom-client.html">
 <template id="root">

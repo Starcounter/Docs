@@ -12,7 +12,7 @@ Add the properties `FirstName` and `LastName` to this class. Your code should no
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace HelloWorld
@@ -40,7 +40,7 @@ Add a first instance to the class by defining a new person, its properties, and 
 
 
 
-```csharp
+```
 class Program
 {
     static void Main()
@@ -69,7 +69,7 @@ Start your program with Starcounter by clicking F5 in Visual Studio. To see for 
 
 
 
-![](../.gitbook/assets/part1resized.gif)
+![](../.gitbook/assets/part1resized%20%282%29.gif)
 
 
 

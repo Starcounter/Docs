@@ -18,24 +18,22 @@ As a shorthand, the `session.Data` property and the `json.Session` properties ar
 
 Here are some examples of creating a new session.
 
-```csharp
-var json = new Json();
-var session = new Session();
+    var json = new Json();
+    var session = new Session();
 
-// The JSON and the session can then be connected by either setting the `Data` property on the
-// session or setting the `Session` property on JSON. Both will have the exact same outcome.
+    // The JSON and the session can then be connected by either setting the `Data` property on the
+    // session or setting the `Session` property on JSON. Both will have the exact same outcome.
 
-session.Data = json;
-// OR
-json.Session = session;
-```
+    session.Data = json;
+    // OR
+    json.Session = session;
 
 ### Session Properties
 
 The `Session` object exposes a few useful properties, including:
 
 | Property | Explanation |
-| --- | --- |
+| :--- | :--- |
 | `Created` | Session creation time \(UTC\). |
 | `LastActive` | Session last active \(a receive or send occurred on a session\) time \(UTC\) |
 
@@ -57,7 +55,7 @@ One can store sessions by obtaining session ID string \(`Session.SessionId`\). S
 
 There is a variation of `Session.ScheduleTask` that takes care of sessions grouped by some principle: `Session.ScheduleTask(IEnumerable<String> sessionIds, Action<Session, string> task)`. Use it if you want to operate on a group of sessions, like in the following chat app example:
 
-```csharp
+```
 [Database]
 public class SavedSession
 {
@@ -97,7 +95,7 @@ JSON object can be attached to session by assigning `Data` property on `Session`
 
 
 
-```javascript
+```
 {
    "FirstName": "",
    "LastName": "",
@@ -107,7 +105,7 @@ JSON object can be attached to session by assigning `Data` property on `Session`
 
 
 
-```csharp
+```
 using Starcounter;
 
 class Program  
@@ -137,7 +135,7 @@ Starcounter Gateway uses one of the following ways to determine the session that
 * Automatic session creation when using WebSockets: When using WebSockets protocol, the session is automatically created \(unless its already it was already on the socket\). The session is kept for this WebSocket connection until it closes or session is explicitly destroyed. Session can also be changed during lifetime of WebSocket by setting `Session.Current` property.
 * Session as handler URI parameter: Session value can be specified as one of URI parameters when defining a handler, for example:
 
-```csharp
+```
 Handle.GET("/usesession/{?}", (Session session, Request request) =>
 {
     // Implementation
@@ -162,7 +160,7 @@ More important, however is the built in support for the [HTTP PATCH method](http
 The `Session` constructor has an overload that takes the enum `SessionOptions`. This enum has five options:
 
 | Option | Explanation |
-| --- | --- |
+| :--- | :--- |
 | `Default` | Is the default behavior of `Session`, declaring `new Session(SessionOptions.Default)` is the same as using the default constructor. |
 | `IncludeSchema` | Was added for Starcounter 1.x and does not serve a purpose anymore. Is the same as using the default constructor. |
 | `PatchVersioning` | Enables operational transformation with Palindrom. Thus, `PatchVersioning` is required for communication with Palindrom. |

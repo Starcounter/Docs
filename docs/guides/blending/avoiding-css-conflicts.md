@@ -16,7 +16,7 @@ A **modifier** is a variation of a block or of an element \(_an expanded menu, a
 
 Possible combinations of blocks, elements and modifiers are the following:
 
-```css
+```
 .block {}
 .block__element {} /*The element part starts after __*/
 .block--modifier {} /*The modifier part starts after --*/
@@ -25,7 +25,7 @@ Possible combinations of blocks, elements and modifiers are the following:
 
 When applied to an HTML structure, the above CSS class names are used in the following way:
 
-```markup
+```
 <div class="block">
   <div class="block__element"> ... </div>
   <div class="block__element--modifier"> ... </div>
@@ -53,7 +53,7 @@ Here, the block is marked in red and the element sections in blue.
 
 From this, these BEM classes can be derived:
 
-```css
+```
 .signin-form {}
 .signin-form--expanded {}
 .signin-form__text-input {}
@@ -80,7 +80,7 @@ We recommend the following rules when using BEM selectors in Starcounter apps.
 
   In your stylesheet, the definition for the base class should include all the modifiers, like this:
 
-  ```css
+  ```
   .chatter-menu__item,
   .chatter-menu__item--active {
     font-size: 11px;
@@ -105,7 +105,7 @@ We recommend the following rules when using BEM selectors in Starcounter apps.
 
 
 
-  ```markup
+  ```
   <ul class="chatter-autocomplete">
     <template is="dom-repeat" items="{{model.FoundAttachment}}">
         <li class="chatter-autocomplete__item">

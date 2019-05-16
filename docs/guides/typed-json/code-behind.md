@@ -6,14 +6,14 @@ To create a Typed JSON class with code-behind, choose `New item` in Visual Studi
 
 
 
-```javascript
+```
 {
 }
 ```
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace MyApp
@@ -30,7 +30,7 @@ Consider this JSON object with a property that is [writable](json-by-example.md#
 
 
 
-```javascript
+```
 {
   "FirstName$": ""
 }
@@ -40,7 +40,7 @@ To observe changes to this property, the code-behind method `Handle` can be used
 
 
 
-```csharp
+```
 partial class PersonPage : Json
 {
     void Handle(Input.FirstName action)
@@ -72,7 +72,7 @@ JSON-by-example might contain nested objects. For example:
 
 
 
-```javascript
+```
 {
   "Name": {
      "FirstName$": "",
@@ -84,7 +84,7 @@ JSON-by-example might contain nested objects. For example:
 
 Code-behind for the root level and `Name`-level can be provided as two separate partial classes. For example:
 
-```csharp
+```
 partial class PersonPage : Json
 {
     void Handle(Input.FullName action)

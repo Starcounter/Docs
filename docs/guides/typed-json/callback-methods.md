@@ -12,7 +12,7 @@ The basic structure for using `OnData` looks like this:
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace MyApp
@@ -39,7 +39,7 @@ This method implemented in the same way as `OnData` - all the declaration is hap
 Unlike `OnData` the method `HasChanged` is not that commonly used but only when there is a need for auto-committed database transactions every time data updates.  
 There is a quick example on `HasChanged` usage:
 
-```csharp
+```
 using Starcounter;
 using Starcounter.Templates;
 

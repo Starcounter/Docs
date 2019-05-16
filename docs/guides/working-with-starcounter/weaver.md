@@ -6,7 +6,7 @@ For example, the simplest transformation might look something like this:
 
 **Before**:
 
-```csharp
+```
 [Database]
 public class Person
 {
@@ -16,7 +16,7 @@ public class Person
 
 **After**:
 
-```csharp
+```
 [Database]
 public class Person
 {
@@ -65,14 +65,14 @@ To instruct the weaver to exclude files,
 
 A simple `weaver.ignore` file:
 
-```text
+```
 foo.dll
 bar.dll
 ```
 
 Regular expressions are allowed and is matched according to the following pattern:
 
-```csharp
+```
 new Regex("^" + specification.Replace(".", "\\.").Replace("?", ".").
 Replace("*", ".*"), RegexOptions.IgnoreCase);
 ```
@@ -107,7 +107,7 @@ The effect of that is that the weaver will run, trying to analyze and weave \(i.
 
 Let's look at an example. Notice the options we used to get the maximum of diagnostics: `--nocache --verbosity=diagnostic`.
 
-```text
+```
 C:\Users\Per\Bogota\bin\Debug>scweaver --nocache --verbosity=diagnostic bogota.exe
 
 === Bootstrap diagnostics ===

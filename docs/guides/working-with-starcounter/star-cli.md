@@ -6,7 +6,7 @@ The `star` command line interface \(CLI\) handles tasks in a database. This page
 
 The version of the current Starcounter installation is displayed with `star --version` or the shorthand `star -v`.
 
-```bash
+```
 > star --version
 Version=2.3.1.7018
 ```
@@ -15,7 +15,7 @@ Version=2.3.1.7018
 
 Apps are started with `star [app]` by specifying the path to the `exe` file. For example:
 
-```bash
+```
 ~\Apps\HelloWorld> star .\src\HelloWorld\bin\Debug\HelloWorld
 ```
 
@@ -23,7 +23,7 @@ Apps are started with `star [app]` by specifying the path to the `exe` file. For
 
 When starting an app, Starcounter will fail to find the application resource directory \(`wwwroot`\) if the current working directory is not the root of the project or the same directory as the resource directory. This will, for apps that use the Starcounter web stack presented in [Blendable Web Apps](../web-apps/), throw, when opening the app, an `ArgumentOutOfRangeException` that looks like this:
 
-```text
+```
 System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
 Parameter name: Can not find referenced Html file: "/HelloWorld/PersonJson.html"
    at Starcounter.HtmlFromJsonProvider.ProvideFromFilePath[T](String filePath) in C:\TeamCity\BuildAgent\work\sc-7450\Level1\src\Starcounter\Middleware\HtmlFromJsonProvider.cs:line 58
@@ -41,7 +41,7 @@ HResult=-2146233086
 
 To solve this, specify the resource directory with the `--resourcedir` option:
 
-```bash
+```
 ~\Apps\HelloWorld\src\HelloWorld\bin\Debug> star --resourcedir=../../wwwroot HelloWorld
 HelloWorld -> default (started, default port 8080, admin 8181)
 ```
@@ -52,7 +52,7 @@ Read more about this on the page [Static File Server](../network/static-file-ser
 
 By default, apps are started in the `default` database. To start apps in another database, use the `--database` option:
 
-```bash
+```
 > staradmin new db myDatabase
 Created (Name=myDatabase)
 > star --database=myDatabase HelloWorld
@@ -65,7 +65,7 @@ The shorthand notation is `-d`: `star -d=myDatabase HelloWorld`.
 
 Apps are stopped with the `--stop` option:
 
-```bash
+```
 > star HelloWorld
 HelloWorld -> default (started, default port 8080, admin 8181)
 > star --stop HelloWorld
@@ -78,7 +78,7 @@ Read [Starting and Stopping Apps](starting-and-stopping-apps.md) for more inform
 
 To start an app with another name than the existing one, use the `--name` option:
 
-```bash
+```
 > star --name=HelloUniverse HelloWorld
 HelloUniverse -> default (started, default port 8080, admin 8181)
 ```

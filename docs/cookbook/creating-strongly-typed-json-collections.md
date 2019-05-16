@@ -6,7 +6,7 @@ In this example, it's described how to create a strongly typed collection of `Pe
 
 
 
-```javascript
+```
 {
   "Name": ""
 }
@@ -14,7 +14,7 @@ In this example, it's described how to create a strongly typed collection of `Pe
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace TypedJSONCollectionSample 
@@ -31,7 +31,7 @@ To allow this JSON to contain a collection of other objects, the JSON-by-example
 
 
 
-```javascript
+```
 {
   "People": [{}]
 }
@@ -41,7 +41,7 @@ In the code-behind for the JSON object, make the collection strongly typed by us
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace TypedJSONCollectionSample 
@@ -58,7 +58,7 @@ namespace TypedJSONCollectionSample
 
 With this setup, it's possible to add instances of the `Person` class to the `PersonCollection`:
 
-```csharp
+```
 static void Main() 
 {
   var alice = new Person() { Name = "Alice" };

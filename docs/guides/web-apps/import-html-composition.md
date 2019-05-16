@@ -15,7 +15,7 @@ Place your HTML composition in a file like this one of Hello World:
 
 
 
-```markup
+```
 <slot name="helloworld/description"></slot>
 <slot name="helloworld/amount"></slot>
 <div style="display: none">
@@ -30,7 +30,7 @@ This code merges the elements from `Images` and `HelloWorld`. It also resizes th
 
 Go to the command prompt where you installed Git Bash, navigate to your `HelloWorld` solution and run:
 
-```bash
+```
 curl -XPOST --data-binary '@src/HelloWorldMapper/ExpenseJsonComposition.html' 'http://localhost:8080/sc/partial/composition?key=%2Fsc%2Fhtmlmerger%3FHelloWorld%3D%2FHelloWorld%2FExpenseJson.html
 %26Images%3D%2FImages%2Fviewmodels%2FConceptPage.html&amp;ver='
 ```
@@ -43,14 +43,14 @@ In addition to using POST, we can also use the GET and DELETE methods contained 
 
 To GET the HTML composition that's posted we can use cURL like we did with our POST command. Here's how a cURL command to get the HTML composition above would look:
 
-```bash
+```
 curl 'http://localhost:8080/sc/partial/composition?key=%2Fsc%2Fhtmlmerger%3FHelloWorld%3D%2FHelloWorld%2FExpenseJson.html
 %26Images%3D%2FImages%2Fviewmodels%2FConceptPage.html&amp;ver='
 ```
 
 If we decode the command above, we get the following result:
 
-```bash
+```
 curl 'http://localhost:8080/sc/partial/composition?key=/sc/htmlmerger?HelloWorld=/HelloWorld/ExpenseJson.html&amp;Images=/Images/viewmodels/ConceptPage.html&amp;ver='
 ```
 
@@ -68,7 +68,7 @@ If the key or the version is invalid, a 404 is returned. Otherwise, the response
 
 To delete, insert `-X DELETE` before the URI in the GET call. It look like this:
 
-```bash
+```
 curl -X DELETE 'http://localhost:8080/sc/partial/composition?key=%2Fsc%2Fhtmlmerger%3FHelloWorld%3D%2FHelloWorld%2FExpenseJson.html
 %26Images%3D%2FImages%2Fviewmodels%2FConceptPage.html&amp;ver='
 ```

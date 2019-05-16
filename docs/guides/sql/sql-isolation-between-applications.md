@@ -14,7 +14,7 @@ For example, the first application defines a database class `App1Class` in its n
 
 
 
-```csharp
+```
 namespace App1
 {
     [Database]
@@ -29,7 +29,7 @@ In the second application, the class `App2Class` is defined:
 
 
 
-```csharp
+```
 namespace App2
 {
     [Database]
@@ -44,7 +44,7 @@ The first application is now able to access its own `App1Class` using full and s
 
 
 
-```csharp
+```
 var result = Db.SQL("SELECT c FROM App1.App1Class c").First;
 result = Db.SQL("SELECT c FROM App1Class c").First;
 ```
@@ -55,7 +55,7 @@ However, the first application will not be able to retrieve classes from the sec
 
 
 
-```csharp
+```
 var result = Db.SQL("SELECT c FROM App2Class c").First;
 ```
 
@@ -67,7 +67,7 @@ If the first and second application are referencing the same library, for exampl
 
 
 
-```csharp
+```
 namespace SharedDll
 {
     [Database]
@@ -80,7 +80,7 @@ namespace SharedDll
 
 With this, both applications are able to query the `SharedDllClass`:
 
-```csharp
+```
 var x = Db.SQL("SELECT c FROM SharedDllClass c").First;
 var x2 = Db.SQL("SELECT c FROM SharedDll.SharedDllClass c").First;
 ```
@@ -91,7 +91,7 @@ The usa of shared libraries is a way for several applications to share the same 
 
 Currently, the Starcounter Administrator only supports SQL queries with fully namespaced class names. In the above example, only the following queries are legitimate:
 
-```csharp
+```
 "SELECT c FROM App1.App1Class c"
 "SELECT c FROM App2.App2Class c"
 "SELECT c FROM SharedDll.SharedDllClass c"

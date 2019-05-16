@@ -15,7 +15,7 @@ To unload the database, the [StarDump](https://github.com/Starcounter/StarDump) 
 
 From the stardump directory, use the `stardump unload` command to unload the database. For example, to unload the `default` database to the Desktop, the following would be used:
 
-```text
+```
 stardump unload --database default --file C:\Users\[User]\Desktop\Dump
 ```
 
@@ -29,7 +29,7 @@ In order to open the `sqlite3` file, it is recommended to use [DB Browser for SQ
 
 If we have the following database schema where we want to change "Teenager" to "Teen":
 
-```csharp
+```
 [Database]
 public class Person
 {
@@ -56,11 +56,9 @@ Renaming `Teenager` to `Teen` requires two changes, renaming the table itself, a
 
 Renaming multiple tables by going through them one by one is not an efficient strategy if there are many tables to rename. To solve this, an SQL query can be used to generate SQL that makes the changes at once. For example, if the goal is to rename all the `Simplified` tables to go by the name of `Custom`, the following SQL query can be used:
 
-```sql
-SELECT 'ALTER TABLE `' || Name || '` RENAME TO `Custom.' || substr(Name, 12) || '`;'
-FROM `Starcounter.Metadata.Table`
-WHERE Name LIKE 'Simplified.%';
-```
+    SELECT 'ALTER TABLE `' || Name || '` RENAME TO `Custom.' || substr(Name, 12) || '`;'
+    FROM `Starcounter.Metadata.Table`
+    WHERE Name LIKE 'Simplified.%';
 
 This will generate as many SQL queries as there are tables to rename. Copy these generated queries, remove the quotation marks in a text editor, paste them back into the query field in the DB Browser, and run them. It should look something like this:
 
@@ -72,17 +70,15 @@ This will generate as many SQL queries as there are tables to rename. Copy these
 
 The tables themselves are now renamed. Lastly, run this query to update the metadata accordingly:
 
-```sql
-UPDATE `Starcounter.Metadata.Table`
-SET Name = 'Custom.' || substr(Name, 12)
-WHERE Name LIKE 'Simplified.%';
-```
+    UPDATE `Starcounter.Metadata.Table`
+    SET Name = 'Custom.' || substr(Name, 12)
+    WHERE Name LIKE 'Simplified.%';
 
 ### Renaming Columns
 
 Renaming columns is relatively easy in DB Browser. Consider the case where the goal is to rename the column `FirstName` to `Name` in the following model:
 
-```csharp
+```
 [Database]
 public class Person
 {
@@ -115,7 +111,7 @@ Rename the column in the metadata at `Starcounter.Metadata.Column` by finding th
 
 To modify the database schema in the application, simply change it according to the modification done in the database. For example, if the `Teenager` table was renamed to `Teen`, the code would be changed from this:
 
-```csharp
+```
 [Database]
 public class Person
 {
@@ -128,7 +124,7 @@ public class Child : Teenager { }
 
 To this:
 
-```csharp
+```
 [Database]
 public class Person
 {
@@ -145,13 +141,13 @@ No matter what change is made, this step is rather trivial. It might even be cle
 
 To reload the database, use the `stardump reload` command. For example, to reload the `sqlite3` file "Dump" into the default database, the following would be used:
 
-```text
+```
 stardump reload --database default --file C:\Users\[User]\Desktop\Dump.sqlite3
 ```
 
 If the default database already contains data, it is neccessary to delete it and create a new default database first. That is done using the following two commands:
 
-```text
+```
 staradmin -d=default delete --force db
 staradmin -d=default new db DefaultUserHttpPort=8080
 ```

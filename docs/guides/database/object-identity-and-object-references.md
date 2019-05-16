@@ -20,7 +20,7 @@ Objects are retrieved from identity with `Db.FromId`. It handles both `ObjectID`
 
 A common use is in handlers like this where `Person` is a database object:
 
-```csharp
+```
 Handle.GET("PersonList/{?}", (string objectId) =>
 {
     return new PersonPage()
@@ -32,7 +32,7 @@ Handle.GET("PersonList/{?}", (string objectId) =>
 
 There are four overloads of `Db.FromId`:
 
-```csharp
+```
 T Db.FromId<T>(string base64Id);
 T Db.FromId<T>(ulong id);
 IObjectView FromId(ulong id);

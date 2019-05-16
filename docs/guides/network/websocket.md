@@ -8,7 +8,7 @@ Starcounter WebSocket implementation is based on RFC 6455.
 
 WebSocket connection upgrade can be made inside an ordinary HTTP handler by calling `SendUpgrade` method on received HTTP `Request` object, for example:
 
-```csharp
+```
 Handle.GET(8080, "/wstest", (Request req) =>
 {
     // Checking if its a WebSocket upgrade request.
@@ -57,7 +57,7 @@ Once the `SendUpgrade` is called and WebSocket object is available, it can immed
 WebSocket can be identified as a one UInt64 integer, that user can store in database and by some other means. Whenever needed, user can restore WebSocket object using the ID and perform operations on that object.  
 To obtain a WebSocket ID, call `WebSocket.ToUInt64()`, in opposite, to create a WebSocket object just pass the UInt64 ID to WebSocket constructor:
 
-```csharp
+```
 WebSocket ws = new WebSocket(savedWsId);
 ws.Send("My server message!");
 ```
@@ -68,7 +68,7 @@ When the `SendUpgrade` method is called, the approving WebSocket upgrade HTTP Re
 
 The WebSocket `SendUpgrade` method on Request has the following signature:
 
-```csharp
+```
 WebSocket SendUpgrade(
     String groupName,
     List<String> cookies = null,
@@ -89,7 +89,7 @@ Once the WebSocket object is returned, user can fetch the ID representing this W
 
 To register a specific WebSocket group to handle WebSocket data receiving events, the `Handle.WebSocket` method should be used, for example:
 
-```csharp
+```
 Handle.WebSocket("echotestws", (String s, WebSocket ws) =>
 {
     Console.WriteLine("Received on WebSocket: " + s);
@@ -109,7 +109,7 @@ Note that if arriving frame type is `Text` and the only registered handler is fo
 
 To handle WebSocket disconnect event, the `Handle.WebSocketDisconnect` method should be used, for example:
 
-```csharp
+```
 Handle.WebSocketDisconnect("echotestws", (WebSocket ws) =>
 {
     // Handle resources associated with WebSocket ws.
@@ -124,7 +124,7 @@ The returned `WebSocket` object contains the following notable methods:
 
 Sending string data on WebSocket:
 
-```csharp
+```
 void Send(String data,
   Boolean isText = true,
   Response.ConnectionFlags connFlags = Response.ConnectionFlags.NoSpecialFlags)
@@ -132,7 +132,7 @@ void Send(String data,
 
 Sending binary data on WebSocket:
 
-```csharp
+```
 void Send(Byte[] data,
   Boolean isText = false,
   Response.ConnectionFlags connFlags = Response.ConnectionFlags.NoSpecialFlags)
@@ -146,7 +146,7 @@ NOTE: When doing operations on the same WebSocket but from different Starcounter
 
 Disconnecting an active WebSocket \(with an error message and/or close code according to RFC6455\):
 
-```csharp
+```
 void Disconnect(String message = null,
   WebSocketCloseCodes code = WebSocketCloseCodes.WS_CLOSE_NORMAL)
 ```
@@ -163,7 +163,7 @@ Other following methods and properties are available:
 
 Sometimes its needed to perform the some "action" on a group of WebSocket connections, for example, to unicast some common data. To accomplish this, user can create a WebSocket object from saved UInt64 ID and perform operations with that object \(send/disconnect\). The only requirement is that operating thread should be attached to Starcounter scheduler. The following code snippet demonstrates broadcasting of previously saved WebSockets every second from arbitrary .NET thread:
 
-```csharp
+```
 [Database]
 public class WebSocketId
 {

@@ -10,7 +10,7 @@ These commit hooks should be implemented in a separate class and then registered
 
 Let's say you have two DB classes: parent `Order` and child `OrderItem`:
 
-```csharp
+```
 [Database]
 public class Order
 {
@@ -29,7 +29,7 @@ public class OrderItem
 
 Here the commit hooks are declared in a separate class within a Register method:
 
-```csharp
+```
 public class Hooks
 {
     public void Register()
@@ -60,7 +60,7 @@ public class Hooks
 
 In this code, we register the hooks by simply using `Hooks hooks = new Hooks();` and `hooks.Register();`.
 
-```csharp
+```
 public class Program 
 {
     public void Main() 
@@ -120,7 +120,7 @@ As an alternative to the `BeforeDelete` commit hook, you can use the Starcounter
 
 This is how it would look in code:
 
-```csharp
+```
 [Database]
 public class Foo : IEntity
 {

@@ -10,7 +10,7 @@ Starcounter is not taking a goal to outperform those with any of our potential h
 
 Starcounter is an in-memory technology, hence it only uses disks for persistence and recovery rather than a primary storage. Starcounter streams changes in your data to disk, while uses only primary memory to read data. Changes from committed transactions are logged to disk by a means of log writer and stored in Starcounter `.log` files. Periodically a disk image of the database is updated. This image, which is also known as a checkpoint, is stored in `.sci` and `.sci2` files. When checkpoint creation is executed, log files with records that the checkpoint now incorporates become redundant and thus are renamed from `.log` to `.log.bak` and are a subject of manual deletion. The fraction of `.log` files that are still in work along with snapshot image files together represent a current durable state of the database.
 
-**Having **`.log.bak`** files regularly erased.** In order to clean `.log.bak` files you need to create a task in your preferred task scheduler for Windows or in Windows Task Scheduler to run `del` command on your `.log.bak` files. Please make sure that the created task in Task Scheduler do actually run as expected. Sometimes it will not run because the correct user privileges aren't set.
+**Having** `.log.bak` **files regularly erased.** In order to clean `.log.bak` files you need to create a task in your preferred task scheduler for Windows or in Windows Task Scheduler to run `del` command on your `.log.bak` files. Please make sure that the created task in Task Scheduler do actually run as expected. Sometimes it will not run because the correct user privileges aren't set.
 
 ### Backup and failover
 
@@ -85,7 +85,7 @@ Starcounter streams changes to disk sequentially. Modern HDDs can stream terraby
 
 
 
-![](../../.gitbook/assets/screen-shot-2015-10-06-at-11.24.041-1024x726.png)
+![](../../.gitbook/assets/screen-shot-2015-10-06-at-11.24.041-1024x726%20%282%29.png)
 
 
 

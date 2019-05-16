@@ -12,7 +12,7 @@ An example of this is the [Launcher](https://github.com/starcounterapps/launcher
 
 All middleware is registered with the `Application.Current.Use` API which has three overloads corresponding to the different types of middleware listed above. The registration is usually done at the entry point of the application and can look something like this:
 
-```csharp
+```
 static void Main()
 {
   Application.Current.Use((Request request) => {
@@ -35,13 +35,13 @@ When allowing external HTTP requests, it might be useful to pre-process or filte
 
 
 
-![](../../.gitbook/assets/middleware-example.PNG)
+![](../../.gitbook/assets/middleware-example%20%282%29.PNG)
 
 
 
 An example of this can be an basic spam filter:
 
-```csharp
+```
 Application.Current.Use((Request request) =>
 {
     if (request.Uri.Contains("spam"))
@@ -62,7 +62,7 @@ When there is an incoming request, this request filter checks if the URI contain
 
 To let requests to a certain handler bypass all request filters, use the class `HandlerOptions` and set `SkipRequestFilters` to `true`. Like this:
 
-```csharp
+```
 Handle.GET("/my-url", () => new Json(), new HandlerOptions() { SkipRequestFilters = true });
 ```
 
@@ -74,13 +74,13 @@ Response filters do the opposite of request filters; they make alterations to ou
 
 
 
-![](../../.gitbook/assets/middleware-response.PNG)
+![](../../.gitbook/assets/middleware-response%20%281%29.PNG)
 
 
 
 For example, response filters makes it possible to add a certain HTTP header to responses for requests with a `/special` URI prefix after the request has been dealt with by the handler:
 
-```csharp
+```
 Application.Current.Use((Request request, Response response) =>
 {
     if (request.Uri.StartsWith("/special"))
@@ -94,7 +94,7 @@ Application.Current.Use((Request request, Response response) =>
 
 In this case, a new header would be added to the response if the URI of the incoming request started with `/special`. It would then return the response and no other response filters would be called. If the request URI did not start with `/special`, then the next response filter would be called or the response would be returned if there were no more response filters to call. Take a look at this response filter by comparison:
 
-```csharp
+```
 Application.Current.Use((Request request, Response response) =>
 {
     if (request.Uri.StartsWith("/special"))
@@ -109,7 +109,7 @@ In this case, the next response filter is never called since a response is alway
 
 In the examples above, the response filter checks for information in the request. It's also possible to check for information in the response, such as in this example:
 
-```csharp
+```
 Application.Current.Use((Request request, Response response) =>
 {
     if (response.StatusCode == 404)
@@ -131,7 +131,7 @@ Here, the response filter makes it possible to return a descriptive `404` page b
 
 When using both request and response filters, response filters will intercept responses coming from request filters. Consider the following example:
 
-```csharp
+```
 static void Main()
 {
     // Request filter
@@ -175,7 +175,7 @@ Both request and response filters catch requests to handlers in other applicatio
 
 Consider the following request filter:
 
-```csharp
+```
 Application.Current.Use((Request request) =>
 {
     return new Response()
@@ -191,7 +191,7 @@ By having this request filter in one application, all requests, to all applicati
 
 Adding this `if` statement fixes it:
 
-```csharp
+```
 Application.Current.Use((Request request) =>
 {
     if (request.Uri.StartsWith("/MyApp"))
@@ -213,7 +213,7 @@ Application.Current.Use((Request request) =>
 
 Here's an application using a middleware class:
 
-```csharp
+```
 class Blocker : IMiddleware
 {
     void IMiddleware.Register(Application application)
@@ -256,7 +256,7 @@ These classes do not have to contain request or response filters. Although, that
   
 
 
-```markup
+```
 <template>
     <template is="dom-bind">
         <h1>{{model.FirstName}}</h1>
@@ -269,7 +269,7 @@ These classes do not have to contain request or response filters. Although, that
 
 
 
-```csharp
+```
 {
   "Html": "/person.html",
   "FirstName": "John",
@@ -279,7 +279,7 @@ These classes do not have to contain request or response filters. Although, that
 
 
 
-```csharp
+```
 void Main() 
 {
   Application.Current.Use(new HtmlFromJsonProvider());
@@ -313,7 +313,7 @@ It's possible to override this default HTML by passing a string containing HTML 
 
 
 
-```csharp
+```
 var html = @"<!DOCTYPE html>
 <html>
 <head>
@@ -350,7 +350,7 @@ When building Starcounter applications the recommended way, use the two middlewa
 
 This is how it should look:
 
-```csharp
+```
 static void Main()
 {
   Application.Current.Use(new HtmlFromJsonProvider());

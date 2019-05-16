@@ -28,7 +28,7 @@ If the user elects to cancel the email, the EmailAddress should not be saved. If
 
 A new transaction is created calling `Db.Scope` that takes a delegate to be executed as parameter. The transaction will then attach to the view-model when the \(view-model\) object is instantiated.
 
-```csharp
+```
 Handle.GET("/email-client/new-email", () =>
 {
   return Db.Scope(() => 
@@ -50,7 +50,7 @@ Inside your form, the changes are all there and the information appears updated 
 
 Sometimes a transaction is already attached on another part of the view-model. To reuse it, it needs to be scoped before the new page is created.
 
-```csharp
+```
 Handle.GET("/email-client/new-email", () =>
 {
   var masterPage = Self.GET<MasterPage>("/email-client");
@@ -71,7 +71,7 @@ If the part of the view-model that the transaction should attach to is already i
 
 Lets assume that in the previous example, the `CurrentPage` property was already instantiated.
 
-```csharp
+```
 Handle.GET("/email-client/new-email", () =>
 {
   var masterPage = Self.GET<MasterPage>("/email-client");
@@ -89,7 +89,7 @@ A transaction can attach and be used on more than one instance in the view-model
 
 In this example the call to the second handler with uri `/email-client/email/{emailId}` will use the transaction created in the first handler.
 
-```csharp
+```
 Handle.GET("/email-client/new-email", () =>
 {
   var masterPage = Self.GET<MasterPage>("/email-client");
@@ -118,7 +118,7 @@ Scopes are nested, so if in the example the second rest-handler, `Handle.Get("/e
 
 To always create a new transaction, manually create and scope it:
 
-```csharp
+```
 Handle.GET("/email-client/new-email", () =>
 {
   var masterPage = Self.GET<MasterPage>("/email-client");
@@ -142,7 +142,7 @@ The syntax for these are `Transaction.Commit()` and `Transaction.Rollback()`.
 
 `Transaction.Rollback()` rolls back the state of the view-model. For example, with a commit that's immidiately followed by a rollback, no changes will roll back. Consider this scenario instead:
 
-```csharp
+```
 void Handle(Input.CreateEmailTrigger action) 
 {
   Transaction.Commit();
@@ -158,7 +158,7 @@ In this scenario, the new `Email` that's created would roll back and the state o
 
 Most sample apps uses `Commit` and `Rollback` to allow the user to save or cancel change like in the following example:
 
-```csharp
+```
 partial class MailPage : Json, IBound<Mail>
 {
   void Handle(Input.RecipientAddress action)
@@ -196,7 +196,7 @@ Starcounter throws this exception when an iterator closes before finishing. An i
 
 This is the simplest way to close the iteration and throw the exception if we assume that this code is in a long-running transaction:
 
-```csharp
+```
 foreach (var person in Db.SQL("SELECT p FROM Person p"))
 {
     Transaction.Commit();

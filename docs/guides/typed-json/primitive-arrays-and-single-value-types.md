@@ -16,13 +16,13 @@ In the following example we create a JSON-by-example file containing of a single
 
 
 
-```javascript
+```
 "Default"
 ```
 
 
 
-```csharp
+```
 public static void Main()
 {
     var json = new SingleValueJson();
@@ -36,7 +36,7 @@ public static void Main()
 
 Running this example \(project called SingleValueTest\) will print the following to the console:
 
-```text
+```
 > star.exe SingleValueTest.exe
 SingleValueTest ->; default (started, default port 8080, admin 8181)
 Json is string: true
@@ -51,13 +51,13 @@ A single array containing integers. We add two items and print.
 
 
 
-```javascript
+```
 [ 99 ]
 ```
 
 
 
-```csharp
+```
 public static void Main()
 {
     var json = new SingleArrayJson();
@@ -77,7 +77,7 @@ public static void Main()
 
 Running this example \(project called SingleArrayTest\) will print the following to the console:
 
-```text
+```
 > star.exe SingleArrayTest.exe
 SingleArrayTest -> default (started, default port 8080, admin 8181)
 1

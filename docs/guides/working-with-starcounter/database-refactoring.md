@@ -53,7 +53,7 @@ _Add a database field to an existing database class_
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace AddField
@@ -76,7 +76,7 @@ namespace AddField
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace AddField
@@ -109,14 +109,14 @@ namespace AddField
 
 
 
-```sql
+```
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."AddField"."Foo"(__id)VALUES(object 1)
 ```
 
 
 
-```sql
+```
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."AddField"."Foo"(__id,"Bar")VALUES(object 2,'Value'),(object 1,NULL)
 ```
@@ -129,7 +129,7 @@ _Add a database property to an existing database class._
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace AddProperty
@@ -152,7 +152,7 @@ namespace AddProperty
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace AddProperty
@@ -185,14 +185,14 @@ namespace AddProperty
 
 
 
-```sql
+```
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."AddProperty"."Foo"(__id)VALUES(object 1)
 ```
 
 
 
-```sql
+```
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."AddProperty"."Foo"(__id,"Bar")VALUES(object 2,'Value'),(object 1,NULL)
 ```
@@ -205,7 +205,7 @@ _Add a database class when there is already a class present and instances of it.
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace AddProperty
@@ -228,7 +228,7 @@ namespace AddProperty
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace AddProperty
@@ -265,14 +265,14 @@ namespace AddProperty
 
 
 
-```sql
+```
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."AddClass"."Foo"(__id)VALUES(object 1)
 ```
 
 
 
-```sql
+```
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."AddClass"."Foo"(__id)VALUES(object 1),(object 2)
 INSERT INTO "Starcounter"."Raw"."AddClass"."Bar"(__id)VALUES(object 3)
@@ -286,7 +286,7 @@ _Remove a database field from a class._
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace RemoveField
@@ -315,7 +315,7 @@ namespace RemoveField
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace RemoveField
@@ -345,14 +345,14 @@ namespace RemoveField
 
 
 
-```sql
+```
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."RemoveField"."Foo"(__id,"Bar")VALUES(object 1,'Value')
 ```
 
 
 
-```sql
+```
 Not possible to achieve - see remarks below.
 ```
 
@@ -368,7 +368,7 @@ _Remove a database property from a class._
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace RemoveProperty
@@ -397,7 +397,7 @@ namespace RemoveProperty
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace RemoveProperty
@@ -427,14 +427,14 @@ namespace RemoveProperty
 
 
 
-```sql
+```
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."RemoveProperty"."Foo"(__id,"Bar")VALUES(object 1,'Value')
 ```
 
 
 
-```sql
+```
 Not possible to achieve - see remarks below.
 ```
 
@@ -450,7 +450,7 @@ _Remove a database class that was previously bound._
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace RemoveClass
@@ -486,7 +486,7 @@ namespace RemoveClass
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace RemoveClass
@@ -516,7 +516,7 @@ namespace RemoveClass
 
 
 
-```sql
+```
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."RemoveClass"."Foo"(__id)VALUES(object 1)
 INSERT INTO "Starcounter"."Raw"."RemoveClass"."Bar"(__id,"Value")VALUES(object 2,'Value')
@@ -524,7 +524,7 @@ INSERT INTO "Starcounter"."Raw"."RemoveClass"."Bar"(__id,"Value")VALUES(object 2
 
 
 
-```sql
+```
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."RemoveClass"."Foo"(__id)VALUES(object 1),(object 3)
 ```
@@ -541,7 +541,7 @@ _Rename a field in a database class._
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace RenameField
@@ -567,7 +567,7 @@ namespace RenameField
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace RenameField
@@ -603,7 +603,7 @@ _Rename a property in a database class._
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace RenameProperty
@@ -629,7 +629,7 @@ namespace RenameProperty
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace RenameProperty
@@ -665,7 +665,7 @@ _Rename a database class._
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace RenameClass
@@ -688,7 +688,7 @@ namespace RenameClass
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace RenameClass

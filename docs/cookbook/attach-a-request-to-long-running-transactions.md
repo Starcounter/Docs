@@ -6,7 +6,7 @@ If you want to provide the user with a URL to an uncommitted object, you will ne
 
 The following button handler creates a `Person` object and redirects to its page, without committing the object:
 
-```csharp
+```
 public void Handle(Input.CreatePerson action)
 {
     var person = new Person()
@@ -20,7 +20,7 @@ public void Handle(Input.CreatePerson action)
 
 When the request handler for `"/people/persons/{?}"` catches the request after the redirection, it needs to search for the object by its ID in the existing long-running transaction:
 
-```csharp
+```
 Handle.GET<string>("/people/persons/{?}", (string id) =>
 {
     var master = Self.GET<StandalonePage>("/people/standalone");

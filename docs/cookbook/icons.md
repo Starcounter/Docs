@@ -23,7 +23,7 @@ This happens to be the default size in Polymer \([`iron-icon`](https://elements.
 
 In the `dom-bind` part of your partial define a `<button>` that includes an inline SVG or and inline SVG with `<use>` reference to an external file:
 
-```markup
+```
 <button class="CompositionEditor-resetbutton" slot="CompositionEditor/icon" on-click="toggleEditing" aria-label="Brush icon">
     <svg modified$="{{model.layoutModified$}}" active$="{{model.editingMode$}}" viewBox="0 0 74 76" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <use xlink:href="/CompositionEditor/images/layout-editor.svg#Page-1"/>
@@ -33,7 +33,7 @@ In the `dom-bind` part of your partial define a `<button>` that includes an inli
 
 Now, the above SVG and its paths can be styled using CSS in the `starcounter-composition` part. The below code includes a fix that makes SVG content styleable in browsers other than Chrome:
 
-```markup
+```
 <template is="starcounter-composition">
     <style>
         .icon-holder {

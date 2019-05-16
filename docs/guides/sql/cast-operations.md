@@ -4,7 +4,7 @@ In some path expressions you need to cast the type of a property/column.
 
 Assume Employee is a subtype of Person, the property Father is of type Person and is defined in Person, the property Manager is of type Employee and is defined in Employee, and you want to select the manager of each person's father whenever such manager exists.
 
-```csharp
+```
 [Database]
 public class Person
 {
@@ -20,14 +20,14 @@ public class Employee : Person
 
 In this case the query below would be incorrect because Father is of type Person and this type have no property called Manager.
 
-```sql
+```
 /* incorrect */
 SELECT p.Father.Manager FROM Person p
 ```
 
 However, if you cast Father to type Employee then you can continue the path expression with Manager. See example below.
 
-```sql
+```
 /* correct */
 SELECT CAST(p.Father AS Employee).Manager FROM Person p
 ```

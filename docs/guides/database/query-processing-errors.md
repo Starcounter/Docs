@@ -2,7 +2,7 @@
 
 If a query can not be processed due to some syntax or type checking error then the method `Db.SQL<T>(String query)` will throw an `SqlException` \(namespace `Starcounter`\).
 
-```csharp
+```
 try
 {
   string query = "SELECT e.NonExistingProperty FROM Person p";

@@ -2,7 +2,7 @@
 
 The number of returned results can be limited using the `FETCH` clause. An example can be seen below:
 
-```sql
+```
 SELECT e.LastName, e.FirstName
   FROM Employee e
   FETCH FIRST 5 ROWS ONLY
@@ -10,7 +10,7 @@ SELECT e.LastName, e.FirstName
 
 The only mandatory reserved word is the word `FETCH` as in the example below; the other reserved words are optional.
 
-```sql
+```
 SELECT e.LastName, e.FirstName
   FROM Employee e
   FETCH 5
@@ -18,7 +18,7 @@ SELECT e.LastName, e.FirstName
 
 The `FETCH` clause should be after the main part of the query possibly including an `ORDER BY` clause but before an `OPTION` clause including hints, see example below.
 
-```sql
+```
 SELECT e.LastName, e.FirstName
   FROM Employee e
   ORDER BY e.FirstName
@@ -28,7 +28,7 @@ SELECT e.LastName, e.FirstName
 
 The `OFFSET` clause can be used to skip a number of rows before beginning to fetch the rows. This can be used to apply patterns like result pagination. `OFFSET 0` is the same as omitting the `OFFSET` clause.
 
-```sql
+```
 SELECT e.LastName, e.FirstName
   FROM Employee e
   FETCH 5

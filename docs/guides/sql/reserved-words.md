@@ -29,14 +29,14 @@ Be aware that the list of reserved words might be extended in later versions of 
 
 Reserved words cannot be used in queries directly. They have to be surrounded with double quotes as in example:
 
-```sql
+```
 SELECT d FROM "DATE" d
 SELECT o FROM "ORDER" o
 ```
 
 Double quoting can be applied to any identifier, but only necessary for reserved keywords. It is important to double quote each identifier in identifier change, e.g.:
 
-```sql
+```
 SELECT t FROM "Order"."Date" t
 ```
 

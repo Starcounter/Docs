@@ -12,7 +12,7 @@ Consider the following JSON file:
 
 
 
-```javascript
+```
 {
    "FirstName": "",
    "LastName": "",
@@ -23,7 +23,7 @@ To bind the Typed JSON object `PersonPage` defined above to a database class `Pe
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace MyApp
@@ -77,7 +77,7 @@ To accomplish what was demonstrated in the [previous example](../../#binding-to-
 
 
 
-```javascript
+```
 {
    "FirstName": "Steven",
    "LastName": "Smith",
@@ -87,7 +87,7 @@ To accomplish what was demonstrated in the [previous example](../../#binding-to-
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace MyApp
@@ -101,7 +101,7 @@ namespace MyApp
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace MyApp
@@ -155,7 +155,7 @@ All binding modifications are done in a static contructor in the code-behind fil
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace MyApp
@@ -178,7 +178,7 @@ For example:
 
 
 
-```csharp
+```
 partial class PersonPage : Json
 {
     static PersonPage()
@@ -198,7 +198,7 @@ If a property should be bound to a property that has a different name than the p
 
 For example, to bind the Typed JSON property `FirstName` to the database property `LastName` in the example in the [bindings to database objects section](../../#binding-to-database-objects) and vice versa to essentially switch the names around, the following code can be used:
 
-```csharp
+```
 public class PersonPage : Json
 {
     static PersonPage()
@@ -215,7 +215,7 @@ The resulting JSON looks like this: `{"FirstName":"Smith","LastName":"Steve","Fu
 
 Since it is possible to [bind to properties with different names](../../#binding-to-properties-with-different-names), it is also possible to bind to custom properties in the code-behind. For example:
 
-```csharp
+```
 public class PersonPage : Json
 {
     static PersonPage()
@@ -235,7 +235,7 @@ It is also possible to bind to deep properties by providing full path to the pro
 
 
 
-```javascript
+```
 {
   "FirstName": "",
   "FriendName": ""
@@ -244,7 +244,7 @@ It is also possible to bind to deep properties by providing full path to the pro
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace MyApp
@@ -261,7 +261,7 @@ namespace MyApp
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace MyApp
@@ -310,7 +310,7 @@ By setting the property `BindChildren`, each child that don't specify it's own b
 
 Setting the value in the code-behind from the `BindingStrategy` enum:
 
-```csharp
+```
 partial class PersonPage : Json
 {
     static PersonPage()
@@ -334,7 +334,7 @@ If the JSON object is static, that is all properties are known compile-time, you
 
 The JSON code-behind class has to implement `IBound<T>` to set custom data type.
 
-```csharp
+```
 [PersonJson_json]
 public partial class PersonJson : Json, IBound<MyNamespace.Person>
 ```
@@ -347,7 +347,7 @@ public partial class PersonJson : Json, IBound<MyNamespace.Person>
 
 When using `IExplicitBound`, properties in JSON-by-example are expected to be bound. This allows the pinpointing of failed bindings which otherwise could go unnoticed. If the JSON-by-example looks like this:
 
-```javascript
+```
 {
   "Name": "",
   "Age": 0,
@@ -357,7 +357,7 @@ When using `IExplicitBound`, properties in JSON-by-example are expected to be bo
 
 And the database class looks like this:
 
-```csharp
+```
 public class Person
 {
   public string Name { get; set; }
@@ -368,7 +368,7 @@ public class Person
 
 If the code-behind includes `IExplicitBound` like this:
 
-```csharp
+```
 public class PersonPage : Json, IExplicitBound<Person>
 ```
 
@@ -377,7 +377,7 @@ If `public long Age` was removed, then the following error would be displayed: `
 
 Since `IExplicitBound` expects all values to be bound to _something_, properties that are not intended to be bound have to be explicitly unbound. As noted above, it will not compile without this. A static constructor can be used in order to explicitly unbind these properties. This is how it would look:
 
-```csharp
+```
 static PersonPage()
 {
     DefaultTemplate.Age.Bind = null;

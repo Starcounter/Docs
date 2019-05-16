@@ -6,7 +6,7 @@ Starcounter implements transactions with `Db.Transact`, `Db.TransactAsync`, and 
 
 `Db.Transact` is the simplest way to create a transaction in Starcounter. It declares a transactional scope and runs synchronously, as described on the [previous page](./). The argument passed to the `Db.Transact` method is a delegate containing the code to run within the transaction. In code, it looks like this:
 
-```csharp
+```
 Db.Transact(() =>
 {
     new Employee
@@ -27,7 +27,7 @@ Worth noting is that `Db.Transact` is actually `Db.TransactAsync` but with a thi
 
 `Db.Transact` and `Db.TransactAsync` are syntactically identical:
 
-```csharp
+```
 Db.TransactAsync(() => 
 {
     // The code to run in the transaction
@@ -56,7 +56,7 @@ Since `Db.Transact` and `Db.TransactAsync` can run more than once, they should n
 
 When a transaction runs within another transaction, the changes will commit when the outermost transaction scope ends. Consider a situation like this:
 
-```csharp
+```
 public void MakePayment(Account payerAccount, Account receiverAccount, Decimal amount)
 {
     Db.Transact(() => // Inner transaction

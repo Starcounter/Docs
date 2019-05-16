@@ -81,7 +81,7 @@ The app that defines that table needs to run in order to query it.
 
 For example, the class `Person` can be queried this way:
 
-```sql
+```
 SELECT Person.FullName, Text FROM Quote WHERE Person.FirstName = 'Albert'
 ```
 

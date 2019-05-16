@@ -8,7 +8,7 @@ Using Starcounter we recommend that you model a one-to-many relation as in a rel
 
 In the code example below there is a one-to-many relation between the entities/classes `Department` and `Employee` regarding employment. This one-to-many relation is stored in the object references `Department` in the class `Employee`.
 
-```csharp
+```
 [Database]
 public class Department
 {
@@ -33,7 +33,7 @@ Using Starcounter we recommend that you model a many-to-many relation as in a re
 
 In the code example below there is a many-to-many relation between the classes `Person` and `Company` regarding shares of the company. To represent this many-to-many relation we introduce the associative class `Shares`.
 
-```csharp
+```
 [Database]
 public class Person
 {

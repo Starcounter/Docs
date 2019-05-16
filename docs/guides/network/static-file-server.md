@@ -10,7 +10,7 @@ When your application start, Starcounter support exposing static resources by co
 
 For example, having this:
 
-```text
+```
 C:\Users\JohnDoe\apps\app1>dir
 app1.exe
 wwwroot
@@ -18,7 +18,7 @@ wwwroot
 
 and starting the application doing this
 
-```text
+```
 C:\Users\JohnDoe\apps\app1>star app1
 ```
 
@@ -40,7 +40,7 @@ To be even more specific, you can specify resource directories in the "Command l
 
 Command line arguments:
 
-```text
+```
 --resourcedir=thirdpartyscripts
 ```
 
@@ -50,7 +50,7 @@ By doing this, Starcounter will **add** that directory as an additional resource
 
 When starting your application using `star.exe`, the resources directory can be set for that application explicitly using parameter `--resourcedir`, for example:
 
-```text
+```
 star --resourcedir=C:\MyWebsite\Content c:\MyWebsite\PMail.exe
 ```
 
@@ -60,7 +60,7 @@ You can use fully qualified paths, or relative paths. Relative paths are resolve
 
 Resources directory can also be added programmatically in your code, by calling `AppsBootstrapper.AddStaticFileDirectory`. The first parameter is relative/absolute static resources directory and second optional parameter is a port on which files should be served, for example:
 
-```csharp
+```
 AppsBootstrapper.AddStaticFileDirectory("C:\\MyWebsite\\Content", 80);
 ```
 
@@ -72,7 +72,7 @@ In both command-line mode aswell as in Visual Studio, we have shown how to speci
 
 Specify multiple resource directories using ";" \(semi-colon\) as the separator, like this:
 
-```bash
+```
 star --resourcedir=thirdpartyfiles;images;d:\mywebserver\htmlutils app.exe
 ```
 
@@ -82,7 +82,7 @@ Mixing relative and absolute paths work in harmony. Relative paths are resolved 
 
 You can specify only directories that exist. As a consequence, you can not specify paths including characters not supported by the underlying platform. For example, specifying this on Windows
 
-```text
+```
 star --resourcedir="foo>>>" myapp.exe
 ```
 

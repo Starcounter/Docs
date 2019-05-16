@@ -69,7 +69,7 @@ However, in the following special cases you need a data type with higher precede
 
 It is possible to have collections in the database class if the collection has an explicitly declared body. For example, the following properties are allowed:
 
-```csharp
+```
 public List<string> Branches => new List<string>(){ "develop", "master" };
 
 public IEnumerable<Person> Friends => Db.SQL<Person>("SELECT p FROM Person p");
@@ -77,7 +77,7 @@ public IEnumerable<Person> Friends => Db.SQL<Person>("SELECT p FROM Person p");
 
 These properties and fields are not allowed:
 
-```csharp
+```
 public string[] Names { get; set; }
 public List<Person> People { get; }
 public IEnumerable Animals;
@@ -85,7 +85,7 @@ public IEnumerable Animals;
 
 The properties with explicitly declared bodies cannot be queried for with SQL, but they can be accessed from the application code after they have been retrieved from the database. If a `Person` class has the property `Friends` with a declared body, then `Friends` can be accessed like so:
 
-```csharp
+```
 var person = Db.SQL<Person>("SELECT p FROM Person p").First;
 IEnumerable<Person> friends = person.Friends;
 ```

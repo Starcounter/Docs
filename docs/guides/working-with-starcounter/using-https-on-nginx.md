@@ -27,7 +27,7 @@ Staging, testing and other non-production apps can use a free self-signed SSL ce
 Generating SSL private key in your local environment will require you to install OpenSSL tool.  
 Use openssl to generate a new private key.
 
-```bash
+```
 $openssl genrsa -des3 -out /var/www/master.oops-email.pass.com.key
 ...
 Enter pass phrase for master.oops-email.pass.com.key:
@@ -36,7 +36,7 @@ Verifying - Enter pass phrase for master.oops-email.pass.com.key:
 
 Generated private key can stripped of its password so it can be loaded without manual password entry. You can do it if it's your test key.
 
-```bash
+```
 $ openssl rsa -in /var/www/master.oops-email.pass.com.key -out /var/www/master.oops-email.com.key
 ```
 
@@ -44,7 +44,7 @@ $ openssl rsa -in /var/www/master.oops-email.pass.com.key -out /var/www/master.o
 
 Now that you've created your key, it's time to create the Certificate Signing Request, which will be used by the Certificate Authority of your choice to generate the Certificate that SSL will present to other parties during the handshake.
 
-```bash
+```
 $ openssl req -x509 -new -key master.oops-email.com.key -out master.oops-email.com.csr
 ```
 
@@ -56,7 +56,7 @@ You will be asked to enter a set of information. Before we proceed let's see whi
 You will be asked to enter some information about your location and company. The most important part is the Common Name field which should match the name that you want to use your certificate with - your domain name.  
 Example of fill-in:
 
-```bash
+```
 Country Name (2 letter code) [SE]:Sweden
 State or Province Name (full name) [Some-State]:Stockholm
 Locality Name (eg, city) []:Stockholm
@@ -72,7 +72,7 @@ We have created our key and certificate files under the NGINX configuration dire
 The .key file is your private key, and should be kept secure. The .csr file is what you will send to the CA to request your SSL certificate.  
 Now we just need to modify server configuration to use those by adjusting our server block file the way it is written below:
 
-```bash
+```
 server {
 listen 80;
 server_name master.oops-email.com;
@@ -108,13 +108,13 @@ location ~ /__(.*)/[A-Z0-9]+ {
 When you are done restart NGINX server. This should reload your configuration, now allowing it to respond to both HTTP and HTTPS \(SSL\) requests.  
 Don't forget to test your setup, first using normal HTTP
 
-```http
+```
 http://server_domain_or_IP
 ```
 
 then using SSL to communicate
 
-```http
+```
 https://server_domain_or_IP
 ```
 

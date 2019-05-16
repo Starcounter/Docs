@@ -12,7 +12,7 @@ This tree displays the structure of a Starcounter project:
 
 A json view model class would look like this:
 
-```csharp
+```
 using Starcounter;
 
 namespace StarcounterSample 
@@ -25,7 +25,7 @@ namespace StarcounterSample
 
 A helper file inside `Helpers` folder would look like this:
 
-```csharp
+```
 namespace StarcounterSample 
 {
     public class StringsHelper 
@@ -36,7 +36,7 @@ namespace StarcounterSample
 
 A handler file inside `Api` folder would look like this:
 
-```csharp
+```
 using Starcounter;
 
 namespace StarcounterSample 
@@ -55,7 +55,7 @@ Custom sub-folders and sub-namespaces could be used if needed.
 
 A view page inside sub-folder: `StarcounterSample/ViewModels/Launcher/AppMenuPage.json`.
 
-```csharp
+```
 using Starcounter;
 
 namespace StarcounterSample.Launcher 
@@ -82,7 +82,7 @@ Html files which represent a json view model like `SignInPage.Html` should be na
 
 This is correct:
 
-```javascript
+```
 {
     "Html": "/GoogleSignIn/views/SignInPage.html"
 }
@@ -90,13 +90,13 @@ This is correct:
 
 And these are incorrect:
 
-```javascript
+```
 {
     "Html": "/GoogleSignIn/views/signinpage.html"
 }
 ```
 
-```javascript
+```
 {
     "Html": "/GoogleSignIn/views/sign-in-page.html"
 }

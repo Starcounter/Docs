@@ -4,11 +4,11 @@
 
 In SQL queries database objects can be compared either by the equals `=` operator or by the `ObjectNo` value. The direct comparison is always preferable.
 
-```csharp
+```
 var products = Db.SQL<Product>("SELECT p FROM Product p WHERE p.Customer = ?", customer);
 ```
 
-```csharp
+```
 var products = Db.SQL<Product>("SELECT p FROM Product p WHERE p.Customer.ObjectNo = ?", customer.GetObjectNo());
 ```
 
@@ -18,7 +18,7 @@ Two instances of a database class can be compared either with the `Object.Equals
 
 **Note:** the equals `==` operator and the `Object.ReferenceEquals` method will always return `false`.
 
-```csharp
+```
 var firstProduct = new Product();
 var secondProduct = new Product();
 var anotherFirstProduct = DbHelper.FromID(p1.GetObjectNo());

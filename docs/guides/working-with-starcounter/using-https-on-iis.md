@@ -12,7 +12,7 @@ The following items should be installed.
 
 
 
-![](../../.gitbook/assets/starcounter-https-iis-0.png)
+![](../../.gitbook/assets/starcounter-https-iis-0%20%281%29.png)
 
 
 
@@ -27,7 +27,7 @@ Open Internet Information Services \(IIS\) Manager from the Start menu. And inst
 
 
 
-![](../../.gitbook/assets/starcounter-https-iis-1.png)
+![](../../.gitbook/assets/starcounter-https-iis-1%20%281%29.png)
 
 
 
@@ -45,13 +45,13 @@ Open `Application Request Routing Cache` section and go to it's settings page.
 
 
 
-![](../../.gitbook/assets/starcounter-https-iis-3.png)
+![](../../.gitbook/assets/starcounter-https-iis-3%20%281%29.png)
 
 
 
 
 
-![](../../.gitbook/assets/starcounter-https-iis-4.png)
+![](../../.gitbook/assets/starcounter-https-iis-4%20%281%29.png)
 
 
 
@@ -75,7 +75,7 @@ Open `https://localhost/` in your browser and make sure that the default IIS web
 
 Open or create `web.config` file in the root folder of the website and update it's content to the following.
 
-```markup
+```
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <system.webServer>

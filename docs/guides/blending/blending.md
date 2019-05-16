@@ -14,7 +14,7 @@ The class `Blender` in the Starcounter namespace does the blending. The blender 
 
 The first parameter is always a mapped handler URI. If the token is a string, it's defined as the second parameter. If it's one or more classes, they are defined in the template or as a `Type` array parameter.
 
-```csharp
+```
 Blender.MapUri("/Products/settings", "settings");
 Blender.MapUri<Product>("/Products/partials/product/{?}");
 Blender.MapUri("/Products/menu", "menu");
@@ -22,7 +22,7 @@ Blender.MapUri("/Products/menu", "menu");
 
 An arbitrary number of classes are allowed as a blending token \(up to 3 in template, more in array of class `Type`\). Here are the `MapUri` signature examples \(same exist for removing handler from blender\):
 
-```csharp
+```
 static void MapUri<T>(String uri);
 static void MapUri<T1, T2, T3>(String uri);
 static void MapUri(String uri, Type[] types);
@@ -32,7 +32,7 @@ static void MapUri(String uri, Type[] types);
 
 It is possible to get a list of handlers and tokens that are in Blender and then remove some of them or add new ones.
 
-```csharp
+```
 Blender.UnmapUri("/app4/{?}", token2);
 ...
 Blender.UnmapUri("/twoparams3/{?}/{?}", token);
@@ -42,14 +42,14 @@ Blender.UnmapUri<MyClass>("/app1/{?}");
 
 To check if certain handler is in blender:
 
-```csharp
+```
 isInBlender = Blender.IsMapped("/noparam1", token3);
 isInBlender = Blender.IsMapped<MyClass>("/noparam1");
 ```
 
 To get a list of all blended handlers, tokens and all:
 
-```csharp
+```
 static Dictionary<String, Boolean> ListUris();
 static Dictionary<String, Boolean> ListTokens();
 static Dictionary<String, String[]> ListAll();
@@ -59,7 +59,7 @@ static Dictionary<String, String[]> ListAll();
 
 Blending handlers are allowed to have arbitrary amount of parameters. When there is at least one parameter, the blender convertion functions are used. First converter translates handler arguments to token arguments, while the second converter does the opposite. Both converters are taking and returning an array of strings:
 
-```csharp
+```
 Blender.MapUri("/twoparams1/{?}/{?}", token,
 (String[] from) => {
    return from;
@@ -76,7 +76,7 @@ Often it's needed to trigger blending on a specific URI. To achieve this, first 
 
 Blender allows to specify the direction in which blended handlers would be called. This is needed to trigger blending in a certain direction: from handler or to handler. The direction is determined by the value that corresponding converter is returning: `null` converter or `null` string array returned in converter blocks the direction of the call. In case of zero parameters, there is a special `Blender.MapUri` override with corresponding boolean parameters to determine the allowed call directions.
 
-```csharp
+```
 Blender.MapUri("/twoparams1/{?}/{?}", myToken, null, (String[] to) => {
     return to;
 });
@@ -90,7 +90,7 @@ In the second example above, handler "/noparam1" can trigger other handlers on t
 
 It is allowed to add blending for the same handler but on different tokens.
 
-```csharp
+```
 Blender.MapUri("/app1/{?}", token1);
 Blender.MapUri("/app2/{?}", token1);
 Blender.MapUri("/app3/{?}", token1);

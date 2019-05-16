@@ -12,13 +12,13 @@ The StarDump tool unloads Starcounter database into an SQLite dump. The dump fil
 
 ### Unload database
 
-```text
+```
 StarDump.exe unload --database [DatabaseName] --file [FilePath]
 ```
 
 Example
 
-```text
+```
 StarDump.exe unload --database default --file C:\Temp\default.sqlite3
 ```
 
@@ -26,19 +26,19 @@ StarDump.exe unload --database default --file C:\Temp\default.sqlite3
 
 Before upgrading from 2.2 in order to reload, delete the directory at `\<User>\Documents\Starcounter` since it is not compatible with 2.3+. **Warning!** this will delete all the database files, ensure that it's properly backed up first.
 
-```text
+```
 StarDump.exe reload --database [DatabaseName] --file [FilePath]
 ```
 
 Example
 
-```text
+```
 StarDump.exe reload --database default --file C:\Temp\default.sqlite3
 ```
 
 **Note:** the database should be dropped and created prior to reload.
 
-```text
+```
 staradmin -d=default delete --force db
 staradmin -d=default new db DefaultUserHttpPort=8080
 ```
@@ -63,7 +63,7 @@ Things to know about `StarDump.Migrator.2.2`.
 
 **Example**
 
-```text
+```
 http://localhost:8080/StarDump/Migrator22/Unload/D:/Temp/default.sqlite3
 ```
 
