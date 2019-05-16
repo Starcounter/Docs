@@ -309,7 +309,7 @@ Application.Current.Use(new HtmlFromJsonProvider() { IgnoreJsonWithoutHtml = tru
 
 ### PartialToStandaloneHtmlProvider
 
-This middleware class checks if the HTML is a full document, or essentially if it starts with a `<!DOCTYPE html>`. If it's not a full HTML document, it wraps the existing HTML inside the body of an HTML document that imports the prerequisites for all blendable web apps, called the [app shell](https://github.com/Starcounter/Docs/tree/4fc2662c856690d93fddfaf344d9d6f8d9244f54/docs/topic-guides/blendable-web-apps/app-shell.html).
+This middleware class checks if the HTML is a full document, or essentially if it starts with a `<!DOCTYPE html>`. If it's not a full HTML document, it wraps the existing HTML inside the body of an HTML document that imports the prerequisites for all blendable web apps, called the [app shell](../blendable-web-apps/app-shell.md).
 
 It's possible to override this default HTML by passing a string containing HTML as a parameter.
 

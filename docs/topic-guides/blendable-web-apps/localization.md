@@ -10,7 +10,9 @@ Real world applications often need to support a variety of languages. This artic
    3. Add as many resource files as many languages you want to support. Use the following format when naming them: `name.ll-cc.resx` where `ll` is the language code and `cc` is the country code. To continue our example, you would add `Strings.sv-se.resx` to support Swedish language as used in Sweden.
 2. Populate your resource files with texts you want to localize.
    1. The `name` column should contain a valid C\# indentifier, like `SignIn`. Value should be the relevant text in language chosen for this file. For example, it could be "Logga in" in file `Strings.sv-se.resx`. The comments column can be used freely.
-3. Visual Studio will generate a class from your resource file. In our example, it will generate `Strings` class with a string member `SignIn`. 1. The value of this property will depend on currently selected culture. You don't have to worry about setting it in your application, it's done by a special language selection application. 1. In your application, instead of using hard-coded strings use members of this class. For example, here is an example of view-model using a generated resource class:
+3. Visual Studio will generate a class from your resource file. In our example, it will generate `Strings` class with a string member `SignIn`.
+   1. The value of this property will depend on currently selected culture. You don't have to worry about setting it in your application, it's done by a special language selection application. 
+   2. In your application, instead of using hard-coded strings use members of this class. For example, here is an example of view-model using a generated resource class:
 
    ```csharp
    public partial class SignInViewModel: Json

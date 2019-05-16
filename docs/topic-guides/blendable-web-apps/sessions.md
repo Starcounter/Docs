@@ -49,7 +49,7 @@ One additional feature when using `Session`, besides keeping state on the server
 
 When this is used, the client can send HTTP requests using the `PATCH` verb \([HTTP PATCH method](http://tools.ietf.org/html/rfc5789)\) or use WebSocket to send and receive patches.
 
-To enable this, the session needs to know which `Json` instance should be considered the root view-model. If the [PartialToStandalone middleware](https://github.com/Starcounter/Docs/blob/2ffb62f69111b62d73cc9493ef5f190250aa8729/guides/network/middleware#partialtostandalonehtmlprovider) is used, the root view-model will be automatically assigned to the session based on the `Json`instance returned from a handler.
+To enable this, the session needs to know which `Json` instance should be considered the root view-model. If the [PartialToStandalone middleware](../network/middleware#partialtostandalonehtmlprovider) is used, the root view-model will be automatically assigned to the session based on the `Json`instance returned from a handler.
 
 To specify which `Json` instance to use as the root, use the `SetClientRoot` extension method from the `Starcounter.XSON.Advanced` namespace. It's called on a `Session` object with a `Json` instance as the argument.
 

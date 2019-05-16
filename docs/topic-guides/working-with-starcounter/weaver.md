@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The weaver ****is the component that transforms and recompiles user code before it is loaded in the database. The weaver lets developers to write plain, ordinary business-focused source code and transparently enjoy the power of the Starcounter database engine.
+The weaver is the component that transforms and recompiles user code before it is loaded in the database. The weaver lets developers to write plain, ordinary business-focused source code and transparently enjoy the power of the Starcounter database engine.
 
 For example, the simplest transformation might look something like this:
 
@@ -100,7 +100,7 @@ In some situations, weaving fails. Failures normally come in one of two categori
 
 The first category of errors are generally easier to resolve and the error information we can provide to you as a developer is often quite concise. As an example, if you define a `private` database class in an application targeting Starcounter 2.x, you'll get a clear message informing you this is not supported, and the identity of the class that was private. The way to resolve it is to make it public.
 
-For the second category, or for any error that does not include a specific error condition, detecting what is actually wrong can be harder. As an example, dependency resolution failures can occur deep in a long chain of dependencies, and hence not trivial to fully comprehend. The solution is normally to exclude ****some file part of your application from being weaved/analyzed, as was described above in [How to exclude a file from being processed](weaver.md#how-to-exclude-a-file-from-being-processed) But how should you know what file you need to exclude?
+For the second category, or for any error that does not include a specific error condition, detecting what is actually wrong can be harder. As an example, dependency resolution failures can occur deep in a long chain of dependencies, and hence not trivial to fully comprehend. The solution is normally to exclude some file part of your application from being weaved/analyzed, as was described above in [How to exclude a file from being processed](weaver.md#how-to-exclude-a-file-from-being-processed) But how should you know what file you need to exclude?
 
 One way to diagnose any failing application is to invoke the weaver in isolation. Instructions for this is in the [weaving from the command line section](weaver.md#weaving-from-the-command-line).
 

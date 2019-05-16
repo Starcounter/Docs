@@ -20,7 +20,7 @@ To get through this tutorial, you will need to fulfill the [system requirements]
 
 ## Extra Resources <a id="extra-resources"></a>
 
-Since the author is a mere mortal, there might be mistakes in the code or text. If you experience that something doesn't work as intended, you can look at the [source code](https://github.com/Starcounter/HelloWorld). Each commit in this repository represents one step in the tutorial. For further explanations of the concepts discussed, you can take a look at the [guide section](https://github.com/Starcounter/Docs/tree/a93ef046404db2f2f15fe79f8640f4b3974c2663/topic-guides/README.md).
+Since the author is a mere mortal, there might be mistakes in the code or text. If you experience that something doesn't work as intended, you can look at the [source code](https://github.com/Starcounter/HelloWorld). Each commit in this repository represents one step in the tutorial. For further explanations of the concepts discussed, you can take a look at the [guide section](../topic-guides/README.md).
 
 Are you ready?
 

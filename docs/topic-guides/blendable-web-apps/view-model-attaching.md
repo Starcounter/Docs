@@ -71,7 +71,11 @@ Contexts are case-insensitive. No context \(`null` value\) means **match any con
 
 Consider contexts as an additional matching criteria for handlers with the same token.
 
-Attachment system needs to know if you try to add a rule for the handler with substituted parameter, or a handler template, or a non-parametrized handler: 1. Handler with substituted parameter. For example, for the handler `/people/{?}` the URI with substituted parameter will be `/people/john`, `/people/bob`, etc. You should have a rule in `blend.json` with parameters `/people/{john}` and `/people/{bob}` correspondingly. Mind the braces. 2. Handler template. For example, for the handler `/people/{?}` you should have a rule in `blend.json` with parameter `/people/{?}`. 3. Non-parametrized handler. For example, we have a handler without any parameters, for example, `/people/john`. You should should have a rule in `blend.json` with parameter `/people/john`.
+Attachment system needs to know if you try to add a rule for the handler with substituted parameter, or a handler template, or a non-parametrized handler: 
+
+1. Handler with substituted parameter. For example, for the handler `/people/{?}` the URI with substituted parameter will be `/people/john`, `/people/bob`, etc. You should have a rule in `blend.json` with parameters `/people/{john}` and `/people/{bob}` correspondingly. Mind the braces. 
+2. Handler template. For example, for the handler `/people/{?}` you should have a rule in `blend.json` with parameter `/people/{?}`. 
+3. Non-parametrized handler. For example, we have a handler without any parameters, for example, `/people/john`. You should should have a rule in `blend.json` with parameter `/people/john`.
 
 ## Separate attachment rules in JSON
 

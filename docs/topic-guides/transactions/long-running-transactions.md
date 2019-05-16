@@ -190,7 +190,7 @@ partial class MailPage : Json, IBound<Mail>
 }
 ```
 
-You can find an example of this in [step 6](https://github.com/Starcounter/Docs/tree/5b5c9d73bef12a50fc09149955e5169cf3b276f0/guides/tutorial/cancel-and-delete/README.md) of the tutorial.
+You can find an example of this in [step 6](../../getting-started/hello-world-tutorial/cancel-and-delete.md) of the tutorial.
 
 ## Exceptions
 

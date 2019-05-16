@@ -27,7 +27,7 @@ There are two different ways to install Starcounter in Production Mode.
 * Run the `<Your setup file name>.exe` by double clicking on it.
 * Select `Production` on the Setup screen :
 
-![](https://github.com/Starcounter/Docs/tree/37365d216aa7400514249b9fccc613dacd465a7f/docs/.gitbook/assets/productionmode-1.PNG)
+![](../../.gitbook/assets/productionmode-1.PNG)
 
 #### OR
 
