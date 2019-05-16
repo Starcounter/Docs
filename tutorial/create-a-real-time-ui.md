@@ -11,7 +11,7 @@ Let's create the file structure to contain a view and a view-model. Follow these
 3. Add an HTML file into this folder by right-clicking and then choosing `Add -> New Item... -> Starcounter -> Starcounter HTML template with dom-bind`. Name this file `PersonJson.html`.
 4. Add a JSON file, which will be the view-model, into the root of the project by going to `Add -> New Item... -> Starcounter -> Starcounter Typed JSON with Code-behind`. By doing this, you create a `json` and `json.cs` file. Both of these should have the name PersonJson.
 
-![](../.gitbook/assets/file-structure.PNG)
+![](../.gitbook/assets/file-structure%20%283%29.PNG)
 
 With a solid file structure, we can continue by creating the view-model.
 
@@ -99,7 +99,7 @@ Now, we have established a real-time model-view-view-model \(MVVM\) binding. The
 Check out how it looks by starting the application with F5 and go to `http://localhost:8080/HelloWorld` in your web browser.  
 
 
-![](../.gitbook/assets/part2.png)
+![](../.gitbook/assets/part2%20%282%29.png)
 
 It's impossible for us to see the immediate changes as there is no way for the user to change the info. Let us fix that by adding some interactivity!
 

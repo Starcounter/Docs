@@ -20,7 +20,7 @@ The installer will guide you through the process and install the Visual Studio S
 
 To run your first app, open Visual Studio and choose `File -> New -> Project...`. Create a new Starcounter application by going to `Installed -> Templates -> Visual C# -> Starcounter -> Starcounter Application`. If we call it "HelloStarcounter", it will create a project containing a `Program.cs` file that looks like this:
 
-```csharp
+```
 using System;
 using Starcounter;
 
@@ -38,7 +38,7 @@ namespace HelloStarcounter
 
 For a first simple application, we'll define a `GET` handler that returns an HTML element:
 
-```csharp
+```
 using System;
 using Starcounter;
 
@@ -61,7 +61,7 @@ Run the application by pressing `F5` and go to `http://localhost:8080/Hello`.
 
 
 
-![](.gitbook/assets/hellostarcounter.PNG)
+![](.gitbook/assets/hellostarcounter%20%281%29.PNG)
 
 
 

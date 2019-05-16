@@ -78,7 +78,7 @@ Start your program with Starcounter by clicking F5 in Visual Studio. To see for 
 
 
 
-![](../.gitbook/assets/part1resized.gif)
+![](../.gitbook/assets/part1resized%20%282%29.gif)
 
 For the next step, we'll add a UI which will help us to display the data in the browser.
 

@@ -60,7 +60,7 @@ System apps and navigation apps like [Launchpad](https://github.com/StarcounterA
 The response JSON can consist of the following properties:
 
 | Property | Explanation |
-| --- | --- |
+| :--- | :--- |
 | `name` | **Required.** Human readable app name. |
 | `description` | Optional. Short \(single sentence\) description of the app. |
 | `html` | Optional. URI to a view that contains the app icon. |

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-When the browser sends a request to the server, the app with the matching URI sends back a response with the view. Starcounter has a unique feature of _attaching _views from other apps to the main view in the same response using a system based on _tokens _and _contexts_.
+When the browser sends a request to the server, the app with the matching URI sends back a response with the view. Starcounter has a unique feature of _attaching_ views from other apps to the main view in the same response using a system based on _tokens_ and _contexts_.
 
 For example, if a user wants to see a profile of a person, the browser makes a request to the People app: `GET http://localhost:8080/people/person/4782`. The response that is sent to the browser will include not only the view from the People app but also views from other apps that are attached to it.
 

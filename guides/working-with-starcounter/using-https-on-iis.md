@@ -10,7 +10,7 @@ IIS is available from the `Turn Windows features on or off` console.
 
 The following items should be installed.
 
-![](../../.gitbook/assets/starcounter-https-iis-0.png)
+![](../../.gitbook/assets/starcounter-https-iis-0%20%281%29.png)
 
 
 
@@ -23,7 +23,7 @@ Open Internet Information Services \(IIS\) Manager from the Start menu. And inst
 * URL Rewrite 2.0
 * Application Request Routing 3.0
 
-![](../../.gitbook/assets/starcounter-https-iis-1.png)
+![](../../.gitbook/assets/starcounter-https-iis-1%20%281%29.png)
 
 Enable `system.webServer/webSocket` configuration section via Configuration Editor.
 
@@ -35,9 +35,9 @@ Restart the machine.
 
 Open `Application Request Routing Cache` section and go to it's settings page.
 
-![](../../.gitbook/assets/starcounter-https-iis-3.png)
+![](../../.gitbook/assets/starcounter-https-iis-3%20%281%29.png)
 
-![](../../.gitbook/assets/starcounter-https-iis-4.png)
+![](../../.gitbook/assets/starcounter-https-iis-4%20%281%29.png)
 
 Enable proxy, update timeout to `600` seconds, and click the `Apply` button.
 

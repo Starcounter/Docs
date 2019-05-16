@@ -91,7 +91,7 @@ Click the `Download` button to download an app. Downloaded apps can be controlle
 
 ![](../../.gitbook/assets/appstore1.png)
 
-## Starting Executables {#starting-executables}
+## Starting Executables <a id="starting-executables"></a>
 
 You can launch an application in a database by going to `localhost:8181/#/databases/default/executabeStart`. Specify the path to your `.exe` application in the field. 
 

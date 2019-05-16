@@ -252,7 +252,7 @@ Run the program and try to add expenses, change their cost, and see the current 
 
 
 
-![](../.gitbook/assets/part5resized.gif)
+![](../.gitbook/assets/part5resized%20%282%29.gif)
 
 
 

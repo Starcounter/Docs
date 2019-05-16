@@ -64,11 +64,11 @@ If [SignIn](https://github.com/StarcounterApps/SignIn) app is not running, the u
 
 This message should be defined inside "Unauthenticated.Html" file which has to be set as the `Html` property for "unauthenticated" partial view.
 
-![](../.gitbook/assets/authentication-nosignin.png)
+![](../.gitbook/assets/authentication-nosignin%20%281%29.png)
 
 But if [SignIn](https://github.com/StarcounterApps/SignIn) app is running, it shows its own view blended with the "Unauthenticated" warning message from the "Unauthenticated.Html" file. 
 
-![](../.gitbook/assets/signin-authentication.png)
+![](../.gitbook/assets/signin-authentication%20%281%29.png)
 
 That view is clever! Depending on `SignInFormAsFullPage` setting it will decide whether to display the login form right in this view, or redirect to a standalone page that only has the login form.
 

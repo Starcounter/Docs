@@ -41,7 +41,7 @@ In the following example, we will add acceptance tests to Launcher. Let's create
 
 Call the new project "Launcher.AcceptanceTest". We will use `Launcher\test\` as the project location.
 
-![](../.gitbook/assets/2016-04-01-13_03_00-add-new-project.png)
+![](../.gitbook/assets/2016-04-01-13_03_00-add-new-project%20%281%29.png)
 
 ### Install Required Packages
 
@@ -143,7 +143,7 @@ Build your test project. If it builds correctly, you should see this:
 
 Now, the only thing left to do is to run that test! In the Test Explorer, click on the "Run All" button. If it works well, you should see your tests passing.
 
-![](../.gitbook/assets/2016-04-01-13_40_22-launcher-microsoft-visual-studio.png)
+![](../.gitbook/assets/2016-04-01-13_40_22-launcher-microsoft-visual-studio%20%282%29.png)
 
 ### Sample Test Suites
 

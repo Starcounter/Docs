@@ -4,13 +4,13 @@
 
 When [Attaching views](view-attaching.md) from different apps, the views are stacked on top of each other. In most cases, that's not what we want. Instead, we would like to compose elements in the views to make the result look like one page. That's what View Composing does:
 
-![](../../.gitbook/assets/assets2fstarcounter2fe48b74d0-8680-11e7-9944-1f85270462c62fe5df1df0-8680-11e7-9944-1f85270462c62fsim.png)
+![](../../.gitbook/assets/assets-2fstarcounter-2fe48b74d0-8680-11e7-9944-1f85270462c6-2fe5df1df0-8680-11e7-9944-1f85270462c6-2.png)
 
 In the example above, there are two apps, PetList and MedicalRecord. By default, they are stacked on top of each other. This makes it seem like they are not related, when they actually are. By Composing, we can move the table of examinations into the card from the PetList app and make it look like one coherent concept. In essence, we are **changing the composition but not the content** to combine apps that were not explicitly built to share the same screen. This is done without touching the source code of the individual apps.
 
 This ability of modifying the composition of views coming from different apps is crucial, especially when working with many apps. Without it, there would just be a stack of views with no meaningful visual context, as shown in this illustration:
 
-![](../../.gitbook/assets/assets2fstarcounter2fe48b74d0-8680-11e7-9944-1f85270462c62fe5df1df1-8680-11e7-9944-1f85270462c62fcli.png)
+![](../../.gitbook/assets/assets-2fstarcounter-2fe48b74d0-8680-11e7-9944-1f85270462c6-2fe5df1df1-8680-11e7-9944-1f85270462c6-2.png)
 
 {% hint style="info" %}
 Composing was previously called "client-side-blending"
@@ -128,7 +128,7 @@ The tool for creating these custom compositions is the [CompositionEditor](https
 
 There are two main concepts in the CompositionEditor - the identifier and composition \("layout" on the below picture\).
 
-![](../../.gitbook/assets/compositioneditor.png)
+![](../../.gitbook/assets/compositioneditor%20%283%29.png)
 
 The identifier represents the unique set of the attached views. For example, the identifier for the PetList and MedicalProvider example looks like this:
 

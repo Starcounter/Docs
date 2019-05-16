@@ -71,7 +71,7 @@ Typed JSON follows the specification of JSON, which means that objects, arrays a
 The following is a list of the tokens in JSON and the equivalence in C\#:
 
 | JSON | C\# |
-| --- | --- |
+| :--- | :--- |
 | `{ }` | Object |
 | `[ ]` | Array |
 | `"value"` | String |
