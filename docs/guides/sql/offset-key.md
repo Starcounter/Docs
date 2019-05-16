@@ -14,7 +14,7 @@ The initial query must be identical with the subsequent queries apart from the `
 
 The `OFFSETKEY` clause is placed at the end of the `SELECT` statement and can be together with [FETCH](fetch.md) clause, e.g.:
 
-```sql
+```
 SELECT u FROM User u FETCH ? OFFSETKEY ?
 ```
 
@@ -32,19 +32,19 @@ The offset key is obtained by calling method `GetOffsetKey()` on enumerable or o
 
 The enumerator is obtained for initial query by calling standard interface method `GetEnumerator`, e.g.:
 
-```csharp
+```
 IRowEnumerator<User> e = Db.SQL<User>("SELECT u FROM User u FETCH ? OFFSETKEY ?", 10, null).GetEnumerator();
 ```
 
 An offset key is obtained by calling method `GetOffsetKey`, which has the following signature:
 
-```csharp
+```
 byte[] GetOffsetKey();
 ```
 
 The offset key is obtained at any valid state of enumerator, i.e., after `MoveNext` was called and was `true`:
 
-```csharp
+```
 byte[] key = null;
 using (IRowEnumerator<User> rows = Db.SQL<User>("SELECT u FROM User u").GetEnumerator())
 {
@@ -64,7 +64,7 @@ using (IRowEnumerator<User> rows = Db.SQL<User>("SELECT u FROM User u").GetEnume
 
 The offset key can be obtained after query with FETCH clause was enumerated. The offset key will be valid, if there are more rows exist after the fetched number of rows:
 
-```csharp
+```
 byte[] key = null;
 using (IRowEnumerator<User> rows = Db.SQL<User>("SELECT u FROM User u").GetEnumerator())
 {
@@ -93,7 +93,7 @@ If a new row, which has the same values as the last row of original query, \(wit
 
 ### Example of using OFFSETKEY:
 
-```csharp
+```
 byte[] k  = null;
 using (IRowEnumerator<Account> e = Db.SQL<Account>("SELECT a FROM Account a WHERE a.AccountId < ? FETCH ?", 100, 10).GetEnumerator())
 {
@@ -122,13 +122,13 @@ using (IRowEnumerator<Account> e = Db.SQL<Account>("SELECT a FROM Account a WHER
 
 If the database contains accounts with following AccountIds:
 
-```text
+```
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 ...
 ```
 
 The code above will return:
 
-```text
+```
 1 2 3 4 5 6 7 8 9 10
 11 12 13 14 15
 ...
@@ -137,13 +137,13 @@ The code above will return:
   
 If the database contains accounts with following AccountIds:
 
-```text
+```
 10 20 30 40 50 60 70 80 90 100 110 120 130 140 150 160 170 180 190 200 210 ...
 ```
 
 The code above will return:
 
-```text
+```
 10 20 30 40 50 60 70 80 90
 ```
 

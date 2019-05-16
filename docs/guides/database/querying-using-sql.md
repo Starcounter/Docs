@@ -4,21 +4,21 @@ There is no [ORM](http://en.wikipedia.org/wiki/Object-relational_mapping) mappin
 
 SQL queries are executed using the `Db.SQL` function. If the SQL command is `SELECT`, the function returns `Starcounter.QueryResultRows<T> : IEnumerable<T>`, it otherwise returns `null`.
 
-```csharp
+```
 Db.SQL("SELECT p FROM Person p"); // --> QueryResultRows<Person>
 Db.SQL("DELETE FROM Person"); // --> null
 ```
 
 `T` in `QueryResultRows<T>` is the type of the object retrieved if the whole object is retrieved, otherwise, it's `Starcounter.Query.Execution.Row`.
 
-```csharp
+```
 Db.SQL("SELECT p FROM Person p"); // --> QueryResultRows<Person>
 Db.SQL("SELECT p.Name FROM Person p"); // --> QueryResultRows<Query.Execution.Row>
 ```
 
 We recommend avoiding `Starcounter.Query.Execution.Row` when possible and instead retrieve the whole object and filter out the needed properties with Linq.
 
-```csharp
+```
 Db.SQL("SELECT p.Name FROM Person p"); // Not recommended
 Db.SQL("SELECT p FROM Person p").Select(p => new { p.Name }); // Recommended
 ```
@@ -27,7 +27,7 @@ To get the first object in the enumeration, you can use the property `First`. In
 
 See more about SQL in [Guides: SQL](../sql/).
 
-```csharp
+```
 using Starcounter;
 
 namespace Querying

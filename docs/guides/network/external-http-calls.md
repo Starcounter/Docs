@@ -18,7 +18,7 @@ Instead of using static function calls, you can instantiate a representation of 
 
 The Node constructor accepts the following parameters: the DNS host name of the server we are trying to communicate to, an optional port number, aggregation parameters and an optional receive timeout:
 
-```csharp
+```
 Node(String hostName,
      UInt16 portNumber = 0,
      Int32 defaultReceiveTimeoutMs = 0,
@@ -28,7 +28,7 @@ Node(String hostName,
 
 for example:
 
-```csharp
+```
 Node localNode = new Node("www.starcounter.com");
 Node localNode2 = new Node("127.0.0.1", 8080);
 Node localNode3 = new Node("buildserver", 8080);
@@ -48,7 +48,7 @@ Node supports most popular HTTP methods: GET, POST, PUT, DELETE. User can specif
 
 For example, one of the Node REST **asynchronous** GET call has the following signature:
 
-```csharp
+```
 void GET(String uri,
          String customHeaders,
          Object userObject,
@@ -70,7 +70,7 @@ If exception occurs within user delegate, its logged to Starcounter server log i
 
 Another version of Node REST **synchronous** GET simply returns the HTTP response instead of calling user delegate:
 
-```csharp
+```
 Response GET(String uri, String customHeaders, Int32 receiveTimeoutMs = 0)
 ```
 
@@ -78,7 +78,7 @@ Returned `Response` should never be null.
 
 Other standard HTTP method calls \(PUT, POST, DELETE\) have an optional body parameter, for example:
 
-```csharp
+```
 void PUT(String uri,
          String body,
          String customHeaders,
@@ -91,7 +91,7 @@ which also has a corresponding version of function that returns HTTP response in
 
 In order to user arbitrary user HTTP method you can call the following Node call:
 
-```csharp
+```
 void CustomRESTRequest(String method,
        String uri,
        String body,
@@ -111,7 +111,7 @@ You can obtain some information about Node instance using the following methods:
 
 User delegate described above accepts two parameters: received `Response` object and object supplied by user. When delegate exits `Node` checks if response should be returned to the original `Request`. User indicates that by setting the `Response` object property on original `Request` object, like in the following example:
 
-```csharp
+```
 Handle.GET("/postponed", (Request req) =>
 {
     Http.POST("http://www.mywebsite.com/echotest", "Here we go!", null, null, (Response resp, Object userObject) =>
@@ -132,7 +132,7 @@ Once the Node call is finished, user should check for status code of the HTTP re
 
 The code below demonstrates the redirection of root HTTP URI "/" to startup HTML page `http://www.mywebsite.com/index.html`:
 
-```csharp
+```
 // Redirecting root to index.html.
 GET("/", (Request req) =>
 {
@@ -154,7 +154,7 @@ GET("/", (Request req) =>
 
 User can specify receive timeout both in synchronous and asynchronous `Node` and `Http` modes. Timeout is specified in milliseconds as last parameter for each method \(GET, POST, PUT, etc\), for example:
 
-```csharp
+```
 Response GET(String uri, Int32 receiveTimeoutMs = 0)
 ```
 

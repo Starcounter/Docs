@@ -43,7 +43,7 @@ Call the new project "Launcher.AcceptanceTest". We will use `Launcher\test\` as 
 
 
 
-![](../.gitbook/assets/2016-04-01-13_03_00-add-new-project.png)
+![](../.gitbook/assets/2016-04-01-13_03_00-add-new-project%20%281%29.png)
 
 
 
@@ -63,7 +63,7 @@ Open the package manager \(Tools → NuGet Packet Manager → Packet Manager Con
 
 Run the following commands in the console to install the required dependencies:
 
-```text
+```
 Install-Package Selenium.WebDriver
 Install-Package Selenium.Support
 Install-Package NUnit
@@ -161,7 +161,7 @@ Now, the only thing left to do is to run that test! In the Test Explorer, click 
 
 
 
-![](../.gitbook/assets/2016-04-01-13_40_22-launcher-microsoft-visual-studio.png)
+![](../.gitbook/assets/2016-04-01-13_40_22-launcher-microsoft-visual-studio%20%282%29.png)
 
 
 

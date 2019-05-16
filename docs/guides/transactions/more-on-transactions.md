@@ -41,7 +41,7 @@ static class Db \(namespace Starcounter\).
 To the method Transact you pass a delegate with the code that  
 should be run within the transaction.
 
-```csharp
+```
 Db.Transact(() =>
 {
     new Employee
@@ -62,7 +62,7 @@ transaction scope and that method calls Payment which has another transaction sc
 Thus when executing PaymentOfSalaries all calls of Payment will  
 be executed within the same transaction as PaymentOfSalaries.
 
-```csharp
+```
 public class Administration
 {
     Company company;
@@ -101,7 +101,7 @@ will automatically restart the transaction. The maximum times a transaction will
 
 In Starcounter, you declare transaction scopes. A transaction scope surrounds its code and declares that the database operations within the scope should be atomic and isolated. The following example shows how to declare transaction scope:
 
-```csharp
+```
 using Starcounter;
 
 [Database]
@@ -140,7 +140,7 @@ If you have worked with older SQL databases, you might be familiar with transact
 
 When you nest transactions scopes, only the topmost transaction scope will actually commit any changes and make them visible to outside transactions \(other users\). Consider the following example:
 
-```csharp
+```
 [Database]
 public class Account
 {

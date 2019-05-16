@@ -4,7 +4,7 @@ Typed JSON objects can be used as a representation of the HTTP \(or other REST p
 
 
 
-```javascript
+```
 {
    "FirstName": "",
    "LastName": "",
@@ -14,7 +14,7 @@ Typed JSON objects can be used as a representation of the HTTP \(or other REST p
 
 
 
-```csharp
+```
 using Starcounter;
 
 class Hello
@@ -33,7 +33,7 @@ The parameter is not associated with the URI template, so the content of the bod
 
 Now you can call the above handler with a HTTP request, for example using `XMLHttpRequest` in a web browser or manually using cURL:
 
-```text
+```
 $ curl -X PUT -H "Content-Type: application/json"
 -d "{FirstName:"Olle",LastName:"Svensson", Age:49}"
 http://localhost:8080/hello/Olle

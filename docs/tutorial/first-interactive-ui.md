@@ -13,7 +13,7 @@ In code, that is done by wrapping everything in our handler inside a `Db.Scope`:
 
 
 
-```csharp
+```
 Handle.GET("/HelloWorld", () =>
 {
     return Db.Scope(() =>
@@ -40,7 +40,7 @@ To make properties in the view-model writable from the view, a dollar sign it ad
 
 
 
-```javascript
+```
 {
   "Html": "/HelloWorld/PersonJson.html",
   "FirstName$": "",
@@ -56,7 +56,7 @@ This is how it should look:
 
 
 
-```javascript
+```
 {
   "Html": "/HelloWorld/PersonJson.html",
   "FirstName$": "",
@@ -73,7 +73,7 @@ In this case, where the goal is to save, the following code can be used:
 
 
 
-```csharp
+```
 using Starcounter;
 
 namespace HelloWorld
@@ -104,7 +104,7 @@ We'll change our previous text elements to input elements and add a button:
 
 
 
-```markup
+```
 <template>
     <template is="dom-bind">
         <fieldset>

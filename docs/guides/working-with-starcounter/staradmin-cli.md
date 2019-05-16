@@ -6,7 +6,7 @@ With **staradmin.exe**, users can interact with Starcounter from the command-lin
 
 Running staradmin without arguments will display the usage message in the console. The general syntax of the staradmin tool is:
 
-```text
+```
 staradmin [options] command [<command options>] [<parameters>]
 ```
 
@@ -28,7 +28,7 @@ To find extended help on a certain command or a known topic, issue `staradmin he
 
 The **console** command shows the console output from applications
 
-```text
+```
 staradmin console [<databases>]
 ```
 
@@ -42,7 +42,7 @@ Provide a space-separated list of database names as command parameters to show o
 
 The **delete** command deletes various types of objects, e.g. databases. Usage:
 
-```text
+```
 staradmin delete [--force] [--failmissing]
 ```
 
@@ -50,7 +50,7 @@ Example: delete database
 
 To create a user-specified database use
 
-```bash
+```
 C:\>staradmin --database=NewDbName delete db
 ```
 
@@ -58,13 +58,13 @@ C:\>staradmin --database=NewDbName delete db
 
 The delete command supports the `--force` flag. This flag tell staradmin you don't want to confirm the requested delete, which otherwise is the default in case you are deleting some sensitive artifact such as a database. Use this flag with care, there is no going back.
 
-```text
+```
 staradmin -d=foo delete --force db
 ```
 
 The `--failmissing` flag toogle how staradmin behaves when the artifact you want to delete is not found. By default, such case is treated as a successful operation. With this flag applied, `staradmin` will instead issue an error.
 
-```text
+```
 staradmin -d=nonExisting delete --failmissing db
 
 ScErrDatabaseNotFound (SCERR10002): ScErrDatabaseNotFound (SCERR10002):
@@ -81,7 +81,7 @@ The delete command supports the following type of objects to be deleted.
 
 The **kill** command kills processes relating to Starcounter. Usage:
 
-```text
+```
 staradmin kill <target>
 ```
 
@@ -91,7 +91,7 @@ Use `all` as the command parameter to target killing all processes relating to S
 
 The **list** command provides viewing of lists. It takes the general form:
 
-```text
+```
 staradmin list <type>
 ```
 
@@ -101,7 +101,7 @@ where _type_ will indicate the kind of list you want to see. To see a list of da
 
 The list command supports the `max=<n>` property. By using this property, you tell staradmin not to list more entries than the value of `<n>`.
 
-```text
+```
 staradmin list --max=10 app
 ```
 
@@ -119,7 +119,7 @@ The list command supports the following type of objects to be listed.
 
 The **new** command allows creation of new artifacts. It takes the general form:
 
-```text
+```
 staradmin new <type>
 ```
 
@@ -129,7 +129,7 @@ Example: create database
 
 To create a user-specified database use
 
-```bash
+```
 C:\>staradmin --database=NewDbName new db
 ```
 
@@ -144,7 +144,7 @@ The new command allow the following type of artifacts to be created:
 
 The **reload** command reloads data into a data source, usually a database. Usage:
 
-```text
+```
 staradmin reload [source] [--file=<path>]
 ```
 
@@ -158,7 +158,7 @@ If no _source_ is given, `db` is used as the default.
 
 The reload command supports the `--file=<path>` option. The filename is resolved to the same directory from which the command runs. If the file option is omitted, the default file is used.
 
-```text
+```
 staradmin -d=bar reload db --file=data.sql
 ```
 
@@ -168,7 +168,7 @@ _Reloads the "data.sql" file into the "bar" database._
 
 The **start** command is used to start processes. It takes the general form:
 
-```text
+```
 staradmin start <type>
 ```
 
@@ -178,13 +178,13 @@ Example: start database
 
 To start a user-specified database use
 
-```bash
+```
 C:\>staradmin --database=UserDbName start db
 ```
 
 To start the application with .exe extension on a specified database use:
 
-```bash
+```
 C:\"path to your application">star --database=newdb YourApplicationName.exe
 ```
 
@@ -195,7 +195,7 @@ The console output does not go to the console, but directed to a server side mem
 
 _Starting the "foo" database_
 
-```text
+```
 staradmin -d=foo start db
 Starting foo (started, code host PID: 6048)
 ```
@@ -211,7 +211,7 @@ The start command support starting the following types.
 
 The **stop** command is used to stop running processes or applications. It takes the general form:
 
-```text
+```
 staradmin stop <type> [reference]
 ```
 
@@ -221,7 +221,7 @@ Example: stop database
 
 To start a user-specified database use
 
-```bash
+```
 C:\>staradmin --database=UserDbName stop db
 ```
 
@@ -237,7 +237,7 @@ The stop command supports stopping the following types.
 
 The **unload** command unloads data from a data source, usually a database. Usage:
 
-```text
+```
 staradmin unload [source] [--file=<path>]
 ```
 
@@ -251,7 +251,7 @@ If no _source_ is given, `db` is used as the default.
 
 The unload command supports the `--file=<path>` option. The filename is resolved to the same directory from which the command runs. If the file option is omitted, the default file is used.
 
-```text
+```
 staradmin -d=bar unload db --file=data.sql
 ```
 
@@ -261,7 +261,7 @@ The `--allowPartial` option unloads the database, allowing the unload to be part
 
 The `--shiftKey` option makes every key being unloaded increase with the given number.
 
-```text
+```
 staradmin unload db --shiftKey=99999
 ```
 

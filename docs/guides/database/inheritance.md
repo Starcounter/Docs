@@ -2,7 +2,7 @@
 
 Starcounter allows any database object to inherit from any other database object.
 
-```csharp
+```
 [Database]
 public class Customer
 {
@@ -28,7 +28,7 @@ The table `Customer` will contain all `PrivateCustomers` and all `CorporateCusto
 
 A base class contains all instances of all derived classes in addition to the instances with the its own exact type.
 
-```sql
+```
 SELECT C FROM Customer C WHERE Name LIKE 'Goldman%'
 ```
 
@@ -36,13 +36,13 @@ Returns `[ { Name:"Goldman Sachs" }, { Name:"Goldman, Carl" } ]`
 
 ### Derived classes
 
-```sql
+```
 SELECT C FROM PrivateCustomer C WHERE Name LIKE 'Goldman%'
 ```
 
 Returns `[{ Name:"Goldman, Carl", Gender:"Male" }]`
 
-```sql
+```
 SELECT C FROM CorporateCustomer C WHERE Name LIKE 'Goldman%'
 ```
 

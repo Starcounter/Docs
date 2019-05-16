@@ -28,7 +28,7 @@ This is how it looks in code:
 
 
 
-```csharp
+```
 [Database]
 public class Expense
 {
@@ -46,7 +46,7 @@ This is the result:
 
 
 
-```javascript
+```
 {
   "Html": "/HelloWorld/ExpenseJson.html",
   "Description$": "",
@@ -62,7 +62,7 @@ The view for the expense can be extremely simple. It will only contain two input
 
 
 
-```markup
+```
 <template>
     <template is="dom-bind">
         <input value="{{model.Description$::input}}">
@@ -88,7 +88,7 @@ In code, it looks like this:
 
 
 
-```csharp
+```
 [Database]
 public class Person
 {
@@ -107,7 +107,7 @@ With the properties `Expenses` and `CurrentBalance` in place, we can bind them t
 
 
 
-```javascript
+```
 {
   "Html": "/HelloWorld/PersonJson.html",
   "FirstName$": "",
@@ -123,7 +123,7 @@ When binding the view-model with properties of database classes, the types have 
 
 
 
-```csharp
+```
 static PersonJson()
 {
     DefaultTemplate.Expenses.ElementType.InstanceType = typeof(ExpenseJson);
@@ -142,7 +142,7 @@ In addition to this, we'll also want to display the current balance and change t
 
 
 
-```markup
+```
 <template>
     <template is="dom-bind">
         <h1>{{model.FullName}}'s expense list</h1>
@@ -187,7 +187,7 @@ The trigger property will look almost identical to the save trigger:
 
 
 
-```javascript
+```
 {
   "Html": "/HelloWorld/PersonJson.html",
   "FirstName$": "",
@@ -206,7 +206,7 @@ The button to create new expenses simply have to increment the trigger we just d
 
 
 
-```markup
+```
 <button value="{{model.NewExpenseTrigger$::click}}" onmousedown="++this.value">Add new expense</button>
 ```
 
@@ -220,7 +220,7 @@ To act on the trigger, we'll create a handler in the code-behind. Since the view
 
 
 
-```csharp
+```
 void Handle(Input.NewExpenseTrigger action)
 {
     new Expense()
@@ -239,7 +239,7 @@ Run the program and try to add expenses, change their cost, and see the current 
 
 
 
-![](../.gitbook/assets/part5resized.gif)
+![](../.gitbook/assets/part5resized%20%282%29.gif)
 
 
 

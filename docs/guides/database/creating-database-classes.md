@@ -5,7 +5,7 @@ Starcounter does not support SQL92's INSERT statement. Instead, objects are crea
 New records are created with the `new` operator. All instances of a database class are database objects and are stored in the database.  
 Public fields \(e.g., `Person.FirstName` and `Quote.Person`\), public auto-created properties \(e.g., `Person.LastName`\) and public properties getting and setting private fields \(e.g., `Quote.Text`\) become database columns. More complex public properties become code properties, which are not stored as columns, but can be accessed in SQL queries \(e.g., `Person.FullName`\).
 
-```csharp
+```
 using Starcounter;
 
 [Database]
@@ -43,7 +43,7 @@ We recommend using auto-implemented properties instead of fields in database cla
 
 Database classes can have a maximum of 112 columns for performance reasons. Thus, this is not allowed:
 
-```csharp
+```
 [Database]
 public class LargeTable
 {
@@ -62,7 +62,7 @@ Nested database classes are not supported. The limitation is that inner database
 
 Using the `Transient` attribute, it's possible to exclude fields and auto-implemented properties of a database class from becoming database columns. A field or auto-implemented property with this attribute will remain as a regular .NET field/property and its value will be stored on the CLR heap and be garbage collected along with the object it belongs to. Starcounter ignores these fields and properties which means that they are not available using SQL.
 
-```csharp
+```
 using Starcounter;
 
 [Database]

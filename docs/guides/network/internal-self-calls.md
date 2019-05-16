@@ -7,13 +7,13 @@ For example, the same HTTP methods are supported, as in `Http`. However, in comp
 
 Here are some examples of `Self` calls:
 
-```csharp
+```
 Response resp = Self.GET("/MyHandler");
 ```
 
 Templated `Self` can be used to specify what object type is expected in `Body` of the `Response` and gets it as a return value, for example:
 
-```csharp
+```
 Json json = Self.GET<Json>("/MyApp/MyJsonObject/13235");
 ```
 
@@ -21,19 +21,19 @@ Here, an object of type `Json` is expected to be in the `Body`.
 
 A specific JSON type can also be used:
 
-```csharp
+```
 Master master = Self.GET<Master>("/emails");
 ```
 
 Here is an example of expecting and obtaining the string `Body`:
 
-```csharp
+```
 String myText = Self.GET<String>("/MyApp/MyTextDocument/54664");
 ```
 
 or expecting a binary body:
 
-```csharp
+```
 Byte[] myBinaryData = Self.GET<Byte[]>("/EncodedDocument/34563");
 ```
 

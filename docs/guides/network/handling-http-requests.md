@@ -12,7 +12,7 @@ This page describes the built-in `Handle` API
 
 Incoming HTTP 1.0/1.1 requests are caught using the static `Handle` class.
 
-```csharp
+```
 Handle.GET("/hello", () =>
 {
     return "Hello World";
@@ -25,7 +25,7 @@ Handlers can be registered anywhere and at any time. Though, in most cases, they
 
 The basic HTTP methods `GET`, `POST`, `PUT`, `DELETE` and `PATCH` can be caught by methods with the same name in the `Handle` class.
 
-```csharp
+```
 Handle.GET("/hello", () =>
 {
     return "Hello World";
@@ -46,7 +46,7 @@ Handle.DELETE("/hello", () =>
 
 When matching incoming requests, some parts of the URI may contain dynamic data. This is handled by Starcounter by allowing you to define parameters in handlers. This is done by marking the dynamic part of the URI template with curly braces. The simplest use of the curly brace syntax is a single question mark `{?}`. This indicates that there is a fragment of dynamic data in the URI. The type of the data is determined by the code delegate that follows.
 
-```csharp
+```
 Handle.GET("/hello/{?}", (string name) => 
 {         
     return "Hello " + name;
@@ -55,7 +55,7 @@ Handle.GET("/hello/{?}", (string name) =>
 
 In the above example, the delegate accepts `string name`. This means that the parameter will be parsed as a string, for example: `/hello/albert`, `/hello/anna`. To accept an integer parameter, simply change the lambda parameter type.
 
-```csharp
+```
 Handle.GET("/squared?{?}", (int num) => 
 {         
     return num + " squared equals " + num * num;
@@ -66,7 +66,7 @@ The accepted URIs would, for example, be `/squared?123` and `/squared?-4321`
 
 To accept multiple dynamic fragments, add more curly braces. For each dynamic parameter there should be a parameter in the delegate. They are enumerated from left to right, so be careful to put the parameters in the right order.
 
-```csharp
+```
 Handle.GET("/{?}/{?}", (string list, int item) => 
 {         
     return "List is " + list + " and item is " + item;
@@ -79,7 +79,7 @@ The accepted URIs would be, for example: `/serialnumbers/4534123`, `/itemid/3432
 
 The `CUSTOM` verb in the `Handle` class makes it possible to register other HTTP methods or even catch all methods and URIs.
 
-```csharp
+```
 Handle.CUSTOM("REPORT /hello/{?}", (string p1) =>
 {
     return 500;
@@ -105,7 +105,7 @@ Handle.CUSTOM("{?}", (string methodAndUri) =>
 
 A `Request` parameter can be declared together with the enumerated parameters. It encapsulates the entire request.
 
-```csharp
+```
 Handle.GET("/hello", (Request request) =>
 {
     return 500;
@@ -119,14 +119,14 @@ Handle.GET("/persons/{?}", (string name, Request request) =>
 
 To access certain request HTTP headers, use `Headers[String]` accessor on a `Request` object \(same as for the `Response` object\):
 
-```csharp
+```
 string mySuperHeader = req.Headers["MySuperHeader"];
 string allRequestCookies = req.Headers["Set-Cookie"];
 ```
 
 Request cookies are accessible from `Cookies` as a list of strings "name=value" \(same as for Response object\):
 
-```csharp
+```
 List<String> allRequestCookies = req.Cookies;
 ```
 
@@ -149,7 +149,7 @@ When creating \(using the `Handle` interface\) and calling handlers \(using the 
 
 Registering a handler that skips middleware filters and is being called directly externally:
 
-```csharp
+```
 Handle.POST("/myhandler", (Request request) =>
 {
     return 204;
@@ -158,7 +158,7 @@ Handle.POST("/myhandler", (Request request) =>
 
 Calling the URI handler `/MyPostHandler` on handlers level `ApplicationLevel`:
 
-```csharp
+```
 Self.POST("/MyPostHandler", null, null, null, 0, new HandlerOptions()
 {
     HandlerLevel = HandlerOptions.HandlerLevels.ApplicationLevel
@@ -169,7 +169,7 @@ Self.POST("/MyPostHandler", null, null, null, 0, new HandlerOptions()
 
 Internal requests are requests made to handlers within same user application \(`sccode` instance\) using `Node` and `X`. Internal requests and handlers can be nested and create a call hierarchy. Sometimes its useful to cast a specific exception deep down in the hierarchy and handle it on another level or let the system handle it \(for example by automatically sending the response\). This can be achieved using `ResponseException` exception object. The following example illustrates this concept:
 
-```csharp
+```
 Handle.GET("/exc1", (Request req) =>
 {
     Response resp = Self.GET("/exc2");

@@ -38,7 +38,7 @@ Since the network gateway supports limited size uploads, the user has to write a
 
 Starcounter gateway provides basic reverse proxy functionality based on HTTP Host header in requests. Reverse proxies are defined in `ReverseProxies` section of gateway configuration. Here is an example of reverse proxy that redirects all incoming HTTP requests on port 80, with Host header equals "www.example1.sc", to service on localhost and port 8080:
 
-```text
+```
 <ReverseProxy>
   <DestinationIP>127.0.0.1</DestinationIP>
   <DestinationPort>8080</DestinationPort>

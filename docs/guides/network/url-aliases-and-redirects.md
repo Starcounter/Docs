@@ -10,7 +10,7 @@ For web apps, the URL displayed in the browser address bar does not get changed 
 
 Example:
 
-```csharp
+```
 Handle.GET("/pmail", () =>
 {
   return Self.GET("/pmail/inbox");
@@ -27,7 +27,7 @@ For web apps, the URL displayed in the browser address bar gets changed to the d
 
 Example:
 
-```csharp
+```
 Handle.GET("/villains/anakin-skywalker", () =>
 {
   var resp = new Response()
@@ -53,7 +53,7 @@ To create redirection on the startup of your application, you may call `Http.GET
 The classical example is to alias root URI to some other URI in your application. URI aliases are configured in `scnetworkgateway.xml` in your server directory.  
 The following section is an excerpt from gateway configuration:
 
-```markup
+```
 <UriAliases>
     <UriAlias>
         <HttpMethod>GET</HttpMethod>
@@ -86,7 +86,7 @@ Starcounter allows adding, modifying, listing, and deleting URI aliases using th
 
 * Adding and modifying a specific URI alias is done using `PUT /sc/alias`. The URI alias info should be in HTTP body with the following format:
 
-```javascript
+```
 {
   "HttpMethod": "",
   "FromUri": "",
@@ -99,7 +99,7 @@ for example, `{"HttpMethod":"GET","FromUri":"/","ToUri":"/launcher","Port":8080}
 
 * Listing all URI aliases is done using `GET /sc/alias`:
 
-```javascript
+```
 {  
   "Items":[  
     {  

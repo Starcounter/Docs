@@ -14,7 +14,7 @@ The `Response` class has many implicit cast operators to make this convenient.
 
 When creating a `Response` object, you have the choice of setting the body to a `byte[]`, a `string`.
 
-```csharp
+```
 Handle.GET("/hello", () =>
 {
     new Response()
@@ -29,7 +29,7 @@ Handle.GET("/hello", () =>
 
 When returning an instance of the `Json` class, the mime type will `application/json` and the body will contain a JSON string.
 
-```csharp
+```
 Handle.GET("/hello", () =>
 {
     return new PersonData()
@@ -44,7 +44,7 @@ Handle.GET("/hello", () =>
 
 When returning a string, the returned mime type depends on the `Accept` header of the request. If the request prioritizes `text/html` or `application\json`, the HTTP response will use this type accordingly. If no Accept header was provided, the mime-type `text/plain` will be used.
 
-```csharp
+```
 Handle.GET("/hello", () => "Hello World" );
 ```
 
@@ -52,7 +52,7 @@ Handle.GET("/hello", () => "Hello World" );
 
 Create a `Response` object:
 
-```csharp
+```
 GET("/hello", () =>
 {
     return new Response()
@@ -73,7 +73,7 @@ When null is returned from the handler, it's equal to returning the 404 `Not fou
 
 To resolve a static resource, there is a method `Handle.ResolveStaticResource` which takes a resource URI and incoming request and returns a response representing this resource. Response however can be a 404, so to return a "nice" 404 page user has to do the following code, for example:
 
-```csharp
+```
 Response resp = Handle.ResolveStaticResource(req.Uri, req);
 
 if (404 == resp.StatusCode)
@@ -91,7 +91,7 @@ Sometimes, the `Response` object cannot be returned immediately in the handler. 
 
 For example:
 
-```csharp
+```
 Handle.GET("/postponed", (Request req) =>
 {
     Http.POST("/posttest", "Here I do a post!", null, null, (Response resp, Object userObject) =>
@@ -125,7 +125,7 @@ The following `Response.ConnectionFlags` values are available:
 
 Example:
 
-```csharp
+```
 Handle.GET(8080, "/shutdown", (Request req) =>
 {
     return new Response()
@@ -138,7 +138,7 @@ Handle.GET(8080, "/shutdown", (Request req) =>
 
 Setting arbitrary HTTP headers on a `Responce` object is straightforward using the `Headers` property:
 
-```csharp
+```
 Handle.GET("/response", () =>
 {
     var response = new Response()
@@ -164,7 +164,7 @@ Remarks:
 * `StatusDescription` default value is _"OK"_
 * To access certain HTTP headers, use the `Headers` accessor on the `Response` or `Request` object:
 
-```csharp
+```
 Response response;
 ...
 if ("SC" == response.Headers["Server"])
@@ -175,7 +175,7 @@ if ("SC" == response.Headers["Server"])
 
 Examples:
 
-```csharp
+```
 Handle.GET("/hello", () =>
 {
   return new Response()
@@ -195,7 +195,7 @@ Handle.GET("/hello", () =>
 When creating the `Response` object, the body can be set to a `byte[]`, `string`, or `Stream`.  
 As Starcounter schedules threads in a optimized way, it is recommended to allow Starcounter to handle streaming. This is done by assigning the `stream` to the `Response` object and then returning the response, relying on Starcounter to read the stream and send the network traffic on its own accord. Streamed object should allow getting length of the stream in bytes \(`Length` property\).
 
-```csharp
+```
 Handle.GET("/movie", () =>
 {
    FileStream stream = File.Open("bigfile.mpg", FileMode.Open, FileAccess.Read, FileShare.Read));
@@ -214,7 +214,7 @@ Note that the `stream` object is automatically closed when the stream data is se
 
 Sometimes, when deep in the call hierarchy of `Self.GET`, it's necessary to be able to set properties not on the current response, but directly on corresponding, not yet available, outgoing responses, like headers, status codes, messages, and cookies. To achieve that, the following static methods are available from the class `Handle`:
 
-```csharp
+```
 void AddOutgoingCookie(String cookieName, String cookieValue);
 void AddOutgoingHeader(String headerName, String headerValue);
 void SetOutgoingStatusDescription(String statusDescription);

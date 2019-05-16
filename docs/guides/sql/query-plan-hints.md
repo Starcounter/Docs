@@ -4,7 +4,7 @@ The Starcounter SQL optimizer decides the execution plan of an SQL-query. If you
 
 To specify a preferred join order to use, you write JOIN ORDER \(extent-alias-sequence\) in the OPTION clause. You do not need to specify the order of all included extents in the extent-alias-sequence, only the ones for which you have a preferred join order. See example below.
 
-```sql
+```
 SELECT d.Name, e.LastName FROM Department d 
   JOIN Employee e ON e.Department = d 
   WHERE e.FirstName = 'Bob' 
@@ -15,7 +15,7 @@ If it is not possible to execute a query in the join order specified in the OPTI
 
 To specify a preferred index to use for a particular extent/table, you write  INDEX \(extent-alias index-name\) in the OPTION clause. If some specified index does not exist then the optimizer choses another index if there is one. See example below.
 
-```sql
+```
 SELECT e.FirstName, e.LastName FROM Employee e 
   WHERE e.FirstName = 'John' AND e.LastName = 'Smith' 
   OPTION INDEX (e MyIndexOnLastName)
@@ -23,7 +23,7 @@ SELECT e.FirstName, e.LastName FROM Employee e
 
 You can specify an index to use for each extent in the SQL-query as in example  below. If you specify more than one index hint for a particular extent only the first one will be considered.
 
-```sql
+```
 SELECT e, m FROM Employee e JOIN Employee m ON e.Manager = m 
   WHERE e.FirstName = 'John' AND e.LastName = 'Smith'
   AND m.FirstName = 'David' AND m.LastName = 'King' 
@@ -32,7 +32,7 @@ SELECT e, m FROM Employee e JOIN Employee m ON e.Manager = m
 
 You can specify both one index hint for each extent and one join order hint in the OPTION clause of a query, which is exemplified in example below.
 
-```sql
+```
 SELECT e, m FROM Employee e JOIN Employee m ON e.Manager = m 
   WHERE e.FirstName = 'John' AND e.LastName = 'Smith' 
   AND m.FirstName = 'David' AND m.LastName = 'King' 

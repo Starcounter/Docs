@@ -6,7 +6,7 @@ TCP is a connection-oriented protocol.
 
 TCP sockets in user code are represented by objects of the class `TcpSocket`. User code can define a handler for retrieving data and detecting disconnects on a socket by using `Handle.Tcp` method:
 
-```csharp
+```
 static void Handle.Tcp(UInt16 port, Action<TcpSocket tcpSocket, Byte[] data> handler);
 ```
 
@@ -28,7 +28,7 @@ Once the TCP socket object is returned, user can fetch the ID representing this 
 
 In the following example we process TCP sockects on port 8585 and send echo data back. The example shows how socket ID can be used to associate socket with resources, for example objects in database:
 
-```csharp
+```
 Handle.Tcp(8585, (TcpSocket tcpSocket, Byte[] incomingData) =>
 {
     UInt64 socketId = tcpSocket.ToUInt64();

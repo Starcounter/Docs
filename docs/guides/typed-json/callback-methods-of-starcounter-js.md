@@ -21,7 +21,7 @@ This method implemented in the same way as OnData - all the declaration is happe
 Unlike OnData the method HasChanged is not that commonly used but only when there is a need for auto-committed database transactions every time data updates.  
 There is a quick example on HasChanged usage:
 
-```csharp
+```
 using Starcounter;
 using Starcounter.Templates;
 

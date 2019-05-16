@@ -18,7 +18,7 @@ In the following example we create a JSON-by-example file containing of a single
 
 
 
-```csharp
+```
 public static void Main()
 {
     var json = new SingleValueJson();
@@ -44,7 +44,7 @@ A single array containing integers. We add two items and print.
 
 
 
-```csharp
+```
 public static void Main()
 {
     var json = new SingleArrayJson();

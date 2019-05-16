@@ -6,7 +6,7 @@ Ontology mapping allows mapping URI handlers of independent applications to shar
 
 Here is the description of the `UriMapping.OntologyMap` function:
 
-```csharp
+```
 void OntologyMap(
     String appProcessedUri,
     String mappedClassInfo,
@@ -25,13 +25,13 @@ where
 
 Here is an example of mapping People application's handler `/people/partials/persons/{?}` to class Person in a given class hierarchy to which this class Person belongs:
 
-```csharp
+```
 UriMapping.OntologyMap("/people/partials/persons/{?}", typeof(Person).FullName, null, null);
 ```
 
 and here is how the mapped handler looks like:
 
-```csharp
+```
 Handle.GET<string>("/people/partials/persons/{?}", (string id) =>
 {
   return Db.Scope<PersonPage>(() =>

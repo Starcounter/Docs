@@ -15,7 +15,7 @@ We start by adding our needed trigger properties for our future buttons to the `
 
 
 
-```javascript
+```
 {
   "Html": "/HelloWorld/PersonJson.html",
   "FirstName$": "",
@@ -38,13 +38,13 @@ Now, let's add the buttons that will increment these values in the same way that
 
 Delete button:
 
-```markup
+```
 <button value="{{model.DeleteAllTrigger$::click}}" onmousedown="++this.value">Delete all expenses</button>
 ```
 
 Cancel button:
 
-```markup
+```
 <button value="{{model.CancelTrigger$::click}}" onmousedown="++this.value">Cancel</button>
 ```
 
@@ -58,7 +58,7 @@ The next step is to build handlers to react accordingly. We will also do that si
 
 
 
-```csharp
+```
 void Handle(Input.CancelTrigger action)
 {
     Transaction.Rollback();

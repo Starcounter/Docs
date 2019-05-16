@@ -4,7 +4,7 @@ Typed JSON objects are serialized automatically to `application/json` format whe
 
 
 
-```javascript
+```
 {
     "FirstName": "Jocke",
     "LastName": "Wester"
@@ -13,7 +13,7 @@ Typed JSON objects are serialized automatically to `application/json` format whe
 
 
 
-```csharp
+```
 using Starcounter;
 
 class Hello
@@ -35,7 +35,7 @@ To achieve a different HTTP status code, define it explicitly in a `Response` ob
 
 
 
-```javascript
+```
 {
     "ErrorDescription": ""
 }
@@ -43,7 +43,7 @@ To achieve a different HTTP status code, define it explicitly in a `Response` ob
 
 
 
-```csharp
+```
 using Starcounter;
 
 class Hello

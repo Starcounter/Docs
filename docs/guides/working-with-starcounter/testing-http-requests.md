@@ -10,7 +10,7 @@ The following guide shows 3 tools that make it easier: cURL, Postman and JavaScr
 
 Send a `GET` request with a header `Content-Type: application/json` to `http://localhost:8080/invoicedemo`, show response body:
 
-```text
+```
 $ curl -X GET -H "Content-Type: application/json" http://localhost:8080/invoicedemo
 
 {"_ver#c$":0, "_ver#s":0, "Html":"/InvoiceDemo/InvoicePage.html", "InvoiceNo":0, "Name$":"", "Total":0.0, "Items":[{"Description$":"", "Quantity$":1, "Price$":0.0, "Total":0.0}], "AddRowTrigger$":0, "SaveTrigger$":0, "CancelTrigger$":0}
@@ -18,7 +18,7 @@ $ curl -X GET -H "Content-Type: application/json" http://localhost:8080/invoiced
 
 Send a `PUT` request with a header `Content-Type: application/json` and body `{"FirstName":"Olle","LastName":"Svensson", "Age":49}` to `http://localhost:8080/hello/Olle`, show response body:
 
-```text
+```
 $ curl -X PUT -H "Content-Type: application/json"
 -d '{"FirstName":"Olle","LastName":"Svensson", "Age":49}'
 http://localhost:8080/hello/Olle
@@ -28,7 +28,7 @@ Welcome Olle you are 49 years old.
 
 Adding a `-v` parameter results in more information being displayed, including the request and response HTTP headers:
 
-```text
+```
 $ curl -v -X PUT -H "Content-Type: application/json"
 -d '{"FirstName":"Olle","LastName":"Svensson", "Age":49}'
 http://127.0.0.1:8080/hello/Olle
@@ -77,7 +77,7 @@ The below screenshot shows the same request \(& response\) as above, sent in Pos
 
 The following JavaScript code makes the same request as above using XMLHttpRequest:
 
-```javascript
+```
 var xhr = new XMLHttpRequest();
 xhr.addEventListener('load', function (event) {
   console.log("Repsonse", event.target.responseText);

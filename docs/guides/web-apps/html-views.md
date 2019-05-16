@@ -41,7 +41,7 @@ These examples use [Web Component](introduction-to-web-components.md) features a
 
 No matter if the partial is accessed through an HTTP request from the browser or a `Self.GET` call, there always needs to be a handler that deals with the request. This handler simply returns a partial containing the JSON and HTML. The handler, in its simplest form, looks something like this:
 
-```csharp
+```
 Handle.GET("/your/partial/url", () => 
 {
     return new YourPartialPage();
@@ -54,13 +54,13 @@ Keep in mind that this only returns the JSON and HTML if the app is using the `H
 
 It is now possible to create an blending point for this partial. The way to do this is by attaching the partial to a parent partial using `Self.GET`. For example:
 
-```csharp
+```
 mainPage.SubPage = Self.GET("/your/partial/url");
 ```
 
 In the partial HTML view for the `mainPage` above, the HTML from the `SubPage` partial can be stamped in like so:
 
-```markup
+```
 <starcounter-include partial="{{model.SubPage}}"></starcounter-include>
 ```
 
@@ -70,36 +70,34 @@ A partial HTML view may look something like this:
 
 
 
-```markup
-<!--
-    Load you dependencies: <script>s, HTML Imports, CSS stylesheets etc.
-    Those dependencies will only be executed once when the partial is imported
--->
-<!-- For example, to use Polymer's dom-bind custom element: -->
-<link rel="import" href="/sys/polymer/polymer.html" />
-<style>
-.myapp-address-entry-name {
-    font-weight: bold;
-}
-</style>
-<!--
-    Everything from this template will be stamped into the parent page's DOM,
-    and <script>s will be executed for every instance of this partial.
-    All child nodes will receive a `.model` property with JSON view-model,
-    which is automatically bound to the server-side.
--->
-<template>
-    <template is="dom-bind">
-        <!--
-            Now, the double curly brace syntax "{{}}" can be used for two-way data bindings
-            from the HTML view to serverside. For example:
-         -->
-        <h2 class="myapp-address-entry-name">{{model.FullName}}</h2>
-        <h4>Address</h4>
-        <starcounter-include partial="{{model.Address}}"></starcounter-include>
+    <!--
+        Load you dependencies: <script>s, HTML Imports, CSS stylesheets etc.
+        Those dependencies will only be executed once when the partial is imported
+    -->
+    <!-- For example, to use Polymer's dom-bind custom element: -->
+    <link rel="import" href="/sys/polymer/polymer.html" />
+    <style>
+    .myapp-address-entry-name {
+        font-weight: bold;
+    }
+    </style>
+    <!--
+        Everything from this template will be stamped into the parent page's DOM,
+        and <script>s will be executed for every instance of this partial.
+        All child nodes will receive a `.model` property with JSON view-model,
+        which is automatically bound to the server-side.
+    -->
+    <template>
+        <template is="dom-bind">
+            <!--
+                Now, the double curly brace syntax "{{}}" can be used for two-way data bindings
+                from the HTML view to serverside. For example:
+             -->
+            <h2 class="myapp-address-entry-name">{{model.FullName}}</h2>
+            <h4>Address</h4>
+            <starcounter-include partial="{{model.Address}}"></starcounter-include>
+        </template>
     </template>
-</template>
-```
 
 
 

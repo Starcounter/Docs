@@ -12,7 +12,7 @@ To create a Typed JSON class, choose New item in Visual Studio and then choose S
 
 
 
-```javascript
+```
 {
    "FirstName": "Jocke",
    "LastName": "Wester",
@@ -28,7 +28,7 @@ The above example will act as partial nested C\# classes supporting intelligence
 
 
 
-```csharp
+```
 using Starcounter;
 
 class Hello
@@ -58,7 +58,7 @@ To mark a specific value as writable by the client, add a dollar sign \(`$`\) at
 
 
 
-```javascript
+```
 {
    "Html": "",
    "FirstName$": "",

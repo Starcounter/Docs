@@ -6,7 +6,7 @@ UDP is a connection-less protocol with unreliable delivery.
 
 Incoming UDP datagrams with maximum size of 30000 bytes are supported \(user code can send datagrams up to 65000 bytes\). In order to receive UDP datagrams, user needs to register a handler using `Handle.Udp`:
 
-```csharp
+```
 void Udp(UInt16 port,
          Action<IPAddress clientAddr,
          UInt16 clientPort,
@@ -20,7 +20,7 @@ void Udp(UInt16 port,
 
 In order to send a UDP datagram from user code, static method `UdpSocket.Send` is used:
 
-```csharp
+```
 static void Send(IPAddress ipTo,
                  UInt16 portTo,
                  UInt16 portFrom,
@@ -34,7 +34,7 @@ static void Send(IPAddress ipTo,
 
 In the following example we receive \(on port 8787\) and send the same echo UDP datagram back to the client:
 
-```csharp
+```
 Handle.Udp(8787, (IPAddress clientIp, UInt16 clientPort, Byte[] datagram) =>
 {    
     // One can update any resources associated with "clientIp" and "clientPort".

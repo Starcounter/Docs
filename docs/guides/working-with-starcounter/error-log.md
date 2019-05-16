@@ -53,7 +53,7 @@ The log data is in one or more files named with the convention `Starcounter.[nnn
 
 Not only Starcounter components can write to the log. Applications running in Starcounter can do so too. Writing to the log is done using the `LogSource` class, part of the `Starcounter.Logging` namespace.
 
-```csharp
+```
 using Starcounter;
 using Starcounter.Logging;
 
@@ -78,7 +78,7 @@ In addition to errors, warnings and notices, Starcounter also allows diagnostic 
 
 Various Starcounter components also support low-level diagnostics in Starcounter TRACE builds by enabling _trace logging_. With trace logging turned on, trace messages emitted by the Starcounter runtime is routed to the log using the `Debug` severity. Trace logging is an experimental feature and should not be considered future compatible. It is driven by an environment variable, `SC_ENABLE_TRACE_LOGGING`. To set this flag and thereby effectively enable trace logging for a set of Starcounter components, make sure all Starcounter processes are stopped and apply the `--tracelogging` flag to `scservice.exe`.
 
-```csharp
+```
 staradmin kill all
 start scservice --tracelogging
 ```

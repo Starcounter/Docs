@@ -13,7 +13,7 @@ Typed JSON follows the specification of JSON, which means that objects, arrays a
 The following is a list of the tokens in JSON and the equivalence in C\#:
 
 | JSON | C\# |
-| --- | --- |
+| :--- | :--- |
 | `{ }` | Object |
 | `[ ]` | Array |
 | `"value"` | String |
@@ -26,7 +26,7 @@ To specify that a member in Json-by-example should be of type `Double` is done i
 
 _Foo.json_
 
-```javascript
+```
 {
   "Value": 2E3 // will be parsed as decimal by default.
 }
@@ -34,7 +34,7 @@ _Foo.json_
 
 _Foo.json.cs_
 
-```csharp
+```
 partial class Foo : Json
 {
     static void Foo()

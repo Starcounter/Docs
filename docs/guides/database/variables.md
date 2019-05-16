@@ -4,7 +4,7 @@ In programming code you are not allowed to use literals in SQL queries. Instead 
 
 SQL variables are represented by question marks \(?\) in the query string, and you pass the current values of the variables as parameters to the method Db.SQL\(String query, params Object\[\] values\).
 
-```csharp
+```
 QueryResultRows<Employee> result = Db.SQL<Employee>("SELECT e FROM Employee e WHERE e.FirstName = ?", "Joe");
 foreach (Employee emp in result)
 {
@@ -14,7 +14,7 @@ foreach (Employee emp in result)
 
 You can pass an arbitrary number of variable values to the method SQL, but the number of variables values needs to be exactly the same as the number of variables \(question marks\) in the query string. Otherwise an ArgumentException will be thrown.
 
-```csharp
+```
 string lastName = "Smith";
 Employee manager; //Assume some value is assigned to the variable manager.
 QueryResultRows<Employee> result = Db.SQL<Employee>("SELECT e FROM Employee e WHERE e.LastName = ? AND e.Manager = ?", lastName, manager);

@@ -19,19 +19,19 @@ In traditional SQL you can only refer to tables, columns, rows and fields of val
 
 In Starcounter SQL you can refer to an object itself. For example, in query below the identifier `e` is an object reference.
 
-```sql
+```
 SELECT e FROM Employee e
 ```
 
 In a traditional SQL database, to get data from more than one type of object \(table/class\) you have to do a "join" of a number of tables. For example, query below gives you the names of the employees and the names of the departments where they work.
 
-```sql
+```
 SELECT e.FirstName, d.Name FROM Employee e JOIN Department d ON e.DepartmentId = d.Id
 ```
 
 In Starcounter SQL there is a more convenient way to get the same result by instead using a path expression as in query below. In that way, you can from one type of object \(`Employee`\) reach another type of object \(`Department`\) by object reference.
 
-```sql
+```
 SELECT e.FirstName, e.Department.Name FROM Employee e
 ```
 

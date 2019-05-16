@@ -10,7 +10,7 @@ A server-side JSON object can be associated with a transaction. This is an impor
 
 Let's assume that you are composing an email in a mail program. You are entering a recipient that is not yet in your contact database. You would then create a new EmailAddress object and assign it to your email.
 
-```csharp
+```
 partial class MailPage : Json, IBound<Mail>
 {
   void Handle(Input.To input)
@@ -39,7 +39,7 @@ If the user elects to cancel the email, the EmailAddress should not be saved. If
 
 The way this is done in Starcounter is to assign a transaction to the view-model. In this way, changes that pertains to the actions performed in the scope of the form editing can be kept together as a single transaction. A new transaction is created calling `Db.Scope` that takes a delegate to be executed as parameter. The transaction will then be attached to the view-model when the \(view-model\) object is instantiated.
 
-```csharp
+```
 class Program
 {
   static void Main()
@@ -69,7 +69,7 @@ Inside your form, the changes are all there and the information appears updated 
 
 Sometimes a transaction is already attached on another part of the view-model. To reuse it it needs to be scoped before the new page is created.
 
-```csharp
+```
 class Program
 {
   static void Main()
@@ -97,7 +97,7 @@ If the part of the view-model that the transaction should be attached to is alre
 
 Lets assume that in the previous example, the `FocusedPage` property was already instantiated.
 
-```csharp
+```
 class Program
 {
   static void Main()
@@ -121,7 +121,7 @@ A transaction can be attached and used on more than one instance in the view-mod
 
 In this example the call to the second handler with uri `/email/{emailId}` will use the transaction created in the first handler.
 
-```csharp
+```
 class Program
 {
   static void Main()
@@ -156,7 +156,7 @@ Scopes are nested, so if in the example the second rest-handler, `Handle.Get("/e
 
 If, for some reason, that it's vital that a new transaction always is created it is possible to manually create and scope a transaction.
 
-```csharp
+```
 class Program
 {
   static void Main()

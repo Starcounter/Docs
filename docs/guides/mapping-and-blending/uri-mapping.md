@@ -4,7 +4,7 @@ Starcounter applications are isolated, meaning that they don't know about each o
 
 Menu partial from the People application:
 
-```csharp
+```
 Handle.GET("/people/menu", () =>
 {
     return new Json() { Html = "/People/viewmodels/Menu.html" };
@@ -13,7 +13,7 @@ Handle.GET("/people/menu", () =>
 
 Menu partial from the Products application:
 
-```csharp
+```
 Handle.GET("/products/menu", () =>
 {
     return new Json() { Html = "/products/viewmodels/Menu.html" };
@@ -22,14 +22,14 @@ Handle.GET("/products/menu", () =>
 
 Now using URI mapping we can map both of the above to common URI "/sc/mapping/menu":
 
-```csharp
+```
 UriMapping.Map("/people/menu", "/sc/mapping/menu");
 UriMapping.Map("/products/menu", "/sc/mapping/menu");
 ```
 
 Now by calling the common URI "/sc/mapping/menu" \(from the common wrapping application\) and serializing the response to the client \(e.g. browser\) we will get a merged JSON response from both applications and a link to merged HTML response in common HTML property:
 
-```javascript
+```
 {
 "People": {
     "Html": "/People/viewmodels/Menu.html"
@@ -49,7 +49,7 @@ In conclusion, by calling any of mapped URIs \("/people/menu" or "/products/menu
 
 The syntax for `UriMapping.Map` is the following:
 
-```csharp
+```
 void Map(String appProcessedUri,
          String mapProcessedUri,
          String method = Handle.GET_METHOD)
@@ -57,13 +57,13 @@ void Map(String appProcessedUri,
 
 where `appProcessedUri` and `mapProcessedUri` can contain last parameter of the type string, for example, to map a search query URI:
 
-```csharp
+```
 UriMapping.Map("/Products/search?query={?}", "/sc/mapping/search?query={?}");
 ```
 
 to a Products application search handler:
 
-```csharp
+```
 Handle.GET("/products/search?query={?}", (string query) => { ... }
 ```
 

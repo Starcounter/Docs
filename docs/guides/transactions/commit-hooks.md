@@ -6,7 +6,7 @@ The app `TestHooks` shows a full set of use cases for commit hooks.
 
 
 
-```csharp
+```
 using System;
 using Starcounter;
 
@@ -97,7 +97,7 @@ namespace TestHooks
 
 The output produced is as follows \(accurate to [ObjectNo](../database/object-identity-and-object-references.md)\):
 
-```text
+```
 Hooked: Object 29 is created
 01: The changed object isn't yet commited
 Hooked: Object 29 is updated

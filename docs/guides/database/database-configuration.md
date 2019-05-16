@@ -26,13 +26,13 @@ When codehost is running one can manipulate the above flags at runtime using a R
 
 Getter for flags: `GET /sc/[DatabaseName]/GetFlag/[FlagName]`. For example:
 
-```text
+```
 http://localhost:8181/sc/default/GetFlag/WrapJsonInNamespaces
 ```
 
 Setter for flags: `GET /sc/[DatabaseName]/SetFlag/[FlagName]/[BooleanValue]`. For example:
 
-```text
+```
 http://localhost:8181/sc/default/SetFlag/WrapJsonInNamespaces/True
 ```
 

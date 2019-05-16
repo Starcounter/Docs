@@ -13,7 +13,7 @@ Let's create the file structure to contain a view and a view-model. These steps 
 
 
 
-![](../.gitbook/assets/file-structure.PNG)
+![](../.gitbook/assets/file-structure%20%283%29.PNG)
 
 
 
@@ -27,7 +27,7 @@ The value of the `Html` property is the path to the view that the view-model sho
 
 
 
-```javascript
+```
 {
   "Html": "/HelloWorld/PersonJson.html",
   "FirstName": "",
@@ -45,7 +45,7 @@ This is how the handler and middleware looks in code:
 
 
 
-```csharp
+```
 Application.Current.Use(new HtmlFromJsonProvider());
 Application.Current.Use(new PartialToStandaloneHtmlProvider());
 
@@ -83,7 +83,7 @@ This is how it looks in code:
 
 
 
-```markup
+```
 <link rel="import" href="/sys/polymer/polymer.html"/>
 <template>
     <template is="dom-bind">
@@ -109,7 +109,7 @@ Now, we have established a real-time model-view-view-model \(MVVM\) binding. The
 Check out how it looks by starting the application with F5 and go to `http://localhost:8080/HelloWorld` in your web browser.  
 
 
-![](../.gitbook/assets/part2.png)
+![](../.gitbook/assets/part2%20%282%29.png)
 
 
 

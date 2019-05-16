@@ -8,7 +8,7 @@ CLR objects and JSON documents work in concert. To create a JSON document that r
 
 
 
-```javascript
+```
 {
    $:{DataType:"Person"},
 
@@ -27,7 +27,7 @@ By setting the `Data` property on the typed JSON object, you will bind each prop
 
 
 
-```csharp
+```
 using System.Collections;
 using Starcounter;
 

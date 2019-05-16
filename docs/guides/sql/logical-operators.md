@@ -2,7 +2,7 @@
 
 There are three logical operators in Starcounter SQL, `AND`, `OR`, and `NOT`. For instructions on how to use these, take a look at these examples:
 
-```sql
+```
 SELECT e FROM Employee e WHERE e.FirstName = 'Bob' AND e.LastName = 'Smith'
 SELECT e FROM Employee e WHERE e.FirstName = 'Bob' OR e.FirstName = 'John'
 SELECT e FROM Employee e WHERE NOT e.FirstName = 'Bob'

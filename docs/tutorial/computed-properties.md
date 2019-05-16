@@ -10,7 +10,7 @@ To synchronize the computed property between view and code-behind, simply add th
 
 
 
-```javascript
+```
 {
   "Html": "/HelloWorld/PersonJson.html",
   "FirstName$": "",
@@ -30,7 +30,7 @@ The `FullName` property can be calculated by simply concatenating `FirstName` an
 
 
 
-```csharp
+```
 partial class PersonJson : Json
 {
     public string FullName => FirstName + " " + LastName;
@@ -52,7 +52,7 @@ To display this computed property, we just have to add it to to the view. This i
 
 
 
-```markup
+```
 <template>
     <template is="dom-bind">
         <h1>Hey, {{model.FullName}}!</h1>

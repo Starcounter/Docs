@@ -6,7 +6,7 @@ There are some HTTP "namespacing" precautions that you need to take to make your
 
 Your app should only create HTTP handlers \(using `Handle.GET`, `Handle.POST`, etc\) that begin with the app name. For example:
 
-```csharp
+```
 Handle.GET("/myapp", ()
 {
   var page = new MyAppHomePage();

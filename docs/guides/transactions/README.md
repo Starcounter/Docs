@@ -10,7 +10,7 @@ This works even if the database is in the terabytes. This means that nobody sees
 
 You define transactional scope using the `Db.Transact` function. The scoped transaction is placed in a delegate.
 
-```csharp
+```
 using Starcounter;
 
 class Hello
@@ -52,7 +52,7 @@ public class Quote
 
 For your convenience there are some overloads of the `Db.Transact` function that allows you to specify delegates that have input and output parameters.
 
-```csharp
+```
 Db.Transact(Action action, ...);
 Db.Transact<T>(Action<T> action, T arg, ...);
 TResult Db.Transact<TResult>(Func<TResult> func, ...);

@@ -14,7 +14,7 @@ There is often a case when long running threads are needed, for example, timer j
 
 Each Starcounter scheduler has a queue of tasks that are supposed to be run on this scheduler. Tasks are picked from the queue and executed. To put a task in a queue, the `Scheduling.ScheduleTask` should be used. When scheduling a task, you can specify the scheduler number, and if the thread should wait for the task to be picked by scheduler and completed. Here is the signature of the `Scheduling.ScheduleTask`:
 
-```csharp
+```
 void ScheduleTask(
     Action action,
     Boolean waitForCompletion = false,
@@ -39,7 +39,7 @@ The following sample will execute a job every minute and do needed database oper
 
 The same scheduler is used in these samples \(scheduler 0\) for simplicity but a better solution might be to schedule jobs on all available schedulers.
 
-```csharp
+```
 using System;
 using System.Timers;
 using Starcounter;
@@ -77,7 +77,7 @@ namespace TimerSample
 
 Running a separate \(non-database\) thread that regularly schedules jobs that access database instead of using a timer will work as solution for the first problem, deleting and purging objects, but have another issue with shutting down the codehost. This is due to lack of event that usercode can listen to when codehost is terminating.
 
-```csharp
+```
 using System.Threading;
 using Starcounter;
 
@@ -116,7 +116,7 @@ namespace StarcounterApplication4
 
 **Note:** using `thread.Start()` instead of `ThreadPool.QueueUserWorkItem` will lead to the following entries in the Starcounter log and the shutdown will take longer time.
 
-```csharp
+```
 Thread foreverThread = new Thread(new ThreadStart(RunForever));
 foreverThread.Start();
 ```

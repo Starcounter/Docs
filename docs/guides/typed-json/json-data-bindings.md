@@ -17,7 +17,7 @@ In the following example the binding will succeed since the property `Name` exis
 
 
 
-```javascript
+```
 {
     "Name": "John"
 }
@@ -25,7 +25,7 @@ In the following example the binding will succeed since the property `Name` exis
 
 
 
-```csharp
+```
 [Database]
 public class Person
 {
@@ -51,7 +51,7 @@ Here, the property `Name` in the JSON `PersonJson` will be bound to the property
 
 Assuming there is one person in the database with the name "Christian", the resulting JSON from the request will be:
 
-```javascript
+```
 { "Name": "Christian" }
 ```
 
@@ -81,7 +81,7 @@ By setting the property `BindChildren`, each child that don't specify it's own b
 
 Setting the value in code-behind from `BindingStrategy` enumerable:
 
-```csharp
+```
 ...
 PersonJson.DefaultTemplate.BindChildren = BindingStrategy.Bound
 ...
@@ -99,7 +99,7 @@ If the JSON object is static, that is all properties are known compile-time, you
 
 The JSON code-behind class has to implement `IBound<T>` to set custom data type.
 
-```csharp
+```
 [PersonJson_json]
 public partial class PersonJson : Json, IBound<MyNamespace.Person>
 ```
@@ -110,7 +110,7 @@ public partial class PersonJson : Json, IBound<MyNamespace.Person>
 
 All examples in this section use the same `Person` database class.
 
-```csharp
+```
 [Database]
 public class Person
 {
@@ -124,7 +124,7 @@ public class Person
 
 If a property should be bound to a property that has a different name than the property in the JSON, a binding value can be set.
 
-```javascript
+```
 {
   "Name": "John",
   "Surname": "Walker",
@@ -133,7 +133,7 @@ If a property should be bound to a property that has a different name than the p
 }
 ```
 
-```csharp
+```
 public class PersonJson : Json, IBound<Person>
 {
     static PersonJson()
@@ -148,7 +148,7 @@ public class PersonJson : Json, IBound<Person>
 
 It is also possible to bind to deep properties by providing full path to the property.
 
-```javascript
+```
 {
     "Name": "John",
     "Surname": "Walker",
@@ -156,7 +156,7 @@ It is also possible to bind to deep properties by providing full path to the pro
 }
 ```
 
-```csharp
+```
 DefaultTemplate.FatherName.Bind = "Father.Name";
 ```
 
@@ -164,7 +164,7 @@ DefaultTemplate.FatherName.Bind = "Father.Name";
 
 Binding to custom properties in code-behind works the same way.
 
-```javascript
+```
 {
     "Name": "John",
     "Surname": "Walker",
@@ -172,7 +172,7 @@ Binding to custom properties in code-behind works the same way.
 }
 ```
 
-```csharp
+```
 public class PersonJson : Json, IBound<Person>
 {
     static PersonJson()
@@ -198,7 +198,7 @@ The following restrictions applies though:
 
 In the following example `FullName` in json will be automatically bound to the property `FullName` in code-behind:
 
-```javascript
+```
 {
     "Name": "John",
     "Surname": "Walker",
@@ -206,7 +206,7 @@ In the following example `FullName` in json will be automatically bound to the p
 }
 ```
 
-```csharp
+```
 public class PersonJson : Json, IBound<Person>
 {
     public string FullName
@@ -224,7 +224,7 @@ Using the same example as the section above but change `Street` to always be unb
 
 Code
 
-```csharp
+```
 ...
 PersonJson.DefaultTemplate.Street.Bind = null;
 // or same behaviour setting BindingStrategy
@@ -238,7 +238,7 @@ The `Reuse` keyword is used to reuse same JSON object multiple times. For exampl
 
 ### EntityJson.json
 
-```javascript
+```
 {
     "Key": "",
     "Name": "",
@@ -248,7 +248,7 @@ The `Reuse` keyword is used to reuse same JSON object multiple times. For exampl
 
 ### ListPage.json
 
-```javascript
+```
 {
     "Items": [{
         "$": { "Reuse": "AppNamespace.EntityJson" }
@@ -258,7 +258,7 @@ The `Reuse` keyword is used to reuse same JSON object multiple times. For exampl
 
 ### DetailsPage.json
 
-```javascript
+```
 {
     "Entity": {
         "$": { "Reuse": "AppNamespace.EntityJson.cs" }
@@ -268,7 +268,7 @@ The `Reuse` keyword is used to reuse same JSON object multiple times. For exampl
 
 **Note:** in case of `Reuse` you cannot specify custom code-behind class.
 
-```csharp
+```
 [ListPage_json.Items]
 partial class ListPageItem : Json
 {

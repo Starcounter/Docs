@@ -8,7 +8,7 @@ A database object is deleted by calling the `Delete` method on the database obje
 
 All modifications are directly reflected in the database for the current transaction, and when the current transaction is committed the modifications are saved and visible to other transactions.
 
-```csharp
+```
 [Database]
 public class Employee
 {
@@ -19,7 +19,7 @@ public class Employee
 }
 ```
 
-```csharp
+```
 Db.Transact(() =>
 {
     Employee emp = new Employee(); // Create database object.
@@ -33,7 +33,7 @@ Db.Transact(() =>
 The following example shows how to update the `LastName` of all  
 `Employee` objects to upper case.
 
-```csharp
+```
 Db.Transact(() =>
 { 
     string query = "SELECT e FROM Employee e";
