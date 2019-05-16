@@ -1,6 +1,6 @@
 # Create a Real Time UI
 
-To create a user interface \(UI\), we establish a [MVVM](https://en.wikipedia.org/wiki/Model–view–viewmodel) pattern by adding a [view-model](../guides/web-apps/starcounter-mvvm.md#tier-2---the-view-model) and a corresponding [view](../guides/web-apps/html-views.md). The view-model will act as a representation of the view and as a midpoint between the view and the database.
+To create a user interface \(UI\), we establish a [MVVM](https://en.wikipedia.org/wiki/Model–view–viewmodel) pattern by adding a [view-model](../guides/blendable-web-apps/starcounter-mvvm.md#tier-2---the-view-model) and a corresponding [view](../guides/blendable-web-apps/html-views.md). The view-model will act as a representation of the view and as a midpoint between the view and the database.
 
 ## Setup the File Structure
 
@@ -11,7 +11,7 @@ Let's create the file structure to contain a view and a view-model. Follow these
 3. Add an HTML file into this folder by right-clicking and then choosing `Add -> New Item... -> Starcounter -> Starcounter HTML template with dom-bind`. Name this file `PersonJson.html`.
 4. Add a JSON file, which will be the view-model, into the root of the project by going to `Add -> New Item... -> Starcounter -> Starcounter Typed JSON with Code-behind`. By doing this, you create a `json` and `json.cs` file. Both of these should have the name PersonJson.
 
-![](../.gitbook/assets/file-structure.PNG)
+![](../.gitbook/assets/file-structure%20%282%29.PNG)
 
 With a solid file structure, we can continue by creating the view-model.
 
@@ -35,7 +35,7 @@ The value of the `Html` property is the path to the view that the view-model sho
 
 ## Create the HTTP Handler
 
-To get the view-model and the corresponding view to the client, an HTTP handler has to be created. This handler sets the specific database object that the view-model should be bound to, creates a [session](../guides/web-apps/sessions.md), and returns the view-model to the client.
+To get the view-model and the corresponding view to the client, an HTTP handler has to be created. This handler sets the specific database object that the view-model should be bound to, creates a [session](../guides/blendable-web-apps/sessions.md), and returns the view-model to the client.
 
 This handler will only return the JSON tree that we defined earlier and not any HTML, which is what we want to render. The solution is to use [middleware](../guides/network/middleware.md). For this app, and most other Starcounter apps, we use the `HtmlFromJsonProvider` and `PartialToStandaloneHtmlProvider` middleware. These affect the pipeline by catching the outgoing JSON, finding the HTML at the `Html` path, wrapping the HTML to form a complete HTML document, and forwarding it to the client. By doing this, a complete HTML document can be sent to the client, even if the only thing that's returned from the handler is a simple JSON tree.
 
@@ -96,10 +96,9 @@ This is how it looks in code:
 
 Now, we have established a real-time model-view-view-model \(MVVM\) binding. The JSON, which is our view-model, is bound to the model \(database\) with no latency; our view, the HTML, is in turn bound to the JSON, which is synced in real time using WebSocket and HTTP. Polymer helps us display this instantaneously to the user.
 
-Check out how it looks by starting the application with F5 and go to `http://localhost:8080/HelloWorld` in your web browser.  
+Check out how it looks by starting the application with F5 and go to `http://localhost:8080/HelloWorld` in your web browser.
 
-
-![](../.gitbook/assets/part2.png)
+![](../.gitbook/assets/part2%20%283%29.png)
 
 It's impossible for us to see the immediate changes as there is no way for the user to change the info. Let us fix that by adding some interactivity!
 

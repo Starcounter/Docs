@@ -54,7 +54,7 @@ Web Components are loaded by browser with HTML Imports. HTML Import for Polymer 
 <link rel="import" href="/sys/polymer/polymer.html" />
 ```
 
-### Avoiding Loading the Same Files Multiple Times {#avoiding-loading-the-same-files-multiple-times}
+### Avoiding Loading the Same Files Multiple Times <a id="avoiding-loading-the-same-files-multiple-times"></a>
 
 Browser loads HTML Imports only once, not like scripts and styles, which are loaded as many times as many references page has.
 
@@ -72,13 +72,13 @@ Starcounter has system folder called `StaticFiles` and located in the installati
 
 The benefit of this is that you can rely on having a specific version of Starcounter to include a specific version of Polymer, Palindrom, etc.
 
-### Adding External Dependencies to Your Apps {#adding-external-dependencies-to-your-apps}
+### Adding External Dependencies to Your Apps <a id="adding-external-dependencies-to-your-apps"></a>
 
 In order to add files that match this pattern, simply put a `sys` folder in your `wwwroot` folder that holds the static files for your project.
 
 You should not do that automatically, but use Bower to install such dependencies. A correct Bower configuration consists of two files in your project: `.bowerrc` and \`bower.json.
 
-#### .bowerrc {#.bowerrc}
+#### .bowerrc <a id=".bowerrc"></a>
 
 The `.bowerrc` file contains the Bower configuration. It specifies the destination directory and what dependencies should be ignored, because they are delivered with Starcounter. An example of this can be found in the [KitchenSink app](https://github.com/Starcounter/KitchenSink/blob/master/src/KitchenSink/.bowerrc).
 
@@ -127,13 +127,13 @@ sys#1.0.0 D:\repos\Starcounter\src\BuildSystem\ClientFiles
 └── webcomponentsjs#0.7.24 (latest is 1.0.10)
 ```
 
-#### bower.json {#bower.json}
+#### bower.json <a id="bower.json"></a>
 
 `bower.json` file that keeps the list of your app's client side dependencies. This file should not be created and maintained manually. It should be modified using the command line tool: `bower init`, `bower install paper-dialog --save`.
 
 A sample file can be found in the [KitchenSink app](https://github.com/Starcounter/KitchenSink/blob/master/src/KitchenSink/bower.json).
 
-## Static File Server {#starcounter-static-file-server}
+## Static File Server <a id="starcounter-static-file-server"></a>
 
 The `StaticFiles` folder from Starcounter installation is automatically served as a static content folder. When Starcounter server receives a request for a static file, it searches for the file in all of the static content folders. The project folder has higher priority over internal folder.
 

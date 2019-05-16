@@ -23,7 +23,7 @@ Apps are started with `star [app]` by specifying the path to the `exe` file. For
 
 ### Set Resource Directory
 
-When starting an app, Starcounter will fail to find the application resource directory \(`wwwroot`\) if the current working directory is not the root of the project or the same directory as the resource directory. This will, for apps that use the Starcounter web stack presented in [Blendable Web Apps](../web-apps/), throw, `ArgumentOutOfRangeException` when opening the app.
+When starting an app, Starcounter will fail to find the application resource directory \(`wwwroot`\) if the current working directory is not the root of the project or the same directory as the resource directory. This will, for apps that use the Starcounter web stack presented in [Blendable Web Apps](../blendable-web-apps/), throw, `ArgumentOutOfRangeException` when opening the app.
 
 To solve this, specify the resource directory with the `--resourcedir` option:
 

@@ -164,9 +164,5 @@ Without the extension, you can't start the application project simply from withi
 
 ### ScErrAppDeployedEditionLibrary \(SCERR12019\)
 
-Starcounter throws `SCERR12019` if you add a Starcounter assembly, such as `Starcounter.Extensions` that's found in `C:\Program Files\Starcounter\Public Assemblies`. To fix this, change the `Copy Local` property of the added assembly to `false`.
-
-### 
-
-
+Starcounter throws `SCERR12019` if you add a Starcounter assembly, such as `Starcounter.Extensions` that's found in `C:\Program Files\Starcounter\Public Assemblies`. To fix this, change the `Copy Local` property of the added assembly to `false`.
 

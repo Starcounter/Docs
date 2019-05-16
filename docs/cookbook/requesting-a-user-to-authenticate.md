@@ -4,7 +4,7 @@ To separate the concerns, your app should not directly deal with user authentica
 
 Below instruction shows how to provide an authentication notice that blends in the authentication form from the [SignIn](https://github.com/Starcounter/SignIn) app.
 
-When your app decides that the view cannot be presented without authentication, it redirects to its own "Unauthenticated" view.   
+When your app decides that the view cannot be presented without authentication, it redirects to its own "Unauthenticated" view.  
 For example: `/your-app/partial/unauthenticated?return_uri={?}`
 
 ```csharp
@@ -66,7 +66,7 @@ This message should be defined inside "Unauthenticated.Html" file which has to b
 
 ![](../.gitbook/assets/authentication-nosignin.png)
 
-But if [SignIn](https://github.com/Starcounter/SignIn) app is running, it shows its own view blended with the "Unauthenticated" warning message from the "Unauthenticated.Html" file. 
+But if [SignIn](https://github.com/Starcounter/SignIn) app is running, it shows its own view blended with the "Unauthenticated" warning message from the "Unauthenticated.Html" file.
 
 ![](../.gitbook/assets/signin-authentication.png)
 

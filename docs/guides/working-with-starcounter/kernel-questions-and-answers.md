@@ -75,7 +75,7 @@ Starcounter doesn't try to pin database memory to the physical memory. It instea
 ### What happens to the current database when the physical amount of RAM or the pagefile is changed?
 
 | Change | Consequence |
-| --- | --- |
+| :--- | :--- |
 | Increasing RAM | The page fault rate should decrease which will improve the overall performance. The database limit will grow. It's likely that the chunk size will increase, so the database preallocates more memory. More prealocated memory does not have any real drawback, since unused memory does not consume physical memory. It may also be possible to start more database instances than previously without poor performance originating from high page faults. |
 | Decreasing RAM | The page fault rate will probably increase, decreasing the performance of your database. Additionally, starting existing databases may fail if they do not fit the new database limit. |
 | Increasing pagefile | More applications may be started \(including starcounter hosted databases\). Whether starting new database makes sense depends on observed performance and reported page faults rate. |

@@ -1,4 +1,5 @@
 # Anonymous or Substitute Handlers
+
 {% hint style="warning" %}
 Substitute handlers/delegates are deprecated and will be removed from Blender.MapUri in Starcounter 2.4. Please use normal handlers instead.
 {% endhint %}
@@ -43,7 +44,7 @@ The `model.Menu` contains merged responses from all handlers mapped to `/sc/mapp
 UriMapping.Map("/Products/menu", UriMapping.MappingUriPrefix + "/menu");
 ```
 
-Read more about mapping here: [Mixing apps]().
+Read more about mapping here: [Mixing apps](anonymous-or-substitute-handlers.md).
 
 ### UI View Composition with Layout Editor
 

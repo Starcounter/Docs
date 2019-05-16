@@ -38,11 +38,11 @@ Application specific static files should be put in a directory with the name of 
 
 External dependencies, such as fonts, Web Components and other files that might be used in more than one app should be put in a `sys` directory. For example, the [People](https://github.com/Starcounter/People) app puts the Polymer elements it uses in `wwwroot/sys`.
 
-Starcounter has certain files that are served by default to the `sys` directory which makes them available to all apps. One example is Polymer; even if it's not put in the `sys` folder of individual apps, it's still available with the HTML import `<link rel="import" href="/sys/polymer/polymer.html">` because it's served by Starcounter.  
-  
+Starcounter has certain files that are served by default to the `sys` directory which makes them available to all apps. One example is Polymer; even if it's not put in the `sys` folder of individual apps, it's still available with the HTML import `<link rel="import" href="/sys/polymer/polymer.html">` because it's served by Starcounter.
+
 With this approach, we ensure that HTML imports only load each dependency one time.
 
-For further instructions on how to add external dependencies to Web Components, read [avoiding loading the same files multiple times](../web-apps/web-components.md#avoiding-loading-the-same-files-multiple-times) on the Web Components page.
+For further instructions on how to add external dependencies to Web Components, read [avoiding loading the same files multiple times](../blendable-web-apps/web-components.md#avoiding-loading-the-same-files-multiple-times) on the Web Components page.
 
 ## Specifying Static Resources Directory
 

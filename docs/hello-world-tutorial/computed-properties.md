@@ -80,11 +80,7 @@ To display this computed property, we just have to add it to to the view. This i
 
 Start the application and see how the computed property is calculated keystroke by keystroke and displayed instantly:
 
-
-
-![](../.gitbook/assets/part4resized.gif)
-
-
+![](../.gitbook/assets/part4resized%20%281%29.gif)
 
 The next step is to practice working on multiple object instances and relations by turning the app into a simple expense tracker.
 

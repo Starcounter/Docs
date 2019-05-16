@@ -293,16 +293,15 @@ If the HTML at the path would be a complete HTML document, this would be enough.
 
 #### ScErrInvalidOperation
 
- If you have a JSON file without an \`Html\` property, `HtmlFromJsonProvider` will throw this exception:
+If you have a JSON file without an \`Html\` property, `HtmlFromJsonProvider` will throw this exception:
 
 ```text
 System.InvalidOperationException: ScErrInvalidOperation (SCERR1025): Operation invalid for the object's current state. Json instance MyJson missing 'Html' property.
 ```
 
-  
 If the JSON has a corresponding HTML file, add an \`Html\` property with the path to the HTML file. That will fix it.
 
- If you don't have an `Html` property and don't intend to return HTML, but to return the JSON instead, set `IgnoreJsonWithoutHtml` to `true`:
+If you don't have an `Html` property and don't intend to return HTML, but to return the JSON instead, set `IgnoreJsonWithoutHtml` to `true`:
 
 ```csharp
 Application.Current.Use(new HtmlFromJsonProvider() { IgnoreJsonWithoutHtml = true });

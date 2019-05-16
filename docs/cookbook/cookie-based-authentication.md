@@ -8,7 +8,7 @@ How do you implement cookie-based authentication with Starcounter? You have to c
 
 [Sign In](https://github.com/Starcounter/SignIn) is a prefab app that authenticates a user using a username and a password. It generates an auth token and stores it in a cookie for use in future sessions.
 
-### Internals of Sign In App
+## Internals of Sign In App
 
 Let's take a deeper look at how Sign In app works. Essentially, this can be divided into three parts:
 
@@ -16,7 +16,7 @@ Let's take a deeper look at how Sign In app works. Essentially, this can be divi
 * HTTP handler that sets the cookie
 * Middleware that reads the cookie
 
-### Form for Authentication Input
+## Form for Authentication Input
 
 Sign In has a view-model that can be mapped to any app. It is a typical HTML form that asks for authentication input \(username & password\).
 
@@ -31,7 +31,7 @@ this.set("password", "");
 document.querySelector("palindrom-client").network.changeState(url);
 ```
 
-### HTTP Handler that Sets the Cookie
+## HTTP Handler that Sets the Cookie
 
 When the user submits the form, a relevant HTTP handler tries to authenticate the user. In case of successful authentication, an auth token is generated and stored in the database:
 
@@ -93,7 +93,7 @@ else
 Handle.AddOutgoingCookie(cookie.Name, cookie.GetFullValueString());
 ```
 
-### Middleware that Reads the Cookie
+## Middleware that Reads the Cookie
 
 Sign In app registers a request middleware. The middleware checks if the request contains a valid auth token cookie. In that case, we can immediately authenticate the user without asking for the credentials.
 

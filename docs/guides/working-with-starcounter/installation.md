@@ -13,7 +13,7 @@ This is the default installation mode where the  `Starcounter Server Service`  c
 * Run the  `<Your setup file name>.exe`  by double clicking on it.
 * Select `Production` on the Setup screen :
 
-![](../../.gitbook/assets/developer.PNG)
+![](../../.gitbook/assets/developer%20%281%29.PNG)
 
 ## Production Mode
 
@@ -26,7 +26,7 @@ There are two ways you can install Starcounter in Production Mode :
 * Run the  `<Your setup file name>.exe`  by double clicking on it.
 * Select `Production` on the Setup screen :
 
-![](../../.gitbook/assets/productionmode.PNG)
+![](../../.gitbook/assets/productionmode%20%281%29.PNG)
 
 ### Installing with command line
 
@@ -52,7 +52,7 @@ In `Silent Installation`the Starcounter installation process runs seamlessly wit
 <Your setup file name>.exe Silent productionmode unattended
 ```
 
-![](../../.gitbook/assets/silent-mode.PNG)
+![](../../.gitbook/assets/silent-mode%20%281%29.PNG)
 
 * It should install Starcounter seamlessly
 

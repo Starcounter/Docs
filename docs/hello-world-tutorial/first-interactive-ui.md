@@ -92,7 +92,7 @@ namespace HelloWorld
 
 `Transaction.Commit()` commits the current state of the view-model to the database so that the data is accessible from other transactions.
 
-With server-side view-models like this, you don't have to write a single line of "glue code" to update the view in HTML. Any change in the view-model made in C\# will instantly be synced to the client using [Palindrom](../guides/web-apps/palindrom.md), which in turn automatically renders because of Polymer's data bindings. This saves you from creating single-purpose REST APIs, need for double validation of user input, and more. This also means that all logic that can be written on the server-side should be written on the server-side to enjoy these benefits. 
+With server-side view-models like this, you don't have to write a single line of "glue code" to update the view in HTML. Any change in the view-model made in C\# will instantly be synced to the client using [Palindrom](../guides/blendable-web-apps/palindrom.md), which in turn automatically renders because of Polymer's data bindings. This saves you from creating single-purpose REST APIs, need for double validation of user input, and more. This also means that all logic that can be written on the server-side should be written on the server-side to enjoy these benefits.
 
 ### Creating Interactive Elements
 
@@ -132,7 +132,7 @@ We now have a program where we can change the view-model in real time and then c
 
 If you are an especially curious person, you can try to change the name and then take a look at the database again with SQL. Here's how it should work:
 
-![](../.gitbook/assets/page3resized.gif)
+![](../.gitbook/assets/page3resized%20%281%29.gif)
 
 Neat! Right? The next step is to display the name change in real time and let the code-behind calculate the full name.
 

@@ -27,7 +27,7 @@ There are two different ways to install Starcounter in Production Mode.
 * Run the `<Your setup file name>.exe` by double clicking on it.
 * Select `Production` on the Setup screen :
 
-![](../../.gitbook/assets/productionmode%20%281%29.PNG)
+![](../../.gitbook/assets/productionmode-1%20%283%29.PNG)
 
 #### OR
 
@@ -41,7 +41,7 @@ There are two different ways to install Starcounter in Production Mode.
 
 ### Silent Mode
 
-In `Silent Mode`the Starcounter installation process runs seamlessly without prompting any messages to the user or asking about any choices - Yes/No popups. This is particularly useful in production environments where user wants to install Starcounter in an unattended fashion with some commands or scripts.  
+In `Silent Mode`the Starcounter installation process runs seamlessly without prompting any messages to the user or asking about any choices - Yes/No popups. This is particularly useful in production environments where user wants to install Starcounter in an unattended fashion with some commands or scripts.
 
 #### How to install
 
@@ -53,7 +53,7 @@ In `Silent Mode`the Starcounter installation process runs seamlessly without pro
 <Your setup file name>.exe Silent productionmode unattended
 ```
 
-![](../../.gitbook/assets/silent-mode%20%281%29.PNG)
+![](../../.gitbook/assets/silent-mode-1%20%284%29.PNG)
 
 * It should install Starcounter seamlessly
 
@@ -61,7 +61,7 @@ In `Silent Mode`the Starcounter installation process runs seamlessly without pro
 
 Starcounter is an in-memory technology, hence it only uses disks for persistence and recovery rather than a primary storage. Starcounter streams changes in your data to disk, while uses only primary memory to read data. Changes from committed transactions are logged to disk by a means of log writer and stored in Starcounter `.log` files. Periodically a disk image of the database is updated. This image, which is also known as a checkpoint, is stored in `.sci` and `.sci2` files. When checkpoint creation is executed, log files with records that the checkpoint now incorporates become redundant and thus are renamed from `.log` to `.log.bak` and are a subject of manual deletion. The fraction of `.log` files that are still in work along with snapshot image files together represent a current durable state of the database.
 
-**Having **`.log.bak`** files regularly erased.** In order to clean `.log.bak` files you need to create a task in your preferred task scheduler for Windows or in Windows Task Scheduler to run `del` command on your `.log.bak` files. Please make sure that the created task in Task Scheduler do actually run as expected. Sometimes it will not run because the correct user privileges aren't set.
+**Having** `.log.bak` **files regularly erased.** In order to clean `.log.bak` files you need to create a task in your preferred task scheduler for Windows or in Windows Task Scheduler to run `del` command on your `.log.bak` files. Please make sure that the created task in Task Scheduler do actually run as expected. Sometimes it will not run because the correct user privileges aren't set.
 
 ## Backup and Failover
 
@@ -94,7 +94,7 @@ shadowspawn C:\Users\User\Documents\Starcounter\Personal\Data\default\Default-20
 This will create a shadow copy of a drive, mount shadowed copy of a source folder to `Q:` \(the drive letter `Q` must be free, otherwise choose other letter\), copy contents of `Q:\` to a sub-folder in `Y:\Backup` named after the current date and time, such as `Y:\Backup\2015-09-15_16-41-48`, unmount and destroy a shadow copy. Copying is done with `robocopy` utility that ships with Windows, you can use any other command, e.g. you can call your favorite incremental binary backup utility and store the result in a cloud.
 
 {% hint style="info" %}
-Read more about robocopy in the [robycopy documentation](https://www.computerhope.com/robocopy.htm). You can also read this thread on GitHub for more information: https://github.com/Starcounter/Home/issues/363.
+Read more about robocopy in the [robycopy documentation](https://www.computerhope.com/robocopy.htm). You can also read this thread on GitHub for more information: [https://github.com/Starcounter/Home/issues/363](https://github.com/Starcounter/Home/issues/363).
 {% endhint %}
 
 **Note:** creating and removing a VSS snapshot during the described backup routine may affect performance of your Starcounter application when you have user activity peaks. Consider running backup scenario in periods of time when you have less than hundreds of thousands of simultaneously connected users.
@@ -143,7 +143,7 @@ Starcounter streams changes to disk sequentially. Modern HDDs can stream terraby
 
 ## Disabling Anti-Virus Scan of Database Files
 
-For higher performance, disable your anti-virus from scanning the database files in the [server directory](configuration-structure.md#server-repository). 
+For higher performance, disable your anti-virus from scanning the database files in the [server directory](configuration-structure.md#server-repository).
 
 ## Checklist: Starcounter in Production
 

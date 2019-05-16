@@ -87,7 +87,7 @@ The `DeleteAllTrigger` handler deletes all the expenses for the current `Person`
 
 You can now run your application again and rollback any mistakes you make or delete all expenses.
 
-![](../.gitbook/assets/resizedpart6.gif)
+![](../.gitbook/assets/resizedpart6%20%282%29.gif)
 
 If you get any errors, you can check your code against the [source code](https://github.com/Starcounter/HelloWorld/commit/e8424d4129d79379154281174cd31ad236bd8e22).
 

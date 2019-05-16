@@ -1,5 +1,5 @@
 # Running Background Jobs
- 
+
 ## Introduction
 
 Starcounter maintains its own thread pool. Most of Starcounter API may be called only from a thread from the Starcounter thread pool. Among such APIs are: methods from Starcounter.Db class, methods from Starcounter.Request class etc. Safer to regard all APIs from Starcounter namespace as required to be called on a Starcounter thread, unless explicitly stated otherwise. Starcounter assures that an application `Main`, typed JSON event handlers and HTTP-handlers registered with the `Handle` API are called on a Starcounter thread. In other situations, like your code is running on separately created .Net threads or on .Net thread pool, you have to schedule a task on Starcounter thread pool using `Scheduling.RunTask` in order to be able to use Starcounter API. You can call `Scheduling.RunTask` while on a .NET or Starcounter thread. `StarcounterEnvironment.IsOnScheduler` is another method that can be called on any thread, it tells you if the current thread is a Starcounter thread.
@@ -38,8 +38,7 @@ namespace StarcounterSampleApp
 
 ## Basic Information About Scheduling
 
-Tasks scheduled by `Scheduling.RunTask` as well as ready-to-call handlers make a queue of ready tasks. Then Starcounter picks tasks and runs them on a free thread from the thread pool. By default Starcounter thread pool hosts number of threads equal to number of CPU cores. It allows to maximize throughput by avoiding unnecessary context switches. But what if user code happens to block on IO or synchronization? Starcounter is able to detect such condition and launch an additional thread, so that queue processing doesn't stall. To maximize throughput, don't rely on thread pool scaling. Better to avoid blocking calls and use async IO whenever possible. 
-To put a task in a queue, the `Scheduling.RunTask` should be used:
+Tasks scheduled by `Scheduling.RunTask` as well as ready-to-call handlers make a queue of ready tasks. Then Starcounter picks tasks and runs them on a free thread from the thread pool. By default Starcounter thread pool hosts number of threads equal to number of CPU cores. It allows to maximize throughput by avoiding unnecessary context switches. But what if user code happens to block on IO or synchronization? Starcounter is able to detect such condition and launch an additional thread, so that queue processing doesn't stall. To maximize throughput, don't rely on thread pool scaling. Better to avoid blocking calls and use async IO whenever possible. To put a task in a queue, the `Scheduling.RunTask` should be used:
 
 ```csharp
 Task RunTask(Action action)
@@ -113,3 +112,4 @@ class Program
 ## Exceptions in scheduled tasks
 
 Unhandled exceptions in scheduled tasks are logged to the [Administrator log](../working-with-starcounter/administrator-web-ui.md#log). Besides of this fact, exception handling is identical to that of a regular .Net task.
+

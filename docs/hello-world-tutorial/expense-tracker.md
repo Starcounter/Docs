@@ -2,12 +2,12 @@
 
 We will now turn our application into a simple expense tracker.
 
-With Starcounter, views and view-models can be broken up into parts and [nested](../guides/web-apps/html-views.md#using-partials). This allows for increased composability and modularity. In this case, the two main concepts in this app, `Person` and `Expense`, will be built with separate view-models and views and then nested to create a coherent whole. Let's start by creating the appropriate files.
+With Starcounter, views and view-models can be broken up into parts and [nested](../guides/blendable-web-apps/html-views.md#using-partials). This allows for increased composability and modularity. In this case, the two main concepts in this app, `Person` and `Expense`, will be built with separate view-models and views and then nested to create a coherent whole. Let's start by creating the appropriate files.
 
 1. Add a new Starcounter "HTML template with dom-bind" in the HelloWorld folder together with `PersonJson.html`. Name it `ExpenseJson.html`.
 2. Add a new Starcounter "Typed JSON with Code-behind" file to the HelloWorld project together with `PersonJson.json` and `PersonJson.json.cs`. Name it `ExpenseJson.json`.
 
-![](../.gitbook/assets/expense-file-structure.png)
+![](../.gitbook/assets/expense-file-structure%20%282%29.png)
 
 ## Define the Expenses
 
@@ -96,7 +96,7 @@ public class Person
     public string LastName { get; set; }
     public IEnumerable<Expense> Expenses => Db.SQL<Expense>(
             "SELECT e FROM Expense e WHERE e.Spender = ?", this);
-            
+
     public decimal CurrentBalance => Db.SQL<Expense>(
             "SELECT e FROM Expense e WHERE e.Spender = ?", this)
             .Sum(e => e.Amount);
@@ -250,11 +250,7 @@ void Handle(Input.NewExpenseTrigger action)
 
 Run the program and try to add expenses, change their cost, and see the current balance change in real time.
 
-
-
-![](../.gitbook/assets/part5resized.gif)
-
-
+![](../.gitbook/assets/part5resized%20%281%29.gif)
 
 With every keystroke, the UI is updated almost instantly from the database. Starcounter's in-memory database makes this possible. There's no delay, everything simply happens at the moment the user interacts with the view.
 

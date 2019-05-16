@@ -8,7 +8,7 @@ We recommend BEM, a well-known convention that solves this problem.
 
 ## What is BEM?
 
-In the BEM naming convention, you **only use classes** in your stylesheets.  There are three kinds of classes at your disposal: blocks, elements, and modifiers.
+In the BEM naming convention, you **only use classes** in your stylesheets. There are three kinds of classes at your disposal: blocks, elements, and modifiers.
 
 A **block** is a basic class that represents a logical area of your app's UI \(_a menu, login form, a search form_\).
 
@@ -45,7 +45,7 @@ Note here that **everything at the root level must be a block**. A block can hav
 
 Consider the [SignIn app](https://github.com/Starcounter/signin):
 
-![](../../.gitbook/assets/bem-example.PNG)
+![](../../.gitbook/assets/bem-example%20%282%29.PNG)
 
 Here, the block is marked in red and the element sections in blue.
 
@@ -101,9 +101,7 @@ We recommend the following rules when using BEM selectors in Starcounter apps.
 
   It is **not** fine to override Bootstrap classes in your app's stylesheet. The only proper way to extend style is to with a BEM selector, for example:
 
-
-
-  ```markup
+```markup
   <ul class="chatter-autocomplete">
     <template is="dom-repeat" items="{{model.FoundAttachment}}">
         <li class="chatter-autocomplete__item">
@@ -111,9 +109,9 @@ We recommend the following rules when using BEM selectors in Starcounter apps.
         </li>
     </template>
   </ul>
-  ```
+```
 
-  For reference, the available Bootstrap classes can be found in [bootstrap.css](https://github.com/twbs/bootstrap/blob/v3.3.7/dist/css/bootstrap.css).
+For reference, the available Bootstrap classes can be found in [bootstrap.css](https://github.com/twbs/bootstrap/blob/v3.3.7/dist/css/bootstrap.css).
 
 ## Further reading
 

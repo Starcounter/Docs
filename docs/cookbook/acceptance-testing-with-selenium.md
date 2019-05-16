@@ -4,7 +4,7 @@ Puppet web apps are C\# apps with a thin presentation layer rendered in HTML5. B
 
 This page teaches how to use NUnit to run Selenium acceptance tests of a Starcounter Puppet web app. It is assumed here that you are using Visual Studio 2015, though it should also work with the older editions.
 
-### What is Selenium
+## What is Selenium
 
 Selenium is a free \(open source\) automated testing suite for web applications across different browsers and platforms.
 
@@ -21,7 +21,7 @@ You can learn more about Selenium at their [website \(docs.seleniumhq.org\)](htt
 * [Selenium Tutorial: Learn Selenium WebDriver](https://blog.udemy.com/selenium-ide-tutorial/)
 * [Getting Started with Selenium IDE](http://www.softwaretestinghelp.com/selenium-ide-download-and-installation-selenium-tutorial-2/)
 
-### What is NUnit
+## What is NUnit
 
 NUnit is a testing framework that has great integration with Visual Studio as well as continuous integration systems \(TeamCity, etc\). We will use NUnit to run our Selenium tests.
 
@@ -33,7 +33,7 @@ You can learn more about NUnit at their [website \(nunit.org\)](https://github.c
 * [Unit testing with .NET](http://www.developerfusion.com/article/84847/unit-testing-with-net/)
 * [Learning NUnit In Easy Way For Beginners](http://learnseleniumtesting.com/learning-nunit-in-easy-way-for-beginners/)
 
-### Create a Test Project
+## Create a Test Project
 
 It is recommended to keep the testing project in the same solution as the tested project. Note that they are two different projects.
 
@@ -43,7 +43,7 @@ Call the new project "Launcher.AcceptanceTest". We will use `Launcher\test\` as 
 
 ![](../.gitbook/assets/2016-04-01-13_03_00-add-new-project.png)
 
-### Install Required Packages
+## Install Required Packages
 
 Open the newly created test project. Now, we need to install a bunch of libraries mentioned above.
 
@@ -51,7 +51,7 @@ Open the package manager \(Tools → NuGet Packet Manager → Packet Manager Con
 
 **Important:** In the console, choose your test project from the "Default project" dropdown.
 
-![](../.gitbook/assets/2016-04-01-13_05_38-launcher-microsoft-visual-studio.png)
+![](../.gitbook/assets/2016-04-01-13_05_38-launcher-microsoft-visual-studio%20%282%29.png)
 
 Run the following commands in the console to install the required dependencies:
 
@@ -63,11 +63,11 @@ Install-Package NUnit.ConsoleRunner
 Install-Package NUnit3TestAdapter
 ```
 
-### Running in Multiple Browsers
+## Running in Multiple Browsers
 
 We don't want to test only Firefox. Because of that, you should use Selenium RemoteWebDriver, which adds a layer of abstraction that runs tests in multiple browsers, possibly on remote machines.
 
-### Install Selenium Standalone Server and Browser Drivers
+## Install Selenium Standalone Server and Browser Drivers
 
 To make this happen, you will need to install some additional software.
 
@@ -82,7 +82,7 @@ To make this happen, you will need to install some additional software.
 
 Open your Properties in the Tests project. Go to Reference Paths, enter C:\Selenium and click Add Folder.
 
-### Use BaseTest Class to Run Tests in Multiple Browsers
+## Use BaseTest Class to Run Tests in Multiple Browsers
 
 BaseTest is a helper class that makes it easier to test multiple browsers. The source code is available:
 
@@ -93,59 +93,59 @@ When you rebuild the test project now, you should see each test for every browse
 
 The final setup looks like this:
 
-![](../.gitbook/assets/2016-04-01-13_51_26-launcher-microsoft-visual-studio.png)
+![](../.gitbook/assets/2016-04-01-13_51_26-launcher-microsoft-visual-studio%20%281%29.png)
 
 Before you can execute the tests, start Selenium Server Standalone by calling `java -jar selenium-server-standalone-3.*.jar`.
 
-### Wait for Asynchronous Content
+## Wait for Asynchronous Content
 
 There is one common pitfall when writing Selenium tests. The test is executed with disregard of the asynchronously loaded content. This means that your tests need to explicitly wait for UI elements to appear before running any actions or assertions on them.
 
 It is a good practice to always wait:
 
 * Wait for a text element to be present before you check the content of that element
-  * An example can be found in the method `TextareaPage_WriteToTextArea` in KitchenSink 
+  * An example can be found in the method `TextareaPage_WriteToTextArea` in KitchenSink
 
-    Tests \(see [TextareaPageTest.cs lines 28-38](https://github.com/Starcounter/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextareaPageTest.cs#L28-L38)\). The method `WaitForText()` is used to 
+    Tests \(see [TextareaPageTest.cs lines 28-38](https://github.com/Starcounter/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextareaPageTest.cs#L28-L38)\). The method `WaitForText()` is used to
 
-    compare the text value of `TextareaInfoLabel` asynchronously. The assertion passes if the 
+    compare the text value of `TextareaInfoLabel` asynchronously. The assertion passes if the
 
     text is found within 5 seconds, otherwise it fails.
 * Wait for a button to be present before you click on that button
-  * An example can be found in the method `ButtonPage_RegularButton` in the KitchenSink 
+  * An example can be found in the method `ButtonPage_RegularButton` in the KitchenSink
 
-    tests \(see [ButtonPageTest.cs lines 29-46](https://github.com/Starcounter/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionNumber/ButtonPageTest.cs#L29-L46)\). The method `WaitUntil()` is used to 
+    tests \(see [ButtonPageTest.cs lines 29-46](https://github.com/Starcounter/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionNumber/ButtonPageTest.cs#L29-L46)\). The method `WaitUntil()` is used to
 
-    asynchronously check the state of the `Displayed` property of a button. It halts the test 
+    asynchronously check the state of the `Displayed` property of a button. It halts the test
 
-    for a default maximum time of 10 seconds. If the button is not displayed within that 
+    for a default maximum time of 10 seconds. If the button is not displayed within that
 
     time, it throws an exception.
 * Wait for presence of an input field before typing in it and wait for text to be present in label
-  * An example can be found in the method `TextPage_TextPropagationOnUnfocus` in the 
+  * An example can be found in the method `TextPage_TextPropagationOnUnfocus` in the
 
-    KitchenSink tests \(see [TextPageTest.cs lines 28-38](https://github.com/Starcounter/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextPageTest.cs#L28-L38)\). This test mixes the other examples 
+    KitchenSink tests \(see [TextPageTest.cs lines 28-38](https://github.com/Starcounter/KitchenSink/blob/master/test/KitchenSink.Tests/Test/SectionString/TextPageTest.cs#L28-L38)\). This test mixes the other examples
 
-    presented above. The method `WaitUntil()` is used here to asynchronously wait for the 
+    presented above. The method `WaitUntil()` is used here to asynchronously wait for the
 
-    input to be `Displayed`. Notice that the following response check is also done 
+    input to be `Displayed`. Notice that the following response check is also done
 
     asynchrously using `WaitForText`.
 
-### Run the First Test
+## Run the First Test
 
 Clone [KitchenSink repo](https://github.com/Starcounter/KitchenSink) from the [Starcounter organisation](https://github.com/Starcounter) on GitHub.  
 Follow the steps that were presented at `Install Selenium Standalone Server and browser drivers`.
 
 Build your test project. If it builds correctly, you should see this:
 
-![](../.gitbook/assets/2016-04-01-13_34_52-launcher-microsoft-visual-studio.png)
+![](../.gitbook/assets/2016-04-01-13_34_52-launcher-microsoft-visual-studio%20%282%29.png)
 
 Now, the only thing left to do is to run that test! In the Test Explorer, click on the "Run All" button. If it works well, you should see your tests passing.
 
 ![](../.gitbook/assets/2016-04-01-13_40_22-launcher-microsoft-visual-studio.png)
 
-### Sample Test Suites
+## Sample Test Suites
 
 Some of the Starcounter's sample apps come with acceptance test suite. We run tests every night to make sure that we keep the good quality.
 

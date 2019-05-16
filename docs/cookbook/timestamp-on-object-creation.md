@@ -4,7 +4,7 @@ Sometimes, it may be useful to have a timestamp of when a database object is cre
 
 In code, it would look something like this:
 
-```csharp
+```
 [Database]
 public abstract class BaseOfAllOtherClasses 
 {
@@ -22,7 +22,7 @@ public class Bar : BaseOfAllOtherClasses {}
 
 From this, it is possible to get when all the instances were created chronologically by using the following query:
 
-```sql
+```
 SELECT b.Inserted FROM BaseOfAllOtherClasses e ORDER BY e.Inserted
 ```
 

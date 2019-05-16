@@ -173,7 +173,7 @@ Use the `HandlerAppName` property to find out which application the request belo
 When creating \(using the `Handle` interface\) and calling handlers \(using the `Self` interface\), one can supply last `HandlerOptions` parameter, which specifies certain options for handler calls or registration. Here are the notable handler options:
 
 * `SkipRequestFilters`: used to declare a handler for which request filters will not be applied.
-*  `SkipResponsetFilters`: used to declare a handler for which response filters will not be applied.
+* `SkipResponsetFilters`: used to declare a handler for which response filters will not be applied.
 * `SkipHandlersPolicy`: If the database flag "EnforceURINamespaces" is set to True, all application handlers are required to start with application name. In this case `SkipHandlersPolicy` flag allows to register any URI handler.
 * `SelfOnly`: registered handler is going to be accessible only inside codehost using `Self` interface. `SelfOnly` handlers are not registered in gateway, in comparison with normal handlers.
 
@@ -237,11 +237,11 @@ After an HTTP handler is created - it can be unregistered with the `Handle.Unreg
 
 ### Size Limit on Payloads
 
-The default limit on payloads in requests is 1048576 bytes, exceeding this limit will prevent the request from going through and this warning will be printed in the [Administrator log](../working-with-starcounter/administrator-web-ui.md#log): 
+The default limit on payloads in requests is 1048576 bytes, exceeding this limit will prevent the request from going through and this warning will be printed in the [Administrator log](../working-with-starcounter/administrator-web-ui.md#log):
 
 > Attempt to HTTP upload of more than 1048576 bytes. Closing socket connection
 
-The limit can be increased to a maximum of 2048576 bytes by changing the value of  `MaximumReceiveContentLength` in `%userprofile%\Documents\Starcounter\Personal\scnetworkgateway.xml`.
+The limit can be increased to a maximum of 2048576 bytes by changing the value of `MaximumReceiveContentLength` in `%userprofile%\Documents\Starcounter\Personal\scnetworkgateway.xml`.
 
 {% hint style="info" %}
 When sending large files, we recommend to use WebSocket instead of HTTP. That pattern is demonstrated in the `FileUploadPage` \([code-behind](https://github.com/Starcounter/KitchenSink/blob/master/src/KitchenSink/FileUploadPage.json.cs), [HTML](https://github.com/Starcounter/KitchenSink/blob/master/src/KitchenSink/wwwroot/KitchenSink/FileUploadPage.html)\) in the sample app [KitchenSink](https://github.com/Starcounter/KitchenSink).
@@ -376,7 +376,7 @@ Handle.GET("/postponed", (Request req) =>
 });
 ```
 
-Please refer to the [External HTTP calls and Node usage]() article for more information.
+Please refer to the [External HTTP calls and Node usage](http.md) article for more information.
 
 ### Summary of Adjustable Response Fields
 

@@ -1,11 +1,12 @@
 # View Attaching
+
 {% hint style="warning" %}
 Converter functions are obsoleted and will be removed from Blender.MapUri in Starcounter 2.4.
 {% endhint %}
 
 ## Introduction
 
-When the browser sends a request to the server, the app with the matching URI sends back a response with the view. Starcounter has a unique feature of _attaching _views from other apps to the main view in the same response using a system based on _tokens _and _contexts_.
+When the browser sends a request to the server, the app with the matching URI sends back a response with the view. Starcounter has a unique feature of _attaching \_views from other apps to the main view in the same response using a system based on \_tokens \_and \_contexts_.
 
 For example, if a user wants to see a profile of a person, the browser makes a request to the People app: `GET http://localhost:8080/people/person/4782`. The response that is sent to the browser will include not only the view from the People app but also views from other apps that are attached to it.
 
@@ -18,11 +19,11 @@ On a high level, these are the specific steps involved with sending the response
 5. For the responses from other apps that are views, the server attaches the views to the view from the initial handler \(which is called the main view\) during the serialization process.
 6. The server sends the response, which now contains views from multiple apps, back to the client.
 
-By using tokens, the apps don't need to know anything about other apps in the code host - they don't even need to know if there are other apps -  they only have to communicate what concept the handlers deal with. Thus, apps should be built to not depend on, or expect, attaching. 
+By using tokens, the apps don't need to know anything about other apps in the code host - they don't even need to know if there are other apps - they only have to communicate what concept the handlers deal with. Thus, apps should be built to not depend on, or expect, attaching.
 
 The process of mapping handlers to tokens and attaching responses is handled by the `Blender` class in the `Starcounter` namespace.
 
-Attaching works well with [view composing]() to make different apps looks like one.
+Attaching works well with [view composing](view-attaching.md) to make different apps looks like one.
 
 {% hint style="info" %}
 Attaching was previously called "server-side blending"
@@ -71,7 +72,7 @@ Consider contexts as an additional matching rule for handlers with the same toke
 
 ### Attaching Specific URIs
 
- Specific URI is the handler URI with parameters supplied. For example, for the handler `/people/{?}` the specific URIs will be `/people/john`, `/people/bob`, etc. When calling `Blender.MapUri` for a specific URI, you should pass a mixed URI which indicates what handler it belongs to. For the previous examples, the mixed URI will be `/people/{john}` and `/people/{bob}`, so the parameter in specific URI is wrapped into curly brackets. `Blender` class has helper methods to construct such mixed URIs: `Blender.GetMixedUriFromHandlerAndParameters`, `Blender.TryGetMixedUriFromSpecific`. The last method tries to find corresponding handler for the given specific URI, which might not be determined correctly \(for example, in case when the corresponding handler is not yet registered\). Mixed URIs in `MapUri` calls are needed so the underlying handler for a specific URI can be identified. Other `Blender` methods like `UnmapUri`, `IsMapped`, etc. can still use specific URIs and not mixed.
+Specific URI is the handler URI with parameters supplied. For example, for the handler `/people/{?}` the specific URIs will be `/people/john`, `/people/bob`, etc. When calling `Blender.MapUri` for a specific URI, you should pass a mixed URI which indicates what handler it belongs to. For the previous examples, the mixed URI will be `/people/{john}` and `/people/{bob}`, so the parameter in specific URI is wrapped into curly brackets. `Blender` class has helper methods to construct such mixed URIs: `Blender.GetMixedUriFromHandlerAndParameters`, `Blender.TryGetMixedUriFromSpecific`. The last method tries to find corresponding handler for the given specific URI, which might not be determined correctly \(for example, in case when the corresponding handler is not yet registered\). Mixed URIs in `MapUri` calls are needed so the underlying handler for a specific URI can be identified. Other `Blender` methods like `UnmapUri`, `IsMapped`, etc. can still use specific URIs and not mixed.
 
 ## Dynamic Addition and Removal
 
@@ -191,25 +192,25 @@ You can describe blending rules in JSON, separate from the application code. If 
 ```javascript
 [
   {
-	 "Uri": "/someuri1",
-	 "Token": "sometoken1",
-	 "Contexts":[],
-	 "AllowFromDirection": true,
-	 "AllowToDirection": false
+     "Uri": "/someuri1",
+     "Token": "sometoken1",
+     "Contexts":[],
+     "AllowFromDirection": true,
+     "AllowToDirection": false
   },
   {
-	 "Uri": "/someuri2/{?}/bla",
-	 "Token": "",
-	 "Contexts":["context1","context2"],
-	 "AllowFromDirection": false,
-	 "AllowToDirection": true
+     "Uri": "/someuri2/{?}/bla",
+     "Token": "",
+     "Contexts":["context1","context2"],
+     "AllowFromDirection": false,
+     "AllowToDirection": true
   },
   {
-	 "Uri": "/someuri3/{name}/xxx",
-	 "Token": "sometoken3",
-	 "Contexts":["context1","context2", "context3"],
-	 "AllowFromDirection": true,
-	 "AllowToDirection": true
+     "Uri": "/someuri3/{name}/xxx",
+     "Token": "sometoken3",
+     "Contexts":["context1","context2", "context3"],
+     "AllowFromDirection": true,
+     "AllowToDirection": true
   }
 ]
 ```

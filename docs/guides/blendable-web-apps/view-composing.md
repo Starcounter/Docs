@@ -124,7 +124,7 @@ To create a custom composition, we will move the MedicalRecord table and headlin
 
 We have now produced the result shown in the image above; the view from the MedicalRecord app has been neatly integrated with the view from PetList.
 
-The tool for creating these custom compositions is the [CompositionEditor](https://github.com/Starcounter/CompositionEditor) app. When this app is running, you can open it at any page with `Ctrl + E`. When the app opens, it gives you an HTML editor for the composition of your attached views. 
+The tool for creating these custom compositions is the [CompositionEditor](https://github.com/Starcounter/CompositionEditor) app. When this app is running, you can open it at any page with `Ctrl + E`. When the app opens, it gives you an HTML editor for the composition of your attached views.
 
 There are two main concepts in the CompositionEditor - the identifier and composition \("layout" on the below picture\).
 
@@ -140,8 +140,8 @@ The `/sc/htmlmerger` is a prefix that is added every time a view contains views 
 
 The composition changes made in the editor are displayed in real time.
 
-Compositions are saved in the database and can be queried for with `SELECT * FROM Starcounter.HTMLComposition`. Since the CompositionEditor interacts with the database, it should not run in production.  
-  
+Compositions are saved in the database and can be queried for with `SELECT * FROM Starcounter.HTMLComposition`. Since the CompositionEditor interacts with the database, it should not run in production.
+
 Compositions can also be accessed with the static methods `GetUsingkey(string key)` and `GetUsingKeyAndVersion(string key, string version)`on the `HTMLComposition` class. These methods return an `HTMLComposition` with the specified key, or key and version.
 
 ### Providing custom compositions
@@ -152,7 +152,7 @@ Because of this, the CompositionProvider has to be running if you want to render
 
 ## Result
 
-![Composing in action](../../.gitbook/assets/inside%20%281%29.PNG)
+![Composing in action](../../.gitbook/assets/inside-1%20%283%29.PNG)
 
 This screenshot is a result of several of our sample apps running together:
 
@@ -173,6 +173,4 @@ Composing allows us to make views coming from multiple apps to look like one by 
 * [Layout compositions for HTML partials](https://starcounter.io/layout-compositions-html-partials/) - Blog October 2016
 * [Html Views Blending Guidelines](html-views-blending-guidelines.md) - Docs
 * [Shadow DOM v1: Self-Contained Web Components](https://developers.google.com/web/fundamentals/getting-started/primers/shadowdom) - Google Developers
-
-
 

@@ -2,7 +2,7 @@
 
 In this "Hello World" tutorial you will learn how to use the essential features of Starcounter by building an expense tracker complete with a database, interactive UI and real-time syncing.
 
-We will use C\# as the server-side language. All the app logic will be written in C\# and execute in the database. The client-server communication will be handled by [Palindrom](../guides/web-apps/palindrom.md) over HTTP and WebSocket. This is how we recommend building Starcounter apps.
+We will use C\# as the server-side language. All the app logic will be written in C\# and execute in the database. The client-server communication will be handled by [Palindrom](../guides/blendable-web-apps/palindrom.md) over HTTP and WebSocket. This is how we recommend building Starcounter apps.
 
 ## Content
 
@@ -12,9 +12,7 @@ In the four following steps, you will create an expense tracker by establishing 
 
 ## Final Result
 
-
-
-![Final result](../.gitbook/assets/resizedpart6.gif)
+![Final result](../.gitbook/assets/resizedpart6%20%282%29.gif)
 
 ## Requirements
 
