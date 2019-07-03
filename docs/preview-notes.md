@@ -148,7 +148,6 @@ namespace StarcounterConsoleSample
                     }
 
                     return p.Name;
-
                 });
 
                 Console.WriteLine(name);
