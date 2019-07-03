@@ -25,7 +25,7 @@ Please make sure to read our [End User License Agreement for Starcounter Softwar
 
 ## Installation
 
-**Note**: This section assumes that you have required operating system and .NET Core `3.0.100-preview6-012264` installed.
+**Note**: This section assumes that you have required operating system and .NET Core `3.0.100-preview6-012264` SDK installed.
 
 ### Binaries
 
