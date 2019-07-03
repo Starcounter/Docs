@@ -140,7 +140,10 @@ using Starcounter.Nova;
 [Database]
 public class Department
 {
-    public IEnumerable Employees => Db.SQL<Employee>("SELECT e FROM Employee e WHERE e.Department = ?", this);
+    public IEnumerable Employees
+    {
+        get => Db.SQL<Employee>("SELECT e FROM Employee e WHERE e.Department = ?", this);
+    }
 }
 
 [Database]
@@ -162,13 +165,19 @@ using Starcounter.Nova;
 [Database]
 public class Person
 {
-    public IEnumerable EquityPortfolio => Db.SQL<Shares>("SELECT s.Equity FROM Shares s WHERE s.Owner = ?", this);
+    public IEnumerable EquityPortfolio
+    {
+        get => Db.SQL<Shares>("SELECT s.Equity FROM Shares s WHERE s.Owner = ?", this);
+    }
 }
 
 [Database]
 public class Company
 {
-    public IEnumerable ShareHolders => Db.SQL<Shares>("SELECT s.Owner FROM Shares s WHERE s.Equity = ?", this);
+    public IEnumerable ShareHolders
+    {
+        get => Db.SQL<Shares>("SELECT s.Owner FROM Shares s WHERE s.Equity = ?", this);
+    }
 }
 
 [Database]
@@ -250,19 +259,20 @@ Starcounter automatically assigns an `UInt64` unique key for each database objec
 
 ```cs
 var p = Db.Insert<Product>();
-ulong productOid = Db.GetOid(p);
+ulong oid = Db.GetOid(p);
 ```
 
 ### Get object by unique key
 
 ```cs
-var p = Db.Get<Product>(productOid);
+var p = Db.Get<Product>(oid);
 ```
 
 ### Querying by object's unique key
 
 ```cs
-var product = Db.SQL<Product>("SELECT p FROM Product p WHERE p.ObjectNo = ?", productOid).FirstOrDefault();
+var product = Db.SQL<Product>("SELECT p FROM Product p WHERE p.ObjectNo = ?", oid)
+    .FirstOrDefault();
 ```
 
 ### Notes
