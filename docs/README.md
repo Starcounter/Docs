@@ -228,6 +228,14 @@ Everything should run out of the box.
 - Set the debug path in `Project properties → Debug → Working directory` to the path of the project. E.g. `C:\StarcounterSamples\StarcounterConsoleSample`.
 - Click `Ctrl + F5` to start the application.
 
+It is also possible to set working directory in the `.csproj` file by adding the following:
+
+```xml
+<PropertyGroup>
+  <RunWorkingDirectory>$(MSBuildProjectDirectory)</RunWorkingDirectory>
+</PropertyGroup>
+```
+
 ## Extra information
 
 *Before asking questions or reporting issues, please read these few lines, and maybe you will find an answer for your question.*
