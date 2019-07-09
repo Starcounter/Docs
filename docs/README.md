@@ -243,6 +243,7 @@ It is also possible to set working directory in the `.csproj` file by adding the
 - Currently there is no database tooling available except the bare minimum of `dotnet star new` and `dotnet star start` commands.
 - Currently it is only possible to start the database manually.
 - Currently it is only possible to store the database files in the default `.stardata` folder.
+- Currently it is not supported to have a dot (`.`) in the application name. For example app may use `CompanyApplication` as it's name, but `Company.Application` is not supported.
 - Starting from Starcounter 3.0.0 beta, all required packages will be uploaded to one of the popular providers, such as [NuGet.org](https://www.nuget.org/), [MyGet.org](https://www.myget.org/) or [GitHub Package Registry](https://github.com/features/package-registry).
 - Base namespace will be changed from `Starcounter.Nova` to just `Starcounter`.
 - It is recommended to define all database classes and properties as `abstract` to reduce memory footprint when compared to `virtual`. Support for `virtual` properties might be removed in the future.
