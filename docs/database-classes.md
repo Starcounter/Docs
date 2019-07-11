@@ -105,7 +105,9 @@ public class Person
 
 ### Property limit
 
-Database classes can have a maximum of 112 properties for performance reasons. Thus, this is not allowed:
+Database classes can have a maximum of 112 properties for performance reasons. The limit applies to the total number of persistent properties (including all inherited) per class.
+
+Thus, this is not allowed:
 
 ```cs
 [Database]
