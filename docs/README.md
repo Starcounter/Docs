@@ -99,6 +99,17 @@ Create `nuget.config` file and add required package sources:
 </configuration>
 ```
 
+**Visual Studio Setup**:
+
+Visual Studio requires manual NuGet package sources configuration. For this go to the `Tools → Options → NuGet Package Manager → Package Sources` menu then add `local` and `Starcounter` feeds:
+
+<details>
+  <summary>Visual Studio → NuGet Package Manager Screenshot</summary>
+
+![image](https://user-images.githubusercontent.com/6435556/61075850-2b5b8080-a41b-11e9-9a08-0f0785552a2b.png)
+
+</details>
+
 **Note**: Replace the `[Starcounter.3.0.0-alpha-20190701]` value with actual path to the folder with unzipped Starcounter binaries.
 
 ##### Add `Starcounter.Nova.App` package reference
