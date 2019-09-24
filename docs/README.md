@@ -1,23 +1,23 @@
-# Starcounter 3.0 - public preview
+# Starcounter 3.0 - public preview 2
 
-Starcounter 3.0.0 Alpha 20190701, codenamed Nova, is available for public preview.
+The next preview version of Starcounter 3.0.0, codenamed Nova, is available for general access.
+
+Download [`Starcounter.3.0.0-alpha-20190930.zip`](https://starcounter.io/Starcounter/Starcounter.3.0.0-alpha-20190930.zip) archive with all required NuGet packages.
 
 Please make sure to read our [End User License Agreement for Starcounter Software](https://starcounter.com/wp-content/themes/starcounter-custom/assets/docs/Starcounter_EULA.pdf).
 
-## Starcounter 3.0 main focus
+## Starcounter 3.0 preview 2 main changes
 
-- Support Linux & Windows operating systems.
-- Provide seamless integration with standard .NET Core applications:
-  - .NET Core Console applications.
-  - .NET Core Web applications with [Kestrel web server](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel).
-  - .NET Core Desktop applications.
-- Support development experience with standard `dotnet` CLI tooling.
+- Starcounter database access is now provided with a `Microsoft.Extensions.DependencyInjection` service.
+- `Starcounter.Star.Tool` is no longer required to manipulate and communicate with the database.
+- It is not possible to distribute Starcounter applications with `dotnet publish` command.
+- Overall performance has been significantly improved with multiple optimizations in the communication layer between application and the database.
 
 ## Requirements
 
 - [Ubuntu 18.04.02 x64](https://ubuntu.com/download/desktop) or [Windows 10 Pro x64 Build 1903](https://www.microsoft.com/en-us/software-download/windows10).
   - [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install-win10) is also supported.
-- [.NET Core 3.0.100-preview6-012264 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0). Make sure to select the SDK download for your platform, and not the runtime download.
+- [.NET Core 3.0.100](https://dotnet.microsoft.com/download/dotnet-core/3.0), SDK for development, runtime for production.
 - Enough RAM to load database of targeted size.
 - It's recommended to have at least two CPU cores.
 
@@ -25,12 +25,12 @@ Please make sure to read our [End User License Agreement for Starcounter Softwar
 
 ## Installation
 
-**Note**: This section assumes that you have required operating system and .NET Core `3.0.100-preview6-012264` SDK installed.
+**Note**: This section assumes that you have required operating system and .NET Core `3.0.100` SDK installed.
 
 ### Binaries
 
-- Create a folder for Starcounter binaries, for example `Starcounter.3.0.0-alpha-20190701`.
-- Download [`Starcounter.3.0.0-alpha-20190701.zip`](https://starcounter.io/Starcounter/Starcounter.3.0.0-alpha-20190701.zip) into the folder.
+- Create a folder for Starcounter binaries, for example `Starcounter.3.0.0-alpha-20190930`.
+- Download [`Starcounter.3.0.0-alpha-20190930.zip`](https://starcounter.io/Starcounter/Starcounter.3.0.0-alpha-20190930.zip) into the folder.
 - Unzip downloaded archive into the folder.
 
 #### Ubuntu 18.04
@@ -54,10 +54,10 @@ sudo apt-get install swi-prolog-nox=7.\*
 
 ```
 cd $HOME
-mkdir Starcounter.3.0.0-alpha-20190701
-cd Starcounter.3.0.0-alpha-20190701
-wget https://starcounter.io/Starcounter/Starcounter.3.0.0-alpha-20190701.zip
-unzip Starcounter.3.0.0-alpha-20190701.zip
+mkdir Starcounter.3.0.0-alpha-20190930
+cd Starcounter.3.0.0-alpha-20190930
+wget https://starcounter.io/Starcounter/Starcounter.3.0.0-alpha-20190930.zip
+unzip Starcounter.3.0.0-alpha-20190930.zip
 ```
 
 ### Application
@@ -92,7 +92,7 @@ Create `nuget.config` file and add required package sources:
 <configuration>
   <packageSources>
     <clear />
-    <add key="local" value="[Starcounter.3.0.0-alpha-20190701]" />
+    <add key="local" value="[Starcounter.3.0.0-alpha-20190930]" />
     <add key="Starcounter" value="https://www.myget.org/F/starcounter/api/v2" />
     <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />
   </packageSources>
