@@ -174,6 +174,8 @@ namespace StarcounterConsoleSample
 }
 ```
 
+[Read more about Starcounter database connection string](database-connection-string.md).
+
 **For ASP.NET Core application**:
 
 Update `Startup.cs` class with the following:
