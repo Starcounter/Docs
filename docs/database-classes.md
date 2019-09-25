@@ -18,11 +18,11 @@ public abstract class Person
 }
 ```
 
-All instances of database classes created with the `Db.Insert` method are stored persistently.
+All instances of database classes created with the `IDatabaseContext.Insert` method are stored persistently.
 
 ## Constructors
 
-Database classes support default constructors. Non-private default constructors are called when a new instance is created with `Db.Insert`.
+Database classes support default constructors. Non-private default constructors are called when a new instance is created with `IDatabaseContext.Insert`.
 
 For example, this is a valid database class with a constructor:
 
@@ -41,7 +41,7 @@ public abstract class Order
 }
 ```
 
-It's possible to have constructors with parameters, although, they are never called when using `Db.Insert`.
+It's possible to have constructors with parameters, although, they are never called when using `IDatabaseContext.Insert`.
 Constructors with parameters in database classes can be useful for unit testing purposes when you want to inject dependencies or other arguments into a class.
 If you add a constructor with parameters to a database class, you also have to add a default constructor.
 
@@ -55,13 +55,13 @@ Properties should also be public and either `abstract` or `virtual`. It is recom
 
 ### Collections
 
-It's possible to have collections in the database class if the collection has an explicitly declared body.
-For example, the following properties are allowed:
+It's also possible to have methods to retrieve collections of the database objects.
 
 ```cs
-public List<string> Branches => new List<string>() { "develop", "master" };
-
-public IEnumerable<Person> Friends => Db.SQL<Person>("SELECT p FROM Person p");
+public IEnumerable<Person> SelectFriends(IDatabaseContext db)
+{
+	return db.Sql<Person>("SELECT p FROM Person p");
+}
 ```
 
 These properties and fields are not allowed:
@@ -72,19 +72,29 @@ public List<Person> People { get; }
 public IEnumerable Animals;
 ```
 
-To access collections from database objects, first retrieve the object and then access the property that has the collection:
+To access collections from the database objects, first retrieve the object and then call the method that returns the collection:
 
 ```
-var person = Db.SQL<Person>("SELECT p FROM Person p").First();
-IEnumerable<Person> friends = person.Friends;
+var transactor = services.GetRequiredService<ITransactor>();
+
+transactor.Transact(db =>
+{
+	var person = db.Sql<Person>("SELECT p FROM Person p").First();
+	IEnumerable<Person> friends = person.Friends;
+});
 ```
+
+*Note: In the previous versions of Starcounter with static database access via the `Db` class it was possible to define `IEnumerable` properties, not methods.
+This type of syntax will come back in the next alpha release.*
 
 ## Indexing
 
 Database indexes can be defined with [`CREATE INDEX`](https://www.w3schools.com/sql/sql_create_index.asp) SQL query. Unique and not unique indexes are supported.
 
 ```cs
-Db.SQL("CREATE INDEX IX_Person_FirstName ON Person (FirstName)");
+var ddlExecutor = services.GetRequiredService<IDdlExecutor>();
+
+ddlExecutor.Execute("CREATE INDEX IX_Person_FirstName ON Person (FirstName)");
 ```
 
 A single property index can be created with the `[Index]` attribute:
@@ -100,6 +110,8 @@ public class Person
     public virtual string LastName { get; set; }
 }
 ```
+
+*Note: In the previous versions of Starcounter it was possible to execute DDL statements using `Db.SQL` method. This is no longer allowed, all the DDL statements have to be executed using the `IDdlExecutor` service.*
 
 ## Limitations
 
@@ -132,7 +144,7 @@ Nested database classes are not supported. The limitation is that inner database
 
 ### One-to-many relations
 
-We recommend modeling one-to-many relationships by having references both ways - the child has a reference to the parent and the parent has a reference to all the children.
+We recommend modeling one-to-many relationships by having references both ways - the child has a reference to the parent and the parent has a method to select all the children.
 
 In this example there is a one-to-many relationship between `Department` and `Employee`:
 
@@ -142,16 +154,16 @@ using Starcounter.Nova;
 [Database]
 public class Department
 {
-    public IEnumerable Employees
+    public IEnumerable<Employee> SelectEmployees(IDatabaseContext db)
     {
-        get => Db.SQL<Employee>("SELECT e FROM Employee e WHERE e.Department = ?", this);
+        return db.Sql<Employee>("SELECT e FROM Employee e WHERE e.Department = ?", this);
     }
 }
 
 [Database]
 public class Employee
 {
-    public virtual Department Department { get; set; }
+    public abstract Department Department { get; set; }
 }
 ```
 
@@ -167,18 +179,18 @@ using Starcounter.Nova;
 [Database]
 public class Person
 {
-    public IEnumerable EquityPortfolio
+    public IEnumerable<Company> SelectEquityPortfolio(IDatabaseContext db)
     {
-        get => Db.SQL<Shares>("SELECT s.Equity FROM Shares s WHERE s.Owner = ?", this);
+        return db.Sql<Company>("SELECT s.Equity FROM Shares s WHERE s.Owner = ?", this);
     }
 }
 
 [Database]
 public class Company
 {
-    public IEnumerable ShareHolders
+    public IEnumerable<Person> SelectShareHolders(IDatabaseContext db)
     {
-        get => Db.SQL<Shares>("SELECT s.Owner FROM Shares s WHERE s.Equity = ?", this);
+        return db.Sql<Person>("SELECT s.Owner FROM Shares s WHERE s.Equity = ?", this);
     }
 }
 
@@ -236,21 +248,26 @@ Database objects can be checked for equality with the `Equals` method.
 Comparing database objects with `object.ReferenceEquals` or the `==` operator always returns `false` if any of the objects are retrieved from the database:
 
 ```cs
-var firstProduct = Db.Insert<Product>();
-var secondProduct = Db.Insert<Product>();
-var anotherFirstProduct = Db.Get<Product>(Db.GetOid(firstProduct));
+var transactor = services.GetRequiredService<ITransactor>();
 
-// Checks if two database objects are equal 
-Console.WriteLine(firstProduct.Equals(secondProduct)); // => false
-Console.WriteLine(firstProduct.Equals(anotherFirstProduct)); // => true
+transactor.Transact(db =>
+{
+	var firstProduct = db.Insert<Product>();
+	var secondProduct = db.Insert<Product>();
+	var anotherFirstProduct = db.Get<Product>(db.GetOid(firstProduct));
 
-// Returns false for different object or objects retrieved from the database
-Console.WriteLine(firstProduct == secondProduct); // => false
-Console.WriteLine(firstProduct == anotherFirstProduct); // => false
-Console.WriteLine(firstProduct == firstProduct); // => true
-Console.WriteLine(object.ReferenceEquals(firstProduct, secondProduct)); // => false
-Console.WriteLine(object.ReferenceEquals(firstProduct, anotherFirstProduct)); // => false
-Console.WriteLine(object.ReferenceEquals(firstProduct, firstProduct)); // => true
+	// Checks if two database objects are equal 
+	Console.WriteLine(firstProduct.Equals(secondProduct)); // => false
+	Console.WriteLine(firstProduct.Equals(anotherFirstProduct)); // => true
+
+	// Returns false for different object or objects retrieved from the database
+	Console.WriteLine(firstProduct == secondProduct); // => false
+	Console.WriteLine(firstProduct == anotherFirstProduct); // => false
+	Console.WriteLine(firstProduct == firstProduct); // => true
+	Console.WriteLine(object.ReferenceEquals(firstProduct, secondProduct)); // => false
+	Console.WriteLine(object.ReferenceEquals(firstProduct, anotherFirstProduct)); // => false
+	Console.WriteLine(object.ReferenceEquals(firstProduct, firstProduct)); // => true
+});
 ```
 
 ## Database object identity
@@ -260,21 +277,36 @@ Starcounter automatically assigns an `UInt64` unique key for each database objec
 ### Get object's unique key
 
 ```cs
-var p = Db.Insert<Product>();
-ulong oid = Db.GetOid(p);
+var transactor = services.GetRequiredService<ITransactor>();
+
+transactor.Transact(db =>
+{
+	var p = db.Insert<Product>();
+	ulong oid = db.GetOid(p);
+});
 ```
 
 ### Get object by unique key
 
 ```cs
-var p = Db.Get<Product>(oid);
+var transactor = services.GetRequiredService<ITransactor>();
+
+transactor.Transact(db =>
+{
+	var p = db.Get<Product>(oid);
+});
 ```
 
 ### Querying by object's unique key
 
 ```cs
-var product = Db.SQL<Product>("SELECT p FROM Product p WHERE p.ObjectNo = ?", oid)
-    .FirstOrDefault();
+var transactor = services.GetRequiredService<ITransactor>();
+
+transactor.Transact(db =>
+{
+	var product = db.Sql<Product>("SELECT p FROM Product p WHERE p.ObjectNo = ?", oid)
+		.FirstOrDefault();
+});
 ```
 
 ### Notes

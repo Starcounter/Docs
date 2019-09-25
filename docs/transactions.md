@@ -47,37 +47,41 @@ Another word for locking is "pessimistic concurrency control".
 A more efficient way of providing concurrency than "pessimistic concurrency control" is "optimistic concurrency control".
 As the name implies, this concurrency mechanism assumes that conflicts are unlikely, but if conflicts happen, they are still handled.
 Starcounter uses optimistic concurrency control. Thus, the Starcounter database handles transactions without locking the modified objects.
-If there are conflicts, the developer can either provide a delegate to execute on conflict or use the `Db.TryTransact` method to retry when there is a conflict.
+If there are conflicts, the developer can either provide a delegate to execute on conflict or use the `ITransactor.TryTransact` method to retry when there is a conflict.
 
-### `Db.Transact`
+### `ITransactor.Transact`
 
-`Db.Transact` is the simplest way to create a transaction in Starcounter.
+`ITransactor.Transact` is the simplest way to create a transaction in Starcounter.
 It declares a transactional scope and runs synchronously, as described above.
-The argument passed to the Db.Transact method is a delegate containing the code to run within the transaction. In code, it looks like this:
+The argument passed to the ITransactor.Transact method is a delegate containing the code to run within the transaction. In code, it looks like this:
 
 ```cs
-Db.Transact(() =>
+var transactor = services.GetRequiredService<ITransactor>();
+
+transactor.Transact(db =>
 {
     // Adds a row to the Person table.
-    var person = Db.Insert<Person>();
+    var person = db.Insert<Person>();
     person.Name = "Gandalf";
 });
 ```
 
-Since `Db.Transact` is synchronous, it blocks the executing thread until the transaction completes.
+Since `ITransactor.Transact` is synchronous, it blocks the executing thread until the transaction completes.
 Thus, if the transaction takes more than a few milliseconds to run, it might prevent your application's performance from scaling with CPU core counts.
-In those cases, use `Db.TransactAsync` instead. `Db.TransactAsync` returns a `Task` that completes when the transaction commits or rolls back which lets you avoid blocking.
+In those cases, use `ITransactor.TransactAsync` instead. `ITransactor.TransactAsync` returns a `Task` that completes when the transaction commits or rolls back which lets you avoid blocking.
 
-### `Db.TransactAsync`
+### `ITransactor.TransactAsync`
 
-`Db.TransactAsync` is the asynchronous counterpart of `Db.Transact`.
+`ITransactor.TransactAsync` is the asynchronous counterpart of `ITransactor.Transact`.
 It gives the developer more control to balance throughput and latency.
 The function returns a `Task` that is marked as completed and successful with the property `IsCompletedSuccessfully` when the database operations are written to the transaction log which persists the changes.
 
-`Db.Transact` and `Db.TransactAsync` are syntactically identical, but semantically different since `Db.TransactAsync` is used with `await`:
+`ITransactor.Transact` and `ITransactor.TransactAsync` are syntactically identical, but semantically different since `ITransactor.TransactAsync` is used with `await`:
 
 ```cs
-await Db.TransactAsync(() =>
+var transactor = services.GetRequiredService<ITransactor>();
+
+await transactor.TransactAsync(db =>
 {
     // The code to run in the transaction.
 });
@@ -86,11 +90,13 @@ await Db.TransactAsync(() =>
 While waiting for the write to the transaction log to finish, it's possible to do other things, such as sending an email:
 
 ```cs
+var transactor = services.GetRequiredService<ITransactor>();
+
 Order order = null;
 
-Task task = Db.TransactAsync(() =>
+Task task = transactor.TransactAsync(db =>
 {
-    order = Db.Insert<Order>();
+    order = db.Insert<Order>();
 });
 
 // Order has been added to the database.
@@ -101,19 +107,19 @@ SendConfirmationEmail(order);
 await task;
 ```
 
-This is more flexible and performant than Db.Transact, but it comes with certain risks;
+This is more flexible and performant than `ITransactor.Transact`, but it comes with certain risks;
 for example, if there's a power outage or other hardware failure after the email is sent but before writing to the log,
 the email will be incorrect - even if the user got a confirmation, the order will not be in the database since it was never written to the transaction log.
 
-`Db.TransactAsync` is useful when creating many transactions in sequence:
+`ITransactor.TransactAsync` is useful when creating many transactions in sequence:
 
 ```cs
+var transactor = services.GetRequiredService<ITransactor>();
 var coupon = GetPromotionalCoupon();
-
-Customer[] customers = GetAllCustomers();
+var customers = GetAllCustomers();
 
 Task[] tasks = customers
-    .Select(c => Db.TransactAsync(() => c.AddCoupon(coupon)))
+    .Select(c => transactor.TransactAsync(db => c.AddCoupon(coupon)))
     .ToArray();
 
 // Alternatively, use Task.WaitAll(tasks) to block until tasks are completed.
@@ -128,19 +134,19 @@ Transactions can't be nested unless you specify what to do on commit for the inn
 To understand why it's this way, take a look at this example:
 
 ```cs
-public void OrderProduct(long productId, Customer customer)
+public void OrderProduct(ITransactor transactor, long productId, Customer customer)
 {
-    Db.Transact(() =>
+    transactor.Transact(db =>
     {
         SendInvoice(productId, customer);
         RemoveFromInventory(productId);
     });
 }
 
-public void SendInvoice(long productId, Customer customer)
+public void SendInvoice(ITransactor transactor, long productId, Customer customer)
 {
     var invoice = new Invoice(productId, customer);
-    Db.Transact(() => AddInvoiceToDb(invoice));
+    transactor.Transact(db => AddInvoiceToDb(invoice));
     invoice.Send();
 }
 ```
@@ -154,11 +160,16 @@ This would cause the customer to receive an invoice that is not stored in the da
 Due to this, inner transactions have to specify what to do on commit. To adapt the previous example to specify what to do on commit, we would do this to `SendInvoice`:
 
 ```cs
-public void SendInvoice(long productId, Customer customer)
+public void SendInvoice(ITransactor transactor, long productId, Customer customer)
 {
-    var invoice = new Invoice(productId, customer);
-    Db.Transact(() => AddInvoiceToDb(invoice),
-        new TransactOptions(() => invoice.Send()));
+    transactor.Transact(db =>
+    {
+        AddInvoiceToDb(invoice);
+    }, 
+    options: new TransactOptions
+    (
+        onCommit: () => invoice.Send())
+    );
 }
 ```
 
@@ -169,7 +180,9 @@ Thus, `onCommit` ensures that the calls are made in the correct order no matter 
 If you don't know if a transaction will be nested within another transaction, it's always safe to add an empty `onCommit` delegate:
 
 ```cs
-Db.Transact(() =>
+var transactor = services.GetRequiredService<ITransactor>();
+
+transactor.Transact(db =>
 {
     // Read and write to database
 }, new TransactOptions(() => {}));
@@ -181,7 +194,7 @@ If an inner transaction doesn't have an onCommit delegate, Starcounter throws `A
 
 ### Transaction Size
 
-Code in `Db.Transact` and `Db.TransactAsync` should execute in as short time as possible because conflicts are more likely the longer the transaction is.
+Code in `ITransactor.Transact` and `ITransactor.TransactAsync` should execute in as short time as possible because conflicts are more likely the longer the transaction is.
 Conflicts requires long transactions to run more times which can be expensive.
 The solution is to break big transactions into smaller ones.
 
@@ -193,9 +206,11 @@ For example, if you try to use PLINQ to parallelize database operations in a tra
 
 
 ```cs
-Db.Transact(() =>
+var transactor = services.GetRequiredService<ITransactor>();
+
+transactor.Transact(db =>
 {
-    var customers = Db.SQL<Customer>("SELECT p FROM Customer p");
+    var customers = db.Sql<Customer>("SELECT p FROM Customer p");
 
     // Fails with ScErrNoTransactionAttached
     customers.AsParallel().ForAll(customer =>
@@ -210,14 +225,18 @@ Even if database operations in the same transactions aren't parallelized, databa
 It's possible to use `async`/`await` in transactions. To perform database operations asynchronously in transactions, you have to make sure it uses the enclosing context:
 
 ```cs
-await Db.TransactAsync(async () =>
+var transactor = services.GetRequiredService<ITransactor>();
+
+await transactor.TransactAsync(async db =>
 {
-    await Task.Factory.StartNew(() =>
+    await Task.Factory.StartNew
+	(	() =>
         {
             // Database operations
         },
         CancellationToken.None,
         TaskCreationOptions.None,
-        TaskScheduler.FromCurrentSynchronizationContext());
+        TaskScheduler.FromCurrentSynchronizationContext()
+	);
 });
 ```
