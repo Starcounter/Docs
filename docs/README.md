@@ -10,7 +10,7 @@ Please make sure to read our [End User License Agreement for Starcounter Softwar
 
 - Starcounter database access is now provided with a [`Microsoft.Extensions.DependencyInjection`](https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection/) service.
 - `Starcounter.Star.Tool` is no longer required to manipulate and communicate with the database.
-- It is now possible to distribute Starcounter applications with `dotnet publish` command.
+- It is now possible to deploy Starcounter applications with `dotnet publish` command.
 - Overall performance has been significantly improved with multiple optimizations in the communication layer between application and the database.
 
 ## Requirements
