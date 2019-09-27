@@ -14,7 +14,7 @@ Starcounter database can be created with the following options configured.
 These values are available to configure via `Starcounter.Nova.Bluestar.DatabaseCreationOptions` class. Sample configuration:
 
 ```cs
-services.AddStarcounter("Database=./path/to/db;OpenMode=CreateIfNotExists;StartMode=StartIfNotRunning;StopMode=IfWeStarted")
+services.AddStarcounter("Database=./path/to/db")
 	.Configure<Starcounter.Nova.Bluestar.DatabaseCreationOptions>(options =>
 	{
 		options.Collation = "en-GB-CI-AS";
