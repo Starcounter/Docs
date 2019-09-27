@@ -28,6 +28,8 @@
 - `IfWeStarted` - Stops database processes if they where started by the current application.
 - `Never` - Leaves database processes running, even after the application shuts down and even if the application started them.
 
+*Note: the `Never` option is not effective when the application process is forcibly killed with task manager or `Ctrl + C`. In this case operating system will kill corresponding Starcounter processes as well.*
+
 ### The `ContextCount` option
 
 Starcounter has maximum of `31` database contexts available for allocation between multiple processes.
