@@ -24,6 +24,8 @@ services.AddStarcounter("Database=./path/to/db")
 	});
 ```
 
+***Note**: any of these values is not possible to change after database creation.*
+
 ### The `Collation` option
 
 Currently Starcounter supports the following string collations:
@@ -33,8 +35,6 @@ Currently Starcounter supports the following string collations:
 - `nb-NO`, Norwegian, Case Insensitive, Accent Insensitive.
 - `en-GB`, English, Case Insensitive, Accent Insensitive.
 - `ru-RU`, Russian, Case Insensitive, Accent Insensitive.
-
-*Note: it is not possible to change database collation after it's creation.*
 
 ### The `FirstObjectId` and `LastObjectId` options
 
