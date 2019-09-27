@@ -3,3 +3,4 @@
 * [Database classes](database-classes.md)
 * [Transactions](transactions.md)
 * [Database connection string](database-connection-string.md)
+* [Database creation options](database-creation-options.md)

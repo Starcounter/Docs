@@ -174,7 +174,8 @@ namespace StarcounterConsoleSample
 }
 ```
 
-[Read more about Starcounter database connection string](database-connection-string.md).
+- [Read more about Starcounter database connection string](database-connection-string.md).
+- [Read how to configure Starcounter database options](database-creation-options.md).
 
 **For ASP.NET Core application**:
 
