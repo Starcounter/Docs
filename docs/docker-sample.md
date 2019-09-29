@@ -1,4 +1,4 @@
-# Running Starcounter 3.0 application under [Docker](https://www.docker.com/)
+# Running Starcounter 3.0 applications under [Docker](https://www.docker.com/)
 
 With Starcounter 3.0 it is possible to run Starcounter applications in Linux Docker containers.
 
