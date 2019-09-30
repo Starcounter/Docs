@@ -1,12 +1,12 @@
-# Starcounter 3.0 - public preview 2
+# Starcounter 3.0 - alpha `20190930`
 
-The next preview version of Starcounter 3.0.0, codenamed Nova, is available for general access.
+The next alpha version of Starcounter 3.0.0, codenamed Nova, is available for general access.
 
 Download [`Starcounter.3.0.0-alpha-20190930.zip`](https://starcounter.io/Starcounter/Starcounter.3.0.0-alpha-20190930.zip) archive with all required NuGet packages.
 
 Please make sure to read our [End User License Agreement for Starcounter Software](https://starcounter.com/wp-content/themes/starcounter-custom/assets/docs/Starcounter_EULA.pdf).
 
-## Starcounter 3.0 preview 2 main changes
+## Starcounter 3.0 alpha `20190930` main changes
 
 - Starcounter database access is now provided with a [`Microsoft.Extensions.DependencyInjection`](https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection/) service.
 - `Starcounter.Star.Tool` is no longer required to manipulate and communicate with the database.
@@ -21,7 +21,7 @@ Please make sure to read our [End User License Agreement for Starcounter Softwar
 - Enough RAM to load database of targeted size.
 - It's recommended to have at least two CPU cores.
 
-**Note**: Due to the preview state of this release we cannot provide any guarantees, but we monitor our [GitHub: Starcounter/Home](https://github.com/Starcounter/Home/issues) issue tracker and stand ready to assist with any potential issues.
+**Note**: Due to the alpha state of this release we cannot provide any guarantees, but we monitor our [GitHub: Starcounter/Home](https://github.com/Starcounter/Home/issues) issue tracker and stand ready to assist with any potential issues.
 
 ## Installation
 
