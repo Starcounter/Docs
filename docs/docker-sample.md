@@ -1,4 +1,4 @@
-# Running Starcounter 3.0 applications under [Docker](https://www.docker.com/)
+# Running Starcounter 3.0 applications under Docker
 
 With Starcounter 3.0 it is possible to run Starcounter applications in Linux Docker containers.
 
@@ -6,7 +6,7 @@ With Starcounter 3.0 it is possible to run Starcounter applications in Linux Doc
 
 Sample files structure:
 
-```
+```text
 📁 App
 |--📑 App.csproj
 |--📑 nuget.config
@@ -14,12 +14,12 @@ Sample files structure:
 📑 Dockerfile
 ```
 
-- The [`App`](docker-sample/App) contains a sample Starcounter Console application files.
-- The [`Dockerfile`](docker-sample/Dockerfile) contains Docker container definition for the app.
+* The [`App`](https://github.com/Starcounter/Docs/tree/99cbda1f28703b1b2ac4c5f9a12650b9ef7c6d35/docs/docker-sample/App/README.md) contains a sample Starcounter Console application files.
+* The [`Dockerfile`](https://github.com/Starcounter/Docs/tree/99cbda1f28703b1b2ac4c5f9a12650b9ef7c6d35/docs/docker-sample/Dockerfile/README.md) contains Docker container definition for the app.
 
 ### `App.csproj`
 
-```xml
+```markup
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
@@ -35,7 +35,7 @@ Sample files structure:
 
 ### `nuget.config`
 
-```xml
+```markup
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
   <packageSources>
@@ -50,7 +50,7 @@ Sample files structure:
 
 ### `Program.cs`
 
-```cs
+```csharp
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -67,7 +67,7 @@ namespace App
     {
         public abstract string Name { get; set; }
     }
-    
+
     /// <summary>
     /// This simple console application demonstrates how to build a service provider
     /// for the Starcounter services, to fetch service instances from it, and then 
@@ -79,7 +79,7 @@ namespace App
         public static void Main(string[] args)
         {
             string name = args.FirstOrDefault() ?? "Noname";
-            
+
             // Here we create a service collection that we add the Starcounter services to.
             // When we call BuildServiceProvider(), we get an instance that we can use to 
             // fetch service instances, for example ITransactor, which we then can use to 
@@ -123,14 +123,14 @@ namespace App
 
 ### `Dockerfile`
 
-```
+```text
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0-bionic AS build
 
 WORKDIR /source
 
 # Download & Unpack latest Starcounter 3.0.0
 RUN apt-get update \
-	&& apt-get install -y wget unzip
+    && apt-get install -y wget unzip
 
 RUN mkdir artifacts
 RUN wget https://starcounter.io/Starcounter/Starcounter.3.0.0-alpha-20190930.zip -O ./artifacts/Starcounter.zip
@@ -149,12 +149,12 @@ FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-bionic AS runtime
 
 # Install Starcounter dependencies
 RUN apt-get update \
-	&& apt-get install -y wget unzip \
-	&& apt-get install -y software-properties-common \
-	&& apt-get install -y libaio1 \
-	&& add-apt-repository -y ppa:swi-prolog/stable \
-	&& apt-get update \
-	&& apt-get install -y swi-prolog-nox=7.\*
+    && apt-get install -y wget unzip \
+    && apt-get install -y software-properties-common \
+    && apt-get install -y libaio1 \
+    && add-apt-repository -y ppa:swi-prolog/stable \
+    && apt-get update \
+    && apt-get install -y swi-prolog-nox=7.\*
 
 ENV ASPNETCORE_URLS http://+:8080
 WORKDIR /source/publish
@@ -162,3 +162,4 @@ COPY --from=build /source/App/out ./
 
 ENTRYPOINT ["dotnet", "App.dll"]
 ```
+

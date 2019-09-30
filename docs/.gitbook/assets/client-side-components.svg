@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="707px" height="1053px" viewBox="0 0 707 1053" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard 1</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="565" width="372" height="482"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="372" height="482" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <rect id="path-3" x="0" y="0" width="341" height="86"></rect>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="341" height="86" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+        <rect id="path-5" x="0" y="0" width="249" height="86"></rect>
+        <mask id="mask-6" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="249" height="86" fill="white">
+            <use xlink:href="#path-5"></use>
+        </mask>
+        <rect id="path-7" x="0" y="0" width="249" height="86"></rect>
+        <mask id="mask-8" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="249" height="86" fill="white">
+            <use xlink:href="#path-7"></use>
+        </mask>
+        <rect id="path-9" x="0" y="-1.13686838e-13" width="249" height="86"></rect>
+        <mask id="mask-10" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="249" height="86" fill="white">
+            <use xlink:href="#path-9"></use>
+        </mask>
+        <rect id="path-11" x="0" y="0" width="249" height="86"></rect>
+        <mask id="mask-12" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="249" height="86" fill="white">
+            <use xlink:href="#path-11"></use>
+        </mask>
+        <rect id="path-13" x="378" y="77" width="322" height="482"></rect>
+        <mask id="mask-14" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="322" height="482" fill="white">
+            <use xlink:href="#path-13"></use>
+        </mask>
+        <rect id="path-15" x="0" y="0" width="286" height="86"></rect>
+        <mask id="mask-16" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="286" height="86" fill="white">
+            <use xlink:href="#path-15"></use>
+        </mask>
+        <rect id="path-17" x="0" y="-1.13686838e-13" width="249" height="96"></rect>
+        <mask id="mask-18" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="249" height="96" fill="white">
+            <use xlink:href="#path-17"></use>
+        </mask>
+        <rect id="path-19" x="0" y="5.68434189e-14" width="249" height="96"></rect>
+        <mask id="mask-20" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="249" height="96" fill="white">
+            <use xlink:href="#path-19"></use>
+        </mask>
+        <rect id="path-21" x="0" y="-1.13686838e-13" width="249" height="96"></rect>
+        <mask id="mask-22" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="249" height="96" fill="white">
+            <use xlink:href="#path-21"></use>
+        </mask>
+        <rect id="path-23" x="0" y="0" width="263" height="86"></rect>
+        <mask id="mask-24" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="263" height="86" fill="white">
+            <use xlink:href="#path-23"></use>
+        </mask>
+        <rect id="path-25" x="0" y="77" width="372" height="482"></rect>
+        <mask id="mask-26" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="372" height="482" fill="white">
+            <use xlink:href="#path-25"></use>
+        </mask>
+        <rect id="path-27" x="0" y="0" width="341" height="86"></rect>
+        <mask id="mask-28" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="341" height="86" fill="white">
+            <use xlink:href="#path-27"></use>
+        </mask>
+        <rect id="path-29" x="0" y="0" width="112" height="86"></rect>
+        <mask id="mask-30" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="112" height="86" fill="white">
+            <use xlink:href="#path-29"></use>
+        </mask>
+        <rect id="path-31" x="111" y="0" width="86" height="86"></rect>
+        <mask id="mask-32" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="86" height="86" fill="white">
+            <use xlink:href="#path-31"></use>
+        </mask>
+        <rect id="path-33" x="196" y="0" width="125" height="86"></rect>
+        <mask id="mask-34" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="125" height="86" fill="white">
+            <use xlink:href="#path-33"></use>
+        </mask>
+        <rect id="path-35" x="0" y="0" width="322" height="86"></rect>
+        <mask id="mask-36" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="322" height="86" fill="white">
+            <use xlink:href="#path-35"></use>
+        </mask>
+        <rect id="path-37" x="0" y="0" width="278" height="86"></rect>
+        <mask id="mask-38" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="278" height="86" fill="white">
+            <use xlink:href="#path-37"></use>
+        </mask>
+        <rect id="path-39" x="174" y="0" width="34.1388479" height="13.5479452"></rect>
+        <mask id="mask-40" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="34.1388479" height="13.5479452" fill="white">
+            <use xlink:href="#path-39"></use>
+        </mask>
+        <rect id="path-41" x="344.704579" y="0" width="34.1388479" height="13.5479452"></rect>
+        <mask id="mask-42" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="34.1388479" height="13.5479452" fill="white">
+            <use xlink:href="#path-41"></use>
+        </mask>
+        <rect id="path-43" x="499" y="0" width="34.1388479" height="13.5479452"></rect>
+        <mask id="mask-44" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="34.1388479" height="13.5479452" fill="white">
+            <use xlink:href="#path-43"></use>
+        </mask>
+        <rect id="path-45" x="0" y="0" width="34.1388479" height="13.5479452"></rect>
+        <mask id="mask-46" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="34.1388479" height="13.5479452" fill="white">
+            <use xlink:href="#path-45"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-1">
+            <use id="Rectangle-1" stroke="#E1E1E1" mask="url(#mask-2)" stroke-width="2" xlink:href="#path-1"></use>
+            <text id="Data-sync" font-family="LucidaGrande, Lucida Grande" font-size="20" font-weight="normal" fill="#000000">
+                <tspan x="138" y="596">Data sync</tspan>
+            </text>
+            <g id="Rectangle-1-+-Data-sync" transform="translate(15.000000, 698.000000)">
+                <use id="Rectangle-1" stroke="#FFFFFF" mask="url(#mask-4)" stroke-width="2" fill="#46404A" xlink:href="#path-3"></use>
+                <text id="Palindrom" font-family="LucidaGrande, Lucida Grande" font-size="20" font-weight="normal" fill="#F67E00">
+                    <tspan x="125.563477" y="51">Palindrom</tspan>
+                </text>
+            </g>
+            <g id="Rectangle-1-+-Data-sync" transform="translate(58.000000, 907.500000) rotate(-270.000000) translate(-58.000000, -907.500000) translate(-66.500000, 864.500000)">
+                <use id="Rectangle-1" stroke="#FFFFFF" mask="url(#mask-6)" stroke-width="2" fill="#46404A" xlink:href="#path-5"></use>
+                <text id="json-patch-duplex.js" font-family="LucidaGrande, Lucida Grande" font-size="20" font-weight="normal" fill="#F67E00">
+                    <tspan x="20.8623047" y="51">json-patch-duplex.js</tspan>
+                </text>
+            </g>
+            <g id="Rectangle-1-+-Data-sync" transform="translate(143.000000, 907.500000) rotate(-270.000000) translate(-143.000000, -907.500000) translate(18.500000, 864.500000)">
+                <use id="Rectangle-1" stroke="#FFFFFF" mask="url(#mask-8)" stroke-width="2" fill="#D8D8D8" xlink:href="#path-7"></use>
+                <text id="JSON" font-family="LucidaGrande, Lucida Grande" font-size="20" font-weight="normal" fill="#000000">
+                    <tspan x="101.347656" y="50">JSON</tspan>
+                </text>
+            </g>
+            <g id="Rectangle-1-+-Data-sync" transform="translate(228.000000, 907.500000) rotate(-270.000000) translate(-228.000000, -907.500000) translate(103.500000, 864.500000)">
+                <use id="Rectangle-1" stroke="#FFFFFF" mask="url(#mask-10)" stroke-width="2" fill="#D8D8D8" xlink:href="#path-9"></use>
+                <text id="XMLHttpRequest" font-family="LucidaGrande, Lucida Grande" font-size="20" font-weight="normal" fill="#000000">
+                    <tspan x="44.1181641" y="50">XMLHttpRequest</tspan>
+                </text>
+            </g>
+            <g id="Rectangle-1-+-Data-sync" transform="translate(313.000000, 907.500000) rotate(-270.000000) translate(-313.000000, -907.500000) translate(188.500000, 864.500000)">
+                <use id="Rectangle-1" stroke="#FFFFFF" mask="url(#mask-12)" stroke-width="2" fill="#D8D8D8" xlink:href="#path-11"></use>
+                <text id="WebSocket" font-family="LucidaGrande, Lucida Grande" font-size="20" font-weight="normal" fill="#000000">
+                    <tspan x="72.0234375" y="50">WebSocket</tspan>
+                </text>
+            </g>
+            <use id="Rectangle-1" stroke="#E1E1E1" mask="url(#mask-14)" stroke-width="2" xlink:href="#path-13"></use>
+            <text id="Template-loading" font-family="LucidaGrande, Lucida Grande" font-size="20" font-weight="normal" fill="#000000">
+                <tspan x="454" y="109">Template loading</tspan>
+            </text>
+            <g id="Rectangle-1-+-Data-sync" transform="translate(394.000000, 210.000000)">
+                <use id="Rectangle-1" stroke="#FFFFFF" mask="url(#mask-16)" stroke-width="2" fill="#46404A" xlink:href="#path-15"></use>
+                <text id="&lt;imported-template&gt;" font-family="LucidaGrande, Lucida Grande" font-size="20" font-weight="normal" fill="#F67E00">
+                    <tspan x="34.6464505" y="51">&lt;imported-template&gt;</tspan>
+                </text>
+            </g>
+            <g id="Rectangle-1-+-Data-sync" transform="translate(537.000000, 419.500000) rotate(-270.000000) translate(-537.000000, -419.500000) translate(412.500000, 371.500000)">
+                <use id="Rectangle-1" stroke="#FFFFFF" mask="url(#mask-18)" stroke-width="2" fill="#D8D8D8" xlink:href="#path-17"></use>
+                <text id="HTML-Imports*" font-family="LucidaGrande, Lucida Grande" font-size="20" font-weight="normal" fill="#000000">
+                    <tspan x="51.8164062" y="56">HTML Imports*</tspan>
+                </text>
+            </g>
+            <g id="Rectangle-1-+-Data-sync" transform="translate(442.000000, 419.500000) rotate(-270.000000) translate(-442.000000, -419.500000) translate(317.500000, 371.500000)">
+                <use id="Rectangle-1" stroke="#FFFFFF" mask="url(#mask-20)" stroke-width="2" fill="#D8D8D8" xlink:href="#path-19"></use>
+                <text id="&lt;template&gt;" font-family="LucidaGrande, Lucida Grande" font-size="20" font-weight="normal" fill="#000000">
+                    <tspan x="65.6855469" y="55">&lt;template&gt;</tspan>
+                </text>
+            </g>
+            <g id="Rectangle-1-+-Data-sync" transform="translate(632.000000, 419.500000) rotate(-270.000000) translate(-632.000000, -419.500000) translate(507.500000, 371.500000)">
+                <use id="Rectangle-1" stroke="#FFFFFF" mask="url(#mask-22)" stroke-width="2" fill="#D8D8D8" xlink:href="#path-21"></use>
+                <text id="Custom-Elements*" font-family="LucidaGrande, Lucida Grande" font-size="20" font-weight="normal" fill="#000000">
+                    <tspan x="34.9921875" y="56">Custom Elements*</tspan>
+                </text>
+            </g>
+            <g id="Rectangle-1-+-Data-sync" transform="translate(394.000000, 125.000000)">
+                <use id="Rectangle-1" stroke="#FFFFFF" mask="url(#mask-24)" stroke-width="2" fill="#46404A" xlink:href="#path-23"></use>
+                <text id="&lt;starcounter-include" font-family="LucidaGrande, Lucida Grande" font-size="20" font-weight="normal" fill="#F67E00">
+                    <tspan x="19.6025391" y="51">&lt;starcounter-include&gt;</tspan>
+                </text>
+            </g>
+            <use id="Rectangle-1" stroke="#E1E1E1" mask="url(#mask-26)" stroke-width="2" xlink:href="#path-25"></use>
+            <g id="Rectangle-1-+-Data-sync" transform="translate(15.000000, 294.000000)">
+                <use id="Rectangle-1" stroke="#FFFFFF" mask="url(#mask-28)" stroke-width="2" fill="#3867E3" xlink:href="#path-27"></use>
+                <text id="Polymer" font-family="LucidaGrande, Lucida Grande" font-size="18.1866667" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="135.232253" y="50">Polymer</tspan>
+                </text>
+            </g>
+            <g id="Rectangle-1-+-Data-sync" transform="translate(15.000000, 209.000000)">
+                <use id="Rectangle-1" stroke="#FFFFFF" mask="url(#mask-30)" stroke-width="2" fill="#3867E3" xlink:href="#path-29"></use>
+                <text id="dom-bind" font-family="LucidaGrande, Lucida Grande" font-size="17.9888268" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="11.7086625" y="49">dom-bind</tspan>
+                </text>
+                <use id="Rectangle-1" stroke="#FFFFFF" mask="url(#mask-32)" stroke-width="2" fill="#3867E3" xlink:href="#path-31"></use>
+                <text id="dom-if" font-family="LucidaGrande, Lucida Grande" font-size="17.9888268" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="123.805686" y="49">dom-if</tspan>
+                </text>
+                <use id="Rectangle-1" stroke="#FFFFFF" mask="url(#mask-34)" stroke-width="2" fill="#3867E3" xlink:href="#path-33"></use>
+                <text id="dom-repeat" font-family="LucidaGrande, Lucida Grande" font-size="17.9888268" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="205.517949" y="49">dom-repeat</tspan>
+                </text>
+            </g>
+            <text id="Template-data-bindin" font-family="LucidaGrande, Lucida Grande" font-size="20" font-weight="normal" fill="#000000">
+                <tspan x="76" y="109">Template data binding</tspan>
+            </text>
+            <g id="Rectangle-1-+-Data-sync" transform="translate(14.000000, 613.000000)">
+                <use id="Rectangle-1" stroke="#FFFFFF" mask="url(#mask-36)" stroke-width="2" fill="#46404A" xlink:href="#path-35"></use>
+                <text id="&lt;puppet-client&gt;" font-family="LucidaGrande, Lucida Grande" font-size="20" font-weight="normal" fill="#F67E00">
+                    <tspan x="78.4951172" y="51">&lt;puppet-client&gt;</tspan>
+                </text>
+            </g>
+            <g id="Rectangle-1-+-Data-sync" transform="translate(15.000000, 124.000000)">
+                <use id="Rectangle-1" stroke="#FFFFFF" mask="url(#mask-38)" stroke-width="2" fill="#158100" xlink:href="#path-37"></use>
+                <text id="Partial-HTML" font-family="LucidaGrande, Lucida Grande" font-size="20" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="78.5332031" y="51">Partial HTML</tspan>
+                </text>
+            </g>
+            <g id="Group">
+                <use id="Rectangle-1" stroke="#979797" mask="url(#mask-40)" stroke-width="2" fill="#46404A" xlink:href="#path-39"></use>
+                <text id="By-Starcounter" font-family="LucidaGrande, Lucida Grande" font-size="11.7808219" font-weight="normal" fill="#000000">
+                    <tspan x="217" y="11">By Starcounter</tspan>
+                </text>
+                <use id="Rectangle-1" stroke="#979797" mask="url(#mask-42)" stroke-width="2" fill="#3767E4" xlink:href="#path-41"></use>
+                <text id="By-3rd-party" font-family="LucidaGrande, Lucida Grande" font-size="11.7808219" font-weight="normal" fill="#000000">
+                    <tspan x="387.704579" y="11">By 3rd party</tspan>
+                </text>
+                <use id="Rectangle-1" stroke="#979797" mask="url(#mask-44)" stroke-width="2" fill="#D8D8D8" xlink:href="#path-43"></use>
+                <text id="Native" font-family="LucidaGrande, Lucida Grande" font-size="11.7808219" font-weight="normal" fill="#000000">
+                    <tspan x="542" y="11">Native</tspan>
+                </text>
+                <text id="*requires-webcompone" font-family="LucidaGrande, Lucida Grande" font-size="11.7808219" font-weight="normal" fill="#000000">
+                    <tspan x="542" y="29">*requires webcomponents.js </tspan>
+                    <tspan x="542" y="42">in unsupporting browsers</tspan>
+                </text>
+                <use id="Rectangle-1" stroke="#979797" mask="url(#mask-46)" stroke-width="2" fill="#168100" xlink:href="#path-45"></use>
+                <text id="By-app-developer" font-family="LucidaGrande, Lucida Grande" font-size="11.7808219" font-weight="normal" fill="#000000">
+                    <tspan x="42.9896603" y="11">By app developer</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>
