@@ -8,18 +8,18 @@ Please make sure to read our [End User License Agreement for Starcounter Softwar
 
 ## Starcounter 3.0 alpha `20190930` main changes
 
-- Starcounter database access is now provided with a [`Microsoft.Extensions.DependencyInjection`](https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection/) service.
-- `Starcounter.Star.Tool` is no longer required to manipulate and communicate with the database.
-- It is now possible to deploy Starcounter applications with `dotnet publish` command and [run them in a Docker container](docker-sample.md).
-- Overall performance has been significantly improved with multiple optimizations in the communication layer between application and the database.
+* Starcounter database access is now provided with a [`Microsoft.Extensions.DependencyInjection`](https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection/) service.
+* `Starcounter.Star.Tool` is no longer required to manipulate and communicate with the database.
+* It is now possible to deploy Starcounter applications with `dotnet publish` command and [run them in a Docker container](docker-sample.md).
+* Overall performance has been significantly improved with multiple optimizations in the communication layer between application and the database.
 
 ## Requirements
 
-- [Ubuntu 18.04.02 x64](https://ubuntu.com/download/desktop) or [Windows 10 Pro x64 Build 1903](https://www.microsoft.com/en-us/software-download/windows10).
-  - [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install-win10) is also supported.
-- [.NET Core 3.0.100](https://dotnet.microsoft.com/download/dotnet-core/3.0), SDK for development, runtime for production.
-- Enough RAM to load database of targeted size.
-- It's recommended to have at least two CPU cores.
+* [Ubuntu 18.04.02 x64](https://ubuntu.com/download/desktop) or [Windows 10 Pro x64 Build 1903](https://www.microsoft.com/en-us/software-download/windows10).
+  * [Windows Subsystem for Linux \(WSL\)](https://docs.microsoft.com/en-us/windows/wsl/install-win10) is also supported.
+* [.NET Core 3.0.100](https://dotnet.microsoft.com/download/dotnet-core/3.0), SDK for development, runtime for production.
+* Enough RAM to load database of targeted size.
+* It's recommended to have at least two CPU cores.
 
 **Note**: Due to the alpha state of this release we cannot provide any guarantees, but we monitor our [GitHub: Starcounter/Home](https://github.com/Starcounter/Home/issues) issue tracker and stand ready to assist with any potential issues.
 
@@ -29,30 +29,30 @@ Please make sure to read our [End User License Agreement for Starcounter Softwar
 
 ### Binaries
 
-- Create a folder for Starcounter binaries, for example `Starcounter.3.0.0-alpha-20190930`.
-- Download [`Starcounter.3.0.0-alpha-20190930.zip`](https://starcounter.io/Starcounter/Starcounter.3.0.0-alpha-20190930.zip) into the folder.
-- Unzip downloaded archive into the folder.
+* Create a folder for Starcounter binaries, for example `Starcounter.3.0.0-alpha-20190930`.
+* Download [`Starcounter.3.0.0-alpha-20190930.zip`](https://starcounter.io/Starcounter/Starcounter.3.0.0-alpha-20190930.zip) into the folder.
+* Unzip downloaded archive into the folder.
 
 #### Ubuntu 18.04
 
-##### Install prerequisites.
+**Install prerequisites.**
 
-```
+```text
 sudo apt-get install wget unzip
 sudo apt-get install libaio1
 ```
 
 Starcounter relies on a specific version of [SWI-Prolog](https://wwu-pi.github.io/tutorials/lectures/lsp/010_install_swi_prolog.html).
 
-```
+```text
 sudo add-apt-repository ppa:swi-prolog/stable
 sudo apt-get update
 sudo apt-get install swi-prolog-nox=7.\*
 ```
 
-##### Download and unpack Starcounter binaries.
+**Download and unpack Starcounter binaries.**
 
-```
+```text
 cd $HOME
 mkdir Starcounter.3.0.0-alpha-20190930
 cd Starcounter.3.0.0-alpha-20190930
@@ -62,9 +62,9 @@ unzip Starcounter.3.0.0-alpha-20190930.zip
 
 ### Application
 
-##### Create an application folder and initialize a .NET Core console application.
+**Create an application folder and initialize a .NET Core console application.**
 
-```
+```text
 mkdir StarcounterConsoleSample
 cd StarcounterConsoleSample
 
@@ -73,21 +73,21 @@ dotnet new console
 
 All the following commands shall be executed from the `StarcounterConsoleSample` folder.
 
-##### Setup NuGet to consume Starcounter packages feeds.
+**Setup NuGet to consume Starcounter packages feeds.**
 
 Create `nuget.config` file and add required package sources:
 
-- `local`, points to the Starcounter binaries folder.
-- `Starcounter`, points to `https://www.myget.org/F/starcounter/api/v2`.
+* `local`, points to the Starcounter binaries folder.
+* `Starcounter`, points to `https://www.myget.org/F/starcounter/api/v2`.
 
 **NuGet tips**:
 
-- Default `NuGet.config` file can be created with [`dotnet new nugetconfig`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-new) command.
-- For more information on how to work with NuGet configurations, see [this post](https://docs.microsoft.com/en-us/nuget/consume-packages/configuring-nuget-behavior) by Microsoft.
+* Default `NuGet.config` file can be created with [`dotnet new nugetconfig`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-new) command.
+* For more information on how to work with NuGet configurations, see [this post](https://docs.microsoft.com/en-us/nuget/consume-packages/configuring-nuget-behavior) by Microsoft.
 
 **End file should look similar to this**:
 
-```xml
+```markup
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
   <packageSources>
@@ -105,17 +105,17 @@ Visual Studio requires manual NuGet package sources configuration. For this go t
 
 **Note**: Replace the `[Starcounter.3.0.0-alpha-20190930]` value with actual path to the folder with unzipped Starcounter binaries.
 
-##### Add `Starcounter.Nova.App` package reference
+**Add Starcounter.Nova.App package reference**
 
-```
+```text
 dotnet add package Starcounter.Nova.App --version 3.0.0-*
 ```
 
-##### Add minimal Starcounter database access
+**Add minimal Starcounter database access**
 
 Replace content of the `Program.cs` file with the following:
 
-```cs
+```csharp
 using System;
 using System.Linq;
 using Starcounter.Nova;
@@ -174,14 +174,14 @@ namespace StarcounterConsoleSample
 }
 ```
 
-- [Read more about Starcounter database connection string](database-connection-string.md).
-- [Read how to configure Starcounter database options](database-creation-options.md).
+* [Read more about Starcounter database connection string](database-connection-string.md).
+* [Read how to configure Starcounter database options](database-creation-options.md).
 
 **For ASP.NET Core application**:
 
 Update `Startup.cs` class with the following:
 
-```cs
+```csharp
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -203,25 +203,26 @@ namespace StarcounterMvcSample
 
 ## Running with [Visual Studio Code](https://code.visualstudio.com/Download)
 
-- Open Visual Studio Code in the application folder (from command line: `code ./`).
-- Restore dependencies Visual Studio Code asks for.
-- Click `Ctrl + F5` to start the application.
+* Open Visual Studio Code in the application folder \(from command line: `code ./`\).
+* Restore dependencies Visual Studio Code asks for.
+* Click `Ctrl + F5` to start the application.
 
 Everything should run out of the box.
 
 ## Running with [Visual Studio 2019](https://visualstudio.microsoft.com/vs/)
 
-- Update Visual Studio 2019 to the latest version using Visual Studio Installer.
-- We checked version 16.3.0.
-- Open `StarcounterConsoleSample.csproj` from Visual Studio.
-- Click `Ctrl + F5` to start the application.
+* Update Visual Studio 2019 to the latest version using Visual Studio Installer.
+* We checked version 16.3.0.
+* Open `StarcounterConsoleSample.csproj` from Visual Studio.
+* Click `Ctrl + F5` to start the application.
 
 ## Extra information
 
-*Before asking questions or reporting issues, please read these few lines, and maybe you will find an answer for your question.*
+_Before asking questions or reporting issues, please read these few lines, and maybe you will find an answer for your question._
 
-- Currently there is no database tooling available except the bare minimum of `dotnet star new` and `dotnet star start` commands.
-- Starting from Starcounter 3.0.0 beta, all required packages will be uploaded to one of the popular providers, such as [NuGet.org](https://www.nuget.org/), [MyGet.org](https://www.myget.org/) or [GitHub Package Registry](https://github.com/features/package-registry).
-- Base namespace will be changed from `Starcounter.Nova` to just `Starcounter`.
-- It is recommended to define all database classes and properties as `abstract` to reduce memory footprint when compared to `virtual`. Support for `virtual` properties might be removed in the future.
-- Publishing application in a single file with [`dotnet publish /p:PublishSingleFile=true`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-publish) is not yet supported.
+* Currently there is no database tooling available except the bare minimum of `dotnet star new` and `dotnet star start` commands.
+* Starting from Starcounter 3.0.0 beta, all required packages will be uploaded to one of the popular providers, such as [NuGet.org](https://www.nuget.org/), [MyGet.org](https://www.myget.org/) or [GitHub Package Registry](https://github.com/features/package-registry).
+* Base namespace will be changed from `Starcounter.Nova` to just `Starcounter`.
+* It is recommended to define all database classes and properties as `abstract` to reduce memory footprint when compared to `virtual`. Support for `virtual` properties might be removed in the future.
+* Publishing application in a single file with [`dotnet publish /p:PublishSingleFile=true`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-publish) is not yet supported.
+

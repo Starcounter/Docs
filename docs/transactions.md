@@ -10,23 +10,15 @@ All database reads and writes must be wrapped in transactions.
 
 ### Atomicity
 
-As defined on [Wikipedia](https://en.wikipedia.org/wiki/Atomicity_%28database_systems%29), an atomic transaction "is an indivisible and irreducible series of database operations such that either all occur, or nothing occurs."
-Starcounter ensures atomicity by wrapping changes of one transaction within a transaction scope. The changes commit simultaneously at the end of the scope.
-If something interrupts the transaction before the end of the scope is reached, none of the changes will commit to the database.
+As defined on [Wikipedia](https://en.wikipedia.org/wiki/Atomicity_%28database_systems%29), an atomic transaction "is an indivisible and irreducible series of database operations such that either all occur, or nothing occurs." Starcounter ensures atomicity by wrapping changes of one transaction within a transaction scope. The changes commit simultaneously at the end of the scope. If something interrupts the transaction before the end of the scope is reached, none of the changes will commit to the database.
 
 ### Consistency
 
-A consistent DBMS ensures that all the data written to the database follow the defined contraints of the database. 
-In Starcounter, this is solved by raising exceptions when an "illegal" action is carried out within a transaction, such as commiting non-unique values to a field that requires unique values.
-The exception will in turn make the transaction roll back so that none of the changes are applied.
+A consistent DBMS ensures that all the data written to the database follow the defined contraints of the database. In Starcounter, this is solved by raising exceptions when an "illegal" action is carried out within a transaction, such as commiting non-unique values to a field that requires unique values. The exception will in turn make the transaction roll back so that none of the changes are applied.
 
 ### Isolation
 
-To make transaction isolated, Starcounter uses [snapshot isolation](https://en.wikipedia.org/wiki/Snapshot_isolation).
-This means that when a transaction initializes, it takes a snapshot of the database and stores it in a transactional memory.
-Every transaction sees its own snapshot of the database. For example,
-an SQL query that executes before a parallel transaction commits will not be able to see the changes made by the transaction because the changes are isolated to that transaction's snapshot of the database.
-This works no matter how large the database is.
+To make transaction isolated, Starcounter uses [snapshot isolation](https://en.wikipedia.org/wiki/Snapshot_isolation). This means that when a transaction initializes, it takes a snapshot of the database and stores it in a transactional memory. Every transaction sees its own snapshot of the database. For example, an SQL query that executes before a parallel transaction commits will not be able to see the changes made by the transaction because the changes are isolated to that transaction's snapshot of the database. This works no matter how large the database is.
 
 ### Durability
 
@@ -34,28 +26,17 @@ Durability ensures that commited transactions will survive permanently. Starcoun
 
 ### Concurrency Control
 
-When multiple users write to the database at the same time, the database engine must ensure that the data is consistent by using atomicity and isolation.
-For example, if an account reads 100 and you want to update it to 110 and another transaction is simultaneously reading a 100 and wants to update it to 120.
-Should the result be 110, 120 or 130?
+When multiple users write to the database at the same time, the database engine must ensure that the data is consistent by using atomicity and isolation. For example, if an account reads 100 and you want to update it to 110 and another transaction is simultaneously reading a 100 and wants to update it to 120. Should the result be 110, 120 or 130?
 
-To resolve the problem with multiple transactions accessing the same data, the transaction must be able to handle conflicts.
-The easiest way to do this is to use locking.
-If you want your database engine to serve large numbers of users and transactions, locking is slow and expensive and can lead to [deadlocks](http://en.wikipedia.org/wiki/Deadlock).
-Locking is efficient when conflicts are likely, but is otherwise slow because it always consumes time, even if there are no conflicts.
-Another word for locking is "pessimistic concurrency control".
+To resolve the problem with multiple transactions accessing the same data, the transaction must be able to handle conflicts. The easiest way to do this is to use locking. If you want your database engine to serve large numbers of users and transactions, locking is slow and expensive and can lead to [deadlocks](http://en.wikipedia.org/wiki/Deadlock). Locking is efficient when conflicts are likely, but is otherwise slow because it always consumes time, even if there are no conflicts. Another word for locking is "pessimistic concurrency control".
 
-A more efficient way of providing concurrency than "pessimistic concurrency control" is "optimistic concurrency control".
-As the name implies, this concurrency mechanism assumes that conflicts are unlikely, but if conflicts happen, they are still handled.
-Starcounter uses optimistic concurrency control. Thus, the Starcounter database handles transactions without locking the modified objects.
-If there are conflicts, the developer can either provide a delegate to execute on conflict or use the `ITransactor.TryTransact` method to retry when there is a conflict.
+A more efficient way of providing concurrency than "pessimistic concurrency control" is "optimistic concurrency control". As the name implies, this concurrency mechanism assumes that conflicts are unlikely, but if conflicts happen, they are still handled. Starcounter uses optimistic concurrency control. Thus, the Starcounter database handles transactions without locking the modified objects. If there are conflicts, the developer can either provide a delegate to execute on conflict or use the `ITransactor.TryTransact` method to retry when there is a conflict.
 
 ### `ITransactor.Transact`
 
-`ITransactor.Transact` is the simplest way to create a transaction in Starcounter.
-It declares a transactional scope and runs synchronously, as described above.
-The argument passed to the ITransactor.Transact method is a delegate containing the code to run within the transaction. In code, it looks like this:
+`ITransactor.Transact` is the simplest way to create a transaction in Starcounter. It declares a transactional scope and runs synchronously, as described above. The argument passed to the ITransactor.Transact method is a delegate containing the code to run within the transaction. In code, it looks like this:
 
-```cs
+```csharp
 var transactor = services.GetRequiredService<ITransactor>();
 
 transactor.Transact(db =>
@@ -66,19 +47,15 @@ transactor.Transact(db =>
 });
 ```
 
-Since `ITransactor.Transact` is synchronous, it blocks the executing thread until the transaction completes.
-Thus, if the transaction takes more than a few milliseconds to run, it might prevent your application's performance from scaling with CPU core counts.
-In those cases, use `ITransactor.TransactAsync` instead. `ITransactor.TransactAsync` returns a `Task` that completes when the transaction commits or rolls back which lets you avoid blocking.
+Since `ITransactor.Transact` is synchronous, it blocks the executing thread until the transaction completes. Thus, if the transaction takes more than a few milliseconds to run, it might prevent your application's performance from scaling with CPU core counts. In those cases, use `ITransactor.TransactAsync` instead. `ITransactor.TransactAsync` returns a `Task` that completes when the transaction commits or rolls back which lets you avoid blocking.
 
 ### `ITransactor.TransactAsync`
 
-`ITransactor.TransactAsync` is the asynchronous counterpart of `ITransactor.Transact`.
-It gives the developer more control to balance throughput and latency.
-The function returns a `Task` that is marked as completed and successful with the property `IsCompletedSuccessfully` when the database operations are written to the transaction log which persists the changes.
+`ITransactor.TransactAsync` is the asynchronous counterpart of `ITransactor.Transact`. It gives the developer more control to balance throughput and latency. The function returns a `Task` that is marked as completed and successful with the property `IsCompletedSuccessfully` when the database operations are written to the transaction log which persists the changes.
 
 `ITransactor.Transact` and `ITransactor.TransactAsync` are syntactically identical, but semantically different since `ITransactor.TransactAsync` is used with `await`:
 
-```cs
+```csharp
 var transactor = services.GetRequiredService<ITransactor>();
 
 await transactor.TransactAsync(db =>
@@ -89,7 +66,7 @@ await transactor.TransactAsync(db =>
 
 While waiting for the write to the transaction log to finish, it's possible to do other things, such as sending an email:
 
-```cs
+```csharp
 var transactor = services.GetRequiredService<ITransactor>();
 
 Order order = null;
@@ -107,13 +84,11 @@ SendConfirmationEmail(order);
 await task;
 ```
 
-This is more flexible and performant than `ITransactor.Transact`, but it comes with certain risks;
-for example, if there's a power outage or other hardware failure after the email is sent but before writing to the log,
-the email will be incorrect - even if the user got a confirmation, the order will not be in the database since it was never written to the transaction log.
+This is more flexible and performant than `ITransactor.Transact`, but it comes with certain risks; for example, if there's a power outage or other hardware failure after the email is sent but before writing to the log, the email will be incorrect - even if the user got a confirmation, the order will not be in the database since it was never written to the transaction log.
 
 `ITransactor.TransactAsync` is useful when creating many transactions in sequence:
 
-```cs
+```csharp
 var transactor = services.GetRequiredService<ITransactor>();
 var coupon = GetPromotionalCoupon();
 var customers = GetAllCustomers();
@@ -130,10 +105,9 @@ This speeds up the application since the thread is free to handle the next trans
 
 ### Nested Transactions
 
-Transactions can't be nested unless you specify what to do on commit for the inner transaction.
-To understand why it's this way, take a look at this example:
+Transactions can't be nested unless you specify what to do on commit for the inner transaction. To understand why it's this way, take a look at this example:
 
-```cs
+```csharp
 public void OrderProduct(ITransactor transactor, long productId, Customer customer)
 {
     transactor.Transact(db =>
@@ -151,15 +125,11 @@ public void SendInvoice(ITransactor transactor, long productId, Customer custome
 }
 ```
 
-After the `SendInvoice` transaction, you'd expect that the invoice has been committed to the database.
-That is not the case.
-To preserve the atomicity of the outer transaction, the changes have to be committed at the same time at the end of the outer transaction's scope.
-Thus, if the invoice was sent on line 14 and then the whole transaction could roll back in `RemoveFromInventory` and undo `AddInvoiceToDb`.
-This would cause the customer to receive an invoice that is not stored in the database.
+After the `SendInvoice` transaction, you'd expect that the invoice has been committed to the database. That is not the case. To preserve the atomicity of the outer transaction, the changes have to be committed at the same time at the end of the outer transaction's scope. Thus, if the invoice was sent on line 14 and then the whole transaction could roll back in `RemoveFromInventory` and undo `AddInvoiceToDb`. This would cause the customer to receive an invoice that is not stored in the database.
 
 Due to this, inner transactions have to specify what to do on commit. To adapt the previous example to specify what to do on commit, we would do this to `SendInvoice`:
 
-```cs
+```csharp
 public void SendInvoice(ITransactor transactor, long productId, Customer customer)
 {
     transactor.Transact(db =>
@@ -173,13 +143,11 @@ public void SendInvoice(ITransactor transactor, long productId, Customer custome
 }
 ```
 
-With this change, the invoice would be sent whenever the changes in `AddInvoiceToDb` are committed and you can be sure that the invoice would be sent first when the invoice is safely in the database.
-In this case, it would be when the outer transaction scope terminates. If there was no outer transaction, the invoice would be sent when the transaction with `AddInvoiceToDb` terminates.
-Thus, `onCommit` ensures that the calls are made in the correct order no matter what.
+With this change, the invoice would be sent whenever the changes in `AddInvoiceToDb` are committed and you can be sure that the invoice would be sent first when the invoice is safely in the database. In this case, it would be when the outer transaction scope terminates. If there was no outer transaction, the invoice would be sent when the transaction with `AddInvoiceToDb` terminates. Thus, `onCommit` ensures that the calls are made in the correct order no matter what.
 
 If you don't know if a transaction will be nested within another transaction, it's always safe to add an empty `onCommit` delegate:
 
-```cs
+```csharp
 var transactor = services.GetRequiredService<ITransactor>();
 
 transactor.Transact(db =>
@@ -194,9 +162,7 @@ If an inner transaction doesn't have an onCommit delegate, Starcounter throws `A
 
 ### Transaction Size
 
-Code in `ITransactor.Transact` and `ITransactor.TransactAsync` should execute in as short time as possible because conflicts are more likely the longer the transaction is.
-Conflicts requires long transactions to run more times which can be expensive.
-The solution is to break big transactions into smaller ones.
+Code in `ITransactor.Transact` and `ITransactor.TransactAsync` should execute in as short time as possible because conflicts are more likely the longer the transaction is. Conflicts requires long transactions to run more times which can be expensive. The solution is to break big transactions into smaller ones.
 
 ### Threading
 
@@ -204,8 +170,7 @@ Transactions serialize database access because the database kernel is not thread
 
 For example, if you try to use PLINQ to parallelize database operations in a transaction, it will fail with `ScErrNoTransactionAttached`:
 
-
-```cs
+```csharp
 var transactor = services.GetRequiredService<ITransactor>();
 
 transactor.Transact(db =>
@@ -224,19 +189,20 @@ Even if database operations in the same transactions aren't parallelized, databa
 
 It's possible to use `async`/`await` in transactions. To perform database operations asynchronously in transactions, you have to make sure it uses the enclosing context:
 
-```cs
+```csharp
 var transactor = services.GetRequiredService<ITransactor>();
 
 await transactor.TransactAsync(async db =>
 {
     await Task.Factory.StartNew
-	(	() =>
+    (    () =>
         {
             // Database operations
         },
         CancellationToken.None,
         TaskCreationOptions.None,
         TaskScheduler.FromCurrentSynchronizationContext()
-	);
+    );
 });
 ```
+
