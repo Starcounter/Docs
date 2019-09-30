@@ -6,6 +6,18 @@ Database access and operations are provided via two main Starcounter services.
 - `Starcounter.Nova.Hosting.ITransactor` - provides database transactions and data manipulation ([DML](https://en.wikipedia.org/wiki/Data_manipulation_language)) API.
 - `Starcounter.Nova.Hosting.IDdlExecutor` - provides data definition ([DML](https://en.wikipedia.org/wiki/Data_definition_language)) API.
 
+## Why Dependency Injection (DI)?
+
+One of the major disadvantages of the static classes usage is inability to test such code with unit tests.
+With Dependency Injection it is possible to mock tested services and write unit tests for the application.
+
+Furthermore, current approach reduces possibilities for invalid database access:
+
+- Attempt to create a new database object without a transaction.
+- Attempt to execute a DDL statement within a transaction.
+
+Read more about Dependency Injection - [Design Patterns Explained – Dependency Injection with Code Examples](https://stackify.com/dependency-injection/).
+
 ## ASP.NET Core `DbAccessController` sample
 
 ```cs
