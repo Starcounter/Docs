@@ -84,7 +84,7 @@ namespace App
             string name = args.FirstOrDefault() ?? "Noname";
             string connectionString = "Database=./.database/ConsoleApp;"
                 + "OpenMode=CreateIfNotExists;"
-                + "StartMode=StartIfNotRunning;
+                + "StartMode=StartIfNotRunning;"
                 + "StopMode=IfWeStarted";
 
             // Here we create a service collection
