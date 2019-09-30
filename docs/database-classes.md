@@ -153,7 +153,11 @@ public class Department
 {
     public IEnumerable<Employee> SelectEmployees(IDatabaseContext db)
     {
-        return db.Sql<Employee>("SELECT e FROM Employee e WHERE e.Department = ?", this);
+        return db.Sql<Employee>
+        (
+            "SELECT e FROM Employee e WHERE e.Department = ?",
+            this
+        );
     }
 }
 
@@ -178,7 +182,11 @@ public class Person
 {
     public IEnumerable<Company> SelectEquityPortfolio(IDatabaseContext db)
     {
-        return db.Sql<Company>("SELECT s.Equity FROM Shares s WHERE s.Owner = ?", this);
+        return db.Sql<Company>
+        (
+            "SELECT s.Equity FROM Shares s WHERE s.Owner = ?",
+            this
+        );
     }
 }
 
@@ -187,7 +195,11 @@ public class Company
 {
     public IEnumerable<Person> SelectShareHolders(IDatabaseContext db)
     {
-        return db.Sql<Person>("SELECT s.Owner FROM Shares s WHERE s.Equity = ?", this);
+        return db.Sql<Person>
+        (
+            "SELECT s.Owner FROM Shares s WHERE s.Equity = ?",
+            this
+        );
     }
 }
 
@@ -252,12 +264,24 @@ transactor.Transact(db =>
     Console.WriteLine(firstProduct.Equals(anotherFirstProduct)); // => true
 
     // Returns false for different object or objects retrieved from the database
-    Console.WriteLine(firstProduct == secondProduct); // => false
-    Console.WriteLine(firstProduct == anotherFirstProduct); // => false
-    Console.WriteLine(firstProduct == firstProduct); // => true
-    Console.WriteLine(object.ReferenceEquals(firstProduct, secondProduct)); // => false
-    Console.WriteLine(object.ReferenceEquals(firstProduct, anotherFirstProduct)); // => false
-    Console.WriteLine(object.ReferenceEquals(firstProduct, firstProduct)); // => true
+    
+    // Writes: false
+    Console.WriteLine(firstProduct == secondProduct);
+    
+    // Writes: false
+    Console.WriteLine(firstProduct == anotherFirstProduct);
+    
+    // Writes: true
+    Console.WriteLine(firstProduct == firstProduct);
+    
+    // Writes: false
+    Console.WriteLine(object.ReferenceEquals(firstProduct, secondProduct));
+    
+    // Writes: false
+    Console.WriteLine(object.ReferenceEquals(firstProduct, anotherFirstProduct));
+    
+    // Writes: true
+    Console.WriteLine(object.ReferenceEquals(firstProduct, firstProduct));
 });
 ```
 
