@@ -46,7 +46,8 @@ namespace DiSample.Controllers
         private readonly IDdlExecutor _ddlExecutor;
         private readonly ITransactor _transactor;
 
-        // The DbAccessController class requires two services: IDdlExecutor & ITransactor.
+        // The DbAccessController class requires 
+        // two services: IDdlExecutor & ITransactor.
         public DbAccessController(IDdlExecutor ddlExecutor, ITransactor transactor)
         {
             _ddlExecutor = ddlExecutor;
