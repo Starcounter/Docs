@@ -14,8 +14,8 @@ Sample files structure:
 📑 Dockerfile
 ```
 
-* The [`App`](https://github.com/Starcounter/Docs/tree/99cbda1f28703b1b2ac4c5f9a12650b9ef7c6d35/docs/docker-sample/App/README.md) contains a sample Starcounter Console application files.
-* The [`Dockerfile`](https://github.com/Starcounter/Docs/tree/99cbda1f28703b1b2ac4c5f9a12650b9ef7c6d35/docs/docker-sample/Dockerfile/README.md) contains Docker container definition for the app.
+* The `App` folder contains a sample Starcounter Console application files.
+* The `Dockerfile` file contains Docker container definition for the app.
 
 ### `App.csproj`
 
@@ -42,7 +42,10 @@ Sample files structure:
     <!--To inherit the global NuGet package sources remove the <clear/> line below -->
     <clear />
     <add key="local" value="../artifacts" />
-    <add key="Starcounter" value="https://www.myget.org/F/starcounter/api/v3/index.json" />
+    <add 
+        key="Starcounter" 
+        value="https://www.myget.org/F/starcounter/api/v3/index.json"
+    />
     <add key="nuget" value="https://api.nuget.org/v3/index.json" />
   </packageSources>
 </configuration>
@@ -70,23 +73,25 @@ namespace App
 
     /// <summary>
     /// This simple console application demonstrates how to build a service provider
-    /// for the Starcounter services, to fetch service instances from it, and then 
-    /// how to use the services to make basic database transactions with basic database 
-    /// interactions like SQL queries and inserts.
+    /// for the Starcounter services, to fetch service instances from it,
+    /// and then how to use the services to make basic database transactions 
+    /// with basic database interactions like SQL queries and inserts.
     /// </summary>
     public class Program
     {
         public static void Main(string[] args)
         {
             string name = args.FirstOrDefault() ?? "Noname";
+            string connectionString =
+                "Database=./.database/ConsoleApp;OpenMode=CreateIfNotExists;StartMode=StartIfNotRunning;StopMode=IfWeStarted";
 
             // Here we create a service collection that we add the Starcounter services to.
             // When we call BuildServiceProvider(), we get an instance that we can use to 
             // fetch service instances, for example ITransactor, which we then can use to 
             // to make database transactions.
             using var services = new ServiceCollection()
-                .AddStarcounter("Database=./.database/ConsoleApp;OpenMode=CreateIfNotExists;StartMode=StartIfNotRunning;StopMode=IfWeStarted")
-                .BuildServiceProvider();
+                .AddStarcounter()
+                .BuildServiceProvider(connectionString);
 
             // Here we fetch our ITransactor instance from the service provider.
             var transactor = services.GetRequiredService<ITransactor>();
@@ -94,19 +99,26 @@ namespace App
             // And here we use it to make a database transaction.
             ulong oid = transactor.Transact(db =>
             {
-                // Here inside the transaction, we can use the IDatabaseContext instance to
+                // Here inside the transaction,
+                // we can use the IDatabaseContext instance to
                 // interact with the Starcounter database.
 
-                // We can query it using SQL (which returns an IEnumerable<Person> that we can
-                // use with LINQ).
-                var p = db.Sql<Person>("SELECT p FROM App.Person p WHERE Name = ?", name).FirstOrDefault();
+                // We can query it using SQL
+                // (which returns an IEnumerable<Person>
+                // that we can use with LINQ).
+                var p = db.Sql<Person>
+                (
+                    "SELECT p FROM App.Person p WHERE Name = ?",
+                    name
+                ).FirstOrDefault();
 
                 if (p == null)
                 {
                     // We can insert new rows in the database using Insert().
                     p = db.Insert<Person>();
 
-                    // We write to the database row using standard C# property accessors.
+                    // We write to the database row using
+                    // standard C# property accessors.
                     p.Name = name;
                 }
 
