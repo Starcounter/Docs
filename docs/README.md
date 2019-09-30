@@ -13,6 +13,11 @@ Please make sure to read our [End User License Agreement for Starcounter Softwar
 * It is now possible to deploy Starcounter applications with `dotnet publish` command and [run them in a Docker container](docker-sample.md).
 * Overall performance has been significantly improved with multiple optimizations in the communication layer between application and the database.
 
+### Dependency Injection (DI) and Starcounter
+
+- Read more about Dependency Injection on the official Microsoft documentation page - [Dependency injection in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.0).
+- Checkout [ASP.NET Core sample](dependency-injection.md) controller with Starcounter database access using Dependency Injection (DI).
+
 ## Requirements
 
 * [Ubuntu 18.04.02 x64](https://ubuntu.com/download/desktop) or [Windows 10 Pro x64 Build 1903](https://www.microsoft.com/en-us/software-download/windows10).
