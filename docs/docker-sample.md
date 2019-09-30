@@ -82,13 +82,17 @@ namespace App
         public static void Main(string[] args)
         {
             string name = args.FirstOrDefault() ?? "Noname";
-            string connectionString =
-                "Database=./.database/ConsoleApp;OpenMode=CreateIfNotExists;StartMode=StartIfNotRunning;StopMode=IfWeStarted";
+            string connectionString = "Database=./.database/ConsoleApp;"
+                + "OpenMode=CreateIfNotExists;"
+                + "StartMode=StartIfNotRunning;
+                + "StopMode=IfWeStarted";
 
-            // Here we create a service collection that we add the Starcounter services to.
-            // When we call BuildServiceProvider(), we get an instance that we can use to 
-            // fetch service instances, for example ITransactor, which we then can use to 
-            // to make database transactions.
+            // Here we create a service collection
+            // that we add the Starcounter services to.
+            // When we call BuildServiceProvider(),
+            // we get an instance that we can use to 
+            // fetch service instances, for example ITransactor,
+            // which we then can use to to make database transactions.
             using var services = new ServiceCollection()
                 .AddStarcounter()
                 .BuildServiceProvider(connectionString);
