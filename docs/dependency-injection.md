@@ -14,9 +14,51 @@ With Dependency Injection it is possible to mock tested services and write unit 
 Furthermore, current approach reduces possibilities for invalid database access:
 
 - Attempt to create a new database object without a transaction.
+- Attempt to access a database object without a transaction.
 - Attempt to execute a DDL statement within a transaction.
 
 Read more about Dependency Injection - [Design Patterns Explained – Dependency Injection with Code Examples](https://stackify.com/dependency-injection/).
+
+### Examples
+
+#### Database DML & DDL operations
+
+Previously `Db.SQL` method was responsible for all kind of SQL statements.
+This led to a confusion, when developers tried to execute DDL statements within a transaction and access database without a transaction.
+
+```cs
+Db.Transact(() =>
+{
+    // This is a valid database access.
+    // DML operations require a database transaction.
+    Db.SQL("SELECT i FROM Item i");
+    
+    // This is an invalid database access.
+    // DDL operations cannot be executed within a transaction.
+    Db.SQL("CREATE INDEX IX_Item ON Item (Name)");
+    
+    // This is a valid database object creation.
+    // DML operations require a database transaction.
+    var newItem = Db.Insert<Item>();
+    
+    // This is a valid database object access.
+    // DML operations require a database transaction.
+    var existingItem = Db.Get<Item>(1);
+    existingItem.Name = "Valid";
+});
+
+// This is an invalid database object creation.
+// A database transaction is required to create a database object.
+var newItem = Db.Insert<Item>();
+
+// This is an invalid database object access.
+// DML operations require a database transaction.
+var existingItem = Db.Get<Item>(1);
+existingItem.Name = "Invalid";
+```
+
+With introduction of the `ITransactor` and `IDdlExecutor` database services it is easier to follow the code flow and database interaction.
+The `Insert` and `Get` database operations are only available within a transaction.
 
 ## ASP.NET Core `DbAccessController` sample
 
