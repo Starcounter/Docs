@@ -94,8 +94,8 @@ namespace App
             // fetch service instances, for example ITransactor,
             // which we then can use to to make database transactions.
             using var services = new ServiceCollection()
-                .AddStarcounter()
-                .BuildServiceProvider(connectionString);
+                .AddStarcounter(connectionString)
+                .BuildServiceProvider();
 
             // Here we fetch our ITransactor instance from the service provider.
             var transactor = services.GetRequiredService<ITransactor>();
