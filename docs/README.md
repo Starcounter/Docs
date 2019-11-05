@@ -170,7 +170,7 @@ namespace StarcounterConsoleSample
                 // that we can use with LINQ).
                 var p = db.Sql<Person>
                 (
-                    "SELECT p FROM ConsoleApp.Person p WHERE Name = ?", 
+                    "SELECT p FROM Person p WHERE Name = ?", 
                     "Jane"
                 ).FirstOrDefault();
 
