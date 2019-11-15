@@ -38,6 +38,13 @@ Please make sure to read our [End User License Agreement for Starcounter Softwar
 * Download [`Starcounter.3.0.0-alpha-20190930.zip`](https://starcounter.io/Starcounter/Starcounter.3.0.0-alpha-20190930.zip) into the folder.
 * Unzip downloaded archive into the folder.
 
+#### Windows 10
+
+On Windows Starcounter requires x64 version of Visual C++ to be installed.
+Download and install it from the Microsoft website: 
+
+[The latest supported Visual C++ downloads](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads).
+
 #### Ubuntu 18.04
 
 **Install prerequisites.**
