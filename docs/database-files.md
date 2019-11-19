@@ -28,7 +28,7 @@ When database grows, Starcounter:
 
 ## Database configuration file
 
-This file contains all quired information about the database.
+This file contains all required information about the database.
 
 ## Database events log
 
