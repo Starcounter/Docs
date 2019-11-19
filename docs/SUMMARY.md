@@ -9,3 +9,4 @@
 * [Running Starcounter 3.0 applications under Docker](docker-sample.md)
 * [Publishing Starcounter 3.0 application](publish-app.md)
 * [Database types](database-types.md)
+* [Database files](database-files.md)
