@@ -1,13 +1,13 @@
 # Database processes
 
-### The `scdata` process
+## The `scdata` process
 
 This is the main database process.
 
 A database can be accessed by only one `scdata` process at a time.
 Attempt to start two or more `scdata` processes for the same database will fail with an exception.
 
-### Database identification
+## Database identification
 
 Starcounter database is identified by it's physical location and Starcounter version which attempts to access it.
 
@@ -26,11 +26,11 @@ Attempt to establish multiple connections to the same database using different p
 Starcounter identifies database by the provided path, not by its physical location.
 Attempt to establish multiple connections to the same database using different paths will fail.
 
-#### Windows
+### Windows
 
 It is not possible to delete database files while `scdata` process is running.
 
-#### Linux
+### Linux
 
 It is possible to delete database files while `scdata` is running, which may lead to a trap.
 
@@ -44,7 +44,7 @@ Consider the following scenario:
 - Starcounter detects, that there is a running `scdata` process associated with this database path.
 - The app connects to the existing `scdata` process, which still operates on the deleted files.
 
-### The `scdblog` process
+## The `scdblog` process
 
 This process is responsible for writing, compressing, and archiving database transaction log files.
 No manual interaction is required with this process.
