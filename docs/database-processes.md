@@ -11,17 +11,17 @@ Attempt to start two or more `scdata` processes for the same database will fail 
 
 Starcounter database is identified by it's physical location and Starcounter version which attempts to access it.
 
-For example, attempting to start a database located at `/home/databases/TestDatabase` with Starcounter version `3.0.0-00001` do the following:
+For example, attempting to start a database located at `/home/databases/TestDatabase` with Starcounter version `3.0.0-00001` will do the following:
 
 - Calculate database identification: `Starcounter-3.0.0-00001-/home/databases/TestDatabase`.
 - Check if there is a running `scdata` process associated with this database identification.
-- If no: spin up a new `scdata` process. This will fail if there is another version of `scdata` process is already running for this database.
+- If no: spin up a new `scdata` process. This will fail if there is another version of `scdata` process already running for this database.
 - Communicate with the `scdata` process.
 
 **Notes:**
 
 Database path is case sensitive even on the case insensitive operating systems (Windows).
-Attempt to establish multiple connections to the same database using different path casing `C:\Databases\TestDatabase` and `c:\databases\testdatabase` will fail.
+Attempt to establish multiple connections to the same database using different path casing, like `C:\Databases\TestDatabase` and `c:\databases\testdatabase`, will fail.
 
 Starcounter identifies database by the provided path, not by its physical location.
 Attempt to establish multiple connections to the same database using different paths will fail.
