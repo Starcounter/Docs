@@ -10,3 +10,4 @@
 * [Publishing Starcounter 3.0 application](publish-app.md)
 * [Database types](database-types.md)
 * [Database files](database-files.md)
+* [Database processes](database-processes.md)
