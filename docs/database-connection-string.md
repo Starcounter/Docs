@@ -12,6 +12,45 @@
 | `StopMode` | `enum` | False | `IfWeStarted` | Specifies database shut down strategy. |
 | `ContextCount` | `int` | False | 2 - 24 | Specifies number of database contexts allocated for this connection. |
 
+### The `Database` value
+
+Starcounter database is identified by it's physical location and Starcounter version which attempts to access it.
+
+For example, attempting to start a database located at `/home/databases/TestDatabase` with Starcounter version `3.0.0-00001` will do the following:
+
+- Calculate database identification: `Starcounter-3.0.0-00001-/home/databases/TestDatabase`.
+- Check if there is a running `scdata` process associated with this database identification.
+- If no: spin up a new `scdata` process. This will fail if there is another version of `scdata` process already running for this database.
+- Communicate with the `scdata` process.
+
+*[Read more about Starcounter database processes](database-processes.md).*
+
+**Notes:**
+
+Database path is case sensitive even on the case insensitive operating systems (Windows).
+Attempt to establish multiple connections to the same database using different path casing, like `C:\Databases\TestDatabase` and `c:\databases\testdatabase`, will fail.
+
+Starcounter identifies database by the provided path, not by its physical location.
+Attempt to establish multiple connections to the same database using different paths will fail.
+
+#### Windows
+
+It is not possible to delete database files while `scdata` process is running.
+
+#### Linux
+
+It is possible to delete database files while `scdata` is running, which may lead to a trap.
+
+Consider the following scenario:
+
+- A database is created at `/home/database/TestDatabase`.
+- An `scdata` process is started for the database.
+- The database files are deleted.
+- New database is created in exactly the same location.
+- An app tries to connect to the new database.
+- Starcounter detects, that there is a running `scdata` process associated with this database path.
+- The app connects to the existing `scdata` process, which still operates on the deleted files.
+
 ### The `DatabaseOpenMode` enumeration values
 
 * `Open` - Opens the database if it exist.
