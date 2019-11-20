@@ -185,9 +185,15 @@ transactor.Transact(db =>
 });
 ```
 
-Even if database operations in the same transactions aren't parallelized, database operations from multiple transactions are run either concurrently or in parallel, depending on the available database resources.
+Even if database operations in the same transactions aren't parallelized, database operations from multiple transactions are executed either concurrently or in parallel, depending on the available database resources.
 
-It's possible to use `async`/`await` in transactions. To perform database operations asynchronously in transactions, you have to make sure it uses the enclosing context:
+#### Async operations within a transaction
+
+It is not recommended to execute any asynchronous operations within a database transaction, especially not those which have side effects.
+Still, there are some rare cases when it's needed to execute an asynchronous operation within a database transaction.
+It is possible achieve by using the `async`/`await` keywords.
+
+In order to execute the asynchronous task within the same database transaction, it is required to use the current synchronization context.
 
 ```csharp
 var transactor = services.GetRequiredService<ITransactor>();
@@ -195,14 +201,24 @@ var transactor = services.GetRequiredService<ITransactor>();
 await transactor.TransactAsync(async db =>
 {
     await Task.Factory.StartNew
-    (    () =>
+    (   
+		() =>
         {
-            // Database operations
+			// This asynchronous task has database access and executed within the parent transaction.
         },
         CancellationToken.None,
         TaskCreationOptions.None,
         TaskScheduler.FromCurrentSynchronizationContext()
     );
+
+	await Task.Run(() =>
+	{
+		// This asynchronous task does not have database access.
+	});
+
+	await transactor.TransactAsync(nestedDb =>
+	{
+		// This asynchronous task has database access but executed within a new transaction.
+	});
 });
 ```
-
