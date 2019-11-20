@@ -202,23 +202,23 @@ await transactor.TransactAsync(async db =>
 {
     await Task.Factory.StartNew
     (   
-		() =>
+        () =>
         {
-			// This asynchronous task has database access and executed within the parent transaction.
+            // This asynchronous task has database access and executed within the parent transaction.
         },
         CancellationToken.None,
         TaskCreationOptions.None,
         TaskScheduler.FromCurrentSynchronizationContext()
     );
 
-	await Task.Run(() =>
-	{
-		// This asynchronous task does not have database access.
-	});
+    await Task.Run(() =>
+    {
+        // This asynchronous task does not have database access.
+    });
 
-	await transactor.TransactAsync(nestedDb =>
-	{
-		// This asynchronous task has database access but executed within a new transaction.
-	});
+    await transactor.TransactAsync(nestedDb =>
+    {
+        // This asynchronous task has database access but executed within a new transaction.
+    });
 });
 ```
