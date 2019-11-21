@@ -56,6 +56,8 @@ The string data type can store data up to 1 MiB of encoded text.
 Thus, all strings with a length of less than 270600 will fit into the string data type.
 Strings longer than 270600 might fit depending on string content.
 
+Starcounter does not yet support not nullable strings.
+
 ## Starcounter specific types
 
 - `Binary` - [limitations](#binary)
@@ -63,3 +65,18 @@ Strings longer than 270600 might fit depending on string content.
 ### Binary
 
 The `Binary` data type is used to store byte arrays. The maximum size of a binary field is 1 MiB.
+
+Starcounter only supports nullable binary properties.
+
+```cs
+public abstract class Item
+{
+	// This defines a nullable binary property.
+	// It is supported by Starcounter.
+	public abstract Binary? NonNullBinary { get; set; }
+
+	// This defines a not nullable binary property.
+	// It is not yet supported by Starcounter.
+	public abstract Binary NonNullBinary { get; set; }
+}
+```
