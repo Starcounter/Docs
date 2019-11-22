@@ -190,35 +190,26 @@ Even if database operations in the same transactions aren't parallelized, databa
 #### Async operations within a transaction
 
 It is not recommended to execute any asynchronous operations within a database transaction, especially not those which have side effects.
-Still, there are some rare cases when it's needed to execute an asynchronous operation within a database transaction.
-It is possible achieve by using the `async`/`await` keywords.
+Still, Starcounter supports asynchronous transaction delegates.
 
-In order to execute the asynchronous task within the same database transaction, it is required to use the current synchronization context.
+The following example demonstrates how to asynchronously save a query result into a file.
 
 ```csharp
+string fileName = null;
 var transactor = services.GetRequiredService<ITransactor>();
 
 await transactor.TransactAsync(async db =>
 {
-    await Task.Factory.StartNew
-    (   
-        () =>
-        {
-            // This asynchronous task has database access and executed within the parent transaction.
-        },
-        CancellationToken.None,
-        TaskCreationOptions.None,
-        TaskScheduler.FromCurrentSynchronizationContext()
-    );
+    fileName = Path.GetTempFileName();
+    using TextWriter writer = new StreamWriter(fileName);
 
-    await Task.Run(() =>
+    foreach (var s in db.Sql<Something>("SELECT s FROM Something s"))
     {
-        // This asynchronous task does not have database access.
-    });
-
-    await transactor.TransactAsync(nestedDb =>
-    {
-        // This asynchronous task has database access but executed within a new transaction.
-    });
+        await writer.WriteLineAsync($"{db.GetOid(s)}: {s.Name}");
+    }
 });
+
+Console.WriteLine("Query result has been saved into " + fileName);
 ```
+
+***Note**: Starcounter uses custom database access synchronization context, that is why awaiter has to always continue on the captured context. It means that `.ConfigureAwait(false)` is not supported.*
