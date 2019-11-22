@@ -212,4 +212,4 @@ await transactor.TransactAsync(async db =>
 Console.WriteLine("Query result has been saved into " + fileName);
 ```
 
-***Note**: Starcounter uses custom synchronization context to serialize database access, that is why awaiter has to always continue on the captured context. It means that `.ConfigureAwait(false)` is not supported.*
+***Note**: Starcounter uses custom synchronization context to serialize database access, that is why awaiter has to always continue on the captured context.*
