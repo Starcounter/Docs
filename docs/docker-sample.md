@@ -28,7 +28,7 @@ Sample files structure:
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Starcounter.Nova.App" Version="3.0.0-*" />
+    <PackageReference Include="Starcounter.Database" Version="3.0.0-*" />
   </ItemGroup>
 </Project>
 ```
@@ -57,8 +57,7 @@ Sample files structure:
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using Starcounter.Nova;
-using Starcounter.Nova.Hosting;
+using Starcounter.Database;
 
 namespace App
 {

@@ -1,8 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using Starcounter.Nova;
-using Starcounter.Nova.Hosting;
+using Starcounter.Database;
 
 namespace App
 {

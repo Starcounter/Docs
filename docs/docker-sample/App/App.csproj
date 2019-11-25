@@ -6,6 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Starcounter.Nova.App" Version="3.0.0-*" />
+    <PackageReference Include="Starcounter.Database" Version="3.0.0-*" />
   </ItemGroup>
 </Project>

@@ -7,7 +7,7 @@
 The database schema in Starcounter is defined by C\# classes with the `[Database]` attribute:
 
 ```csharp
-using Starcounter.Nova;
+using Starcounter.Database;
 
 [Database]
 public abstract class Person
@@ -27,7 +27,7 @@ Database classes support default constructors. Non-private default constructors 
 For example, this is a valid database class with a constructor:
 
 ```csharp
-using Starcounter.Nova;
+using Starcounter.Database;
 
 [Database]
 public abstract class Order
@@ -97,7 +97,7 @@ ddlExecutor.Execute("CREATE INDEX IX_Person_FirstName ON Person (FirstName)");
 A single property index can be created with the `[Index]` attribute:
 
 ```csharp
-using Starcounter.Nova;
+using Starcounter.Database;
 
 [Database]
 public class Person
@@ -146,7 +146,7 @@ We recommend modeling one-to-many relationships by having references both ways -
 In this example there is a one-to-many relationship between `Department` and `Employee`:
 
 ```csharp
-using Starcounter.Nova;
+using Starcounter.Database;
 
 [Database]
 public class Department
@@ -175,7 +175,7 @@ We recommend modeling many-to-many relationships with an associative class.
 In this example there is a many-to-many relation between `Person` and `Company` - to represent this many-to-many relationship we use the associative class `Shares`:
 
 ```csharp
-using Starcounter.Nova;
+using Starcounter.Database;
 
 [Database]
 public class Person
@@ -217,7 +217,7 @@ public class Shares
 Any database class can inherit from any other database class.
 
 ```csharp
-using Starcounter.Nova;
+using Starcounter.Database;
 
 [Database]
 public class Customer

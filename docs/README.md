@@ -1,6 +1,6 @@
 # Starcounter 3.0 - alpha `20190930`
 
-The next alpha version of Starcounter 3.0.0, codenamed Nova, is available for general access.
+Starcounter 3.0.0 Release Candidate is available for general access.
 
 Download [`Starcounter.3.0.0-alpha-20190930.zip`](https://starcounter.io/Starcounter/Starcounter.3.0.0-alpha-20190930.zip) archive with all required NuGet packages.
 
@@ -117,10 +117,10 @@ Visual Studio requires manual NuGet package sources configuration. For this go t
 
 **Note**: Replace the `[Starcounter.3.0.0-alpha-20190930]` value with actual path to the folder with unzipped Starcounter binaries.
 
-**Add Starcounter.Nova.App package reference**
+**Add Starcounter.Database package reference**
 
 ```text
-dotnet add package Starcounter.Nova.App --version 3.0.0-*
+dotnet add package Starcounter.Database --version 3.0.0-*
 ```
 
 **Add minimal Starcounter database access**
@@ -130,8 +130,7 @@ Replace content of the `Program.cs` file with the following:
 ```csharp
 using System;
 using System.Linq;
-using Starcounter.Nova;
-using Starcounter.Nova.Hosting;
+using Starcounter.Database;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace StarcounterConsoleSample
@@ -256,7 +255,5 @@ _Before asking questions or reporting issues, please read these few lines, and m
 
 * Currently there is no database tooling available except the bare minimum of `dotnet star new` and `dotnet star start` commands.
 * Starting from Starcounter 3.0.0 beta, all required packages will be uploaded to one of the popular providers, such as [NuGet.org](https://www.nuget.org/), [MyGet.org](https://www.myget.org/) or [GitHub Package Registry](https://github.com/features/package-registry).
-* Base namespace will be changed from `Starcounter.Nova` to just `Starcounter`.
 * It is recommended to define all database classes and properties as `abstract` to reduce memory footprint when compared to `virtual`. Support for `virtual` properties might be removed in the future.
 * Publishing application in a single file with [`dotnet publish /p:PublishSingleFile=true`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-publish) is not yet supported.
-

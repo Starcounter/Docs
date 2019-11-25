@@ -11,11 +11,11 @@ Starcounter database can be created with the following options configured.
 | `LastObjectId` | `ulong` | True | `ulong.MaxValue` | Last object id value. |
 | `LogFileSize` | `int` | True | `256` | Database transaction log file size in [MiB](https://en.wikipedia.org/wiki/Mebibyte). |
 
-These values are available to configure via `Starcounter.Nova.Bluestar.DatabaseCreationOptions` class. Sample configuration:
+These values are available to configure via `Starcounter.Database.Bluestar.DatabaseCreationOptions` class. Sample configuration:
 
 ```csharp
 services.AddStarcounter("Database=./path/to/db")
-    .Configure<Starcounter.Nova.Bluestar.DatabaseCreationOptions>(options =>
+    .Configure<Starcounter.Database.Bluestar.DatabaseCreationOptions>(options =>
     {
         options.Collation = "en-GB-CI-AS";
         options.FirstObjectId = 1;
