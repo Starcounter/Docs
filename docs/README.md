@@ -45,13 +45,13 @@ Download and install it from the Microsoft website:
 
 [The latest supported Visual C++ downloads](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads).
 
-#### Ubuntu 18.04
+#### Ubuntu 18.04 & 19.04
 
 **Install prerequisites.**
 
 ```text
 sudo apt-get install wget unzip
-sudo apt-get install libaio1
+sudo apt-get install libaio1 libtinfo5
 ```
 
 Starcounter relies on a specific version of [SWI-Prolog](https://wwu-pi.github.io/tutorials/lectures/lsp/010_install_swi_prolog.html).
@@ -70,16 +70,6 @@ mkdir Starcounter.3.0.0-alpha-20190930
 cd Starcounter.3.0.0-alpha-20190930
 wget https://starcounter.io/Starcounter/Starcounter.3.0.0-alpha-20190930.zip
 unzip Starcounter.3.0.0-alpha-20190930.zip
-```
-
-### Ubuntu 19.04
-
-Due to the following bug, it is required to manually install `libtinfo.so.5` on Ubuntu 19.04. Other than that, the installation process is the same as on Ubuntu 18.04.
-
-[Ubuntu | gcc-8 package | g++-8 in disco is broken with libstdc++6 from gcc9 and libstdc++fs](https://bugs.launchpad.net/ubuntu/+source/gcc-8/+bug/1824721).
-
-```
-sudo apt-get install libtinfo5
 ```
 
 ### Application
