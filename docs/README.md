@@ -72,6 +72,16 @@ wget https://starcounter.io/Starcounter/Starcounter.3.0.0-alpha-20190930.zip
 unzip Starcounter.3.0.0-alpha-20190930.zip
 ```
 
+### Ubuntu 19.04
+
+Due to the following bug, it is required to manually install `libtinfo.so.5` on Ubuntu 19.04. Other than that, the installation process is the same as on Ubuntu 18.04.
+
+[Ubuntu | gcc-8 package | g++-8 in disco is broken with libstdc++6 from gcc9 and libstdc++fs](https://bugs.launchpad.net/ubuntu/+source/gcc-8/+bug/1824721).
+
+```
+sudo apt-get install libtinfo5
+```
+
 ### Application
 
 **Create an application folder and initialize a .NET Core console application.**
