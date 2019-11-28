@@ -11,3 +11,4 @@
 * [Database types](database-types.md)
 * [Database files](database-files.md)
 * [Database processes](database-processes.md)
+* [Failover cluster](failover-cluster.md)
