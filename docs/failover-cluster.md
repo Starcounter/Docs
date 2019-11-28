@@ -108,7 +108,7 @@ The issue though seems marginal as `scdata` is supposed to never crash. And cras
 
 ### Future directions
 
-- Make `scdata` to serve read requests in standby mode. With it, every cluster node becomes a sequentially consistent read-only replica.
+- We plan to make `scdata` to serve read requests in standby mode. With it, every cluster node becomes an eventually consistent read-only replica.
 
 ### Practical setup steps
 
