@@ -52,7 +52,7 @@ Database classes should only use properties - either **abstract** or with an exp
 Any property that is neither abstract nor defines a body will generate an error.
 
 ```csharp
-abstract class Supported
+public abstract class Supported
 {
     public abstract string Name { get; set; }
     public string CapitalName { get => Name.ToUpper(); }
@@ -60,7 +60,7 @@ abstract class Supported
 ```
 
 ```csharp
-abstract class NotSupported
+public abstract class NotSupported
 {
     public abstract System.IO.File File { get; set; }  // Data type not supported
     public string Name { get; set; }                   // Concrete - must be abstract
