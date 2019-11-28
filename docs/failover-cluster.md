@@ -25,7 +25,7 @@ It provides all regular services, like file-system locks, that effectively becom
 
 ### Basic setup
 
-***Note**: `WebApp` is just a name of a .NET Core Starcounter 3.0 Web Application.
+***Note**: `WebApp` is just a name of a .NET Core Starcounter 3.0 Web Application.*
 
 Now we've covered all the resources we need to setup a Starcounter failover cluster.
 First, we start with the easiest setup and show how it recovers from possible faults.
@@ -112,7 +112,7 @@ The issue though seems marginal as `scdata` is supposed to never crash. And cras
 
 ### Practical setup steps
 
-**Note**: It is important to specify database path using exactly the same value in all the places. Values such as `C:\Path\To\Db` & `C:/Path/To/Db` are treated as different.*
+***Note**: It is important to specify database path using exactly the same value in all the places. Values such as `C:\Path\To\Db` & `C:/Path/To/Db` are treated as different.*
 
 *Read more at - [Database connection string](database-connection-string.md#the-database-value).*
 
