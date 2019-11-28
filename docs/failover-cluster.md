@@ -8,13 +8,13 @@ Starcounter 3 Release Candidate does not yet support failover on Linux operating
 
 ### Introduction
 
-[Windows Failover Cluster](https://docs.microsoft.com/en-us/windows-server/failover-clustering/failover-clustering-overview) (WFC) is a component of Windows Server OS, that allows several machines (here nodes) to function together as a failover cluster. The purpose of a cluster is to administer resources assigned to it. A cluster monitors the health of resources and can restart or migrate them on another node if needed. Resources can be dependent on other resources and also belong to resource groups so that all resources from a group are running on the same node. WFC supports multiple different resources, three of them are of our particular interest – Generic Application, Generic Script, and ip-address.
+[Windows Failover Cluster](https://docs.microsoft.com/en-us/windows-server/failover-clustering/failover-clustering-overview) (WFC) is a component of Windows Server OS, that allows several machines (here nodes) to function together as a failover cluster. The purpose of a cluster is to administer resources assigned to it. A cluster monitors the health of resources and can restart or migrate them on another node if needed. Resources can be dependent on other resources and also belong to resource groups so that all resources from a group are running on the same node. WFC supports multiple different resources, three of them are of our particular interest – Generic Application, Generic Script, and IP Address.
 
 A Generic Application is a resource that is backed by a customer-specified executable. WFC starts the executable on one of its nodes when a resource should go online and then tracks the process. If the process terminates or the node goes irresponsive, the cluster takes corrective actions, like restarting the process or migrating it to another node.
 
 A Generic Script resource is a customer provided [WSH](https://en.wikipedia.org/wiki/Windows_Script_Host)-script. This script is used to manage some resource, and the cluster calls the script for tasks like setting the resource's online/offline status and retrieving the resource's current state.
 
-An IP-address resource is, as its name implies, just an IP address. Whenever a node with this resource is online, it gets this address assigned to it.
+An IP Address resource is, as its name implies, just an IP address. Whenever a node with this resource is online, it gets this address assigned to it.
 
 WCF also provides for [Clustered Shared Volume](https://docs.microsoft.com/en-us/windows-server/failover-clustering/failover-cluster-csvs) (CSV) services. CSV is a shared synchronized storage that is available for all cluster nodes, and which is presented to a cluster node as a regular NTFS volume. It provides all regular storage services, for example file-system locks that effectively become distributed locks in a cluster.
 
