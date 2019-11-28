@@ -47,9 +47,26 @@ It's possible to have constructors with parameters, although, they are never cal
 
 ## Fields and properties
 
-Database classes should only use properties - either auto-implemented or with an explicitly declared body.
+Database classes should only use properties - either **abstract** or with an explicitly **declared body**. Abstract properties should be public and have a data type that is supported by the database.
 
-Properties should also be public and either `abstract` or `virtual`. It is recommended to use `abstract` properties to reduce application memory footprint.
+Properties that is neither abstract nor defines a body will generate an error.
+
+```csharp
+class Supported
+{
+  public abstract string Name { get; set; }
+  public string CapitalName { get => Name.ToUpper(); }
+}
+```
+
+```csharp
+abstract class NotSupported
+{
+  public abstract System.IO.File File { get; set; }  // Data type not supported
+  public string Name { get; set; }                   // Concrete - must be abstract
+  public virtual int Age { get; set; }               // Virtual - must be abstract
+}
+```
 
 ### Collections
 
