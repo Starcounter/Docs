@@ -112,7 +112,7 @@ The issue though seems marginal as `scdata` is supposed to never crash. And cras
 
 ### Practical setup steps
 
-**Note**: It is important to specify database path using exactly the same value in all the places. Values such as `C:\Path\To\Db` & `C:/Path/To/Db` are treated as different.
+**Note**: It is important to specify database path using exactly the same value in all the places. Values such as `C:\Path\To\Db` & `C:/Path/To/Db` are treated as different.*
 
 *Read more at - [Database connection string](database-connection-string.md#the-database-value).*
 
