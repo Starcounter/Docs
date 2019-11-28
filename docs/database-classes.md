@@ -49,22 +49,22 @@ It's possible to have constructors with parameters, although, they are never cal
 
 Database classes should only use properties - either **abstract** or with an explicitly **declared body**. Abstract properties should be public and have a data type that is supported by the database.
 
-Properties that is neither abstract nor defines a body will generate an error.
+Any property that is neither abstract nor defines a body will generate an error.
 
 ```csharp
-class Supported
+abstract class Supported
 {
-  public abstract string Name { get; set; }
-  public string CapitalName { get => Name.ToUpper(); }
+    public abstract string Name { get; set; }
+    public string CapitalName { get => Name.ToUpper(); }
 }
 ```
 
 ```csharp
 abstract class NotSupported
 {
-  public abstract System.IO.File File { get; set; }  // Data type not supported
-  public string Name { get; set; }                   // Concrete - must be abstract
-  public virtual int Age { get; set; }               // Virtual - must be abstract
+    public abstract System.IO.File File { get; set; }  // Data type not supported
+    public string Name { get; set; }                   // Concrete - must be abstract
+    public virtual int Age { get; set; }               // Virtual - must be abstract
 }
 ```
 
@@ -346,4 +346,3 @@ transactor.Transact(db =>
 * Zero \(`0`\) is not a valid key.
 * Currently it is not possible to insert a database object with predefined unique key.
 * It is possible to compare database objects by their unique keys.
-
