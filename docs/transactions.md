@@ -105,7 +105,7 @@ This speeds up the application since the thread is free to handle the next trans
 
 ### Nested Transactions
 
-Starcounter does not support nested transaction. Attempting to start a new transaction within an active transaction will throw `NotSupportedException` exception.
+A nested transaction is a transaction that is run within the scope of another transaction. Starcounter does not support such transactions. Attempting to start a new transaction within an active transaction's scope will throw a `NotSupportedException` exception.
 
 ```csharp
 transactor.Transact(db =>
