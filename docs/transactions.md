@@ -105,60 +105,43 @@ This speeds up the application since the thread is free to handle the next trans
 
 ### Nested Transactions
 
-Transactions can't be nested unless you specify what to do on commit for the inner transaction. To understand why it's this way, take a look at this example:
+Starcounter does not support nested transaction. Attempting to start a new transaction within an active transaction will throw `NotSupportedException` exception.
 
 ```csharp
-public void OrderProduct(ITransactor transactor, long productId, Customer customer)
-{
-    transactor.Transact(db =>
-    {
-        SendInvoice(productId, customer);
-        RemoveFromInventory(productId);
-    });
-}
-
-public void SendInvoice(ITransactor transactor, long productId, Customer customer)
-{
-    var invoice = new Invoice(productId, customer);
-    transactor.Transact(db => AddInvoiceToDb(invoice));
-    invoice.Send();
-}
-```
-
-After the `SendInvoice` transaction, you'd expect that the invoice has been committed to the database. That is not the case. To preserve the atomicity of the outer transaction, the changes have to be committed at the same time at the end of the outer transaction's scope. Thus, if the invoice was sent on line 14 and then the whole transaction could roll back in `RemoveFromInventory` and undo `AddInvoiceToDb`. This would cause the customer to receive an invoice that is not stored in the database.
-
-Due to this, inner transactions have to specify what to do on commit. To adapt the previous example to specify what to do on commit, we would do this to `SendInvoice`:
-
-```csharp
-public void SendInvoice(ITransactor transactor, long productId, Customer customer)
-{
-    transactor.Transact(db =>
-    {
-        AddInvoiceToDb(invoice);
-    }, 
-    options: new TransactOptions
-    (
-        onCommit: () => invoice.Send())
-    );
-}
-```
-
-With this change, the invoice would be sent whenever the changes in `AddInvoiceToDb` are committed and you can be sure that the invoice would be sent first when the invoice is safely in the database. In this case, it would be when the outer transaction scope terminates. If there was no outer transaction, the invoice would be sent when the transaction with `AddInvoiceToDb` terminates. Thus, `onCommit` ensures that the calls are made in the correct order no matter what.
-
-If you don't know if a transaction will be nested within another transaction, it's always safe to add an empty `onCommit` delegate:
-
-```csharp
-var transactor = services.GetRequiredService<ITransactor>();
-
 transactor.Transact(db =>
 {
-    // Read and write to database
-}, new TransactOptions(() => {}));
+	// NotSupportedException
+	// ScErrNestedTransactionNotSupported (SCERR4311):
+	// An attempt was made to initialize a new transaction within the scope of an active transaction.
+	// Creating such nested transactions is not supported. Consider reusing the already active transaction or running the new transaction outside the already active transaction's scope.
+	transactor.Transact(db =>
+	{
+	});
+});
 ```
 
-With an empty `onCommit` delegate, you acknowledge that the changes are not guaranteed to commit after the transaction scope.
+It is possible to create a new parallel transaction using the following syntax:
 
-If an inner transaction doesn't have an onCommit delegate, Starcounter throws `ArgumentNullException`.
+```cs
+using Starcounter.Database.Data;
+
+// Initiating the first transaction.
+transactor.Transact(db1 =>
+{
+    var i = db1.Insert<Item>();
+
+    // Initiating the second transaction.
+    // This transaction runs in parallel to the first transaction.
+    // If the first transaction happens to be retried due to a conflict, the second transaction will be executed and committed multiple times.
+    Transaction.Create().Run(db2 =>
+    {
+        // This is an invalid object access.
+        // The object "i" does not exist in the second transaction.
+		// ScErrInvalidObjectAccessAbort (SCERR8006): The transaction was aborted because of an invalid object access.
+        i.Name = "Test";
+    });
+});
+```
 
 ### Transaction Size
 
