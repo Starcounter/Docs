@@ -42,7 +42,7 @@ public abstract class Person
 
 ## Fields and properties
 
-Table columns are defined in database classes by abstract instance auto-implemented properties with public `get` and `set` accessors and with one of the [supported data types](database-types). The `Person` database class below defines two such columns, `Name` and `CreatedAtUtc`:
+Table columns are defined in database classes by abstract instance auto-implemented properties with public `get` and `set` accessors and with one of the [supported data types](./database-types.md). The `Person` database class below defines two such columns, `Name` and `CreatedAtUtc`:
 
 ```csharp
 using System;
@@ -72,7 +72,7 @@ public abstract class Person
 }
 ```
 
-**Note**: If a database class definition of a Starcounter application contains any non-computed instance properties that are not declared as abstract auto-implemented properties with public get and set accessors and with one of the [supported data types](database-types), an exception will be thrown when the application starts.
+**Note**: If a database class definition of a Starcounter application contains any non-computed instance properties that are not declared as abstract auto-implemented properties with public get and set accessors and with one of the [supported data types](./database-types.md), an exception will be thrown when the application starts.
 
 ### Database queries in computed properties
 
@@ -108,7 +108,7 @@ To implement this, we need access to the database context that the given `Person
 
 ## Indexing
 
-To achieve the full performance potential of the Starcounter database, it's crucial to register appropriate indexes for database classes. Database indexes can be defined with [`CREATE INDEX`](https://www.w3schools.com/sql/sql_create_index.asp) SQL queries. Both unique and not unique indexes are supported. Since `CREATE INDEX` is a DDL statement, we use the `IDdlExecutor` to perform it, outside an active transaction. We can obtain the `IDdlExecutor` from the [service provider](dependency-injection/).
+To achieve the full performance potential of the Starcounter database, it's crucial to register appropriate indexes for database classes. Database indexes can be defined with [`CREATE INDEX`](https://www.w3schools.com/sql/sql_create_index.asp) SQL queries. Both unique and not unique indexes are supported. Since `CREATE INDEX` is a DDL statement, we use the `IDdlExecutor` to perform it, outside an active transaction. We can obtain the `IDdlExecutor` from the [service provider](./dependency-injection.md).
 
 ```csharp
 var ddlExecutor = services.GetRequiredService<IDdlExecutor>();
@@ -142,7 +142,7 @@ It's recommended to model one-to-many relations using references both ways, with
 
 Many-to-many relations are best modelled using an **association class**.
 
-Let's say we want to model many-to-many relation of **share ownership**, as understood as a relation between `Person` and `Company` entities such that a single person can hold multiple shares in multiple companies, and a single company can have multiple shareholders. For this, let's use the association class `HoldsShares`. We can then make queries to this database class to calculate useful information in `Person` and `Company` that is exposed using computed properties. Lastly, we make sure that indexes are registered for the `Owner` and `Equity` properties of `HoldsShares` since we will be quering them a lot.
+Let's say we want to model many-to-many relation of **share ownership**, as understood as a relation between `Person` and `Company` entities such that a single person can hold multiple shares in multiple companies, and a single company can have multiple shareholders. For this, let's use the association class `ShareOwnership`. We can then make queries to this database class to calculate useful information in `Person` and `Company` that is exposed using computed properties. Lastly, we make sure that indexes are registered for the `Owner` and `Equity` properties of `ShareOwnership` since we will be quering them a lot.
 
 ```csharp
 using Starcounter.Database;
@@ -157,7 +157,7 @@ public abstract class Person
         get
         {
             var db = DbProxy.GetContext(this);
-            return db.Sql<Company>("SELECT s.Equity FROM HoldsShares s WHERE s.Owner = ?", this);
+            return db.Sql<Company>("SELECT s.Equity FROM ShareOwnership s WHERE s.Owner = ?", this);
         }
     }
 }
@@ -173,13 +173,13 @@ public abstract class Company
         get
         {
             var db = DbProxy.GetContext(this);
-            return db.Sql<Person>("SELECT s.Owner FROM HoldsShares s WHERE s.Equity = ?", this);
+            return db.Sql<Person>("SELECT s.Owner FROM ShareOwnership s WHERE s.Equity = ?", this);
         }
     }
 }
 
 [Database]
-public abstract class HoldsShares
+public abstract class ShareOwnership
 {
     [Index]
     public abstract Person Owner { get; set; }
