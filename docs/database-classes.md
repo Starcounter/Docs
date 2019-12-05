@@ -1,109 +1,114 @@
 # Database classes
 
-**Note**: Starcounter 3.0.0 is currently in preview stage. This API might be changed in the future releases without backwards compatibility.
+## Defining database classes
 
-## Introduction
-
-The database schema in Starcounter is defined by C\# classes with the `[Database]` attribute:
+We can define the schema of a Starcounter database table in an application by defining **public abstract C# classes** decorated with the `DatabaseAttribute` attribute. We call these types **database classes**. The names and namespaces we give to these C# classes will be the names and namespaces of the corresponding database tables.
 
 ```csharp
+using System;
 using Starcounter.Database;
 
 [Database]
 public abstract class Person
 {
-    public abstract string FirstName { get; set; }
-    public abstract string LastName { get; set; }
-    public string FullName => $"{FirstName} {LastName}";
+    public abstract string Name { get; set; }
 }
 ```
 
-All instances of database classes created with the `IDatabaseContext.Insert` method are stored persistently.
+All instances of these database classes created with the `IDatabaseContext.Insert<T>()` method are stored in the Starcounter database persistently.
 
 ## Constructors
 
-Database classes support default constructors. Non-private default constructors are called when a new instance is created with `IDatabaseContext.Insert`.
+Database classes support default constructors, which is useful for adding logic that is run each time an instance of the database class is created. Public default constructors of database classes are called whenever a new instance of the class is created with `IDatabaseContext.Insert<T>()`.
 
-For example, this is a valid database class with a constructor:
+For exaαmple, here is our `Person` class with a custom default constructor:
 
 ```csharp
+using System;
 using Starcounter.Database;
 
 [Database]
-public abstract class Order
+public abstract class Person
 {
-    public Order()
-    {
-        this.Created = DateTime.Now;
-    }
+    public abstract string Name { get; set; }
+    public abstract DateTime CreatedAtUtc { get; set; }
 
-    public abstract DateTime Created { get; set; }
+    public Person()
+    {
+        CreatedAtUtc = DateTime.UtcNow;
+    }
 }
 ```
-
-It's possible to have constructors with parameters, although, they are never called when using `IDatabaseContext.Insert`. Constructors with parameters in database classes can be useful for unit testing purposes when you want to inject dependencies or other arguments into a class. If you add a constructor with parameters to a database class, you also have to add a default constructor.
-
-**Warning**: All C\# access modifiers are accepted for constructors, except for `internal`. Using it will throw `ScErrSchemaCodeMismatch (SCERR4177)` exception.
 
 ## Fields and properties
 
-Database classes should only use properties - either **abstract** or with an explicitly **declared body**. Abstract properties should be public and have a data type that is supported by the database.
-
-Any property that is neither abstract nor defines a body will generate an error.
+Table columns are defined in database classes by abstract instance auto-implemented properties with public `get` and `set` accessors and with one of the [supported data types](database-types). The `Person` database class below defines two such columns, `Name` and `CreatedAtUtc`:
 
 ```csharp
-public abstract class Supported
+using System;
+using Starcounter.Database;
+
+[Database]
+public abstract class Person
 {
     public abstract string Name { get; set; }
-    public string CapitalName { get => Name.ToUpper(); }
+    public abstract DateTime CreatedAtUtc { get; set; }
 }
 ```
+
+Database classes can also define calculated properties, which are properties that do not expose an instance field. Commonly, we use them to reflect an aspect of the state of a database class instance. Let's say we want a shorthand for calculating the length of the `Name` string of a `Person`. We could do this by introducing a calculated property. These computed properties do not have the same restrictions as column properties, since they are transient and not bound to the corresponding database table.
 
 ```csharp
-public abstract class NotSupported
+using System;
+using Starcounter.Database;
+
+[Database]
+public abstract class Person
 {
-    public abstract System.IO.File File { get; set; }  // Data type not supported
-    public string Name { get; set; }                   // Concrete - must be abstract
-    public virtual int Age { get; set; }               // Virtual - must be abstract
+    public abstract string Name { get; set; }
+    public abstract DateTime CreatedAtUtc { get; set; }
+
+    public int NameLength => Name.Length;
 }
 ```
 
-### Collections
+**Note**: If a database class definition of a Starcounter application contains any non-computed instance properties that are not declared as abstract auto-implemented properties with public get and set accessors and with one of the [supported data types](database-types), an exception will be thrown when the application starts.
 
-It's also possible to have methods to retrieve collections of the database objects.
+### Database queries in computed properties
+
+Sometimes it's very useful to make database queries inside the `get` accessors of computed properties of database classes. This way we can extend object-oriented principles like encapsulation onto the persistent nature of database objects. Let's expand our `Person` class with a `Mother` one-to-many relational property:
 
 ```csharp
-public IEnumerable<Person> SelectFriends(IDatabaseContext db)
+using System;
+using Starcounter.Database;
+
+[Database]
+public abstract class Person
 {
-    return db.Sql<Person>("SELECT p FROM Person p");
+    public abstract string Name { get; set; }
+    public abstract DateTime CreatedAtUtc { get; set; }
+    public abstract Person Mother { get; set; }
+
+    public IEnumerable<Person> Children
+    {
+        get
+        {
+            var db = DbProxy.GetContext(this);
+            return db.Sql<Person>("SELECT p FROM Person p WHERE p.Mother = ?", this);
+        }
+    }
+
+    public int NameLength => Name.Length;
 }
 ```
 
-These properties and fields are not allowed:
+We can then introduce a computed property `Children` with the purpose of listing, for each Person `m`, all `Person` instances `p` in the database where `m` is the value of the `Mother` property for `p`.
 
-```text
-public string[] Names { get; set; }
-public List<Person> People { get; }
-public IEnumerable Animals;
-```
-
-To access collections from the database objects, first retrieve the object and then call the method that returns the collection:
-
-```text
-var transactor = services.GetRequiredService<ITransactor>();
-
-transactor.Transact(db =>
-{
-    var person = db.Sql<Person>("SELECT p FROM Person p").First();
-    IEnumerable<Person> friends = person.Friends;
-});
-```
-
-_Note: In the previous versions of Starcounter with static database access via the `Db` class it was possible to define `IEnumerable` properties, not methods. This type of syntax will come back in the next alpha release._
+To implement this, we need access to the database context that the given `Person` instance lives in. We can achieve this by calling the static method `DbProxy.GetContext(this)`.
 
 ## Indexing
 
-Database indexes can be defined with [`CREATE INDEX`](https://www.w3schools.com/sql/sql_create_index.asp) SQL query. Unique and not unique indexes are supported.
+To achieve the full performance potential of the Starcounter database, it's crucial to register appropriate indexes for database classes. Database indexes can be defined with [`CREATE INDEX`](https://www.w3schools.com/sql/sql_create_index.asp) SQL queries. Both unique and not unique indexes are supported. Since `CREATE INDEX` is a DDL statement, we use the `IDdlExecutor` to perform it, outside an active transaction. We can obtain the `IDdlExecutor` from the [service provider](dependency-injection/).
 
 ```csharp
 var ddlExecutor = services.GetRequiredService<IDdlExecutor>();
@@ -111,161 +116,141 @@ var ddlExecutor = services.GetRequiredService<IDdlExecutor>();
 ddlExecutor.Execute("CREATE INDEX IX_Person_FirstName ON Person (FirstName)");
 ```
 
-A single property index can be created with the `[Index]` attribute:
+A single property index can also be registered for a column by decorating its associated C# property with the `IndexAttribute` attribute:
 
 ```csharp
+using System;
 using Starcounter.Database;
 
 [Database]
-public class Person
+public abstract class Person
 {
     [Index]
-    public virtual string FirstName { get; set; }
-    public virtual string LastName { get; set; }
+    public abstract string Name { get; set; }
 }
 ```
 
-_Note: In the previous versions of Starcounter it was possible to execute DDL statements using `Db.SQL` method. This is no longer allowed, all the DDL statements have to be executed using the `IDdlExecutor` service._
-
-## Limitations
-
-### Property limit
-
-Database classes can have a maximum of 112 properties for performance reasons. The limit applies to the total number of persistent properties \(including all inherited\) per class.
-
-Thus, this is not allowed:
-
-```csharp
-[Database]
-public class LargeClass
-{
-    public virtual string Property1 { get; set; }
-    public virtual string Property2 { get; set; }
-
-    // ...
-
-    public virtual string Property113 { get; set; }
-}
-```
-
-If a database class has more than 113 properties, Starcounter throws `ScErrToManyAttributes (SCERR4013)`.
-
-### Nested classes
-
-Nested database classes are not supported. The limitation is that inner database classes cannot be queried with SQL.
+**Note**: DDL statements can only be performed from `IDdlExecutor`.
 
 ## Relations
 
 ### One-to-many relations
 
-We recommend modeling one-to-many relationships by having references both ways - the child has a reference to the parent and the parent has a method to select all the children.
-
-In this example there is a one-to-many relationship between `Department` and `Employee`:
-
-```csharp
-using Starcounter.Database;
-
-[Database]
-public class Department
-{
-    public IEnumerable<Employee> SelectEmployees(IDatabaseContext db)
-    {
-        return db.Sql<Employee>
-        (
-            "SELECT e FROM Employee e WHERE e.Department = ?",
-            this
-        );
-    }
-}
-
-[Database]
-public class Employee
-{
-    public abstract Department Department { get; set; }
-}
-```
+It's recommended to model one-to-many relations using references both ways, with the child entity having a reference to the parent and the parent having an instance method or computed property that selects all the children (like in the example with the `Mother`/`Children` relation above).
 
 ### Many-to-many relations
 
-We recommend modeling many-to-many relationships with an associative class.
+Many-to-many relations are best modelled using an **association class**.
 
-In this example there is a many-to-many relation between `Person` and `Company` - to represent this many-to-many relationship we use the associative class `Shares`:
+Let's say we want to model many-to-many relation of **share ownership**, as understood as a relation between `Person` and `Company` entities such that a single person can hold multiple shares in multiple companies, and a single company can have multiple shareholders. For this, let's use the association class `HoldsShares`. We can then make queries to this database class to calculate useful information in `Person` and `Company` that is exposed using computed properties. Lastly, we make sure that indexes are registered for the `Owner` and `Equity` properties of `HoldsShares` since we will be quering them a lot.
 
 ```csharp
 using Starcounter.Database;
 
 [Database]
-public class Person
+public abstract class Person
 {
-    public IEnumerable<Company> SelectEquityPortfolio(IDatabaseContext db)
+    public abstract string Name { get; set; }
+
+    public IEnumerable<Company> OwnsSharesInCompanies
     {
-        return db.Sql<Company>
-        (
-            "SELECT s.Equity FROM Shares s WHERE s.Owner = ?",
-            this
-        );
+        get
+        {
+            var db = DbProxy.GetContext(this);
+            return db.Sql<Company>("SELECT s.Equity FROM HoldsShares s WHERE s.Owner = ?", this);
+        }
     }
 }
 
 [Database]
-public class Company
+public abstract class Company
 {
-    public IEnumerable<Person> SelectShareHolders(IDatabaseContext db)
+    public abstract string Name { get; set; }
+    public abstract Person Ceo { get; set; }
+
+    public IEnumerable<Person> Shareholders
     {
-        return db.Sql<Person>
-        (
-            "SELECT s.Owner FROM Shares s WHERE s.Equity = ?",
-            this
-        );
+        get
+        {
+            var db = DbProxy.GetContext(this);
+            return db.Sql<Person>("SELECT s.Owner FROM HoldsShares s WHERE s.Equity = ?", this);
+        }
     }
 }
 
 [Database]
-public class Shares
+public abstract class HoldsShares
 {
-    public virtual Person Owner { get; set; }
-    public virtual Company Equity { get; set; }
-    public virtual int Quantity { get; set; }
+    [Index]
+    public abstract Person Owner { get; set; }
+
+    [Index]
+    public abstract Company Equity { get; set; }
+
+    public abstract int Quantity { get; set; }
 }
 ```
 
 ### Inheritance
 
-Any database class can inherit from any other database class.
+Inheritance is supported between database classes and has the same general semantics as class inheritence in C#.
 
 ```csharp
 using Starcounter.Database;
 
 [Database]
-public class Customer
+public abstract class Customer
 {
-   public virtual string Name { get; set; }
+   public abstract string Name { get; set; }
 }
 
-public class PrivateCustomer : Customer
+public abstract class PrivateCustomer : Customer
 {
-   public virtual string Gender { get; set; }
+   public abstract string Gender { get; set; }
 }
 
-public class CorporateCustomer : Customer
+public abstract class CorporateCustomer : Customer
 {
-   public virtual string VatNumber { get; set; }
+   public abstract string VatNumber { get; set; }
 }
 ```
 
-The `[Database]` attribute is inherited from base - to subclasses. Any class that directly or indirectly inherits a class with the `[Database]` attribute becomes a database class. In the example above, both `PrivateCustomer` and `CorporateCustomer` become database classes due to them inheriting `Customer`.
+The `DatabaseAttribute` attribute decoration is inherited from any base class to its subclasses, meaning that any class that directly or indirectly inherits a class that is decorated with the `DatabaseAttribute` attribute becomes a database class. In the example above, both `PrivateCustomer` and `CorporateCustomer` become database classes due to them inheriting `Customer`.
 
-The table `Customer` will contain all `PrivateCustomers` and all `CorporateCustomers`. So if there is a private customer called `"Goldman, Carl"` and a corporate customer called `"Goldman Sachs"`, the result of `SELECT C FROM Customer c` will contain both of them.
+This also means that all rows in the `CorporateCustomer` table also are contained in the `Customer` table. The result of the `SELECT C FROM Customer c` SQL query will contain all rows from `Customer` as well as all rows from subclasses of `Customer`.
 
-#### Inheriting from non-database classes
+A database class cannot inherit from a class that's not a database class. It's also not possible to cast a non-database class to a database class.
 
-A database class cannot inherit from a class that's not a database class. This will throw, during compile-time, `System.NotSupportedException` or `ScErrSchemasDoNotMatch (SCERR15009)` depending on how the base class is defined.
+## Database object identity
 
-It's also not possible to cast a non-database class to a database class.
+Starcounter automatically assigns an unique integer identifier called `Oid` to each database object. The key is unique across all table rows in the entire database. The `IDatabaseContext` type defines methods for working with object `Oid`'s. For the examples above, let's assume that `db` holds a reference to an instance of `IDatabaseContext`, recieved from an `ITransactor` when starting a new database transaction.
+
+### Get the `Oid` from a database object
+
+```csharp
+var newObject = db.Insert<Product>();
+ulong oid = db.GetOid(newObject);
+```
+
+### Find an object in the database by its unique key
+
+```csharp
+var oid = 459123UL;
+var product = db.Get<Product>(oid);
+```
+
+### Notes
+
+- Zero (`0`) is not a valid `Oid`.
+- It's not yet possible to insert a database object with a predefined `Oid`.
 
 ## Comparing database objects
 
-Database objects can be checked for equality with the `Equals` method. Comparing database objects with `object.ReferenceEquals` or the `==` operator always returns `false` if any of the objects are retrieved from the database:
+Database objects can be checked for equality with the `object.Equals` method or the `Equals` instance method for each database class instance. Comparing database objects with `object.ReferenceEquals` or the `==` operator always returns `false` if any of the objects are retrieved from the database.
+
+We can also compare database objects by comparing their `Oid`'s.
+
+Example:
 
 ```csharp
 var transactor = services.GetRequiredService<ITransactor>();
@@ -273,76 +258,24 @@ var transactor = services.GetRequiredService<ITransactor>();
 transactor.Transact(db =>
 {
     var firstProduct = db.Insert<Product>();
+    var firstProductOid = db.GetOid(firstProduct);
     var secondProduct = db.Insert<Product>();
-    var anotherFirstProduct = db.Get<Product>(db.GetOid(firstProduct));
+    var anotherFirstProduct = db.Get<Product>(firstProductOid);
 
-    // Checks if two database objects are equal 
-    Console.WriteLine(firstProduct.Equals(secondProduct)); // => false
-    Console.WriteLine(firstProduct.Equals(anotherFirstProduct)); // => true
+    firstProduct.Equals(secondProduct); // false
+    firstProduct.Equals(anotherFirstProduct); // true
 
-    // Returns false for different object or objects retrieved from the database
-    
-    // Writes: false
-    Console.WriteLine(firstProduct == secondProduct);
-    
-    // Writes: false
-    Console.WriteLine(firstProduct == anotherFirstProduct);
-    
-    // Writes: true
-    Console.WriteLine(firstProduct == firstProduct);
-    
-    // Writes: false
-    Console.WriteLine(object.ReferenceEquals(firstProduct, secondProduct));
-    
-    // Writes: false
-    Console.WriteLine(object.ReferenceEquals(firstProduct, anotherFirstProduct));
-    
-    // Writes: true
-    Console.WriteLine(object.ReferenceEquals(firstProduct, firstProduct));
+    _ = firstProduct == secondProduct; // false
+    _ = firstProduct == anotherFirstProduct; // false
+    _ = firstProduct == firstProduct; // true
+
+    object.ReferenceEquals(firstProduct, secondProduct); // false
+    object.ReferenceEquals(firstProduct, anotherFirstProduct); // false
+    object.ReferenceEquals(firstProduct, firstProduct); // true
 });
 ```
 
-## Database object identity
+## Limitations
 
-Starcounter automatically assigns an `UInt64` unique key for each database object. The key is unique across entire database not across one table.
-
-### Get object's unique key
-
-```csharp
-var transactor = services.GetRequiredService<ITransactor>();
-
-transactor.Transact(db =>
-{
-    var p = db.Insert<Product>();
-    ulong oid = db.GetOid(p);
-});
-```
-
-### Get object by unique key
-
-```csharp
-var transactor = services.GetRequiredService<ITransactor>();
-
-transactor.Transact(db =>
-{
-    var p = db.Get<Product>(oid);
-});
-```
-
-### Querying by object's unique key
-
-```csharp
-var transactor = services.GetRequiredService<ITransactor>();
-
-transactor.Transact(db =>
-{
-    var product = db.Sql<Product>("SELECT p FROM Product p WHERE p.ObjectNo = ?", oid)
-        .FirstOrDefault();
-});
-```
-
-### Notes
-
-* Zero \(`0`\) is not a valid key.
-* Currently it is not possible to insert a database object with predefined unique key.
-* It is possible to compare database objects by their unique keys.
+- Database classes can have a maximum of 112 properties for performance reasons. The limit applies to the total number of persistent properties (including all inherited) per class.
+- Nested database classes are not supported in SQL queries.
