@@ -40,11 +40,9 @@ public abstract class Person
 }
 ```
 
-It's allowed to have non-default constructors in database class definitions as well, although they are not called by `IDatabaseContext.Insert<T>()`. Instead they can be useful in unit testing scenarios when you want to inject dependencies or other arguments into a class instance. If you add a constructor with parameters to a database class, you also have to add a default constructor.
-
 ## Fields and properties
 
-Table columns are defined in database classes by abstract instance auto-implemented properties with public get and set accessors and with one of the [supported data types](database-types). The `Person` database class below defines two such columns, `Name` and `CreatedAtUtc`:
+Table columns are defined in database classes by abstract instance auto-implemented properties with public `get` and `set` accessors and with one of the [supported data types](database-types). The `Person` database class below defines two such columns, `Name` and `CreatedAtUtc`:
 
 ```csharp
 using System;
