@@ -200,4 +200,4 @@ Start-ClusterGroup Starcounter
 
 ## Starcounter failover on Linux
 
-Starcounter 3 Release Candidate does not yet support failover on Linux operating systems out of the box.
+Starcounter 3 Release Candidate does not yet support failover on Linux operating systems out of the box. If you have a Linux production environment which requires failover, please contact us.
