@@ -31,11 +31,11 @@ using Starcounter.Database;
 public abstract class Person
 {
     public abstract string Name { get; set; }
-    public abstract DateTime CreatedAt { get; set; }
+    public abstract DateTime CreatedAtUtc { get; set; }
 
     public Person()
     {
-        CreatedAt = DateTime.UtcNow;
+        CreatedAtUtc = DateTime.UtcNow;
     }
 }
 ```
@@ -44,7 +44,7 @@ It's allowed to have non-default constructors in database class definitions as w
 
 ## Fields and properties
 
-Table columns are defined in database classes by abstract instance auto-implemented properties with public get and set accessors and with one of the [supported data types](database-types). The `Person` database class below defines two such columns, `Name` and `CreatedAt`:
+Table columns are defined in database classes by abstract instance auto-implemented properties with public get and set accessors and with one of the [supported data types](database-types). The `Person` database class below defines two such columns, `Name` and `CreatedAtUtc`:
 
 ```csharp
 using System;
@@ -54,7 +54,7 @@ using Starcounter.Database;
 public abstract class Person
 {
     public abstract string Name { get; set; }
-    public abstract DateTime CreatedAt { get; set; }
+    public abstract DateTime CreatedAtUtc { get; set; }
 }
 ```
 
@@ -68,7 +68,7 @@ using Starcounter.Database;
 public abstract class Person
 {
     public abstract string Name { get; set; }
-    public abstract DateTime CreatedAt { get; set; }
+    public abstract DateTime CreatedAtUtc { get; set; }
 
     public int NameLength => Name.Length;
 }
@@ -88,7 +88,7 @@ using Starcounter.Database;
 public abstract class Person
 {
     public abstract string Name { get; set; }
-    public abstract DateTime CreatedAt { get; set; }
+    public abstract DateTime CreatedAtUtc { get; set; }
     public abstract Person Mother { get; set; }
 
     public IEnumerable<Person> Children
