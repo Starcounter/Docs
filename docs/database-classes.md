@@ -56,7 +56,7 @@ public abstract class Person
 }
 ```
 
-Database classes can also define calculated properties, which are properties that do not expose an instance field. Commonly, we use them to reflect an aspect of the state of a database class instance. Let's say we want a shorthand for calculating the length of the `Name` string of a `Person`. We could do this by introducing a calculated property. These computed properties do not have the same restrictions as column properties, since they are not bound to the corresponding database table.
+Database classes can also define calculated properties, which are properties that do not expose an instance field. Commonly, we use them to reflect an aspect of the state of a database class instance. Let's say we want a shorthand for calculating the length of the `Name` string of a `Person`. We could do this by introducing a calculated property. These computed properties do not have the same restrictions as column properties, since they are transient and not bound to the corresponding database table.
 
 ```csharp
 using System;
@@ -215,9 +215,9 @@ public abstract class CorporateCustomer : Customer
 }
 ```
 
-The `DatabaseAttribute` attribute decoration is inherited from any base class to its subclasses, meaning that any class that directly or indirectly inherits a class that is decorated with `DatabaseAttribute` becomes a database class. In the example above, both `PrivateCustomer` and `CorporateCustomer` become database classes due to them inheriting `Customer`.
+The `DatabaseAttribute` attribute decoration is inherited from any base class to its subclasses, meaning that any class that directly or indirectly inherits a class that is decorated with the `DatabaseAttribute` attribute becomes a database class. In the example above, both `PrivateCustomer` and `CorporateCustomer` become database classes due to them inheriting `Customer`.
 
-This also means that all rows in the `CorporateCustomer` table also are contained in the `Customer` table. The result of the `SELECT C FROM Customer c` SQL query will contain all rows from `Customer` as well as all tables from subclasses of `Customer`.
+This also means that all rows in the `CorporateCustomer` table also are contained in the `Customer` table. The result of the `SELECT C FROM Customer c` SQL query will contain all rows from `Customer` as well as all rows from subclasses of `Customer`.
 
 A database class cannot inherit from a class that's not a database class. It's also not possible to cast a non-database class to a database class.
 
@@ -242,7 +242,7 @@ var product = db.Get<Product>(oid);
 ### Notes
 
 - Zero (`0`) is not a valid `Oid`.
-- It's not possible to insert a database object with a predefined `Oid`.
+- It's not yet possible to insert a database object with a predefined `Oid`.
 
 ## Comparing database objects
 
