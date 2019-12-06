@@ -12,22 +12,22 @@ StartMode    | `enum`   | No       | `StartIfNotRunning` | Specifies database st
 StopMode     | `enum`   | No       | `IfWeStarted`       | Specifies database shut down strategy.
 ContextCount | `int`    | No       | 2 - 24              | Specifies number of database contexts allocated for this connection.
 
-### The `Database` value
+### Database
 
-Starcounter database is identified by it's physical location and Starcounter version which attempts to access it.
+A Starcounter database is identified by it's physical location on disk and the Starcounter version which attempts to access it.
 
 For example, attempting to start a database located at `/home/databases/TestDatabase` with Starcounter version `3.0.0-00001` will do the following:
 
 - Calculate database identification: `Starcounter-3.0.0-00001-/home/databases/TestDatabase`.
 - Check if there is a running `scdata` process associated with this database identification.
-- If no: spin up a new `scdata` process. This will fail if there is another version of `scdata` process already running for this database.
+- If no, spin up a new `scdata` process. This will fail if there is another version of `scdata` process already running for this database.
 - Communicate with the `scdata` process.
 
-_[Read more about Starcounter database processes](database-processes.md)._
+_For more information, see the article about [database processes](database-processes.md)._
 
 **Notes:**
 
-Database path is case sensitive even on the case insensitive operating systems (Windows). Attempt to establish multiple connections to the same database using different path casing, like `C:\Databases\TestDatabase` and `c:\databases\testdatabase`, will fail.
+Database path is case sensitive even on operating systems like Windows that use case insensitive file paths. Attempting to establish multiple connections to the same database using different path casing, like `C:\Databases\TestDatabase` and `c:\databases\testdatabase`, will fail.
 
 Starcounter identifies database by the provided path, not by its physical location. Attempt to establish multiple connections to the same database using different paths will fail.
 
