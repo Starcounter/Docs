@@ -1,38 +1,34 @@
 # Transactions
 
-**Note**: Starcounter 3.0.0 is currently in preview stage. This API might be changed in the future releases without backwards compatibility.
-
-Starcounter uses transactions to ensure that database operations are [ACID](https://en.wikipedia.org/wiki/ACID).
-
-All database reads and writes must be wrapped in transactions.
+Starcounter uses database transactions to ensure that database operations are [ACID](https://en.wikipedia.org/wiki/ACID) compliant. When writing Starcounter application code, we must wrap database reads and writes in transactions, so it's important to know how they work in Starcounter.
 
 ## Achieving ACID Compliance
 
 ### Atomicity
 
-As defined on [Wikipedia](https://en.wikipedia.org/wiki/Atomicity_%28database_systems%29), an atomic transaction "is an indivisible and irreducible series of database operations such that either all occur, or nothing occurs." Starcounter ensures atomicity by wrapping changes of one transaction within a transaction scope. The changes commit simultaneously at the end of the scope. If something interrupts the transaction before the end of the scope is reached, none of the changes will commit to the database.
+As defined by [Wikipedia](https://en.wikipedia.org/wiki/Atomicity_%28database_systems%29), an atomic transaction "is an indivisible and irreducible series of database operations such that either all occur, or nothing occurs." Starcounter ensures atomicity by wrapping changes of one transaction within a transaction scope. The changes commit simultaneously at the end of the scope. If something interrupts the transaction before the end of the scope is reached, none of the changes will commit to the database.
 
 ### Consistency
 
-A consistent DBMS ensures that all the data written to the database follow the defined contraints of the database. In Starcounter, this is solved by raising exceptions when an "illegal" action is carried out within a transaction, such as commiting non-unique values to a field that requires unique values. The exception will in turn make the transaction roll back so that none of the changes are applied.
+A consistent DBMS ensures that all the data written to the database follow the defined contraints of the database. In Starcounter, this is solved by raising exceptions when an illegal action is carried out within a transaction, such as commiting non-unique values to a field that requires unique values. The exception will in turn make the transaction roll back so that none of the changes are applied.
 
 ### Isolation
 
-To make transaction isolated, Starcounter uses [snapshot isolation](https://en.wikipedia.org/wiki/Snapshot_isolation). This means that when a transaction initializes, it takes a snapshot of the database and stores it in a transactional memory. Every transaction sees its own snapshot of the database. For example, an SQL query that executes before a parallel transaction commits will not be able to see the changes made by the transaction because the changes are isolated to that transaction's snapshot of the database. This works no matter how large the database is.
+To make transaction isolated, Starcounter uses [snapshot isolation](https://en.wikipedia.org/wiki/Snapshot_isolation). This means that when a transaction initializes, it takes a snapshot of the database and stores it in a transactional memory. Every transaction operates on its own snapshot of the database. For example, an SQL query that executes before a parallel transaction commits will not be able to see the changes made by the transaction because the changes are isolated to that transaction's snapshot of the database. This works no matter how large the database is.
 
 ### Durability
 
-Durability ensures that commited transactions will survive permanently. Starcounter solves this by writing transactions to a transaction log after commits.
+Durability ensures that committed transactions will have their results recorded permanently. Starcounter solves this by writing transactions to a transaction log after they are committed.
 
-### Concurrency Control
+## Concurrency Control
 
-When multiple users write to the database at the same time, the database engine must ensure that the data is consistent by using atomicity and isolation. For example, if an account reads 100 and you want to update it to 110 and another transaction is simultaneously reading a 100 and wants to update it to 120. Should the result be 110, 120 or 130?
+When multiple users write to the database at the same time, the database engine must ensure that the data is consistent by using atomicity and isolation. For example, imagine the value of a database table cell is `100`, and you update it to `110` in a transaction. At the same time, another transaction is also reading the value of the cell as `100` and updates it to `120`. What should the end result be?
 
 To resolve the problem with multiple transactions accessing the same data, the transaction must be able to handle conflicts. The easiest way to do this is to use locking. If you want your database engine to serve large numbers of users and transactions, locking is slow and expensive and can lead to [deadlocks](http://en.wikipedia.org/wiki/Deadlock). Locking is efficient when conflicts are likely, but is otherwise slow because it always consumes time, even if there are no conflicts. Another word for locking is "pessimistic concurrency control".
 
 A more efficient way of providing concurrency than "pessimistic concurrency control" is "optimistic concurrency control". As the name implies, this concurrency mechanism assumes that conflicts are unlikely, but if conflicts happen, they are still handled. Starcounter uses optimistic concurrency control. Thus, the Starcounter database handles transactions without locking the modified objects. If there are conflicts, the developer can either provide a delegate to execute on conflict or use the `ITransactor.TryTransact` method to retry when there is a conflict.
 
-### `ITransactor.Transact`
+## `ITransactor.Transact`
 
 `ITransactor.Transact` is the simplest way to create a transaction in Starcounter. It declares a transactional scope and runs synchronously, as described above. The argument passed to the ITransactor.Transact method is a delegate containing the code to run within the transaction. In code, it looks like this:
 
@@ -135,7 +131,7 @@ public void SendInvoice(ITransactor transactor, long productId, Customer custome
     transactor.Transact(db =>
     {
         AddInvoiceToDb(invoice);
-    }, 
+    },
     options: new TransactOptions
     (
         onCommit: () => invoice.Send())
@@ -189,8 +185,7 @@ Even if database operations in the same transactions aren't parallelized, databa
 
 #### Async operations within a transaction
 
-It is not recommended to execute any asynchronous operations within a database transaction, especially not those which have side effects.
-Still, Starcounter supports asynchronous transaction delegates.
+It is not recommended to execute any asynchronous operations within a database transaction, especially not those which have side effects. Still, Starcounter supports asynchronous transaction delegates.
 
 The following example demonstrates how to asynchronously save a query result into a file.
 
