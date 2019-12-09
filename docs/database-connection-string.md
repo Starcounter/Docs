@@ -16,7 +16,7 @@ The options are further explored in the sections below.
 
 ### Database
 
-The database option is required in the connection string, and consists of an absolute or relative path to the directory where the Starcounter database files are located, or should be located if they do not yet exist.
+The Database option is required in the connection string, and consists of an absolute or relative path to the directory where the Starcounter database files are located, or should be located if they do not yet exist.
 
 Internally, a Starcounter database is identified by it's physical location on disk and the version of Starcounter that is trying to access it. For example, attempting to start a database located at `/home/databases/TestDatabase` with Starcounter version `3.0.0-00001` will lead to this behavior:
 
