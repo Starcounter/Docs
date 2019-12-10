@@ -4,12 +4,12 @@
 
 Starcounter database can be created with the following options configured.
 
-| Name | Type | Required | Default Value | Description |
-| :--- | :--- | :--- | :--- | :--- |
-| `Collation` | `string` | True | `en-GB-CI-AS` | Database string values collation. |
-| `FirstObjectId` | `ulong` | True | `1` | First object id value. |
-| `LastObjectId` | `ulong` | True | `ulong.MaxValue` | Last object id value. |
-| `LogFileSize` | `int` | True | `256` | Database transaction log file size in [MiB](https://en.wikipedia.org/wiki/Mebibyte). |
+Name            | Type     | Required | Default Value    | Description
+:-------------- | :------- | :------- | :--------------- | :-----------------------------------------------------------------------------------
+`Collation`     | `string` | True     | `en-GB-CI-AS`    | Database string values collation.
+`FirstObjectId` | `ulong`  | True     | `1`              | First object id value.
+`LastObjectId`  | `ulong`  | True     | `ulong.MaxValue` | Last object id value.
+`LogFileSize`   | `int`    | True     | `256`            | Database transaction log file size in [MiB](https://en.wikipedia.org/wiki/Mebibyte).
 
 These values are available to configure via `Starcounter.Database.Bluestar.DatabaseCreationOptions` class. Sample configuration:
 
@@ -24,17 +24,17 @@ services.AddStarcounter("Database=./path/to/db")
     });
 ```
 
-**\*Note**: any of these values is not possible to change after database creation.\*
+***Note**: any of these values is not possible to change after database creation.*
 
 ## The `Collation` option
 
 Currently Starcounter supports the following string collations:
 
-* `en-GB-CI-AS`, English, Case Insensitive, Accent Sensitive.
-* `sv-SE`, Swedish, Case Insensitive, Accent Insensitive.
-* `nb-NO`, Norwegian, Case Insensitive, Accent Insensitive.
-* `en-GB`, English, Case Insensitive, Accent Insensitive.
-* `ru-RU`, Russian, Case Insensitive, Accent Insensitive.
+- `en-GB-CI-AS`, English, Case Insensitive, Accent Sensitive.
+- `sv-SE`, Swedish, Case Insensitive, Accent Insensitive.
+- `nb-NO`, Norwegian, Case Insensitive, Accent Insensitive.
+- `en-GB`, English, Case Insensitive, Accent Insensitive.
+- `ru-RU`, Russian, Case Insensitive, Accent Insensitive.
 
 ## The `FirstObjectId` and `LastObjectId` options
 
@@ -46,6 +46,5 @@ Starcounter streams all database changes to the disk in form of a transaction lo
 
 256 MiB is the optimal value for production, but it can be tweaked if needed.
 
-* For testing purposes it might be beneficial to use smaller transaction log file size, such as 64 MiB.
-* The transaction log file size can be increased to any desired size if it's needed to perform transaction log compression less frequently.
-
+- For testing purposes it might be beneficial to use smaller transaction log file size, such as 64 MiB.
+- The transaction log file size can be increased to any desired size if it's needed to perform transaction log compression less frequently.

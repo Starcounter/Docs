@@ -4,8 +4,7 @@
 
 This is the main database process.
 
-A database can be accessed by only one `scdata` process at a time.
-Attempt to start two or more `scdata` processes for the same database will fail with an exception.
+A database can be accessed by only one `scdata` process at a time. Attempt to start two or more `scdata` processes for the same database will fail with an exception.
 
 ```
 failed to lock storage
@@ -21,16 +20,18 @@ When receiving a request to to start a database, Starcounter starts the correspo
 Let's look at two examples:
 
 An application connects to Starcounter:
-* During startup, the application requests a connection to the database `mydb`, located in the root folder. This is indicated by the `Database=./mydb` segment in the connection string.
-* Starcounter checks the internal version of Starcounter binaries referenced by the **application**, e.g. "3.2.1".
-* Starcounter combines the two above values to form a unique database identity, and uses that to check if the database process is running.
+
+- During startup, the application requests a connection to the database `mydb`, located in the root folder. This is indicated by the `Database=./mydb` segment in the connection string.
+- Starcounter checks the internal version of Starcounter binaries referenced by the **application**, e.g. "3.2.1".
+- Starcounter combines the two above values to form a unique database identity, and uses that to check if the database process is running.
 
 Starcounter tool starts a database:
-* The Starcounter command line interface (CLI) is used to start the database `mydb`. This can be done with the command `dotnet star start ./mydb`.
-* Starcounter checks the internal version of Starcounter binaries referenced by the **tool**, e.g. "3.2.1".
-* Starcounter combines the two above values to form a unique database identity, and uses that to check if the database process is running.
 
-If two requests come to start the same database (same path), but _versions mismatch_, the second request will fail, saying that the database is already started (but with another, incompatible version of the Starcounter binaries). 
+- The Starcounter command line interface (CLI) is used to start the database `mydb`. This can be done with the command `dotnet star start ./mydb`.
+- Starcounter checks the internal version of Starcounter binaries referenced by the **tool**, e.g. "3.2.1".
+- Starcounter combines the two above values to form a unique database identity, and uses that to check if the database process is running.
+
+If two requests come to start the same database (same path), but _versions mismatch_, the second request will fail, saying that the database is already started (but with another, incompatible version of the Starcounter binaries).
 
 The easiest way to assure compatibility is to use the same version of the tool as the version you use for your application.
 
@@ -38,9 +39,8 @@ When a database fails to start, and you suspect that a versioning mismatch may b
 
 1. Find the folder from where the tool or application execute, e.g. `bin\Release`.
 2. There should be a `runtimes\%OS%\native` subfolder in there, where `%OS` would be the platform you are on.
-3. Check the content of the `version.inc` file in that folder.  
+3. Check the content of the `version.inc` file in that folder.
 
 ## The `scdblog` process
 
-This process is responsible for writing, compressing, and archiving database transaction log files.
-No manual interaction is required with this process.
+This process is responsible for writing, compressing, and archiving database transaction log files. No manual interaction is required with this process.

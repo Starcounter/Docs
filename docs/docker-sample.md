@@ -14,8 +14,8 @@ Sample files structure:
 📑 Dockerfile
 ```
 
-* The `App` folder contains a sample Starcounter Console application files.
-* The `Dockerfile` file contains Docker container definition for the app.
+- The `App` folder contains a sample Starcounter Console application files.
+- The `Dockerfile` file contains Docker container definition for the app.
 
 ### `App.csproj`
 
@@ -42,8 +42,8 @@ Sample files structure:
     <!--To inherit the global NuGet package sources remove the <clear/> line below -->
     <clear />
     <add key="local" value="../artifacts" />
-    <add 
-        key="Starcounter" 
+    <add
+        key="Starcounter"
         value="https://www.myget.org/F/starcounter/api/v3/index.json"
     />
     <add key="nuget" value="https://api.nuget.org/v3/index.json" />
@@ -73,7 +73,7 @@ namespace App
     /// <summary>
     /// This simple console application demonstrates how to build a service provider
     /// for the Starcounter services, to fetch service instances from it,
-    /// and then how to use the services to make basic database transactions 
+    /// and then how to use the services to make basic database transactions
     /// with basic database interactions like SQL queries and inserts.
     /// </summary>
     public class Program
@@ -89,7 +89,7 @@ namespace App
             // Here we create a service collection
             // that we add the Starcounter services to.
             // When we call BuildServiceProvider(),
-            // we get an instance that we can use to 
+            // we get an instance that we can use to
             // fetch service instances, for example ITransactor,
             // which we then can use to to make database transactions.
             using var services = new ServiceCollection()
@@ -177,4 +177,3 @@ COPY --from=build /source/App/out ./
 
 ENTRYPOINT ["dotnet", "App.dll"]
 ```
-
