@@ -1,19 +1,21 @@
 # Database creation options
 
-**Note**: Starcounter 3.0.0 is currently in preview stage. This API might be changed in the future releases without backwards compatibility.
-
-Starcounter database can be created with the following options configured.
+When creating a Starcounter database, we can provide the following options to configure it.
 
 Name            | Type     | Required | Default Value    | Description
 :-------------- | :------- | :------- | :--------------- | :-----------------------------------------------------------------------------------
-`Collation`     | `string` | True     | `en-GB-CI-AS`    | Database string values collation.
-`FirstObjectId` | `ulong`  | True     | `1`              | First object id value.
-`LastObjectId`  | `ulong`  | True     | `ulong.MaxValue` | Last object id value.
-`LogFileSize`   | `int`    | True     | `256`            | Database transaction log file size in [MiB](https://en.wikipedia.org/wiki/Mebibyte).
+`Collation`     | `string` | Yes      | `en-GB-CI-AS`    | The collation to use for string values in the database.
+`FirstObjectId` | `ulong`  | Yes      | `1`              | The first [object id](database-classes#database-object-identity) (oid) value.
+`LastObjectId`  | `ulong`  | Yes      | `ulong.MaxValue` | The last [object id](database-classes#database-object-identity) (oid) value.
+`LogFileSize`   | `int`    | Yes      | `256`            | Database transaction log file size in [MiB](https://en.wikipedia.org/wiki/Mebibyte).
 
-These values are available to configure via `Starcounter.Database.Bluestar.DatabaseCreationOptions` class. Sample configuration:
+These options are available to configure via the `Starcounter.Database.Bluestar.DatabaseCreationOptions` class.
+
+Example:
 
 ```csharp
+var services = new ServiceCollection();
+
 services.AddStarcounter("Database=./path/to/db")
     .Configure<Starcounter.Database.Bluestar.DatabaseCreationOptions>(options =>
     {
@@ -24,27 +26,27 @@ services.AddStarcounter("Database=./path/to/db")
     });
 ```
 
-***Note**: any of these values is not possible to change after database creation.*
+***Note**: These options are unchangeable after the database has been created.*
 
-## The `Collation` option
+## `Collation`
 
-Currently Starcounter supports the following string collations:
+The `Collation` option defines the collation to use for string values in the database. Starcounter supports the following string collations:
 
-- `en-GB-CI-AS`, English, Case Insensitive, Accent Sensitive.
-- `sv-SE`, Swedish, Case Insensitive, Accent Insensitive.
-- `nb-NO`, Norwegian, Case Insensitive, Accent Insensitive.
-- `en-GB`, English, Case Insensitive, Accent Insensitive.
-- `ru-RU`, Russian, Case Insensitive, Accent Insensitive.
+- `en-GB-CI-AS`, English, case insensitive, accent sensitive.
+- `sv-SE`, Swedish, case insensitive, accent insensitive.
+- `nb-NO`, Norwegian, case insensitive, accent insensitive.
+- `en-GB`, English, case insensitive, accent insensitive.
+- `ru-RU`, Russian, case insensitive, accent insensitive.
 
-## The `FirstObjectId` and `LastObjectId` options
+## `FirstObjectId` and `LastObjectId`
 
-There options are used to limit range of the object identifiers used by Starcounter to identify objects. Beware that Starcounter will throw an exception if there is no more free values left. Any id value is used only once, and not reused in the future, even if the original object was deleted.
+These options are used to limit range of the [object identifiers](database-classes#database-object-identity) (oid's) used by Starcounter. Every time a new database object is created, a unique oid will be assigned to it. If there is no more unique numbers in the range, an exception will be thrown.
 
 ## The `LogFileSize` option
 
-Starcounter streams all database changes to the disk in form of a transaction log, once the transaction log file grows up to the specified size, it's compressed and a new file created. Any Starcounter database consists of at least two transaction log files, thus the minimal database size is `2 * (transaction log file size)`.
+Starcounter continuously writes database changes to the transaction log on disk. Once the transaction log file grows to the size specified by `LogFileSize`, it's compressed and a new file created. Any Starcounter database consists of at least two transaction log files.
 
 256 MiB is the optimal value for production, but it can be tweaked if needed.
 
 - For testing purposes it might be beneficial to use smaller transaction log file size, such as 64 MiB.
-- The transaction log file size can be increased to any desired size if it's needed to perform transaction log compression less frequently.
+- The transaction log file size can be increased to any desired size to make transaction log compression happen less frequently.
