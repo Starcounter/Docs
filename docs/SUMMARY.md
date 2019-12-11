@@ -12,3 +12,4 @@
 - [Database files](database-files.md)
 - [Database processes](database-processes.md)
 - [Failover cluster](failover-cluster.md)
+- [Error codes](error-codes-md)

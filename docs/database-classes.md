@@ -223,7 +223,9 @@ A database class cannot inherit from a class that's not a database class. It's a
 
 ## Database object identity
 
-Starcounter automatically assigns an unique integer identifier called `Oid` to each database object. The key is unique across all table rows in the entire database. The `IDatabaseContext` type defines methods for working with object `Oid`'s. For the examples above, let's assume that `db` holds a reference to an instance of `IDatabaseContext`, recieved from an `ITransactor` when starting a new database transaction.
+Starcounter automatically assigns an unique integer identifier called `Oid` to each database object. The key is unique across all table rows in the entire database. Any id value is used only once, and not reused in the future, even if the original object was deleted. We can configure the range to use for oid's using the `FirstObjectId` and `LastObjectId` options in the [database creation options](database-creation-options.md).
+
+The `IDatabaseContext` type defines methods for working with object `Oid`'s. For the examples above, let's assume that `db` holds a reference to an instance of `IDatabaseContext`, recieved from an `ITransactor` when starting a new database transaction.
 
 ### Get the `Oid` from a database object
 
