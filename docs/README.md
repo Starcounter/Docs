@@ -25,6 +25,7 @@ Please make sure to read our [End User License Agreement for Starcounter Softwar
   - [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install-win10) is also supported.
 
 - [.NET Core 3.0.100](https://dotnet.microsoft.com/download/dotnet-core/3.0), SDK for development, runtime for production.
+
 - Enough RAM to load database of targeted size.
 - It's recommended to have at least two CPU cores.
 
@@ -203,9 +204,9 @@ namespace StarcounterConsoleSample
 ```
 
 - [Read more about Starcounter database connection string](database-connection-string.md).
-- [Read how to configure Starcounter database options](database-creation-options.md).
+- [Read how to configure Starcounter database creation options](database-creation-options.md).
 
-**For ASP.NET Core application**:
+**For ASP.NET Core applications**:
 
 Update `Startup.cs` class with the following:
 
@@ -249,12 +250,3 @@ Everything should run out of the box.
 - We checked version 16.3.0.
 - Open `StarcounterConsoleSample.csproj` from Visual Studio.
 - Click `Ctrl + F5` to start the application.
-
-## Extra information
-
-_Before asking questions or reporting issues, please read these few lines, and maybe you will find an answer for your question._
-
-- Currently there is no database tooling available except the bare minimum of `dotnet star new` and `dotnet star start` commands.
-- Starting from Starcounter 3.0.0 beta, all required packages will be uploaded to one of the popular providers, such as [NuGet.org](https://www.nuget.org/), [MyGet.org](https://www.myget.org/) or [GitHub Package Registry](https://github.com/features/package-registry).
-- It is recommended to define all database classes and properties as `abstract` to reduce memory footprint when compared to `virtual`. Support for `virtual` properties might be removed in the future.
-- Publishing application in a single file with [`dotnet publish /p:PublishSingleFile=true`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-publish) is not yet supported.
