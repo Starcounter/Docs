@@ -1,17 +1,22 @@
-# Starcounter 3.0 - alpha `20190930`
+# Starcounter 3.0 - release candidate `20191212`
 
 Starcounter 3.0.0 Release Candidate is available for general access.
 
-Download [`Starcounter.3.0.0-alpha-20190930.zip`](https://starcounter.io/Starcounter/Starcounter.3.0.0-alpha-20190930.zip) archive with all required NuGet packages.
+Downloads:
+
+- [`Starcounter.3.0.0-rc-20191212.zip`](https://starcounter.io/Starcounter/Starcounter.3.0.0-rc-20191212.zip) archive with all required NuGet packages.
+- [`star-3.0.0-rc-20191212.zip`](https://starcounter.io/Starcounter/star-3.0.0-rc-20191212.zip) Starcounter command line `star` tool for Windows.
+- [`star-3.0.0-rc-20191212.tar.gz`](https://starcounter.io/Starcounter/star-3.0.0-rc-20191212.tar.gz) Starcounter command line `star` tool for Linux.
 
 Please make sure to read our [End User License Agreement for Starcounter Software](https://starcounter.com/wp-content/themes/starcounter-custom/assets/docs/Starcounter_EULA.pdf).
 
-## Starcounter 3.0 alpha `20190930` main changes
+## Starcounter 3.0 release candidate `20191212` main changes
 
-- Starcounter database access is now provided with a [`Microsoft.Extensions.DependencyInjection`](https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection/) service.
-- `Starcounter.Star.Tool` is no longer required to manipulate and communicate with the database.
-- It is now possible to deploy Starcounter applications with `dotnet publish` command and [run them in a Docker container](docker-sample.md).
-- Overall performance has been significantly improved with multiple optimizations in the communication layer between application and the database.
+- [Starcounter failover](failover-cluster.md) setup using Windows Failover Cluster.
+- The `star` tool is a cross-platform console application with SQL REPL & database import/export features.
+- Starcounter apps can now be distributed as a regular .NET Core app in framework dependent and self contained modes.  [Read more](publish-app.md).
+- It's now possible to execute DML & DDL SQL statements using the `star` tool.
+- Starcounter namespace has been changed from `Starcounter.Nova.App` to `Starcounter.Database`.
 
 ### Dependency Injection (DI) and Starcounter
 
@@ -23,12 +28,13 @@ Please make sure to read our [End User License Agreement for Starcounter Softwar
 - [Ubuntu 18.04.02 x64](https://ubuntu.com/download/desktop) or [Windows 10 Pro x64 Build 1903](https://www.microsoft.com/en-us/software-download/windows10).
 
   - [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install-win10) is also supported.
+  - [Ubuntu 19.10 x64](https://ubuntu.com/download/desktop) is also supported.
 
 - [.NET Core 3.0.100](https://dotnet.microsoft.com/download/dotnet-core/3.0), SDK for development, runtime for production.
 - Enough RAM to load database of targeted size.
 - It's recommended to have at least two CPU cores.
 
-**Note**: Due to the alpha state of this release we cannot provide any guarantees, but we monitor our [GitHub: Starcounter/Home](https://github.com/Starcounter/Home/issues) issue tracker and stand ready to assist with any potential issues.
+**Note**: Please let us know if you have any issues trying or installting Starcounter. We monitor our [GitHub: Starcounter/Home](https://github.com/Starcounter/Home/issues) issue tracker and stand ready to assist.
 
 ## Installation
 
@@ -36,8 +42,8 @@ Please make sure to read our [End User License Agreement for Starcounter Softwar
 
 ### Binaries
 
-- Create a folder for Starcounter binaries, for example `Starcounter.3.0.0-alpha-20190930`.
-- Download [`Starcounter.3.0.0-alpha-20190930.zip`](https://starcounter.io/Starcounter/Starcounter.3.0.0-alpha-20190930.zip) into the folder.
+- Create a folder for Starcounter binaries, for example `Starcounter.3.0.0-rc-20191212`.
+- Download [`Starcounter.3.0.0-rc-20191212.zip`](https://starcounter.io/Starcounter/Starcounter.3.0.0-rc-20191212.zip) into the folder.
 - Unzip downloaded archive into the folder.
 
 #### Windows 10
@@ -46,7 +52,7 @@ On Windows Starcounter requires x64 version of Visual C++ to be installed. Downl
 
 [The latest supported Visual C++ downloads](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads).
 
-#### Ubuntu 18.04 & 19.04
+#### Ubuntu 18.04 & 19.10
 
 **Install prerequisites.**
 
@@ -67,10 +73,10 @@ sudo apt-get install swi-prolog-nox=7.\*
 
 ```text
 cd $HOME
-mkdir Starcounter.3.0.0-alpha-20190930
-cd Starcounter.3.0.0-alpha-20190930
-wget https://starcounter.io/Starcounter/Starcounter.3.0.0-alpha-20190930.zip
-unzip Starcounter.3.0.0-alpha-20190930.zip
+mkdir Starcounter.3.0.0-rc-20191212
+cd Starcounter.3.0.0-rc-20191212
+wget https://starcounter.io/Starcounter/Starcounter.3.0.0-rc-20191212.zip
+unzip Starcounter.3.0.0-rc-20191212.zip
 ```
 
 ### Application
@@ -105,7 +111,7 @@ Create `nuget.config` file and add required package sources:
 <configuration>
   <packageSources>
     <clear />
-    <add key="local" value="[Starcounter.3.0.0-alpha-20190930]" />
+    <add key="local" value="[Starcounter.3.0.0-rc-20191212]" />
     <add key="Starcounter" value="https://www.myget.org/F/starcounter/api/v2" />
     <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />
   </packageSources>
@@ -116,7 +122,7 @@ Create `nuget.config` file and add required package sources:
 
 Visual Studio requires manual NuGet package sources configuration. For this go to the `Tools → Options → NuGet Package Manager → Package Sources` menu then add `local` and `Starcounter` feeds.
 
-**Note**: Replace the `[Starcounter.3.0.0-alpha-20190930]` value with actual path to the folder with unzipped Starcounter binaries.
+**Note**: Replace the `[Starcounter.3.0.0-rc-20191212]` value with actual path to the folder with unzipped Starcounter binaries.
 
 **Add Starcounter.Database package reference**
 
@@ -254,7 +260,4 @@ Everything should run out of the box.
 
 _Before asking questions or reporting issues, please read these few lines, and maybe you will find an answer for your question._
 
-- Currently there is no database tooling available except the bare minimum of `dotnet star new` and `dotnet star start` commands.
-- Starting from Starcounter 3.0.0 beta, all required packages will be uploaded to one of the popular providers, such as [NuGet.org](https://www.nuget.org/), [MyGet.org](https://www.myget.org/) or [GitHub Package Registry](https://github.com/features/package-registry).
-- It is recommended to define all database classes and properties as `abstract` to reduce memory footprint when compared to `virtual`. Support for `virtual` properties might be removed in the future.
 - Publishing application in a single file with [`dotnet publish /p:PublishSingleFile=true`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-publish) is not yet supported.
