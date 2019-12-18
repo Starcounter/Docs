@@ -7,7 +7,7 @@ The current release introduces new _`SC` framework API_ based on dependency inje
 In this release, database access and operations are provided via two main Starcounter services.
 
 - `Starcounter.Database.ITransactor` - provides database transactions and data manipulation ([DML](https://en.wikipedia.org/wiki/Data_manipulation_language)) API.
-- `Starcounter.Database.IDdlExecutor` - provides data definition ([DML](https://en.wikipedia.org/wiki/Data_definition_language)) API.
+- `Starcounter.Database.IDdlExecutor` - provides data definition ([DDL](https://en.wikipedia.org/wiki/Data_definition_language)) API.
 
 The purpose of the current release is to polish the new `SC` framework API and approve it with the customers. In the future public releases we plan to introduce a so-called _static API_ serving same purpose as `Db` class in Starcounter 2.x, yet free from known flaws and _strictly_ built on top of the new `SC` framework API.
 
