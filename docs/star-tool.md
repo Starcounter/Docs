@@ -124,7 +124,7 @@ star list table -u -f tb C:\databases\mydb
 star list index [options] <db> <table>
 ```
 
-The `list index` sub-command lists all indexes in the table the name of which is specified by the `<table>` argument, in the database referenced by the absolute or relative path given in the `<db>` argument. The following options are available to configure the output of the commmand:
+The `list index` sub-command lists all indexes in a table, the name of which is specified by the `<table>` argument, in the database referenced by the absolute or relative path given in the `<db>` argument. The following options are available to configure the output of the commmand:
 
 Option        | Short form | Description
 ------------- | ---------- | --------------------------------------------------------------------------------------------
@@ -159,7 +159,7 @@ The `info` command is used together with one of the following sub-commands to pr
 star info table [options] <db> <table>
 ```
 
-The `info table` sub-command prints detailed information about a table, the name of which is specified in the `<table>` argument, of the database referenced by the absolute or relative path given in the `<db>` argument. The following options are available to configure the output of the commmand:
+The `info table` sub-command prints detailed information about a table, the name of which is specified in the `<table>` argument, in the database referenced by the absolute or relative path given in the `<db>` argument. The following options are available to configure the output of the commmand:
 
 Option        | Short form | Description
 ------------- | ---------- | --------------------------------------------------------------------------------------------
@@ -188,7 +188,7 @@ star info table -u -i -f ct C:\databases\mydb MyApp.Superhero
 star info index [options] <db> <index>
 ```
 
-The `info index` sub-command prints detailed information about an index, the name of which is specified in the `<index>` argument, of the database referenced by the absolute or relative path given in the `<db>` argument. The following options are available to configure the output of the commmand:
+The `info index` sub-command prints detailed information about an index, the name of which is specified in the `<index>` argument, in the database referenced by the absolute or relative path given in the `<db>` argument. The following options are available to configure the output of the commmand:
 
 Option     | Short form | Description
 ---------- | ---------- | --------------------------------------------------------------------------------------------
