@@ -24,12 +24,12 @@ DROP INDEX IX_IndexName ON TableName
 CREATE TABLE TableName
 (
     BooleanColumn boolean,
-	DecimalColumn decimal,
-	DoubleColumn double,
-	FloatColumn, float,
-	IntColumn int,
-	UIntColumn uint,
-	TextColumn text
+    DecimalColumn decimal,
+    DoubleColumn double,
+    FloatColumn, float,
+    IntColumn int,
+    UIntColumn uint,
+    TextColumn text
 )
 ```
 
