@@ -52,7 +52,7 @@ On Windows Starcounter requires x64 version of Visual C++ to be installed. Downl
 
 [The latest supported Visual C++ downloads](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads).
 
-Make sure to `Unblock` archive after downloading prior to extracting it. See the screenshot below:
+Make sure to `Unblock` the archive after downloading prior to extracting it. See the screenshot below:
 
 ![](images/zip-archive-unblock.png)
 
