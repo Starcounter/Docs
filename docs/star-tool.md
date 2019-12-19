@@ -109,8 +109,8 @@ Option     | Short form | Description
 
 Formatting options:
 
-- `t` – The name of the table to list.
-- `b` – The name of the base table (if inherited) of the table to list.
+- `t` – Include the name of the table to list.
+- `b` – Include the name of the base table (if inherited) of the table to list.
 
 To list all tables of an existing database located at `C:\databases\mydb`, including only user tables but both the name of the table and the name of its base table (if any), we run:
 
@@ -135,9 +135,9 @@ Option        | Short form | Description
 
 Formatting options:
 
-- `i` – The name of the index to list.
-- `t` – The name of the table of the index.
-- `u` – Whether or not the index is unique.
+- `i` – Include the name of the index to list.
+- `t` – Include the name of the table of the index.
+- `u` – Include whether or not the index is unique.
 
 To list all indexes of the table `MyApp.Superhero`, of an existing database located at `C:\databases\mydb`, including both user indexes and system indexes and both the name of the index and whether it's unique, we run:
 
@@ -170,11 +170,11 @@ Option        | Short form | Description
 
 Formatting options:
 
-- `c` – The name of the columns of the table to list.
-- `t` – The datatype of the columns of the table to list.
-- `n` – For each column, whether it accepts null values in table cells.
-- `i` – For each column, whether it is inherited.
-- `b` – The name of the table of the column.
+- `c` – Include the name of the columns of the table to list.
+- `t` – Include the datatype of the columns of the table to list.
+- `n` – For each column, include whether it accepts null values in table cells.
+- `i` – For each column, include whether it is inherited.
+- `b` – Include the name of the table of the column.
 
 To list all user columns of the `MyApp.Superhero` table of an existing database located at `C:\databases\mydb`, including inherited columns and listing only the the names and the datatypes of columns, we run:
 
@@ -196,8 +196,8 @@ Option     | Short form | Description
 
 Formatting options:
 
-- `c` – The name of the column that the index is registered on.
-- `b` – The name of the table that holds the column that the index is registered on.
+- `c` – Include the name of the column that the index is registered on.
+- `b` – Include the name of the table that holds the column that the index is registered on.
 
 To list all indexes of the `MyApp.Superhero` table of an existing database located at `C:\databases\mydb`, including only the name of the column of the index, we run:
 
