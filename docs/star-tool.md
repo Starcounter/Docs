@@ -65,7 +65,7 @@ star start C:\databases\mydb
 star reload [options] <db> <file>
 ```
 
-The `reload` command takes data from an SQLite database file referenced by the absolute or relative path in the `<file>` argument and imports that data column for column into the database referenced by the absolute or relative path given in the `<db>` argument. To load data from an SQLite database file named `myDatabase.sqlite3` located in `C:\databases` into an existing database located at `C:\databases\mydb`, we run:
+The `reload` command takes data from an SQLite database file referenced by the absolute or relative path in the `<file>` argument and imports that data into the database referenced by the absolute or relative path given in the `<db>` argument. To load data from an SQLite database file named `myDatabase.sqlite3` located in `C:\databases` into an existing database located at `C:\databases\mydb`, we run:
 
 ```
 star reload C:\databases\mydb C:\databases\myDatabase.sqlite3
