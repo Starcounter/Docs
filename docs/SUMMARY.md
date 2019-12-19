@@ -14,3 +14,4 @@
 - [Failover cluster](failover-cluster.md)
 - [Error codes](error-codes-md)
 - [`star` tool](star-tool.md)
+- [SQL Queries](sql/README.md)

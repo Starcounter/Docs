@@ -2,11 +2,11 @@
 
 The `star` tool is a cross-platform command-line tool, distributed as a stand-alone console application, used to manage Starcounter databases and applications. By using the `star` tool, you can – for example – create, modify, delete and query Starcounter databases, as well as import and export data from compatible 3:rd party data sources.
 
-The easiest way to expore the features of the `star` tool is to use it, in particular with the `--help` option, which prints help information about available commands and options. In this article, we will provide a reference for the available commands and describe some common use cases.
+The easiest way to explore the features of the `star` tool is to use it, in particular with the `--help` option, which prints help information about available commands and options. In this article, we will provide a reference for the available commands and describe some common use cases.
 
 ## Distribution
 
-The Windows and Linux versions of the tool are downloaded together with the main [Starcounter binaries](README.md#installation). For Linux operating systems, make sure to also install the prerequisites listed at the [installation page](README.md#installation).
+The Windows and Linux versions of the tool are downloaded together with the main [Starcounter binaries](README.md#installation). For Linux operating systems, make sure to also install the prerequisites listed at the [installation page](README.md#installation) and grant execution permissions (`chmod -R u+x /path/to/star/tool/folder`).
 
 ## Usage
 
@@ -71,6 +71,8 @@ The `reload` command takes data from an SQLite database file referenced by the a
 star reload C:\databases\mydb C:\databases\myDatabase.sqlite3
 ```
 
+*Note: only files created with the `unload` command can be reloaded.*
+
 ##### `unload`
 
 ```
@@ -99,7 +101,7 @@ The `list` command is used together with one of the following sub-commands to li
 star list table [options] <db>
 ```
 
-The `list table` sub-command lists all tables in the database referenced by the absolute or relative path given in the `<db>` argument. The following options are available to configure the output of the commmand:
+The `list table` sub-command lists all tables in the database referenced by the absolute or relative path given in the `<db>` argument. The following options are available to configure the output of the command:
 
 Option     | Short form | Description
 ---------- | ---------- | ----------------------------------------------------------------------------------------
@@ -112,7 +114,7 @@ Formatting options:
 - `t` – Include the name of the table to list.
 - `b` – Include the name of the base table (if inherited) of the table to list.
 
-To list all tables of an existing database located at `C:\databases\mydb`, including only user tables but both the name of the table and the name of its base table (if any), we run:
+To list all tables of an existing database located at `C:\databases\mydb`, including only user tables and displaying both the name of the table and the name of its base table (if any), we run:
 
 ```
 star list table -u -f tb C:\databases\mydb
@@ -159,7 +161,7 @@ The `info` command is used together with one of the following sub-commands to pr
 star info table [options] <db> <table>
 ```
 
-The `info table` sub-command prints detailed information about a table, the name of which is specified in the `<table>` argument, in the database referenced by the absolute or relative path given in the `<db>` argument. The following options are available to configure the output of the commmand:
+The `info table` sub-command prints detailed information about a table, the name of which is specified in the `<table>` argument, in the database referenced by the absolute or relative path given in the `<db>` argument. The following options are available to configure the output of the command:
 
 Option        | Short form | Description
 ------------- | ---------- | --------------------------------------------------------------------------------------------
@@ -176,7 +178,7 @@ Formatting options:
 - `i` – For each column, include whether it is inherited.
 - `b` – Include the name of the table of the column.
 
-To list all user columns of the `MyApp.Superhero` table of an existing database located at `C:\databases\mydb`, including inherited columns and listing only the the names and the datatypes of columns, we run:
+To list all user columns of the `MyApp.Superhero` table of an existing database located at `C:\databases\mydb`, including inherited columns and listing only the names and the datatypes of columns, we run:
 
 ```
 star info table -u -i -f ct C:\databases\mydb MyApp.Superhero
@@ -188,7 +190,7 @@ star info table -u -i -f ct C:\databases\mydb MyApp.Superhero
 star info index [options] <db> <index>
 ```
 
-The `info index` sub-command prints detailed information about an index, the name of which is specified in the `<index>` argument, in the database referenced by the absolute or relative path given in the `<db>` argument. The following options are available to configure the output of the commmand:
+The `info index` sub-command prints detailed information about an index, the name of which is specified in the `<index>` argument, in the database referenced by the absolute or relative path given in the `<db>` argument. The following options are available to configure the output of the command:
 
 Option     | Short form | Description
 ---------- | ---------- | --------------------------------------------------------------------------------------------
