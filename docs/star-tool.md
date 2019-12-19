@@ -6,7 +6,7 @@ The easiest way to expore the features of the `star` tool is to use it, in parti
 
 ## Distribution
 
-The Windows and Linux versions of the tool are downloaded together with the main [Starcounter binaries](README.md#installation). For Linux operating systems, make sure to also install the prerequisites listed at the [installation page](README.md#installation).
+The Windows and Linux versions of the tool are downloaded together with the main [Starcounter binaries](README.md#installation). For Linux operating systems, make sure to also install the prerequisites listed at the [installation page](README.md#installation) and grant execution permissions (`chmod -R u+x /path/to/star/tool/folder`).
 
 ## Usage
 
