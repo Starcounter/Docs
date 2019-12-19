@@ -71,6 +71,8 @@ The `reload` command takes data from an SQLite database file referenced by the a
 star reload C:\databases\mydb C:\databases\myDatabase.sqlite3
 ```
 
+*Note: only files created with the `unload` command can be reloaded.*
+
 ##### `unload`
 
 ```
