@@ -24,7 +24,7 @@ In examples below, Windows-style directory paths are used. On Linux operating sy
 
 ### Commands
 
-The available commands can be split into three categories:
+The available commands can be split into four categories:
 
 - [Database management commands](#database-management), used for creating and starting databases.
 - [Import and export commands](#import-and-export), used for importing and exporting data to or from SQLite database files.
