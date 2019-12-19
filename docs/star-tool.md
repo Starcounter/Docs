@@ -198,7 +198,7 @@ Option     | Short form | Description
 
 Formatting options:
 
-- `c` – The name of the columns that the index is registered on.
+- `c` – The name of the column that the index is registered on.
 - `b` – The name of the table that holds the column that the index is registered on.
 
 To list all indexes of the `MyApp.Superhero` table of an existing database located at `C:\databases\mydb`, including only the name of the column of the index, we run:
