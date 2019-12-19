@@ -39,7 +39,7 @@ DROP TABLE TableName
 
 #### Starcounter database vs .NET CLR data types
 
-Starcounter database data types do not have one to one match with .NET CLR data types.
+There is no one to one match between Starcounter database data types and .NET CLR data types.
 
 Use the following table to translate .NET CLR data types into Starcounter database data types.
 
