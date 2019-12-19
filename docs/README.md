@@ -126,7 +126,7 @@ Create `nuget.config` file and add required package sources:
 
 Visual Studio requires manual NuGet package sources configuration. For this go to the `Tools → Options → NuGet Package Manager → Package Sources` menu then add `local` and `Starcounter` feeds.
 
-**Note**: Replace the `[Starcounter.3.0.0-rc-20191212]` value with actual path to the folder with unzipped Starcounter binaries.
+**Note**: Replace the `[Starcounter.3.0.0-rc-20191212]` value with the actual path to the folder with unzipped Starcounter binaries.
 
 **Add Starcounter.Database package reference**
 
