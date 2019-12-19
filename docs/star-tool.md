@@ -2,7 +2,7 @@
 
 The `star` tool is a cross-platform command-line tool, distributed as a stand-alone console application, used to manage Starcounter databases and applications. By using the `star` tool, you can – for example – create, modify, delete and query Starcounter databases, as well as import and export data from compatible 3:rd party data sources.
 
-The easiest way to expore the features of the `star` tool is to use it, in particular with the `--help` option, which prints help information about available commands and options. In this article, we will provide a reference for the available commands and describe some common use cases.
+The easiest way to explore the features of the `star` tool is to use it, in particular with the `--help` option, which prints help information about available commands and options. In this article, we will provide a reference for the available commands and describe some common use cases.
 
 ## Distribution
 
