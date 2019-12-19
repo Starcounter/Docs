@@ -114,7 +114,7 @@ Formatting options:
 - `t` – The name of the table to list.
 - `b` – The name of the base table (if inherited) of the table to list.
 
-To list all tables of an existing database located at `C:\databases\mydb`, including only user tables but both the name of the table and the name of its base table (if any), we run:
+To list all tables of an existing database located at `C:\databases\mydb`, including only user tables and displaying both the name of the table and the name of its base table (if any), we run:
 
 ```
 star list table -u -f tb C:\databases\mydb
