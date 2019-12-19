@@ -34,7 +34,7 @@ Please make sure to read our [End User License Agreement for Starcounter Softwar
 - Enough RAM to load database of targeted size.
 - It's recommended to have at least two CPU cores.
 
-**Note**: Please let us know if you have any issues trying or installting Starcounter. We monitor our [GitHub: Starcounter/Home](https://github.com/Starcounter/Home/issues) issue tracker and stand ready to assist.
+**Note**: Please let us know if you encounter any issues while working with Starcounter. We monitor our [GitHub: Starcounter/Home](https://github.com/Starcounter/Home/issues) issue tracker and stand ready to assist.
 
 ## Installation
 
