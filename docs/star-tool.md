@@ -77,7 +77,7 @@ star reload C:\databases\mydb C:\databases\myDatabase.sqlite3
 star unload [options] <db> <file>
 ```
 
-The `unload` command selects the SQLite database file at the path given in the `<file>` argument, or creates one if it doesn't exists, then takes data from a database referenced by the absolute or relative path given in the `<db>` argument and imports that data into the created SQLite database. To load data from an existing database located at `C:\databases\mydb` into a new SQLite database file named `myDatabase.sqlite3` at `C:\databases`, we run:
+The `unload` command selects the SQLite database file at the path given in the `<file>` argument, or creates one if it doesn't exists, and then takes data from a database referenced by the absolute or relative path given in the `<db>` argument and imports that data into the created SQLite database. To load data from an existing database located at `C:\databases\mydb` into a new SQLite database file named `myDatabase.sqlite3` at `C:\databases`, we run:
 
 ```
 star unload C:\databases\mydb C:\databases\myDatabase.sqlite3
