@@ -101,7 +101,7 @@ The `list` command is used together with one of the following sub-commands to li
 star list table [options] <db>
 ```
 
-The `list table` sub-command lists all tables in the database referenced by the absolute or relative path given in the `<db>` argument. The following options are available to configure the output of the commmand:
+The `list table` sub-command lists all tables in the database referenced by the absolute or relative path given in the `<db>` argument. The following options are available to configure the output of the command:
 
 Option     | Short form | Description
 ---------- | ---------- | ----------------------------------------------------------------------------------------
