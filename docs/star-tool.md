@@ -178,7 +178,7 @@ Formatting options:
 - `i` – For each column, whether it is inherited.
 - `b` – The name of the table of the column.
 
-To list all user columns of the `MyApp.Superhero` table of an existing database located at `C:\databases\mydb`, including inherited columns and listing only the the names and the datatypes of columns, we run:
+To list all user columns of the `MyApp.Superhero` table of an existing database located at `C:\databases\mydb`, including inherited columns and listing only the names and the datatypes of columns, we run:
 
 ```
 star info table -u -i -f ct C:\databases\mydb MyApp.Superhero
