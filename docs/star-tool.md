@@ -190,7 +190,7 @@ star info table -u -i -f ct C:\databases\mydb MyApp.Superhero
 star info index [options] <db> <index>
 ```
 
-The `info index` sub-command prints detailed information about an index, the name of which is specified in the `<index>` argument, in the database referenced by the absolute or relative path given in the `<db>` argument. The following options are available to configure the output of the commmand:
+The `info index` sub-command prints detailed information about an index, the name of which is specified in the `<index>` argument, in the database referenced by the absolute or relative path given in the `<db>` argument. The following options are available to configure the output of the command:
 
 Option     | Short form | Description
 ---------- | ---------- | --------------------------------------------------------------------------------------------
