@@ -12,7 +12,7 @@ Versions that are already released should not be touched. At the time of this wr
 
 If the change applies to 2.3.2, 2.3.2 should be merged into 2.4 to ensure that 2.4 is always ahead of 2.3.2 - similar to how we treat source-code. 
 
-When merging, beware of merge conflicts. There might be structural differences between versions, so merge conflicts might not always be straightforward to resolve. Ask for help from the maintainer (@Mackiovello) when in doubt.
+When merging, beware of merge conflicts. There might be structural differences between versions, so merge conflicts might not always be straightforward to resolve. Ask for help from the maintainer (@miyconst) when in doubt.
 
 ## Reviews
 
@@ -31,6 +31,6 @@ To make it easier for the reader to skim through the pages, we're trying to keep
 
 ## Editing on docs.starcounter.io
 
-In addition to pushing to GitHub, it's also possible to edit directly in the browser on docs.starcounter.io. These changes are then automatically synced to GitHub. To edit directly on docs.starcounter.io, you have to have the correct authorization. To get authorization, contact @Mackiovello.
+In addition to pushing to GitHub, it's also possible to edit directly in the browser on docs.starcounter.io. These changes are then automatically synced to GitHub. To edit directly on docs.starcounter.io, you have to have the correct authorization. To get authorization, contact @miyconst.
 
 Editing directly is appropriate when moving pages or making other structural changes. By doing that in the web interface, GitBook will handle paths and other related things. It's also useful to edit in the browser when you're using more visual elements, such as hints, API blocks, or tabs, since that allows you to see how it looks before publishing. 
