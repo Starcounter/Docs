@@ -2,7 +2,7 @@
 
 ## Data Manipulation Language (DML) Queries
 
-Starcounter 3.0 has inherited SQL Query Processor from Starcounter 2.3.2. Please refere to the (original documentation)[https://docs.starcounter.io/v/2.3.2/guides/sql] for the full specification.
+Starcounter 3.0 has the same SQL Query Processor as Starcounter 2.3.2. Please refer to the (original documentation)[https://docs.starcounter.io/v/2.3.2/guides/sql] for the full specification.
 
 ## Data Definition Language (DDL) Queries
 
