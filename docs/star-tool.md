@@ -161,7 +161,7 @@ The `info` command is used together with one of the following sub-commands to pr
 star info table [options] <db> <table>
 ```
 
-The `info table` sub-command prints detailed information about a table, the name of which is specified in the `<table>` argument, in the database referenced by the absolute or relative path given in the `<db>` argument. The following options are available to configure the output of the commmand:
+The `info table` sub-command prints detailed information about a table, the name of which is specified in the `<table>` argument, in the database referenced by the absolute or relative path given in the `<db>` argument. The following options are available to configure the output of the command:
 
 Option        | Short form | Description
 ------------- | ---------- | --------------------------------------------------------------------------------------------
