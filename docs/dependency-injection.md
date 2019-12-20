@@ -1,26 +1,25 @@
-# Starcounter database access API with Microsoft Dependency Injection services
+# Database access with Dependency Injection \(DI\)
 
 Starting from this version, static Starcounter 2.x style `Db` class has been removed.
 
-The current release introduces new _`SC` framework API_ based on dependency injection (DI), which has been for long time requested by the majority of our users.
+The current release introduces new _`SC` framework API_ based on dependency injection \(DI\), which has been for long time requested by the majority of our users.
 
 In this release, database access and operations are provided via two main Starcounter services.
 
-- `Starcounter.Nova.Hosting.ITransactor` - provides database transactions and data manipulation ([DML](https://en.wikipedia.org/wiki/Data_manipulation_language)) API.
-- `Starcounter.Nova.Hosting.IDdlExecutor` - provides data definition ([DML](https://en.wikipedia.org/wiki/Data_definition_language)) API.
+* `Starcounter.Nova.Hosting.ITransactor` - provides database transactions and data manipulation \([DML](https://en.wikipedia.org/wiki/Data_manipulation_language)\) API.
+* `Starcounter.Nova.Hosting.IDdlExecutor` - provides data definition \([DML](https://en.wikipedia.org/wiki/Data_definition_language)\) API.
 
 The purpose of the current release is to polish the new `SC` framework API and approve it with the customers. In the future public releases we plan to introduce a so-called _static API_ serving same purpose as `Db` class in Starcounter 2.x, yet free from known flaws and _strictly_ built on top of the new `SC` framework API.
 
-## Why Dependency Injection (DI)?
+## Why Dependency Injection \(DI\)?
 
-One of the major disadvantages of the static classes usage is inability to test such code with unit tests.
-With Dependency Injection it is possible to mock tested services and write unit tests for the application.
+One of the major disadvantages of the static classes usage is inability to test such code with unit tests. With Dependency Injection it is possible to mock tested services and write unit tests for the application.
 
 Furthermore, current approach reduces possibilities for invalid database access:
 
-- Attempt to create a new database object without a transaction.
-- Attempt to access a database object without a transaction.
-- Attempt to execute a DDL statement within a transaction.
+* Attempt to create a new database object without a transaction.
+* Attempt to access a database object without a transaction.
+* Attempt to execute a DDL statement within a transaction.
 
 Read more about Dependency Injection - [Design Patterns Explained – Dependency Injection with Code Examples](https://stackify.com/dependency-injection/).
 
@@ -28,24 +27,23 @@ Read more about Dependency Injection - [Design Patterns Explained – Dependency
 
 #### Database DML & DDL operations
 
-Previously `Db.SQL` method was responsible for all kind of SQL statements.
-This led to a confusion, when developers tried to execute DDL statements within a transaction and access database without a transaction.
+Previously `Db.SQL` method was responsible for all kind of SQL statements. This led to a confusion, when developers tried to execute DDL statements within a transaction and access database without a transaction.
 
-```cs
+```csharp
 Db.Transact(() =>
 {
     // This is a valid database access.
     // DML operations require a database transaction.
     Db.SQL("SELECT i FROM Item i");
-    
+
     // This is an invalid database access.
     // DDL operations cannot be executed within a transaction.
     Db.SQL("CREATE INDEX IX_Item ON Item (Name)");
-    
+
     // This is a valid database object creation.
     // DML operations require a database transaction.
     var newItem = Db.Insert<Item>();
-    
+
     // This is a valid database object access.
     // DML operations require a database transaction.
     var existingItem = Db.Get<Item>(1);
@@ -62,12 +60,11 @@ var existingItem = Db.Get<Item>(1);
 existingItem.Name = "Invalid";
 ```
 
-With introduction of the `ITransactor` and `IDdlExecutor` database services it is easier to follow the code flow and database interaction.
-The `Insert` and `Get` database operations are only available within a transaction.
+With introduction of the `ITransactor` and `IDdlExecutor` database services it is easier to follow the code flow and database interaction. The `Insert` and `Get` database operations are only available within a transaction.
 
 ## ASP.NET Core `DbAccessController` sample
 
-```cs
+```csharp
 using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
@@ -148,3 +145,4 @@ namespace DiSample.Controllers
     }
 }
 ```
+

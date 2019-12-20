@@ -1,4 +1,4 @@
-# Starcounter 3.0 - alpha `20190930`
+# Introduction
 
 The next alpha version of Starcounter 3.0.0, codenamed Nova, is available for general access.
 
@@ -13,10 +13,10 @@ Please make sure to read our [End User License Agreement for Starcounter Softwar
 * It is now possible to deploy Starcounter applications with `dotnet publish` command and [run them in a Docker container](docker-sample.md).
 * Overall performance has been significantly improved with multiple optimizations in the communication layer between application and the database.
 
-### Dependency Injection (DI) and Starcounter
+### Dependency Injection \(DI\) and Starcounter
 
-- Read more about Dependency Injection on the official Microsoft documentation page - [Dependency injection in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.0).
-- Checkout [ASP.NET Core sample](dependency-injection.md) controller with Starcounter database access using Dependency Injection (DI).
+* Read more about Dependency Injection on the official Microsoft documentation page - [Dependency injection in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.0).
+* Checkout [ASP.NET Core sample](dependency-injection.md) controller with Starcounter database access using Dependency Injection \(DI\).
 
 ## Requirements
 
@@ -144,7 +144,7 @@ namespace StarcounterConsoleSample
                 + "OpenMode=CreateIfNotExists;"
                 + "StartMode=StartIfNotRunning;"
                 + "StopMode=IfWeStarted";
-        
+
             // Here we create a service collection that
             // we add the Starcounter services to.
             // When we call BuildServiceProvider(), we get an instance
@@ -217,7 +217,7 @@ namespace StarcounterMvcSample
                 + "OpenMode=CreateIfNotExists;"
                 + "StartMode=StartIfNotRunning;"
                 + "StopMode=IfWeStarted";
-                
+
             // This adds and configures Starcounter services to our application, for
             // example ITransactor, that allows us to create database transactions.
             services.AddStarcounter(connectionString);

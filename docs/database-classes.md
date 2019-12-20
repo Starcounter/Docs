@@ -264,22 +264,22 @@ transactor.Transact(db =>
     Console.WriteLine(firstProduct.Equals(anotherFirstProduct)); // => true
 
     // Returns false for different object or objects retrieved from the database
-    
+
     // Writes: false
     Console.WriteLine(firstProduct == secondProduct);
-    
+
     // Writes: false
     Console.WriteLine(firstProduct == anotherFirstProduct);
-    
+
     // Writes: true
     Console.WriteLine(firstProduct == firstProduct);
-    
+
     // Writes: false
     Console.WriteLine(object.ReferenceEquals(firstProduct, secondProduct));
-    
+
     // Writes: false
     Console.WriteLine(object.ReferenceEquals(firstProduct, anotherFirstProduct));
-    
+
     // Writes: true
     Console.WriteLine(object.ReferenceEquals(firstProduct, firstProduct));
 });
