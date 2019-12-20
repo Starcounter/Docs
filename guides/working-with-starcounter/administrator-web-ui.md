@@ -95,7 +95,7 @@ Click the `Download` button to download an app. Downloaded apps can be controlle
 
 You can launch an application in a database by going to `localhost:8181/#/databases/default/executabeStart`. Specify the path to your `.exe` application in the field. 
 
-![](../../.gitbook/assets/capture%20%281%29.PNG)
+![](../../.gitbook/assets/capture.PNG)
 
 ## Database Configuration
 
@@ -122,8 +122,6 @@ Go to `localhost:8181/#/server/network` to see internal environment, the informa
 ## Server Configuration
 
 The system port and gateway port can be changed at `localhost:8181/#/server/settings`.
-
-![](../../.gitbook/assets/capture.PNG)
 
 The "Allow Remote Access" option determines if the Administrator accepts requests from outside localhost. If it's set to "yes", any other machine in the same network can access the Administrator and if it's "no", then the Administrator will only accept requests from localhost. The default value is "no". 
 
