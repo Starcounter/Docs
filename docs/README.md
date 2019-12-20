@@ -31,6 +31,7 @@ Please make sure to read our [End User License Agreement for Starcounter Softwar
   - [Ubuntu 19.10 x64](https://ubuntu.com/download/desktop) is also supported.
 
 - [.NET Core 3.0.100](https://dotnet.microsoft.com/download/dotnet-core/3.0), SDK for development, runtime for production.
+
 - Enough RAM to load database of targeted size.
 - It's recommended to have at least two CPU cores.
 
@@ -213,9 +214,9 @@ namespace StarcounterConsoleSample
 ```
 
 - [Read more about Starcounter database connection string](database-connection-string.md).
-- [Read how to configure Starcounter database options](database-creation-options.md).
+- [Read how to configure Starcounter database creation options](database-creation-options.md).
 
-**For ASP.NET Core application**:
+**For ASP.NET Core applications**:
 
 Update `Startup.cs` class with the following:
 
