@@ -233,8 +233,9 @@ namespace StarcounterMvcSample
                 + "StartMode=StartIfNotRunning;"
                 + "StopMode=IfWeStarted";
 
-            // This adds and configures Starcounter services to our application, for
-            // example ITransactor, that allows us to create database transactions.
+            // This adds and configures Starcounter services to our application,
+            // for example ITransactor,
+            // that allows us to create database transactions.
             services.AddStarcounter(connectionString);
         }
     }
