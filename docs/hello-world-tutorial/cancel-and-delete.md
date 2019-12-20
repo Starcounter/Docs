@@ -13,8 +13,7 @@ Similar to how the "Add new expense" button was implemented, the process to add 
 
 We start by adding our needed trigger properties for our future buttons to the `PersonJson.json`.
 
-{% code-tabs %}
-{% code-tabs-item title="PersonJson.json" %}
+{% code title="PersonJson.json" %}
 ```javascript
 {
   "Html": "/HelloWorld/PersonJson.html",
@@ -29,8 +28,7 @@ We start by adding our needed trigger properties for our future buttons to the `
   "DeleteAllTrigger$": 0
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ## Add Buttons to the View
 
@@ -38,23 +36,19 @@ Now, let's add the buttons that will increment these values in the same way that
 
 Delete button:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonJson.html" %}
+{% code title="PersonJson.html" %}
 ```markup
 <button value="{{model.DeleteAllTrigger$::click}}" onmousedown="++this.value">Delete all expenses</button>
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 Cancel button:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonJson.html" %}
+{% code title="PersonJson.html" %}
 ```markup
 <button value="{{model.CancelTrigger$::click}}" onmousedown="++this.value">Cancel</button>
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 We'll place the delete button at the bottom of the page and the cancel button next to the save button.
 
@@ -62,8 +56,7 @@ We'll place the delete button at the bottom of the page and the cancel button ne
 
 The next step is to build handlers to react accordingly. We will also do that similar to the way we did with the other buttons.
 
-{% code-tabs %}
-{% code-tabs-item title="PersonJson.json.cs" %}
+{% code title="PersonJson.json.cs" %}
 ```csharp
 void Handle(Input.CancelTrigger action)
 {
@@ -76,8 +69,7 @@ void Handle(Input.DeleteAllTrigger action)
     this.Expenses.Clear();
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 `Transaction.Rollback()` simply rolls back the state of your application to where you last ran a `Transaction.Commit()`.
 

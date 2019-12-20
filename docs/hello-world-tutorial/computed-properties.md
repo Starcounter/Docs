@@ -8,8 +8,7 @@ Let us compute the `FullName` of a person from their `FirstName` and `LastName` 
 
 To synchronize the computed property between view and code-behind, simply add the `FullName` property to the view-model.
 
-{% code-tabs %}
-{% code-tabs-item title="PersonJson.json" %}
+{% code title="PersonJson.json" %}
 ```javascript
 {
   "Html": "/HelloWorld/PersonJson.html",
@@ -19,8 +18,7 @@ To synchronize the computed property between view and code-behind, simply add th
   "FullName": ""
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 Notice that we don't have to make `FullName` writable because we will modify it from the code-behind and not the view.
 
@@ -30,8 +28,7 @@ There are two ways to implement computed properties, in the code-behind or in th
 
 The `FullName` property can be calculated by concatenating `FirstName` and `LastName`.
 
-{% code-tabs %}
-{% code-tabs-item title="PersonJson.json.cs" %}
+{% code title="PersonJson.json.cs" %}
 ```csharp
 partial class PersonJson : Json
 {
@@ -43,8 +40,7 @@ partial class PersonJson : Json
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 This property will now be bound to the property with the same name in the view-model and always be up to date.
 
@@ -52,8 +48,7 @@ This property will now be bound to the property with the same name in the view-m
 
 To display this computed property, we just have to add it to to the view. This is done the same way as earlier; by using a Polymer binding:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonJson.html" %}
+{% code title="PersonJson.html" %}
 ```markup
 <template>
     <template is="dom-bind">
@@ -73,8 +68,7 @@ To display this computed property, we just have to add it to to the view. This i
     </template>
 </template>
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ## Result
 

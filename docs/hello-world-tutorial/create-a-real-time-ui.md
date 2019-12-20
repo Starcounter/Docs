@@ -21,8 +21,7 @@ In the JSON file, create three properties called `Html`, `FirstName`, and `LastN
 
 The value of the `Html` property is the path to the view that the view-model should be connected to.
 
-{% code-tabs %}
-{% code-tabs-item title="PersonJson.json" %}
+{% code title="PersonJson.json" %}
 ```javascript
 {
   "Html": "/HelloWorld/PersonJson.html",
@@ -30,8 +29,7 @@ The value of the `Html` property is the path to the view that the view-model sho
   "LastName": ""
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ## Create the HTTP Handler
 
@@ -41,8 +39,7 @@ This handler will only return the JSON tree that we defined earlier and not any 
 
 This is how the handler and middleware looks in code:
 
-{% code-tabs %}
-{% code-tabs-item title="Program.cs" %}
+{% code title="Program.cs" %}
 ```csharp
 Application.Current.Use(new HtmlFromJsonProvider());
 Application.Current.Use(new PartialToStandaloneHtmlProvider());
@@ -55,8 +52,7 @@ Handle.GET("/HelloWorld", () =>
     return new PersonJson { Data = person };
 });
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ## Define the View
 
@@ -71,8 +67,7 @@ To create a two-way binding between the view and the view model, we choose to us
 
 This is how it looks in code:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonJson.html" %}
+{% code title="PersonJson.html" %}
 ```markup
 <link rel="import" href="/sys/polymer/polymer.html"/>
 <template>
@@ -89,8 +84,7 @@ This is how it looks in code:
     </template>
 </template>
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ## Result
 

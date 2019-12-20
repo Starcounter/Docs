@@ -16,8 +16,7 @@ In Starcounter, you can create master pages and sub pages that are handled on th
 
 ### View-model
 
-{% code-tabs %}
-{% code-tabs-item title="MailsPage.json" %}
+{% code title="MailsPage.json" %}
 ```javascript
 {
   "Html": "/MultiplePagesDemo/views/MailsPage.html",
@@ -30,13 +29,11 @@ In Starcounter, you can create master pages and sub pages that are handled on th
   "Focused": {}
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 The `Mails` element is used to display a list with links to their corresponding email. The `Focused` element is filled with a single `Focused.json`.
 
-{% code-tabs %}
-{% code-tabs-item title="Focused.json" %}
+{% code title="Focused.json" %}
 ```javascript
 {
   "Html": "/MultiplePagesDemo/views/Focused.html",
@@ -44,15 +41,13 @@ The `Mails` element is used to display a list with links to their corresponding 
   "Content": ""
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 The `Focused.json` has its own Html file which will be inserted into the `MailsPage` in a SPA manner.
 
 ### Application Code
 
-{% code-tabs %}
-{% code-tabs-item title="Program.cs" %}
+{% code title="Program.cs" %}
 ```csharp
 using Starcounter;
 using System.Linq;
@@ -139,8 +134,7 @@ namespace MultiplePagesDemo
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 The program defines two [`Handle.GET`](https://docs.starcounter.io/guides/network/handling-http-requests/) operations. One to retrieve the master, MailsPage, and the other to retrieve specific emails.
 
@@ -150,8 +144,7 @@ The second, `Handle.GET("/multiplepagesdemo/mails/{?}"...`, returns a MailsPage 
 
 ### View
 
-{% code-tabs %}
-{% code-tabs-item title="Focused.html" %}
+{% code title="Focused.html" %}
 ```markup
 <link rel="import" href="/sys/polymer/polymer.html">
 
@@ -163,13 +156,11 @@ The second, `Handle.GET("/multiplepagesdemo/mails/{?}"...`, returns a MailsPage 
     </template>
 </template>
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 The `Focused.html` referenced by `Focused.json` simply displays the title and content of a email stored in `Focused.json`. It does not have to care about the rest of the page and would work even as a stand-alone page.
 
-{% code-tabs %}
-{% code-tabs-item title="MailsPage.html" %}
+{% code title="MailsPage.html" %}
 ```markup
 <link rel="import" href="/sys/polymer/polymer.html" />
 <template>
@@ -210,8 +201,7 @@ The `Focused.html` referenced by `Focused.json` simply displays the title and co
     </template>
 </template>
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 `MailsPage.html` contains the full page to display. It lists all the mails as linked text. The most important part is the `<template is="imported-template"` which loads the Focused element of `MailsPage.json` with its own html file.
 

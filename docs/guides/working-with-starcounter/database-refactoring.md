@@ -49,8 +49,8 @@ _Add a database field to an existing database class_
 
 #### Source code
 
-{% code-tabs %}
-{% code-tabs-item title="Before.cs" %}
+{% tabs %}
+{% tab title="Before.cs" %}
 ```csharp
 using Starcounter;
 
@@ -71,9 +71,9 @@ namespace AddField
     }
 }
 ```
-{% endcode-tabs-item %}
+{% endtab %}
 
-{% code-tabs-item title="After.cs" %}
+{% tab title="After.cs" %}
 ```csharp
 using Starcounter;
 
@@ -97,8 +97,8 @@ namespace AddField
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endtab %}
+{% endtabs %}
 
 #### Traits
 
@@ -107,21 +107,21 @@ namespace AddField
 
 #### Dumps
 
-{% code-tabs %}
-{% code-tabs-item title="Before" %}
+{% tabs %}
+{% tab title="Before" %}
 ```sql
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."AddField"."Foo"(__id)VALUES(object 1)
 ```
-{% endcode-tabs-item %}
+{% endtab %}
 
-{% code-tabs-item title="After" %}
+{% tab title="After" %}
 ```sql
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."AddField"."Foo"(__id,"Bar")VALUES(object 2,'Value'),(object 1,NULL)
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endtab %}
+{% endtabs %}
 
 ### 2. Add a Property
 
@@ -129,8 +129,8 @@ _Add a database property to an existing database class._
 
 #### Source code
 
-{% code-tabs %}
-{% code-tabs-item title="Before.cs" %}
+{% tabs %}
+{% tab title="Before.cs" %}
 ```csharp
 using Starcounter;
 
@@ -151,9 +151,9 @@ namespace AddProperty
     }
 }
 ```
-{% endcode-tabs-item %}
+{% endtab %}
 
-{% code-tabs-item title="After.cs" %}
+{% tab title="After.cs" %}
 ```csharp
 using Starcounter;
 
@@ -177,8 +177,8 @@ namespace AddProperty
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endtab %}
+{% endtabs %}
 
 #### Traits
 
@@ -187,21 +187,21 @@ namespace AddProperty
 
 #### Dumps
 
-{% code-tabs %}
-{% code-tabs-item title="Before" %}
+{% tabs %}
+{% tab title="Before" %}
 ```sql
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."AddProperty"."Foo"(__id)VALUES(object 1)
 ```
-{% endcode-tabs-item %}
+{% endtab %}
 
-{% code-tabs-item title="After" %}
+{% tab title="After" %}
 ```sql
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."AddProperty"."Foo"(__id,"Bar")VALUES(object 2,'Value'),(object 1,NULL)
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endtab %}
+{% endtabs %}
 
 ### 3. Add a Class
 
@@ -209,8 +209,8 @@ _Add a database class when there is already a class present and instances of it.
 
 #### Source code
 
-{% code-tabs %}
-{% code-tabs-item title="Before.cs" %}
+{% tabs %}
+{% tab title="Before.cs" %}
 ```csharp
 using Starcounter;
 
@@ -231,9 +231,9 @@ namespace AddProperty
     }
 }
 ```
-{% endcode-tabs-item %}
+{% endtab %}
 
-{% code-tabs-item title="After.cs" %}
+{% tab title="After.cs" %}
 ```csharp
 using Starcounter;
 
@@ -261,8 +261,8 @@ namespace AddProperty
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endtab %}
+{% endtabs %}
 
 #### Traits
 
@@ -271,22 +271,22 @@ namespace AddProperty
 
 #### Dumps
 
-{% code-tabs %}
-{% code-tabs-item title="Before" %}
+{% tabs %}
+{% tab title="Before" %}
 ```sql
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."AddClass"."Foo"(__id)VALUES(object 1)
 ```
-{% endcode-tabs-item %}
+{% endtab %}
 
-{% code-tabs-item title="After" %}
+{% tab title="After" %}
 ```sql
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."AddClass"."Foo"(__id)VALUES(object 1),(object 2)
 INSERT INTO "Starcounter"."Raw"."AddClass"."Bar"(__id)VALUES(object 3)
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endtab %}
+{% endtabs %}
 
 ### 4. Remove a Field
 
@@ -294,8 +294,8 @@ _Remove a database field from a class._
 
 #### Source code
 
-{% code-tabs %}
-{% code-tabs-item title="Before.cs" %}
+{% tabs %}
+{% tab title="Before.cs" %}
 ```csharp
 using Starcounter;
 
@@ -322,9 +322,9 @@ namespace RemoveField
     }
 }
 ```
-{% endcode-tabs-item %}
+{% endtab %}
 
-{% code-tabs-item title="After.cs" %}
+{% tab title="After.cs" %}
 ```csharp
 using Starcounter;
 
@@ -345,8 +345,8 @@ namespace RemoveField
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endtab %}
+{% endtabs %}
 
 #### Traits
 
@@ -355,20 +355,20 @@ namespace RemoveField
 
 #### Dumps
 
-{% code-tabs %}
-{% code-tabs-item title="Before" %}
+{% tabs %}
+{% tab title="Before" %}
 ```sql
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."RemoveField"."Foo"(__id,"Bar")VALUES(object 1,'Value')
 ```
-{% endcode-tabs-item %}
+{% endtab %}
 
-{% code-tabs-item title="After" %}
+{% tab title="After" %}
 ```
 Not possible to achieve - see remarks below.
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endtab %}
+{% endtabs %}
 
 #### Remarks
 
@@ -380,8 +380,8 @@ _Remove a database property from a class._
 
 #### Source code
 
-{% code-tabs %}
-{% code-tabs-item title="Before.cs" %}
+{% tabs %}
+{% tab title="Before.cs" %}
 ```csharp
 using Starcounter;
 
@@ -408,9 +408,9 @@ namespace RemoveProperty
     }
 }
 ```
-{% endcode-tabs-item %}
+{% endtab %}
 
-{% code-tabs-item title="After.cs" %}
+{% tab title="After.cs" %}
 ```csharp
 using Starcounter;
 
@@ -431,8 +431,8 @@ namespace RemoveProperty
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endtab %}
+{% endtabs %}
 
 #### Traits
 
@@ -441,20 +441,20 @@ namespace RemoveProperty
 
 #### Dumps
 
-{% code-tabs %}
-{% code-tabs-item title="Before" %}
+{% tabs %}
+{% tab title="Before" %}
 ```sql
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."RemoveProperty"."Foo"(__id,"Bar")VALUES(object 1,'Value')
 ```
-{% endcode-tabs-item %}
+{% endtab %}
 
-{% code-tabs-item title="After" %}
+{% tab title="After" %}
 ```
 Not possible to achieve - see remarks below.
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endtab %}
+{% endtabs %}
 
 #### Remarks
 
@@ -466,8 +466,8 @@ _Remove a database class that was previously bound._
 
 #### Source code
 
-{% code-tabs %}
-{% code-tabs-item title="Before.cs" %}
+{% tabs %}
+{% tab title="Before.cs" %}
 ```csharp
 using Starcounter;
 
@@ -501,9 +501,9 @@ namespace RemoveClass
     }
 }
 ```
-{% endcode-tabs-item %}
+{% endtab %}
 
-{% code-tabs-item title="After.cs" %}
+{% tab title="After.cs" %}
 ```csharp
 using Starcounter;
 
@@ -524,8 +524,8 @@ namespace RemoveClass
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endtab %}
+{% endtabs %}
 
 #### Traits
 
@@ -534,22 +534,22 @@ namespace RemoveClass
 
 #### Dumps
 
-{% code-tabs %}
-{% code-tabs-item title="Before" %}
+{% tabs %}
+{% tab title="Before" %}
 ```sql
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."RemoveClass"."Foo"(__id)VALUES(object 1)
 INSERT INTO "Starcounter"."Raw"."RemoveClass"."Bar"(__id,"Value")VALUES(object 2,'Value')
 ```
-{% endcode-tabs-item %}
+{% endtab %}
 
-{% code-tabs-item title="After" %}
+{% tab title="After" %}
 ```sql
 Database dump. DO NOT EDIT!
 INSERT INTO "Starcounter"."Raw"."RemoveClass"."Foo"(__id)VALUES(object 1),(object 3)
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endtab %}
+{% endtabs %}
 
 #### Remarks
 
@@ -561,8 +561,8 @@ _Rename a field in a database class._
 
 #### Source code
 
-{% code-tabs %}
-{% code-tabs-item title="Before.cs" %}
+{% tabs %}
+{% tab title="Before.cs" %}
 ```csharp
 using Starcounter;
 
@@ -586,9 +586,9 @@ namespace RenameField
     }
 }
 ```
-{% endcode-tabs-item %}
+{% endtab %}
 
-{% code-tabs-item title="After.cs" %}
+{% tab title="After.cs" %}
 ```csharp
 using Starcounter;
 
@@ -612,8 +612,8 @@ namespace RenameField
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endtab %}
+{% endtabs %}
 
 #### Remarks
 
@@ -625,8 +625,8 @@ _Rename a property in a database class._
 
 #### Source code
 
-{% code-tabs %}
-{% code-tabs-item title="Before.cs" %}
+{% tabs %}
+{% tab title="Before.cs" %}
 ```csharp
 using Starcounter;
 
@@ -650,9 +650,9 @@ namespace RenameProperty
     }
 }
 ```
-{% endcode-tabs-item %}
+{% endtab %}
 
-{% code-tabs-item title="After.cs" %}
+{% tab title="After.cs" %}
 ```csharp
 using Starcounter;
 
@@ -676,8 +676,8 @@ namespace RenameProperty
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endtab %}
+{% endtabs %}
 
 #### Remarks
 
@@ -689,8 +689,8 @@ _Rename a database class._
 
 #### Source code
 
-{% code-tabs %}
-{% code-tabs-item title="Before.cs" %}
+{% tabs %}
+{% tab title="Before.cs" %}
 ```csharp
 using Starcounter;
 
@@ -711,9 +711,9 @@ namespace RenameClass
     }
 }
 ```
-{% endcode-tabs-item %}
+{% endtab %}
 
-{% code-tabs-item title="After.cs" %}
+{% tab title="After.cs" %}
 ```csharp
 using Starcounter;
 
@@ -734,8 +734,8 @@ namespace RenameClass
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endtab %}
+{% endtabs %}
 
 #### Remarks
 

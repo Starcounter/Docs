@@ -76,8 +76,7 @@ In the partial HTML view for the `mainPage` above, the HTML from the `SubPage` p
 
 A partial HTML view may look something like this:
 
-{% code-tabs %}
-{% code-tabs-item title="AddressPage.html" %}
+{% code title="AddressPage.html" %}
 ```markup
 <!--
 Load you dependencies: <script>s, HTML Imports, CSS stylesheets etc.
@@ -109,8 +108,7 @@ which is automatically bound to the server-side.
     </template>
 </template>
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 The example above uses Polymer's `dom-bind` element for data-bindings. Using Polymer in HTML views is not required, but we prefer it because it is a simple declarative alternative to imperative binding data to HTML elements using JavaScript.
 

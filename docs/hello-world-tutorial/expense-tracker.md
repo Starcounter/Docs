@@ -23,8 +23,7 @@ To keep it as simple as possible, the expense only needs to contain information 
 
 This is how it looks in code:
 
-{% code-tabs %}
-{% code-tabs-item title="Program.cs" %}
+{% code title="Program.cs" %}
 ```csharp
 [Database]
 public class Expense
@@ -34,8 +33,7 @@ public class Expense
     public decimal Amount { get; set; }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ### View-Model
 
@@ -43,8 +41,7 @@ The information that we want to have in the view is the description and the amou
 
 This is the result:
 
-{% code-tabs %}
-{% code-tabs-item title="ExpenseJson.html" %}
+{% code title="ExpenseJson.html" %}
 ```javascript
 {
   "Html": "/HelloWorld/ExpenseJson.html",
@@ -52,15 +49,13 @@ This is the result:
   "Amount$": 0
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ### View
 
 The view for the expense can be extremely simple. It will only contain two input fields that are bound to the properties in the view-model:
 
-{% code-tabs %}
-{% code-tabs-item title="ExpenseJson.html" %}
+{% code title="ExpenseJson.html" %}
 ```markup
 <template>
     <template is="dom-bind">
@@ -69,8 +64,7 @@ The view for the expense can be extremely simple. It will only contain two input
     </template>
 </template>
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ## Nest Expenses Within a Person
 
@@ -86,8 +80,7 @@ To link each `Person` object with its `Expense` objects, we'll utilize the fact 
 
 In code, it looks like this:
 
-{% code-tabs %}
-{% code-tabs-item title="Program.cs" %}
+{% code title="Program.cs" %}
 ```csharp
 [Database]
 public class Person
@@ -102,15 +95,13 @@ public class Person
             .Sum(e => e.Amount);
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ### Extending the View-Model
 
 With the properties `Expenses` and `CurrentBalance` in place, we can bind them to the view-model in order to use them in the view.
 
-{% code-tabs %}
-{% code-tabs-item title="PersonJson.json" %}
+{% code title="PersonJson.json" %}
 ```javascript
 {
   "Html": "/HelloWorld/PersonJson.html",
@@ -122,21 +113,18 @@ With the properties `Expenses` and `CurrentBalance` in place, we can bind them t
   "CurrentBalance": 0
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 When binding the view-model with properties of database classes, the types have to be specified. `Expenses` is defined as an array of objects, that is not quite enough. We also need to set what type of object it should contain. This can be done in the code-behind for `PersonJson` by creating a constructor that specifies the type to be `ExpenseJson`. This is how it looks in code:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonJson.json.cs" %}
+{% code title="PersonJson.json.cs" %}
 ```csharp
 static PersonJson()
 {
     DefaultTemplate.Expenses.ElementType.InstanceType = typeof(ExpenseJson);
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ### Nesting the View
 
@@ -146,8 +134,7 @@ The elements that it should loop over are the expenses. For each expense it shou
 
 In addition to this, we want to display the current balance and change the headline to reflect the actual purpose of the page:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonJson.html" %}
+{% code title="PersonJson.html" %}
 ```markup
 <template>
     <template is="dom-bind">
@@ -180,8 +167,7 @@ In addition to this, we want to display the current balance and change the headl
     </template>
 </template>
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ## Create New Expenses
 
@@ -194,8 +180,7 @@ If you start the application now, you will not see any expenses because no expen
 
 The trigger property will look almost identical to the save trigger:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonJson.json" %}
+{% code title="PersonJson.json" %}
 ```javascript
 {
   "Html": "/HelloWorld/PersonJson.html",
@@ -208,20 +193,17 @@ The trigger property will look almost identical to the save trigger:
   "CurrentBalance": 0
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ### Add Button
 
 The button to create new expenses simply have to increment the trigger we just defined. It should look like this:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonJson.html" %}
+{% code title="PersonJson.html" %}
 ```markup
 <button value="{{model.NewExpenseTrigger$::click}}" onmousedown="++this.value">Add new expense</button>
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 This button should be added below the list of expenses.
 
@@ -229,8 +211,7 @@ This button should be added below the list of expenses.
 
 To act on the trigger, we'll create a handler in the code-behind. Since the view-model is bound to the `Person` object that holds a reference to a collection of `Expense` objects, we only need to add an `Expense` object to the database and it will immediately be synched to the view-model and placed in the view.
 
-{% code-tabs %}
-{% code-tabs-item title="PersonJson.json.cs" %}
+{% code title="PersonJson.json.cs" %}
 ```csharp
 void Handle(Input.NewExpenseTrigger action)
 {
@@ -241,8 +222,7 @@ void Handle(Input.NewExpenseTrigger action)
     };
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 `This.Data` is the current database object, which in this case is the `Person` that added a new expense.
 

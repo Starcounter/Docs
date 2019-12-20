@@ -6,8 +6,7 @@ Typed JSON objects can be used as a representation of the HTTP \(or other REST p
 
 ## Example
 
-{% code-tabs %}
-{% code-tabs-item title="PersonMsg.json" %}
+{% code title="PersonMsg.json" %}
 ```javascript
 {
    "FirstName": "",
@@ -15,11 +14,9 @@ Typed JSON objects can be used as a representation of the HTTP \(or other REST p
    "Age": 0
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
-{% code-tabs %}
-{% code-tabs-item title="Program.cs" %}
+{% code title="Program.cs" %}
 ```csharp
 using Starcounter;
 
@@ -34,8 +31,7 @@ class Hello
    }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 The parameter is not associated with the URI template, so the content of the body will be used to fill in the object.
 

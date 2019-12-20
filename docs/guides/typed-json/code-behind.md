@@ -8,17 +8,14 @@ To create interactivity for the Typed JSON classes, code-behind classes can be a
 
 To create a Typed JSON class with code-behind, choose `New item` in Visual Studio and then select `Starcounter Typed JSON with Code-behind`. By creating one of these with the filename "Person", two files will be created:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json" %}
+{% code title="PersonPage.json" %}
 ```javascript
 {
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json.cs" %}
+{% code title="PersonPage.json.cs" %}
 ```csharp
 using Starcounter;
 
@@ -29,27 +26,23 @@ namespace MyApp
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ## Handling Input Events
 
 Consider this JSON object with a property that is [writable](json-by-example.md#writable-json-values) from the client:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json" %}
+{% code title="PersonPage.json" %}
 ```javascript
 {
   "FirstName$": ""
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 To observe changes to this property, the code-behind method `Handle` can be used:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json.cs" %}
+{% code title="PersonPage.json.cs" %}
 ```csharp
 partial class PersonPage : Json
 {
@@ -63,8 +56,7 @@ partial class PersonPage : Json
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 The `Handle` method gets called with a parameter of type `Input`. `Input` is the base class for events triggered by the client.
 
@@ -82,8 +74,7 @@ To get many more examples of how interactivity is handled, take a look at the [K
 
 JSON-by-example might contain nested objects. For example:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json" %}
+{% code title="PersonPage.json" %}
 ```javascript
 {
   "Name": {
@@ -93,13 +84,11 @@ JSON-by-example might contain nested objects. For example:
   "FullName$": ""
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 Code-behind for the root level and `Name`-level can be provided as two separate partial classes. For example:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json.cs" %}
+{% code title="PersonPage.json.cs" %}
 ```csharp
 partial class PersonPage : Json
 {
@@ -127,8 +116,7 @@ partial class PersonPage : Json
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 The attribute `[PersonPage_json.Name]` is used to hint what is the path in JSON-by-example that the partial class refers to.
 

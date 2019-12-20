@@ -84,16 +84,14 @@ Db.Transact(() => person.Name = "Someone");
 Db.Transact(() => person.Delete());
 ```
 
-{% code-tabs %}
-{% code-tabs-item title="Debug console" %}
+{% code title="Debug console" %}
 ```text
 AfterCommitInsert-Order
 AfterCommitInsert-Person
 AfterCommitUpdate-Person
 AfterCommitDelete-Person
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 Notice how each of these operations is in a separate transaction. If we put them in the same transaction, the result is different:
 
@@ -114,13 +112,11 @@ Db.Transact(() =>
 });
 ```
 
-{% code-tabs %}
-{% code-tabs-item title="Debug console" %}
+{% code title="Debug console" %}
 ```text
 AfterCommitInsert-Order
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 This code only triggers the `AfterCommitInsert` hook for the `Order` class. The reason for this is that the hooks are triggered based on the final result of the transaction, not the individual operations themselves. The only state change after the transaction was that the app created an `Order` since the transaction created and then immediately deleted the `Person`.
 
@@ -134,14 +130,12 @@ Db.Transact(() =>
 }); 
 ```
 
-{% code-tabs %}
-{% code-tabs-item title="Debug console" %}
+{% code title="Debug console" %}
 ```text
 AfterCommitInsert-Person
 AfterCommitInsert-Person
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ### Infinite loops
 
@@ -250,15 +244,13 @@ public class Program
 }
 ```
 
-{% code-tabs %}
-{% code-tabs-item title="Debug console" %}
+{% code title="Debug console" %}
 ```text
 In insert hook
 In insert hook
 In insert hook
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ## Advanced: post-commit hooks with a custom scheduler
 

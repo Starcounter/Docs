@@ -12,8 +12,7 @@ The `OnData` method is usually used to initialize the parts of the view-model th
 
 The basic structure for using `OnData` looks like this:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json.cs" %}
+{% code title="PersonPage.json.cs" %}
 ```csharp
 using Starcounter;
 
@@ -30,8 +29,7 @@ namespace MyApp
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ## HasChanged
 

@@ -11,8 +11,7 @@ To be able to commit changes to the database at any time, a [long running transa
 
 In code, that is done by wrapping everything in our handler inside a `Db.Scope`:
 
-{% code-tabs %}
-{% code-tabs-item title="Program.cs" %}
+{% code title="Program.cs" %}
 ```csharp
 Handle.GET("/HelloWorld", () =>
 {
@@ -25,15 +24,13 @@ Handle.GET("/HelloWorld", () =>
     });
 });
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ## Writable View-Model
 
 To make properties in the view-model writable from the view, a dollar sign it added to the end of it. With this, `"FirstName"` becomes `"FirstName$"` and `"LastName"` becomes `"LastName$"`. The view-model should then look like this:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonJson.json" %}
+{% code title="PersonJson.json" %}
 ```javascript
 {
   "Html": "/HelloWorld/PersonJson.html",
@@ -41,8 +38,7 @@ To make properties in the view-model writable from the view, a dollar sign it ad
   "LastName$": ""
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ## Trigger Property
 
@@ -50,8 +46,7 @@ As mentioned earlier, we also want the possibility to save at will. In order to 
 
 This is how it should look:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonJson.json" %}
+{% code title="PersonJson.json" %}
 ```javascript
 {
   "Html": "/HelloWorld/PersonJson.html",
@@ -60,8 +55,7 @@ This is how it should look:
   "SaveTrigger$": 0
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ## Handling Changes in the Code-Behind
 
@@ -69,8 +63,7 @@ To act on the change in the view-model that is triggered from the view, an event
 
 In this case, where the goal is to save, the following code can be used:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonJson.json.cs" %}
+{% code title="PersonJson.json.cs" %}
 ```csharp
 using Starcounter;
 
@@ -85,8 +78,7 @@ namespace HelloWorld
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 `Input.SaveTrigger action` makes the method run when a change is detected in the `SaveTrigger` value. Note that we do not need to use a `$` here like in the view-model. The rule is that we use `$` for the view, and view-model, but not in the application code.
 
@@ -100,8 +92,7 @@ Now, with a view-model that is writable and a database which allows commits at a
 
 We'll change our previous text elements to input elements and add a button:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonJson.html" %}
+{% code title="PersonJson.html" %}
 ```markup
 <template>
     <template is="dom-bind">
@@ -119,8 +110,7 @@ We'll change our previous text elements to input elements and add a button:
     </template>
 </template>
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 The `::input` declaration on the input value sets up an event listener. It updates the property it's bound to on every keystroke. This means that every time a change is made in the input field, the view-model will reflect that change.
 

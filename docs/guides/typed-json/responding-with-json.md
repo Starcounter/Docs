@@ -6,19 +6,16 @@ Typed JSON objects are serialized automatically to the `application/json` format
 
 ## Example
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json" %}
+{% code title="PersonPage.json" %}
 ```javascript
 {
     "FirstName": "Bilbo",
     "LastName": "Baggins"
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json.cs" %}
+{% code title="PersonPage.json.cs" %}
 ```csharp
 using Starcounter;
 
@@ -36,8 +33,7 @@ namespace MyApp
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ## Setting Status Code and Description
 
@@ -47,8 +43,7 @@ To change this, two methods are provided to the `Handle` class: `SetOutgoingStat
 
 In code, they look like this:
 
-{% code-tabs %}
-{% code-tabs-item title="Program.cs" %}
+{% code title="Program.cs" %}
 ```csharp
 using Starcounter;
 
@@ -68,13 +63,11 @@ namespace MyApp
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 It is also possible to change the status code and description by creating a `Response` object:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json" %}
+{% code title="PersonPage.json" %}
 ```javascript
 {
     "FirstName": "Gandalf",
@@ -82,11 +75,9 @@ It is also possible to change the status code and description by creating a `Res
     "Quote": "You shall not pass!" 
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json.cs" %}
+{% code title="PersonPage.json.cs" %}
 ```csharp
 using Starcounter;
 
@@ -113,8 +104,7 @@ namespace MyApp
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 The JSON needs to be explicitly parsed to a string using `ToJson` when attaching a Typed JSON object to the body of a `Response`.
 

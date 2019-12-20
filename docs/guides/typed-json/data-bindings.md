@@ -12,21 +12,18 @@ To bind a Typed JSON object to a database object, the `Data` property is used.
 
 Consider the following JSON file:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json" %}
+{% code title="PersonPage.json" %}
 ```javascript
 {
    "FirstName": "",
    "LastName": "",
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 To bind the Typed JSON object `PersonPage` defined above to a database class `Person`, the following code can be used:
 
-{% code-tabs %}
-{% code-tabs-item title="Program.cs" %}
+{% code title="Program.cs" %}
 ```csharp
 using Starcounter;
 
@@ -68,8 +65,7 @@ namespace MyApp
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 The `PersonPage` object will now look like this: `{"FirstName":"Steve","LastName":"Smith","FullName":"Steve Smith"}`.
 
@@ -81,8 +77,7 @@ In addition to binding to database objects, Typed JSON properties can also be bo
 
 To accomplish what was demonstrated in the [previous example](../../#binding-to-database-objects) by using code-behind properties instead of database properties, the following code can be used:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json" %}
+{% code title="PersonPage.json" %}
 ```javascript
 {
    "FirstName": "Steven",
@@ -90,11 +85,9 @@ To accomplish what was demonstrated in the [previous example](../../#binding-to-
    "FullName": ""
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json.cs" %}
+{% code title="PersonPage.json.cs" %}
 ```csharp
 using Starcounter;
 
@@ -106,11 +99,9 @@ namespace MyApp
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
-{% code-tabs %}
-{% code-tabs-item title="Program.cs" %}
+{% code title="Program.cs" %}
 ```csharp
 using Starcounter;
 
@@ -128,8 +119,7 @@ namespace MyApp
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ### Mixing Database and Code-Behind Bindings
 
@@ -169,8 +159,7 @@ There are different ways to modify bindings so that they do not bind the default
 
 All binding modifications are done in a static constructor in the code-behind file. Like so:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json.cs" %}
+{% code title="PersonPage.json.cs" %}
 ```csharp
 using Starcounter;
 
@@ -185,8 +174,7 @@ namespace MyApp
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ### Opting Out of Bindings
 
@@ -194,8 +182,7 @@ In some cases we want to make sure that a specific property is not bound. This c
 
 For example:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json.cs" %}
+{% code title="PersonPage.json.cs" %}
 ```csharp
 partial class PersonPage : Json
 {
@@ -205,8 +192,7 @@ partial class PersonPage : Json
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 Setting the `Bind` property to `null` in this case ensures that the Typed JSON property `FullName` is not bound to any database, or code-behind, property.
 
@@ -218,8 +204,7 @@ If a property should be bound to a property that has a different name than the p
 
 For example, to bind the Typed JSON property `FirstName` to the database property `LastName` in the example in the [bindings to database objects section](../../#binding-to-database-objects) and vice versa to essentially switch the names around, the following code can be used:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json.cs" %}
+{% code title="PersonPage.json.cs" %}
 ```csharp
 public class PersonPage : Json
 {
@@ -230,8 +215,7 @@ public class PersonPage : Json
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 The resulting JSON looks like this: `{"FirstName":"Smith","LastName":"Steve","FullName":"Steve Smith"}`.
 
@@ -239,8 +223,7 @@ The resulting JSON looks like this: `{"FirstName":"Smith","LastName":"Steve","Fu
 
 Since it is possible to [bind to properties with different names](../../#binding-to-properties-with-different-names), it is also possible to bind to custom properties in the code-behind. For example:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json.cs" %}
+{% code title="PersonPage.json.cs" %}
 ```csharp
 public class PersonPage : Json
 {
@@ -252,8 +235,7 @@ public class PersonPage : Json
     public string CustomFullName => FirstName + FirstName + " " + LastName; 
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 The resulting JSON looks like this with the example in the [bindings to database objects section](../../#binding-to-database-objects): `{"FirstName":"Steve","LastName":"Smith","FullName":"SteveSteve Smith"}`.
 
@@ -261,19 +243,16 @@ The resulting JSON looks like this with the example in the [bindings to database
 
 It is also possible to bind to deep properties by providing full path to the property. Here, the property `FriendName` is bound to the deep property `Friend.FirstName`.
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json" %}
+{% code title="PersonPage.json" %}
 ```javascript
 {
   "FirstName": "",
   "FriendName": ""
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json.cs" %}
+{% code title="PersonPage.json.cs" %}
 ```csharp
 using Starcounter;
 
@@ -288,11 +267,9 @@ namespace MyApp
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
-{% code-tabs %}
-{% code-tabs-item title="Program.cs" %}
+{% code title="Program.cs" %}
 ```csharp
 using Starcounter;
 
@@ -331,8 +308,7 @@ namespace MyApp
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 The resulting JSON from this example looks like this: `{"FirstName":"Steve","FriendName":"Bilbo"}`.
 
@@ -344,8 +320,7 @@ By setting the property `BindChildren`, each child that don't specify it's own b
 
 Setting the value in the code-behind from the `BindingStrategy` enum:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json.cs" %}
+{% code title="PersonPage.json.cs" %}
 ```csharp
 partial class PersonPage : Json
 {
@@ -355,8 +330,7 @@ partial class PersonPage : Json
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 The enum has the following values: "Auto", "Bound", and "Unbound".
 
@@ -374,14 +348,12 @@ If the JSON object is static, that is all properties are known compile-time, you
 
 The JSON code-behind class has to implement `IBound<T>` to set custom data type.
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json.cs" %}
+{% code title="PersonPage.json.cs" %}
 ```csharp
 [PersonJson_json]
 public partial class PersonJson : Json, IBound<MyNamespace.Person>
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 **Note:** empty JSON objects do not have code-behind classes so it is not possible to declare a custom data type for them.
 
@@ -391,8 +363,7 @@ public partial class PersonJson : Json, IBound<MyNamespace.Person>
 
 When using `IExplicitBound`, properties in JSON-by-example are expected to be bound. This allows the pinpointing of failed bindings which otherwise could go unnoticed. If the JSON-by-example looks like this:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json" %}
+{% code title="PersonPage.json" %}
 ```javascript
 {
   "Name": "",
@@ -400,13 +371,11 @@ When using `IExplicitBound`, properties in JSON-by-example are expected to be bo
   "Address": ""
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 And the database class looks like this:
 
-{% code-tabs %}
-{% code-tabs-item title="Person.cs" %}
+{% code title="Person.cs" %}
 ```csharp
 public class Person
 {
@@ -415,34 +384,29 @@ public class Person
   public string Address { get; set; }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 If the code-behind includes `IExplicitBound` like this:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json.cs" %}
+{% code title="PersonPage.json.cs" %}
 ```csharp
 public class PersonPage : Json, IExplicitBound<Person>
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 Then it will compile successfully.  
 If `public long Age` was removed, then the following error would be displayed: `'Person' does not contain a definition for 'Age'`. The reason for this is that `IExplicitBound` would look for a database property corresponding to `Age` and fail.
 
 Since `IExplicitBound` expects all values to be bound to _something_, properties that are not intended to be bound have to be explicitly unbound. As noted above, it will not compile without this. A static constructor can be used in order to explicitly unbind these properties. This is how it would look:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json.cs" %}
+{% code title="PersonPage.json.cs" %}
 ```csharp
 static PersonPage()
 {
     DefaultTemplate.Age.Bind = null;
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 Now, the code will compile successfully because it is explicitly described that the `Age` property will not be bound. This is further described in the section "Opt-out of Bindings".
 

@@ -56,23 +56,19 @@ public class Employee : Person
 
  If you want to select the manager of each person's father whenever such manager exists, then this is incorrect  since `Father` is of type `Person` and `Person` has no `Manager` property:
 
-{% code-tabs %}
-{% code-tabs-item title="Incorrect" %}
+{% code title="Incorrect" %}
 ```sql
 SELECT p.Father.Manager FROM Person p
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 However, if you cast `Father` to type `Employee` then you can continue the path expression with `Manager`:
 
-{% code-tabs %}
-{% code-tabs-item title="Correct" %}
+{% code title="Correct" %}
 ```sql
 SELECT CAST(p.Father AS Employee).Manager FROM Person p
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 If the object reference `Father` for some objects in the extent `Person` is not of type, or subtype of `Employee` , then this object reference can't be cast to `Employee` and the operation returns `null`.
 
