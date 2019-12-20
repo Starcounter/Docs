@@ -2,7 +2,7 @@
 
 ## Defining database classes
 
-We can define the schema of a Starcounter database table in an application by defining **public abstract C# classes** decorated with the `DatabaseAttribute` attribute. We call these types **database classes**. The names and namespaces we give to these C# classes will be the names and namespaces of the corresponding database tables.
+We can define the schema of a Starcounter database table in an application by defining **public abstract C\# classes** decorated with the `DatabaseAttribute` attribute. We call these types **database classes**. The names and namespaces we give to these C\# classes will be the names and namespaces of the corresponding database tables.
 
 ```csharp
 using System;
@@ -42,7 +42,7 @@ public abstract class Person
 
 ## Fields and properties
 
-Table columns are defined in database classes by abstract instance auto-implemented properties with public `get` and `set` accessors and with one of the [supported data types](./database-types.md). The `Person` database class below defines two such columns, `Name` and `CreatedAtUtc`:
+Table columns are defined in database classes by abstract instance auto-implemented properties with public `get` and `set` accessors and with one of the [supported data types](database-types.md). The `Person` database class below defines two such columns, `Name` and `CreatedAtUtc`:
 
 ```csharp
 using System;
@@ -72,7 +72,7 @@ public abstract class Person
 }
 ```
 
-**Note**: If a database class definition of a Starcounter application contains any non-computed instance properties that are not declared as abstract auto-implemented properties with public get and set accessors and with one of the [supported data types](./database-types.md), an exception will be thrown when the application starts.
+**Note**: If a database class definition of a Starcounter application contains any non-computed instance properties that are not declared as abstract auto-implemented properties with public get and set accessors and with one of the [supported data types](database-types.md), an exception will be thrown when the application starts.
 
 ### Database queries in computed properties
 
@@ -108,7 +108,7 @@ To implement this, we need access to the database context that the given `Person
 
 ## Indexing
 
-To achieve the full performance potential of the Starcounter database, it's crucial to register appropriate indexes for database classes. Database indexes can be defined with [`CREATE INDEX`](https://www.w3schools.com/sql/sql_create_index.asp) SQL queries. Both unique and not unique indexes are supported. Since `CREATE INDEX` is a DDL statement, we use the `IDdlExecutor` to perform it, outside an active transaction. We can obtain the `IDdlExecutor` from the [service provider](./dependency-injection.md).
+To achieve the full performance potential of the Starcounter database, it's crucial to register appropriate indexes for database classes. Database indexes can be defined with [`CREATE INDEX`](https://www.w3schools.com/sql/sql_create_index.asp) SQL queries. Both unique and not unique indexes are supported. Since `CREATE INDEX` is a DDL statement, we use the `IDdlExecutor` to perform it, outside an active transaction. We can obtain the `IDdlExecutor` from the [service provider](dependency-injection.md).
 
 ```csharp
 var ddlExecutor = services.GetRequiredService<IDdlExecutor>();
@@ -116,7 +116,7 @@ var ddlExecutor = services.GetRequiredService<IDdlExecutor>();
 ddlExecutor.Execute("CREATE INDEX IX_Person_FirstName ON Person (FirstName)");
 ```
 
-A single property index can also be registered for a column by decorating its associated C# property with the `IndexAttribute` attribute:
+A single property index can also be registered for a column by decorating its associated C\# property with the `IndexAttribute` attribute:
 
 ```csharp
 using System;
@@ -136,7 +136,7 @@ public abstract class Person
 
 ### One-to-many relations
 
-It's recommended to model one-to-many relations using references both ways, with the child entity having a reference to the parent and the parent having an instance method or computed property that selects all the children (like in the example with the `Mother`/`Children` relation above).
+It's recommended to model one-to-many relations using references both ways, with the child entity having a reference to the parent and the parent having an instance method or computed property that selects all the children \(like in the example with the `Mother`/`Children` relation above\).
 
 ### Many-to-many relations
 
@@ -193,7 +193,7 @@ public abstract class ShareOwnership
 
 ### Inheritance
 
-Inheritance is supported between database classes and has the same general semantics as class inheritence in C#.
+Inheritance is supported between database classes and has the same general semantics as class inheritence in C\#.
 
 ```csharp
 using Starcounter.Database;
@@ -243,8 +243,8 @@ var product = db.Get<Product>(oid);
 
 ### Notes
 
-- Zero (`0`) is not a valid `Oid`.
-- It's not yet possible to insert a database object with a predefined `Oid`.
+* Zero \(`0`\) is not a valid `Oid`.
+* It's not yet possible to insert a database object with a predefined `Oid`.
 
 ## Comparing database objects
 
@@ -279,5 +279,6 @@ transactor.Transact(db =>
 
 ## Limitations
 
-- Database classes can have a maximum of 112 properties for performance reasons. The limit applies to the total number of persistent properties (including all inherited) per class.
-- Nested database classes are not supported in SQL queries.
+* Database classes can have a maximum of 112 properties for performance reasons. The limit applies to the total number of persistent properties \(including all inherited\) per class.
+* Nested database classes are not supported in SQL queries.
+

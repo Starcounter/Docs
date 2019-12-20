@@ -153,3 +153,4 @@ Console.WriteLine("Query result has been saved into " + fileName);
 ```
 
 **Note**: Starcounter uses a custom synchronization context to serialize database access, that is why awaiter has to always continue on the captured context.
+

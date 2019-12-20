@@ -1,16 +1,16 @@
 # Database connection string
 
-The database connection string is a character string that is used to define and configure the connection between an application and a Starcounter database. It consists of a number of option assignments, separated by semicolons (see [sample](#connection-string-sample)).
+The database connection string is a character string that is used to define and configure the connection between an application and a Starcounter database. It consists of a number of option assignments, separated by semicolons \(see [sample](database-connection-string.md#connection-string-sample)\).
 
 ## Connection string options
 
-Name           | Type      | Required | Default value       | Description
-:------------- | :-------- | :------- | :------------------ | :-----------------------------------------------------------------------
-`Database`     | `string`  | Yes      | None                | A path string defining the database to use.
-`OpenMode`     | `enum`    | No       | `CreateIfNotExists` | Specifies the database creation strategy.
-`StartMode`    | `enum`    | No       | `StartIfNotRunning` | Specifies the database startup strategy.
-`StopMode`     | `enum`    | No       | `IfWeStarted`       | Specifies the database shut down strategy.
-`ContextCount` | `integer` | No       | `2` – `24`          | Specifies the number of database contexts allocated for this connection.
+| Name | Type | Required | Default value | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `Database` | `string` | Yes | None | A path string defining the database to use. |
+| `OpenMode` | `enum` | No | `CreateIfNotExists` | Specifies the database creation strategy. |
+| `StartMode` | `enum` | No | `StartIfNotRunning` | Specifies the database startup strategy. |
+| `StopMode` | `enum` | No | `IfWeStarted` | Specifies the database shut down strategy. |
+| `ContextCount` | `integer` | No | `2` – `24` | Specifies the number of database contexts allocated for this connection. |
 
 The options are further explored in the sections below.
 
@@ -24,29 +24,29 @@ Relative paths define the path to the database directory in relation to the curr
 
 The `OpenMode` option defines how to interpret the database path on connection. It can have the following string values:
 
-Value               | Description
-:------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-`Open`              | Opens the database directory from the path specified in the `Database` option, if it exist. If the directory does not exist, or if there is no Starcounter database located there, an exception is thrown.
-`CreateIfNotExists` | Opens the database directory from the path specified in the `Database` option, if it exist. If the directory does not exist, or if there is no Starcounter database located there, it will create the necessary directories and database files, and then open the database directory.
+| Value | Description |
+| :--- | :--- |
+| `Open` | Opens the database directory from the path specified in the `Database` option, if it exist. If the directory does not exist, or if there is no Starcounter database located there, an exception is thrown. |
+| `CreateIfNotExists` | Opens the database directory from the path specified in the `Database` option, if it exist. If the directory does not exist, or if there is no Starcounter database located there, it will create the necessary directories and database files, and then open the database directory. |
 
 ### `StartMode`
 
 The `StartMode` option defines how to start and/or connect to the database process once the database files have been located and/or created.
 
-Value               | Description
-:------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-`RequireStarted`    | Expects the database process to already be running and will connect to it if it is, or throw an exception if it is not.
-`StartIfNotRunning` | Connects to the database process if it is already running, or starts and connects to it if it is not.
-`StartExclusive`    | In this case we expect no database process to be already running. If a database process is already running, an exception is thrown. Otherwise, a new process is created and connected to.
+| Value | Description |
+| :--- | :--- |
+| `RequireStarted` | Expects the database process to already be running and will connect to it if it is, or throw an exception if it is not. |
+| `StartIfNotRunning` | Connects to the database process if it is already running, or starts and connects to it if it is not. |
+| `StartExclusive` | In this case we expect no database process to be already running. If a database process is already running, an exception is thrown. Otherwise, a new process is created and connected to. |
 
 ### `StopMode`
 
 The `StopMode` option defines whether to stop the database process once the connection to it is closed, for example when an application is terminated.
 
-Value         | Description
-:------------ | :-----------------------------------------------------------------------------------
-`IfWeStarted` | Stops the database process if and only if it was started by the current application.
-`Never`       | Leaves the database process running, regardless of how it was started.
+| Value | Description |
+| :--- | :--- |
+| `IfWeStarted` | Stops the database process if and only if it was started by the current application. |
+| `Never` | Leaves the database process running, regardless of how it was started. |
 
 **Note:** the `Never` option is not effective when the application process is forcibly killed, for example from a task manager or by `Ctrl + C`. In this case operating system will kill the corresponding database process as well.
 
@@ -71,3 +71,4 @@ Database=./.database/Sample;OpenMode=CreateIfNotExists;StartMode=StartIfNotRunni
 ```
 
 This string defines the `Database` option using a relative path to a database `Sample`, located in the `.database` directory of the current directory. If such a directory does not exist at the time of connection, or if it does not contain a Starcounter database, the `OpenMode` option of `CreateIfNotExists` ensures that it is created. If the database process is not running already, the `StartMode` option of`StartIfNotRunning`ensures that it should be started. And when the app disconnects from the database, it will stop the database process if it was started by this app, since the `StopMode` option is defined as`IfWeStarted`. Lastly, we set the number of occupied database contexts in this connection to 10.
+

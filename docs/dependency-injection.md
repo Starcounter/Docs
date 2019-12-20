@@ -1,25 +1,25 @@
-# Starcounter database access API with Microsoft Dependency Injection services
+# Database access with Dependency Injection \(DI\)
 
 Starting from this version, static Starcounter 2.x style `Db` class has been removed.
 
-The current release introduces new _`SC` framework API_ based on dependency injection (DI), which has been for long time requested by the majority of our users.
+The current release introduces new _`SC` framework API_ based on dependency injection \(DI\), which has been for long time requested by the majority of our users.
 
 In this release, database access and operations are provided via two main Starcounter services.
 
-- `Starcounter.Database.ITransactor` - provides database transactions and data manipulation ([DML](https://en.wikipedia.org/wiki/Data_manipulation_language)) API.
-- `Starcounter.Database.IDdlExecutor` - provides data definition ([DDL](https://en.wikipedia.org/wiki/Data_definition_language)) API.
+* `Starcounter.Database.ITransactor` - provides database transactions and data manipulation \([DML](https://en.wikipedia.org/wiki/Data_manipulation_language)\) API.
+* `Starcounter.Database.IDdlExecutor` - provides data definition \([DDL](https://en.wikipedia.org/wiki/Data_definition_language)\) API.
 
 The purpose of the current release is to polish the new `SC` framework API and approve it with the customers. In the future public releases we plan to introduce a so-called _static API_ serving same purpose as `Db` class in Starcounter 2.x, yet free from known flaws and _strictly_ built on top of the new `SC` framework API.
 
-## Why Dependency Injection (DI)?
+## Why Dependency Injection \(DI\)?
 
 One of the major disadvantages of the static classes usage is inability to test such code with unit tests. With Dependency Injection it is possible to mock tested services and write unit tests for the application.
 
 Furthermore, current approach reduces possibilities for invalid database access:
 
-- Attempt to create a new database object without a transaction.
-- Attempt to access a database object without a transaction.
-- Attempt to execute a DDL statement within a transaction.
+* Attempt to create a new database object without a transaction.
+* Attempt to access a database object without a transaction.
+* Attempt to execute a DDL statement within a transaction.
 
 Read more about Dependency Injection - [Design Patterns Explained – Dependency Injection with Code Examples](https://stackify.com/dependency-injection/).
 
@@ -144,3 +144,4 @@ namespace DiSample.Controllers
     }
 }
 ```
+

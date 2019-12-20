@@ -4,20 +4,20 @@ Starcounter supports most of the .NET CLR primitive types.
 
 ## List of supported .NET CLR types
 
-- `Boolean`
-- `Byte`
-- `DateTime` – [limitations](#datetime)
-- `Decimal` – [limitations](#decimal)
-- `Double`
-- `Int16`
-- `Int32`
-- `Int64`
-- `SByte`
-- `Single`
-- `String` – [limitations](#string)
-- `UInt16`
-- `UInt32`
-- `UInt64`
+* `Boolean`
+* `Byte`
+* `DateTime` – [limitations](database-types.md#datetime)
+* `Decimal` – [limitations](database-types.md#decimal)
+* `Double`
+* `Int16`
+* `Int32`
+* `Int64`
+* `SByte`
+* `Single`
+* `String` – [limitations](database-types.md#string)
+* `UInt16`
+* `UInt32`
+* `UInt64`
 
 ### DateTime
 
@@ -72,3 +72,4 @@ public abstract class Item
     public abstract Binary NonNullBinary { get; set; }
 }
 ```
+

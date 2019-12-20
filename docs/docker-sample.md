@@ -14,8 +14,8 @@ Sample files structure:
 📑 Dockerfile
 ```
 
-- The `App` folder contains a sample Starcounter Console application files.
-- The `Dockerfile` file contains Docker container definition for the app.
+* The `App` folder contains a sample Starcounter Console application files.
+* The `Dockerfile` file contains Docker container definition for the app.
 
 ### `App.csproj`
 
@@ -177,3 +177,4 @@ COPY --from=build /source/App/out ./
 
 ENTRYPOINT ["dotnet", "App.dll"]
 ```
+
