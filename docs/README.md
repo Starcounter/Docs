@@ -52,6 +52,8 @@ On Windows Starcounter requires x64 version of Visual C++ to be installed. Downl
 
 Make sure to `Unblock` the archive after downloading prior to extracting it. See the screenshot below:
 
+![](.gitbook/assets/zip-archive-unblock.png)
+
 #### Ubuntu 18.04 & 19.10
 
 **Install prerequisites.**
