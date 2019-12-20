@@ -10,8 +10,7 @@ Create a new class called `Person` with the attribute [`[Database]`](../guides/d
 
 Add the properties `FirstName` and `LastName` to this class. Your code should now look like this:
 
-{% code-tabs %}
-{% code-tabs-item title="Program.cs" %}
+{% code title="Program.cs" %}
 ```csharp
 using Starcounter;
 
@@ -33,8 +32,7 @@ namespace HelloWorld
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ## Add an Instance to the Class
 
@@ -42,8 +40,7 @@ Add a first instance to the class by defining a new person, its properties, and 
 
 {% page-ref page="../guides/transactions/" %}
 
-{% code-tabs %}
-{% code-tabs-item title="Program.cs" %}
+{% code title="Program.cs" %}
 ```csharp
 class Program
 {
@@ -65,8 +62,7 @@ class Program
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 The if statement here checks if you already have a `Person` in the database by accessing the first result that we get from the query. If that is the case, you do not need to create a new one. Without it, we would create a new instance of `Person` every time we run the program, which we do not intend to do.  
   

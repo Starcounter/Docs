@@ -18,16 +18,14 @@ To create a Typed JSON class, choose `New item`, or use Ctrl + Shift + A in Visu
 
 One of the simplest JSON-by-example files look like this:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json" %}
+{% code title="PersonPage.json" %}
 ```javascript
 {
     "FirstName": "",
     "LastName": ""
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 Here, we set the value to an empty string to declare the type.
 
@@ -44,16 +42,14 @@ string name = personPage.FirstName; // Contains the value "", an empty string
 
 It's simple to set default values in JSON-by-example. Building on the previous code example, it might look like this:
 
-{% code-tabs %}
-{% code-tabs-item title="PersonPage.json" %}
+{% code title="PersonPage.json" %}
 ```javascript
 {
     "FirstName": "Steven", 
     "LastName": "Smith"
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 By doing this, the JSON returned when creating a new `PersonPage` object will be `{"FirstName":"Steven","LastName":"Smith"}`:
 
