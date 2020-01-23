@@ -15,7 +15,7 @@ Starcounter database consists of the following items:
 * **Required**: specifies whether this item is a required database part; for example, when moving or backing up a database.
 * **Platform Specific**: `No` - the file is platform independent; `Yes` - the file is platform specific and not cross-compatible between Windows / Linux versions of Starcounter.
 
-**\*Note**: due to the `.cfg` file being platform specific, it is not currently possible to copy databases between Windows and Linux.\*
+**Note**: due to the `.cfg` file being platform specific, it is not currently possible to copy databases between Windows and Linux.
 
 ## Transaction log files
 

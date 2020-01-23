@@ -2,7 +2,7 @@
 
 ## Data Manipulation Language \(DML\) Queries
 
-Starcounter 3.0 has the same SQL Query Processor as Starcounter 2.3.2. Please refer to the \(original documentation\)\[[https://docs.starcounter.io/v/2.3.2/guides/sql](https://docs.starcounter.io/v/2.3.2/guides/sql)\] for the full specification.
+Starcounter 3.0 has the same SQL Query Processor as Starcounter 2.3.2. Please refer to the [original documentation](https://docs.starcounter.io/v/2.3.2/guides/sql) for the full specification.
 
 ## Data Definition Language \(DDL\) Queries
 
@@ -41,7 +41,7 @@ DROP TABLE TableName
 
 There is no one to one match between Starcounter database data types and .NET CLR data types.
 
-Use the following table to translate .NET CLR data types into Starcounter database data types.
+Use the following table to translate .NET CLR data type names into Starcounter database SQL data type names.
 
 | .NET CLR Data Type | Starcounter database data type |
 | :--- | :--- |
