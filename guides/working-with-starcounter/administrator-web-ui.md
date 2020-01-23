@@ -95,8 +95,6 @@ Click the `Download` button to download an app. Downloaded apps can be controlle
 
 You can launch an application in a database by going to `localhost:8181/#/databases/default/executabeStart`. Specify the path to your `.exe` application in the field. 
 
-![](../../.gitbook/assets/capture.PNG)
-
 ## Database Configuration
 
 Access the database settings by going to `localhost:8181/#/databases/default/settings`. The available settings are:
