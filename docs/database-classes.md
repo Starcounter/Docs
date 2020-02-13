@@ -72,7 +72,76 @@ public abstract class Person
 }
 ```
 
-**Note**: If a database class definition of a Starcounter application contains any non-computed instance properties that are not declared as abstract auto-implemented properties with public get and set accessors and with one of the [supported data types](database-types.md), an exception will be thrown when the application starts.
+**Note**: If a database class definition of a Starcounter application contains any non-computed instance properties that are not declared as abstract auto-implemented properties with public get and set accessors, an exception will be thrown when the application starts.
+
+## Proxy state fields and properties
+
+Sometimes it is required to declare a public non-persistent field or property in a database class. Such fields or properties can be used for advanced calculations or caching of computed values. This can be achieved with usage of the `ProxyStateAttribute`. Starcounter ignores and does not persist everything marked with the `ProxyStateAttribute`.
+
+```csharp
+[Database]
+public abstract class Person
+{
+    public abstract string Name { get; set; }
+    public abstract DateTime CreatedAtUtc { get; set; }
+
+    public int NameLength => Name.Length;
+
+    // This property is ignored by Starcounter and is not persistent.
+    [ProxyState]
+    public string CachedInfo { get; set; }
+}
+
+public static IList<Person> SortPeopleByInfo(IList<Person> people)
+{
+    // First, iterate through each person and calculate it's info string.
+    foreach (Person p in people)
+    {
+        // The info string is saved in the non-persistent proxy state property.
+        p.CachedInfo = $"{p.Name} created at {p.CreatedAtUtc} with name length of {p.NameLength}.";
+    }
+
+    // Sorting the people by their info string.
+    return people.OrderBy(x => x.CachedInfo).ToList();
+}
+```
+
+It is important to understand that all proxy state values have the same lifespan as the proxy object. Starcounter creates a new proxy object on each object retrieval from the database.
+
+```csharp
+public static void IllustrateProxyStateBehavior(IDatabaseContext db)
+{
+    Person pInsert = db.Insert<Person>();
+    ulong oid = db.GetOid(pInsert);
+    Person pGet = db.Get<Person>(oid);
+    Person pSelect = db.Sql<Person>("SELECT p FROM Person p WHERE p IS ?", pInsert).First();
+
+    pInsert.CachedInfo = "This proxy was created with the db.Insert method.";
+
+    // Even though pInsert, pGet, and pSelect point to the same database record,
+    // these are different CLR objects with their own proxy state values.
+
+    Console.WriteLine(pInsert.CachedInfo ?? "null"); // Writes: "This proxy was created with the db.Insert method."
+    Console.WriteLine(pGet.CachedInfo ?? "null"); // Writes: "null".
+    Console.WriteLine(pSelect.CachedInfo ?? "null"); // Writes: "null".
+
+    // The proxy state is not shared between objects.
+    pGet.CachedInfo = "This proxy was created with the db.Get method.";
+    pSelect.CachedInfo = "This proxy was created with the db.Sql method.";
+
+    Console.WriteLine(pInsert.CachedInfo ?? "null"); // Writes: "Person has just been inserted."
+    Console.WriteLine(pGet.CachedInfo ?? "null"); // Writes: "This proxy was created with the db.Get method.".
+    Console.WriteLine(pSelect.CachedInfo ?? "null"); // Writes: "This proxy was created with the db.Sql method.".
+
+    // Each database access creates a new CLR object, which points to the same database record.
+    // The proxy state of the pGet and pSelect objects is now reset.
+    pGet = db.Get<Person>(oid);
+    pSelect = db.Sql<Person>("SELECT p FROM Person p WHERE p IS ?", pInsert).First();
+
+    Console.WriteLine(pGet.CachedInfo ?? "null"); // Writes: "null".
+    Console.WriteLine(pSelect.CachedInfo ?? "null"); // Writes: "null".
+}
+```
 
 ### Database queries in computed properties
 
@@ -279,6 +348,12 @@ transactor.Transact(db =>
 
 ## Limitations
 
+* All database classes have to be declared as `public abstract`.
+* Database classes may not inherit non-database classes.
+* Database classes shall have a public parameterless constructor.
+* All database properties have to be declared as `public abstract` and use a supported [database type](database-types.md).
+* It is not allowed to override database properties.
+* All proxy state members have to be marked with the `ProxyStateAttribute`. This also applies to the derived classes.
+* Database classes may not have non-database abstract members.
 * Database classes can have a maximum of 112 properties for performance reasons. The limit applies to the total number of persistent properties \(including all inherited\) per class.
 * Nested database classes are not supported in SQL queries.
-
