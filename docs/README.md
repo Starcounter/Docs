@@ -59,16 +59,7 @@ Make sure to `Unblock` the archive after downloading prior to extracting it. See
 **Install prerequisites.**
 
 ```text
-sudo apt-get install wget unzip
-sudo apt-get install libaio1 libtinfo5
-```
-
-Starcounter relies on a specific version of [SWI-Prolog](https://wwu-pi.github.io/tutorials/lectures/lsp/010_install_swi_prolog.html).
-
-```text
-sudo add-apt-repository ppa:swi-prolog/stable
-sudo apt-get update
-sudo apt-get install swi-prolog-nox=7.\*
+sudo apt-get install libaio1 libtinfo5 swi-prolog-nox=7.\*
 ```
 
 **Download and unpack Starcounter binaries.**
