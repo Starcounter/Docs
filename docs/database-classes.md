@@ -281,7 +281,10 @@ transactor.Transact(db =>
 
 Starcounter automatically discovers all database classes in the application assembly, which does not include all referenced assemblies. Manual configuration is required to use database classes from referenced assemblies.
 
-### Referenced assembly
+### Example
+
+The `Something` database class definition below is contained in an assembly that our app references:
+
 
 ```cs
 [Database]
