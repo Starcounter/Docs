@@ -76,7 +76,7 @@ public abstract class Person
 
 ## Proxy state fields and properties
 
-Sometimes it is required to declare a public non-persistent field or property in a database class. Such fields or properties can be used for advanced calculations or caching of computed values. This can be achieved with usage of the `ProxyStateAttribute`. Starcounter ignores and does not persist everything marked with the `ProxyStateAttribute`.
+Sometimes it is required to declare a public non-persistent field or property in a database class. Such fields or properties can be used for advanced calculations or caching of computed values. This can be achieved with usage of the `ProxyStateAttribute`. Starcounter ignores and does not persist anything marked with the `ProxyStateAttribute`.
 
 ```csharp
 [Database]
