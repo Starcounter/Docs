@@ -277,8 +277,41 @@ transactor.Transact(db =>
 });
 ```
 
+## Discovery
+
+Starcounter automatically discovers all database classes in the application assembly, which does not include all referenced assemblies. Manual configuration is required to use database classes from referenced assemblies.
+
+### Referenced assembly
+
+```cs
+[Database]
+public abstract class Something
+{
+}
+```
+
+### Application assembly
+
+```cs
+using var services = new ServiceCollection()
+    .AddStarcounter($"Database=./.database/test;OpenMode=CreateIfNotExists;StartMode=StartIfNotRunning;StopMode=IfWeStarted")
+    .Configure<Starcounter.Database.Binding.TypeBindingOptions>(o =>
+    {
+        Type[] extraDatabaseTypes = typeof(Something) // Getting type of a database class.
+            .Assembly // Getting assembly which defines the type.
+            .GetTypes() // Getting all types in the assembly.
+            .Where(x => x.GetCustomAttributes(typeof(DatabaseAttribute), true).Any()) // Filtering the types by the `[Database]` attribute.
+            .ToArray();
+
+        // The `o.DefaultTypes` property contains all automatically discovered database classes.
+        // The `o.Types` property defines which classes will be treated as database classes.
+        // It shall contain all automatically discovered database classes plus extra classes from the referenced assembly.
+        o.Types = o.DefaultTypes.Concat(extraDatabaseTypes).ToArray();
+    })
+    .BuildServiceProvider();
+```
+
 ## Limitations
 
 * Database classes can have a maximum of 112 properties for performance reasons. The limit applies to the total number of persistent properties \(including all inherited\) per class.
 * Nested database classes are not supported in SQL queries.
-
