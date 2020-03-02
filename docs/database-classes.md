@@ -350,7 +350,7 @@ transactor.Transact(db =>
 
 * All database classes have to be declared as `public abstract`.
 * Database classes may not inherit non-database classes.
-* Database classes shall have a public parameterless constructor.
+* Database classes shall have either no declared constructor, or a public parameterless constructor.
 * All database properties have to be declared as `public abstract` and use a supported [database type](database-types.md).
 * It is not allowed to override database properties.
 * All proxy state members have to be marked with the `ProxyStateAttribute`. This also applies to the derived classes.
