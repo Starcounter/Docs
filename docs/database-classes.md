@@ -293,7 +293,7 @@ public abstract class Something
 }
 ```
 
-### Application assembly
+And here's the code we need to have in our application for it to detect the database class definition above:
 
 ```cs
 using var services = new ServiceCollection()
