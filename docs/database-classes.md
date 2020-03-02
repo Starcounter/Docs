@@ -300,7 +300,7 @@ using var services = new ServiceCollection()
         Type[] extraDatabaseTypes = typeof(Something) // Getting type of a database class.
             .Assembly // Getting assembly which defines the type.
             .GetTypes() // Getting all types in the assembly.
-            .Where(x => x.GetCustomAttributes(typeof(DatabaseAttribute), true).Any()) // Filtering the types by the `[Database]` attribute.
+            .Where(x => x.GetCustomAttribute<DatabaseAttribute>(inherit: true) != null) // Filtering the types by the `DatabaseAttribute` attribute.
             .ToArray();
 
         // The `o.DefaultTypes` property contains all automatically discovered database classes.
