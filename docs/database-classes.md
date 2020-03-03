@@ -97,7 +97,7 @@ public static IList<Person> SortPeopleByInfo(IList<Person> people)
     foreach (Person p in people)
     {
         // The info string is saved in the non-persistent proxy state property.
-        p.CachedInfo = $"{p.Name} created at {p.CreatedAtUtc} with name length of {p.NameLength}.";
+        p.CachedInfo = $"{p.Name} created with name length of {p.NameLength}.";
     }
 
     // Sorting the people by their info string.
@@ -383,12 +383,12 @@ using var services = new ServiceCollection()
 
 ## Limitations
 
-* All database classes have to be declared as `public abstract`.
-* Database classes may not inherit non-database classes.
-* Database classes shall have either no declared constructor, or a public parameterless constructor.
-* All database properties have to be declared as `public abstract`, with one of the supported [database types](database-types.md) as property type.
+* All database classes must be declared as `public abstract`.
+* Database classes must not inherit from non-database classes.
+* Database classes with custom constructors must also declare a public parameterless constructor.
+* Database properties must be declared as `public abstract`, with one of the supported [database types](database-types.md) as property type.
 * It is not allowed to override database properties.
-* All proxy state members have to be marked with the `ProxyStateAttribute`. This also applies to the derived classes.
-* Database classes may not have non-database abstract members.
+* Proxy state members must be decorated with the `ProxyStateAttribute` attribute. This also applies to the derived classes.
+* Database classes must not have non-database abstract members.
 * Database classes can have a maximum of 112 properties for performance reasons. The limit applies to the total number of persistent properties \(including all inherited\) per class.
 * Nested database classes are not supported in SQL queries.
