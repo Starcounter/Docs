@@ -285,7 +285,6 @@ Starcounter automatically discovers all database classes in the application asse
 
 The `Something` database class definition below is contained in an assembly that our app references:
 
-
 ```cs
 [Database]
 public abstract class Something
