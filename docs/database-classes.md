@@ -301,7 +301,7 @@ using var services = new ServiceCollection()
     {
         Type[] extraDatabaseTypes = typeof(Something) // Getting type of a database class.
             .Assembly // Getting assembly which defines the type.
-            .GetTypes() // Getting all types in the assembly.
+            .ExportedTypes // Getting all exported types in the assembly.
             .Where(t => t.IsDatabaseType()) // Filtering the types by the `DatabaseAttribute` attribute.
             .ToArray();
 
