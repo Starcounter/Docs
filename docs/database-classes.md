@@ -83,7 +83,6 @@ Sometimes it is required to declare a public non-persistent field or property in
 public abstract class Person
 {
     public abstract string Name { get; set; }
-    public abstract DateTime CreatedAtUtc { get; set; }
 
     public int NameLength => Name.Length;
 
