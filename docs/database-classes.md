@@ -345,6 +345,42 @@ transactor.Transact(db =>
 });
 ```
 
+## Discovery
+
+Starcounter automatically discovers all database classes in the application assembly, which does not include all referenced assemblies. Manual configuration is required to use database classes from referenced assemblies.
+
+### Example
+
+The `Something` database class definition below is contained in an assembly that our app references:
+
+```cs
+[Database]
+public abstract class Something
+{
+}
+```
+
+And here's the code we need to have in our application for it to detect the database class definition above, as well as any other database types contained in the same assembly:
+
+```cs
+using var services = new ServiceCollection()
+    .AddStarcounter($"Database=./.database/test;OpenMode=CreateIfNotExists;StartMode=StartIfNotRunning;StopMode=IfWeStarted")
+    .Configure<Starcounter.Database.Binding.TypeBindingOptions>(o =>
+    {
+        Type[] extraDatabaseTypes = typeof(Something) // Getting type of a database class.
+            .Assembly // Getting assembly which defines the type.
+            .ExportedTypes // Getting all exported types in the assembly.
+            .Where(t => t.IsDatabaseType()) // Filtering the types by the `DatabaseAttribute` attribute.
+            .ToArray();
+
+        // The `o.DefaultTypes` property contains all automatically discovered database classes.
+        // The `o.Types` property defines which classes will be treated as database classes.
+        // It shall contain all automatically discovered database classes plus extra classes from the referenced assembly.
+        o.Types = o.DefaultTypes.Concat(extraDatabaseTypes).ToArray();
+    })
+    .BuildServiceProvider();
+```
+
 ## Limitations
 
 * All database classes have to be declared as `public abstract`.
