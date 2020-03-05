@@ -9,4 +9,4 @@ Then copy `MyTransactor.cs` and `IDeleteAware.cs` to your application.
 Now you can implement `IDeleteAware.OnDelete` on your database types that need to take action when an instance of the type is deleted.
 
 ## Sample application
-Look at [`Program.cs`](./Program.cs) to see how its used.
+Look at [`Program.cs`](./Program.cs) to see how it is used.
