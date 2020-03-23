@@ -15,7 +15,18 @@ public abstract class Person
 }
 ```
 
-All instances of these database classes created with the `IDatabaseContext.Insert<T>()` method are stored in the Starcounter database persistently.
+All instances of these database classes created with the `IDatabaseContext.Insert<T>()` method are stored in the Starcounter database persistently, use `IDatabaseContext.Delete(object obj)` method to delete persistent database objects.
+
+```cs
+public static void IllustrateInsertAndDelete(IDatabaseContext db)
+{
+    // Inserting a new persistent database object of type `Person`.
+    var p = db.Insert<Person>();
+
+    // Deleting the persistent database object.
+    db.Delete(p);
+}
+```
 
 ## Constructors
 
