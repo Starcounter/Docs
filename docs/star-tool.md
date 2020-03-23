@@ -57,6 +57,18 @@ The `start` command starts the database referenced by the absolute or relative p
 star start C:\databases\mydb
 ```
 
+**clean**
+
+```text
+star clean <db>
+```
+
+The `clean` command cleans a database from deleted tables and columns.
+
+```text
+star clean C:\databases\mydb
+```
+
 #### Import and export
 
 **reload**

@@ -6,6 +6,8 @@ Starcounter 3.0 has the same SQL Query Processor as Starcounter 2.3.2. Please re
 
 ## Data Definition Language \(DDL\) Queries
 
+**Note**: Starcounter does not permanently delete dropped tables and columns. The dropped tables and columns are hidden from the application and can be permanently removed from the database using the [`star`](star-tool.md#database-management) tool.
+
 As of right now the following DDL statements are supported:
 
 ### Create / drop database index
