@@ -23,10 +23,12 @@ transactor.Transact(db =>
     foreach (ISqlResultRow row in result)
     {
         // Iterating over each column in the SQL query result.
-        foreach (ISqlResultColumn col in columns)
+        for (int i = 0; i < columns.Count; i++)
         {
+            ISqlResultColumn col = columns[i];
+
             // Printing the column's value of the current row.
-            Console.WriteLine($"{col.DisplayName}: {row.GetValue(col.Name)}");
+            Console.WriteLine($"{col.Name}: {row.GetValue(i)}");
         }
 
         Console.WriteLine();
