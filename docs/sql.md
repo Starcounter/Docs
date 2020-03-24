@@ -4,6 +4,36 @@
 
 Starcounter 3.0 has the same SQL Query Processor as Starcounter 2.3.2. Please refer to the [original documentation](https://docs.starcounter.io/v/2.3.2/guides/sql) for the full specification.
 
+### Arbitrary database access
+
+It is possible to perform arbitrary database access using `Starcounter.Database.ISqlResult`, `Starcounter.Database.ISqlResultRow`, and `Starcounter.Database.ISqlResultColumn` interfaces.
+
+The following example demonstrates how to execute an arbitrary SQL query and retrieve its result.
+
+```cs
+transactor.Transact(db =>
+{
+    // Retrieving SQL query result in an arbitrary form.
+    ISqlResult<ISqlResultRow> result = db.Sql<ISqlResultRow>("SELECT p.FirstName, p.LastName FROM Person p");
+
+    // Retrieving list of columns in the SQL result.
+    IReadOnlyList<ISqlResultColumn> columns = result.Columns;
+
+    // Iterating over each row in the SQL query result.
+    foreach (ISqlResultRow row in result)
+    {
+        // Iterating over each column in the SQL query result.
+        foreach (ISqlResultColumn col in columns)
+        {
+            // Printing the column's value of the current row.
+            Console.WriteLine($"{col.DisplayName}: {row.GetValue(col.Name)}");
+        }
+
+        Console.WriteLine();
+    }
+});
+```
+
 ## Data Definition Language \(DDL\) Queries
 
 As of right now the following DDL statements are supported:
@@ -72,4 +102,3 @@ DROP COLUMN ColumnName
 ALTER TABLE TableName
 ADD ColumnName (TextColumn text)
 ```
-
