@@ -59,16 +59,7 @@ Make sure to `Unblock` the archive after downloading prior to extracting it. See
 **Install prerequisites.**
 
 ```text
-sudo apt-get install wget unzip
-sudo apt-get install libaio1 libtinfo5
-```
-
-Starcounter relies on a specific version of [SWI-Prolog](https://wwu-pi.github.io/tutorials/lectures/lsp/010_install_swi_prolog.html).
-
-```text
-sudo add-apt-repository ppa:swi-prolog/stable
-sudo apt-get update
-sudo apt-get install swi-prolog-nox=7.\*
+sudo apt-get install wget unzip libaio1 libtinfo5 swi-prolog-nox=7.\*
 ```
 
 **Download and unpack Starcounter binaries.**
@@ -264,4 +255,3 @@ Everything should run out of the box.
 _Before asking questions or reporting issues, please read these few lines, and maybe you will find an answer for your question._
 
 * Publishing application in a single file with [`dotnet publish /p:PublishSingleFile=true`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-publish) is not yet supported.
-
