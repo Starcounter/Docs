@@ -25,9 +25,8 @@ Please make sure to read our [End User License Agreement for Starcounter Softwar
 
 ## Requirements
 
-* [Ubuntu 18.04.02 x64](https://ubuntu.com/download/desktop) or [Windows 10 Pro x64 Build 1903](https://www.microsoft.com/en-us/software-download/windows10).
-  * [Windows Subsystem for Linux \(WSL\)](https://docs.microsoft.com/en-us/windows/wsl/install-win10) is also supported.
-  * [Ubuntu 19.10 x64](https://ubuntu.com/download/desktop) is also supported.
+* Supported OS: Windows 10 x64 build 1903+, Ubuntu 18.04, Ubuntu 19.10, CentOS 8.
+  - Supported linux distrubutions are also supported under [Windows Subsystem for Linux \(WSL\)](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 * [.NET Core 3.0.100](https://dotnet.microsoft.com/download/dotnet-core/3.0), SDK for development, runtime for production.
 * Enough RAM to load database of targeted size.
 * It's recommended to have at least two CPU cores.
