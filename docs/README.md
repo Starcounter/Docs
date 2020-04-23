@@ -80,6 +80,32 @@ wget https://starcounter.io/Starcounter/Starcounter.3.0.0-rc-20191212.zip
 unzip Starcounter.3.0.0-rc-20191212.zip
 ```
 
+#### CentOS 8
+
+**Install prerequisites.**
+
+```text
+yum install wget unzip libaio ncurses-compat-libs clang
+```
+
+Starcounter requires a certain version of SWI-Prolog, which is not available from existing repositories, but can be found in package archives:
+
+```text
+yum localinstall https://kojipkgs.fedoraproject.org//packages/compat-readline6/6.3/16.fc30/x86_64/compat-readline6-6.3-16.fc30.x86_64.rpm
+yum localinstall https://kojipkgs.fedoraproject.org//vol/fedora_koji_archive05/packages/pl/7.2.0/1.fc23/x86_64/pl-7.2.0-1.fc23.x86_64.rpm
+ln /usr/lib64/swipl-7.2.0/lib/x86_64-linux/libswipl.so.7.2.0 /usr/lib64/libswipl.so
+```
+
+**Download and unpack Starcounter binaries.**
+
+```text
+cd $HOME
+mkdir Starcounter.3.0.0-rc-20191212
+cd Starcounter.3.0.0-rc-20191212
+wget https://starcounter.io/Starcounter/Starcounter.3.0.0-rc-20191212.zip
+unzip Starcounter.3.0.0-rc-20191212.zip
+```
+
 ### Application
 
 **Create an application folder and initialize a .NET Core console application.**
