@@ -200,5 +200,10 @@ Start-ClusterGroup Starcounter
 
 ## Starcounter failover on Linux
 
-Starcounter 3 Release Candidate does not yet support failover on Linux operating systems out of the box. If you have a Linux production environment which requires failover, please contact us.
+### Introduction
+The idea of starounter failover cluster is to boundle a starcounter database and a starcounter-based application into an entity that can be health monitored and automatically restarted or migrated to a standby cluster node should a disaster happens. Due to in-memory nature of a starcounter database, when failover happens it may take significant time to load data from media on a cold standby node. Thus it would be beneficial to keep starcounter running as a hot standby. Another requirement to the system concers data integrity. Our goal is to provide consistent solution in terms of [CAP](https://en.wikipedia.org/wiki/CAP_theorem), i.e. no committed transactions can be lost during migration.
+### Setup Explained
+
+### Future directions
+### Practical setup steps
 
