@@ -203,6 +203,9 @@ Start-ClusterGroup Starcounter
 ### Introduction
 The idea of starounter failover cluster is to boundle a starcounter database and a starcounter-based application into an entity that can be health monitored and automatically restarted or migrated to a standby cluster node should a disaster happens. Due to in-memory nature of a starcounter database, when failover happens it may take significant time to load data from media on a cold standby node. Thus it would be beneficial to keep starcounter running as a hot standby. Another requirement to the system concers data integrity. Our goal is to provide consistent solution in terms of [CAP](https://en.wikipedia.org/wiki/CAP_theorem), i.e. no committed transactions can be lost during migration.
 ### Setup Explained
+Starcounter failover cluster is build on top of proven stack consisting of [pacemaker](https://clusterlabs.org/), [DRBD](https://www.linbit.com/drbd/) and [GFS2](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/global_file_system_2/index). Pacemaker is responsible for managing cluster nodes, control resources it manages and perform appropriate failover actions. DRBD is responsible for synchronizing starcounter transaction log on a block level. And GFS2 provides Starcounter file level access to a shared transacton log. Starcounter role in this is:
+* supporting hot standby mode so that in-memory data on a standy node is up-to-date with an active node
+* providing pacemaker control scripts for starcounter database.
 
 ### Future directions
 ### Practical setup steps
