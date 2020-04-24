@@ -207,6 +207,18 @@ Starcounter failover cluster is build on top of proven stack consisting of [pace
 * supporting hot standby mode so that in-memory data on a standy node is up-to-date with an active node
 * providing pacemaker control scripts for starcounter database.
 
+Here is a system diagram of a typical starcounter failover cluster:
+
+![cluster](images/Starcounter%20cluster.png)
+
+Let's explain components of the cluster top-down.
+
+* IP address
+This is a resource of type `ocf:heartbeat:IPaddr2`, which we use as an ip address flowing in the cluster along with a starcounter application. It allows external clients to access the application by the ip address regardless of which node hosts it. Should be configured to start on the same node as the starcounter application.
+* Starcounter application
+Controls your starcounter application. A good fit for resource type would be `ocf:heartbeat:anything` which can control any long-running daemon like processes.
+* Starcounter database
+Controls starcounter database required for the starcounter application. This is the only resource in this setup which is managed by starcounter provided resource agent - `ocf:starcounter:database`. You must install `resource-agents-starcounter`
 ### Future directions
 ### Practical setup steps
 
