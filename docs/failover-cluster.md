@@ -246,50 +246,47 @@ Given enough interest, it should be possible to develop a setup that allows runn
 
 The backbone of a starcounter cluster is pretty standard mix of pacemaker, DRBD, GFS2 and IP Address resources. Please refer to [Cluster from scratch](https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/2.0/html/Clusters_from_Scratch/index.html) for detailed configuring steps. Here we'll briefly list required steps to set it up:
 
-1. SETUP PACEMAKER CLUSTER
+#### 1. SETUP PACEMAKER CLUSTER
 
-\#install and run cluster software (on both nodes)
-
+```text
+#install and run cluster software (on both nodes)
 apt-get install pacemaker pcs psmisc corosync
 systemctl start pcsd.service
 systemctl enable pcsd.service
 
-\#set cluster user password (on both nodes)
-
+#set cluster user password (on both nodes)
 passwd hacluster
 
-\#authenticate cluster nodes (on any node)
-
+#authenticate cluster nodes (on any node)
 pcs host auth node1 node2
 
-\#create cluster (on any node)
-
+#create cluster (on any node)
 pcs cluster setup mycluster node1.mshome.net node2.mshome.net --force
+```
 
-2. ADD QUORUM NODE TO THE CLUSTER (https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/high_availability_add-on_reference/s1-quorumdev-haar)
+#### 2. ADD QUORUM NODE TO THE CLUSTER (https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/high_availability_add-on_reference/s1-quorumdev-haar)
 
-\#on a quorum node (it would be a third machine)
-
+```text
+#on a quorum node (it would be a third machine)
 apt install pcs corosync-qnetd
 systemctl start pcsd.service
 systemctl enable pcsd.service
 passwd hacluster
 
-\#install quorum defince (on both nodes)
-
+#install quorum defince (on both nodes)
 apt install corosync-qdevice
 
-\#add quorum to the cluster (on any node)
-
+#add quorum to the cluster (on any node)
 pcs host auth node3.mshome.net
 pcs quorum device add model net host=node3.mshome.net algorithm=lms
+```
 
-3. CONFIGURE FENCING
+#### 3. CONFIGURE FENCING
 
-\#configure diskless sbd (https://documentation.suse.com/sle-ha/12-SP4/html/SLE-HA-all/cha-ha-storage-protect.html#pro-ha-storage-protect-confdiskless)
+```text
+#configure diskless sbd (https://documentation.suse.com/sle-ha/12-SP4/html/SLE-HA-all/cha-ha-storage-protect.html#pro-ha-storage-protect-confdiskless)
 
-\#configure sbd (on both nodes)
-
+#configure sbd (on both nodes)
 apt install sbd
 mkdir /etc/sysconfig
 cat <<EOF >/etc/sysconfig/sbd
@@ -301,17 +298,17 @@ cat <<EOF >/etc/sysconfig/sbd
 	EOF
 systemctl enable sbd
     
-\#enable stonith for the cluster
-
+#enable stonith for the cluster
 pcs property set stonith-enabled="true"
 pcs property set stonith-watchdog-timeout=10
+```
 
-4. CONFIGURE DRDB PARTITIONS
+#### 4. CONFIGURE DRDB PARTITIONS
 
-prerequisite: empty partition \dev\sdb1 on bot nodes
+Prerequisite: empty partition \dev\sdb1 on both nodes
 
-\#intall and configure drbd (on both nodes)
-
+```text
+#intall and configure drbd (on both nodes)
 apt-get install drbd-utils
 cat <<END > /etc/drbd.d/test.res
 resource test {
@@ -342,39 +339,42 @@ END
 drbdadm create-md test
 drbdadm up test
 
-\#make one of the nodes primary (on any node)
-
+#make one of the nodes primary (on any node)
 drbdadm primary --force test
+```
 
-5. SETUP GFS
+#### 5. SETUP GFS
 
-\#setup gfs packages (on both nodes)
-
-For Ubuntu:
+```text
+#setup gfs packages (on both nodes)
+#For Ubuntu:
 apt-get install gfs2-utils dlm-controld 
 
-For CentOS:
+#For CentOS:
 yum localinstall https://repo.cloudlinux.com/cloudlinux/8.1/BaseOS/x86_64/dlm-4.0.9-3.el8.x86_64.rpm
 
-\#setup dlm resource (on one node) (https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/2.0/html/Clusters_from_Scratch/_configure_the_cluster_for_the_dlm.html)
-
+#setup dlm resource (on one node) (https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/2.0/html/Clusters_from_Scratch/_configure_the_cluster_for_the_dlm.html)
 pcs cluster cib dlm_cfg
 pcs -f dlm_cfg resource create dlm ocf:pacemaker:controld op monitor interval=60s
 pcs -f dlm_cfg resource clone dlm clone-max=2 clone-node-max=1
 pcs cluster cib-push dlm_cfg --config
 
-\#create GFS2 filysystem (on both nodes)
+#create GFS2 filysystem (on both nodes)
 mkfs.gfs2 -p lock_dlm -j 2 -t mycluster:gfs_fs /dev/drbd1
+```
 
-6. CONFIGURE DRBD CLUSTER RESOURCE(https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/2.0/html/Clusters_from_Scratch/_configure_the_cluster_for_the_drbd_device.html)
+#### 6. CONFIGURE DRBD CLUSTER RESOURCE(https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/2.0/html/Clusters_from_Scratch/_configure_the_cluster_for_the_drbd_device.html)
 
+```text
 pcs cluster cib drbd_cfg
 pcs -f drbd_cfg resource create drbd_drive ocf:linbit:drbd drbd_resource=test op monitor interval=60s
 pcs -f drbd_cfg resource promotable drbd_drive promoted-max=2 promoted-node-max=1 clone-max=2 clone-node-max=1 notify=true
 pcs cluster cib-push drbd_cfg --config
+```
 
-7. CONFIGURE GFS CLUSTER RESOURCE(https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/2.0/html/Clusters_from_Scratch/_configure_the_cluster_for_the_filesystem.html)
+#### 7. CONFIGURE GFS CLUSTER RESOURCE(https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/2.0/html/Clusters_from_Scratch/_configure_the_cluster_for_the_filesystem.html)
 
+```text
 pcs cluster cib fs_cfg
 pcs -f fs_cfg resource create drbd_fs Filesystem  device="/dev/drbd1" directory="/mnt/drbd" fstype="gfs2"
 pcs -f fs_cfg constraint colocation add drbd_fs with drbd_drive-clone INFINITY with-rsc-role=Master
@@ -383,7 +383,10 @@ pcs -f fs_cfg constraint colocation add drbd_fs with dlm-clone INFINITY
 pcs -f fs_cfg constraint order dlm-clone then drbd_fs
 pcs -f fs_cfg resource clone drbd_fs meta interleave=true
 pcs cluster cib-push fs_cfg --config
+```
 
-8. CONFIGURE CLUSTER VIRTUAL IP (on any node)
+#### 8. CONFIGURE CLUSTER VIRTUAL IP (on any node)
 
+```text
 pcs resource create ClusterIP ocf:heartbeat:IPaddr2 ip=192.168.52.235 cidr_netmask=28 op monitor interval=30s
+```
