@@ -211,14 +211,18 @@ Here is a system diagram of a typical starcounter failover cluster:
 
 ![cluster](images/Starcounter%20cluster.png)
 
-Let's explain components of the cluster top-down.
+Let's go through all cluster resource we have under pacemaker control:
 
 * IP address
-This is a resource of type `ocf:heartbeat:IPaddr2`, which we use as an ip address flowing in the cluster along with a starcounter application. It allows external clients to access the application by the ip address regardless of which node hosts it. Should be configured to start on the same node as the starcounter application.
+This is a resource of type `ocf:heartbeat:IPaddr2`, which we use as a virtual public ip address flowing in the cluster along with a starcounter application. It allows external clients to access the application by the signle ip address regardless of which node hosts it. Should be configured to start on the same node as the starcounter application.
 * Starcounter application
-Controls your starcounter application. A good fit for resource type would be `ocf:heartbeat:anything` which can control any long-running daemon like processes.
+Controls your starcounter application. A good fit for resource type would be `ocf:heartbeat:anything` which can control any long-running daemon like processes. Should be configured to start on the same node where an active instance of starcounter database is running.
 * Starcounter database
-Controls starcounter database required for the starcounter application. This is the only resource in this setup which is managed by starcounter provided resource agent - `ocf:starcounter:database`. You must install `resource-agents-starcounter`
+Controls starcounter database required for the starcounter application. It has a type of `ocf:starcounter:database` and this is the only resource in this setup which is authored by starcounter. You must install `resource-agents-starcounter` package to use it. Unlike IP address and Starcounter application resources that can have  only one running instance per cluster, this resource runs on every cluster node, but in different states - only one node can run it as a "master" while the rest are "slaves". "Master" and "slave" are pacemaker terms that directly correspond to starcounter database modes named "active" and "standby", so that if starcounter database resource in pacemaker is master, then the database it controls is in active mode. The same connection exists between "slave" pacemaker resource state and "standby" mode of starcounter database. In the active mode starcounter is able to accept client connections and perform database operations. And in the standby mode starcounter constantly pulls latest transactions from a transaction log and applies it to in-memory state, thus accelerating possible failover.
+* GFS2
+* DRDB
+
+
 ### Future directions
 ### Practical setup steps
 
