@@ -392,7 +392,7 @@ pcs resource create ClusterIP ocf:heartbeat:IPaddr2 ip=192.168.52.235 cidr_netma
 ```
 
 #### 9. CONFIGURE STARCOUNTER AND STARCOUNTER BASED APPLICATION
-Next steps confugre a starcounter database and a starcounter based application.
+Now we move on to configuring a starcounter database and a starcounter based application.
 
 Let's start with setting default resource strickiness to avoid resources meving back after failed node recovery (https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/1.1/html/Clusters_from_Scratch/_prevent_resources_from_moving_after_recovery.html):
 ```text
