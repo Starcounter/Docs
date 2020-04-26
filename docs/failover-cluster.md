@@ -390,3 +390,43 @@ pcs cluster cib-push fs_cfg --config
 ```text
 pcs resource create ClusterIP ocf:heartbeat:IPaddr2 ip=192.168.52.235 cidr_netmask=28 op monitor interval=30s
 ```
+
+#### 9. CONFIGURE STARCOUNTER AND STARCOUNTER BASED APPLICATION
+Next steps confugre a starcounter database and a starcounter based application.
+
+Let's start with setting default resource strickiness to avoid resources meving back after failed node recovery (https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/1.1/html/Clusters_from_Scratch/_prevent_resources_from_moving_after_recovery.html):
+```text
+pcs resource defaults resource-stickiness=100
+```
+
+Create a starcounter database resource - `db`. It requires two parameters: `dbpath` - a path to the database folder and `starpath` - a path to `star` utility:
+```text
+pcs resource create db database dbpath="/mnt/drbd/databases/db" starpath="/home/user/starcounter/star"
+```
+
+Configure `db` as promotable. After this, pacemaker will start `db` as a slave on all nodes:
+```text
+pcs resource promotable db meta interleave=true
+```
+
+Create a resource to control starcounter based application. We use `anything` resource type for it and the name of resource is `webapp`.
+We configure connection string so that webapp connect to an existing and running database instance and doesn't start its own. This is to avoid possible interference with the databases that should be started by `db` resource:
+```text
+pcs resource create webapp anything binfile=/home/wad/WebApp/WebApp cmdline_options="ConnectionString='Database=/mnt/drbd/databases/db;OpenMode=Open;StartMode=RequireStarted'"
+```
+
+GFS2 fle system should be mounted before the database start:
+```text
+pcs constraint order start drbd_fs-clone then start db-clone
+```
+
+Webapp and ClusterIP should run on the same node:
+```text
+pcs constraint colocation add ClusterIP with webapp
+```
+
+Webapp requires a promoted instance of db to run on the same node as webapp itself. After this command, one instance of the database will be promoted to active state, while another one  will keep running as standby.
+```text
+pcs constraint order promote db-clone then start webapp
+pcs constraint colocation add db-clone with webapp rsc-role=Master
+```
