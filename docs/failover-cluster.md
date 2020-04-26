@@ -225,7 +225,9 @@ Controls running instance of starcounter database required for the starcounter a
 * GFS2
 
 A resource to build a GFS2 cluster file system on top of a shared DRBD volume. This resource is mostly technical as DRBD itself is just a raw syncronized block device while Starounter stores transaction log in a conventional file thus requiring a file-system. The need of a cluster file system (and not a more common local one like ext4) stems form a fact that we use DRBD in dual primary mode. The necessity of dual-primary mode is covered in the section concerning DRBD resource. More on cluster file system requirement for dual-primary DRBD: https://www.linbit.com/drbd-user-guide/drbd-guide-9_0-en/#s-dual-primary-mode.
-* DRDB
+* DRBD
+
+DRBD resource provides us with a shared block storage so that standby instances of starcounter could have an access to up-to-date transaction log. Using DRBD has befits of ensuring data high-availability and data consistency due to DRBD's synchronous replication. There is one caveat of DRBD usage in starcounter scenario - we need to run DRBD in not so common dual-primary mode. Only dual-primary allows mounting of DRBD volume on several nodes at the same time, thus allowing starcounter standby instance to read the transaction log at the same time active instance writes to it. In order to avoid split-brain and keep data consistent, it's strongly advised to use pacemaker fencing when DRBD is running as dual-primary. Without fencing, a cluster can end up in split-brain situation (for instance due to communication problems) and each instance saves a write transaction in the shared transaction log overwriting a transaction saved by another instance. As a result all transactions from the moment of split-brain might be lost. More on fencing: https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/2.0/html/Clusters_from_Scratch/ch05.html#_what_is_fencing.
 
 
 ### Future directions
