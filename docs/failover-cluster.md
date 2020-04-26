@@ -239,5 +239,8 @@ As shown, starcouner failover cluster requires conistent shared data storage to 
     - using NFS-based transaction log given NFS server supports fencing instead of GFS2+DRBD
 
 ### Future directions
+
+Given enough interest, it should be possible to develop a setup that allows running starcounter in standby mode in a cluster with signle-primary DRBD. Such configuration has an advantage of not requiring pacemaker fencing while still be consistent and highly available.
+
 ### Practical setup steps
 
