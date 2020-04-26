@@ -229,6 +229,14 @@ A resource to build a GFS2 cluster file system on top of a shared DRBD volume. T
 
 DRBD resource provides us with a shared block storage so that standby instances of starcounter could have an access to up-to-date transaction log. Using DRBD has befits of ensuring data high-availability and data consistency due to DRBD's synchronous replication. There is one caveat of DRBD usage in starcounter scenario - we need to run DRBD in not so common dual-primary mode. Only dual-primary allows mounting of DRBD volume on several nodes at the same time, thus allowing starcounter standby instance to read the transaction log at the same time active instance writes to it. In order to avoid split-brain and keep data consistent, it's strongly advised to use pacemaker fencing when DRBD is running as dual-primary. Without fencing, a cluster can end up in split-brain situation (for instance due to communication problems) and each instance saves a write transaction in the shared transaction log overwriting a transaction saved by another instance. As a result all transactions from the moment of split-brain might be lost. More on fencing: https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/2.0/html/Clusters_from_Scratch/ch05.html#_what_is_fencing.
 
+### Alternative setups
+
+As shown, starcouner failover cluster requires conistent shared data storage to maintain up-to-date in-memory state on standby node. It gives us possiblity tweak cluster setup in two dimensions:
+1. If we give up on keeping in-memory state and we're fine with longer starcounter startup on failover, then we can use DRBD in single-primary mode. Using DRBD in single primary let us avoid strict fencing requirement if DRBD quorum is configured: https://www.linbit.com/drbd-user-guide/drbd-guide-9_0-en/#s-feature-quorum
+2. We can use another storage alternatives given they provide two required features. Namely, being accesible from active and standby starcounter nodes (1) and ensure data consistency in split-brain situation (2). Possible solutions include:
+    - using [OCFS2] (https://oss.oracle.com/projects/ocfs2/) instead of GFS2
+    - using iSCSI shared volume with scsci fencing instead of DRBD
+    - using NFS-based transaction log given NFS server supports fencing instead of GFS2+DRBD
 
 ### Future directions
 ### Practical setup steps
