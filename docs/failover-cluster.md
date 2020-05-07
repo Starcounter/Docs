@@ -344,6 +344,16 @@ END
 drbdadm create-md test
 drbdadm up test
 
+# Add the DRBD port 7789 in the firewall to allow synchronization of data between the two nodes.
+
+# On the first node:
+firewall-cmd --permanent --add-rich-rule='rule family="ipv4"  source address="node2_ip_address" port port="7789" protocol="tcp" accept'
+firewall-cmd --reload
+
+# On the second node:
+firewall-cmd --permanent --add-rich-rule='rule family="ipv4"  source address="node1_ip_address" port port="7789" protocol="tcp" accept'
+firewall-cmd --reload
+
 #make one of the nodes primary (on any node)
 drbdadm primary --force test
 ```
