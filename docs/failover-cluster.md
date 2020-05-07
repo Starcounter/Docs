@@ -308,9 +308,14 @@ pcs property set stonith-enabled="true"
 pcs property set stonith-watchdog-timeout=10
 ```
 
-#### 4. Configure DRDB partitions
+#### 4. Configure DRBD partitions
 
-Prerequisite: empty partition `\dev\sdb1` on both nodes
+**Prerequisite**: empty partition `\dev\sdb1` on both nodes.
+
+Extra resources:
+
+- [How to Setup DRBD to Replicate Storage on Two CentOS 7 Servers](https://www.tecmint.com/setup-drbd-storage-replication-on-centos-7/).
+- [How to Install DRBD on CentOS Linux](https://linuxhandbook.com/install-drbd-linux/).
 
 ```text
 #intall and configure drbd (on both nodes)
