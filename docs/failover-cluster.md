@@ -428,7 +428,9 @@ Let's start with setting default resource strictness to avoid resources [moving 
 pcs resource defaults resource-stickiness=100
 ```
 
-Create a Starcounter database resource - `db`. It requires two parameters: `dbpath` - a path to the database folder and `starpath` - a path to the `star` utility:
+Create a Starcounter database resource - `db`. It requires two parameters: `dbpath` - a path to the database folder and `starpath` - a path to the `star` utility executable file:
+
+***Note:** the `dbpath` value must point to a folder with an existing Starcounter database. A Starcounter database can be created with the following command: `star new path`.*
 
 ```text
 pcs resource create db database dbpath="/mnt/drbd/databases/db" starpath="/home/user/starcounter/star"
@@ -449,7 +451,7 @@ yum install https://rpmfind.net/linux/fedora/linux/releases/30/Everything/x86_64
 ```
 
 ```text
-pcs resource create webapp anything binfile=/home/user/WebApp/WebApp cmdline_options="ConnectionString='Database=/mnt/drbd/databases/db;OpenMode=Open;StartMode=RequireStarted'"
+pcs resource create webapp anything binfile=/home/user/WebApp/WebApp cmdline_options="--urls http://0.0.0.0:80 ConnectionString='Database=/mnt/drbd/databases/db;OpenMode=Open;StartMode=RequireStarted'"
 ```
 
 GFS2 file system should be mounted before the database start:
