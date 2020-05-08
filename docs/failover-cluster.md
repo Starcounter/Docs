@@ -386,6 +386,12 @@ mkfs.gfs2 -p lock_dlm -j 2 -t mycluster:gfs_fs /dev/drbd1
 
 #### 6. [Configure DRBD cluster resource](https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/2.0/html/Clusters_from_Scratch/_configure_the_cluster_for_the_drbd_device.html)
 
+>[DRBD will not be able to run under the default SELinux security policies. If you are familiar with SELinux, you can modify the policies in a more fine-grained manner, but here we will simply exempt DRBD processes from SELinux control:](https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/1.1/html/Clusters_from_Scratch/ch07.html#_install_the_drbd_packages)
+
+```text
+semanage permissive -a drbd_t
+```
+
 ```text
 pcs cluster cib drbd_cfg
 pcs -f drbd_cfg resource create drbd_drive ocf:linbit:drbd drbd_resource=test op monitor interval=60s
