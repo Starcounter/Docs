@@ -310,7 +310,7 @@ pcs property set stonith-watchdog-timeout=10
 
 #### 4. Configure DRBD partitions
 
-**Prerequisite**: empty partition `\dev\sdb1` on both nodes.
+**Prerequisite**: empty partition `/dev/sdb1` on both nodes.
 
 Extra resources:
 
@@ -436,7 +436,7 @@ pcs resource promotable db meta interleave=true
 Create a resource to control Starcounter based application. We use `anything` resource type for it and the name of the resource is `webapp`. We configure connection string so that the `webapp` connects to an existing and running database instance and doesn't start its own. This is to avoid possible interference with the databases that should be started by the `db` resource:
 
 ```text
-pcs resource create webapp anything binfile=/home/wad/WebApp/WebApp cmdline_options="ConnectionString='Database=/mnt/drbd/databases/db;OpenMode=Open;StartMode=RequireStarted'"
+pcs resource create webapp anything binfile=/home/user/WebApp/WebApp cmdline_options="ConnectionString='Database=/mnt/drbd/databases/db;OpenMode=Open;StartMode=RequireStarted'"
 ```
 
 GFS2 file system should be mounted before the database start:
