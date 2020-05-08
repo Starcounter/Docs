@@ -316,6 +316,7 @@ Extra resources:
 
 - [How to Setup DRBD to Replicate Storage on Two CentOS 7 Servers](https://www.tecmint.com/setup-drbd-storage-replication-on-centos-7/).
 - [How to Install DRBD on CentOS Linux](https://linuxhandbook.com/install-drbd-linux/).
+- [How to Create a GFS2 Formatted Cluster File System](https://www.thegeekdiary.com/how-to-create-a-gfs2-formatted-cluster-file-system/).
 
 ```text
 #intall and configure drbd (on both nodes)
