@@ -442,6 +442,12 @@ pcs resource promotable db meta interleave=true
 
 Create a resource to control Starcounter based application. We use `anything` resource type for it and the name of the resource is `webapp`. We configure connection string so that the `webapp` connects to an existing and running database instance and doesn't start its own. This is to avoid possible interference with the databases that should be started by the `db` resource:
 
+For CentOS extra package has to be installed.
+
+```
+yum install https://rpmfind.net/linux/fedora/linux/releases/30/Everything/x86_64/os/Packages/r/resource-agents-4.2.0-2.fc30.x86_64.rpm
+```
+
 ```text
 pcs resource create webapp anything binfile=/home/user/WebApp/WebApp cmdline_options="ConnectionString='Database=/mnt/drbd/databases/db;OpenMode=Open;StartMode=RequireStarted'"
 ```
