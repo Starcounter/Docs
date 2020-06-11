@@ -33,6 +33,14 @@ The available commands can be split into four categories:
 
 #### Database management
 
+**clean**
+
+```text
+start clean <db>
+```
+
+The `clean` command permanently removes dropped tables and columns from the database referenced by the absolute or relative path given in the argument.
+
 **new**
 
 ```text
@@ -224,4 +232,3 @@ star sql C:\databases\mydb
 ```
 
 For more information on how to write SQL queries to a Starcounter database, and supported DDL statements, see the [SQL section](sql.md) of the documentation.
-
