@@ -472,3 +472,10 @@ Webapp requires a promoted instance of `db` to run on the same node as the `weba
 pcs constraint order promote db-clone then start webapp
 pcs constraint colocation add db-clone with webapp rsc-role=Master
 ```
+
+#### Configure automatic `corosync` and `pacemaker` startup on restart
+
+```text
+systemctl enable corosync
+systemctl enable pacemaker
+```
