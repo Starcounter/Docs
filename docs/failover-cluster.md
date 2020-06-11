@@ -200,5 +200,282 @@ Start-ClusterGroup Starcounter
 
 ## Starcounter failover on Linux
 
-Starcounter 3 Release Candidate does not yet support failover on Linux operating systems out of the box. If you have a Linux production environment which requires failover, please contact us.
+### Introduction
 
+The idea of the Starounter failover cluster is to bundle a Starcounter database and a Starcounter-based application into an entity that can be health monitored and automatically restarted or migrated to a standby cluster node should a disaster happens. Due to the in-memory nature of the Starcounter database, when failover happens it may take significant time to load data from media on a cold standby node. Thus it would be beneficial to keep Starcounter running in the hot standby mode. Another requirement of the system concerns data integrity. Our goal is to provide a consistent solution in terms of [CAP](https://en.wikipedia.org/wiki/CAP_theorem), i.e. no committed transactions can be lost during migration.
+
+### Setup Explained
+
+Starcounter failover cluster is built on top of a proven stack consisting of [pacemaker](https://clusterlabs.org/), [DRBD](https://www.linbit.com/drbd/) and [GFS2](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/global_file_system_2/index). Pacemaker is responsible for managing cluster nodes, control resources it manages and performs appropriate failover actions. DRBD is responsible for synchronizing the Starcounter transaction log on a block level. And GFS2 provides Starcounter file-level access to a shared transaction log. Starcounter role in this is:
+
+* Supporting hot standby mode so that in-memory data on a standby node is up-to-date with an active node.
+* Providing pacemaker control scripts for the Starcounter database.
+
+Here is a system diagram of a typical Starcounter failover cluster:
+
+![cluster](images/starcounter-cluster.png)
+
+Let's go through all cluster resource we have under pacemaker control:
+
+#### IP address
+
+This is a resource of type `ocf:heartbeat:IPaddr2`, which we use as a virtual public IP address flowing in the cluster along with a Starcounter application. It allows external clients to access the application by the single IP address regardless of which node hosts it. It should be configured to start on the same node as the Starcounter application.
+
+#### Starcounter application
+
+Controls your Starcounter application. A good fit for resource type would be `ocf:heartbeat:anything` which can control any long-running daemon like processes. It should be configured to start on the same node where an active instance of Starcounter database is running.
+
+#### Starcounter database
+
+Controls running instance of the Starcounter database required for the Starcounter application. It has a type of `ocf:starcounter:database` and this is the only resource in this setup which is authored by Starcounter. You must install `resource-agents-starcounter` package to use it. Unlike IP address and Starcounter application resources that can have only one running instance per cluster, this resource runs on every cluster node, but in different states - only one node can run it as a "master" while the rest are "slaves". "Master" and "slave" are pacemaker terms that directly correspond to Starcounter database modes named "active" and "standby". If Starcounter database resource in Pacemaker is master, then the database it controls is in active mode. The same connection exists between the "slave" Pacemaker resource state and the "standby" mode of the Starcounter database. In the active mode, Starcounter can accept client connections and perform database operations. And in the standby mode, Starcounter constantly pulls the latest transactions from the transaction log and applies it to in-memory state, thus accelerating possible failover.
+
+#### GFS2
+
+A resource to build a GFS2 cluster file system on top of a shared DRBD volume. This resource is mostly technical as DRBD itself is just a raw synchronized block device while Starounter stores transaction log in a conventional file thus requiring a file-system. The need for a cluster file system (and not a more common local one like `ext4`) stems form a fact that we use DRBD in dual primary mode. The necessity of dual-primary mode is covered in the section concerning DRBD resources. More on cluster file system requirement for dual-primary DRBD: https://www.linbit.com/drbd-user-guide/drbd-guide-9_0-en/#s-dual-primary-mode.
+
+#### DRBD
+
+DRBD resource provides us with shared block storage so that standby instances of Starcounter could have access to the up-to-date transaction log. Using DRBD has benefits of ensuring data high-availability and data consistency due to DRBD's synchronous replication. There is one caveat of DRBD usage in the Starcounter scenario - we need to run DRBD in not so common dual-primary mode. Only dual-primary allows mounting of DRBD volume on several nodes at the same time, thus allowing Starcounter standby instance to read the transaction log at the same time as the active instance writes to it. In order to avoid split-brain and keep data consistent, it's strongly advised to use pacemaker fencing when DRBD is running as dual-primary. Without fencing, a cluster can end up in a split-brain situation (for instance due to communication problems) and each instance saves a write transaction in the shared transaction log overwriting a transaction saved by another instance. As a result, all transactions from the moment of split-brain might be lost. More on fencing: https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/2.0/html/Clusters_from_Scratch/ch05.html#_what_is_fencing.
+
+### Alternative setups
+
+As shown, the Starcouner failover cluster requires consistent shared data storage to maintain up-to-date in-memory state on the standby node. It gives us the possibility to tweak cluster setup in two dimensions:
+
+1. If we give up on keeping in-memory state and we're fine with longer Starcounter startup on failover, then we can use DRBD in single-primary mode. Using DRBD in single primary lets us avoid strict fencing requirements if DRBD [quorum](https://www.linbit.com/drbd-user-guide/drbd-guide-9_0-en/#s-feature-quorum) is configured.
+2. We can use other storage alternatives given they provide two required features. Namely, being accessible from active and standby Starcounter nodes (1) and ensure data consistency in the split-brain situation (2). Possible solutions include:
+    - Using [OCFS2] (https://oss.oracle.com/projects/ocfs2/) instead of GFS2.
+    - Using iSCSI shared volume with scsci fencing instead of DRBD.
+    - Using NFS-based transaction log given NFS server supports fencing instead of GFS2+DRBD.
+
+### Practical setup steps
+
+The backbone of a Starcounter cluster is a pretty standard mix of Pacemaker, DRBD, GFS2, and IP Address resources. Please refer to [Cluster from scratch](https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/2.0/html/Clusters_from_Scratch/index.html) for detailed configuring steps. Here we'll briefly list the required steps to set it up:
+
+#### 1. Setup Pacemaker cluster
+
+```text
+#install and run cluster software (on both nodes)
+apt-get install pacemaker pcs psmisc corosync
+systemctl start pcsd.service
+systemctl enable pcsd.service
+
+#set cluster user password (on both nodes)
+passwd hacluster
+
+#authenticate cluster nodes (on any node)
+pcs host auth node1 node2
+
+#create cluster (on any node)
+pcs cluster setup mycluster node1.mshome.net node2.mshome.net --force
+```
+
+#### 2. [Add quorum node to the cluster](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/high_availability_add-on_reference/s1-quorumdev-haar)
+
+```text
+#on a quorum node (it would be a third machine)
+apt install pcs corosync-qnetd
+systemctl start pcsd.service
+systemctl enable pcsd.service
+passwd hacluster
+
+#install quorum defince (on both nodes)
+apt install corosync-qdevice
+
+#add quorum to the cluster (on any node)
+pcs host auth node3.mshome.net
+pcs quorum device add model net host=node3.mshome.net algorithm=lms
+```
+
+#### 3. Configure fencing
+
+```text
+#configure diskless sbd (https://documentation.suse.com/sle-ha/12-SP4/html/SLE-HA-all/cha-ha-storage-protect.html#pro-ha-storage-protect-confdiskless)
+
+#configure sbd (on both nodes)
+apt install sbd
+mkdir /etc/sysconfig
+cat <<EOF >/etc/sysconfig/sbd
+	SBD_PACEMAKER=yes
+	SBD_STARTMODE=always
+	SBD_DELAY_START=no
+	SBD_WATCHDOG_DEV=/dev/watchdog
+	SBD_WATCHDOG_TIMEOUT=5
+	EOF
+systemctl enable sbd
+    
+#enable stonith for the cluster
+pcs property set stonith-enabled="true"
+pcs property set stonith-watchdog-timeout=10
+```
+
+#### 4. Configure DRBD partitions
+
+**Prerequisite**: empty partition `/dev/sdb1` on both nodes.
+
+Extra resources:
+
+- [How to Setup DRBD to Replicate Storage on Two CentOS 7 Servers](https://www.tecmint.com/setup-drbd-storage-replication-on-centos-7/).
+- [How to Install DRBD on CentOS Linux](https://linuxhandbook.com/install-drbd-linux/).
+- [How to Create a GFS2 Formatted Cluster File System](https://www.thegeekdiary.com/how-to-create-a-gfs2-formatted-cluster-file-system/).
+
+```text
+#intall and configure drbd (on both nodes)
+apt-get install drbd-utils
+cat <<END > /etc/drbd.d/test.res
+resource test {
+ protocol C;
+ meta-disk internal;
+ device /dev/drbd1;
+ syncer {
+  verify-alg sha1;
+ }
+ net {
+  allow-two-primaries;
+  fencing resource-only;
+ }
+ handlers {
+    fence-peer "/usr/lib/drbd/crm-fence-peer.9.sh";
+    unfence-peer "/usr/lib/drbd/crm-unfence-peer.9.sh";
+ }
+ on node1 {
+  disk   /dev/sdb1;
+  address  node1_ip_address:7789;
+ }
+ on node2 {
+  disk   /dev/sdb1;
+  address  node2_ip_address:7789;
+ }
+}
+END
+drbdadm create-md test
+drbdadm up test
+
+# Add the DRBD port 7789 in the firewall to allow synchronization of data between the two nodes.
+
+# On the first node:
+firewall-cmd --permanent --add-rich-rule='rule family="ipv4"  source address="node2_ip_address" port port="7789" protocol="tcp" accept'
+firewall-cmd --reload
+
+# On the second node:
+firewall-cmd --permanent --add-rich-rule='rule family="ipv4"  source address="node1_ip_address" port port="7789" protocol="tcp" accept'
+firewall-cmd --reload
+
+#make one of the nodes primary (on any node)
+drbdadm primary --force test
+```
+
+#### 5. Setup GFS
+
+```text
+#setup gfs packages (on both nodes)
+#For Ubuntu:
+apt-get install gfs2-utils dlm-controld 
+
+#For CentOS:
+yum localinstall https://repo.cloudlinux.com/cloudlinux/8.1/BaseOS/x86_64/dlm-4.0.9-3.el8.x86_64.rpm
+
+#setup dlm resource (on one node) (https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/2.0/html/Clusters_from_Scratch/_configure_the_cluster_for_the_dlm.html)
+pcs cluster cib dlm_cfg
+pcs -f dlm_cfg resource create dlm ocf:pacemaker:controld op monitor interval=60s
+pcs -f dlm_cfg resource clone dlm clone-max=2 clone-node-max=1
+pcs cluster cib-push dlm_cfg --config
+
+#create GFS2 filysystem (on both nodes)
+mkfs.gfs2 -p lock_dlm -j 2 -t mycluster:gfs_fs /dev/drbd1
+```
+
+#### 6. [Configure DRBD cluster resource](https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/2.0/html/Clusters_from_Scratch/_configure_the_cluster_for_the_drbd_device.html)
+
+>[DRBD will not be able to run under the default SELinux security policies. If you are familiar with SELinux, you can modify the policies in a more fine-grained manner, but here we will simply exempt DRBD processes from SELinux control:](https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/1.1/html/Clusters_from_Scratch/ch07.html#_install_the_drbd_packages)
+
+```text
+semanage permissive -a drbd_t
+```
+
+```text
+pcs cluster cib drbd_cfg
+pcs -f drbd_cfg resource create drbd_drive ocf:linbit:drbd drbd_resource=test op monitor interval=60s
+pcs -f drbd_cfg resource promotable drbd_drive promoted-max=2 promoted-node-max=1 clone-max=2 clone-node-max=1 notify=true
+pcs cluster cib-push drbd_cfg --config
+```
+
+#### 7. [Configure GFS cluster resource](https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/2.0/html/Clusters_from_Scratch/_configure_the_cluster_for_the_filesystem.html)
+
+```text
+pcs cluster cib fs_cfg
+pcs -f fs_cfg resource create drbd_fs Filesystem  device="/dev/drbd1" directory="/mnt/drbd" fstype="gfs2"
+pcs -f fs_cfg constraint colocation add drbd_fs with drbd_drive-clone INFINITY with-rsc-role=Master
+pcs -f fs_cfg constraint order promote drbd_drive-clone then start drbd_fs
+pcs -f fs_cfg constraint colocation add drbd_fs with dlm-clone INFINITY
+pcs -f fs_cfg constraint order dlm-clone then drbd_fs
+pcs -f fs_cfg resource clone drbd_fs meta interleave=true
+pcs cluster cib-push fs_cfg --config
+```
+
+#### 8. Configure cluster virtual IP (on any node)
+
+```text
+pcs resource create ClusterIP ocf:heartbeat:IPaddr2 ip=192.168.52.235 cidr_netmask=28 op monitor interval=30s
+```
+
+#### 9. Configure Starcounter and Starcounter based application
+
+Now we move on to configuring a Starcounter database and a Starcounter based application.
+
+Let's start with setting default resource strictness to avoid resources [moving back after failed node recovery](https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/1.1/html/Clusters_from_Scratch/_prevent_resources_from_moving_after_recovery.html):
+
+```text
+pcs resource defaults resource-stickiness=100
+```
+
+Create a Starcounter database resource - `db`. It requires two parameters: `dbpath` - a path to the database folder and `starpath` - a path to the `star` utility executable file:
+
+***Note:** the `dbpath` value must point to a folder with an existing Starcounter database. A Starcounter database can be created with the following command: `star new path`.*
+
+```text
+pcs resource create db database dbpath="/mnt/drbd/databases/db" starpath="/home/user/starcounter/star"
+```
+
+Configure `db` as promotable. After this, Pacemaker will start `db` as a slave on all nodes:
+
+```text
+pcs resource promotable db meta interleave=true
+```
+
+Create a resource to control Starcounter based application. We use `anything` resource type for it and the name of the resource is `webapp`. We configure connection string so that the `webapp` connects to an existing and running database instance and doesn't start its own. This is to avoid possible interference with the databases that should be started by the `db` resource:
+
+For CentOS extra package has to be installed.
+
+```
+yum install https://rpmfind.net/linux/fedora/linux/releases/30/Everything/x86_64/os/Packages/r/resource-agents-4.2.0-2.fc30.x86_64.rpm
+```
+
+```text
+pcs resource create webapp anything binfile=/home/user/WebApp/WebApp cmdline_options="--urls http://0.0.0.0:80 ConnectionString='Database=/mnt/drbd/databases/db;OpenMode=Open;StartMode=RequireStarted'"
+```
+
+GFS2 file system should be mounted before the database start:
+
+```text
+pcs constraint order start drbd_fs-clone then start db-clone
+```
+
+Webapp and ClusterIP should run on the same node:
+
+```text
+pcs constraint colocation add ClusterIP with webapp
+```
+
+Webapp requires a promoted instance of `db` to run on the same node as the `webapp` itself. After this command, one instance of the database will be promoted to the active state, while another one will keep running in the standby state.
+
+```text
+pcs constraint order promote db-clone then start webapp
+pcs constraint colocation add db-clone with webapp rsc-role=Master
+```
+
+#### Configure automatic `corosync` and `pacemaker` startup on restart
+
+```text
+systemctl enable corosync
+systemctl enable pacemaker
+```

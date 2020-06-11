@@ -25,9 +25,8 @@ Please make sure to read our [End User License Agreement for Starcounter Softwar
 
 ## Requirements
 
-* [Ubuntu 18.04.02 x64](https://ubuntu.com/download/desktop) or [Windows 10 Pro x64 Build 1903](https://www.microsoft.com/en-us/software-download/windows10).
-  * [Windows Subsystem for Linux \(WSL\)](https://docs.microsoft.com/en-us/windows/wsl/install-win10) is also supported.
-  * [Ubuntu 19.10 x64](https://ubuntu.com/download/desktop) is also supported.
+* Supported OS: Windows 10 x64 build 1903+, Ubuntu 18.04, Ubuntu 19.10, CentOS 8.
+  - Supported linux distrubutions are also supported under [Windows Subsystem for Linux \(WSL\)](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 * [.NET Core 3.0.100](https://dotnet.microsoft.com/download/dotnet-core/3.0), SDK for development, runtime for production.
 * Enough RAM to load database of targeted size.
 * It's recommended to have at least two CPU cores.
@@ -69,6 +68,32 @@ Starcounter relies on a specific version of [SWI-Prolog](https://wwu-pi.github.i
 sudo add-apt-repository ppa:swi-prolog/stable
 sudo apt-get update
 sudo apt-get install swi-prolog-nox=7.\*
+```
+
+**Download and unpack Starcounter binaries.**
+
+```text
+cd $HOME
+mkdir Starcounter.3.0.0-rc-20191212
+cd Starcounter.3.0.0-rc-20191212
+wget https://starcounter.io/Starcounter/Starcounter.3.0.0-rc-20191212.zip
+unzip Starcounter.3.0.0-rc-20191212.zip
+```
+
+#### CentOS 8
+
+**Install prerequisites.**
+
+```text
+sudo yum install wget unzip libaio ncurses-compat-libs clang
+```
+
+Starcounter requires a certain version of SWI-Prolog, which is not available from existing repositories, but can be found in package archives:
+
+```text
+sudo yum localinstall https://kojipkgs.fedoraproject.org//packages/compat-readline6/6.3/16.fc30/x86_64/compat-readline6-6.3-16.fc30.x86_64.rpm
+sudo yum localinstall https://kojipkgs.fedoraproject.org//vol/fedora_koji_archive05/packages/pl/7.2.0/1.fc23/x86_64/pl-7.2.0-1.fc23.x86_64.rpm
+sudo ln /usr/lib64/swipl-7.2.0/lib/x86_64-linux/libswipl.so.7.2.0 /usr/lib64/libswipl.so
 ```
 
 **Download and unpack Starcounter binaries.**
