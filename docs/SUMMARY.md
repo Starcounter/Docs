@@ -11,8 +11,6 @@
 * [Database types](database-types.md)
 * [Database files](database-files.md)
 * [Database processes](database-processes.md)
-* [Failover cluster](failover-cluster.md)
 * [Error codes](error-codes.md)
 * [star tool](star-tool.md)
 * [SQL Queries](sql.md)
-
