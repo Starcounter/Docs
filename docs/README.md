@@ -4,13 +4,13 @@ Starcounter 3.0.0 Release is available for general access.
 
 Downloads:
 
-* [`Starcounter.3.0.0-20201009.zip`](https://starcounter.io/Starcounter/Starcounter.3.0.0-20201009.zip) archive with all required NuGet packages.
-* [`star-3.0.0-20201009.zip`](https://starcounter.io/Starcounter/star-3.0.0-20201009.zip) Starcounter command line `star` tool for Windows.
-* [`star-3.0.0-20201009.tar.gz`](https://starcounter.io/Starcounter/star-3.0.0-20201009.tar.gz) Starcounter command line `star` tool for Linux.
+* [`Starcounter.3.0.0-20201007.zip`](https://starcounter.io/Starcounter/Starcounter.3.0.0-20201007.zip) archive with all required NuGet packages.
+* [`star-3.0.0-20201007.zip`](https://starcounter.io/Starcounter/star-3.0.0-20201007.zip) Starcounter command line `star` tool for Windows.
+* [`star-3.0.0-20201007.tar.gz`](https://starcounter.io/Starcounter/star-3.0.0-20201007.tar.gz) Starcounter command line `star` tool for Linux.
 
 Please make sure to read our [End User License Agreement for Starcounter Software](https://starcounter.com/wp-content/themes/starcounter-custom/assets/docs/Starcounter_EULA.pdf).
 
-## Starcounter 3.0 release `20201009` main changes
+## Starcounter 3.0 release `20201007` main changes
 
 * The `star` tool is a cross-platform console application with SQL REPL & database import/export features.
 * Starcounter apps can now be distributed as a regular .NET Core app in framework dependent and self contained modes.  [Read more](publish-app.md).
@@ -39,8 +39,8 @@ Please make sure to read our [End User License Agreement for Starcounter Softwar
 
 ### Binaries
 
-* Create a folder for Starcounter binaries, for example `Starcounter.3.0.0-20201009`.
-* Download [`Starcounter.3.0.0-20201009.zip`](https://starcounter.io/Starcounter/Starcounter.3.0.0-20201009.zip) into the folder.
+* Create a folder for Starcounter binaries, for example `Starcounter.3.0.0-20201007`.
+* Download [`Starcounter.3.0.0-20201007.zip`](https://starcounter.io/Starcounter/Starcounter.3.0.0-20201007.zip) into the folder.
 * Unzip downloaded archive into the folder.
 
 #### Windows 10
@@ -74,10 +74,10 @@ sudo apt-get install swi-prolog-nox=7.\*
 
 ```text
 cd $HOME
-mkdir Starcounter.3.0.0-20201009
-cd Starcounter.3.0.0-20201009
-wget https://starcounter.io/Starcounter/Starcounter.3.0.0-20201009.zip
-unzip Starcounter.3.0.0-20201009.zip
+mkdir Starcounter.3.0.0-20201007
+cd Starcounter.3.0.0-20201007
+wget https://starcounter.io/Starcounter/Starcounter.3.0.0-20201007.zip
+unzip Starcounter.3.0.0-20201007.zip
 ```
 
 ### Application
@@ -112,7 +112,7 @@ Create `nuget.config` file and add required package sources:
 <configuration>
   <packageSources>
     <clear />
-    <add key="local" value="[Starcounter.3.0.0-20201009]" />
+    <add key="local" value="[Starcounter.3.0.0-20201007]" />
     <add key="Starcounter" value="https://www.myget.org/F/starcounter/api/v2" />
     <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />
   </packageSources>
@@ -123,7 +123,7 @@ Create `nuget.config` file and add required package sources:
 
 Visual Studio requires manual NuGet package sources configuration. For this go to the `Tools → Options → NuGet Package Manager → Package Sources` menu then add `local` and `Starcounter` feeds.
 
-**Note**: Replace the `[Starcounter.3.0.0-20201009]` value with the actual path to the folder with unzipped Starcounter binaries.
+**Note**: Replace the `[Starcounter.3.0.0-20201007]` value with the actual path to the folder with unzipped Starcounter binaries.
 
 **Add Starcounter.Database package reference**
 
@@ -263,4 +263,3 @@ Everything should run out of the box.
 _Before asking questions or reporting issues, please read these few lines, and maybe you will find an answer for your question._
 
 * Publishing application in a single file with [`dotnet publish /p:PublishSingleFile=true`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-publish) is not yet supported.
-
